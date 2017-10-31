@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th> Core ID </th>
+      <th> Value </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let alarm of alarms">
+    <tr>
+      <td>
+        {{ alarm.core_id }}
+      </td>
+      <td>
+        {{ alarm.value }}
+      </td>
+    </tr>
+  </tbody>
+</table>
