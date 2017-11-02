@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
 
 @Injectable()
@@ -6,7 +7,7 @@ export class AlarmService {
 
   constructor() { }
 
-  connect() {
+  connect(): Observable<any> {
     const ws_path = 'ws://127.0.0.1:8000/stream/';
     console.log("Connecting to " + ws_path);
 
@@ -14,13 +15,15 @@ export class AlarmService {
     webSocketBridge.connect(ws_path);
     webSocketBridge.listen(ws_path);
 
-    webSocketBridge.demultiplex('alarms', function(payload, streamName) {
-      console.log(payload, streamName);
+    let payload = webSocketBridge.demultiplex('alarms', function(payload, streamName) {
+      console.log('Service, ', payload, streamName);
+      return payload;
     });
 
     webSocketBridge.socket.addEventListener('open', function() {
       console.log("Connected to WebSocket");
-    })
+    });
+    return payload;
   }
 
 }

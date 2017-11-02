@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import { WebSocketBridge } from 'django-channels';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
@@ -12,6 +15,10 @@ export class AlarmsListComponent implements OnInit {
   alarms: Alarm[];
 
   constructor(private alarmService: AlarmService) {
+
+  }
+
+  ngOnInit() {
     this.alarms = [
       new Alarm({
         pk:1,
@@ -38,10 +45,30 @@ export class AlarmsListComponent implements OnInit {
         core_timestamp:0
       })
     ];
+    console.log('this.alarms = ', this.alarms);
+    this.connect();
   }
 
-  ngOnInit() {
-    this.alarmService.connect();
+  connect() {
+    const ws_path = 'ws://127.0.0.1:8000/stream/';
+    console.log("Connecting to " + ws_path);
+
+    const webSocketBridge = new WebSocketBridge();
+    webSocketBridge.connect(ws_path);
+    webSocketBridge.listen(ws_path);
+    let alarm = webSocketBridge.demultiplex('alarms', function(payload, streamName): Observable<Alarm> {
+      console.log(payload, streamName);
+      let alarm = Alarm.asAlarm(payload.data);
+      console.log('Alarm = ', alarm);
+      return Observable.of(alarm);
+    }).subscribe(resp => {
+      console.log('Outside Alarm = ', resp);
+    });
+
+
+    webSocketBridge.socket.addEventListener('open', function() {
+      console.log("Connected to WebSocket");
+    });
   }
 
 }
