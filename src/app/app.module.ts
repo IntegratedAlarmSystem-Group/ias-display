@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AlarmsListComponent } from './alarms-list/alarms-list.component';
+import { AlarmService } from './alarm.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +11,11 @@ import { AlarmsListComponent } from './alarms-list/alarms-list.component';
     AlarmsListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
-  providers: [],
+  providers: [
+    AlarmService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
