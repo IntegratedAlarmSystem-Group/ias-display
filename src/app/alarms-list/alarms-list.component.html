@@ -5,13 +5,16 @@
       <th> Value </th>
     </tr>
   </thead>
-  <tbody *ngFor="let alarm of alarmService.alarms">
+  <tbody *ngFor="let pk of alarmPks">
+  <!-- <tbody *ngFor="let alarm of alarmService.alarms"> -->
     <tr>
       <td>
-        {{ alarm.core_id }}
+        {{ alarmService.alarms[pk].core_id }}
+        <!-- {{ alarm.core_id }} -->
       </td>
       <td>
-        {{ alarm.value }}
+        {{ alarmService.alarms[pk].value }}
+        <!-- {{ alarm.value }} -->
       </td>
     </tr>
   </tbody>

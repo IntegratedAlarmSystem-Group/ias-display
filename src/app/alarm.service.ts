@@ -3,11 +3,19 @@ import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Alarm } from './alarm';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AlarmService {
 
-  alarms: Alarm[] = [];
+  // alarms: Alarm[] = [];
+  alarms: {[pk: number]: Alarm } = {};
+  private _alarmSource = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
+  alarmsObs = this._alarmSource.asObservable();
+
+  changeAlarms(alarm: { [pk: number]: Alarm }) {
+    this._alarmSource.next(alarm);
+  }
 
   constructor() { }
 
@@ -23,14 +31,26 @@ export class AlarmService {
       console.log('Received message:, ', payload, streamName);
       let pk = payload['pk'];
       payload.data['pk'] = pk;
-      // this.alarms[pk] = Alarm.asAlarm(payload.data);
-      this.alarms.push(Alarm.asAlarm(payload.data));
-      // console.log(this.alarms);
+      if( payload.action == "create" || payload.action == "update" ){
+        this.alarms[pk] = Alarm.asAlarm(payload.data);
+      }
+      else if( payload.action == "delete"){
+        delete this.alarms[pk];
+      }
+      // else if( payload.action == "update"){
+      //   this.alarms[pk];
+      // }
+
+      console.log('this.alarms = ', this.alarms);
+      this.changeAlarms(this.alarms);
+      // this.alarms.push(Alarm.asAlarm(payload.data));
+      // console.log(Object.keys(this.alarms));
     });
 
     webSocketBridge.socket.addEventListener('open', function() {
       console.log("Connected to WebSocket");
     });
   }
+
 
 }
