@@ -12,41 +12,44 @@ import { Alarm } from '../alarm';
 })
 export class AlarmsListComponent implements OnInit {
   //TODO: Refactor general structure for alarms and components
-  alarms: Alarm[];
+  alarms: Alarm[] = [];
+  webSocketBridge: WebSocketBridge;
 
   constructor(private alarmService: AlarmService) {
-
+    this.webSocketBridge = alarmService.connect();
   }
 
   ngOnInit() {
-    this.alarms = [
-      new Alarm({
-        pk:1,
-        value:0,
-        mode:'1',
-        core_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      }),
-      new Alarm({
-        pk:2,
-        value:1,
-        mode:'2',
-        core_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      }),
-      new Alarm({
-        pk:3,
-        value:0,
-        mode:'3',
-        core_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      })
-    ];
-    console.log('this.alarms = ', this.alarms);
-    this.connect();
+    // this.alarms = [
+    //   new Alarm({
+    //     pk:1,
+    //     value:0,
+    //     mode:'1',
+    //     core_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE',
+    //     running_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE@ATC',
+    //     core_timestamp:0
+    //   }),
+    //   new Alarm({
+    //     pk:2,
+    //     value:1,
+    //     mode:'2',
+    //     core_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE',
+    //     running_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE@ATC',
+    //     core_timestamp:0
+    //   }),
+    //   new Alarm({
+    //     pk:3,
+    //     value:0,
+    //     mode:'3',
+    //     core_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE',
+    //     running_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE@ATC',
+    //     core_timestamp:0
+    //   })
+    // ];
+    //console.log('this.alarms = ', this.alarms);
+    //let webSocketBridge = this.connect();
+    this.appendAlarm(this.webSocketBridge);
+    console.log(this.alarms);
   }
 
   connect() {
@@ -56,19 +59,22 @@ export class AlarmsListComponent implements OnInit {
     const webSocketBridge = new WebSocketBridge();
     webSocketBridge.connect(ws_path);
     webSocketBridge.listen(ws_path);
-    let alarm = webSocketBridge.demultiplex('alarms', function(payload, streamName): Observable<Alarm> {
-      console.log(payload, streamName);
-      let alarm = Alarm.asAlarm(payload.data);
-      console.log('Alarm = ', alarm);
-      return Observable.of(alarm);
-    }).subscribe(resp => {
-      console.log('Outside Alarm = ', resp);
-    });
+    return webSocketBridge;
+  }
 
-
-    webSocketBridge.socket.addEventListener('open', function() {
-      console.log("Connected to WebSocket");
-    });
+  appendAlarm(webSocketBridge) {
+    webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      console.log('component, ', payload, streamName);
+      this.alarms.push(new Alarm({
+        pk:payload.pk,
+        value:payload.data.value,
+        mode:payload.data.mode,
+        core_id:payload.data.core_id,
+        running_id:payload.data.running_id,
+        core_timestamp:0
+      }));
+      console.log(this.alarms);
+    })
   }
 
 }
