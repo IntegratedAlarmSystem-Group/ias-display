@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
+import { environment } from '../environments/environment';
+import { Alarm } from './alarm';
 
 @Injectable()
 export class AlarmService {
 
+  alarms: Alarm[] = [];
+
   constructor() { }
 
-  connect(): Observable<any> {
-    const ws_path = 'ws://127.0.0.1:8000/stream/';
-    console.log("Connecting to " + ws_path);
+  initialize() {
+    const connectionPath = environment.websocketPath;
+    console.log("Connecting to " + connectionPath);
 
     const webSocketBridge = new WebSocketBridge();
-    webSocketBridge.connect(ws_path);
-    webSocketBridge.listen(ws_path);
-    return webSocketBridge;
-    // const ws_path = 'ws://127.0.0.1:8000/stream/';
-    // console.log("Connecting to " + ws_path);
-    //
-    // const webSocketBridge = new WebSocketBridge();
-    // webSocketBridge.connect(ws_path);
-    // webSocketBridge.listen(ws_path);
-    //
-    // let payload = webSocketBridge.demultiplex('alarms', function(payload, streamName) {
-    //   console.log('Service, ', payload, streamName);
-    //   return payload;
-    // });
-    //
-    // webSocketBridge.socket.addEventListener('open', function() {
-    //   console.log("Connected to WebSocket");
-    // });
-    // return payload;
+    webSocketBridge.connect(connectionPath);
+    webSocketBridge.listen(connectionPath);
+
+    webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      console.log('Received message:, ', payload, streamName);
+      let pk = payload['pk'];
+      payload.data['pk'] = pk;
+      // this.alarms[pk] = Alarm.asAlarm(payload.data);
+      this.alarms.push(Alarm.asAlarm(payload.data));
+      // console.log(this.alarms);
+    });
+
+    webSocketBridge.socket.addEventListener('open', function() {
+      console.log("Connected to WebSocket");
+    });
   }
 
 }

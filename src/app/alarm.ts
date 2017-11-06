@@ -12,7 +12,7 @@ export class Alarm {
 
   static isValidAlarm(json: any): boolean {
     return (
-      // json.hasOwnProperty("id") &&
+      json.hasOwnProperty("pk") &&
       json.hasOwnProperty("value") &&
       json.hasOwnProperty("core_id") &&
       json.hasOwnProperty("running_id") &&
@@ -25,7 +25,7 @@ export class Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
-    let pk = <number>json['id'];
+    let pk = <number>json['pk'];
     let value = <string>json['value'];
     let core_id = <string>json['core_id'];
     let running_id = <string>json['running_id'];

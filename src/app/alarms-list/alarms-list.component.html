@@ -5,7 +5,7 @@
       <th> Value </th>
     </tr>
   </thead>
-  <tbody *ngFor="let alarm of alarms">
+  <tbody *ngFor="let alarm of alarmService.alarms">
     <tr>
       <td>
         {{ alarm.core_id }}
