@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { AlarmService } from './alarm.service';
 
 describe('AlarmService', () => {

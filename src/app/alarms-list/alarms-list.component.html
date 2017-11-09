@@ -1,21 +1,11 @@
-<table>
-  <thead>
-    <tr>
-      <th> Core ID </th>
-      <th> Value </th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let pk of alarmPks">
-  <!-- <tbody *ngFor="let alarm of alarmService.alarms"> -->
-    <tr>
-      <td>
-        {{ alarmService.alarms[pk].core_id }}
-        <!-- {{ alarm.core_id }} -->
-      </td>
-      <td>
-        {{ alarmService.alarms[pk].value }}
-        <!-- {{ alarm.value }} -->
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div *ngFor="let pk of alarmPks">
+  <div class="box-alarm" [style.background]="getAlarmColor(alarmService.alarms[pk])">
+    <div class="box-alarm-title">
+      {{ alarmService.alarms[pk].core_id }}
+    </div>
+    <div class="box-alarm-body">
+      Alarm: {{ alarmService.alarms[pk].getValueAsString() }}, &nbsp;
+      Mode: {{ alarmService.alarms[pk].getModeAsString() }}
+    </div>
+  </div>
+</div>

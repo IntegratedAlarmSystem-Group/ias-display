@@ -36,6 +36,7 @@ export class AlarmService {
       else if( payload.action == "delete"){
         delete this.alarms[pk];
       }
+      console.log('alarm.mode = ', this.alarms[pk].mode);
       this.changeAlarms(this.alarms);
     });
 

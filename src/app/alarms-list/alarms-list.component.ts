@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { WebSocketBridge } from 'django-channels';
 import { AlarmService } from '../alarm.service';
-import { Alarm } from '../alarm';
+import { Alarm, OperationalMode } from '../alarm';
 
 @Component({
   selector: 'app-alarms-list',
@@ -21,5 +21,27 @@ export class AlarmsListComponent implements OnInit {
     this.alarmService.alarmsObs.subscribe(alarms => {
       this.alarmPks = Object.keys(alarms);
     });
+  }
+
+  getAlarmColor(alarm: Alarm){
+    if (alarm.mode == OperationalMode.maintenance) {
+      return 'gray';
+    }
+    else if (alarm.mode == OperationalMode.unknown) {
+      if (alarm.value == 0) {
+        return 'blue';
+      }
+      else {
+        return 'purple';
+      }
+    }
+    else {
+      if (alarm.value == 0) {
+        return 'green';
+      }
+      else {
+        return 'red';
+      }
+    }
   }
 }

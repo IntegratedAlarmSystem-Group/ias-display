@@ -1,9 +1,20 @@
+export enum OperationalMode {
+  startup = 0,
+  initialization = 1,
+  closing = 2,
+  shuttedown = 3,
+  maintenance = 4,
+  operational = 5,
+  degraded = 6,
+  unknown = 7,
+};
+
 export class Alarm {
   pk: number;
   value: number;
   core_id: string;
   running_id: string;
-  mode: string;
+  mode: OperationalMode;
   core_timestamp: number;
 
   constructor(values: Object = {}){
@@ -29,8 +40,21 @@ export class Alarm {
     let value = <string>json['value'];
     let core_id = <string>json['core_id'];
     let running_id = <string>json['running_id'];
-    let mode = <string>json['mode'];
+    let mode = <number>json['mode'];
     let core_timestamp = <number>json['core_timestamp'];
     return new Alarm({ pk, value, core_id, running_id, mode, core_timestamp });
+  }
+
+  getModeAsString(): string {
+    return OperationalMode[this.mode];
+  }
+
+  getValueAsString(): string {
+    if (this.value == 0){
+      return 'Cleared';
+    }
+    else {
+      return 'Set';
+    }
   }
 }
