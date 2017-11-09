@@ -30,13 +30,16 @@ describe('AlarmService', () => {
 
     // TODO: Add asserts and check AlarmService instance
 
-    // subject.alarmsObs.subscribe(alarms => {
-    //   console.log('here');
-    //   console.log('alarms = ', alarms);
-    //   this.alarmPks = Object.keys(alarms);
-    // });
-    //
-    // subject.initialize();
+    subject.alarmsObs.subscribe(alarms => {
+      console.log('here');
+      console.log('alarms = ', alarms);
+      if (alarms[1] != undefined) {
+        console.log(alarms[1].pk);
+        expect(alarms[1].pk).toEqual(1);
+      }
+    });
+
+    subject.initialize();
 
     mockStream.on('connection', server => {
       let alarms = [
