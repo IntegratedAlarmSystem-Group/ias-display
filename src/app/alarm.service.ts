@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class AlarmService {
 
-  // alarms: Alarm[] = [];
   alarms: {[pk: number]: Alarm } = {};
   private _alarmSource = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
   alarmsObs = this._alarmSource.asObservable();
@@ -37,14 +36,7 @@ export class AlarmService {
       else if( payload.action == "delete"){
         delete this.alarms[pk];
       }
-      // else if( payload.action == "update"){
-      //   this.alarms[pk];
-      // }
-
-      console.log('this.alarms = ', this.alarms);
       this.changeAlarms(this.alarms);
-      // this.alarms.push(Alarm.asAlarm(payload.data));
-      // console.log(Object.keys(this.alarms));
     });
 
     webSocketBridge.socket.addEventListener('open', function() {

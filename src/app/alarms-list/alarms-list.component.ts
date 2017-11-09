@@ -14,8 +14,6 @@ export class AlarmsListComponent implements OnInit {
   //TODO: Refactor general structure for alarms and components
   alarmPks = [];
 
-  // @Input alarms;
-
   constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
@@ -23,11 +21,5 @@ export class AlarmsListComponent implements OnInit {
     this.alarmService.alarmsObs.subscribe(alarms => {
       this.alarmPks = Object.keys(alarms);
     });
-    console.log('***** Change!! **** ', this.alarmPks);
-  }
-
-  ngOnChanges() {
-    this.alarmPks = Object.keys(this.alarmService.alarms);
-    console.log('***** Change!! **** ', this.alarmPks);
   }
 }
