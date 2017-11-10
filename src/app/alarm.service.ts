@@ -20,7 +20,7 @@ export class AlarmService {
 
   initialize() {
     const connectionPath = environment.websocketPath;
-    console.log("Connecting to " + connectionPath);
+    console.log('Connecting to ' + connectionPath);
 
     const webSocketBridge = new WebSocketBridge();
     webSocketBridge.connect(connectionPath);
@@ -28,19 +28,18 @@ export class AlarmService {
 
     webSocketBridge.demultiplex('alarms', (payload, streamName) => {
       // console.log('Received message:, ', payload, streamName);
-      let pk = payload['pk'];
+      const pk = payload['pk'];
       payload.data['pk'] = pk;
-      if( payload.action == "create" || payload.action == "update" ){
+      if ( payload.action === 'create' || payload.action === 'update' ) {
         this.alarms[pk] = Alarm.asAlarm(payload.data);
-      }
-      else if( payload.action == "delete"){
+      } else if ( payload.action === 'delete') {
         delete this.alarms[pk];
       }
       this.changeAlarms(this.alarms);
     });
 
     webSocketBridge.socket.addEventListener('open', function() {
-      console.log("Connected to WebSocket");
+      console.log('Connected to WebSocket');
     });
   }
 

@@ -10,7 +10,7 @@ describe('AlarmService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AlarmService,]
+      providers: [AlarmService, ]
     });
   });
 
@@ -30,7 +30,7 @@ describe('AlarmService', () => {
 
     let stage = 0;  // initial state index with no messages from server
 
-    let fixtureAlarms = [  // mock alarm messages from webserver
+    const fixtureAlarms = [  // mock alarm messages from webserver
       {
         'stream': 'alarms',
         'payload': {
@@ -84,7 +84,7 @@ describe('AlarmService', () => {
     mockStream = new Server(environment.websocketPath);  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
-      for (let alarm of fixtureAlarms){
+      for (const alarm of fixtureAlarms){
         mockStream.send(JSON.stringify(alarm));
       }
       mockStream.stop();
@@ -94,30 +94,30 @@ describe('AlarmService', () => {
 
     subject.alarmsObs.subscribe(alarms => {
 
-      if (stage == 0){  // no messages
+      if (stage === 0) {  // no messages
         expect(alarms).toEqual({});
         expect(Object.keys(alarms).length).toEqual(0);
       }
 
-      if (stage == 1){  // create
+      if (stage === 1) {  // create
         expect(Object.keys(alarms).length).toEqual(1);
-        let storedAlarm = alarms[1];
-        let fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
-        for (let key in fixtureAlarmMsg){
+        const storedAlarm = alarms[1];
+        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
       }
 
-      if (stage == 2){  // update
+      if (stage === 2) {  // update
         expect(Object.keys(alarms).length).toEqual(1);
-        let storedAlarm = alarms[1];
-        let fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
-        for (let key in fixtureAlarmMsg){
+        const storedAlarm = alarms[1];
+        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
       }
 
-      if (stage == 3){  // last message has delete action, msg should be removed
+      if (stage === 3) {  // last message has delete action, msg should be removed
         expect(alarms).toEqual({});
       }
 
