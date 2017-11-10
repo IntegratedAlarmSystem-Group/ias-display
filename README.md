@@ -2,6 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
+Current instructions are related to a development environment under CentOS Linux release 7.
+
+## Installing
+
+Consider the following instructions from the root project folder.
+
+To install Nodejs, npm and angular-cli
+
+```
+[ias-display]$ sudo yum install nodejs
+[ias-display]$ sudo yum install npm
+[ias-display]$ sudo npm install -g @angular/cli
+```
+
+To install the required local libraries
+
+```
+[ias-display]$ npm install
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
