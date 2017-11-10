@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Alarm } from '../alarm';
+import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import { WebSocketBridge } from 'django-channels';
+import { AlarmService } from '../alarm.service';
+import { Alarm, OperationalMode } from '../alarm';
 
 @Component({
   selector: 'app-alarms-list',
@@ -8,35 +12,36 @@ import { Alarm } from '../alarm';
 })
 export class AlarmsListComponent implements OnInit {
   //TODO: Refactor general structure for alarms and components
-  alarms: Alarm[];
+  alarmPks = [];
 
-  constructor() {
-    this.alarms = [
-      new Alarm({
-        pk:1,
-        value:0,
-        core_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV1$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      }),
-      new Alarm({
-        pk:2,
-        value:1,
-        core_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV2$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      }),
-      new Alarm({
-        pk:3,
-        value:0,
-        core_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE',
-        running_id:'ANTENNA_DV3$WVR$AMBIENT_TEMPERATURE@ATC',
-        core_timestamp:0
-      })
-    ];
-  }
+  constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
+    this.alarmService.initialize();
+    this.alarmService.alarmsObs.subscribe(alarms => {
+      this.alarmPks = Object.keys(alarms);
+    });
   }
 
+  getAlarmColor(alarm: Alarm){
+    if (alarm.mode == OperationalMode.maintenance) {
+      return 'gray';
+    }
+    else if (alarm.mode == OperationalMode.unknown) {
+      if (alarm.value == 0) {
+        return 'blue';
+      }
+      else {
+        return 'purple';
+      }
+    }
+    else {
+      if (alarm.value == 0) {
+        return 'green';
+      }
+      else {
+        return 'red';
+      }
+    }
+  }
 }
