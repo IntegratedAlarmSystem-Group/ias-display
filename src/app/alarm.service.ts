@@ -27,7 +27,7 @@ export class AlarmService {
     webSocketBridge.listen(connectionPath);
 
     webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      console.log('Received message:, ', payload, streamName);
+      // console.log('Received message:, ', payload, streamName);
       let pk = payload['pk'];
       payload.data['pk'] = pk;
       if( payload.action == "create" || payload.action == "update" ){
