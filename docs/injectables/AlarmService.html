@@ -359,6 +359,14 @@
             <code>src/app/alarm.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service that connects and receives <a href="../classes/Alarm.html">Alarm</a> messages from the
+IAS Webserver through Websockets</p>
+
+            </p>
 
 
             <section>
@@ -417,7 +425,7 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/alarm.service.ts:17</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/alarm.service.ts:32</a></div>
                                         </td>
                                     </tr>
             
@@ -440,19 +448,21 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>changeAlarms(alarm: literal type)</code>
+            <code>changeAlarms(alarms: literal type)</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/alarm.service.ts:15</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/alarm.service.ts:42</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Sends an <a href="../classes/Alarm.html">Alarm</a> change event</p>
+            </div>
             
                                         <div class="io-description">
                                                 <b>Parameters :</b>
@@ -467,13 +477,14 @@
                                                     </thead>
                                                     <tbody>
                                                             <tr>
-                                                              <td>alarm</td>
+                                                              <td>alarms</td>
                                                               <td>
                                                                       <code>literal type</code>
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>the updated dictionary of Alarms to notify</p>
+            </td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -508,12 +519,14 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/alarm.service.ts:21</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/alarm.service.ts:49</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Start connection to the backend through websockets</p>
+            </div>
             
                                         <div class="io-description">
                                             <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -546,10 +559,17 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/alarm.service.ts:12</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/alarm.service.ts:24</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Private attribute that defines the source of a stream to notify changes
+            to the dictionary of <a href="../classes/Alarm.html">Alarm</a> objects</p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -575,10 +595,16 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/alarm.service.ts:11</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/alarm.service.ts:18</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Dictionary of <a href="../classes/Alarm.html">Alarm</a> objects, indexed by their primary keys</p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -598,10 +624,18 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/alarm.service.ts:13</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/alarm.service.ts:32</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Observable used to subscribe to changes in the dictionary of
+            <a href="../classes/Alarm.html">Alarm</a> objects</p>
+            <p>It is created from the _alarmSource attribute</p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -618,19 +652,47 @@ import { environment } from &#x27;../environments/environment&#x27;;
 import { Alarm } from &#x27;./alarm&#x27;;
 import { BehaviorSubject } from &#x27;rxjs/BehaviorSubject&#x27;;
 
+/**
+* Service that connects and receives {@link Alarm} messages from the
+* IAS Webserver through Websockets
+*/
 @Injectable()
 export class AlarmService {
 
+  /**
+  * Dictionary of {@link Alarm} objects, indexed by their primary keys
+  */
   alarms: {[pk: number]: Alarm } &#x3D; {};
+
+  /**
+  * Private attribute that defines the source of a stream to notify changes
+  * to the dictionary of {@link Alarm} objects
+  */
   private _alarmSource &#x3D; new BehaviorSubject&lt;{ [pk: number]: Alarm }&gt;(this.alarms);
+
+  /**
+  * Observable used to subscribe to changes in the dictionary of
+  * {@link Alarm} objects
+  *
+  * It is created from the _alarmSource attribute
+  */
   alarmsObs &#x3D; this._alarmSource.asObservable();
 
-  changeAlarms(alarm: { [pk: number]: Alarm }) {
-    this._alarmSource.next(alarm);
-  }
-
+  /** The &quot;constructor&quot; */
   constructor() { }
 
+  /**
+  * Sends an {@link Alarm} change event
+  *
+  * @param {Alarm} alarms the updated dictionary of Alarms to notify
+  */
+  changeAlarms(alarms: { [pk: number]: Alarm }) {
+    this._alarmSource.next(alarms);
+  }
+
+  /**
+  * Start connection to the backend through websockets
+  */
   initialize() {
     const connectionPath &#x3D; environment.websocketPath;
     console.log(&#x27;Connecting to &#x27; + connectionPath);
@@ -655,8 +717,6 @@ export class AlarmService {
       console.log(&#x27;Connected to WebSocket&#x27;);
     });
   }
-
-
 }
 </code></pre>
     </div>

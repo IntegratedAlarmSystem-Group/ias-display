@@ -5,19 +5,47 @@ import { environment } from '../environments/environment';
 import { Alarm } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+/**
+* Service that connects and receives {@link Alarm} messages from the
+* IAS Webserver through Websockets
+*/
 @Injectable()
 export class AlarmService {
 
+  /**
+  * Dictionary of {@link Alarm} objects, indexed by their primary keys
+  */
   alarms: {[pk: number]: Alarm } = {};
+
+  /**
+  * Private attribute that defines the source of a stream to notify changes
+  * to the dictionary of {@link Alarm} objects
+  */
   private _alarmSource = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
+
+  /**
+  * Observable used to subscribe to changes in the dictionary of
+  * {@link Alarm} objects
+  *
+  * It is created from the _alarmSource attribute
+  */
   alarmsObs = this._alarmSource.asObservable();
 
-  changeAlarms(alarm: { [pk: number]: Alarm }) {
-    this._alarmSource.next(alarm);
-  }
-
+  /** The "constructor" */
   constructor() { }
 
+  /**
+  * Sends an {@link Alarm} change event
+  *
+  * @param {Alarm} alarms the updated dictionary of Alarms to notify
+  */
+  changeAlarms(alarms: { [pk: number]: Alarm }) {
+    this._alarmSource.next(alarms);
+  }
+
+  /**
+  * Start connection to the backend through websockets
+  */
   initialize() {
     const connectionPath = environment.websocketPath;
     console.log('Connecting to ' + connectionPath);
@@ -42,6 +70,4 @@ export class AlarmService {
       console.log('Connected to WebSocket');
     });
   }
-
-
 }

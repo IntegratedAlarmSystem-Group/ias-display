@@ -362,6 +362,13 @@
     <code>src/app/alarms-list/alarms-list.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Basic component to display alarms in boxes</p>
+
+    </p>
 
 
     <p class="comment">
@@ -460,12 +467,14 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:22</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>The &quot;constructor&quot;, injects the <a href="../injectables/AlarmService.html">AlarmService</a></p>
+    </div>
                                 <div>
                                         <b>Parameters :</b>
                                         <table class="params">
@@ -485,7 +494,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>An instance of the AlarmService</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -522,12 +532,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:50</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Defines the color that should be used to display an Alarm</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -548,19 +560,25 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The Alarm object to display</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
                                 </div>
                                 <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">AlarmsListComponent.getAlarmColor(alarm);</code></pre>
+                                            </div>
                                 </div>
                                 <div class="io-description">
-                                    <b>Returns : </b>    <code>&quot;gray&quot; | &quot;blue&quot; | &quot;purple&quot; | &quot;green&quot; | &quot;red&quot;</code>
+                                    <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
     
                                 </div>
                                     <div class="io-description">
-                                        
+                                        <p>The color that should be used</p>
+    
                                     </div>
                         </td>
                     </tr>
@@ -583,12 +601,15 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:36</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Function executed when the component is initiated</p>
+    <p>Starts the <a href="../injectables/AlarmService.html">AlarmService</a> and subscribes to its messages</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -621,10 +642,17 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/alarms-list/alarms-list.component.ts:22</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Auxiliary list used to store the primary keys of alarms,
+    for displaying purposes</p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -641,6 +669,9 @@ import { WebSocketBridge } from &#x27;django-channels&#x27;;
 import { AlarmService } from &#x27;../alarm.service&#x27;;
 import { Alarm, OperationalMode } from &#x27;../alarm&#x27;;
 
+/**
+* Basic component to display alarms in boxes
+*/
 @Component({
   selector: &#x27;app-alarms-list&#x27;,
   templateUrl: &#x27;./alarms-list.component.html&#x27;,
@@ -648,10 +679,24 @@ import { Alarm, OperationalMode } from &#x27;../alarm&#x27;;
 })
 export class AlarmsListComponent implements OnInit {
   //TODO: Refactor general structure for alarms and components
+  /**
+  * Auxiliary list used to store the primary keys of alarms,
+  * for displaying purposes
+  */
   alarmPks &#x3D; [];
 
+  /**
+  * The &quot;constructor&quot;, injects the {@link AlarmService}
+  *
+  * @param {AlarmService} alarmService An instance of the AlarmService
+  */
   constructor(private alarmService: AlarmService) { }
 
+  /**
+  * Function executed when the component is initiated
+  *
+  * Starts the {@link AlarmService} and subscribes to its messages
+  */
   ngOnInit() {
     this.alarmService.initialize();
     this.alarmService.alarmsObs.subscribe(alarms &#x3D;&gt; {
@@ -659,7 +704,14 @@ export class AlarmsListComponent implements OnInit {
     });
   }
 
-  getAlarmColor(alarm: Alarm){
+  /**
+  * Defines the color that should be used to display an Alarm
+  * @param {Alarm} alarm The Alarm object to display
+  * @returns {string} The color that should be used
+  * @example
+  * AlarmsListComponent.getAlarmColor(alarm);
+  */
+  getAlarmColor(alarm: Alarm): string{
     if (alarm.mode &#x3D;&#x3D; OperationalMode.maintenance) {
       return &#x27;gray&#x27;;
     }
