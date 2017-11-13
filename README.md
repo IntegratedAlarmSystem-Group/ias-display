@@ -4,6 +4,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Current instructions are related to a development environment under CentOS Linux release 7.
 
+## Documentation
+Documentation is available here:
+https://integratedalarmsystem-group.github.io/ias-display/index.html
+
+Please note that the documentation here corresponds to the master branch version
+
 ## Installing
 
 Consider the following instructions from the root project folder.
