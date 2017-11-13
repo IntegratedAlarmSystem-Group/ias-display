@@ -1,0 +1,11 @@
+<div *ngFor="let pk of alarmPks">
+  <div class="box-alarm" [style.background]="getAlarmColor(alarmService.alarms[pk])">
+    <div class="box-alarm-title">
+      {{ alarmService.alarms[pk].core_id }}
+    </div>
+    <div class="box-alarm-body">
+      Alarm: {{ alarmService.alarms[pk].getValueAsString() }}, &nbsp;
+      Mode: {{ alarmService.alarms[pk].getModeAsString() }}
+    </div>
+  </div>
+</div>
