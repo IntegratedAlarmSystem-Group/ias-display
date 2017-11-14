@@ -68,6 +68,27 @@ export class AlarmService {
 
     webSocketBridge.socket.addEventListener('open', function() {
       console.log('Connected to WebSocket');
+      webSocketBridge.stream('alarms').send({
+        "pk": 350,
+        "action": "update",
+        "data": {
+          "mode": 0,
+        }
+      });
+      // webSocketBridge.stream('alarms').send({
+      //   "action": "create",
+      //   "data": {
+      //     "mode": 0,
+      //     "value": 2,
+      //     "core_id": "core_iddddd",
+      //     "running_id": "running_iddddd",
+      //     "core_timestamp": 666,
+      //   }
+      // });
+      // webSocketBridge.stream('alarms').send({
+      //   "action": "delete",
+      //   "pk": 339,
+      // });
     });
   }
 }
