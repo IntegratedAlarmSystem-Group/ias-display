@@ -55,11 +55,9 @@ export class AlarmService {
     webSocketBridge.listen(connectionPath);
 
     webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      // console.log('Received message:, ', payload, streamName);
       const pk = payload['pk'];
-      payload.data['pk'] = pk;
       if ( payload.action === 'create' || payload.action === 'update' ) {
-        this.alarms[pk] = Alarm.asAlarm(payload.data);
+        this.alarms[pk] = Alarm.asAlarm(payload.data, pk);
       } else if ( payload.action === 'delete') {
         delete this.alarms[pk];
       }
@@ -67,13 +65,11 @@ export class AlarmService {
     });
 
     webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      console.log('here?', payload, streamName);
-      let alarms = JSON.parse(payload.text);
-      console.log(alarms);
-      console.log(alarms[0].fields.value);
-      for (let i=0; i < alarms.length; i++){
-        console.log(alarms[i].pk, alarms[i]['fields']['core_id']);
+      for (let alarm of payload.data){
+        const pk = alarm['pk'];
+        this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
       }
+      this.changeAlarms(this.alarms);
     });
 
     webSocketBridge.socket.addEventListener('open', function() {
@@ -81,27 +77,7 @@ export class AlarmService {
       webSocketBridge.stream('requests').send({
          "action": "list"
       });
-      webSocketBridge.stream('alarms').send({
-        "pk": 350,
-        "action": "update",
-        "data": {
-          "mode": 0,
-        }
-      });
-      // webSocketBridge.stream('alarms').send({
-      //   "action": "create",
-      //   "data": {
-      //     "mode": 0,
-      //     "value": 2,
-      //     "core_id": "core_iddddd",
-      //     "running_id": "running_iddddd",
-      //     "core_timestamp": 666,
-      //   }
-      // });
-      // webSocketBridge.stream('alarms').send({
-      //   "action": "delete",
-      //   "pk": 339,
-      // });
     });
+
   }
 }
