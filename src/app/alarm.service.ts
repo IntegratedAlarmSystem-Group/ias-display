@@ -66,8 +66,21 @@ export class AlarmService {
       this.changeAlarms(this.alarms);
     });
 
+    webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      console.log('here?', payload, streamName);
+      let alarms = JSON.parse(payload.text);
+      console.log(alarms);
+      console.log(alarms[0].fields.value);
+      for (let i=0; i < alarms.length; i++){
+        console.log(alarms[i].pk, alarms[i]['fields']['core_id']);
+      }
+    });
+
     webSocketBridge.socket.addEventListener('open', function() {
       console.log('Connected to WebSocket');
+      webSocketBridge.stream('requests').send({
+         "action": "list"
+      });
       webSocketBridge.stream('alarms').send({
         "pk": 350,
         "action": "update",
