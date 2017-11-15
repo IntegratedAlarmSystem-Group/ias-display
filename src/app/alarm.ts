@@ -52,7 +52,6 @@ export class Alarm {
   */
   static isValidAlarm(json: any): boolean {
     return (
-      json.hasOwnProperty("pk") &&
       json.hasOwnProperty("value") &&
       json.hasOwnProperty("core_id") &&
       json.hasOwnProperty("running_id") &&
@@ -65,12 +64,12 @@ export class Alarm {
   * Class method that receives an object and returns copy as an {@link Alarm}
   *
   * @param {any} json the object to convert to an Alarm
+  * @param {number} pk the primary key of the Alarm in the database
   */
-  static asAlarm(json: any): Alarm {
+  static asAlarm(json: any, pk: number): Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
-    let pk = <number>json['pk'];
     let value = <string>json['value'];
     let core_id = <string>json['core_id'];
     let running_id = <string>json['running_id'];

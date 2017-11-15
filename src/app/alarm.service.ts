@@ -55,19 +55,29 @@ export class AlarmService {
     webSocketBridge.listen(connectionPath);
 
     webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      // console.log('Received message:, ', payload, streamName);
       const pk = payload['pk'];
-      payload.data['pk'] = pk;
       if ( payload.action === 'create' || payload.action === 'update' ) {
-        this.alarms[pk] = Alarm.asAlarm(payload.data);
+        this.alarms[pk] = Alarm.asAlarm(payload.data, pk);
       } else if ( payload.action === 'delete') {
         delete this.alarms[pk];
       }
       this.changeAlarms(this.alarms);
     });
 
+    webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      for (let alarm of payload.data){
+        const pk = alarm['pk'];
+        this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
+      }
+      this.changeAlarms(this.alarms);
+    });
+
     webSocketBridge.socket.addEventListener('open', function() {
       console.log('Connected to WebSocket');
+      webSocketBridge.stream('requests').send({
+         "action": "list"
+      });
     });
+
   }
 }
