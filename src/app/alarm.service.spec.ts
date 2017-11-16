@@ -128,6 +128,83 @@ describe('AlarmService', () => {
 
   }));
 
+  it('should get the list of alarms from the webserver', async(() => {
+
+    let stage = 0;  // initial state index with no messages from server
+
+    const fixtureAlarmsList = {
+        'stream': 'requests',
+        'payload': {
+          'data': [  // mock list of alarms from webserver
+            { 'pk': 1,
+              'model': 'alarms.alarm',
+              'fields': {
+                'pk': 1,
+                'value': 0,
+                'core_id': 'coreid$1',
+                'running_id': 'coreid$1',
+                'mode': 0,
+                'core_timestamp': 10000
+              }
+            },
+            { 'pk': 2,
+              'model': 'alarms.alarm',
+              'fields': {
+                'pk': 2,
+                'value': 1,
+                'core_id': 'coreid$2',
+                'running_id': 'coreid$2',
+                'mode': 0,
+                'core_timestamp': 10000
+              }
+            },
+            { 'pk': 3,
+              'model': 'alarms.alarm',
+              'fields': {
+                'pk': 3,
+                'value': 0,
+                'core_id': 'coreid$3',
+                'running_id': 'coreid$3',
+                'mode': 0,
+                'core_timestamp': 10000
+              }
+            }
+          ]
+        }
+      };
+
+    mockStream = new Server(environment.websocketPath);  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarms list from server
+      mockStream.send(JSON.stringify(fixtureAlarmsList));
+    });
+
+    subject.alarmsObs.subscribe(alarms => {
+
+      if (stage === 0) {
+        expect(alarms).toEqual({});
+        expect(Object.keys(alarms).length).toEqual(0);
+      }
+
+      if (stage === 1) {
+        expect(Object.keys(alarms).length).toEqual(3);
+        // const storedAlarm = alarms[3];
+        // for (const message in fixtureAlarmsList['payload']['data']) {
+        //   for (const key of Object.keys(message['fields'])) {
+        //     console.log(key);
+        //     expect(storedAlarm[key]).toEqual(message[key]);
+        //   }
+        // }
+      }
+
+      stage += 1;
+
+    });
+
+    subject.initialize();
+
+  }));
+
   it('should be created', inject([AlarmService], (service: AlarmService) => {
     expect(service).toBeTruthy();
   }));
