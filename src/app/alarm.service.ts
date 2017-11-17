@@ -17,6 +17,8 @@ export class AlarmService {
   */
   alarms: {[pk: number]: Alarm } = {};
 
+  private webSocketBridge: WebSocketBridge = new WebSocketBridge();
+
   /**
   * Private attribute that defines the source of a stream to notify changes
   * to the dictionary of {@link Alarm} objects
@@ -47,37 +49,67 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    const connectionPath = environment.websocketPath;
-    console.log('Connecting to ' + connectionPath);
 
-    const webSocketBridge = new WebSocketBridge();
-    webSocketBridge.connect(connectionPath);
-    webSocketBridge.listen(connectionPath);
+    this.connect();
 
-    webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      const pk = payload['pk'];
-      if ( payload.action === 'create' || payload.action === 'update' ) {
-        this.alarms[pk] = Alarm.asAlarm(payload.data, pk);
-      } else if ( payload.action === 'delete') {
-        delete this.alarms[pk];
-      }
-      this.changeAlarms(this.alarms);
+    this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      this.processAlarm(payload.pk, payload.action, payload.data);
     });
-
-    webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      for (let alarm of payload.data){
-        const pk = alarm['pk'];
-        this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
-      }
-      this.changeAlarms(this.alarms);
+    this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      this.processAlarms(payload.data);
     });
-
-    webSocketBridge.socket.addEventListener('open', function() {
-      console.log('Connected to WebSocket');
-      webSocketBridge.stream('requests').send({
-         "action": "list"
-      });
-    });
+    this.webSocketBridge.socket.addEventListener(
+      'open', () => this.getAlarmList()
+    );
 
   }
+
+   /**
+   *  Start connection to the backend through websockets
+   */
+  connect() {
+    const connectionPath = environment.websocketPath;
+    this.webSocketBridge.connect(connectionPath);
+    this.webSocketBridge.listen(connectionPath);
+    console.log('Listening on ' + connectionPath);
+  }
+
+  /**
+   * Process the alarm and modifies the service alarms list depending
+   * on the action value.
+   * @param pk Id of the alarm in the web server database
+   * @param action create, update or delete
+   * @param alarm dictionary with values for alarm fields
+   */
+  processAlarm(pk, action, alarm) {
+    if ( action === 'create' || action === 'update' ) {
+      this.alarms[pk] = Alarm.asAlarm(alarm, pk);
+    } else if ( action === 'delete') {
+      delete this.alarms[pk];
+    }
+    this.changeAlarms(this.alarms);
+  }
+
+  /**
+   * Process a list of alarms and add each one to the service alarms list
+   * @param alarmList list of dictionaries with values for alarm fields
+   */
+  processAlarms(alarmList) {
+    for (let alarm of alarmList) {
+      const pk = alarm['pk'];
+      this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
+    }
+    this.changeAlarms(this.alarms);
+  }
+
+  /**
+   * Get the complete list of alarms from the webserver database
+   * through the websocket
+   */
+  getAlarmList() {
+    this.webSocketBridge.stream('requests').send({
+      'action': 'list'
+    });
+  }
+
 }
