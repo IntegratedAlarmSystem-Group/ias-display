@@ -53,6 +53,7 @@ export class AlarmService {
     this.connect();
 
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      console.log('payloas = ', payload);
       this.processAlarm(payload.pk, payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
