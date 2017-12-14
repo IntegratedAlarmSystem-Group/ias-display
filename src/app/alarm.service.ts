@@ -15,23 +15,19 @@ export class AlarmService {
   /**
   * Dictionary of {@link Alarm} objects, indexed by their primary keys
   */
-  alarms: {[pk: number]: Alarm } = {};
+  public alarms: {[pk: number]: Alarm } = {};
 
+  /**
+  * Stream of alarms to notify changes
+  * of the dictionary of {@link Alarm} objects
+  */
+  public alarmStream = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
+
+  /**
+  * Django Channels WebsocketBridge,
+  * used to connect to Django Channels through Websockets
+  */
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
-
-  /**
-  * Private attribute that defines the source of a stream to notify changes
-  * to the dictionary of {@link Alarm} objects
-  */
-  private _alarmSource = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
-
-  /**
-  * Observable used to subscribe to changes in the dictionary of
-  * {@link Alarm} objects
-  *
-  * It is created from the _alarmSource attribute
-  */
-  alarmsObs = this._alarmSource.asObservable();
 
   /** The "constructor" */
   constructor() { }
@@ -42,7 +38,7 @@ export class AlarmService {
   * @param {Alarm} alarms the updated dictionary of Alarms to notify
   */
   changeAlarms(alarms: { [pk: number]: Alarm }) {
-    this._alarmSource.next(alarms);
+    this.alarmStream.next(alarms);
   }
 
   /**
@@ -53,7 +49,7 @@ export class AlarmService {
     this.connect();
 
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      console.log('payloas = ', payload);
+      console.log('payload = ', payload);
       this.processAlarm(payload.pk, payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
