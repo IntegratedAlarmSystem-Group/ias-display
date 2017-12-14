@@ -18,10 +18,10 @@ export class AlarmService {
   public alarms: {[pk: number]: Alarm } = {};
 
   /**
-  * Stream of alarms to notify changes
-  * of the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in
+  * the dictionary of {@link Alarm} objects
   */
-  public alarmStream = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
+  public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /**
   * Django Channels WebsocketBridge,
@@ -38,7 +38,7 @@ export class AlarmService {
   * @param {Alarm} alarms the updated dictionary of Alarms to notify
   */
   changeAlarms(alarms: { [pk: number]: Alarm }) {
-    this.alarmStream.next(alarms);
+    this.alarmChangeStream.next(true);
   }
 
   /**

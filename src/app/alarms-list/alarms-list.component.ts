@@ -35,7 +35,7 @@ export class AlarmsListComponent implements OnInit {
   */
   ngOnInit() {
     this.alarmService.initialize();
-    this.alarmService.alarmStream.subscribe(alarms => {
+    this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmPks = Object.keys(this.alarmService.alarms);
     });
   }
