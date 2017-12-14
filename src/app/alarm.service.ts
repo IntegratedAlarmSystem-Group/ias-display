@@ -45,20 +45,17 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-
     this.connect();
-
+    this.webSocketBridge.socket.addEventListener(
+      'open', () => this.getAlarmList()
+    );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
       console.log('payload = ', payload);
       this.processAlarm(payload.pk, payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      this.processAlarms(payload.data);
+      this.processAlarmsList(payload.data);
     });
-    this.webSocketBridge.socket.addEventListener(
-      'open', () => this.getAlarmList()
-    );
-
   }
 
    /**
@@ -69,6 +66,16 @@ export class AlarmService {
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
     console.log('Listening on ' + connectionPath);
+  }
+
+  /**
+   * Get the complete list of alarms from the webserver database
+   * through the websocket
+   */
+  getAlarmList() {
+    this.webSocketBridge.stream('requests').send({
+      'action': 'list'
+    });
   }
 
   /**
@@ -89,24 +96,13 @@ export class AlarmService {
 
   /**
    * Process a list of alarms and add each one to the service alarms list
-   * @param alarmList list of dictionaries with values for alarm fields
+   * @param alarmsList list of dictionaries with values for alarm fields
    */
-  processAlarms(alarmList) {
-    for (let alarm of alarmList) {
+  processAlarmsList(alarmsList) {
+    for (let alarm of alarmsList) {
       const pk = alarm['pk'];
       this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
     }
     this.changeAlarms(this.alarms);
   }
-
-  /**
-   * Get the complete list of alarms from the webserver database
-   * through the websocket
-   */
-  getAlarmList() {
-    this.webSocketBridge.stream('requests').send({
-      'action': 'list'
-    });
-  }
-
 }
