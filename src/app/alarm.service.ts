@@ -15,23 +15,19 @@ export class AlarmService {
   /**
   * Dictionary of {@link Alarm} objects, indexed by their primary keys
   */
-  alarms: {[pk: number]: Alarm } = {};
+  public alarms: {[pk: number]: Alarm } = {};
 
+  /**
+  * Stream of notifications of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeStream = new BehaviorSubject<any>(true);
+
+  /**
+  * Django Channels WebsocketBridge,
+  * used to connect to Django Channels through Websockets
+  */
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
-
-  /**
-  * Private attribute that defines the source of a stream to notify changes
-  * to the dictionary of {@link Alarm} objects
-  */
-  private _alarmSource = new BehaviorSubject<{ [pk: number]: Alarm }>(this.alarms);
-
-  /**
-  * Observable used to subscribe to changes in the dictionary of
-  * {@link Alarm} objects
-  *
-  * It is created from the _alarmSource attribute
-  */
-  alarmsObs = this._alarmSource.asObservable();
 
   /** The "constructor" */
   constructor() { }
@@ -42,27 +38,24 @@ export class AlarmService {
   * @param {Alarm} alarms the updated dictionary of Alarms to notify
   */
   changeAlarms(alarms: { [pk: number]: Alarm }) {
-    this._alarmSource.next(alarms);
+    this.alarmChangeStream.next(true);
   }
 
   /**
   * Start connection to the backend through websockets
   */
   initialize() {
-
     this.connect();
-
-    this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      console.log('payloas = ', payload);
-      this.processAlarm(payload.pk, payload.action, payload.data);
-    });
-    this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      this.processAlarms(payload.data);
-    });
     this.webSocketBridge.socket.addEventListener(
       'open', () => this.getAlarmList()
     );
-
+    this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      console.log('payload = ', payload);
+      this.processAlarm(payload.pk, payload.action, payload.data);
+    });
+    this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      this.processAlarmsList(payload.data);
+    });
   }
 
    /**
@@ -73,6 +66,16 @@ export class AlarmService {
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
     console.log('Listening on ' + connectionPath);
+  }
+
+  /**
+   * Get the complete list of alarms from the webserver database
+   * through the websocket
+   */
+  getAlarmList() {
+    this.webSocketBridge.stream('requests').send({
+      'action': 'list'
+    });
   }
 
   /**
@@ -93,24 +96,13 @@ export class AlarmService {
 
   /**
    * Process a list of alarms and add each one to the service alarms list
-   * @param alarmList list of dictionaries with values for alarm fields
+   * @param alarmsList list of dictionaries with values for alarm fields
    */
-  processAlarms(alarmList) {
-    for (let alarm of alarmList) {
+  processAlarmsList(alarmsList) {
+    for (let alarm of alarmsList) {
       const pk = alarm['pk'];
       this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
     }
     this.changeAlarms(this.alarms);
   }
-
-  /**
-   * Get the complete list of alarms from the webserver database
-   * through the websocket
-   */
-  getAlarmList() {
-    this.webSocketBridge.stream('requests').send({
-      'action': 'list'
-    });
-  }
-
 }

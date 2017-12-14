@@ -93,8 +93,8 @@ describe('AlarmService', () => {
 
     // Act and assert:
 
-    subject.alarmsObs.subscribe(alarms => {
-
+    subject.alarmChangeStream.subscribe(notification => {
+      let alarms = subject.alarms;
       if (stage === 0) {  // no messages
         expect(alarms).toEqual({});
         expect(Object.keys(alarms).length).toEqual(0);
@@ -180,8 +180,8 @@ describe('AlarmService', () => {
       mockStream.send(JSON.stringify(fixtureAlarmsList));
     });
 
-    subject.alarmsObs.subscribe(alarms => {
-
+    subject.alarmChangeStream.subscribe(notification => {
+      let alarms = subject.alarms;
       if (stage === 0) {
         expect(alarms).toEqual({});
         expect(Object.keys(alarms).length).toEqual(0);
