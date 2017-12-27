@@ -9,6 +9,54 @@ describe('AlarmService', () => {
   let subject: AlarmService;
   let mockStream: Server;
 
+  let alarms = [
+    { 'pk': 0,
+      'model': 'alarms.alarm',
+      'fields': {
+        'pk': 0,
+        'value': 0,
+        'core_id': 'coreid$1',
+        'running_id': 'coreid$1',
+        'mode': 0,
+        'core_timestamp': 10000
+      }
+    },
+    { 'pk': 1,
+      'model': 'alarms.alarm',
+      'fields': {
+        'pk': 1,
+        'value': 1,
+        'core_id': 'coreid$2',
+        'running_id': 'coreid$2',
+        'mode': 0,
+        'core_timestamp': 10000
+      }
+    },
+    { 'pk': 2,
+      'model': 'alarms.alarm',
+      'fields': {
+        'pk': 2,
+        'value': 0,
+        'core_id': 'coreid$3',
+        'running_id': 'coreid$3',
+        'mode': 0,
+        'core_timestamp': 10000
+      }
+    }
+  ];
+
+  const fixtureAlarmsList = {
+      'stream': 'requests',
+      'payload': {
+        'data': [  // mock list of alarms from webserver
+          alarms[0],
+          alarms[1],
+          alarms[2]
+        ]
+      }
+    };
+
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlarmService, ]
@@ -131,55 +179,18 @@ describe('AlarmService', () => {
 
   it('should get the list of alarms from the webserver', async(() => {
 
+    // Arrange
     let stage = 0;  // initial state index with no messages from server
-
-    const fixtureAlarmsList = {
-        'stream': 'requests',
-        'payload': {
-          'data': [  // mock list of alarms from webserver
-            { 'pk': 0,
-              'model': 'alarms.alarm',
-              'fields': {
-                'pk': 0,
-                'value': 0,
-                'core_id': 'coreid$1',
-                'running_id': 'coreid$1',
-                'mode': 0,
-                'core_timestamp': 10000
-              }
-            },
-            { 'pk': 1,
-              'model': 'alarms.alarm',
-              'fields': {
-                'pk': 1,
-                'value': 1,
-                'core_id': 'coreid$2',
-                'running_id': 'coreid$2',
-                'mode': 0,
-                'core_timestamp': 10000
-              }
-            },
-            { 'pk': 2,
-              'model': 'alarms.alarm',
-              'fields': {
-                'pk': 2,
-                'value': 0,
-                'core_id': 'coreid$3',
-                'running_id': 'coreid$3',
-                'mode': 0,
-                'core_timestamp': 10000
-              }
-            }
-          ]
-        }
-      };
 
     mockStream = new Server(environment.websocketPath);  // mock server
 
+    // Act
     mockStream.on('connection', server => {  // send mock alarms list from server
       mockStream.send(JSON.stringify(fixtureAlarmsList));
+      mockStream.stop();
     });
 
+    // Assert
     subject.alarmChangeStream.subscribe(notification => {
       let alarms = subject.alarms;
       if (stage === 0) {
@@ -206,6 +217,7 @@ describe('AlarmService', () => {
     subject.initialize();
 
   }));
+
 
   it('should be created', inject([AlarmService], (service: AlarmService) => {
     expect(service).toBeTruthy();
