@@ -10,6 +10,57 @@ describe('AlarmService', () => {
   let subject: AlarmService;
   let mockStream: Server;
 
+  let alarmsFromWebServer = [  // mock alarm messages from webserver
+    {
+      'stream': 'alarms',
+      'payload': {
+        'pk' : 1,  // same alarm, different actions
+        'action': 'create',
+        'model': 'alarms.alarm',
+        'data': {
+          'pk': 1,
+          'value': 0,
+          'core_id': 'coreid$1',
+          'running_id': 'coreid$1',
+          'mode': 0,
+          'core_timestamp': 10000
+        }
+      }
+    },
+    {
+      'stream': 'alarms',
+      'payload': {
+        'pk' : 1,
+        'action': 'update',
+        'model': 'alarms.alarm',
+        'data': {
+          'pk': 1,
+          'value': 1,
+          'core_id': 'coreid$1',
+          'running_id': 'coreid$1',
+          'mode': 1,
+          'core_timestamp': 10000
+        }
+      }
+    },
+    {
+      'stream': 'alarms',
+      'payload': {
+        'pk' : 1,
+        'action': 'delete',
+        'model': 'alarms.alarm',
+        'data': {
+          'pk': 1,
+          'value': 1,
+          'core_id': 'coreid$1',
+          'running_id': 'coreid$1',
+          'mode': 1,
+          'core_timestamp': 10000
+        }
+      }
+    }
+  ];
+
   let alarms = [
     { 'pk': 0,
       'model': 'alarms.alarm',
@@ -80,56 +131,7 @@ describe('AlarmService', () => {
 
     let stage = 0;  // initial state index with no messages from server
 
-    const fixtureAlarms = [  // mock alarm messages from webserver
-      {
-        'stream': 'alarms',
-        'payload': {
-          'pk' : 1,
-          'action': 'create',
-          'model': 'alarms.alarm',
-          'data': {
-            'pk': 1,
-            'value': 0,
-            'core_id': 'coreid$1',
-            'running_id': 'coreid$1',
-            'mode': 0,
-            'core_timestamp': 10000
-          }
-        }
-      },
-      {
-        'stream': 'alarms',
-        'payload': {
-          'pk' : 1,
-          'action': 'update',
-          'model': 'alarms.alarm',
-          'data': {
-            'pk': 1,
-            'value': 1,
-            'core_id': 'coreid$1',
-            'running_id': 'coreid$1',
-            'mode': 1,
-            'core_timestamp': 10000
-          }
-        }
-      },
-      {
-        'stream': 'alarms',
-        'payload': {
-          'pk' : 1,
-          'action': 'delete',
-          'model': 'alarms.alarm',
-          'data': {
-            'pk': 1,
-            'value': 1,
-            'core_id': 'coreid$1',
-            'running_id': 'coreid$1',
-            'mode': 1,
-            'core_timestamp': 10000
-          }
-        }
-      }
-    ];
+    const fixtureAlarms = alarmsFromWebServer;
 
     mockStream = new Server(environment.websocketPath);  // mock server
 
@@ -263,5 +265,51 @@ describe('AlarmService', () => {
     }
 
   });
+
+  it('should store a timestamp after message from "requests" stream', async(() => {
+
+    let millisecondsDelta: number;
+    let getListExpectedTimestamp: number;
+
+    mockStream = new Server(environment.websocketPath);  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarms list from server
+      // Act:
+      // mock get alarms list from webserver
+      mockStream.send(JSON.stringify(fixtureAlarmsList));
+      // Assert:
+      getListExpectedTimestamp = (new Date()).getTime();
+      millisecondsDelta = Math.abs(
+        subject.lastReceivedMessageTimestamp - getListExpectedTimestamp);
+      expect(millisecondsDelta).toBeLessThan(5);
+      mockStream.stop();
+    });
+
+    subject.initialize();
+
+  }));
+
+  it('should store a timestamp after message from "alarms" stream', async(() => {
+
+    let millisecondsDelta: number;
+    let webserverMsgExpectedTimestamp: number;
+
+    mockStream = new Server(environment.websocketPath);  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarm from server
+      // Act:
+      // mock alarm message from webserver
+      mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
+      // Assert:
+      webserverMsgExpectedTimestamp = (new Date()).getTime();
+      millisecondsDelta = Math.abs(
+        subject.lastReceivedMessageTimestamp - webserverMsgExpectedTimestamp);
+      expect(millisecondsDelta).toBeLessThan(5);
+      mockStream.stop();
+    });
+
+    subject.initialize();
+
+  }));
 
 });

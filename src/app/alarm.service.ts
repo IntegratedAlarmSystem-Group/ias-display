@@ -13,7 +13,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class AlarmService {
 
   /**
-  * Status of the WebsocketBridge connection
+  * Timestamp related with the last received message
+  */
+  public lastReceivedMessageTimestamp : number = (new Date).getTime();
+
+  /**
+  * Stream of notifications of changes in
+  * the status of the service connection
   */
   public connectionStatusStream = new BehaviorSubject<any>(false);
 
@@ -68,10 +74,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      this.updateLastReceivedMessageTimestamp();
       console.log('payload = ', payload);
       this.processAlarm(payload.pk, payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
   }
@@ -102,6 +110,35 @@ export class AlarmService {
   triggerAlarmsNonValidConnectionState() {
     for (let pk in this.alarms) {
       this.alarms[pk]['mode'] = OperationalMode.unknown;
+    }
+  }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  updateLastReceivedMessageTimestamp() {
+    this.lastReceivedMessageTimestamp = (new Date()).getTime();
+  }
+
+  /**
+   * Auxiliary function to check the last received message timestamp
+   * Note: If non-valid, the connection state is non-valid
+   * TODO: To evaluate. Add related test.
+   * TODO: Review the life cycle of the connection status. To evaluate
+   * resuming the true status after a general non-valid state.
+   * Other option could be refresh the application on browser.
+   */
+  checkLastReceivedMessageTimestamp() {
+
+    const MAX_SECONDS_WITHOUT_MESSAGES = 2;
+
+    let now = (new Date).getTime();
+    let millisecondsDelta;
+
+    millisecondsDelta = now - this.lastReceivedMessageTimestamp;
+    console.log(this.lastReceivedMessageTimestamp);
+    if (millisecondsDelta >= 1000 * 2 ){
+      this.connectionStatusStream.next(false);
     }
   }
 
