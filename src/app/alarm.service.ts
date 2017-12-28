@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
-import { Alarm } from './alarm';
+import { Alarm, OperationalMode } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 /**
@@ -15,7 +15,7 @@ export class AlarmService {
   /**
   * Status of the WebsocketBridge connection
   */
-  public bridgeStatus = "invalid";
+  public connectionStatusStream = new BehaviorSubject<any>(false);
 
   /**
   * Dictionary of {@link Alarm} objects, indexed by their primary keys
@@ -35,13 +35,23 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /** The "constructor" */
-  constructor() { }
+  constructor() {
+    this.connectionStatusStream.subscribe(
+      value => {
+        if (value === false){
+          this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+  }
 
   /**
   * Sends an {@link Alarm} change event
   *
   * @param {Alarm} alarms the updated dictionary of Alarms to notify
   */
+
+  // TODO: Review args to changeAlarms
   changeAlarms(alarms: { [pk: number]: Alarm }) {
     this.alarmChangeStream.next(true);
   }
@@ -53,7 +63,7 @@ export class AlarmService {
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
-        this.bridgeStatus = "valid";
+        this.connectionStatusStream.next(true);
         this.getAlarmList();
       }
     );
@@ -84,6 +94,15 @@ export class AlarmService {
     this.webSocketBridge.stream('requests').send({
       'action': 'list'
     });
+  }
+
+  /**
+   * Set selected state to alarms under an non-valid connection
+   */
+  triggerAlarmsNonValidConnectionState() {
+    for (let pk in this.alarms) {
+      this.alarms[pk]['mode'] = OperationalMode.unknown;
+    }
   }
 
   /**

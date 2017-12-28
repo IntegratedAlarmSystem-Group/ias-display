@@ -1,4 +1,5 @@
 import { TestBed, inject, async } from '@angular/core/testing';
+import { Alarm, OperationalMode } from './alarm';
 import { AlarmService } from './alarm.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
@@ -224,19 +225,43 @@ describe('AlarmService', () => {
   }));
 
 
-  it('should be a valid bridge status after websocket connection', async(() => {
+  it('should be a valid connection status after websocket connection', async(() => {
 
-    expect(subject.bridgeStatus).toBe("invalid");
+    expect(subject.connectionStatusStream.value).toBe(false);
 
     mockStream = new Server(environment.websocketPath);  // mock server
 
     mockStream.on('connection', server => {
-      expect(subject.bridgeStatus).toBe("valid");
+      expect(subject.connectionStatusStream.value).toBe(true);
       mockStream.stop();
     });
 
     subject.initialize();
 
   }));
+
+  it('should update the alarms mode to unknown if connection status is invalid', () => {
+
+    // Arrange:
+    subject.connectionStatusStream.next(true);
+    // Initial alarms dictionary
+    subject.alarms[0] = Alarm.asAlarm(alarms[0]['fields'], 0);
+    subject.alarms[0]['mode'] = OperationalMode.startup;
+    subject.alarms[1] = Alarm.asAlarm(alarms[1]['fields'], 1);
+    subject.alarms[1]['mode'] = OperationalMode.startup;
+
+    let expected_mode = OperationalMode.unknown;
+
+    // Act:
+    // Change connection status to invalid
+    subject.connectionStatusStream.next(false);
+
+    // Assert:
+    // All the alarms should have an unknown mode
+    for (let pk in subject.alarms){
+      expect(subject.alarms[pk]['mode']).toBe(expected_mode);
+    }
+
+  });
 
 });
