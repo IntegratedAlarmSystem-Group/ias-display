@@ -13,6 +13,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class AlarmService {
 
   /**
+  * Status of the WebsocketBridge connection
+  */
+  public bridgeStatus = "invalid";
+
+  /**
   * Dictionary of {@link Alarm} objects, indexed by their primary keys
   */
   public alarms: {[pk: number]: Alarm } = {};
@@ -47,7 +52,10 @@ export class AlarmService {
   initialize() {
     this.connect();
     this.webSocketBridge.socket.addEventListener(
-      'open', () => this.getAlarmList()
+      'open', () => {
+        this.bridgeStatus = "valid";
+        this.getAlarmList();
+      }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
       console.log('payload = ', payload);

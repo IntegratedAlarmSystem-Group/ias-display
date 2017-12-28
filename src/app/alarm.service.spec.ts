@@ -222,4 +222,21 @@ describe('AlarmService', () => {
   it('should be created', inject([AlarmService], (service: AlarmService) => {
     expect(service).toBeTruthy();
   }));
+
+
+  it('should be a valid bridge status after websocket connection', async(() => {
+
+    expect(subject.bridgeStatus).toBe("invalid");
+
+    mockStream = new Server(environment.websocketPath);  // mock server
+
+    mockStream.on('connection', server => {
+      expect(subject.bridgeStatus).toBe("valid");
+      mockStream.stop();
+    });
+
+    subject.initialize();
+
+  }));
+
 });
