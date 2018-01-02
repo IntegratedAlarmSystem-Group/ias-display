@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
-import { Alarm, OperationalMode } from './alarm';
+import { Alarm, OperationalMode, Validity } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
@@ -113,7 +113,7 @@ export class AlarmService {
    */
   triggerAlarmsNonValidConnectionState() {
     for (let pk in this.alarms) {
-      this.alarms[pk]['mode'] = OperationalMode.unknown;
+      this.alarms[pk]['validity'] = Validity.unreliable;
     }
   }
 
