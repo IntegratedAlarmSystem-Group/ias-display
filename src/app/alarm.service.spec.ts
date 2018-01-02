@@ -117,6 +117,11 @@ describe('AlarmService', () => {
 
   beforeEach(inject([AlarmService], (alarmService) => {
       subject = alarmService;
+      // TODO: Evaluation to check periodic calls
+      spyOn(subject, 'startLastReceivedMessageTimestampCheck')
+        .and.callFake(function(){});
+      spyOn(subject, 'startAlarmListPeriodicalUpdate')
+        .and.callFake(function(){});
   }));
 
   it('should update the alarms dictionary on new alarm messages', async(() => {
@@ -311,5 +316,24 @@ describe('AlarmService', () => {
     subject.initialize();
 
   }));
+
+  it('should set invalid state if last received message timestamp is two seconds behind', function() {
+
+    // Arrange
+    let now = (new Date).getTime();
+    let maxSecondsWithoutMessages = 2;
+    let delayedTimestamp = now - (maxSecondsWithoutMessages*1000 + 1);
+
+    subject.connectionStatusStream.next(true);
+    subject.lastReceivedMessageTimestamp = delayedTimestamp;
+
+    // Act
+    subject.compareCurrentAndLastReceivedMessageTimestamp();
+
+    // Assert
+    expect(subject.connectionStatusStream.value).toBe(false);
+
+  });
+
 
 });

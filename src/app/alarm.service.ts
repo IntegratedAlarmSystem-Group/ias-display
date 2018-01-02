@@ -4,6 +4,8 @@ import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Alarm, OperationalMode } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -82,6 +84,8 @@ export class AlarmService {
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
+    this.startAlarmListPeriodicalUpdate();
+    this.startLastReceivedMessageTimestampCheck();
   }
 
    /**
@@ -121,14 +125,11 @@ export class AlarmService {
   }
 
   /**
-   * Auxiliary function to check the last received message timestamp
+   * Method to check the last received message timestamp
    * Note: If non-valid, the connection state is non-valid
-   * TODO: To evaluate. Add related test.
-   * TODO: Review the life cycle of the connection status. To evaluate
-   * resuming the true status after a general non-valid state.
-   * Other option could be refresh the application on browser.
+   * TODO: Review the life cycle of the connection status.
    */
-  checkLastReceivedMessageTimestamp() {
+  compareCurrentAndLastReceivedMessageTimestamp() {
 
     const MAX_SECONDS_WITHOUT_MESSAGES = 2;
 
@@ -136,11 +137,31 @@ export class AlarmService {
     let millisecondsDelta;
 
     millisecondsDelta = now - this.lastReceivedMessageTimestamp;
-    console.log(this.lastReceivedMessageTimestamp);
-    if (millisecondsDelta >= 1000 * 2 ){
+    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ){
       this.connectionStatusStream.next(false);
     }
   }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  startLastReceivedMessageTimestampCheck() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() => {
+      this.compareCurrentAndLastReceivedMessageTimestamp();
+    });
+  }
+
+  /**
+   * Method to start a periodical update
+   */
+  startAlarmListPeriodicalUpdate() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() => {
+      this.getAlarmList();
+    });
+  }
+
 
   /**
    * Process the alarm and modifies the service alarms list depending
