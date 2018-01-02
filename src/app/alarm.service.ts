@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
-import { Alarm } from './alarm';
+import { Alarm, OperationalMode, Validity } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -11,6 +13,17 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 */
 @Injectable()
 export class AlarmService {
+
+  /**
+  * Timestamp related with the last received message
+  */
+  public lastReceivedMessageTimestamp : number = (new Date).getTime();
+
+  /**
+  * Stream of notifications of changes in
+  * the status of the service connection
+  */
+  public connectionStatusStream = new BehaviorSubject<any>(false);
 
   /**
   * Dictionary of {@link Alarm} objects, indexed by their primary keys
@@ -30,13 +43,23 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /** The "constructor" */
-  constructor() { }
+  constructor() {
+    this.connectionStatusStream.subscribe(
+      value => {
+        if (value === false){
+          this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+  }
 
   /**
   * Sends an {@link Alarm} change event
   *
   * @param {Alarm} alarms the updated dictionary of Alarms to notify
   */
+
+  // TODO: Review args to changeAlarms
   changeAlarms(alarms: { [pk: number]: Alarm }) {
     this.alarmChangeStream.next(true);
   }
@@ -47,15 +70,22 @@ export class AlarmService {
   initialize() {
     this.connect();
     this.webSocketBridge.socket.addEventListener(
-      'open', () => this.getAlarmList()
+      'open', () => {
+        this.connectionStatusStream.next(true);
+        this.getAlarmList();
+      }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      this.updateLastReceivedMessageTimestamp();
       console.log('payload = ', payload);
       this.processAlarm(payload.pk, payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
+    this.startAlarmListPeriodicalUpdate();
+    this.startLastReceivedMessageTimestampCheck();
   }
 
    /**
@@ -77,6 +107,61 @@ export class AlarmService {
       'action': 'list'
     });
   }
+
+  /**
+   * Set selected state to alarms under an non-valid connection
+   */
+  triggerAlarmsNonValidConnectionState() {
+    for (let pk in this.alarms) {
+      this.alarms[pk]['validity'] = Validity.unreliable;
+    }
+  }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  updateLastReceivedMessageTimestamp() {
+    this.lastReceivedMessageTimestamp = (new Date()).getTime();
+  }
+
+  /**
+   * Method to check the last received message timestamp
+   * Note: If non-valid, the connection state is non-valid
+   * TODO: Review the life cycle of the connection status.
+   */
+  compareCurrentAndLastReceivedMessageTimestamp() {
+
+    const MAX_SECONDS_WITHOUT_MESSAGES = 2;
+
+    let now = (new Date).getTime();
+    let millisecondsDelta;
+
+    millisecondsDelta = now - this.lastReceivedMessageTimestamp;
+    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ){
+      this.connectionStatusStream.next(false);
+    }
+  }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  startLastReceivedMessageTimestampCheck() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() => {
+      this.compareCurrentAndLastReceivedMessageTimestamp();
+    });
+  }
+
+  /**
+   * Method to start a periodical update
+   */
+  startAlarmListPeriodicalUpdate() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() => {
+      this.getAlarmList();
+    });
+  }
+
 
   /**
    * Process the alarm and modifies the service alarms list depending
