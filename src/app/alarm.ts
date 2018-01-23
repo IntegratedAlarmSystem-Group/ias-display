@@ -111,4 +111,27 @@ export class Alarm {
       return 'Set';
     }
   }
+
+  /**
+  * Returns a string representation of the {@link Alarm.mode} attribute
+  *
+  * @returns {string} a string representation of the validity of the Alarm
+  */
+  getValidityAsString(): string {
+    return Validity[this.validity];
+  }
+
+  /**
+  * Returns a Date representation of the {@link Alarm.mode} attribute
+  *
+  * @returns {Date} a date format representation of the Alarm core_timestamp
+  */
+  getCoreTimestampAsDate(): Date {
+
+    let ts = this.core_timestamp;
+    let date: Date = new Date(ts);
+
+    return date;
+  }
+
 }

@@ -16,3 +16,18 @@
 .box-alarm > .box-alarm-body {
   padding-top:10px;
 }
+
+th {
+  line-height: 1.75em;
+}
+
+td {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 1.5em;
+}
+
+.alarm-minibox {
+  font-size: 24px;
+}
