@@ -19,6 +19,7 @@
 
 th {
   line-height: 1.75em;
+  text-align: center;
 }
 
 td {
@@ -26,6 +27,11 @@ td {
   padding-left: 10px;
   padding-right: 10px;
   line-height: 1.5em;
+}
+
+table.alarms {
+  color: white;  
+  width: 100%;
 }
 
 .alarm-minibox {

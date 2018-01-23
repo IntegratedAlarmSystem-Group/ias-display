@@ -1,2 +1,21 @@
-<h1>{{title}}</h1>
-<app-alarms-list></app-alarms-list>
+<nb-layout>
+
+  <nb-layout-header fixed class="ias-header">
+    <span class="title"> {{ title }} </span>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <nb-card>
+
+      <nb-card-header> Alarms </nb-card-header>
+      <nb-card-body>
+        <app-alarms-list></app-alarms-list>
+      </nb-card-body>
+      <nb-card-footer></nb-card-footer>
+
+    </nb-card>
+
+  </nb-layout-column>
+
+</nb-layout>
