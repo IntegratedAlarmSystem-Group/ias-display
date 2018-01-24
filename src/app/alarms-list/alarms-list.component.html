@@ -1,30 +1,40 @@
-<table class="alarms">
-  <thead>
-    <tr>
-      <th style="width:400px;max-width:150px;"> Timestamp </th>
-      <th> Core ID </th>
-      <th> Value </th>
-      <th> Mode </th>
-      <th> Validity </th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let pk of alarmPks">
-    <tr [style.background]="getAlarmColor(alarmService.alarms[pk])">
-      <td>
-        {{ alarmService.alarms[pk].getCoreTimestampAsDate() }}
-      </td>
-      <td>
-        {{ alarmService.alarms[pk].core_id }}
-      </td>
-      <td>
-        {{ alarmService.alarms[pk].getValueAsString() }}
-      </td>
-      <td>
-        {{ alarmService.alarms[pk].getModeAsString() }}
-      </td>
-      <td>
-        {{ alarmService.alarms[pk].getValidityAsString() }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<nb-card>
+
+  <nb-card-header> Alarms </nb-card-header>
+  <nb-card-body>
+
+    <table class="alarms">
+      <thead>
+        <tr>
+          <th style="width:400px;max-width:150px;"> Timestamp </th>
+          <th> Core ID </th>
+          <th> Value </th>
+          <th> Mode </th>
+          <th> Validity </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let pk of alarmPks">
+        <tr [style.background]="getAlarmColor(alarmService.alarms[pk])">
+          <td>
+            {{ alarmService.alarms[pk].getCoreTimestampAsDate() }}
+          </td>
+          <td>
+            {{ alarmService.alarms[pk].core_id }}
+          </td>
+          <td>
+              {{ alarmService.alarms[pk].getValueAsString() }}
+          </td>
+          <td>
+            {{ alarmService.alarms[pk].getModeAsString() }}
+          </td>
+          <td>
+            {{ alarmService.alarms[pk].getValidityAsString() }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </nb-card-body>
+  <nb-card-footer></nb-card-footer>
+
+</nb-card>

@@ -1,20 +1,23 @@
 <nb-layout>
 
   <nb-layout-header fixed class="ias-header">
+    <a (click)="toggleSidebar()">
+      <i class="main-menu-icon ion-md-menu"></i>
+    </a>
     <span class="title"> {{ title }} </span>
+    <div class="logo-container">
+      <img src="/assets/img/alma-logo.png">
+    </div>
   </nb-layout-header>
+
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" left state="compacted">
+    <nb-menu [items]="menu"></nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
 
-    <nb-card>
-
-      <nb-card-header> Alarms </nb-card-header>
-      <nb-card-body>
-        <app-alarms-list></app-alarms-list>
-      </nb-card-body>
-      <nb-card-footer></nb-card-footer>
-
-    </nb-card>
+    <router-outlet></router-outlet>
 
   </nb-layout-column>
 

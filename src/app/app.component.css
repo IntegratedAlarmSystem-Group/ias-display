@@ -1,6 +1,22 @@
+.main-menu-icon {
+  color: white !important;
+  font-size: 24px !important;
+  cursor: pointer;
+}
+
+.logo-container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.logo-container > img {
+  width: 36px;
+}
+
 .title {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 20px;
+  padding-left: 16px;
+  /* font-weight: bold; */
 }
 
 :host /deep/ nb-layout-header nav{
@@ -17,6 +33,7 @@
 
 :host /deep/ nb-card{
   box-shadow: none !important;
+  background-color: #3c4856 !important;
 }
 
 :host /deep/ nb-card-header{
@@ -39,4 +56,31 @@
   border-top: 1px solid #192531 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+}
+
+:host /deep/ nb-sidebar .main-container {
+  background: #324459 !important;
+  box-shadow: none !important;
+}
+
+:host /deep/ nb-sidebar.compacted nb-menu .menu-item a.active::before{
+  background: none !important; /* TODO: review active links style */
+}
+
+:host /deep/ nb-menu {
+  background: none !important;
+}
+
+:host /deep/ nb-menu li {
+  border: 0px solid #324459 !important;
+}
+
+:host /deep/ nb-menu .menu-item a {
+  background: none !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+
+:host /deep/ nb-menu .menu-icon {
+  color: white !important;
 }

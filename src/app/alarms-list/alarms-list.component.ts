@@ -79,5 +79,5 @@ export class AlarmsListComponent implements OnInit {
     }
 
   }
-  
+
 }
