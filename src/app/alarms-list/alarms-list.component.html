@@ -6,7 +6,7 @@
     <table class="alarms">
       <thead>
         <tr>
-          <th style="width:400px;max-width:150px;"> Timestamp </th>
+          <th style="width:400px;max-width:150px;"> Core Time </th>
           <th> Core ID </th>
           <th> Value </th>
           <th> Mode </th>
@@ -16,7 +16,7 @@
       <tbody *ngFor="let pk of alarmPks">
         <tr [style.background]="getAlarmColor(alarmService.alarms[pk])">
           <td>
-            {{ alarmService.alarms[pk].getCoreTimestampAsDate() }}
+            {{ alarmService.alarms[pk].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
           </td>
           <td>
             {{ alarmService.alarms[pk].core_id }}
