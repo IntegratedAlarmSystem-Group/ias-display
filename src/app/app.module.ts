@@ -9,7 +9,8 @@ import { AlarmService } from './alarm.service';
 import { NbThemeModule } from '@nebular/theme';
 import { NbLayoutModule } from '@nebular/theme';
 import { NbCardModule } from '@nebular/theme';
-import { NbSidebarModule, NbSidebarService } from '@nebular/theme';
+import { NbSidebarModule } from '@nebular/theme';
+import { NbSidebarService } from '@nebular/theme';
 
 import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
