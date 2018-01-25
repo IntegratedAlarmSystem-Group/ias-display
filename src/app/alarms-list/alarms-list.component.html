@@ -3,43 +3,78 @@
   <nb-card-header> Alarms </nb-card-header>
   <nb-card-body>
 
-    <table class="alarms">
-      <thead>
-        <tr>
-          <th> Status </th>
-          <th style="width:400px;max-width:150px;"> Core Time </th>
-          <th> Core ID </th>
-          <!-- <th> Value </th> -->
-          <!-- <th> Validity </th> -->
-          <th> Mode </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let pk of alarmPks">
-        <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[pk])"> -->
-        <tr style="background: #ffffff0d; margin-top: 2px; margin-bottom: 2px;">
-          <td>
-            <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[pk])">
-              <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[pk])"> &#9650; </span>
-            </div>
-          </td>
-          <td>
-            {{ alarmService.alarms[pk].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
-          </td>
-          <td>
-            {{ alarmService.alarms[pk].core_id }}
-          </td>
-          <!-- <td>
-              {{ alarmService.alarms[pk].getValueAsString() }}
-          </td> -->
-          <!-- <td>
-            {{ alarmService.alarms[pk].getValidityAsString() }}
-          </td>           -->
-          <td>
-            {{ alarmService.alarms[pk].getModeAsString() }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="alarm-status-legend">
+      <div style="float: left;">
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-status" style="color:white;background:red;"> &#9650; </span> set-valid
+        </span>
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-status" style="color:white;background:#95ff95;"> &nbsp; </span> clear-valid
+        </span>
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-status" style="color:red;background:none;border:2px solid red;"> &#9650; </span> set-invalid
+        </span>
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-status" style="color:white;background:none;border:2px solid #95ff95;"> &nbsp; </span> clear-invalid
+        </span>
+      </div>
+      <div style="float: right;">
+        <!-- <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-color" style="background:red;"> &nbsp; </span> set
+        </span>
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-color" style="background:#95ff95;"> &nbsp; </span> cleared
+        </span> -->
+        <span class="alarm-status-legend-item">
+          <span class="alarm-status-legend-color" style="background:#73adf0;"> &nbsp; </span> unknown
+        </span>
+        <span class="alarm-status-legend-item last">
+          <span class="alarm-status-legend-color" style="background:#9b9797;"> &nbsp; </span> maintenance
+        </span>
+      </div>
+    </div>
+
+    <div>
+
+      <table class="alarms">
+        <thead>
+          <tr>
+            <th> Status </th>
+            <th style="width:400px;max-width:150px;"> Core Time </th>
+            <th> Core ID </th>
+            <!-- <th> Value </th> -->
+            <!-- <th> Validity </th> -->
+            <th> Mode </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let pk of alarmPks">
+          <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[pk])"> -->
+          <tr style="background: #ffffff0d; margin-top: 2px; margin-bottom: 2px;">
+            <td>
+              <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[pk])">
+                <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[pk])"> &#9650; </span>
+              </div>
+            </td>
+            <td>
+              {{ alarmService.alarms[pk].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
+            </td>
+            <td>
+              {{ alarmService.alarms[pk].core_id }}
+            </td>
+            <!-- <td>
+                {{ alarmService.alarms[pk].getValueAsString() }}
+            </td> -->
+            <!-- <td>
+              {{ alarmService.alarms[pk].getValidityAsString() }}
+            </td>           -->
+            <td>
+              {{ alarmService.alarms[pk].getModeAsString() }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
 
   </nb-card-body>
   <nb-card-footer></nb-card-footer>
