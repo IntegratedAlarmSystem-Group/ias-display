@@ -80,4 +80,75 @@ export class AlarmsListComponent implements OnInit {
 
   }
 
+  setAlarmStatusDivStyle(alarm: Alarm): object{
+    // Color based on alarm mode and value
+    // Background color depends on the alarm validity
+
+    // alarm.mode = 7;
+    // alarm.value = 1;
+    // alarm.validity = 0;
+
+    let color: string;
+    let background: string;
+
+    if (alarm.mode == OperationalMode.maintenance) {
+      color = '#9b9797';
+    }
+    else if (alarm.mode == OperationalMode.unknown) {
+      color = '#73adf0';
+    }
+    else {
+      if (alarm.value == 0) {
+        color = '#95ff95';
+      }
+      else {
+        color = 'red';
+      }
+    };
+
+    if (alarm.validity == Validity.reliable){
+      background = color;
+    } else {
+      background = 'none';
+    };
+
+    let styles = {
+      'border': `2px solid ${color}`,
+      'background': background
+    }
+
+    return styles;
+
+  }
+
+  setAlarmStatusSymbolStyle(alarm: Alarm): object{
+    // returns a symbol based on the alarm value
+
+    let color : string;
+    let visibility : string;
+
+    if (alarm.value == 1) {
+
+      visibility = 'visible';
+
+      if (alarm.validity == Validity.reliable){
+        color = 'white';
+      }
+      else {
+        if (alarm.mode == OperationalMode.maintenance) { color = '#9b9797'; }
+        else if (alarm.mode == OperationalMode.unknown) { color = '#73adf0'; }
+        else { color = 'red'; };
+      };
+
+    }
+    else {
+      visibility = 'hidden';
+      color = 'black';
+    };
+
+    let styles = { 'visibility': visibility, 'color': color};
+
+    return styles;
+  }
+
 }
