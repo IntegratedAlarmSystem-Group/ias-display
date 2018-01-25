@@ -55,24 +55,21 @@ table.alarms {
   margin-bottom: 65px !important;
 }
 
-.alarm-status-legend-item {
+.alarm-status-legend .group {
+  display: inline-block;
+}
+
+.alarm-status-legend .group .item {
+  display: inline-block;
   color: #f2f2f2;
-  padding-right: 20px;
+  padding-right: 56px;
+  padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
-.alarm-status-legend-item.last {
-  padding-right: 0px !important;
-}
-
-.alarm-status-legend-status {
+.alarm-status-legend .group .item .status {
   display: inline-block;
   margin-right: 4px;
   text-align: center;
   width:36px;
-}
-
-.alarm-status-legend-color {
-  display: inline-block;
-  margin-right: 4px;
-  width:18px;
 }

@@ -130,15 +130,15 @@ export class AlarmsListComponent implements OnInit {
     if (alarm.value == 1) {
 
       visibility = 'visible';
-
-      if (alarm.validity == Validity.reliable){
-        color = 'white';
-      }
-      else {
-        if (alarm.mode == OperationalMode.maintenance) { color = '#9b9797'; }
-        else if (alarm.mode == OperationalMode.unknown) { color = '#73adf0'; }
-        else { color = 'red'; };
-      };
+      color = 'white';
+      // if (alarm.validity == Validity.reliable){
+      //   color = 'white';
+      // }
+      // else {
+      //   if (alarm.mode == OperationalMode.maintenance) { color = '#9b9797'; }
+      //   else if (alarm.mode == OperationalMode.unknown) { color = '#73adf0'; }
+      //   else { color = 'red'; };
+      // };
 
     }
     else {
