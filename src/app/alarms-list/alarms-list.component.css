@@ -62,14 +62,14 @@ table.alarms {
 .alarm-status-legend .group .item {
   display: inline-block;
   color: #f2f2f2;
-  padding-right: 56px;
+  padding-right: 65px;
   padding-bottom: 20px;
   padding-bottom: 20px;
 }
 
 .alarm-status-legend .group .item .status {
   display: inline-block;
-  margin-right: 4px;
+  margin-right: 7px;
   text-align: center;
   width:36px;
 }

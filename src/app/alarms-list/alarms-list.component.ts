@@ -22,6 +22,17 @@ export class AlarmsListComponent implements OnInit {
   alarmPks = [];
 
   /**
+  * Auxiliary list with non principal alarm modes
+  */
+
+  secondaryModes = [
+    OperationalMode.startup,
+    OperationalMode.initialization,
+    OperationalMode.closing,
+    OperationalMode.shuttedown
+  ];
+
+  /**
   * The "constructor", injects the {@link AlarmService}
   *
   * @param {AlarmService} alarmService An instance of the AlarmService
@@ -84,12 +95,9 @@ export class AlarmsListComponent implements OnInit {
     // Color based on alarm mode and value
     // Background color depends on the alarm validity
 
-    // alarm.mode = 7;
-    // alarm.value = 1;
-    // alarm.validity = 0;
-
     let color: string;
     let background: string;
+    let opacity: number;
 
     if (alarm.mode == OperationalMode.maintenance) {
       color = '#9b9797';
@@ -112,9 +120,17 @@ export class AlarmsListComponent implements OnInit {
       background = 'none';
     };
 
+    if (this.secondaryModes.indexOf(alarm.mode) > -1){
+      opacity = 0.5;
+    } else {
+      opacity = 1.0;
+    }
+
+
     let styles = {
       'border': `2px solid ${color}`,
-      'background': background
+      'background': background,
+      'opacity': opacity
     }
 
     return styles;
@@ -146,7 +162,10 @@ export class AlarmsListComponent implements OnInit {
       color = 'black';
     };
 
-    let styles = { 'visibility': visibility, 'color': color};
+    let styles = {
+      'visibility': visibility,
+      'color': color
+    };
 
     return styles;
   }
