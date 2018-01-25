@@ -1,3 +1,7 @@
+.menu-btn {
+  padding-right: 20px;
+}
+
 .main-menu-icon {
   color: white !important;
   font-size: 24px !important;
@@ -5,8 +9,9 @@
 }
 
 .logo-container {
-  padding-left: 20px;
-  padding-right: 20px;
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+  padding-bottom: 4px;
 }
 
 .logo-container > img {
@@ -14,8 +19,10 @@
 }
 
 .title {
-  font-size: 20px;
-  padding-left: 16px;
+  font-size: 22px;
+  padding-top: 7px;
+  padding-left: 14px;
+  padding-right: 14px;
   /* font-weight: bold; */
 }
 

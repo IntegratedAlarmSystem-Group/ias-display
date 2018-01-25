@@ -1,13 +1,15 @@
 <nb-layout>
 
   <nb-layout-header fixed class="ias-header">
-    <a (click)="toggleSidebar()">
-      <i class="main-menu-icon ion-md-menu"></i>
-    </a>
-    <span class="title"> {{ title }} </span>
+    <div class="menu-btn">
+      <a (click)="toggleSidebar()">
+        <i class="main-menu-icon ion-md-menu"></i>
+      </a>
+    </div>
     <div class="logo-container">
       <img src="/assets/img/alma-logo.png">
     </div>
+    <span class="title"> {{ title }} </span>
   </nb-layout-header>
 
 
