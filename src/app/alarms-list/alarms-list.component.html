@@ -1,11 +1,103 @@
-<div *ngFor="let pk of alarmPks">
-  <div class="box-alarm" [style.background]="getAlarmColor(alarmService.alarms[pk])">
-    <div class="box-alarm-title">
-      {{ alarmService.alarms[pk].core_id }}
+<nb-card>
+
+  <nb-card-header> Alarms </nb-card-header>
+  <nb-card-body>
+
+    <div class="alarm-status-legend">
+
+      <div class="group">
+        <span class="item">
+          <span class="status" style="color:white;background:red;"> &#9650; </span> set-valid
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:#95ff95;"> &nbsp; </span> clear-valid
+        </span>
+      </div>
+
+      <div class="group">
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid red;"> &#9650; </span> set-invalid
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid #95ff95;"> &nbsp; </span> clear-invalid
+        </span>
+      </div>
+
+      <div class="group">
+        <span class="item">
+          <span class="status" style="color:white;background:#73adf0;"> &#9650; </span> set-valid-unknown
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:#73adf0;"> &nbsp; </span> clear-valid-unknown
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid #73adf0;"> &#9650; </span> set-invalid-unknown
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid #73adf0;"> &nbsp; </span> clear-invalid-unknown
+        </span>
+      </div>
+
+      <div class="group">
+        <span class="item">
+          <span class="status" style="color:white;background:#9b9797;"> &#9650; </span> set-valid-maintenance
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:#9b9797;"> &nbsp; </span> clear-valid-maintenance
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid #9b9797;"> &#9650; </span> set-invalid-maintenance
+        </span>
+        <span class="item">
+          <span class="status" style="color:white;background:none;border:2px solid #9b9797;"> &nbsp; </span> clear-invalid-maintenance
+        </span>
+      </div>
+
     </div>
-    <div class="box-alarm-body">
-      Alarm: {{ alarmService.alarms[pk].getValueAsString() }}, &nbsp;
-      Mode: {{ alarmService.alarms[pk].getModeAsString() }}
+
+    <div>
+
+      <table class="alarms">
+        <thead>
+          <tr>
+            <th> Status </th>
+            <th style="width:400px;max-width:150px;"> Core Time </th>
+            <th> Core ID </th>
+            <!-- <th> Value </th> -->
+            <!-- <th> Validity </th> -->
+            <th> Mode </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let pk of alarmPks">
+          <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[pk])"> -->
+          <tr style="background: #ffffff0d; margin-top: 2px; margin-bottom: 2px;">
+            <td>
+              <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[pk])">
+                <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[pk])"> &#9650; </span>
+              </div>
+            </td>
+            <td>
+              {{ alarmService.alarms[pk].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
+            </td>
+            <td>
+              {{ alarmService.alarms[pk].core_id }}
+            </td>
+            <!-- <td>
+                {{ alarmService.alarms[pk].getValueAsString() }}
+            </td> -->
+            <!-- <td>
+              {{ alarmService.alarms[pk].getValidityAsString() }}
+            </td>           -->
+            <td>
+              {{ alarmService.alarms[pk].getModeAsString() }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
-  </div>
-</div>
+
+  </nb-card-body>
+  <nb-card-footer></nb-card-footer>
+
+</nb-card>

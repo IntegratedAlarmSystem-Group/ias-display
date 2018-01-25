@@ -22,6 +22,17 @@ export class AlarmsListComponent implements OnInit {
   alarmPks = [];
 
   /**
+  * Auxiliary list with non principal alarm modes
+  */
+
+  secondaryModes = [
+    OperationalMode.startup,
+    OperationalMode.initialization,
+    OperationalMode.closing,
+    OperationalMode.shuttedown
+  ];
+
+  /**
   * The "constructor", injects the {@link AlarmService}
   *
   * @param {AlarmService} alarmService An instance of the AlarmService
@@ -79,4 +90,84 @@ export class AlarmsListComponent implements OnInit {
     }
 
   }
+
+  setAlarmStatusDivStyle(alarm: Alarm): object{
+    // Color based on alarm mode and value
+    // Background color depends on the alarm validity
+
+    let color: string;
+    let background: string;
+    let opacity: number;
+
+    if (alarm.mode == OperationalMode.maintenance) {
+      color = '#9b9797';
+    }
+    else if (alarm.mode == OperationalMode.unknown) {
+      color = '#73adf0';
+    }
+    else {
+      if (alarm.value == 0) {
+        color = '#95ff95';
+      }
+      else {
+        color = 'red';
+      }
+    };
+
+    if (alarm.validity == Validity.reliable){
+      background = color;
+    } else {
+      background = 'none';
+    };
+
+    if (this.secondaryModes.indexOf(alarm.mode) > -1){
+      opacity = 0.5;
+    } else {
+      opacity = 1.0;
+    }
+
+
+    let styles = {
+      'border': `2px solid ${color}`,
+      'background': background,
+      'opacity': opacity
+    }
+
+    return styles;
+
+  }
+
+  setAlarmStatusSymbolStyle(alarm: Alarm): object{
+    // returns a symbol based on the alarm value
+
+    let color : string;
+    let visibility : string;
+
+    if (alarm.value == 1) {
+
+      visibility = 'visible';
+      color = 'white';
+      // if (alarm.validity == Validity.reliable){
+      //   color = 'white';
+      // }
+      // else {
+      //   if (alarm.mode == OperationalMode.maintenance) { color = '#9b9797'; }
+      //   else if (alarm.mode == OperationalMode.unknown) { color = '#73adf0'; }
+      //   else { color = 'red'; };
+      // };
+
+    }
+    else {
+      visibility = 'hidden';
+      color = 'black';
+    };
+
+    let styles = {
+      'visibility': visibility,
+      'color': color
+    };
+
+    return styles;
+  }
+
 }
