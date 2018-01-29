@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   title = 'IAS Display';
 
   menu: NbMenuItem[] = [
-    { title: 'Overview', link: '/', icon:'ion-ios-globe-outline white', home: true},
+    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline white', home: true},
     { title: 'Weather AOS', link: '/weather', icon:'ion-ios-sunny-outline white'},
   ];
 

@@ -21,10 +21,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './pages/overview/overview.component';
 
 const appRoutes: Routes = [
-  { path:'', component: OverviewComponent },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  { path:'overview', component: OverviewComponent},
   { path:'weather', component: AlarmsListComponent }
 ];
-
 
 @NgModule({
   declarations: [
