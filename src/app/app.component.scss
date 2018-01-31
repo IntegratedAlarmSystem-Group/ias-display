@@ -1,16 +1,16 @@
-@import './theme/alma';
-
-.logo-container {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 4px;
-}
-  
-.logo-container > img {
-    width: 36px;
-}
+@import './@theme/alma';
 
 @include nb-install-component {
+    .logo-container {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 4px;
+    }
+      
+    .logo-container > img {
+        width: 36px;
+    }
+
     /deep/ nb-card {
       nb-card-header {
         background-color: #3c4856;
@@ -24,9 +24,7 @@
         border-top: 1px solid #192531;
       }
     }
-}
 
-@include nb-install-component {
     /deep/ nb-layout {
         nb-layout-column {
             background-color: #282e38;
