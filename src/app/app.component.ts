@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   /**
   * Title of the application
   */
-  title = 'IAS Display';
+  title = 'Integrated Alarm System';
 
   menu: NbMenuItem[] = [
     { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline white', home: true},
