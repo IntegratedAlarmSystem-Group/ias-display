@@ -18,11 +18,10 @@ import { NbMenuModule } from '@nebular/theme';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { OverviewComponent } from './pages/overview/overview.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path:'overview', component: OverviewComponent },
+  { path:'overview', component: AlarmsListComponent },
   { path:'weather', component: AlarmsListComponent }
 ];
 
@@ -31,7 +30,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AlarmsListComponent,
-    OverviewComponent
   ],
   imports: [
     BrowserModule,
