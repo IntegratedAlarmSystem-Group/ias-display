@@ -120,7 +120,9 @@ export class AlarmsListComponent implements OnInit {
       background = 'none';
     };
 
-    if (this.secondaryModes.indexOf(alarm.mode) > -1){
+    let mode = Number(alarm.mode);  // TODO: check alarm value types
+
+    if (this.secondaryModes.indexOf(mode) > -1){
       opacity = 0.5;
     } else {
       opacity = 1.0;
