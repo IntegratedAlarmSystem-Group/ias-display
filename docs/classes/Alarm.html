@@ -500,7 +500,7 @@
                             <tr>
                                 <td class="col-md-4">
                                         <span class="modifier-icon fa fa-reset"></span>
-                                    <code>asAlarm(json: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                                    <code>asAlarm(json: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, pk: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                                 </td>
                             </tr>
             
@@ -538,6 +538,16 @@
                                                               <td><p>the object to convert to an Alarm</p>
             </td>
                                                             </tr>
+                                                            <tr>
+                                                              <td>pk</td>
+                                                              <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td><p>the primary key of the Alarm in the database</p>
+            </td>
+                                                            </tr>
                                                     </tbody>
                                                 </table>
                                         </div>
@@ -571,7 +581,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/alarm.ts:87</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/alarm.ts:86</a></div>
                                         </td>
                                     </tr>
             
@@ -611,7 +621,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/alarm.ts:96</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/alarm.ts:95</a></div>
                                         </td>
                                     </tr>
             
@@ -979,7 +989,6 @@ export class Alarm {
   */
   static isValidAlarm(json: any): boolean {
     return (
-      json.hasOwnProperty(&quot;pk&quot;) &amp;&amp;
       json.hasOwnProperty(&quot;value&quot;) &amp;&amp;
       json.hasOwnProperty(&quot;core_id&quot;) &amp;&amp;
       json.hasOwnProperty(&quot;running_id&quot;) &amp;&amp;
@@ -992,12 +1001,12 @@ export class Alarm {
   * Class method that receives an object and returns copy as an {@link Alarm}
   *
   * @param {any} json the object to convert to an Alarm
+  * @param {number} pk the primary key of the Alarm in the database
   */
-  static asAlarm(json: any): Alarm {
+  static asAlarm(json: any, pk: number): Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
-    let pk &#x3D; &lt;number&gt;json[&#x27;pk&#x27;];
     let value &#x3D; &lt;string&gt;json[&#x27;value&#x27;];
     let core_id &#x3D; &lt;string&gt;json[&#x27;core_id&#x27;];
     let running_id &#x3D; &lt;string&gt;json[&#x27;running_id&#x27;];

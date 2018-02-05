@@ -1,2 +1,26 @@
-<h1>{{title}}</h1>
-<app-alarms-list></app-alarms-list>
+<nb-layout>
+
+  <nb-layout-header fixed class="ias-header">
+    <div class="menu-btn">
+      <a (click)="toggleSidebar()">
+        <i class="main-menu-icon ion-md-menu"></i>
+      </a>
+    </div>
+    <div class="logo-container">
+      <img src="/assets/img/ias-logo.png">
+    </div>
+    <span class="title"> {{ title }} </span>
+  </nb-layout-header>
+
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" left state="compacted">
+    <nb-menu [items]="menu"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column>
+
+    <router-outlet></router-outlet>
+
+  </nb-layout-column>
+
+</nb-layout>

@@ -699,8 +699,8 @@ export class AlarmsListComponent implements OnInit {
   */
   ngOnInit() {
     this.alarmService.initialize();
-    this.alarmService.alarmsObs.subscribe(alarms &#x3D;&gt; {
-      this.alarmPks &#x3D; Object.keys(alarms);
+    this.alarmService.alarmChangeStream.subscribe(notification &#x3D;&gt; {
+      this.alarmPks &#x3D; Object.keys(this.alarmService.alarms);
     });
   }
 

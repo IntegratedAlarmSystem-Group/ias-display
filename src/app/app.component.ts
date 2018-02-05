@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { NbSidebarService } from '@nebular/theme';
+import { NbMenuService } from '@nebular/theme';
+import { NbMenuItem } from '@nebular/theme';
 
 /**
 * Main component of the application
@@ -8,9 +12,29 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   /**
   * Title of the application
   */
-  title = 'Alma Alarm Display';
+  title = 'Integrated Alarm System';
+
+  menu: NbMenuItem[] = [
+    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline white', home: true},
+    { title: 'Alarms', link: '/weather', icon:'ion-ios-list-box-outline white'},
+  ];
+
+  constructor(
+    private sidebarService: NbSidebarService,
+    private menuService: NbMenuService
+  ){};
+
+  ngOnInit(){
+  }
+
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, 'menu-sidebar');
+    return false;
+  }
+
+
 }
