@@ -60,8 +60,8 @@ export class AlarmService {
   */
 
   // TODO: Review args to changeAlarms
-  changeAlarms(alarms: { [core_id: string]: Alarm }) {
-    this.alarmChangeStream.next(true);
+  changeAlarms(any) {
+    this.alarmChangeStream.next(any);
   }
 
   /**
@@ -176,7 +176,7 @@ export class AlarmService {
     } else if ( action === 'delete') {
       delete this.alarms[alarm.core_id];
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms(alarm.core_id);
   }
 
   /**
@@ -188,6 +188,6 @@ export class AlarmService {
       let alarm = Alarm.asAlarm(obj['fields']);
       this.alarms[alarm.core_id] = alarm;
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms('all');
   }
 }
