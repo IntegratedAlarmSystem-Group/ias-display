@@ -56,10 +56,9 @@ export class AlarmService {
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Alarm} alarms the updated dictionary of Alarms to notify
+  * @param {Any} any the core_id of the updated alarm,
+  * or 'all' if all were updated
   */
-
-  // TODO: Review args to changeAlarms
   changeAlarms(any) {
     this.alarmChangeStream.next(any);
   }

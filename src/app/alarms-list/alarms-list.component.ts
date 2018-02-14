@@ -16,10 +16,10 @@ import { Alarm, OperationalMode, Validity } from '../alarm';
 export class AlarmsListComponent implements OnInit {
   //TODO: Refactor general structure for alarms and components
   /**
-  * Auxiliary list used to store the primary keys of alarms,
+  * Auxiliary list used to store the core_ids of alarms,
   * for displaying purposes
   */
-  alarmPks = [];
+  alarmIds = [];
 
   /**
   * Auxiliary list with non principal alarm modes
@@ -47,7 +47,7 @@ export class AlarmsListComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.alarmService.alarmChangeStream.subscribe(notification => {
-      this.alarmPks = Object.keys(this.alarmService.alarms);
+      this.alarmIds = Object.keys(this.alarmService.alarms);
     });
   }
 
