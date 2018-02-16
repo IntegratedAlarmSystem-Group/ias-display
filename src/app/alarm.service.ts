@@ -26,9 +26,9 @@ export class AlarmService {
   public connectionStatusStream = new BehaviorSubject<any>(false);
 
   /**
-  * Dictionary of {@link Alarm} objects, indexed by their primary keys
+  * Dictionary of {@link Alarm} objects, indexed by their core_ids
   */
-  public alarms: {[pk: number]: Alarm } = {};
+  public alarms: {[core_id: string]: Alarm } = {};
 
   /**
   * Stream of notifications of changes in
@@ -56,12 +56,11 @@ export class AlarmService {
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Alarm} alarms the updated dictionary of Alarms to notify
+  * @param {Any} any the core_id of the updated alarm,
+  * or 'all' if all were updated
   */
-
-  // TODO: Review args to changeAlarms
-  changeAlarms(alarms: { [pk: number]: Alarm }) {
-    this.alarmChangeStream.next(true);
+  changeAlarms(any) {
+    this.alarmChangeStream.next(any);
   }
 
   /**
@@ -78,7 +77,7 @@ export class AlarmService {
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
       this.updateLastReceivedMessageTimestamp();
       console.log('payload = ', payload);
-      this.processAlarm(payload.pk, payload.action, payload.data);
+      this.processAlarm(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
       this.updateLastReceivedMessageTimestamp();
@@ -112,8 +111,8 @@ export class AlarmService {
    * Set selected state to alarms under an non-valid connection
    */
   triggerAlarmsNonValidConnectionState() {
-    for (let pk in this.alarms) {
-      this.alarms[pk]['validity'] = Validity.unreliable;
+    for (let core_id in this.alarms) {
+      this.alarms[core_id]['validity'] = Validity.unreliable;
     }
   }
 
@@ -166,17 +165,17 @@ export class AlarmService {
   /**
    * Process the alarm and modifies the service alarms list depending
    * on the action value.
-   * @param pk Id of the alarm in the web server database
    * @param action create, update or delete
    * @param alarm dictionary with values for alarm fields
    */
-  processAlarm(pk, action, alarm) {
+  processAlarm(action, obj) {
+    let alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
-      this.alarms[pk] = Alarm.asAlarm(alarm, pk);
+      this.alarms[alarm.core_id] = alarm;
     } else if ( action === 'delete') {
-      delete this.alarms[pk];
+      delete this.alarms[alarm.core_id];
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms(alarm.core_id);
   }
 
   /**
@@ -184,10 +183,10 @@ export class AlarmService {
    * @param alarmsList list of dictionaries with values for alarm fields
    */
   processAlarmsList(alarmsList) {
-    for (let alarm of alarmsList) {
-      const pk = alarm['pk'];
-      this.alarms[pk] = Alarm.asAlarm(alarm['fields'], pk);
+    for (let obj of alarmsList) {
+      let alarm = Alarm.asAlarm(obj['fields']);
+      this.alarms[alarm.core_id] = alarm;
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms('all');
   }
 }
