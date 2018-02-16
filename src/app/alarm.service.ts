@@ -75,11 +75,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+      console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
-      console.log('payload = ', payload);
       this.processAlarm(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+      console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
@@ -169,7 +170,7 @@ export class AlarmService {
    * @param alarm dictionary with values for alarm fields
    */
   processAlarm(action, obj) {
-    let alarm = Alarm.asAlarm(obj);
+    let alarm = Alarm.asAlarm(obj['fields']);
     if ( action === 'create' || action === 'update' ) {
       this.alarms[alarm.core_id] = alarm;
     } else if ( action === 'delete') {

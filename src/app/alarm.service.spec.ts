@@ -14,48 +14,54 @@ describe('AlarmService', () => {
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : null,  // same alarm, different actions
         'action': 'create',
-        'model': 'alarms.alarm',
         'data': {
-          'value': 0,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '0',
-          'core_timestamp': 10000,
-          'validity': '0'
+          'pk' : null,  // same alarm, different actions
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 0,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '0',
+            'core_timestamp': 10000,
+            'validity': '0'
+          }
         }
       }
     },
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : null,
         'action': 'update',
-        'model': 'alarms.alarm',
         'data': {
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
+          'pk' : null,
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 1,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '1',
+            'core_timestamp': 10000,
+            'validity': '1'
+          }
         }
       }
     },
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : null,
         'action': 'delete',
-        'model': 'alarms.alarm',
         'data': {
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
+          'pk' : null,
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 1,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '1',
+            'core_timestamp': 10000,
+            'validity': '1'
+          }
         }
       }
     }
@@ -103,7 +109,7 @@ describe('AlarmService', () => {
         'data': [  // mock list of alarms from webserver
           alarms[0],
           alarms[1],
-          alarms[2]
+          alarms[2],
         ]
       }
     };
@@ -159,7 +165,7 @@ describe('AlarmService', () => {
       if (stage === 1) {  // create
         expect(Object.keys(alarms).length).toEqual(1);
         const storedAlarm = alarms['coreid$1'];
-        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data']['fields'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -168,7 +174,7 @@ describe('AlarmService', () => {
       if (stage === 2) {  // update
         expect(Object.keys(alarms).length).toEqual(1);
         const storedAlarm = alarms['coreid$1'];
-        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data']['fields'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
