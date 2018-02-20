@@ -13,6 +13,6 @@ COPY . .
 EXPOSE 4200
 
 RUN npm install
-RUN npm run-script build
+RUN npm run-script build-prod
 
 VOLUME /usr/src/ias-display

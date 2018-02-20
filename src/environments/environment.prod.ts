@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  websocketPath: 'ws://127.0.0.1:8000/stream/',
+  websocketPath: 'ws://0.0.0.0:8001/stream/',
 };
