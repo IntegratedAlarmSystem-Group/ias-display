@@ -10,7 +10,7 @@ import { NbMenuItem } from '@nebular/theme';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   /**
@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
   title = 'Integrated Alarm System';
 
   menu: NbMenuItem[] = [
-    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline white', home: true},
-    { title: 'Alarms', link: '/weather', icon:'ion-ios-list-box-outline white'},
+    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline', home: true},
+    { title: 'Alarms', link: '/weather', icon:'ion-ios-list-box-outline'},
   ];
 
   constructor(

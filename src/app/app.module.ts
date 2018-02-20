@@ -25,7 +25,6 @@ const appRoutes: Routes = [
   { path:'weather', component: AlarmsListComponent }
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +32,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: 'alma' }),
     NbLayoutModule,
     NbCardModule,
     RouterModule.forRoot(appRoutes),
