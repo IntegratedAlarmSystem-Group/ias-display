@@ -68,28 +68,28 @@
             <th style="width:230px;min-width:130px;"> Mode </th>
           </tr>
         </thead>
-        <tbody *ngFor="let pk of alarmPks">
-          <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[pk])"> -->
+        <tbody *ngFor="let core_id of alarmIds">
+          <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[core_id])"> -->
           <tr style="background: #ffffff0d; margin-top: 2px; margin-bottom: 2px;">
             <td>
-              <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[pk])">
-                <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[pk])"> &#9650; </span>
+              <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[core_id])">
+                <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[core_id])"> &#9650; </span>
               </div>
             </td>
             <td>
-              {{ alarmService.alarms[pk].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
+              {{ alarmService.alarms[core_id].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
             </td>
             <td>
-              {{ alarmService.alarms[pk].core_id }}
+              {{ alarmService.alarms[core_id].core_id }}
             </td>
             <!-- <td>
-                {{ alarmService.alarms[pk].getValueAsString() }}
+                {{ alarmService.alarms[core_id].getValueAsString() }}
             </td> -->
             <!-- <td>
-              {{ alarmService.alarms[pk].getValidityAsString() }}
+              {{ alarmService.alarms[core_id].getValidityAsString() }}
             </td>           -->
             <td>
-              {{ alarmService.alarms[pk].getModeAsString() }}
+              {{ alarmService.alarms[core_id].getModeAsString() }}
             </td>
           </tr>
         </tbody>

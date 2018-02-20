@@ -14,61 +14,63 @@ describe('AlarmService', () => {
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : 1,  // same alarm, different actions
         'action': 'create',
-        'model': 'alarms.alarm',
         'data': {
-          'pk': 1,
-          'value': 0,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '0',
-          'core_timestamp': 10000,
-          'validity': '0'
+          'pk' : null,  // same alarm, different actions
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 0,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '0',
+            'core_timestamp': 10000,
+            'validity': '0'
+          }
         }
       }
     },
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : 1,
         'action': 'update',
-        'model': 'alarms.alarm',
         'data': {
-          'pk': 1,
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
+          'pk' : null,
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 1,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '1',
+            'core_timestamp': 10000,
+            'validity': '1'
+          }
         }
       }
     },
     {
       'stream': 'alarms',
       'payload': {
-        'pk' : 1,
         'action': 'delete',
-        'model': 'alarms.alarm',
         'data': {
-          'pk': 1,
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
+          'pk' : null,
+          'model': 'alarms.alarm',
+          'fields': {
+            'value': 1,
+            'core_id': 'coreid$1',
+            'running_id': 'coreid$1',
+            'mode': '1',
+            'core_timestamp': 10000,
+            'validity': '1'
+          }
         }
       }
     }
   ];
 
   let alarms = [
-    { 'pk': 0,
+    { 'pk': null,
       'model': 'alarms.alarm',
       'fields': {
-        'pk': 0,
         'value': 0,
         'core_id': 'coreid$1',
         'running_id': 'coreid$1',
@@ -77,10 +79,9 @@ describe('AlarmService', () => {
         'validity': '1'
       }
     },
-    { 'pk': 1,
+    { 'pk': null,
       'model': 'alarms.alarm',
       'fields': {
-        'pk': 1,
         'value': 1,
         'core_id': 'coreid$2',
         'running_id': 'coreid$2',
@@ -89,10 +90,9 @@ describe('AlarmService', () => {
         'validity': '1'
       }
     },
-    { 'pk': 2,
+    { 'pk': null,
       'model': 'alarms.alarm',
       'fields': {
-        'pk': 2,
         'value': 0,
         'core_id': 'coreid$3',
         'running_id': 'coreid$3',
@@ -109,7 +109,7 @@ describe('AlarmService', () => {
         'data': [  // mock list of alarms from webserver
           alarms[0],
           alarms[1],
-          alarms[2]
+          alarms[2],
         ]
       }
     };
@@ -164,8 +164,8 @@ describe('AlarmService', () => {
 
       if (stage === 1) {  // create
         expect(Object.keys(alarms).length).toEqual(1);
-        const storedAlarm = alarms[1];
-        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        const storedAlarm = alarms['coreid$1'];
+        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data']['fields'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -173,8 +173,8 @@ describe('AlarmService', () => {
 
       if (stage === 2) {  // update
         expect(Object.keys(alarms).length).toEqual(1);
-        const storedAlarm = alarms[1];
-        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        const storedAlarm = alarms['coreid$1'];
+        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data']['fields'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -216,11 +216,13 @@ describe('AlarmService', () => {
         expect(Object.keys(alarms).length).toEqual(3);
         const receivedAlarms = alarms;
         const fixtureAlarms = fixtureAlarmsList['payload']['data'];
-        for ( const alarm of Object.keys(receivedAlarms) ) {
-          for (const key of Object.keys(receivedAlarms[alarm])) {
-            expect(receivedAlarms[alarm][key]).toEqual(
-              fixtureAlarms[alarm]['fields'][key]);
+        let index = 0;
+        for ( const core_id of Object.keys(receivedAlarms) ) {
+          for (const key of Object.keys(receivedAlarms[core_id])) {
+            expect(receivedAlarms[core_id][key]).toEqual(
+              fixtureAlarms[index]['fields'][key]);
           }
+          index += 1;
         }
       }
 
@@ -258,9 +260,9 @@ describe('AlarmService', () => {
     // Arrange:
     subject.connectionStatusStream.next(true);
     // Initial alarms dictionary
-    subject.alarms[0] = Alarm.asAlarm(alarms[0]['fields'], 0);
+    subject.alarms[0] = Alarm.asAlarm(alarms[0]['fields']);
     subject.alarms[0]['validity'] = Validity.reliable;
-    subject.alarms[1] = Alarm.asAlarm(alarms[1]['fields'], 1);
+    subject.alarms[1] = Alarm.asAlarm(alarms[1]['fields']);
     subject.alarms[1]['validity'] = Validity.reliable;
 
     let expected_validity = Validity.unreliable;
@@ -340,6 +342,4 @@ describe('AlarmService', () => {
     expect(subject.connectionStatusStream.value).toBe(false);
 
   });
-
-
 });
