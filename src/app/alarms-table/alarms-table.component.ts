@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ViewCell, LocalDataSource } from 'ng2-smart-table';
+import { ViewCell } from 'ng2-smart-table';
 
 
 @Component({
@@ -40,8 +40,6 @@ export class StatusViewComponent implements ViewCell, OnInit {
   styleUrls: ['./alarms-table.component.css', './alarms-table.component.scss']
 })
 export class AlarmsTableComponent implements OnInit {
-
-  source: LocalDataSource;
 
   settings = {
     hideSubHeader: true,
@@ -98,33 +96,8 @@ export class AlarmsTableComponent implements OnInit {
   ];
 
   constructor(){
-    this.source = new LocalDataSource(this.data);
   }
 
-  onSearch(query: string = ''){
-    if (query === ''){
-
-      this.source.setFilter([]);
-
-    } else {
-
-      this.source.setFilter([
-          {
-            field: 'timestamp',
-            search: query
-          },
-          {
-            field: 'core_id',
-            search: query
-          },
-          {
-            field: 'mode',
-            search: query
-          },
-      ], false);
-
-    }
-  }
 
   ngOnInit() {
   }

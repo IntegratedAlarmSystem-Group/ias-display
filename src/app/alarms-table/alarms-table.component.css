@@ -2,28 +2,17 @@
   margin: 0;
 }
 
-.alarms-table-header > .title-container {
+.alarms-table-header > .main-container {
   float:left;
   width:75%;
   overflow: hidden;
 }
 
-.alarms-table-header > .search-container {
+.alarms-table-header > .secondary-container {
   float:left;
   width:25%;
   overflow: hidden;
   text-align: right;
-}
-
-.alarms-table-header > .search-container input.search {
-  background: none;
-  border: none;
-  border-bottom: 1px solid #747474;
-  color: white;
-}
-
-.alarms-table-header > .search-container input.search:focus {
-  outline: none;
 }
 
 .alarm-status-legend {

@@ -2,11 +2,10 @@
 
   <nb-card-header>
     <div class="alarms-table-header">
-        <div class="title-container">
+        <div class="main-container">
           Alarms
         </div>
-        <div class="search-container">
-          <input #search class="search" type="text" placeholder="Search..." (keyup)="onSearch(search.value)">
+        <div class="secondary-container">
         </div>
   </div>
   </nb-card-header>
@@ -66,7 +65,7 @@
 
     <div>
 
-      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+      <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
 
     </div>
 
