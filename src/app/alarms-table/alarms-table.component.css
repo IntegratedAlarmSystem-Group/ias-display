@@ -1,0 +1,53 @@
+.alarms-table-header {
+  margin: 0;
+}
+
+.alarms-table-header > .title-container {
+  float:left;
+  width:75%;
+  overflow: hidden;
+}
+
+.alarms-table-header > .search-container {
+  float:left;
+  width:25%;
+  overflow: hidden;
+  text-align: right;
+}
+
+.alarms-table-header > .search-container input.search {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #747474;
+  color: white;
+}
+
+.alarms-table-header > .search-container input.search:focus {
+  outline: none;
+}
+
+.alarm-status-legend {
+  font-size: 12px;
+  text-align: center;
+  display: inline-table;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.alarm-status-legend .group {
+  display: inline-block;
+}
+
+.alarm-status-legend .group .item {
+  display: inline-block;
+  color: #f2f2f2;
+  padding-right: 55px;
+  padding-bottom: 20px;
+}
+
+.alarm-status-legend .group .item .status {
+  display: inline-block;
+  margin-right: 7px;
+  text-align: center;
+  width:36px;
+}
