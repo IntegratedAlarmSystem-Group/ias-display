@@ -12,23 +12,30 @@ import { NbCardModule } from '@nebular/theme';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbSidebarService } from '@nebular/theme';
 
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuModule } from '@nebular/theme';
 
 import { RouterModule, Routes } from '@angular/router';
+import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
+
+import { StatusViewComponent } from './alarms-table/alarms-table.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  { path: '', redirectTo: 'weather', pathMatch: 'full' },
   { path:'overview', component: AlarmsListComponent },
-  { path:'weather', component: AlarmsListComponent }
+  { path:'weather', component: AlarmsTableComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     AlarmsListComponent,
+    AlarmsTableComponent,
+    StatusViewComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,8 @@ const appRoutes: Routes = [
     NbCardModule,
     RouterModule.forRoot(appRoutes),
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+    Ng2SmartTableModule
   ],
   providers: [
     AlarmService,
@@ -45,6 +53,9 @@ const appRoutes: Routes = [
     NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    StatusViewComponent
+  ]
 })
 export class AppModule { }
