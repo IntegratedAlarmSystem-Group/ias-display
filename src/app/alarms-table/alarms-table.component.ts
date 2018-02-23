@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ViewCell , LocalDataSource } from 'ng2-smart-table';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +18,15 @@ import { Alarm, OperationalMode, Validity } from '../alarm';
       <span [ngStyle]="getSymbolStyle()"> &#9650;  </span>
     </div>
   `,
-  styles: ['.alarm-status { text-align: center; margin: auto; width: 65px; }']
+  styles: [
+    `.alarm-status {
+        text-align: center;
+        margin: auto;
+        width: 65px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }`
+  ]
 })
 export class StatusViewComponent implements ViewCell, OnInit {
 
@@ -132,9 +140,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
   }
 
   ngOnInit(){
-
     let tags = this.value.toString().split("-");
-
     if (tags.length >= 2) {
         for (let tag of this.value.toString().split("-")){
           this.alarmTags.push(tag);
@@ -142,13 +148,11 @@ export class StatusViewComponent implements ViewCell, OnInit {
     } else {
         this.alarmTags = [];
     }
-
     for (let mode of this.secondaryModes){
       this.secondaryModesTags.push(OperationalMode[mode]);
-    }
-
-
+    }  // TODO: Evaluate refactor to get secondary modes names
   }
+
 }
 
 /**
@@ -159,10 +163,19 @@ export class StatusViewComponent implements ViewCell, OnInit {
   templateUrl: './alarms-table.component.html',
   styleUrls: ['./alarms-table.component.css', './alarms-table.component.scss']
 })
-export class AlarmsTableComponent implements OnInit {
+export class AlarmsTableComponent implements OnInit, OnDestroy {
 
   //TODO: Refactor general structure for alarms and components
 
+
+  /**
+  * Variable to follow the subscriptions of the component
+  */
+  subscription;
+
+  /**
+  * Locasl data source for the alarms table
+  */
   source: LocalDataSource;
 
   /**
@@ -219,10 +232,17 @@ export class AlarmsTableComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.source = new LocalDataSource(this.data);
-    this.alarmService.alarmChangeStream.subscribe(notification => {
+    this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
       this.loadTableData(this.getTableData());  // TODO: Data load evaluation
     });
+  }
+
+  /**
+  * Function executed when the component is destroyed
+  */
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   /**
