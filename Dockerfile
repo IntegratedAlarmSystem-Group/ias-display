@@ -1,4 +1,4 @@
-FROM node:8.2.1-alpine
+FROM node:8.9.4-alpine
 
 WORKDIR /usr/src
 
@@ -9,7 +9,6 @@ RUN ng new ias-display
 WORKDIR /usr/src/ias-display
 
 COPY . .
-
 EXPOSE 4200
 
 RUN npm install
