@@ -1,0 +1,29 @@
+// import Nebular Theme System and the default theme
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+// and change some variables inside of the map
+$nb-themes: nb-register-theme((
+
+    font-size-header: 1.4rem,
+
+    color-bg: #324459,
+    color-bg-active: #40dc7e,
+    color-fg: #a4abb3,
+    color-fg-heading: #ffffff,
+    color-fg-text: #ffffff,
+    color-fg-highlight: white,
+
+    shadow: none,
+
+    header-font-size: font-size-header,
+
+    menu-active-fg: white,
+    menu-item-separator: none,
+
+    menu-icon-active-color: white,
+    menu-icon-color: white,
+
+    smart-table-separator: none
+
+), alma, default); // let's leave it as default

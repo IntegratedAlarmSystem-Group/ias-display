@@ -1,0 +1,42 @@
+.alarms-table-header {
+  margin: 0;
+}
+
+.alarms-table-header > .main-container {
+  float:left;
+  width:75%;
+  overflow: hidden;
+}
+
+.alarms-table-header > .secondary-container {
+  float:left;
+  width:25%;
+  overflow: hidden;
+  text-align: right;
+}
+
+.alarm-status-legend {
+  font-size: 12px;
+  text-align: center;
+  display: inline-table;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.alarm-status-legend .group {
+  display: inline-block;
+}
+
+.alarm-status-legend .group .item {
+  display: inline-block;
+  color: #f2f2f2;
+  padding-right: 55px;
+  padding-bottom: 20px;
+}
+
+.alarm-status-legend .group .item .status {
+  display: inline-block;
+  margin-right: 7px;
+  text-align: center;
+  width:36px;
+}

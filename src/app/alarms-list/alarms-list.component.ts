@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { WebSocketBridge } from 'django-channels';
@@ -14,6 +14,9 @@ import { Alarm, OperationalMode, Validity } from '../alarm';
   styleUrls: ['./alarms-list.component.css']
 })
 export class AlarmsListComponent implements OnInit {
+
+  subscription;
+
   //TODO: Refactor general structure for alarms and components
   /**
   * Auxiliary list used to store the core_ids of alarms,
@@ -46,9 +49,17 @@ export class AlarmsListComponent implements OnInit {
   */
   ngOnInit() {
     this.alarmService.initialize();
-    this.alarmService.alarmChangeStream.subscribe(notification => {
+    this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
+      console.log('notification-list-table', new Date());
       this.alarmIds = Object.keys(this.alarmService.alarms);
     });
+  }
+
+  /**
+  * Function executed when the component is destroyed
+  */
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   /**

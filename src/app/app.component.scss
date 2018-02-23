@@ -1,0 +1,53 @@
+@import './@theme/alma';
+
+@include nb-install-component {
+
+    .menu-btn {
+      padding-right: 20px;
+    }
+
+    .main-menu-icon {
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .logo-container {
+      padding-bottom: 2px;
+    }
+
+    .logo-container > img {
+      width: 42px;
+    }
+
+    .title {
+      font-size: 22px;
+      padding-top: 2px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    /deep/ nb-card {
+      nb-card-header {
+        background-color: #3c4856;
+        border-bottom: 1px solid #3c4856;
+      }
+      nb-card-body {
+        background-color: #2e3740;
+      }
+      nb-card-footer {
+        background-color: #192531;
+        border-top: 1px solid #192531;
+      }
+    }
+
+    /deep/ nb-layout {
+        nb-layout-column {
+            background-color: #282e38;
+        }
+        nb-layout-header .menu-btn {
+            font-size: 1.5rem;
+        }
+    }
+
+}
