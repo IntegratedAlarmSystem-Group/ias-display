@@ -23,6 +23,8 @@ import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 
 import { StatusViewComponent } from './alarms-table/alarms-table.component';
 
+import { DatePipe } from '@angular/common';
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'weather', pathMatch: 'full' },
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     NbSidebarService,
     NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

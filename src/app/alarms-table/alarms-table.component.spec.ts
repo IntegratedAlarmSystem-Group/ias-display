@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AlarmService } from '../alarm.service';
 import { AlarmsTableComponent, StatusViewComponent } from './alarms-table.component';
 import { NbCardModule } from '@nebular/theme';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+import { DatePipe } from '@angular/common';
 
 describe('AlarmsTableComponent', () => {
   let component: AlarmsTableComponent;
@@ -13,13 +15,17 @@ describe('AlarmsTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AlarmsTableComponent ,
+        AlarmsTableComponent,
         StatusViewComponent
       ],
       imports: [
         NbCardModule,
         Ng2SmartTableModule
-      ]
+      ],
+      providers: [
+        AlarmService,
+        DatePipe
+      ],
     })
     .compileComponents();
   }));

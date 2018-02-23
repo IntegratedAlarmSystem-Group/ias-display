@@ -1,39 +1,159 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ViewCell } from 'ng2-smart-table';
+import { DatePipe } from '@angular/common';
+import { ViewCell , LocalDataSource } from 'ng2-smart-table';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import { WebSocketBridge } from 'django-channels';
+import { AlarmService } from '../alarm.service';
+import { Alarm, OperationalMode, Validity } from '../alarm';
 
 
+/**
+* Component for graphical alarm status indicator
+*/
 @Component({
   selector: 'status-view',
   template: `
-    <span [ngStyle]="getStyleTest(this.value)"> &#9650;  </span>
+    <div class="alarm-status" [ngStyle]="getContainerStyle()">
+      <span [ngStyle]="getSymbolStyle()"> &#9650;  </span>
+    </div>
   `,
+  styles: ['.alarm-status { text-align: center; margin: auto; width: 65px; }']
 })
 export class StatusViewComponent implements ViewCell, OnInit {
 
-  renderValue: string;
+  /**
+  * Auxiliary list with non principal alarm modes
+  */
+  secondaryModes = [
+    OperationalMode.startup,
+    OperationalMode.initialization,
+    OperationalMode.closing,
+    OperationalMode.shuttedown
+  ];
+
+  secondaryModesTags = [];
+
+  alarmTags = [];
 
   @Input() value: string | number;
   @Input() rowData: any;
 
-  getStyleTest(value: number): object{
+  /**
+  * Status container style
+  *
+  */
+  getContainerStyle(): object{
 
-    let color : string;
+    let color: string;
+    let background: string;
+    let opacity: number;
 
-    if (value < 5) {
-      color = 'green';
+    if (this.hasTag('maintenance')) {
+      color = '#9b9797';
+    } else if (this.hasTag('unknown')) {
+      color = '#73adf0';
     } else {
-      color = 'red';
+      if (this.hasTag('clear')) {
+        color = '#95ff95';
+      } else if (this.hasTag('set')){
+        color = 'red';
+      } else {
+        color = 'black';  // error
+      }
     }
 
-    return {'color': color};
+    if (this.hasTag('valid')) {
+      background = color;
+    } else if (this.hasTag('invalid')){
+      background = 'none';
+    } else {
+      background = 'black';  // error
+    }
 
+    if (this.hasSecondaryOperationalModeTag()){
+      opacity = 0.5;
+    } else {
+      opacity = 1.0;
+    }
+
+    let styles = {
+      'border': `2px solid ${color}`,
+      'background': background,
+      'opacity': 1
+    }
+
+    return styles;
+
+  }
+
+  /**
+  * Status symbol style
+  *
+  * The alarm should have a 'set' or 'clear' status
+  */
+  getSymbolStyle(): object{
+
+    let color : string;
+    let visibility : string;
+
+    if (this.hasTag('set')) {
+      visibility = 'visible';
+      color = 'white';
+    } else if (this.hasTag('clear')) {
+      visibility = 'hidden';
+      color = 'black';
+    } else {
+      visibility = 'visible';
+      color = 'black';  // error
+    }
+
+    let styles = {
+      'visibility': visibility,
+      'color': color
+    };
+
+    return styles;
+
+  }
+
+  hasTag(tag){
+    return this.alarmTags.indexOf(tag) > -1 ? true : false;
+  }
+
+  hasSecondaryOperationalModeTag(){
+    let found = false;
+    for (let tag of this.alarmTags){
+      if (this.secondaryModesTags.indexOf(tag) > -1){
+        found = true;
+      }
+    }
+    return found;
   }
 
   ngOnInit(){
-    this.renderValue = this.value.toString().toUpperCase();
+
+    let tags = this.value.toString().split("-");
+
+    if (tags.length >= 2) {
+        for (let tag of this.value.toString().split("-")){
+          this.alarmTags.push(tag);
+        }
+    } else {
+        this.alarmTags = [];
+    }
+
+    for (let mode of this.secondaryModes){
+      this.secondaryModesTags.push(OperationalMode[mode]);
+    }
+
+
   }
 }
 
+/**
+* Basic component to display alarms
+*/
 @Component({
   selector: 'app-alarms-table',
   templateUrl: './alarms-table.component.html',
@@ -41,8 +161,29 @@ export class StatusViewComponent implements ViewCell, OnInit {
 })
 export class AlarmsTableComponent implements OnInit {
 
+  //TODO: Refactor general structure for alarms and components
+
+  source: LocalDataSource;
+
+  /**
+  * Auxiliary list used to store the core_ids of alarms,
+  * for displaying purposes
+  */
+  alarmIds = [];
+
+  /**
+  * Data table list
+  */
+  data = [];
+
+  /**
+  * Smart table settings
+  */
   settings = {
-    hideSubHeader: true,
+    hideSubHeader: false,
+    pager:{
+      perPage: 50,
+    },
     actions: false,
     columns: {
       status: {
@@ -51,10 +192,10 @@ export class AlarmsTableComponent implements OnInit {
         renderComponent: StatusViewComponent
       },
       timestamp: {
-        title: 'Core Time'
+        title: 'Core Time',
       },
       core_id: {
-        title: 'Core ID'
+        title: 'Core ID',
       },
       mode: {
         title: 'Mode'
@@ -62,44 +203,94 @@ export class AlarmsTableComponent implements OnInit {
     }
   };
 
-  data = [
-    {
-      status: 4,
-      timestamp: "2/2/18, 6:30:51 PM",
-      core_id: "AlarmTemperature7",
-      mode: "operational"
-    },
-    {
-      status: 2,
-      timestamp: "2/2/18, 6:30:54 PM",
-      core_id: "AlarmTemperature5",
-      mode: "operational"
-    },
-    {
-      status: 11,
-      timestamp: "2/2/18, 6:30:57 PM",
-      core_id: "AlarmTemperature1",
-      mode: "operational"
-    },
-    {
-      status: 20,
-      timestamp: "2/2/18, 6:35:57 PM",
-      core_id: "AlarmTemperature12",
-      mode: "operational"
-    },
-    {
-      status: 3,
-      timestamp: "2/2/18, 6:40:57 PM",
-      core_id: "AlarmTemperature20",
-      mode: "operational"
-    }
-  ];
-
-  constructor(){
+  /**
+  * The "constructor", injects the {@link AlarmService}
+  *
+  * @param {AlarmService} alarmService An instance of the AlarmService
+  */
+  constructor(private alarmService: AlarmService, private datePipe: DatePipe){
   }
 
-
+  /**
+  * Function executed when the component is initiated
+  *
+  * Starts the {@link AlarmService} and subscribes to its messages
+  */
   ngOnInit() {
+    this.alarmService.initialize();
+    this.source = new LocalDataSource(this.data);
+    this.alarmService.alarmChangeStream.subscribe(notification => {
+      this.alarmIds = Object.keys(this.alarmService.alarms);
+      this.loadTableData(this.getTableData());  // TODO: Data load evaluation
+    });
+  }
+
+  /**
+  * Function to build data according to the smart table format
+  */
+  getTableData(){
+    this.clearTableData();
+    for (let core_id of this.alarmIds){
+      let item = {
+        status: this.getAlarmStatusTagsString(
+          this.alarmService.alarms[core_id]
+        ),
+        timestamp: this.dateFormat(
+          this.alarmService.alarms[core_id].getCoreTimestampAsDate()
+        ),
+        core_id: this.alarmService.alarms[core_id].core_id,
+        mode: this.alarmService.alarms[core_id].getModeAsString()
+      };
+      this.data.push(item);
+    }
+    return this.data;
+  }
+
+  /**
+  * Clear data table
+  */
+  clearTableData(){
+    this.data = []; // clear data
+  }
+
+  /**
+  * Load data in the table
+  */
+  loadTableData(data){
+    this.source.load(this.getTableData());
+  }
+
+  /**
+  * Date format
+  */
+  dateFormat(date){
+    let stringDate = this.datePipe.transform(date, 'M/d/yy, h:mm:ss a');
+    return stringDate;
+  }
+
+  /**
+  * Alarm status tag
+  */
+  getAlarmStatusTagsString(alarm: Alarm): string{
+
+    let tags = [];
+
+    if (alarm.value == 0){
+      tags.push('clear');
+    } else {
+      tags.push('set');
+    }
+
+    if (alarm.validity == Validity.reliable){
+      tags.push('valid');
+    } else {
+      tags.push('invalid');
+    }
+
+    tags.push(OperationalMode[alarm.mode]);
+
+    return tags.join('-');
+
   }
 
 }
