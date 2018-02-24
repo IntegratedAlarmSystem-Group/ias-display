@@ -88,7 +88,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
     let styles = {
       'border': `2px solid ${color}`,
       'background': background,
-      'opacity': 1
+      'opacity': opacity
     }
 
     return styles;
