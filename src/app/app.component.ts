@@ -4,6 +4,8 @@ import { NbSidebarService } from '@nebular/theme';
 import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
 
+import { AlarmService } from './alarm.service';
+
 /**
 * Main component of the application
 */
@@ -25,10 +27,12 @@ export class AppComponent implements OnInit {
 
   constructor(
     private sidebarService: NbSidebarService,
-    private menuService: NbMenuService
+    private menuService: NbMenuService,
+    private alarmService: AlarmService
   ){};
 
   ngOnInit(){
+    this.alarmService.initialize();
   }
 
   toggleSidebar(): boolean {

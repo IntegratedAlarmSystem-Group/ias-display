@@ -5,6 +5,8 @@ import { WebSocketBridge } from 'django-channels';
 import { AlarmService } from '../alarm.service';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 
+import { ISubscription } from "rxjs/Subscription";
+
 /**
 * Basic component to display alarms in boxes
 */
@@ -13,9 +15,12 @@ import { Alarm, OperationalMode, Validity } from '../alarm';
   templateUrl: './alarms-list.component.html',
   styleUrls: ['./alarms-list.component.css']
 })
-export class AlarmsListComponent implements OnInit {
+export class AlarmsListComponent implements OnInit, OnDestroy {
 
-  subscription;
+  /**
+  * Variable to follow the subscription of the component to the alarms
+  */
+  private subscription: ISubscription;
 
   //TODO: Refactor general structure for alarms and components
   /**
@@ -48,9 +53,7 @@ export class AlarmsListComponent implements OnInit {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
-    this.alarmService.initialize();
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      console.log('notification-list-table', new Date());
       this.alarmIds = Object.keys(this.alarmService.alarms);
     });
   }
@@ -102,9 +105,13 @@ export class AlarmsListComponent implements OnInit {
 
   }
 
+  /**
+  * Style for the alarm status container
+  *
+  * The color is based on alarm mode and value,
+  * the background color depends on the alarm validity
+  */
   setAlarmStatusDivStyle(alarm: Alarm): object{
-    // Color based on alarm mode and value
-    // Background color depends on the alarm validity
 
     let color: string;
     let background: string;
@@ -150,25 +157,17 @@ export class AlarmsListComponent implements OnInit {
 
   }
 
+  /**
+  * Style for the alarm status symbol
+  */
   setAlarmStatusSymbolStyle(alarm: Alarm): object{
-    // returns a symbol based on the alarm value
 
     let color : string;
     let visibility : string;
 
     if (alarm.value == 1) {
-
       visibility = 'visible';
       color = 'white';
-      // if (alarm.validity == Validity.reliable){
-      //   color = 'white';
-      // }
-      // else {
-      //   if (alarm.mode == OperationalMode.maintenance) { color = '#9b9797'; }
-      //   else if (alarm.mode == OperationalMode.unknown) { color = '#73adf0'; }
-      //   else { color = 'red'; };
-      // };
-
     }
     else {
       visibility = 'hidden';
