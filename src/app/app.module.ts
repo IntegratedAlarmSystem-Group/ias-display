@@ -32,6 +32,9 @@ const appRoutes: Routes = [
   { path:'weather', component: AlarmsTableComponent }
 ];
 
+/**
+* Application module
+*/
 @NgModule({
   declarations: [
     AppComponent,
