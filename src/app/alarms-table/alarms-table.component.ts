@@ -230,7 +230,6 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
-    this.alarmService.initialize();
     this.source = new LocalDataSource(this.data);
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
@@ -289,7 +288,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Alarm status tag
+  * Alarm status tags
   */
   getAlarmStatusTagsString(alarm: Alarm): string{
 

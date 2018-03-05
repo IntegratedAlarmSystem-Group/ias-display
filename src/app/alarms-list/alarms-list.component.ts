@@ -48,7 +48,6 @@ export class AlarmsListComponent implements OnInit {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
-    this.alarmService.initialize();
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       console.log('notification-list-table', new Date());
       this.alarmIds = Object.keys(this.alarmService.alarms);
