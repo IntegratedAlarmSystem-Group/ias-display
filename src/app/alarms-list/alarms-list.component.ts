@@ -49,7 +49,6 @@ export class AlarmsListComponent implements OnInit {
   */
   ngOnInit() {
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      console.log('notification-list-table', new Date());
       this.alarmIds = Object.keys(this.alarmService.alarms);
     });
   }
