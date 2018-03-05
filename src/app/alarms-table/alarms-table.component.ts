@@ -7,9 +7,12 @@ import { WebSocketBridge } from 'django-channels';
 import { AlarmService } from '../alarm.service';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 
+import { ISubscription } from "rxjs/Subscription";
 
 /**
-* Component for graphical alarm status indicator
+* Component for the graphical alarm status indicator
+*
+* Note: This component is defined according to the ng2-smart-table component
 */
 @Component({
   selector: 'status-view',
@@ -49,7 +52,6 @@ export class StatusViewComponent implements ViewCell, OnInit {
 
   /**
   * Status container style
-  *
   */
   getContainerStyle(): object{
 
@@ -157,6 +159,8 @@ export class StatusViewComponent implements ViewCell, OnInit {
 
 /**
 * Basic component to display alarms
+*
+* Note: This component is defined according to the ng2-smart-table component
 */
 @Component({
   selector: 'app-alarms-table',
@@ -167,11 +171,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
 
   //TODO: Refactor general structure for alarms and components
 
-
   /**
-  * Variable to follow the subscriptions of the component
+  * Variable to follow the subscription of the component to the alarms
   */
-  subscription;
+  private subscription: ISubscription;
 
   /**
   * Locasl data source for the alarms table
