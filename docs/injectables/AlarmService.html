@@ -73,6 +73,9 @@
                                 <li class="link">
                                     <a href="../modules/AppModule.html" >AppModule</a>
                                 </li>
+                                <li class="link">
+                                    <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                                </li>
                         </ul>
                     </li>
             
@@ -91,7 +94,13 @@
                                     <a href="../components/AlarmsListComponent.html" >AlarmsListComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/AlarmsTableComponent.html" >AlarmsTableComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatusViewComponent.html" >StatusViewComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -154,6 +163,9 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                    </li>
             
                     <li class="chapter">
                         <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
@@ -229,6 +241,9 @@
                                        <li class="link">
                                            <a href="../modules/AppModule.html" >AppModule</a>
                                        </li>
+                                       <li class="link">
+                                           <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                                       </li>
                                </ul>
                            </li>
                    
@@ -247,7 +262,13 @@
                                            <a href="../components/AlarmsListComponent.html" >AlarmsListComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/AlarmsTableComponent.html" >AlarmsTableComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatusViewComponent.html" >StatusViewComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -310,6 +331,9 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                           </li>
                    
                            <li class="chapter">
                                <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
@@ -351,7 +375,7 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info">
+    <div class="tab-pane fade active in" id="c-info">
         <p class="comment">
             <h3>File</h3>
         </p>
@@ -382,13 +406,24 @@ IAS Webserver through Websockets</p>
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
-                                        <span class="modifier">Public</span> <a href="#alarmChangeStream">alarmChangeStream</a>
+                                            <span class="modifier">Public</span>
+                                        <a href="#alarmChangeStream">alarmChangeStream</a>
                                     </li>
                                     <li>
-                                        <span class="modifier">Public</span> <a href="#alarms">alarms</a>
+                                            <span class="modifier">Public</span>
+                                        <a href="#alarms">alarms</a>
                                     </li>
                                     <li>
-                                        <span class="modifier">Private</span> <a href="#webSocketBridge">webSocketBridge</a>
+                                            <span class="modifier">Public</span>
+                                        <a href="#connectionStatusStream">connectionStatusStream</a>
+                                    </li>
+                                    <li>
+                                            <span class="modifier">Public</span>
+                                        <a href="#lastReceivedMessageTimestamp">lastReceivedMessageTimestamp</a>
+                                    </li>
+                                    <li>
+                                            <span class="modifier">Private</span>
+                                        <a href="#webSocketBridge">webSocketBridge</a>
                                     </li>
                                 </ul>
                             </td>
@@ -402,22 +437,37 @@ IAS Webserver through Websockets</p>
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
-                                         <a href="#changeAlarms">changeAlarms</a>
+                                        <a href="#changeAlarms">changeAlarms</a>
                                     </li>
                                     <li>
-                                         <a href="#connect">connect</a>
+                                        <a href="#compareCurrentAndLastReceivedMessageTimestamp">compareCurrentAndLastReceivedMessageTimestamp</a>
                                     </li>
                                     <li>
-                                         <a href="#getAlarmList">getAlarmList</a>
+                                        <a href="#connect">connect</a>
                                     </li>
                                     <li>
-                                         <a href="#initialize">initialize</a>
+                                        <a href="#getAlarmList">getAlarmList</a>
                                     </li>
                                     <li>
-                                         <a href="#processAlarm">processAlarm</a>
+                                        <a href="#initialize">initialize</a>
                                     </li>
                                     <li>
-                                         <a href="#processAlarmsList">processAlarmsList</a>
+                                        <a href="#processAlarm">processAlarm</a>
+                                    </li>
+                                    <li>
+                                        <a href="#processAlarmsList">processAlarmsList</a>
+                                    </li>
+                                    <li>
+                                        <a href="#startAlarmListPeriodicalUpdate">startAlarmListPeriodicalUpdate</a>
+                                    </li>
+                                    <li>
+                                        <a href="#startLastReceivedMessageTimestampCheck">startLastReceivedMessageTimestampCheck</a>
+                                    </li>
+                                    <li>
+                                        <a href="#triggerAlarmsNonValidConnectionState">triggerAlarmsNonValidConnectionState</a>
+                                    </li>
+                                    <li>
+                                        <a href="#updateLastReceivedMessageTimestamp">updateLastReceivedMessageTimestamp</a>
                                     </li>
                                 </ul>
                             </td>
@@ -437,7 +487,7 @@ IAS Webserver through Websockets</p>
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/alarm.service.ts:30</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/alarm.service.ts:43</a></div>
                                         </td>
                                     </tr>
             
@@ -455,19 +505,24 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="changeAlarms"></a>
-                                    <span class="name"><b> changeAlarms</b><a href="#changeAlarms"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        changeAlarms
+                                        </b>
+                                        <a href="#changeAlarms"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>changeAlarms(alarms: literal type)</code>
+            <code>changeAlarms(any: )</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/alarm.service.ts:40</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/alarm.service.ts:62</a></div>
                                         </td>
                                     </tr>
             
@@ -489,13 +544,13 @@ IAS Webserver through Websockets</p>
                                                     </thead>
                                                     <tbody>
                                                             <tr>
-                                                              <td>alarms</td>
-                                                              <td>
-                                                                      <code>literal type</code>
-                                                              </td>
+                                                              <td>any</td>
                                                               <td>
                                                               </td>
-                                                              <td><p>the updated dictionary of Alarms to notify</p>
+                                                              <td>
+                                                              </td>
+                                                              <td><p>the core_id of the updated alarm,
+            or &#39;all&#39; if all were updated</p>
             </td>
                                                             </tr>
                                                     </tbody>
@@ -518,8 +573,54 @@ IAS Webserver through Websockets</p>
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <a name="compareCurrentAndLastReceivedMessageTimestamp"></a>
+                                    <span class="name">
+                                        <b>
+                                        compareCurrentAndLastReceivedMessageTimestamp
+                                        </b>
+                                        <a href="#compareCurrentAndLastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>compareCurrentAndLastReceivedMessageTimestamp()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/alarm.service.ts:132</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Method to check the last received message timestamp
+            Note: If non-valid, the connection state is non-valid
+            TODO: Review the life cycle of the connection status.</p>
+            </div>
+            
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <a name="connect"></a>
-                                    <span class="name"><b> connect</b><a href="#connect"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        connect
+                                        </b>
+                                        <a href="#connect"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -531,7 +632,7 @@ IAS Webserver through Websockets</p>
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/alarm.service.ts:64</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/alarm.service.ts:94</a></div>
                                         </td>
                                     </tr>
             
@@ -553,7 +654,12 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="getAlarmList"></a>
-                                    <span class="name"><b> getAlarmList</b><a href="#getAlarmList"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        getAlarmList
+                                        </b>
+                                        <a href="#getAlarmList"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -565,7 +671,7 @@ IAS Webserver through Websockets</p>
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/alarm.service.ts:75</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/alarm.service.ts:105</a></div>
                                         </td>
                                     </tr>
             
@@ -588,7 +694,12 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="initialize"></a>
-                                    <span class="name"><b> initialize</b><a href="#initialize"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        initialize
+                                        </b>
+                                        <a href="#initialize"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -600,7 +711,7 @@ IAS Webserver through Websockets</p>
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/alarm.service.ts:47</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/alarm.service.ts:69</a></div>
                                         </td>
                                     </tr>
             
@@ -622,19 +733,24 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="processAlarm"></a>
-                                    <span class="name"><b> processAlarm</b><a href="#processAlarm"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        processAlarm
+                                        </b>
+                                        <a href="#processAlarm"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>processAlarm(pk: , action: , alarm: )</code>
+            <code>processAlarm(action: , obj: )</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/alarm.service.ts:88</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/alarm.service.ts:172</a></div>
                                         </td>
                                     </tr>
             
@@ -657,15 +773,6 @@ IAS Webserver through Websockets</p>
                                                     </thead>
                                                     <tbody>
                                                             <tr>
-                                                              <td>pk</td>
-                                                              <td>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td><p>Id of the alarm in the web server database</p>
-            </td>
-                                                            </tr>
-                                                            <tr>
                                                               <td>action</td>
                                                               <td>
                                                               </td>
@@ -675,13 +782,12 @@ IAS Webserver through Websockets</p>
             </td>
                                                             </tr>
                                                             <tr>
-                                                              <td>alarm</td>
+                                                              <td>obj</td>
                                                               <td>
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td><p>dictionary with values for alarm fields</p>
-            </td>
+                                                              <td></td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -704,7 +810,12 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="processAlarmsList"></a>
-                                    <span class="name"><b> processAlarmsList</b><a href="#processAlarmsList"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        processAlarmsList
+                                        </b>
+                                        <a href="#processAlarmsList"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -716,7 +827,7 @@ IAS Webserver through Websockets</p>
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/alarm.service.ts:101</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/alarm.service.ts:186</a></div>
                                         </td>
                                     </tr>
             
@@ -762,6 +873,162 @@ IAS Webserver through Websockets</p>
                             </tr>
                         </tbody>
                     </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="startAlarmListPeriodicalUpdate"></a>
+                                    <span class="name">
+                                        <b>
+                                        startAlarmListPeriodicalUpdate
+                                        </b>
+                                        <a href="#startAlarmListPeriodicalUpdate"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>startAlarmListPeriodicalUpdate()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/alarm.service.ts:158</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Method to start a periodical update</p>
+            </div>
+            
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="startLastReceivedMessageTimestampCheck"></a>
+                                    <span class="name">
+                                        <b>
+                                        startLastReceivedMessageTimestampCheck
+                                        </b>
+                                        <a href="#startLastReceivedMessageTimestampCheck"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>startLastReceivedMessageTimestampCheck()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/alarm.service.ts:148</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Method to update the last received message timestamp</p>
+            </div>
+            
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="triggerAlarmsNonValidConnectionState"></a>
+                                    <span class="name">
+                                        <b>
+                                        triggerAlarmsNonValidConnectionState
+                                        </b>
+                                        <a href="#triggerAlarmsNonValidConnectionState"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>triggerAlarmsNonValidConnectionState()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/alarm.service.ts:114</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Set selected state to alarms under an non-valid connection</p>
+            </div>
+            
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="updateLastReceivedMessageTimestamp"></a>
+                                    <span class="name">
+                                        <b>
+                                        updateLastReceivedMessageTimestamp
+                                        </b>
+                                        <a href="#updateLastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>updateLastReceivedMessageTimestamp()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/alarm.service.ts:123</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Method to update the last received message timestamp</p>
+            </div>
+            
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             </section>
 
             <section>
@@ -774,7 +1041,13 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="alarmChangeStream"></a>
-                                    <span class="name"><b><span class="modifier">Public</span> alarmChangeStream</b><a href="#alarmChangeStream"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Public</span>
+                                        alarmChangeStream
+                                        </b>
+                                        <a href="#alarmChangeStream"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -783,9 +1056,14 @@ IAS Webserver through Websockets</p>
             </code>
                                 </td>
                             </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>new BehaviorSubject&lt;any&gt;(true)</code>
+                                    </td>
+                                </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/alarm.service.ts:24</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/alarm.service.ts:37</a></div>
                                         </td>
                                     </tr>
             
@@ -804,7 +1082,13 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="alarms"></a>
-                                    <span class="name"><b><span class="modifier">Public</span> alarms</b><a href="#alarms"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Public</span>
+                                        alarms
+                                        </b>
+                                        <a href="#alarms"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -819,15 +1103,107 @@ IAS Webserver through Websockets</p>
             
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>{}</code>
+                                    </td>
+                                </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/alarm.service.ts:18</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/alarm.service.ts:31</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Dictionary of <a href="../classes/Alarm.html">Alarm</a> objects, indexed by their primary keys</p>
+                                    <div class="io-description"><p>Dictionary of <a href="../classes/Alarm.html">Alarm</a> objects, indexed by their core_ids</p>
+            </div>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="connectionStatusStream"></a>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Public</span>
+                                        connectionStatusStream
+                                        </b>
+                                        <a href="#connectionStatusStream"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-reset"></span><code>connectionStatusStream:     <code></code>
+            </code>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>new BehaviorSubject&lt;any&gt;(false)</code>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/alarm.service.ts:26</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Stream of notifications of changes in
+            the status of the service connection</p>
+            </div>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="lastReceivedMessageTimestamp"></a>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Public</span>
+                                        lastReceivedMessageTimestamp
+                                        </b>
+                                        <a href="#lastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-reset"></span><code>lastReceivedMessageTimestamp:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+            </code>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+            
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>(new Date).getTime()</code>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/alarm.service.ts:20</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Timestamp related with the last received message</p>
             </div>
                                 </td>
                             </tr>
@@ -839,12 +1215,18 @@ IAS Webserver through Websockets</p>
                             <tr>
                                 <td class="col-md-4">
                                     <a name="webSocketBridge"></a>
-                                    <span class="name"><b><span class="modifier">Private</span> webSocketBridge</b><a href="#webSocketBridge"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Private</span>
+                                        webSocketBridge
+                                        </b>
+                                        <a href="#webSocketBridge"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <span class="modifier-icon fa fa-lock"></span><code>webSocketBridge:     <code>WebSocketBridge</code>
+                                    <span class="modifier-icon fa fa-reset"></span><code>webSocketBridge:     <code>WebSocketBridge</code>
             </code>
                                 </td>
                             </tr>
@@ -854,9 +1236,14 @@ IAS Webserver through Websockets</p>
             
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>new WebSocketBridge()</code>
+                                    </td>
+                                </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/alarm.service.ts:30</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/alarm.service.ts:43</a></div>
                                         </td>
                                     </tr>
             
@@ -875,13 +1262,15 @@ IAS Webserver through Websockets</p>
     </div>
 
 
-    <div class="tab-pane fade tab-source-code" id="source">
+    <div class="tab-pane fade tab-source-code" id="c-source">
         <pre class="line-numbers"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs/Observable&#x27;;
 import { WebSocketBridge } from &#x27;django-channels&#x27;;
 import { environment } from &#x27;../environments/environment&#x27;;
-import { Alarm } from &#x27;./alarm&#x27;;
+import { Alarm, OperationalMode, Validity } from &#x27;./alarm&#x27;;
 import { BehaviorSubject } from &#x27;rxjs/BehaviorSubject&#x27;;
+import { IntervalObservable } from &#x27;rxjs/observable/IntervalObservable&#x27;;
+
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -891,9 +1280,20 @@ import { BehaviorSubject } from &#x27;rxjs/BehaviorSubject&#x27;;
 export class AlarmService {
 
   /**
-  * Dictionary of {@link Alarm} objects, indexed by their primary keys
+  * Timestamp related with the last received message
   */
-  public alarms: {[pk: number]: Alarm } &#x3D; {};
+  public lastReceivedMessageTimestamp : number &#x3D; (new Date).getTime();
+
+  /**
+  * Stream of notifications of changes in
+  * the status of the service connection
+  */
+  public connectionStatusStream &#x3D; new BehaviorSubject&lt;any&gt;(false);
+
+  /**
+  * Dictionary of {@link Alarm} objects, indexed by their core_ids
+  */
+  public alarms: {[core_id: string]: Alarm } &#x3D; {};
 
   /**
   * Stream of notifications of changes in
@@ -908,15 +1308,24 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge &#x3D; new WebSocketBridge();
 
   /** The &quot;constructor&quot; */
-  constructor() { }
+  constructor() {
+    this.connectionStatusStream.subscribe(
+      value &#x3D;&gt; {
+        if (value &#x3D;&#x3D;&#x3D; false){
+          this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+  }
 
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Alarm} alarms the updated dictionary of Alarms to notify
+  * @param {Any} any the core_id of the updated alarm,
+  * or &#x27;all&#x27; if all were updated
   */
-  changeAlarms(alarms: { [pk: number]: Alarm }) {
-    this.alarmChangeStream.next(true);
+  changeAlarms(any) {
+    this.alarmChangeStream.next(any);
   }
 
   /**
@@ -925,15 +1334,23 @@ export class AlarmService {
   initialize() {
     this.connect();
     this.webSocketBridge.socket.addEventListener(
-      &#x27;open&#x27;, () &#x3D;&gt; this.getAlarmList()
+      &#x27;open&#x27;, () &#x3D;&gt; {
+        this.connectionStatusStream.next(true);
+        this.getAlarmList();
+      }
     );
     this.webSocketBridge.demultiplex(&#x27;alarms&#x27;, (payload, streamName) &#x3D;&gt; {
-      console.log(&#x27;payload &#x3D; &#x27;, payload);
-      this.processAlarm(payload.pk, payload.action, payload.data);
+      console.log(&#x27;notify &#x27;, payload);
+      this.updateLastReceivedMessageTimestamp();
+      this.processAlarm(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex(&#x27;requests&#x27;, (payload, streamName) &#x3D;&gt; {
+      console.log(&#x27;request&#x27;, payload);
+      this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
+    this.startAlarmListPeriodicalUpdate();
+    this.startLastReceivedMessageTimestampCheck();
   }
 
    /**
@@ -957,19 +1374,74 @@ export class AlarmService {
   }
 
   /**
+   * Set selected state to alarms under an non-valid connection
+   */
+  triggerAlarmsNonValidConnectionState() {
+    for (let core_id in this.alarms) {
+      this.alarms[core_id][&#x27;validity&#x27;] &#x3D; Validity.unreliable;
+    }
+  }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  updateLastReceivedMessageTimestamp() {
+    this.lastReceivedMessageTimestamp &#x3D; (new Date()).getTime();
+  }
+
+  /**
+   * Method to check the last received message timestamp
+   * Note: If non-valid, the connection state is non-valid
+   * TODO: Review the life cycle of the connection status.
+   */
+  compareCurrentAndLastReceivedMessageTimestamp() {
+
+    const MAX_SECONDS_WITHOUT_MESSAGES &#x3D; 2;
+
+    let now &#x3D; (new Date).getTime();
+    let millisecondsDelta;
+
+    millisecondsDelta &#x3D; now - this.lastReceivedMessageTimestamp;
+    if (millisecondsDelta &gt;&#x3D; 1000 * MAX_SECONDS_WITHOUT_MESSAGES ){
+      this.connectionStatusStream.next(false);
+    }
+  }
+
+  /**
+   * Method to update the last received message timestamp
+   */
+  startLastReceivedMessageTimestampCheck() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() &#x3D;&gt; {
+      this.compareCurrentAndLastReceivedMessageTimestamp();
+    });
+  }
+
+  /**
+   * Method to start a periodical update
+   */
+  startAlarmListPeriodicalUpdate() {
+    return IntervalObservable.create(1000 * 2)
+      .subscribe(() &#x3D;&gt; {
+      this.getAlarmList();
+    });
+  }
+
+
+  /**
    * Process the alarm and modifies the service alarms list depending
    * on the action value.
-   * @param pk Id of the alarm in the web server database
    * @param action create, update or delete
    * @param alarm dictionary with values for alarm fields
    */
-  processAlarm(pk, action, alarm) {
+  processAlarm(action, obj) {
+    let alarm &#x3D; Alarm.asAlarm(obj[&#x27;fields&#x27;]);
     if ( action &#x3D;&#x3D;&#x3D; &#x27;create&#x27; || action &#x3D;&#x3D;&#x3D; &#x27;update&#x27; ) {
-      this.alarms[pk] &#x3D; Alarm.asAlarm(alarm, pk);
+      this.alarms[alarm.core_id] &#x3D; alarm;
     } else if ( action &#x3D;&#x3D;&#x3D; &#x27;delete&#x27;) {
-      delete this.alarms[pk];
+      delete this.alarms[alarm.core_id];
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms(alarm.core_id);
   }
 
   /**
@@ -977,11 +1449,11 @@ export class AlarmService {
    * @param alarmsList list of dictionaries with values for alarm fields
    */
   processAlarmsList(alarmsList) {
-    for (let alarm of alarmsList) {
-      const pk &#x3D; alarm[&#x27;pk&#x27;];
-      this.alarms[pk] &#x3D; Alarm.asAlarm(alarm[&#x27;fields&#x27;], pk);
+    for (let obj of alarmsList) {
+      let alarm &#x3D; Alarm.asAlarm(obj[&#x27;fields&#x27;]);
+      this.alarms[alarm.core_id] &#x3D; alarm;
     }
-    this.changeAlarms(this.alarms);
+    this.changeAlarms(&#x27;all&#x27;);
   }
 }
 </code></pre>
