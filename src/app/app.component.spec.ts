@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { AlarmService } from './alarm.service';
 import { AlarmsListComponent } from './alarms-list/alarms-list.component';
@@ -24,6 +24,10 @@ const appRoutes: Routes = [
 ];
 
 describe('AppComponent', () => {
+
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -46,9 +50,12 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+  it('should create the app', async(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

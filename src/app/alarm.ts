@@ -19,8 +19,6 @@ export enum Validity {
 * Class to define Alarm objects
 */
 export class Alarm {
-  /** Primary key */
-  pk: number;
 
   /**
   * Value that represents the state of the {@link Alarm}.
@@ -76,7 +74,7 @@ export class Alarm {
   * @param {any} json the object to convert to an Alarm
   * @param {number} pk the primary key of the Alarm in the database
   */
-  static asAlarm(json: any, pk: number): Alarm {
+  static asAlarm(json: any): Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
@@ -86,7 +84,7 @@ export class Alarm {
     let mode = <number>json['mode'];
     let core_timestamp = <number>json['core_timestamp'];
     let validity = <number>json['validity'];
-    return new Alarm({ pk, value, core_id, running_id, mode, core_timestamp, validity });
+    return new Alarm({ value, core_id, running_id, mode, core_timestamp, validity });
   }
 
   /**

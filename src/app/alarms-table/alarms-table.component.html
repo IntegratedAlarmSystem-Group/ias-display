@@ -1,6 +1,14 @@
 <nb-card>
 
-  <nb-card-header> Alarms </nb-card-header>
+  <nb-card-header>
+    <div class="alarms-table-header">
+        <div class="main-container">
+          Alarms
+        </div>
+        <div class="secondary-container">
+        </div>
+  </div>
+  </nb-card-header>
   <nb-card-body>
 
     <div class="alarm-status-legend">
@@ -57,43 +65,7 @@
 
     <div>
 
-      <table class="alarms">
-        <thead>
-          <tr>
-            <th> Status </th>
-            <th style="width:400px;min-width:200px;"> Core Time </th>
-            <th> Core ID </th>
-            <!-- <th> Value </th> -->
-            <!-- <th> Validity </th> -->
-            <th style="width:230px;min-width:130px;"> Mode </th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let core_id of alarmIds">
-          <!-- <tr [style.background]="getAlarmColor(alarmService.alarms[core_id])"> -->
-          <tr style="background: #ffffff0d; margin-top: 2px; margin-bottom: 2px;">
-            <td>
-              <div class="alarm-status" [ngStyle]="setAlarmStatusDivStyle(alarmService.alarms[core_id])">
-                <span [ngStyle]="setAlarmStatusSymbolStyle(alarmService.alarms[core_id])"> &#9650; </span>
-              </div>
-            </td>
-            <td>
-              {{ alarmService.alarms[core_id].getCoreTimestampAsDate() | date: 'M/d/yy, h:mm:ss a'}}
-            </td>
-            <td>
-              {{ alarmService.alarms[core_id].core_id }}
-            </td>
-            <!-- <td>
-                {{ alarmService.alarms[core_id].getValueAsString() }}
-            </td> -->
-            <!-- <td>
-              {{ alarmService.alarms[core_id].getValidityAsString() }}
-            </td>           -->
-            <td>
-              {{ alarmService.alarms[core_id].getModeAsString() }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
 
     </div>
 

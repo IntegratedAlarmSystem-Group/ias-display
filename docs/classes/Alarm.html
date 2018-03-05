@@ -73,6 +73,9 @@
                                 <li class="link">
                                     <a href="../modules/AppModule.html" >AppModule</a>
                                 </li>
+                                <li class="link">
+                                    <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                                </li>
                         </ul>
                     </li>
             
@@ -91,7 +94,13 @@
                                     <a href="../components/AlarmsListComponent.html" >AlarmsListComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/AlarmsTableComponent.html" >AlarmsTableComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatusViewComponent.html" >StatusViewComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -154,6 +163,9 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                    </li>
             
                     <li class="chapter">
                         <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
@@ -229,6 +241,9 @@
                                        <li class="link">
                                            <a href="../modules/AppModule.html" >AppModule</a>
                                        </li>
+                                       <li class="link">
+                                           <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                                       </li>
                                </ul>
                            </li>
                    
@@ -247,7 +262,13 @@
                                            <a href="../components/AlarmsListComponent.html" >AlarmsListComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/AlarmsTableComponent.html" >AlarmsTableComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatusViewComponent.html" >StatusViewComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -310,6 +331,9 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                           </li>
                    
                            <li class="chapter">
                                <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
@@ -354,7 +378,7 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info">
+    <div class="tab-pane fade active in" id="c-info">
         <p class="comment">
             <h3>File</h3>
         </p>
@@ -386,22 +410,22 @@
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
-                                         <a href="#core_id">core_id</a>
+                                        <a href="#core_id">core_id</a>
                                     </li>
                                     <li>
-                                         <a href="#core_timestamp">core_timestamp</a>
+                                        <a href="#core_timestamp">core_timestamp</a>
                                     </li>
                                     <li>
-                                         <a href="#mode">mode</a>
+                                        <a href="#mode">mode</a>
                                     </li>
                                     <li>
-                                         <a href="#pk">pk</a>
+                                        <a href="#running_id">running_id</a>
                                     </li>
                                     <li>
-                                         <a href="#running_id">running_id</a>
+                                        <a href="#validity">validity</a>
                                     </li>
                                     <li>
-                                         <a href="#value">value</a>
+                                        <a href="#value">value</a>
                                     </li>
                                 </ul>
                             </td>
@@ -415,16 +439,24 @@
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
-                                        <span class="modifier">Static</span> <a href="#asAlarm">asAlarm</a>
+                                            <span class="modifier">Static</span>
+                                        <a href="#asAlarm">asAlarm</a>
                                     </li>
                                     <li>
-                                         <a href="#getModeAsString">getModeAsString</a>
+                                        <a href="#getCoreTimestampAsDate">getCoreTimestampAsDate</a>
                                     </li>
                                     <li>
-                                         <a href="#getValueAsString">getValueAsString</a>
+                                        <a href="#getModeAsString">getModeAsString</a>
                                     </li>
                                     <li>
-                                        <span class="modifier">Static</span> <a href="#isValidAlarm">isValidAlarm</a>
+                                        <a href="#getValidityAsString">getValidityAsString</a>
+                                    </li>
+                                    <li>
+                                        <a href="#getValueAsString">getValueAsString</a>
+                                    </li>
+                                    <li>
+                                            <span class="modifier">Static</span>
+                                        <a href="#isValidAlarm">isValidAlarm</a>
                                     </li>
                                 </ul>
                             </td>
@@ -444,7 +476,7 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/alarm.ts:35</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/alarm.ts:42</a></div>
                                         </td>
                                     </tr>
             
@@ -494,20 +526,26 @@
                             <tr>
                                 <td class="col-md-4">
                                     <a name="asAlarm"></a>
-                                    <span class="name"><b><span class="modifier">Static</span> asAlarm</b><a href="#asAlarm"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Static</span>
+                                        asAlarm
+                                        </b>
+                                        <a href="#asAlarm"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
                                         <span class="modifier-icon fa fa-reset"></span>
-                                    <code>asAlarm(json: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, pk: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                                    <code>asAlarm(json: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/alarm.ts:69</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/alarm.ts:77</a></div>
                                         </td>
                                     </tr>
             
@@ -538,16 +576,6 @@
                                                               <td><p>the object to convert to an Alarm</p>
             </td>
                                                             </tr>
-                                                            <tr>
-                                                              <td>pk</td>
-                                                              <td>
-                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td><p>the primary key of the Alarm in the database</p>
-            </td>
-                                                            </tr>
                                                     </tbody>
                                                 </table>
                                         </div>
@@ -568,8 +596,58 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <a name="getCoreTimestampAsDate"></a>
+                                    <span class="name">
+                                        <b>
+                                        getCoreTimestampAsDate
+                                        </b>
+                                        <a href="#getCoreTimestampAsDate"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>getCoreTimestampAsDate()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/alarm.ts:127</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Returns a Date representation of the {@link Alarm.mode} attribute</p>
+            </div>
+            
+                                        <div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                <p>a date format representation of the Alarm core_timestamp</p>
+            
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <a name="getModeAsString"></a>
-                                    <span class="name"><b> getModeAsString</b><a href="#getModeAsString"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        getModeAsString
+                                        </b>
+                                        <a href="#getModeAsString"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -581,7 +659,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/alarm.ts:86</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/alarm.ts:95</a></div>
                                         </td>
                                     </tr>
             
@@ -608,8 +686,58 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <a name="getValidityAsString"></a>
+                                    <span class="name">
+                                        <b>
+                                        getValidityAsString
+                                        </b>
+                                        <a href="#getValidityAsString"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>getValidityAsString()</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/alarm.ts:118</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description"><p>Returns a string representation of the {@link Alarm.mode} attribute</p>
+            </div>
+            
+                                        <div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                <p>a string representation of the validity of the Alarm</p>
+            
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <a name="getValueAsString"></a>
-                                    <span class="name"><b> getValueAsString</b><a href="#getValueAsString"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        getValueAsString
+                                        </b>
+                                        <a href="#getValueAsString"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -621,7 +749,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/alarm.ts:95</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/alarm.ts:104</a></div>
                                         </td>
                                     </tr>
             
@@ -649,7 +777,13 @@
                             <tr>
                                 <td class="col-md-4">
                                     <a name="isValidAlarm"></a>
-                                    <span class="name"><b><span class="modifier">Static</span> isValidAlarm</b><a href="#isValidAlarm"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Static</span>
+                                        isValidAlarm
+                                        </b>
+                                        <a href="#isValidAlarm"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -662,7 +796,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/alarm.ts:53</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/alarm.ts:60</a></div>
                                         </td>
                                     </tr>
             
@@ -723,7 +857,12 @@
                             <tr>
                                 <td class="col-md-4">
                                     <a name="core_id"></a>
-                                    <span class="name"><b> core_id</b><a href="#core_id"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        core_id
+                                        </b>
+                                        <a href="#core_id"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -740,7 +879,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/alarm.ts:26</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/alarm.ts:30</a></div>
                                         </td>
                                     </tr>
             
@@ -758,7 +897,12 @@
                             <tr>
                                 <td class="col-md-4">
                                     <a name="core_timestamp"></a>
-                                    <span class="name"><b> core_timestamp</b><a href="#core_timestamp"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        core_timestamp
+                                        </b>
+                                        <a href="#core_timestamp"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -775,7 +919,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/alarm.ts:35</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/alarm.ts:42</a></div>
                                         </td>
                                     </tr>
             
@@ -793,7 +937,12 @@
                             <tr>
                                 <td class="col-md-4">
                                     <a name="mode"></a>
-                                    <span class="name"><b> mode</b><a href="#mode"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        mode
+                                        </b>
+                                        <a href="#mode"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -810,7 +959,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/alarm.ts:32</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/alarm.ts:36</a></div>
                                         </td>
                                     </tr>
             
@@ -827,43 +976,13 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <a name="pk"></a>
-                                    <span class="name"><b> pk</b><a href="#pk"><span class="fa fa-link"></span></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <code>pk:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-            </code>
-                                </td>
-                            </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-            
-                                    </td>
-                                </tr>
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/alarm.ts:17</a></div>
-                                        </td>
-                                    </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Primary key </p>
-            </div>
-                                </td>
-                            </tr>
-            
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
                                     <a name="running_id"></a>
-                                    <span class="name"><b> running_id</b><a href="#running_id"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        running_id
+                                        </b>
+                                        <a href="#running_id"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -880,7 +999,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/alarm.ts:29</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/alarm.ts:33</a></div>
                                         </td>
                                     </tr>
             
@@ -897,8 +1016,53 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <a name="validity"></a>
+                                    <span class="name">
+                                        <b>
+                                        validity
+                                        </b>
+                                        <a href="#validity"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>validity:     <code><a href="../miscellaneous/enumerations.html#Validity" target="_self" >Validity</a></code>
+            </code>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Type : </i>    <code><a href="../miscellaneous/enumerations.html#Validity" target="_self" >Validity</a></code>
+            
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/alarm.ts:39</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Validity of the <a href="../classes/Alarm.html">Alarm</a> </p>
+            </div>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <a name="value"></a>
-                                    <span class="name"><b> value</b><a href="#value"><span class="fa fa-link"></span></a></span>
+                                    <span class="name">
+                                        <b>
+                                        value
+                                        </b>
+                                        <a href="#value"><span class="fa fa-link"></span></a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -915,7 +1079,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/alarm.ts:23</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/alarm.ts:27</a></div>
                                         </td>
                                     </tr>
             
@@ -934,7 +1098,7 @@
     </div>
 
 
-    <div class="tab-pane fade tab-source-code" id="source">
+    <div class="tab-pane fade tab-source-code" id="c-source">
         <pre class="line-numbers"><code class="language-typescript">export enum OperationalMode {
   startup &#x3D; 0,
   initialization &#x3D; 1,
@@ -946,12 +1110,16 @@
   unknown &#x3D; 7,
 };
 
+export enum Validity {
+  unreliable &#x3D; 0,
+  reliable &#x3D; 1
+};
+
+
 /**
 * Class to define Alarm objects
 */
 export class Alarm {
-  /** Primary key */
-  pk: number;
 
   /**
   * Value that represents the state of the {@link Alarm}.
@@ -967,6 +1135,9 @@ export class Alarm {
 
   /** Operational mode of the {@link Alarm} */
   mode: OperationalMode;
+
+  /** Validity of the {@link Alarm} */
+  validity: Validity;
 
   /** Timestamp at which the {@link Alarm} was generated by the IAS Core */
   core_timestamp: number;
@@ -993,7 +1164,8 @@ export class Alarm {
       json.hasOwnProperty(&quot;core_id&quot;) &amp;&amp;
       json.hasOwnProperty(&quot;running_id&quot;) &amp;&amp;
       json.hasOwnProperty(&quot;mode&quot;) &amp;&amp;
-      json.hasOwnProperty(&quot;core_timestamp&quot;)
+      json.hasOwnProperty(&quot;core_timestamp&quot;) &amp;&amp;
+      json.hasOwnProperty(&quot;validity&quot;)
     );
   }
 
@@ -1003,7 +1175,7 @@ export class Alarm {
   * @param {any} json the object to convert to an Alarm
   * @param {number} pk the primary key of the Alarm in the database
   */
-  static asAlarm(json: any, pk: number): Alarm {
+  static asAlarm(json: any): Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
@@ -1012,7 +1184,8 @@ export class Alarm {
     let running_id &#x3D; &lt;string&gt;json[&#x27;running_id&#x27;];
     let mode &#x3D; &lt;number&gt;json[&#x27;mode&#x27;];
     let core_timestamp &#x3D; &lt;number&gt;json[&#x27;core_timestamp&#x27;];
-    return new Alarm({ pk, value, core_id, running_id, mode, core_timestamp });
+    let validity &#x3D; &lt;number&gt;json[&#x27;validity&#x27;];
+    return new Alarm({ value, core_id, running_id, mode, core_timestamp, validity });
   }
 
   /**
@@ -1037,6 +1210,29 @@ export class Alarm {
       return &#x27;Set&#x27;;
     }
   }
+
+  /**
+  * Returns a string representation of the {@link Alarm.mode} attribute
+  *
+  * @returns {string} a string representation of the validity of the Alarm
+  */
+  getValidityAsString(): string {
+    return Validity[this.validity];
+  }
+
+  /**
+  * Returns a Date representation of the {@link Alarm.mode} attribute
+  *
+  * @returns {Date} a date format representation of the Alarm core_timestamp
+  */
+  getCoreTimestampAsDate(): Date {
+
+    let ts &#x3D; this.core_timestamp;
+    let date: Date &#x3D; new Date(ts);
+
+    return date;
+  }
+
 }
 </code></pre>
     </div>
