@@ -116,15 +116,14 @@ describe('GIVEN AlarmsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('GIVEN the service receives 4 alarms', () => {
-    alarmService.processAlarmsList(alarms);
-    it('WHEN the service finishes processing the 4 alarms', () => {
+  describe('AND WHEN the service processes 4 alarms', () => {
+    it('THEN the Table contains those 4 Alarms', () => {
+      alarmService.processAlarmsList(alarms);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        it('THEN the Table should contain those 4 Alarms', () => {
-          component.source.getAll().then(resp => {
-            expect(resp).toEqual(expectedRows);
-          });
+        component.source.getAll().then(resp => {
+          console.log('**** resp =', resp);
+          expect(resp).toEqual(expectedRows);
         });
       });
     });
