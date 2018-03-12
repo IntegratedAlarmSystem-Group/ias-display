@@ -279,7 +279,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Load data in the table
   */
   loadTableData(data){
-    this.source.load(this.getTableData());
+    this.source.load(data);
   }
 
   /**
