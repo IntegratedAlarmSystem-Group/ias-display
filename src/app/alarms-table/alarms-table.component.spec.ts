@@ -14,7 +14,7 @@ describe('GIVEN AlarmsTableComponent', () => {
   let fixture: ComponentFixture<AlarmsTableComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
-
+  let localOffset = (new Date().getTimezoneOffset())*60*1000;
   let alarms = [
     { 'pk': null,
       'model': 'alarms.alarm',
@@ -23,7 +23,7 @@ describe('GIVEN AlarmsTableComponent', () => {
         'core_id': 'coreid$1',
         'running_id': 'coreid$1',
         'mode': '0',
-        'core_timestamp': 1267252440000,
+        'core_timestamp': 1267252440000 + localOffset,
         'validity': '1'
       }
     },
@@ -34,7 +34,7 @@ describe('GIVEN AlarmsTableComponent', () => {
         'core_id': 'coreid$2',
         'running_id': 'coreid$2',
         'mode': '5',
-        'core_timestamp': 1267252440000,
+        'core_timestamp': 1267252440000 + localOffset,
         'validity': '1'
       }
     },
@@ -45,7 +45,7 @@ describe('GIVEN AlarmsTableComponent', () => {
         'core_id': 'coreid$3',
         'running_id': 'coreid$3',
         'mode': '7',
-        'core_timestamp': 1267252440000,
+        'core_timestamp': 1267252440000 + localOffset,
         'validity': '0'
       }
     },
@@ -56,7 +56,7 @@ describe('GIVEN AlarmsTableComponent', () => {
         'core_id': 'coreid$4',
         'running_id': 'coreid$4',
         'mode': '4',
-        'core_timestamp': 1267252440000,
+        'core_timestamp': 1267252440000 + localOffset,
         'validity': '1'
       }
     }
@@ -64,22 +64,22 @@ describe('GIVEN AlarmsTableComponent', () => {
 
   let expectedRows = [
     { 'status': 'clear-valid-startup',
-      'timestamp': '2/27/10, 3:34:00 AM',
+      'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$1',
       'mode': 'startup',
     },
     { 'status': 'set-valid-operational',
-      'timestamp': '2/27/10, 3:34:00 AM',
+      'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$2',
       'mode': 'operational',
     },
     { 'status': 'clear-invalid-unknown',
-      'timestamp': '2/27/10, 3:34:00 AM',
+      'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$3',
       'mode': 'unknown',
     },
     { 'status': 'set-valid-maintenance',
-      'timestamp': '2/27/10, 3:34:00 AM',
+      'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$4',
       'mode': 'maintenance',
     }
@@ -122,7 +122,6 @@ describe('GIVEN AlarmsTableComponent', () => {
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         component.source.getAll().then(resp => {
-          console.log('**** resp =', resp);
           expect(resp).toEqual(expectedRows);
         });
       });
