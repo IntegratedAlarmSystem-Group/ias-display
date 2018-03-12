@@ -8,7 +8,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { DatePipe } from '@angular/common';
 
-describe('AlarmsTableComponent', () => {
+describe('GIVEN AlarmsTableComponent', () => {
   let component: AlarmsTableComponent;
   let alarmService: AlarmService;
   let fixture: ComponentFixture<AlarmsTableComponent>;
@@ -23,7 +23,7 @@ describe('AlarmsTableComponent', () => {
         'core_id': 'coreid$1',
         'running_id': 'coreid$1',
         'mode': '0',
-        'core_timestamp': 10000,
+        'core_timestamp': 1267252440000,
         'validity': '1'
       }
     },
@@ -33,8 +33,8 @@ describe('AlarmsTableComponent', () => {
         'value': 1,
         'core_id': 'coreid$2',
         'running_id': 'coreid$2',
-        'mode': '0',
-        'core_timestamp': 10000,
+        'mode': '5',
+        'core_timestamp': 1267252440000,
         'validity': '1'
       }
     },
@@ -44,10 +44,44 @@ describe('AlarmsTableComponent', () => {
         'value': 0,
         'core_id': 'coreid$3',
         'running_id': 'coreid$3',
-        'mode': '0',
-        'core_timestamp': 10000,
+        'mode': '7',
+        'core_timestamp': 1267252440000,
+        'validity': '0'
+      }
+    },
+    { 'pk': null,
+      'model': 'alarms.alarm',
+      'fields': {
+        'value': 1,
+        'core_id': 'coreid$4',
+        'running_id': 'coreid$4',
+        'mode': '4',
+        'core_timestamp': 1267252440000,
         'validity': '1'
       }
+    }
+  ];
+
+  let expectedRows = [
+    { 'status': 'clear-valid-startup',
+      'timestamp': '2/27/10, 3:34:00 AM',
+      'core_id': 'coreid$1',
+      'mode': 'startup',
+    },
+    { 'status': 'set-valid-operational',
+      'timestamp': '2/27/10, 3:34:00 AM',
+      'core_id': 'coreid$2',
+      'mode': 'operational',
+    },
+    { 'status': 'clear-invalid-unknown',
+      'timestamp': '2/27/10, 3:34:00 AM',
+      'core_id': 'coreid$3',
+      'mode': 'unknown',
+    },
+    { 'status': 'set-valid-maintenance',
+      'timestamp': '2/27/10, 3:34:00 AM',
+      'core_id': 'coreid$4',
+      'mode': 'maintenance',
     }
   ];
 
@@ -78,26 +112,21 @@ describe('AlarmsTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('THEN should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('WHEN the service processes 3 alarms', () => {
-    it('THEN the Table contains those 3 Alarms', () => {
-      console.log('***alarms***= ', alarms);
-      alarmService.processAlarmsList(alarms);
+  it('GIVEN the service receives 4 alarms', () => {
+    alarmService.processAlarmsList(alarms);
+    it('WHEN the service finishes processing the 4 alarms', () => {
       fixture.detectChanges();
-      // fixture.whenStable().then(() => {
-      //   expect(html.textContent).toContain('coreid$1');
-      // })
       fixture.whenStable().then(() => {
-        console.log('***component.data*** = ', component.source.getElements());
-        expect(component.source.count()).toEqual(3);
-        component.source.getAll().then(resp => {
-          console.log(resp);
-          expect(resp).toContain('coreid$1');
+        it('THEN the Table should contain those 4 Alarms', () => {
+          component.source.getAll().then(resp => {
+            expect(resp).toEqual(expectedRows);
+          });
         });
-      })
+      });
     });
   });
 });
