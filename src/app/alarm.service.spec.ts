@@ -126,8 +126,6 @@ describe('AlarmService', () => {
       // TODO: Evaluation to check periodic calls
       spyOn(subject, 'startLastReceivedMessageTimestampCheck')
         .and.callFake(function(){});
-      spyOn(subject, 'startAlarmListPeriodicalUpdate')
-        .and.callFake(function(){});
   }));
 
   it('should update the alarms dictionary on new alarm messages', async(() => {

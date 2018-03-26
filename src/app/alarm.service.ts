@@ -84,7 +84,6 @@ export class AlarmService {
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
-    this.startAlarmListPeriodicalUpdate();
     this.startLastReceivedMessageTimestampCheck();
   }
 
@@ -149,16 +148,6 @@ export class AlarmService {
     return IntervalObservable.create(1000 * 2)
       .subscribe(() => {
       this.compareCurrentAndLastReceivedMessageTimestamp();
-    });
-  }
-
-  /**
-   * Method to start a periodical update
-   */
-  startAlarmListPeriodicalUpdate() {
-    return IntervalObservable.create(1000 * 2)
-      .subscribe(() => {
-      this.getAlarmList();
     });
   }
 
