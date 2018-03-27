@@ -8,10 +8,13 @@ RUN ng new ias-display
 
 WORKDIR /usr/src/ias-display
 
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+
 COPY . .
 EXPOSE 4200
 
-RUN npm install
 RUN npm run-script build-prod
 
 VOLUME /usr/src/ias-display
