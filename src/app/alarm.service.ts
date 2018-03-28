@@ -84,7 +84,6 @@ export class AlarmService {
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
-    this.startAlarmListPeriodicalUpdate();
     this.startLastReceivedMessageTimestampCheck();
   }
 
@@ -115,6 +114,7 @@ export class AlarmService {
     for (let core_id in this.alarms) {
       this.alarms[core_id]['validity'] = Validity.unreliable;
     }
+    this.changeAlarms('all');
   }
 
   /**
@@ -131,7 +131,7 @@ export class AlarmService {
    */
   compareCurrentAndLastReceivedMessageTimestamp() {
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = 2;
+    const MAX_SECONDS_WITHOUT_MESSAGES = 10;
 
     let now = (new Date).getTime();
     let millisecondsDelta;
@@ -146,19 +146,9 @@ export class AlarmService {
    * Method to update the last received message timestamp
    */
   startLastReceivedMessageTimestampCheck() {
-    return IntervalObservable.create(1000 * 2)
+    return IntervalObservable.create(1000 * 10)
       .subscribe(() => {
       this.compareCurrentAndLastReceivedMessageTimestamp();
-    });
-  }
-
-  /**
-   * Method to start a periodical update
-   */
-  startAlarmListPeriodicalUpdate() {
-    return IntervalObservable.create(1000 * 2)
-      .subscribe(() => {
-      this.getAlarmList();
     });
   }
 

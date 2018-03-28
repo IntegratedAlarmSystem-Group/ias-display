@@ -208,10 +208,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
         renderComponent: StatusViewComponent
       },
       timestamp: {
-        title: 'Core Time',
+        title: 'Time',
       },
       core_id: {
-        title: 'Core ID',
+        title: 'Monitor Point',
       },
       mode: {
         title: 'Mode'
@@ -279,7 +279,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Load data in the table
   */
   loadTableData(data){
-    this.source.load(this.getTableData());
+    this.source.load(data);
   }
 
   /**
