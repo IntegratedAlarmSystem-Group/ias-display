@@ -323,11 +323,11 @@ describe('AlarmService', () => {
 
   }));
 
-  it('should set invalid state if last received message timestamp is two seconds behind', function() {
+  it('should set invalid state if last received message timestamp is ten seconds behind', function() {
 
     // Arrange
     let now = (new Date).getTime();
-    let maxSecondsWithoutMessages = 2;
+    let maxSecondsWithoutMessages = 10;
     let delayedTimestamp = now - (maxSecondsWithoutMessages*1000 + 1);
 
     subject.connectionStatusStream.next(true);
