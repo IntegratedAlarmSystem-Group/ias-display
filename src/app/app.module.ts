@@ -27,9 +27,8 @@ import { DatePipe } from '@angular/common';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'weather', pathMatch: 'full' },
-  { path:'overview', component: AlarmsListComponent },
-  { path:'weather', component: AlarmsTableComponent }
+  { path: '', redirectTo: 'alarms', pathMatch: 'full' },
+  { path:'alarms', component: AlarmsTableComponent }
 ];
 
 /**

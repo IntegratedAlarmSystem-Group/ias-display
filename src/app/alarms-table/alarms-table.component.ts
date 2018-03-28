@@ -208,10 +208,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
         renderComponent: StatusViewComponent
       },
       timestamp: {
-        title: 'Core Time',
+        title: 'Time',
       },
       core_id: {
-        title: 'Core ID',
+        title: 'Monitor Point',
       },
       mode: {
         title: 'Mode'
