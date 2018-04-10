@@ -16,49 +16,37 @@ describe('GIVEN AlarmsTableComponent', () => {
   let html: HTMLElement;
   let localOffset = (new Date().getTimezoneOffset())*60*1000;
   let alarms = [
-    { 'pk': null,
-      'model': 'alarms.alarm',
-      'fields': {
-        'value': 0,
-        'core_id': 'coreid$1',
-        'running_id': 'coreid$1',
-        'mode': '0',
-        'core_timestamp': 1267252440000 + localOffset,
-        'validity': '1'
-      }
+    {
+      'value': 0,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': '0',
+      'core_timestamp': 1267252440000 + localOffset,
+      'validity': '1'
     },
-    { 'pk': null,
-      'model': 'alarms.alarm',
-      'fields': {
-        'value': 1,
-        'core_id': 'coreid$2',
-        'running_id': 'coreid$2',
-        'mode': '5',
-        'core_timestamp': 1267252440000 + localOffset,
-        'validity': '1'
-      }
+    {
+      'value': 1,
+      'core_id': 'coreid$2',
+      'running_id': 'coreid$2',
+      'mode': '5',
+      'core_timestamp': 1267252440000 + localOffset,
+      'validity': '1'
     },
-    { 'pk': null,
-      'model': 'alarms.alarm',
-      'fields': {
-        'value': 0,
-        'core_id': 'coreid$3',
-        'running_id': 'coreid$3',
-        'mode': '7',
-        'core_timestamp': 1267252440000 + localOffset,
-        'validity': '0'
-      }
+    {
+      'value': 0,
+      'core_id': 'coreid$3',
+      'running_id': 'coreid$3',
+      'mode': '7',
+      'core_timestamp': 1267252440000 + localOffset,
+      'validity': '0'
     },
-    { 'pk': null,
-      'model': 'alarms.alarm',
-      'fields': {
-        'value': 1,
-        'core_id': 'coreid$4',
-        'running_id': 'coreid$4',
-        'mode': '4',
-        'core_timestamp': 1267252440000 + localOffset,
-        'validity': '1'
-      }
+    {
+      'value': 1,
+      'core_id': 'coreid$4',
+      'running_id': 'coreid$4',
+      'mode': '4',
+      'core_timestamp': 1267252440000 + localOffset,
+      'validity': '1'
     }
   ];
 

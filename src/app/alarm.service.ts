@@ -160,7 +160,7 @@ export class AlarmService {
    * @param alarm dictionary with values for alarm fields
    */
   processAlarm(action, obj) {
-    let alarm = Alarm.asAlarm(obj['fields']);
+    let alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
       this.alarms[alarm.core_id] = alarm;
     } else if ( action === 'delete') {
@@ -175,7 +175,7 @@ export class AlarmService {
    */
   processAlarmsList(alarmsList) {
     for (let obj of alarmsList) {
-      let alarm = Alarm.asAlarm(obj['fields']);
+      let alarm = Alarm.asAlarm(obj);
       this.alarms[alarm.core_id] = alarm;
     }
     this.changeAlarms('all');
