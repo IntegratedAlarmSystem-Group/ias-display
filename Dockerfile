@@ -1,12 +1,14 @@
-FROM node:8.9.4-alpine
+FROM node:8.11.1-alpine
 
-WORKDIR /usr/src
+RUN mkdir -p /usr/src/ias-display
+RUN chown node:node /usr/src/ias-display
+WORKDIR /usr/src/ias-display
+
+USER node
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH="/home/node/.npm-global/bin:${PATH}"
 
 RUN npm install -g @angular/cli@1.6.5
-
-RUN ng new ias-display
-
-WORKDIR /usr/src/ias-display
 
 COPY package.json .
 COPY package-lock.json .
