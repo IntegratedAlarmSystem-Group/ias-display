@@ -1,0 +1,13 @@
+FROM node:8.9.4-alpine
+
+RUN mkdir -p /usr/src/ias-display
+WORKDIR /usr/src/ias-display
+
+USER node
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH="/home/node/.npm-global/bin:${PATH}"
+
+RUN npm install -g @angular/cli@1.6.5
+
+EXPOSE 4200
+VOLUME /usr/src/ias-display
