@@ -207,9 +207,6 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
         type: 'custom',
         renderComponent: StatusViewComponent
       },
-      timestamp: {
-        title: 'Time',
-      },
       core_id: {
         title: 'Monitor Point',
       },
