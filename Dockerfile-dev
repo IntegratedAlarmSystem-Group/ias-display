@@ -1,16 +1,22 @@
 FROM node:8.11.1-alpine
 
-RUN mkdir -p /usr/src/ias-display/node_modules
-RUN chown -R node:node /usr/src/ias-display
-RUN chown -R node:node /usr/src/ias-display/node_modules
+# install chromium to run karma tests
+RUN apk update && apk add udev ttf-freefont chromium
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV CHROME_PATH=/usr/lib/chromium/
+
+# create project folder
+RUN mkdir -p /usr/src/ias-display
+RUN chown node:node /usr/src/ias-display
 WORKDIR /usr/src/ias-display
 
+# install Angular CLI
 USER node
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
 RUN npm install -g @angular/cli@1.6.5
 
+# go back to root user, expose port and volume
 USER root
-
 EXPOSE 4200
 VOLUME /usr/src/ias-display
