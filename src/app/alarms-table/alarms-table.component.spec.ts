@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { AlarmService } from '../alarm.service';
-import { AlarmsTableComponent, StatusViewComponent } from './alarms-table.component';
+import { AlarmsTableComponent } from './alarms-table.component';
+import { StatusViewComponent } from '../status-view/status-view.component';
 import { NbCardModule } from '@nebular/theme';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';

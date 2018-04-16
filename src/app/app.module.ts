@@ -21,7 +21,7 @@ import { NbMenuModule } from '@nebular/theme';
 import { RouterModule, Routes } from '@angular/router';
 import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 
-import { StatusViewComponent } from './alarms-table/alarms-table.component';
+import { StatusViewComponent } from './status-view/status-view.component';
 
 import { DatePipe } from '@angular/common';
 
