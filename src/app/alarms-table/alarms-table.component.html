@@ -15,58 +15,56 @@
 
       <div class="group">
         <span class="item">
-          <span class="status" style="color:white;background:red;"> &#9650; </span> set-valid
+          <span class="status"><app-status-view value='set-valid-operational'></app-status-view></span> set-valid
         </span>
         <span class="item">
-          <span class="status" style="color:white;background:#95ff95;"> &nbsp; </span> clear-valid
-        </span>
-      </div>
-
-      <div class="group">
-        <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid red;"> &#9650; </span> set-invalid
-        </span>
-        <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid #95ff95;"> &nbsp; </span> clear-invalid
+          <span class="status"><app-status-view value='clear-valid-operational'></app-status-view></span> clear-valid
         </span>
       </div>
 
       <div class="group">
         <span class="item">
-          <span class="status" style="color:white;background:#73adf0;"> &#9650; </span> set-valid-unknown
+        <span class="status"><app-status-view value='set-invalid-operational'></app-status-view></span> set-invalid
         </span>
         <span class="item">
-          <span class="status" style="color:white;background:#73adf0;"> &nbsp; </span> clear-valid-unknown
-        </span>
-        <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid #73adf0;"> &#9650; </span> set-invalid-unknown
-        </span>
-        <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid #73adf0;"> &nbsp; </span> clear-invalid-unknown
+          <span class="status"><app-status-view value='clear-invalid-operational'></app-status-view></span> clear-invalid
         </span>
       </div>
 
       <div class="group">
         <span class="item">
-          <span class="status" style="color:white;background:#9b9797;"> &#9650; </span> set-valid-maintenance
+        <span class="status"><app-status-view value='set-valid-unknown'></app-status-view></span> set-valid-unknown
         </span>
         <span class="item">
-          <span class="status" style="color:white;background:#9b9797;"> &nbsp; </span> clear-valid-maintenance
+        <span class="status"><app-status-view value='clear-valid-unknown'></app-status-view></span> clear-valid-unknown
         </span>
         <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid #9b9797;"> &#9650; </span> set-invalid-maintenance
+        <span class="status"><app-status-view value='set-invalid-unknown'></app-status-view></span> set-invalid-unknown
         </span>
         <span class="item">
-          <span class="status" style="color:white;background:none;border:2px solid #9b9797;"> &nbsp; </span> clear-invalid-maintenance
+        <span class="status"><app-status-view value='clear-invalid-unknown'></app-status-view></span> clear-invalid-unknown
+        </span>
+      </div>
+
+      <div class="group">
+        <span class="item">
+        <span class="status"><app-status-view value='set-valid-maintenance'></app-status-view></span> set-valid-maintenance
+        </span>
+        <span class="item">
+        <span class="status"><app-status-view value='clear-valid-maintenance'></app-status-view></span> clear-valid-maintenance
+        </span>
+        <span class="item">
+        <span class="status"><app-status-view value='set-invalid-maintenance'></app-status-view></span> set-invalid-maintenance
+        </span>
+        <span class="item">
+        <span class="status"><app-status-view value='clear-invalid-maintenance'></app-status-view></span> clear-invalid-maintenance
         </span>
       </div>
 
     </div>
 
     <div>
-
       <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-
     </div>
 
   </nb-card-body>
