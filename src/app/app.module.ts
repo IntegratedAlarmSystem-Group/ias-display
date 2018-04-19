@@ -24,6 +24,7 @@ import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 
 import { DatePipe } from '@angular/common';
+import { AckModalComponent } from './ack-modal/ack-modal.component';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     AppComponent,
     AlarmsListComponent,
     AlarmsTableComponent,
-    StatusViewComponent
+    StatusViewComponent,
+    AckModalComponent
   ],
   imports: [
     BrowserModule,
