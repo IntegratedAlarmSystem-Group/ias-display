@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   websocketPath: 'ws://127.0.0.1:8000/stream/',
+  apiUrl: 'http://127.0.0.1:8000/api'
 };
