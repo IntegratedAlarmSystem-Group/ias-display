@@ -17,17 +17,32 @@ export class CdbService {
   /**
   * Variable to store the ias configuration data
   */
-  iasData;
+  iasConfiguration;
 
+  /** Constructor */
   constructor(private http: HttpClient) {
+  }
+
+  /**
+  * Method to trigger main request at the beginning
+  */
+  initialize() {
+    return this.getConfigurationData();
   }
 
   /**
   * Get the ias configuration data from the webserver
   */
-  getData() {
+  getConfigurationData() {
     return this.http.get(this.url)
-      .map(data => this.iasData = data);
+      .map(data => this.iasConfiguration = data[0]);
+  }
+
+  /**
+  * Get refresh rate from ias configuration data
+  */
+  getRefreshRate() {
+    return this.iasConfiguration['refresh_rate'];
   }
 
 }

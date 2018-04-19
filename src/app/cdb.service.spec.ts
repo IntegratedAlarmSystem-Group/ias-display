@@ -6,10 +6,19 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { CdbService } from './cdb.service';
 
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 
 describe('CdbService', () => {
+
+  let mockIasConfiguration = [{
+      id: 1,
+      log_level: "INFO",
+      refresh_rate: 3,
+      tolerance: 1,
+      properties: []
+  }];
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -29,24 +38,39 @@ describe('CdbService', () => {
         cdbService: CdbService
       ) => {
 
-        const testData = [{
-            id: 1,
-            log_level: "INFO",
-            refresh_rate: 3,
-            tolerance: 1,
-            properties: []
-        }];
-
-        cdbService.getData()
+        cdbService.getConfigurationData()
         .subscribe(
           data => {
-            expect(cdbService.iasData).toEqual(data);
+            expect(cdbService.iasConfiguration).toEqual(data);
           }
         );
 
         const req = httpTestingController.expectOne(environment.apiUrl);
         expect(req.request.method).toEqual('GET');
-        req.flush(testData);
+        req.flush(mockIasConfiguration);
+        httpTestingController.verify();
+
+      }
+    )
+  );
+
+  it('should be able to get the refresh rate after initialization',
+    inject(
+      [ HttpTestingController, CdbService ],
+      (
+        httpTestingController: HttpTestingController,
+        cdbService: CdbService
+      ) => {
+
+        cdbService.initialize()
+        .subscribe(
+          data => {
+            expect(cdbService.getRefreshRate()).toEqual(3);
+          }
+        );
+        const req = httpTestingController.expectOne(environment.apiUrl);
+        expect(req.request.method).toEqual('GET');
+        req.flush(mockIasConfiguration);
         httpTestingController.verify();
 
       }
