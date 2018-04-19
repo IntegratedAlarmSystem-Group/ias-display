@@ -14,7 +14,7 @@ WORKDIR /usr/src/ias-display
 USER node
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
-RUN npm install -g @angular/cli@1.6.5
+RUN npm install -g @angular/cli@1.7.4
 
 # install project requirements
 COPY package.json .
