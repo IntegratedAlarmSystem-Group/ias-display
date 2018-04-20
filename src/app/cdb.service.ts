@@ -12,7 +12,7 @@ export class CdbService {
   /**
   * Cdb api url from environment settings
   */
-  url = environment.apiUrl;
+  url = environment.cdbApiUrl+'/ias';
 
   /**
   * Variable to store the ias configuration data
@@ -27,15 +27,17 @@ export class CdbService {
   * Method to trigger main request at the beginning
   */
   initialize() {
-    return this.getConfigurationData();
+    return this.getConfigurationData()
+      .subscribe(
+        data => { this.iasConfiguration = data[0]; }
+    )
   }
 
   /**
   * Get the ias configuration data from the webserver
   */
   getConfigurationData() {
-    return this.http.get(this.url)
-      .map(data => this.iasConfiguration = data[0]);
+    return this.http.get(this.url);
   }
 
   /**

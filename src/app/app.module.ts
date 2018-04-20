@@ -2,9 +2,12 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { AlarmsListComponent } from './alarms-list/alarms-list.component';
 import { AlarmService } from './alarm.service';
+import { CdbService } from './cdb.service';
 
 import { NbThemeModule } from '@nebular/theme';
 import { NbLayoutModule } from '@nebular/theme';
@@ -43,6 +46,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NbThemeModule.forRoot({ name: 'alma' }),
     NbLayoutModule,
     NbCardModule,
@@ -52,7 +56,9 @@ const appRoutes: Routes = [
     Ng2SmartTableModule
   ],
   providers: [
+    HttpClient,
     AlarmService,
+    CdbService,
     NbSidebarService,
     NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },

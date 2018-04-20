@@ -1,6 +1,8 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { Alarm, OperationalMode, Validity } from './alarm';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AlarmService } from './alarm.service';
+import { CdbService } from './cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Server } from 'mock-socket';
@@ -8,6 +10,7 @@ import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
 
 describe('AlarmService', () => {
   let subject: AlarmService;
+  let cdbSubject: CdbService;
   let mockStream: Server;
 
   let alarmsFromWebServer = [  // mock alarm messages from webserver
@@ -96,15 +99,43 @@ describe('AlarmService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AlarmService, ]
+      imports: [HttpClientModule],
+      providers: [AlarmService, CdbService, HttpClient]
     });
   });
 
-  beforeEach(inject([AlarmService], (alarmService) => {
+  beforeEach(inject([AlarmService, CdbService], (alarmService, cdbService) => {
+      /**
+      * Services
+      */
       subject = alarmService;
+      cdbSubject = cdbService;
+
+      /**
+      * Redefinition of periodic calls in the alarm service for testing
+      */
       // TODO: Evaluation to check periodic calls
       spyOn(subject, 'startLastReceivedMessageTimestampCheck')
         .and.callFake(function(){});
+
+      /**
+      * Redefinition of the cdb information for the testing environment
+      *
+      * This is required to set the alarm service validation delay according to
+      * the cdb configuration
+      *
+      */
+      let mockIasConfiguration = {
+          id: 1,
+          log_level: "INFO",
+          refresh_rate: 1,
+          tolerance: 1,
+          properties: []
+      };
+      spyOn(cdbSubject, 'initialize')
+        .and.callFake(function(){});
+      cdbSubject.iasConfiguration = mockIasConfiguration;
+
   }));
 
   it('should update the alarms dictionary on new alarm messages', async(() => {
@@ -303,11 +334,11 @@ describe('AlarmService', () => {
 
   }));
 
-  it('should set invalid state if last received message timestamp is ten seconds behind', function() {
+  it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
     let now = (new Date).getTime();
-    let maxSecondsWithoutMessages = 10;
+    let maxSecondsWithoutMessages = cdbSubject.getRefreshRate()*2+1;
     let delayedTimestamp = now - (maxSecondsWithoutMessages*1000 + 1);
 
     subject.connectionStatusStream.next(true);
