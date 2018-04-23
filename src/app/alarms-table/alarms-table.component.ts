@@ -8,6 +8,8 @@ import { AlarmService } from '../alarm.service';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { ISubscription } from "rxjs/Subscription";
 import { StatusViewComponent } from '../status-view/status-view.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AckModalComponent } from '../ack-modal/ack-modal.component';
 
 /**
 * Basic component to display alarms
@@ -45,6 +47,11 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   data = [];
 
   /**
+  * Modal close result: closed or dismissed
+  */
+  modalCloseResult: string;
+
+  /**
   * Smart table settings
   */
   settings = {
@@ -73,7 +80,9 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   *
   * @param {AlarmService} alarmService An instance of the AlarmService
   */
-  constructor(private alarmService: AlarmService, private datePipe: DatePipe){
+  constructor(private alarmService: AlarmService,
+              private datePipe: DatePipe,
+              private modalService: NgbModal){
   }
 
   /**
@@ -82,6 +91,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
+
     this.source = new LocalDataSource(this.data);
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
@@ -161,6 +171,19 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     tags.push(OperationalMode[alarm.mode]);
 
     return tags.join('-');
+
+  }
+
+  /**
+  * Handle click on table rows, it triggers the ack modal
+  */
+  onUserRowClick(event){
+
+    this.modalService.open(AckModalComponent).result.then((result) => {
+      this.modalCloseResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.modalCloseResult = `Dismissed ${reason}`;
+    });
 
   }
 

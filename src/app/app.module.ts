@@ -66,7 +66,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    StatusViewComponent
+    StatusViewComponent,
+    AckModalComponent,
   ]
 })
 export class AppModule { }

@@ -64,7 +64,7 @@
     </div>
 
     <div>
-      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+      <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="onUserRowClick($event)"></ng2-smart-table>
     </div>
 
   </nb-card-body>
