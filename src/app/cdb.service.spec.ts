@@ -17,7 +17,8 @@ describe('CdbService', () => {
   let mockIasConfigurationResponse = [{
       id: 1,
       log_level: "INFO",
-      refresh_rate: 1,
+      refresh_rate: 2,
+      broadcast_factor: 3,
       tolerance: 1,
       properties: []
   }];
@@ -63,7 +64,9 @@ describe('CdbService', () => {
     req.flush(mockIasConfigurationResponse);
     testController.verify();
     /* Final assert */
-    expect(subject.getRefreshRate()).toEqual(1);
+    let pars = subject.getRefreshRateParameters();
+    expect(pars['refreshRate']).toEqual(2);
+    expect(pars['broadcastFactor']).toEqual(3);
   });
 
 });

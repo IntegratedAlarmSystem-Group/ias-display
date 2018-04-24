@@ -137,23 +137,23 @@ export class AlarmService {
    */
   compareCurrentAndLastReceivedMessageTimestamp() {
 
-    let iasRefreshRate;
+    /* Refresh rate parameters */
+    let pars;
 
     /* TODO: Evaluate try exception. Here for debug options. */
     try {
-      iasRefreshRate = this.cdbService.getRefreshRate();
+      pars = this.cdbService.getRefreshRateParameters();
     }
     catch (e) {
-      iasRefreshRate = 5;
+      pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    let multiplierFactor = 2;
-
     /* TODO: Remove console log */
-    console.log('refresh rate (default: 5):: '+iasRefreshRate);
+    console.log('refresh rate (default: 5):: '+pars['refreshRate']);
+    console.log('broadcast factor (default: 1):: '+pars['broadcastFactor']);
     /* const MAX_SECONDS_WITHOUT_MESSAGES = 10; */
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = iasRefreshRate*multiplierFactor + 1;
+    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
 
     let now = (new Date).getTime();
     let millisecondsDelta;

@@ -41,10 +41,15 @@ export class CdbService {
   }
 
   /**
-  * Get refresh rate from ias configuration data
+  * Get refresh rate parameters from ias configuration data
+  *
+  * Refresh rate value and related multiplier factor
   */
-  getRefreshRate() {
-    return this.iasConfiguration['refresh_rate'];
+  getRefreshRateParameters() {
+    return {
+      'refreshRate': this.iasConfiguration['refresh_rate'],
+      'broadcastFactor': this.iasConfiguration['broadcast_factor']
+    }
   }
 
 }
