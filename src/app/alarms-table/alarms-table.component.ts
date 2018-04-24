@@ -176,15 +176,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Handle click on table rows, it triggers the ack modal
   */
   onUserRowClick(event){
-    const ackModal = this.modalService.open(AckModalComponent,
+    let ackModal = this.modalService.open(AckModalComponent,
       { size: 'lg', centered: true }
     );
     ackModal.componentInstance.alarm = event.data.alarm;
-    ackModal.componentInstance.result.then((result) => {
-      this.modalCloseResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.modalCloseResult = `Dismissed ${reason}`;
-    });
   }
 
 }
