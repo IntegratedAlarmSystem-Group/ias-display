@@ -112,15 +112,13 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   getTableData(){
     this.clearTableData();
     for (let core_id of this.alarmIds){
+      let alarm = this.alarmService.alarms[core_id];
       let item = {
-        status: this.getAlarmStatusTagsString(
-          this.alarmService.alarms[core_id]
-        ),
-        timestamp: this.dateFormat(
-          this.alarmService.alarms[core_id].getCoreTimestampAsDate()
-        ),
-        core_id: this.alarmService.alarms[core_id].core_id,
-        mode: this.alarmService.alarms[core_id].getModeAsString()
+        status: this.getAlarmStatusTagsString(alarm),
+        timestamp: this.dateFormat(alarm.getCoreTimestampAsDate()),
+        core_id: alarm.core_id,
+        mode: alarm.getModeAsString(),
+        alarm: alarm
       };
       this.data.push(item);
     }
@@ -178,13 +176,15 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Handle click on table rows, it triggers the ack modal
   */
   onUserRowClick(event){
-
-    this.modalService.open(AckModalComponent).result.then((result) => {
+    const ackModal = this.modalService.open(AckModalComponent,
+      { size: 'lg', centered: true }
+    );
+    ackModal.componentInstance.alarm = event.data.alarm;
+    ackModal.componentInstance.result.then((result) => {
       this.modalCloseResult = `Closed with: ${result}`;
     }, (reason) => {
       this.modalCloseResult = `Dismissed ${reason}`;
     });
-
   }
 
 }

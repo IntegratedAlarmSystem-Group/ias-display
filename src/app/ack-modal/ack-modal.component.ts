@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Alarm } from '../alarm';
 
 @Component({
   selector: 'app-ack-modal',
@@ -8,6 +9,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./ack-modal.component.css']
 })
 export class AckModalComponent implements OnInit {
+  @Input() alarm;
 
 
   constructor(public activeModal: NgbActiveModal) {}
