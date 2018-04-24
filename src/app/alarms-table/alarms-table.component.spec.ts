@@ -106,6 +106,12 @@ describe('GIVEN AlarmsTableComponent', () => {
         entryComponents: [  StatusViewComponent, AckModalComponent ]
       }
     })
+
+    TestBed.compileComponents().then(() => {
+      modalService = TestBed.get(NgbModal);
+      modalRef = modalService.open(AckModalComponent);
+      spyOn(modalService, "open").and.returnValue(modalRef);
+    });
   }));
 
   beforeEach(() => {
@@ -131,12 +137,21 @@ describe('GIVEN AlarmsTableComponent', () => {
         });
       });
     });
+  });
 
-    describe('AND the user clicks on a row', () => {
-      // modalService = TestBed.get(NgbModal);
-      // modalRef = modalService.open(AckModalComponent);
-      // spyOn(modalService, "open").and.returnValue(modalRef);
-      // fixture.detectChanges();
+  describe('AND the user clicks on a row', () => {
+    it('THEN the modal is opened', () => {
+      let mockEvent = {
+        data: {
+          alarm: Alarm.asAlarm(alarms[0])
+        }
+      };
+      alarmService.processAlarmsList(alarms);
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        component.onUserRowClick(mockEvent);
+        expect(modalService.open).toHaveBeenCalled();
+      });
     });
   });
 
