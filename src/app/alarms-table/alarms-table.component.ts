@@ -8,7 +8,7 @@ import { AlarmService } from '../alarm.service';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { ISubscription } from "rxjs/Subscription";
 import { StatusViewComponent } from '../status-view/status-view.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
 
 /**
@@ -45,11 +45,6 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Data table list
   */
   data = [];
-
-  /**
-  * Modal close result: closed or dismissed
-  */
-  modalCloseResult: string;
 
   /**
   * Smart table settings
