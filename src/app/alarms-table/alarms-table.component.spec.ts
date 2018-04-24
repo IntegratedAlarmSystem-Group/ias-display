@@ -4,10 +4,13 @@ import { AlarmService } from '../alarm.service';
 import { AlarmsTableComponent } from './alarms-table.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { NbCardModule } from '@nebular/theme';
-
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
 import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AckModalComponent } from '../ack-modal/ack-modal.component';
+import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { Alarm } from '../alarm';
 
 describe('GIVEN AlarmsTableComponent', () => {
   let component: AlarmsTableComponent;
@@ -16,6 +19,8 @@ describe('GIVEN AlarmsTableComponent', () => {
   let debug: DebugElement;
   let html: HTMLElement;
   let localOffset = (new Date().getTimezoneOffset())*60*1000;
+  let modalService: NgbModal;
+  let modalRef: NgbModalRef;
   let alarms = [
     {
       'value': 0,
@@ -56,21 +61,25 @@ describe('GIVEN AlarmsTableComponent', () => {
       'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$1',
       'mode': 'startup',
+      'alarm': Alarm.asAlarm(alarms[0])
     },
     { 'status': 'set-valid-operational',
       'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$2',
       'mode': 'operational',
+      'alarm': Alarm.asAlarm(alarms[1])
     },
     { 'status': 'clear-invalid-unknown',
       'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$3',
       'mode': 'unknown',
+      'alarm': Alarm.asAlarm(alarms[2])
     },
     { 'status': 'set-valid-maintenance',
       'timestamp': '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$4',
       'mode': 'maintenance',
+      'alarm': Alarm.asAlarm(alarms[3])
     }
   ];
 
@@ -78,18 +87,25 @@ describe('GIVEN AlarmsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlarmsTableComponent,
-        StatusViewComponent
+        StatusViewComponent,
+        AckModalComponent
       ],
       imports: [
         NbCardModule,
-        Ng2SmartTableModule
+        Ng2SmartTableModule,
+        NgbModule.forRoot()
       ],
       providers: [
         AlarmService,
-        DatePipe
+        DatePipe,
+        NgbModal,
       ],
     })
-    .compileComponents();
+    .overrideModule( BrowserDynamicTestingModule ,{
+      set: {
+        entryComponents: [  StatusViewComponent, AckModalComponent ]
+      }
+    })
   }));
 
   beforeEach(() => {
@@ -115,5 +131,13 @@ describe('GIVEN AlarmsTableComponent', () => {
         });
       });
     });
+
+    describe('AND the user clicks on a row', () => {
+      // modalService = TestBed.get(NgbModal);
+      // modalRef = modalService.open(AckModalComponent);
+      // spyOn(modalService, "open").and.returnValue(modalRef);
+      // fixture.detectChanges();
+    });
   });
+
 });
