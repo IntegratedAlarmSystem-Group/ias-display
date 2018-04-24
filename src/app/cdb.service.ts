@@ -5,6 +5,8 @@ import { environment } from '../environments/environment'
 
 import {Observable} from 'rxjs/Rx';
 
+import { HttpClientService } from './http-client.service';
+
 
 @Injectable()
 export class CdbService {
@@ -20,8 +22,10 @@ export class CdbService {
   iasConfiguration;
 
   /** Constructor */
-  constructor(private http: HttpClient) {
-  }
+  constructor(
+    private http: HttpClient,
+    private httpClientService: HttpClientService
+  ) {}
 
   /**
   * Method to trigger main request at the beginning
@@ -37,7 +41,7 @@ export class CdbService {
   * Get the ias configuration data from the webserver
   */
   getConfigurationData() {
-    return this.http.get(this.url);
+    return this.httpClientService.get(this.url);
   }
 
   /**

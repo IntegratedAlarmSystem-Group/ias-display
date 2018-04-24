@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { AlarmsListComponent } from './alarms-list.component';
@@ -22,7 +23,8 @@ describe('AlarmsListComponent', () => {
       providers: [
         AlarmService,
         CdbService,
-        HttpClient
+        HttpClient,
+        HttpClientService
       ],
     })
     .compileComponents();

@@ -1,6 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { WebSocketBridge } from 'django-channels';
@@ -100,7 +101,7 @@ describe('AlarmService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [AlarmService, CdbService, HttpClient]
+      providers: [AlarmService, CdbService, HttpClient, HttpClientService]
     });
   });
 

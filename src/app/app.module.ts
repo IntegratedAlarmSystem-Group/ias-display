@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AlarmsListComponent } from './alarms-list/alarms-list.component';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
+import { HttpClientService } from './http-client.service';
 
 import { NbThemeModule } from '@nebular/theme';
 import { NbLayoutModule } from '@nebular/theme';
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
     Ng2SmartTableModule
   ],
   providers: [
+    HttpClientService,
     HttpClient,
     AlarmService,
     CdbService,
