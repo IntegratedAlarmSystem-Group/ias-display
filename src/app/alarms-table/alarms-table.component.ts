@@ -175,6 +175,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
       { size: 'lg', centered: true }
     );
     ackModal.componentInstance.alarm = event.data.alarm;
+    return ackModal;
   }
 
 }

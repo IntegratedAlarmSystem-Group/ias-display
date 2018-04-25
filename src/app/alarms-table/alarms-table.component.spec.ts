@@ -108,9 +108,7 @@ describe('GIVEN AlarmsTableComponent', () => {
     })
 
     TestBed.compileComponents().then(() => {
-      modalService = TestBed.get(NgbModal);
-      modalRef = modalService.open(AckModalComponent);
-      spyOn(modalService, "open").and.returnValue(modalRef);
+      // spyOn(modalService, "open").and.returnValue("hola");
     });
   }));
 
@@ -140,17 +138,25 @@ describe('GIVEN AlarmsTableComponent', () => {
   });
 
   describe('AND the user clicks on a row', () => {
-    it('THEN the modal is opened', () => {
+    it('THEN the modal is opened', async () => {
       let mockEvent = {
         data: {
           alarm: Alarm.asAlarm(alarms[0])
         }
       };
-      alarmService.processAlarmsList(alarms);
+      modalService = TestBed.get(NgbModal);
+      modalRef = modalService.open(AckModalComponent);
+      modalRef.componentInstance.alarm = mockEvent.data.alarm;
+      spyOn(modalService, "open").and.returnValue(modalRef);
+      // spyOn(modalService, "open").and.returnValue("Hola");
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        component.onUserRowClick(mockEvent);
+        expect(1).toEqual(1);
+        let ackModal = component.onUserRowClick(mockEvent);
         expect(modalService.open).toHaveBeenCalled();
+        expect(ackModal).toBeTruthy();
+        // expect(ackModal instanceof AckModalComponent).toBeTruthy();
+        // expect(1).toEqual(0);
       });
     });
   });

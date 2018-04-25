@@ -75,12 +75,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.processAlarm(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      console.log('request', payload);
+      // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
     });
@@ -94,7 +94,7 @@ export class AlarmService {
     const connectionPath = environment.websocketPath;
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Listening on ' + connectionPath);
+    // console.log('Listening on ' + connectionPath);
   }
 
   /**
