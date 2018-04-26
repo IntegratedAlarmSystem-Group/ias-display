@@ -6,7 +6,7 @@ import { Alarm } from '../alarm';
 @Component({
   selector: 'app-ack-modal',
   templateUrl: './ack-modal.component.html',
-  styleUrls: ['./ack-modal.component.css']
+  styleUrls: ['./ack-modal.component.css', './ack-modal.component.scss']
 })
 export class AckModalComponent implements OnInit {
   @Input() alarm;

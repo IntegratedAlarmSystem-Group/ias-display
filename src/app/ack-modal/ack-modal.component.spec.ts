@@ -45,4 +45,10 @@ describe('AckModalComponent', () => {
   it('should display the Alarm ID', () => {
     expect(modalBody.textContent).toContain(alarm.core_id);
   });
+  it('should have an input field in the modal body', () => {
+    expect(modalBody.querySelector('textarea')).toBeTruthy();
+  });
+  it('should have a Send button in the modal footer', () => {
+    expect(modalFooter.querySelector('button')).toBeTruthy();
+  });
 });
