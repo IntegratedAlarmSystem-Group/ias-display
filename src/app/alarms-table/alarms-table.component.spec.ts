@@ -106,9 +106,6 @@ describe('GIVEN AlarmsTableComponent', () => {
         entryComponents: [  StatusViewComponent, AckModalComponent ]
       }
     })
-
-    TestBed.compileComponents().then(() => {
-    });
   }));
 
   beforeEach(() => {
