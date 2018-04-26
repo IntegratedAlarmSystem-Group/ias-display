@@ -54,7 +54,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
       style.push('low-opacity');
     }
 
-    if (this.hasTag('ack')) {
+    if (!this.hasTag('ack')) {
       style.push('blink');
     }
 
