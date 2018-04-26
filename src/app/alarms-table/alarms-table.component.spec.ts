@@ -149,7 +149,6 @@ describe('GIVEN AlarmsTableComponent', () => {
       spyOn(modalService, "open").and.returnValue(modalRef);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        expect(1).toEqual(1);
         let ackModal = component.onUserRowClick(mockEvent);
         expect(modalService.open).toHaveBeenCalled();
         expect(ackModal).toBeTruthy();
