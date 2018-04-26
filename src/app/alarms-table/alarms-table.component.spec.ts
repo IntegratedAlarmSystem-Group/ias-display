@@ -108,7 +108,6 @@ describe('GIVEN AlarmsTableComponent', () => {
     })
 
     TestBed.compileComponents().then(() => {
-      // spyOn(modalService, "open").and.returnValue("hola");
     });
   }));
 
@@ -148,15 +147,14 @@ describe('GIVEN AlarmsTableComponent', () => {
       modalRef = modalService.open(AckModalComponent);
       modalRef.componentInstance.alarm = mockEvent.data.alarm;
       spyOn(modalService, "open").and.returnValue(modalRef);
-      // spyOn(modalService, "open").and.returnValue("Hola");
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         expect(1).toEqual(1);
         let ackModal = component.onUserRowClick(mockEvent);
         expect(modalService.open).toHaveBeenCalled();
         expect(ackModal).toBeTruthy();
-        // expect(ackModal instanceof AckModalComponent).toBeTruthy();
-        // expect(1).toEqual(0);
+        expect(ackModal instanceof NgbModalRef).toBeTruthy();
+        expect(ackModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
       });
     });
   });
