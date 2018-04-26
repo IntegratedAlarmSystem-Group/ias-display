@@ -105,7 +105,7 @@ describe('GIVEN AlarmsTableComponent', () => {
       set: {
         entryComponents: [  StatusViewComponent, AckModalComponent ]
       }
-    })
+    }).compileComponents();
   }));
 
   beforeEach(() => {
