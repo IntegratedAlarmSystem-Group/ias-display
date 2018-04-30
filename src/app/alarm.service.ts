@@ -44,7 +44,7 @@ export class AlarmService {
   */
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
-  /** The "constructor" */
+  /** The "constructor" of the Service */
   constructor(
     private cdbService: CdbService,
   ) {
@@ -67,6 +67,8 @@ export class AlarmService {
     this.alarmChangeStream.next(any);
   }
 
+  /******* SERVICE INITIALIZATION *******/
+
   /**
   * Start connection to the backend through websockets
   */
@@ -83,12 +85,12 @@ export class AlarmService {
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
-      this.processAlarm(payload.action, payload.data);
+      this.readAlarmMessage(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
-      this.processAlarmsList(payload.data);
+      this.readAlarmMessagesList(payload.data);
     });
     this.startLastReceivedMessageTimestampCheck();
   }
@@ -103,6 +105,8 @@ export class AlarmService {
     // console.log('Listening on ' + connectionPath);
   }
 
+  /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
+
   /**
    * Get the complete list of alarms from the webserver database
    * through the websocket
@@ -112,6 +116,37 @@ export class AlarmService {
       'action': 'list'
     });
   }
+
+  /**
+   * Reads an alarm message from the Core and modify the service alarms list
+   * depending on the action value.
+   * @param action create, update or delete
+   * @param alarm dictionary with values for alarm fields (as generic object)
+   */
+  readAlarmMessage(action, obj) {
+    let alarm = Alarm.asAlarm(obj);
+    if ( action === 'create' || action === 'update' ) {
+      this.alarms[alarm.core_id] = alarm;
+    } else if ( action === 'delete') {
+      delete this.alarms[alarm.core_id];
+    }
+    this.changeAlarms(alarm.core_id);
+  }
+
+  /**
+   * Reads a list of alarm messages form the Core and add them to the
+   * service alarms list
+   * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   */
+  readAlarmMessagesList(alarmsList) {
+    for (let obj of alarmsList) {
+      let alarm = Alarm.asAlarm(obj);
+      this.alarms[alarm.core_id] = alarm;
+    }
+    this.changeAlarms('all');
+  }
+
+  /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
 
   /**
    * Set selected state to alarms under an non-valid connection
@@ -148,11 +183,6 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    /* TODO: Remove console log */
-    console.log('refresh rate (default: 5):: '+pars['refreshRate']);
-    console.log('broadcast factor (default: 1):: '+pars['broadcastFactor']);
-    /* const MAX_SECONDS_WITHOUT_MESSAGES = 10; */
-
     const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
 
     let now = (new Date).getTime();
@@ -174,32 +204,12 @@ export class AlarmService {
     });
   }
 
+  /******* ALARM ACKNOWLEDGEMENT *******/
 
   /**
-   * Process the alarm and modifies the service alarms list depending
-   * on the action value.
-   * @param action create, update or delete
-   * @param alarm dictionary with values for alarm fields
+   * Acknowledges an specific Alarm
    */
-  processAlarm(action, obj) {
-    let alarm = Alarm.asAlarm(obj);
-    if ( action === 'create' || action === 'update' ) {
-      this.alarms[alarm.core_id] = alarm;
-    } else if ( action === 'delete') {
-      delete this.alarms[alarm.core_id];
-    }
-    this.changeAlarms(alarm.core_id);
-  }
+  acknowledgeAlarm(alarm) {
 
-  /**
-   * Process a list of alarms and add each one to the service alarms list
-   * @param alarmsList list of dictionaries with values for alarm fields
-   */
-  processAlarmsList(alarmsList) {
-    for (let obj of alarmsList) {
-      let alarm = Alarm.asAlarm(obj);
-      this.alarms[alarm.core_id] = alarm;
-    }
-    this.changeAlarms('all');
   }
 }

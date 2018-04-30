@@ -130,7 +130,7 @@ describe('GIVEN AlarmsTableComponent', () => {
 
   describe('AND WHEN the service processes 4 alarms', () => {
     it('THEN the Table contains those 4 Alarms', () => {
-      alarmService.processAlarmsList(alarms);
+      alarmService.readAlarmMessagesList(alarms);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         component.source.getAll().then(resp => {
