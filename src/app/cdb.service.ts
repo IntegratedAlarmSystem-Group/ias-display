@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-
 import { environment } from '../environments/environment'
-
-import {Observable} from 'rxjs/Rx';
-
+import { Observable } from 'rxjs/Rx';
+import { BackendUrls } from './settings';
 import { HttpClientService } from './http-client.service';
 
 
@@ -14,7 +12,7 @@ export class CdbService {
   /**
   * Cdb api url from environment settings
   */
-  url = environment.cdbApiUrl+'/ias';
+  url = environment.httpUrl + BackendUrls.CDB_IAS;
 
   /**
   * Variable to store the ias configuration data

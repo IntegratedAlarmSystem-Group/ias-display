@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { Alarm, OperationalMode, Validity } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
-
+import { BackendUrls, Streams } from './settings';
 import { CdbService } from './cdb.service';
 
 
@@ -80,12 +80,12 @@ export class AlarmService {
         this.cdbService.initialize();
       }
     );
-    this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
+    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.processAlarm(payload.action, payload.data);
     });
-    this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
+    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.processAlarmsList(payload.data);
@@ -108,7 +108,7 @@ export class AlarmService {
    * through the websocket
    */
   getAlarmList() {
-    this.webSocketBridge.stream('requests').send({
+    this.webSocketBridge.stream(Streams.UPDATES).send({
       'action': 'list'
     });
   }
