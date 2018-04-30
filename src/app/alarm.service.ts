@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { BackendUrls, Streams } from './settings';
 import { CdbService } from './cdb.service';
+import { HttpClientService } from './http-client.service';
 
 
 /**
@@ -47,6 +48,7 @@ export class AlarmService {
   /** The "constructor" of the Service */
   constructor(
     private cdbService: CdbService,
+    private httpClientService: HttpClientService,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
@@ -73,6 +75,7 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
+    let alarmId = 1;
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -103,6 +106,38 @@ export class AlarmService {
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
     // console.log('Listening on ' + connectionPath);
+  }
+
+  /******* ALARM HANDLING *******/
+
+  /**
+   * Returns an Alarm object
+   * @param core_id core_id of the Alarm to return
+   * @returns {Alarm} Alarm object corresponding to the given core_id
+   */
+  get(core_id: string): Alarm {
+    return this.alarms[core_id] as Alarm;
+  }
+
+  /**
+   * Acknowledges a list of Alarms with a message
+   * @param alarms list of ids of the alarms to acknowledge
+   * @param message message of the acknowledgement
+   */
+  acknowledgeAlarms(alarm_ids, message) {
+    let data = {
+      'alarms_ids': alarm_ids,
+      'message': message,
+    }
+    let response = this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data);
+
+    if (response['status'] == 200) {
+      for (let i in alarm_ids) {
+        let alarm = this.get(alarm_ids[i]);
+        alarm.acknowledge(message);
+      }
+    }
+    return response;
   }
 
   /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
@@ -204,12 +239,4 @@ export class AlarmService {
     });
   }
 
-  /******* ALARM ACKNOWLEDGEMENT *******/
-
-  /**
-   * Acknowledges an specific Alarm
-   */
-  acknowledgeAlarm(alarm) {
-
-  }
 }
