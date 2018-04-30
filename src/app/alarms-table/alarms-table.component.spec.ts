@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
+import { CdbService } from '../cdb.service';
 import { AlarmsTableComponent } from './alarms-table.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { NbCardModule } from '@nebular/theme';
@@ -93,10 +96,14 @@ describe('GIVEN AlarmsTableComponent', () => {
       imports: [
         NbCardModule,
         Ng2SmartTableModule,
+        HttpClientModule,
         NgbModule.forRoot()
       ],
       providers: [
+        HttpClientService,
+        HttpClient,
         AlarmService,
+        CdbService,
         DatePipe,
         NgbModal,
       ],

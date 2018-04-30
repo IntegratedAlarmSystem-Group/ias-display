@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
+import { CdbService } from '../cdb.service';
 import { AlarmsListComponent } from './alarms-list.component';
 
 import { NbCardModule } from '@nebular/theme';
@@ -14,10 +17,14 @@ describe('AlarmsListComponent', () => {
         AlarmsListComponent
       ],
       imports: [
-        NbCardModule
+        NbCardModule,
+        HttpClientModule
       ],
       providers: [
-        AlarmService
+        AlarmService,
+        CdbService,
+        HttpClient,
+        HttpClientService
       ],
     })
     .compileComponents();

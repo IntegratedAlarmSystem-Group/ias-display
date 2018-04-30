@@ -6,6 +6,8 @@ import { Alarm, OperationalMode, Validity } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
+import { CdbService } from './cdb.service';
+
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -43,7 +45,9 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /** The "constructor" */
-  constructor() {
+  constructor(
+    private cdbService: CdbService,
+  ) {
     this.connectionStatusStream.subscribe(
       value => {
         if (value === false){
@@ -71,7 +75,9 @@ export class AlarmService {
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
         this.connectionStatusStream.next(true);
+        /* TODO: Evaluate function for webserver requests */
         this.getAlarmList();
+        this.cdbService.initialize();
       }
     );
     this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
@@ -131,7 +137,23 @@ export class AlarmService {
    */
   compareCurrentAndLastReceivedMessageTimestamp() {
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = 10;
+    /* Refresh rate parameters */
+    let pars;
+
+    /* TODO: Evaluate try exception. Here for debug options. */
+    try {
+      pars = this.cdbService.getRefreshRateParameters();
+    }
+    catch (e) {
+      pars = {'refreshRate': 5, 'broadcastFactor': 1};
+    }
+
+    /* TODO: Remove console log */
+    console.log('refresh rate (default: 5):: '+pars['refreshRate']);
+    console.log('broadcast factor (default: 1):: '+pars['broadcastFactor']);
+    /* const MAX_SECONDS_WITHOUT_MESSAGES = 10; */
+
+    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
 
     let now = (new Date).getTime();
     let millisecondsDelta;

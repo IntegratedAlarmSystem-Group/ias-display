@@ -1,7 +1,10 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
+import { CdbService } from './cdb.service';
 import { AlarmsListComponent } from './alarms-list/alarms-list.component';
 
 import { NbThemeModule } from '@nebular/theme';
@@ -41,9 +44,13 @@ describe('AppComponent', () => {
         NbSidebarModule.forRoot(),
         NbMenuModule.forRoot(),
         RouterModule.forRoot(appRoutes),
+        HttpClientModule
       ],
       providers: [
+        HttpClientService,
+        HttpClient,
         AlarmService,
+        CdbService,
         NbSidebarService,
         NbMenuService,
         { provide: APP_BASE_HREF, useValue: '/' }
