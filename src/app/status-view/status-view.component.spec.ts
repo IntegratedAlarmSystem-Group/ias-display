@@ -13,7 +13,8 @@ describe('StatusViewComponent', () => {
       'running_id': 'Dummy-clear-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     },
     {
       'value': 1,
@@ -21,7 +22,8 @@ describe('StatusViewComponent', () => {
       'running_id': 'Dummy-set-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     },
     {
       'value': 0,
@@ -29,7 +31,8 @@ describe('StatusViewComponent', () => {
       'running_id': 'Dummy-clear-invalid',
       'mode': '5',
       'core_timestamp': 1267252440000,
-      'validity': '0'
+      'validity': '0',
+      'dependencies': [],
     },
     {
       'value': 1,
@@ -37,7 +40,8 @@ describe('StatusViewComponent', () => {
       'running_id': 'Dummy-set-invalid',
       'mode': '5',
       'core_timestamp': 1267252440000,
-      'validity': '0'
+      'validity': '0',
+      'dependencies': [],
     }
   ];
 

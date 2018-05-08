@@ -44,6 +44,9 @@ export class Alarm {
   /** Acknowledgement message */
   ack_message: any = null;
 
+  /** List of core_id's of dependent alarms **/
+  dependencies: string[];
+
   /**
   * The "constructor"
   *
@@ -68,7 +71,8 @@ export class Alarm {
       json.hasOwnProperty("running_id") &&
       json.hasOwnProperty("mode") &&
       json.hasOwnProperty("core_timestamp") &&
-      json.hasOwnProperty("validity")
+      json.hasOwnProperty("validity") &&
+      json.hasOwnProperty("dependencies")
     );
   }
 
@@ -88,7 +92,9 @@ export class Alarm {
     let mode = <number>json['mode'];
     let core_timestamp = <number>json['core_timestamp'];
     let validity = <number>json['validity'];
-    return new Alarm({ value, core_id, running_id, mode, core_timestamp, validity });
+    let dependencies = <string[]>json['dependencies'];
+    return new Alarm({ value, core_id, running_id, mode, core_timestamp,
+      validity, dependencies });
   }
 
   /**

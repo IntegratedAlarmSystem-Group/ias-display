@@ -30,7 +30,8 @@ describe('AckModalComponent', () => {
       'running_id': 'coreid$1',
       'mode': '0',
       'core_timestamp': 1267252440000,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     });
     component.alarm = alarm;
     modalHeader = fixture.nativeElement.querySelector('.modal-header');

@@ -25,7 +25,8 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': '0',
       'core_timestamp': 10000,
-      'validity': '0'
+      'validity': '0',
+      'dependencies': [],
     }
   }
 },
@@ -39,7 +40,8 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': '1',
       'core_timestamp': 10000,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     }
   }
 },
@@ -53,7 +55,8 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': '1',
       'core_timestamp': 10000,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     }
   }
 }
@@ -68,6 +71,7 @@ let alarms = [
     'core_timestamp': 10000,
     'validity': '1',
     'ack_message': null,
+    'dependencies': [],
   },
   {
     'value': 1,
@@ -77,6 +81,7 @@ let alarms = [
     'core_timestamp': 10000,
     'validity': '1',
     'ack_message': null,
+    'dependencies': [],
   },
   {
     'value': 0,
@@ -86,6 +91,7 @@ let alarms = [
     'core_timestamp': 10000,
     'validity': '1',
     'ack_message': null,
+    'dependencies': [],
   }
 ];
 

@@ -31,7 +31,8 @@ describe('GIVEN AlarmsTableComponent', () => {
       'running_id': 'coreid$1',
       'mode': '0',
       'core_timestamp': 1267252440000 + localOffset,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     },
     {
       'value': 1,
@@ -39,7 +40,8 @@ describe('GIVEN AlarmsTableComponent', () => {
       'running_id': 'coreid$2',
       'mode': '5',
       'core_timestamp': 1267252440000 + localOffset,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     },
     {
       'value': 0,
@@ -47,7 +49,8 @@ describe('GIVEN AlarmsTableComponent', () => {
       'running_id': 'coreid$3',
       'mode': '7',
       'core_timestamp': 1267252440000 + localOffset,
-      'validity': '0'
+      'validity': '0',
+      'dependencies': [],
     },
     {
       'value': 1,
@@ -55,7 +58,8 @@ describe('GIVEN AlarmsTableComponent', () => {
       'running_id': 'coreid$4',
       'mode': '4',
       'core_timestamp': 1267252440000 + localOffset,
-      'validity': '1'
+      'validity': '1',
+      'dependencies': [],
     }
   ];
 
