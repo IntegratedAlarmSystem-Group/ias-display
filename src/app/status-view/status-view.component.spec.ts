@@ -14,6 +14,7 @@ describe('StatusViewComponent', () => {
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '1',
+      'ack': false,
       'dependencies': [],
     },
     {
@@ -23,6 +24,7 @@ describe('StatusViewComponent', () => {
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '1',
+      'ack': false,
       'dependencies': [],
     },
     {
@@ -32,6 +34,7 @@ describe('StatusViewComponent', () => {
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '0',
+      'ack': false,
       'dependencies': [],
     },
     {
@@ -41,6 +44,7 @@ describe('StatusViewComponent', () => {
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '0',
+      'ack': false,
       'dependencies': [],
     }
   ];

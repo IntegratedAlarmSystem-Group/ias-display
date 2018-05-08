@@ -31,6 +31,7 @@ describe('AckModalComponent', () => {
       'mode': '0',
       'core_timestamp': 1267252440000,
       'validity': '1',
+      'ack': false,
       'dependencies': [],
     });
     component.alarm = alarm;

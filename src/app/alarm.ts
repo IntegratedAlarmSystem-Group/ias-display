@@ -42,7 +42,7 @@ export class Alarm {
   core_timestamp: number;
 
   /** Acknowledgement message */
-  ack_message: any = null;
+  ack: boolean;
 
   /** List of core_id's of dependent alarms **/
   dependencies: string[];
@@ -55,7 +55,6 @@ export class Alarm {
   */
   constructor(attributes: Object = {}){
     Object.assign(this, attributes)
-    this.ack_message = null;
   }
 
   /**
@@ -72,6 +71,7 @@ export class Alarm {
       json.hasOwnProperty("mode") &&
       json.hasOwnProperty("core_timestamp") &&
       json.hasOwnProperty("validity") &&
+      json.hasOwnProperty("ack") &&
       json.hasOwnProperty("dependencies")
     );
   }
@@ -92,21 +92,22 @@ export class Alarm {
     let mode = <number>json['mode'];
     let core_timestamp = <number>json['core_timestamp'];
     let validity = <number>json['validity'];
+    let ack = <boolean>json['ack'];
     let dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      validity, dependencies });
+      validity, ack, dependencies });
   }
 
   /**
-  * Acknowledges the {@link Alarm} and rturns the acknowledge message
+  * Acknowledges the {@link Alarm} and returns the acknowledge message
   *
   * @param {message} string string message of the acknowledgement
   *
   * @returns {string} a the acknowledgement message
   */
-  acknowledge(message: string): string {
-    this.ack_message = message;
-    return message;
+  acknowledge(): boolean {
+    this.ack = true;
+    return this.ack
   }
 
   /**

@@ -134,7 +134,7 @@ export class AlarmService {
     if (response['status'] == 200) {
       for (let i in alarm_ids) {
         let alarm = this.get(alarm_ids[i]);
-        alarm.acknowledge(message);
+        alarm.acknowledge();
       }
     }
     return response;

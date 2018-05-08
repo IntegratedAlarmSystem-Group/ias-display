@@ -26,6 +26,7 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': '0',
       'core_timestamp': 10000,
       'validity': '0',
+      'ack': false,
       'dependencies': [],
     }
   }
@@ -41,6 +42,7 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': '1',
       'core_timestamp': 10000,
       'validity': '1',
+      'ack': false,
       'dependencies': [],
     }
   }
@@ -56,6 +58,7 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': '1',
       'core_timestamp': 10000,
       'validity': '1',
+      'ack': false,
       'dependencies': [],
     }
   }
@@ -70,7 +73,7 @@ let alarms = [
     'mode': '0',
     'core_timestamp': 10000,
     'validity': '1',
-    'ack_message': null,
+    'ack': false,
     'dependencies': [],
   },
   {
@@ -80,7 +83,7 @@ let alarms = [
     'mode': '0',
     'core_timestamp': 10000,
     'validity': '1',
-    'ack_message': null,
+    'ack': false,
     'dependencies': [],
   },
   {
@@ -90,7 +93,7 @@ let alarms = [
     'mode': '0',
     'core_timestamp': 10000,
     'validity': '1',
-    'ack_message': null,
+    'ack': false,
     'dependencies': [],
   }
 ];
@@ -405,7 +408,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
     expect(httpSpy).toHaveBeenCalled();
     for (let a in alarmsToAck){
       let alarm = subject.get(alarmsToAck[a]);
-      expect(alarm.ack_message).toEqual(ackMessage);
+      expect(alarm.ack).toEqual(true);
     }
   });
 });
