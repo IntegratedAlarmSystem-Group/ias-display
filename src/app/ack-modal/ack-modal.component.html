@@ -4,12 +4,14 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <p>Alarm Details: {{alarm?.core_id}}</p>
-  <form action="">
-    <textarea name="message" placeholder="Write a message to explain the action taken"></textarea>
-  </form>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Send</button>
-</div>
+
+<form class="form-group" [formGroup]="form">
+  <div class="modal-body">
+    <p>Alarm Details: {{alarm?.core_id}}</p>
+    <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain the action taken"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button id="cancel" type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
+    <button id="acknowledge" type="button" class="btn btn-outline-dark" (click)="acknoledge()" [disabled]="!form.valid">Acknowledge</button>
+  </div>
+</form>

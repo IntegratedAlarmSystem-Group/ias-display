@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alarm } from '../alarm';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { AlarmService } from '../alarm.service';
 
 @Component({
   selector: 'app-ack-modal',
@@ -10,10 +12,28 @@ import { Alarm } from '../alarm';
 export class AckModalComponent implements OnInit {
   @Input() alarm;
 
+  form: FormGroup;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+    private alarmService: AlarmService
+  ) {}
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      message: [null, [Validators.required]]
+    });
+  }
+
+  acknoledge(): void {
+    if(this.form.valid) {
+      // Add the real call to acknoledge the alarm
+      console.log("Alarm acknoledged");
+      // Show something to confirm the acknoledge was done
+    } else {
+      // Show a message, add a red asterisc, etc.
+    }
   }
 
 }
