@@ -125,25 +125,40 @@ export class AlarmService {
    * @param message message of the acknowledgement
    */
   acknowledgeAlarms(alarm_ids, message) {
+    console.log('Acknoledging the alarms');
     let data = {
       'alarms_ids': alarm_ids,
       'message': message,
     }
-    let response = this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data);
-
-    if (response['status'] == 200) {
-      for (let i in alarm_ids) {
-        let alarm = this.get(alarm_ids[i]);
-        alarm.acknowledge();
+    console.log(data);
+    return this.httpClientService.post(BackendUrls.TICKETS_MULTIPLE_ACK, data)
+    .subscribe(
+      (response) => {
+        console.log(response);
+        if (response['status'] == 200) {
+          for (let i in alarm_ids) {
+            let alarm = this.get(alarm_ids[i]);
+            alarm.acknowledge();
+          }
+          console.log("response", response);
+          return response;
+        }
+        else{
+          console.log('Error:' + response['status']);
+        }
+      },
+      (error) => {
+        console.log("error: ", error);
+        return error;
       }
-    }
-    return response;
+    );
   }
 
   /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
 
   /**
-   * Get the complete list of alarms from the webserver database
+  * Get the complete list of alarms from the webserver database
+  * Get the complete list of alarms from the webserver database
    * through the websocket
    */
   getAlarmList() {
@@ -218,6 +233,7 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
+    console.log(pars);
     const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
 
     let now = (new Date).getTime();

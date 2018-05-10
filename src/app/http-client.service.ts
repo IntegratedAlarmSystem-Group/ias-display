@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 
 /**
 * Custom Http Client Service for CRUD operations
@@ -12,6 +13,14 @@ export class HttpClientService {
 
   /** The "constructor" */
   constructor(private http: HttpClient) {
+  }
+
+  /**
+  * Method to manage httpRequest errors
+  */
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
   /**
@@ -38,6 +47,10 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
+    console.log("url: ", url);
+    console.log("data:", data);
+    console.log("data alarms:", data.alarms_ids);
+    console.log("httpOptions:", httpOptions);
     return this.http.post(url, data, httpOptions);
   }
 
@@ -52,6 +65,11 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
+    console.log("url: ", url);
+    console.log("data:", data);
+    console.log("data alarms:", data.alarms_ids);
+    console.log("httpOptions:", httpOptions);
+
     return this.http.put(url, data, httpOptions);
   }
 
