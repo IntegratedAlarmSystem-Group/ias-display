@@ -158,7 +158,6 @@ export class AlarmService {
 
   /**
   * Get the complete list of alarms from the webserver database
-  * Get the complete list of alarms from the webserver database
    * through the websocket
    */
   getAlarmList() {
