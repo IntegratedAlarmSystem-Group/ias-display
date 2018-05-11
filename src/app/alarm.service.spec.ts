@@ -401,20 +401,22 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       */
       httpSpy = spyOn(httpSubject, 'put').and.returnValue(
           Observable.of({'status': 200, 'alarms_ids': alarmsToAck})
-        );
+      );
       }
-    ));
+    )
+  );
 
-    it('WHEN a set of Alarm is Acknowledged, they should be updated', async (() => {
-      let ackMessage = 'This is the message';
-      let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage);
-      console.log("OBSERVABLE:" , response);
+  it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
+    let ackMessage = 'This is the message';
+    let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
+      (response) => {
         expect(response['status']).toEqual(200);
         expect(httpSpy).toHaveBeenCalled();
         for (let a in alarmsToAck){
           let alarm = subject.get(alarmsToAck[a]);
-          console.log(alarm);
           expect(alarm.ack).toEqual(true);
         }
-    }));
+      }
+    );
+  });
 });

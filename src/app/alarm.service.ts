@@ -129,16 +129,13 @@ export class AlarmService {
       'alarms_ids': alarms_ids,
       'message': message,
     }
-    console.log("CONSOLE BEFORE RETURN");
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
-    .subscribe(
+    .map(
       (response) => {
         if (response['status'] == 200) {
           for (let i in alarms_ids) {
             let alarm = this.get(alarms_ids[i]);
-            console.log("ANTES:", alarm);
             alarm.acknowledge();
-            console.log("DESPUES:", alarm);
           }
           return response;
         }
