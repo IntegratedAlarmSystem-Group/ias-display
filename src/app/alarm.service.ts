@@ -125,30 +125,26 @@ export class AlarmService {
    * @param message message of the acknowledgement
    */
   acknowledgeAlarms(alarm_ids, message) {
-    console.log('Acknoledging the alarms');
     let data = {
       'alarms_ids': alarm_ids,
       'message': message,
     }
-    console.log(data);
-    return this.httpClientService.post(BackendUrls.TICKETS_MULTIPLE_ACK, data)
+    return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
     .subscribe(
       (response) => {
-        console.log(response);
         if (response['status'] == 200) {
           for (let i in alarm_ids) {
             let alarm = this.get(alarm_ids[i]);
             alarm.acknowledge();
           }
-          console.log("response", response);
           return response;
         }
-        else{
-          console.log('Error:' + response['status']);
+        else {
+          console.log('Status:', response['status']);
         }
       },
       (error) => {
-        console.log("error: ", error);
+        console.log("Error: ", error);
         return error;
       }
     );
