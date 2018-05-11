@@ -1,12 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AckModalComponent } from './ack-modal.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../http-client.service';
+import { AlarmService } from '../alarm.service';
+import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
+
 
 describe('AckModalComponent', () => {
   let component: AckModalComponent;
   let fixture: ComponentFixture<AckModalComponent>;
   let alarm: Alarm;
+  let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
   let modalFooter: any;
@@ -16,6 +23,14 @@ describe('AckModalComponent', () => {
       declarations: [ AckModalComponent ],
       providers: [
         NgbActiveModal,
+        HttpClientService,
+        HttpClient,
+        AlarmService,
+        CdbService,
+      ],
+      imports: [
+        HttpClientModule,
+        ReactiveFormsModule
       ],
     })
     .compileComponents();
@@ -23,6 +38,7 @@ describe('AckModalComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AckModalComponent);
+    alarmService = fixture.debugElement.injector.get(AlarmService);
     component = fixture.componentInstance;
     alarm = Alarm.asAlarm({
       'value': 0,

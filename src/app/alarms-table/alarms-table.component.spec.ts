@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
@@ -105,7 +106,8 @@ describe('GIVEN AlarmsTableComponent', () => {
         NbCardModule,
         Ng2SmartTableModule,
         HttpClientModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        ReactiveFormsModule
       ],
       providers: [
         HttpClientService,

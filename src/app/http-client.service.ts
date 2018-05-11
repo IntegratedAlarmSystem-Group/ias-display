@@ -47,10 +47,6 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    console.log("url: ", url);
-    console.log("data:", data);
-    console.log("data alarms:", data.alarms_ids);
-    console.log("httpOptions:", httpOptions);
     return this.http.post(url, data, httpOptions);
   }
 
@@ -65,11 +61,6 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    console.log("url: ", url);
-    console.log("data:", data);
-    console.log("data alarms:", data.alarms_ids);
-    console.log("httpOptions:", httpOptions);
-
     return this.http.put(url, data, httpOptions);
   }
 

@@ -1,13 +1,14 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
+import { Observable } from 'rxjs/Observable';
+import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Server } from 'mock-socket';
-import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
 
 let subject: AlarmService;
 let cdbSubject: CdbService;
@@ -374,6 +375,7 @@ describe('AlarmService', () => {
 describe('GIVEN the AlarmService contains Alarms', () => {
 
   let httpSpy;
+  let alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -397,18 +399,22 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       /**
       * Redefinition of acknowledge of Alarms
       */
-      httpSpy = spyOn(httpSubject, 'put').and.returnValue({'status': 200});
-  }));
+      httpSpy = spyOn(httpSubject, 'put').and.returnValue(
+          Observable.of({'status': 200, 'alarms_ids': alarmsToAck})
+        );
+      }
+    ));
 
-  it('WHEN a set of Alarm is Acknowledged, they should be updated', function() {
-    let alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
-    let ackMessage = 'This is the message';
-    let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage);
-    expect(response['status']).toEqual(200);
-    expect(httpSpy).toHaveBeenCalled();
-    for (let a in alarmsToAck){
-      let alarm = subject.get(alarmsToAck[a]);
-      expect(alarm.ack).toEqual(true);
-    }
-  });
+    it('WHEN a set of Alarm is Acknowledged, they should be updated', async (() => {
+      let ackMessage = 'This is the message';
+      let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage);
+      console.log("OBSERVABLE:" , response);
+        expect(response['status']).toEqual(200);
+        expect(httpSpy).toHaveBeenCalled();
+        for (let a in alarmsToAck){
+          let alarm = subject.get(alarmsToAck[a]);
+          console.log(alarm);
+          expect(alarm.ack).toEqual(true);
+        }
+    }));
 });
