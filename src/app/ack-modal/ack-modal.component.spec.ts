@@ -69,4 +69,14 @@ describe('AckModalComponent', () => {
   it('should have a Send button in the modal footer', () => {
     expect(modalFooter.querySelector('button')).toBeTruthy();
   });
+  describe('should have a Send button', () => {
+    it('in the modal footer', () => {
+      expect(modalFooter.querySelector('button')).toBeTruthy();
+    });
+    describe('and when the user clicks on it,', () => {
+      it('it should call Aknowledge method on AlarmService', () => {
+        expect(modalFooter.querySelector('button')).toBeTruthy();
+      });
+    });
+  });
 });

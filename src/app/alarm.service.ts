@@ -132,20 +132,11 @@ export class AlarmService {
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
     .map(
       (response) => {
-        if (response['status'] == 200) {
-          for (let i in alarms_ids) {
-            let alarm = this.get(alarms_ids[i]);
-            alarm.acknowledge();
-          }
-          return response;
+        for (let i in alarms_ids) {
+          let alarm = this.get(alarms_ids[i]);
+          alarm.acknowledge();
         }
-        else {
-          console.log('Status:', response);
-        }
-      },
-      (error) => {
-        console.log("Error: ", error);
-        return error;
+        return response;
       }
     );
   }

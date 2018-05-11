@@ -400,7 +400,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       * Redefinition of acknowledge of Alarms
       */
       httpSpy = spyOn(httpSubject, 'put').and.returnValue(
-          Observable.of({'status': 200, 'alarms_ids': alarmsToAck})
+          Observable.of(alarmsToAck)
       );
       }
     )
@@ -410,7 +410,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
     let ackMessage = 'This is the message';
     let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
       (response) => {
-        expect(response['status']).toEqual(200);
+        expect(response).toEqual(alarmsToAck);
         expect(httpSpy).toHaveBeenCalled();
         for (let a in alarmsToAck){
           let alarm = subject.get(alarmsToAck[a]);

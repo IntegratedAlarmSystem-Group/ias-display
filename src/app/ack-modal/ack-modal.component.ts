@@ -25,11 +25,24 @@ export class AckModalComponent implements OnInit {
     });
   }
 
+  ackSuccessful(alarms: any): void {
+    console.log("Ack successful for alarms: ", alarms);
+  }
+
   acknowledge(): void {
     if(this.form.valid) {
       // Add the real call to acknoledge the alarm
-      this.alarmService.acknowledgeAlarms([this.alarm.core_id],
-                                          this.form.get('message').value);
+      this.alarmService.acknowledgeAlarms(
+        [this.alarm.core_id], this.form.get('message').value).subscribe(
+          (response) => {
+            console.log(response);
+            this.ackSuccessful(response);
+          },
+          (error) => {
+            console.log("Error: ", error);
+            return error;
+          }
+        );
       // Show something to confirm the acknoledge was done
     } else {
       // Show a message, add a red asterisc, etc.
