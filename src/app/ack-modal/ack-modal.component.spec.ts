@@ -80,12 +80,12 @@ describe('AckModalComponent', () => {
     it('in the modal body', () => {
       expect(modalBody.querySelector('textarea')).toBeTruthy();
     });
-    describe('and when it is empty', () => {
+    describe('such that when it is empty', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('and when the user enter a message', () => {
+    describe('such that when the user enters a message', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
         component.form.controls['message'].setValue("Any Message");
@@ -96,7 +96,7 @@ describe('AckModalComponent', () => {
   });
 
   // Acknowledge button
-  describe('should have an Acknoledge button', () => {
+  describe('should have an Acknowledge button', () => {
     it('in the modal footer', () => {
       expect(modalFooter.querySelector('#acknowledge')).toBeTruthy();
     });
