@@ -28,11 +28,17 @@ import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 
 import { DatePipe } from '@angular/common';
+import { AckModalComponent } from './ack-modal/ack-modal.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'alarms', pathMatch: 'full' },
-  { path:'alarms', component: AlarmsTableComponent }
+  { path:'alarms', component: AlarmsTableComponent },
+  { path:'modal', component: AckModalComponent }
 ];
 
 /**
@@ -43,7 +49,8 @@ const appRoutes: Routes = [
     AppComponent,
     AlarmsListComponent,
     AlarmsTableComponent,
-    StatusViewComponent
+    StatusViewComponent,
+    AckModalComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    NgbModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     HttpClientService,
@@ -68,7 +78,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    StatusViewComponent
+    StatusViewComponent,
+    AckModalComponent,
   ]
 })
 export class AppModule { }

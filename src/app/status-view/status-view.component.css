@@ -1,8 +1,73 @@
 .alarm-status {
-    text-align: center;
-    margin: auto;
-    max-width: 65px;
-    max-height: 28px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+  text-align: center;
+  margin: auto;
+  max-width: 65px;
+  max-height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-style: solid;
+  border-width: 2px;
+  opacity: 1;
+}
+
+.status-clear {
+  color: #95ff95;
+  border-color: #95ff95;
+  background: #95ff95;
+}
+
+.status-set {
+  color: white;
+  border-color: red;
+  background: red;
+}
+
+.status-error {
+  color: black;
+  border-color: black;
+  background: black;
+}
+
+.status-maintenance {
+  color: #9b9797;
+  border-color: #9b9797;
+  background: #9b9797;
+}
+
+.status-unknown {
+  color: #73adf0;
+  border-color: #73adf0;
+  background: #73adf0;
+}
+
+.status-invalid {
+  background: transparent;
+}
+
+.low-opacity {
+  opacity: 0.5;
+}
+
+.blink {
+  -webkit-animation: BLINK 1s infinite;
+  -moz-animation:    BLINK 1s infinite;
+  -o-animation:      BLINK 1s infinite;
+  animation:         BLINK 1s infinite;
+}
+
+@-webkit-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }

@@ -29,48 +29,36 @@ export class StatusViewComponent implements ViewCell, OnInit {
   /**
   * Status container style
   */
-  getContainerStyle(): object{
-
-    let color: string;
-    let background: string;
-    let opacity: number;
+  getContainerStyle(): any{
+    let style = ['alarm-status'];
 
     if (this.hasTag('maintenance')) {
-      color = '#9b9797';
+      style.push('status-maintenance');
     } else if (this.hasTag('unknown')) {
-      color = '#73adf0';
+      style.push('status-unknown');
     } else {
       if (this.hasTag('clear')) {
-        color = '#95ff95';
+        style.push('status-clear');
       } else if (this.hasTag('set')){
-        color = 'red';
+        style.push('status-set');
       } else {
-        color = 'black';  // error
+        style.push('status-error');
       }
     }
 
-    if (this.hasTag('valid')) {
-      background = color;
-    } else if (this.hasTag('invalid')){
-      background = 'none';
-    } else {
-      background = 'black';  // error
+    if (this.hasTag('invalid')) {
+      style.push('status-invalid');
     }
 
     if (this.hasSecondaryOperationalModeTag()){
-      opacity = 0.5;
-    } else {
-      opacity = 1.0;
+      style.push('low-opacity');
     }
 
-    let styles = {
-      'border': `2px solid ${color}`,
-      'background': background,
-      'opacity': opacity
+    if (!this.hasTag('ack')) {
+      style.push('blink');
     }
 
-    return styles;
-
+    return style;
   }
 
   /**

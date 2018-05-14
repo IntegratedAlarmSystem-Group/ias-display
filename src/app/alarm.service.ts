@@ -5,8 +5,9 @@ import { environment } from '../environments/environment';
 import { Alarm, OperationalMode, Validity } from './alarm';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
-
+import { BackendUrls, Streams } from './settings';
 import { CdbService } from './cdb.service';
+import { HttpClientService } from './http-client.service';
 
 
 /**
@@ -44,9 +45,10 @@ export class AlarmService {
   */
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
-  /** The "constructor" */
+  /** The "constructor" of the Service */
   constructor(
     private cdbService: CdbService,
+    private httpClientService: HttpClientService,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
@@ -67,10 +69,13 @@ export class AlarmService {
     this.alarmChangeStream.next(any);
   }
 
+  /******* SERVICE INITIALIZATION *******/
+
   /**
   * Start connection to the backend through websockets
   */
   initialize() {
+    let alarmId = 1;
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -80,15 +85,15 @@ export class AlarmService {
         this.cdbService.initialize();
       }
     );
-    this.webSocketBridge.demultiplex('alarms', (payload, streamName) => {
-      console.log('notify ', payload);
+    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
-      this.processAlarm(payload.action, payload.data);
+      this.readAlarmMessage(payload.action, payload.data);
     });
-    this.webSocketBridge.demultiplex('requests', (payload, streamName) => {
-      console.log('request', payload);
+    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
+      // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
-      this.processAlarmsList(payload.data);
+      this.readAlarmMessagesList(payload.data);
     });
     this.startLastReceivedMessageTimestampCheck();
   }
@@ -100,18 +105,84 @@ export class AlarmService {
     const connectionPath = environment.websocketPath;
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Listening on ' + connectionPath);
+    // console.log('Listening on ' + connectionPath);
+  }
+
+  /******* ALARM HANDLING *******/
+
+  /**
+   * Returns an Alarm object
+   * @param core_id core_id of the Alarm to return
+   * @returns {Alarm} Alarm object corresponding to the given core_id
+   */
+  get(core_id: string): Alarm {
+    return this.alarms[core_id] as Alarm;
   }
 
   /**
-   * Get the complete list of alarms from the webserver database
+   * Acknowledges a list of Alarms with a message
+   * @param alarms list of ids of the alarms to acknowledge
+   * @param message message of the acknowledgement
+   */
+  acknowledgeAlarms(alarms_ids, message) {
+    let data = {
+      'alarms_ids': alarms_ids,
+      'message': message,
+    }
+    return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
+    .map(
+      (response) => {
+        for (let i in alarms_ids) {
+          let alarm = this.get(alarms_ids[i]);
+          alarm.acknowledge();
+        }
+        return response;
+      }
+    );
+  }
+
+  /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
+
+  /**
+  * Get the complete list of alarms from the webserver database
    * through the websocket
    */
   getAlarmList() {
-    this.webSocketBridge.stream('requests').send({
+    this.webSocketBridge.stream(Streams.UPDATES).send({
       'action': 'list'
     });
   }
+
+  /**
+   * Reads an alarm message from the Core and modify the service alarms list
+   * depending on the action value.
+   * @param action create, update or delete
+   * @param alarm dictionary with values for alarm fields (as generic object)
+   */
+  readAlarmMessage(action, obj) {
+    let alarm = Alarm.asAlarm(obj);
+    if ( action === 'create' || action === 'update' ) {
+      this.alarms[alarm.core_id] = alarm;
+    } else if ( action === 'delete') {
+      delete this.alarms[alarm.core_id];
+    }
+    this.changeAlarms(alarm.core_id);
+  }
+
+  /**
+   * Reads a list of alarm messages form the Core and add them to the
+   * service alarms list
+   * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   */
+  readAlarmMessagesList(alarmsList) {
+    for (let obj of alarmsList) {
+      let alarm = Alarm.asAlarm(obj);
+      this.alarms[alarm.core_id] = alarm;
+    }
+    this.changeAlarms('all');
+  }
+
+  /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
 
   /**
    * Set selected state to alarms under an non-valid connection
@@ -148,11 +219,7 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    /* TODO: Remove console log */
-    console.log('refresh rate (default: 5):: '+pars['refreshRate']);
-    console.log('broadcast factor (default: 1):: '+pars['broadcastFactor']);
-    /* const MAX_SECONDS_WITHOUT_MESSAGES = 10; */
-
+    console.log(pars);
     const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
 
     let now = (new Date).getTime();
@@ -174,32 +241,4 @@ export class AlarmService {
     });
   }
 
-
-  /**
-   * Process the alarm and modifies the service alarms list depending
-   * on the action value.
-   * @param action create, update or delete
-   * @param alarm dictionary with values for alarm fields
-   */
-  processAlarm(action, obj) {
-    let alarm = Alarm.asAlarm(obj);
-    if ( action === 'create' || action === 'update' ) {
-      this.alarms[alarm.core_id] = alarm;
-    } else if ( action === 'delete') {
-      delete this.alarms[alarm.core_id];
-    }
-    this.changeAlarms(alarm.core_id);
-  }
-
-  /**
-   * Process a list of alarms and add each one to the service alarms list
-   * @param alarmsList list of dictionaries with values for alarm fields
-   */
-  processAlarmsList(alarmsList) {
-    for (let obj of alarmsList) {
-      let alarm = Alarm.asAlarm(obj);
-      this.alarms[alarm.core_id] = alarm;
-    }
-    this.changeAlarms('all');
-  }
 }

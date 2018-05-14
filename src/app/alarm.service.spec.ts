@@ -1,101 +1,116 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
+import { Observable } from 'rxjs/Observable';
+import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Server } from 'mock-socket';
-import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
 
-describe('AlarmService', () => {
-  let subject: AlarmService;
-  let cdbSubject: CdbService;
-  let mockStream: Server;
+let subject: AlarmService;
+let cdbSubject: CdbService;
+let httpSubject: HttpClientService;
+let mockStream: Server;
 
-  let alarmsFromWebServer = [  // mock alarm messages from webserver
-    {  // same alarm, different actions
-      'stream': 'alarms',
-      'payload': {
-        'action': 'create',
-        'data': {
-          'value': 0,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '0',
-          'core_timestamp': 10000,
-          'validity': '0'
-        }
-      }
-    },
-    {
-      'stream': 'alarms',
-      'payload': {
-        'action': 'update',
-        'data': {
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
-        }
-      }
-    },
-    {
-      'stream': 'alarms',
-      'payload': {
-        'action': 'delete',
-        'data': {
-          'value': 1,
-          'core_id': 'coreid$1',
-          'running_id': 'coreid$1',
-          'mode': '1',
-          'core_timestamp': 10000,
-          'validity': '1'
-        }
-      }
-    }
-  ];
-
-  let alarms = [
-    {
+let alarmsFromWebServer = [  // mock alarm messages from webserver
+  {  // same alarm, different actions
+  'stream': 'alarms',
+  'payload': {
+    'action': 'create',
+    'data': {
       'value': 0,
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',
       'mode': '0',
       'core_timestamp': 10000,
-      'validity': '1'
-    },
-    {
-      'value': 1,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': '0',
-      'core_timestamp': 10000,
-      'validity': '1'
-    },
-    {
-      'value': 0,
-      'core_id': 'coreid$3',
-      'running_id': 'coreid$3',
-      'mode': '0',
-      'core_timestamp': 10000,
-      'validity': '1'
+      'validity': '0',
+      'ack': false,
+      'dependencies': [],
     }
-  ];
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 1,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': '1',
+      'core_timestamp': 10000,
+      'validity': '1',
+      'ack': false,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'delete',
+    'data': {
+      'value': 1,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': '1',
+      'core_timestamp': 10000,
+      'validity': '1',
+      'ack': false,
+      'dependencies': [],
+    }
+  }
+}
+];
 
-  const fixtureAlarmsList = {
-      'stream': 'requests',
-      'payload': {
-        'data': [  // mock list of alarms from webserver
-          alarms[0],
-          alarms[1],
-          alarms[2],
-        ]
-      }
-    };
+let alarms = [
+  {
+    'value': 0,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': '0',
+    'core_timestamp': 10000,
+    'validity': '1',
+    'ack': false,
+    'dependencies': [],
+  },
+  {
+    'value': 1,
+    'core_id': 'coreid$2',
+    'running_id': 'coreid$2',
+    'mode': '0',
+    'core_timestamp': 10000,
+    'validity': '1',
+    'ack': false,
+    'dependencies': [],
+  },
+  {
+    'value': 0,
+    'core_id': 'coreid$3',
+    'running_id': 'coreid$3',
+    'mode': '0',
+    'core_timestamp': 10000,
+    'validity': '1',
+    'ack': false,
+    'dependencies': [],
+  }
+];
+
+const fixtureAlarmsList = {
+  'stream': 'requests',
+  'payload': {
+    'data': [  // mock list of alarms from webserver
+      alarms[0],
+      alarms[1],
+      alarms[2],
+    ]
+  }
+};
+
+describe('AlarmService', () => {
 
 
   beforeEach(() => {
@@ -353,5 +368,55 @@ describe('AlarmService', () => {
     // Assert
     expect(subject.connectionStatusStream.value).toBe(false);
 
+  });
+});
+
+
+describe('GIVEN the AlarmService contains Alarms', () => {
+
+  let httpSpy;
+  let alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [AlarmService, CdbService, HttpClient, HttpClientService]
+    });
+  });
+
+  beforeEach(
+    inject([AlarmService, CdbService, HttpClientService],
+      (alarmService, cdbService, httpClientService) => {
+
+      subject = alarmService;
+      httpSubject = httpClientService;
+      let alarmsDict = {};
+      for (let a in alarms) {
+        alarmsDict[alarms[a].core_id] = Alarm.asAlarm(alarms[a]);
+      }
+      subject.alarms = alarmsDict;
+
+      /**
+      * Redefinition of acknowledge of Alarms
+      */
+      httpSpy = spyOn(httpSubject, 'put').and.returnValue(
+          Observable.of(alarmsToAck)
+      );
+      }
+    )
+  );
+
+  it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
+    let ackMessage = 'This is the message';
+    let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
+      (response) => {
+        expect(response).toEqual(alarmsToAck);
+        expect(httpSpy).toHaveBeenCalled();
+        for (let a in alarmsToAck){
+          let alarm = subject.get(alarmsToAck[a]);
+          expect(alarm.ack).toEqual(true);
+        }
+      }
+    );
   });
 });

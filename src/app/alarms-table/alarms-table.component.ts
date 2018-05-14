@@ -8,6 +8,8 @@ import { AlarmService } from '../alarm.service';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { ISubscription } from "rxjs/Subscription";
 import { StatusViewComponent } from '../status-view/status-view.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AckModalComponent } from '../ack-modal/ack-modal.component';
 
 /**
 * Basic component to display alarms
@@ -73,7 +75,9 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   *
   * @param {AlarmService} alarmService An instance of the AlarmService
   */
-  constructor(private alarmService: AlarmService, private datePipe: DatePipe){
+  constructor(private alarmService: AlarmService,
+              private datePipe: DatePipe,
+              private modalService: NgbModal){
   }
 
   /**
@@ -82,6 +86,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
+
     this.source = new LocalDataSource(this.data);
     this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
@@ -102,15 +107,13 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   getTableData(){
     this.clearTableData();
     for (let core_id of this.alarmIds){
+      let alarm = this.alarmService.alarms[core_id];
       let item = {
-        status: this.getAlarmStatusTagsString(
-          this.alarmService.alarms[core_id]
-        ),
-        timestamp: this.dateFormat(
-          this.alarmService.alarms[core_id].getCoreTimestampAsDate()
-        ),
-        core_id: this.alarmService.alarms[core_id].core_id,
-        mode: this.alarmService.alarms[core_id].getModeAsString()
+        status: this.getAlarmStatusTagsString(alarm),
+        timestamp: this.dateFormat(alarm.getCoreTimestampAsDate()),
+        core_id: alarm.core_id,
+        mode: alarm.getModeAsString(),
+        alarm: alarm
       };
       this.data.push(item);
     }
@@ -159,9 +162,18 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     }
 
     tags.push(OperationalMode[alarm.mode]);
-
     return tags.join('-');
+  }
 
+  /**
+  * Handle click on table rows, it triggers the ack modal
+  */
+  onUserRowClick(event){
+    let ackModal = this.modalService.open(AckModalComponent,
+      { size: 'lg', centered: true }
+    );
+    ackModal.componentInstance.alarm = event.data.alarm;
+    return ackModal;
   }
 
 }
