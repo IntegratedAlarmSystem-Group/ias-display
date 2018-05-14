@@ -27,6 +27,7 @@ export class AckModalComponent implements OnInit {
 
   ackSuccessful(alarms: any): void {
     console.log("Ack successful for alarms: ", alarms);
+    this.activeModal.close();
   }
 
   acknowledge(): void {
@@ -35,7 +36,6 @@ export class AckModalComponent implements OnInit {
       this.alarmService.acknowledgeAlarms(
         [this.alarm.core_id], this.form.get('message').value).subscribe(
           (response) => {
-            console.log(response);
             this.ackSuccessful(response);
           },
           (error) => {
