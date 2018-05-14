@@ -162,6 +162,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     }
 
     tags.push(OperationalMode[alarm.mode]);
+
+    if (alarm.ack){
+      tags.push('ack');
+    }
     return tags.join('-');
   }
 
