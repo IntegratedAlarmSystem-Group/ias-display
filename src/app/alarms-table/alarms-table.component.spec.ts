@@ -31,7 +31,7 @@ describe('GIVEN AlarmsTableComponent', () => {
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',
       'mode': '0',
-      'core_timestamp': 1267252440000 + localOffset,
+      'core_timestamp': 1267252440000,
       'validity': '1',
       'ack': false,
       'dependencies': [],
@@ -41,7 +41,7 @@ describe('GIVEN AlarmsTableComponent', () => {
       'core_id': 'coreid$2',
       'running_id': 'coreid$2',
       'mode': '5',
-      'core_timestamp': 1267252440000 + localOffset,
+      'core_timestamp': 1267252440000,
       'validity': '1',
       'ack': false,
       'dependencies': [],
@@ -51,7 +51,7 @@ describe('GIVEN AlarmsTableComponent', () => {
       'core_id': 'coreid$3',
       'running_id': 'coreid$3',
       'mode': '7',
-      'core_timestamp': 1267252440000 + localOffset,
+      'core_timestamp': 1267252440000,
       'validity': '0',
       'ack': false,
       'dependencies': [],
@@ -61,34 +61,36 @@ describe('GIVEN AlarmsTableComponent', () => {
       'core_id': 'coreid$4',
       'running_id': 'coreid$4',
       'mode': '4',
-      'core_timestamp': 1267252440000 + localOffset,
+      'core_timestamp': 1267252440000,
       'validity': '1',
       'ack': false,
       'dependencies': [],
     }
   ];
 
+  let datepipe = new DatePipe('en');
+  let alarms_date = new Date(Date.parse("27 Feb 2010 06:34:00 GMT"));
   let expectedRows = [
     { 'status': 'clear-valid-startup',
-      'timestamp': '2/27/10, 6:34:00 AM',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),// '2/27/10, 6:34:00 AM',
       'core_id': 'coreid$1',
       'mode': 'startup',
       'alarm': Alarm.asAlarm(alarms[0])
     },
     { 'status': 'set-valid-operational',
-      'timestamp': '2/27/10, 6:34:00 AM',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$2',
       'mode': 'operational',
       'alarm': Alarm.asAlarm(alarms[1])
     },
     { 'status': 'clear-invalid-unknown',
-      'timestamp': '2/27/10, 6:34:00 AM',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$3',
       'mode': 'unknown',
       'alarm': Alarm.asAlarm(alarms[2])
     },
     { 'status': 'set-valid-maintenance',
-      'timestamp': '2/27/10, 6:34:00 AM',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$4',
       'mode': 'maintenance',
       'alarm': Alarm.asAlarm(alarms[3])
