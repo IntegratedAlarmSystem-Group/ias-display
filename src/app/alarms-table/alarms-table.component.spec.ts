@@ -72,7 +72,7 @@ describe('GIVEN AlarmsTableComponent', () => {
   let alarms_date = new Date(Date.parse("27 Feb 2010 06:34:00 GMT"));
   let expectedRows = [
     { 'status': 'clear-valid-startup',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),// '2/27/10, 6:34:00 AM',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$1',
       'mode': 'startup',
       'alarm': Alarm.asAlarm(alarms[0])
