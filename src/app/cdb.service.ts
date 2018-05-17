@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { environment } from '../environments/environment'
 import { Observable } from 'rxjs/Rx';
 import { HttpClientService } from './http-client.service';
+import { Iasio } from './iasio';
 
 
 @Injectable()
@@ -22,8 +23,7 @@ export class CdbService {
   /**
   * Variable to store alarm type iasios information data
   */
-  // TODO: Refactor as a dictionary
-  iasAlarmsIasios;
+  iasAlarmsIasios: {[io_id: string]: Iasio } = {};
 
   /** Constructor */
   constructor(
@@ -38,13 +38,15 @@ export class CdbService {
     return Observable.forkJoin(
       this.getConfigurationData().map((res: Response) => res[0]),
       this.getAlarmsIasiosData().map((res: Response) => res),
-    ).subscribe(
-      latestValues => {
-        this.iasConfiguration = latestValues[0];
-        this.iasAlarmsIasios = latestValues[1];
-      },
-      err => console.error(err)
-    );
+    )
+    .subscribe((data: any[]) => {
+      let iasConfigurationData = data[0];
+      let alarmsIasiosData = data[1];
+      this.iasConfiguration = iasConfigurationData;
+      alarmsIasiosData.forEach(iasio => {
+        this.iasAlarmsIasios[iasio.io_id] = new Iasio(iasio);
+      });
+    });
   }
 
   /**
@@ -79,9 +81,7 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   */
   getAlarmDescription(alarmCoreId): string {
-      let targetIasioAlarm = this.iasAlarmsIasios.find(
-        iasio => iasio.io_id === alarmCoreId);
-      return targetIasioAlarm.short_desc;
+      return this.iasAlarmsIasios[alarmCoreId].short_desc;
   }
 
 }

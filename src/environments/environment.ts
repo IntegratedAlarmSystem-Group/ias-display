@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   websocketPath: 'ws://127.0.0.1:8000/stream/',
   httpUrl: 'http://127.0.0.1:8000',
-  cdbApiUrl: '/cdb-api',
+  cdbApiUrl: 'http://127.0.0.1:8000/cdb-api',
 };

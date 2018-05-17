@@ -7,6 +7,7 @@ import { BackendUrls } from './settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from './http-client.service';
 import { environment } from '../environments/environment';
+import { Iasio } from './iasio';
 
 
 describe('CdbService', () => {
@@ -71,10 +72,13 @@ describe('CdbService', () => {
     testController.verify();
 
     /* Final assert */
-    expect(subject.iasConfiguration)
-      .toEqual(mockIasConfigurationResponse[0]);
-    expect(subject.iasAlarmsIasios)
-      .toEqual(mockIasAlarmsIasiosResponse);
+
+    let expectedIasConfiguration = mockIasConfigurationResponse[0];
+    let alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
+    let expectedIasAlarmsIasios = {};
+    expectedIasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
+    expect(subject.iasConfiguration).toEqual(expectedIasConfiguration);
+    expect(subject.iasAlarmsIasios).toEqual(expectedIasAlarmsIasios);
   });
 
   it('should be able to get the refresh rate after retrieve the configuration data', () => {
