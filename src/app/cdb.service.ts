@@ -15,6 +15,11 @@ export class CdbService {
   iasUrl = environment.cdbApiUrl+'/ias';
   iasioUrl = environment.cdbApiUrl+'/iasio';
   iasioAlarmsUrl = this.iasioUrl+'/filtered_by_alarm';
+  /**
+  * Twiki url
+  * TODO: Provisory link. To get the link from the cdb database when available.
+  */
+  wikiUrl = environment.wikiUrl;
 
   /**
   * Variable to store the ias configuration data
@@ -81,7 +86,14 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   */
   getAlarmDescription(alarmCoreId): string {
-      return this.iasAlarmsIasios[alarmCoreId].short_desc;
+    return this.iasAlarmsIasios[alarmCoreId].short_desc;
+  }
+
+  /**
+  * Get link with information about the alarms
+  */
+  getAlarmsInformationUrl(): string {
+    return this.wikiUrl;
   }
 
 }

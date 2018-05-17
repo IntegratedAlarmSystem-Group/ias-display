@@ -3,4 +3,5 @@ export const environment = {
   websocketPath: '/stream',
   httpUrl: '',
   cdbApiUrl: '/cdb-api',
+  wikiUrl: 'https://ictwiki.alma.cl/twiki/bin/view/Management',
 };

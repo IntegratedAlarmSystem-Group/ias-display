@@ -33,6 +33,7 @@ describe('CdbService', () => {
   let iasCdbUrl = environment.cdbApiUrl+'/ias';
   let iasioCdbUrl = environment.cdbApiUrl+'/iasio';
   let iasioCdbAlarmsUrl = iasioCdbUrl+'/filtered_by_alarm';
+  let wikiUrl = environment.wikiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -116,6 +117,11 @@ describe('CdbService', () => {
     let alarmCoreId = targetAlarm['io_id'];
     let shortDescription = subject.getAlarmDescription(alarmCoreId);
     expect(shortDescription).toEqual(targetAlarm['short_desc']);
+  });
+
+  it('should be able to retrieve the link with information about the alarms', () => {
+    let expectedUrl = wikiUrl;
+    expect(expectedUrl).toEqual(subject.getAlarmsInformationUrl());
   });
 
 });
