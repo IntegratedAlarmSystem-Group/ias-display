@@ -1,20 +1,29 @@
-FROM node:8.11.1-alpine as builder
+FROM centos:7 as builder
 
 # install chromium to run karma tests
-RUN apk update && apk add udev ttf-freefont chromium
-ENV CHROME_BIN=/usr/bin/chromium-browser
-ENV CHROME_PATH=/usr/lib/chromium/
+COPY google-chrome.repo /etc/yum.repos.d/
+RUN yum update -y && \
+  yum install -y google-chrome-stable && \
+  yum clean all
+ENV CHROME_BIN=/opt/google/chrome/chrome \
+  CHROME_PATH=/opt/google/chrome
+
+# install nodejs
+RUN sh -c "curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -" && \
+  yum install -y nodejs gcc-c++ make
 
 # create project folder
-RUN mkdir -p /usr/src/ias-display
-RUN chown node:node /usr/src/ias-display
+RUN useradd --user-group --create-home --shell /bin/false node && \
+  mkdir -p /usr/src/ias-display && \
+  chown node:node /usr/src/ias-display
 WORKDIR /usr/src/ias-display
 
 # install Angular CLI
 USER node
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH="/home/node/.npm-global/bin:${PATH}"
-RUN npm install -g @angular/cli@1.7.4
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global \
+  PATH="/home/node/.npm-global/bin:${PATH}"
+RUN cd /home/node && \
+  npm install -g @angular/cli@1.7.4
 
 # install project requirements
 COPY package.json .
@@ -26,10 +35,10 @@ COPY . .
 EXPOSE 4200
 
 # test and build project
-RUN ng test --watch=false --single-run --browser=ChromeDocker
-RUN npm run-script build-prod
+RUN ng test --watch=false --single-run --browser=ChromeDocker && \
+  npm run-script build-prod
 
 # copy compiled files to smaller image
-FROM alpine:3.7
+FROM centos:7
 COPY --from=builder /usr/src/ias-display/dist /usr/src/ias-display/dist
 VOLUME /usr/src/ias-display
