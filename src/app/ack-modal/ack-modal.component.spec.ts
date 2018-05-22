@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,18 +9,22 @@ import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
+import { Iasio } from '../iasio';
 
 
 describe('AckModalComponent', () => {
   let component: AckModalComponent;
   let fixture: ComponentFixture<AckModalComponent>;
   let alarm: Alarm;
+  let alarmIasio: Iasio;
   let form: FormGroup;
   let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
   let modalFooter: any;
   let spy;
+
+  let cdbSubject: CdbService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,6 +44,34 @@ describe('AckModalComponent', () => {
     })
     .compileComponents();
   }));
+
+  beforeEach(
+    inject([CdbService], (cdbService) => {
+      cdbSubject = cdbService;
+
+      let mockIasConfiguration = {
+          id: 1,
+          log_level: "INFO",
+          refresh_rate: 2,
+          broadcast_factor: 3,
+          tolerance: 1,
+          properties: []
+      };
+      spyOn(cdbSubject, 'initialize')
+        .and.callFake(function(){});
+      cdbSubject.iasConfiguration = mockIasConfiguration;
+
+      let mockIasAlarmsIasiosResponse = [{
+          io_id: "coreid$1",
+          short_desc: "Short description for mock alarm",
+          ias_type: "ALARM"
+      }];
+
+      alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
+      cdbSubject.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
+
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AckModalComponent);
@@ -73,6 +105,18 @@ describe('AckModalComponent', () => {
   // Information
   it('should display the Alarm ID', () => {
     expect(modalBody.textContent).toContain(alarm.core_id);
+  });
+
+  it('should display the alarm short description', () => {
+    let expected = cdbSubject.getAlarmDescription(alarm.core_id);
+    expect(modalBody.textContent).toContain(expected);
+  });
+
+  it('should display a link to get more information about the alarms', () => {
+    let expected = cdbSubject.wikiUrl;
+    let compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.alarmUrl').href)
+      .toEqual(expected);
   });
 
   // TextArea

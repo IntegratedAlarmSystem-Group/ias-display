@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-action modal-header">
   <h4 class="modal-title">Alarm Acknowledgement</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
@@ -6,12 +6,19 @@
 </div>
 
 <form class="form-group" [formGroup]="form">
-  <div class="modal-body">
-    <p>Alarm Details: {{alarm?.core_id}}</p>
+  <div class="modal-action modal-body">
+    <p>Alarm ID: {{alarm?.core_id}}</p>
+    <p>Short description: {{ getAlarmDescription() }} </p>
+    <p>More information:
+      <a class="alarmUrl" target="_blank" href="{{ getAlarmUrl() }}"> ALMA Wiki </a>
+    </p>
     <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain the action taken"></textarea>
+    <p class="info-message">
+      * The acknowledge button will be enabled after writing the message
+    </p>
   </div>
-  <div class="modal-footer">
-    <button id="cancel" type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
-    <button id="acknowledge" type="button" class="btn btn-outline-dark" (click)="acknowledge();" [disabled]="!form.valid">Acknowledge</button>
+  <div class="modal-action modal-footer">
+    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
+    <button id="acknowledge" type="button" class="btn btn-action btn-info" (click)="acknowledge();" [disabled]="!form.valid">Acknowledge</button>
   </div>
 </form>

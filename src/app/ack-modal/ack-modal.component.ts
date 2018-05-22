@@ -3,6 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alarm } from '../alarm';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AlarmService } from '../alarm.service';
+import { CdbService } from '../cdb.service';
+
 
 @Component({
   selector: 'app-ack-modal',
@@ -11,13 +13,15 @@ import { AlarmService } from '../alarm.service';
 })
 export class AckModalComponent implements OnInit {
   @Input() alarm;
-  form: FormGroup;
+  form: FormGroup
 
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private alarmService: AlarmService
-  ) {}
+    private alarmService: AlarmService,
+    private cdbService: CdbService,
+  ) {
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -47,6 +51,14 @@ export class AckModalComponent implements OnInit {
     } else {
       // Show a message, add a red asterisc, etc.
     }
+  }
+
+  getAlarmDescription(){
+    return this.cdbService.getAlarmDescription(this.alarm.core_id);
+  }
+
+  getAlarmUrl(){
+    return this.cdbService.getAlarmsInformationUrl();
   }
 
 }
