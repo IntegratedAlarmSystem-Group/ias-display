@@ -108,8 +108,15 @@ describe('AckModalComponent', () => {
   });
 
   it('should display the alarm short description', () => {
-    let short_desc = cdbSubject.getAlarmDescription(alarm.core_id);
-    expect(modalBody.textContent).toContain(short_desc);
+    let expected = cdbSubject.getAlarmDescription(alarm.core_id);
+    expect(modalBody.textContent).toContain(expected);
+  });
+
+  it('should display a link to get more information about the alarms', () => {
+    let expected = cdbSubject.wikiUrl;
+    let compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.alarmUrl').href)
+      .toEqual(expected);
   });
 
   // TextArea

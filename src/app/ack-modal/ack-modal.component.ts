@@ -57,4 +57,8 @@ export class AckModalComponent implements OnInit {
     return this.cdbService.getAlarmDescription(this.alarm.core_id);
   }
 
+  getAlarmUrl(){
+    return this.cdbService.getAlarmsInformationUrl();
+  }
+
 }
