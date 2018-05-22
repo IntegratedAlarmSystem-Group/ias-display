@@ -8,6 +8,7 @@
 <form class="form-group" [formGroup]="form">
   <div class="modal-body">
     <p>Alarm Details: {{alarm?.core_id}}</p>
+    <p>Short description: {{ getAlarmDescription() }} </p>
     <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain the action taken"></textarea>
   </div>
   <div class="modal-footer">

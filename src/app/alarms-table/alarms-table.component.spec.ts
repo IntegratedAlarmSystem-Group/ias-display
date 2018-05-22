@@ -163,6 +163,9 @@ describe('GIVEN AlarmsTableComponent', () => {
       modalRef = modalService.open(AckModalComponent);
       modalRef.componentInstance.alarm = mockEvent.data.alarm;
       spyOn(modalService, "open").and.returnValue(modalRef);
+      spyOn(modalRef.componentInstance, "getAlarmDescription")
+        .and.callFake(function(){
+          return "Short description for the mock alarm from cdb"});
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         let ackModal = component.onUserRowClick(mockEvent);
