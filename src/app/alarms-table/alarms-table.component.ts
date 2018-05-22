@@ -55,6 +55,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
       perPage: 50,
     },
     actions: false,
+    rowClassFunction: (row) => { return 'clickable-row' },
     columns: {
       status: {
         title: 'Status',
