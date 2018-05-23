@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -15,10 +15,13 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { Alarm } from '../alarm';
+import { Iasio } from '../iasio';
+
 
 describe('GIVEN AlarmsTableComponent', () => {
   let component: AlarmsTableComponent;
   let alarmService: AlarmService;
+  let cdbService: CdbService;
   let fixture: ComponentFixture<AlarmsTableComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
@@ -75,25 +78,29 @@ describe('GIVEN AlarmsTableComponent', () => {
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$1',
       'mode': 'startup',
-      'alarm': Alarm.asAlarm(alarms[0])
+      'alarm': Alarm.asAlarm(alarms[0]),
+      'short_desc': 'Alarm 1 description',
     },
     { 'status': 'set-valid-operational',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$2',
       'mode': 'operational',
-      'alarm': Alarm.asAlarm(alarms[1])
+      'alarm': Alarm.asAlarm(alarms[1]),
+      'short_desc': 'Alarm 2 description',
     },
     { 'status': 'clear-invalid-unknown',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$3',
       'mode': 'unknown',
-      'alarm': Alarm.asAlarm(alarms[2])
+      'alarm': Alarm.asAlarm(alarms[2]),
+      'short_desc': 'Alarm 3 description',
     },
     { 'status': 'set-valid-maintenance',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$4',
       'mode': 'maintenance',
-      'alarm': Alarm.asAlarm(alarms[3])
+      'alarm': Alarm.asAlarm(alarms[3]),
+      'short_desc': 'Alarm 4 description',
     }
   ];
 
@@ -126,6 +133,55 @@ describe('GIVEN AlarmsTableComponent', () => {
       }
     }).compileComponents();
   }));
+
+  beforeEach(
+    inject([CdbService], (service) => {
+      cdbService = service
+
+      let mockIasConfiguration = {
+          id: 1,
+          log_level: "INFO",
+          refresh_rate: 2,
+          broadcast_factor: 3,
+          tolerance: 1,
+          properties: []
+      };
+      spyOn(cdbService, 'initialize')
+        .and.callFake(function(){});
+      cdbService.iasConfiguration = mockIasConfiguration;
+
+      let mockIasAlarmsIasiosResponse = [
+        {
+            io_id: "coreid$1",
+            short_desc: "Alarm 1 description",
+            ias_type: "ALARM"
+        },
+        {
+            io_id: "coreid$2",
+            short_desc: "Alarm 2 description",
+            ias_type: "ALARM"
+        },
+        {
+            io_id: "coreid$3",
+            short_desc: "Alarm 3 description",
+            ias_type: "ALARM"
+        },
+        {
+            io_id: "coreid$4",
+            short_desc: "Alarm 4 description",
+            ias_type: "ALARM"
+        },
+      ];
+
+      for (let iasio of mockIasAlarmsIasiosResponse) {
+        let alarmIasio = new Iasio(iasio);
+        cdbService.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
+      }
+
+      cdbService.iasDataAvailable.next(true);
+
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlarmsTableComponent);

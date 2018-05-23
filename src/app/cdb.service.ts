@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { environment } from '../environments/environment'
 import { Observable } from 'rxjs/Rx';
 import { HttpClientService } from './http-client.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Iasio } from './iasio';
 
 
@@ -29,6 +30,10 @@ export class CdbService {
   * Variable to store alarm type iasios information data
   */
   iasAlarmsIasios: {[io_id: string]: Iasio } = {};
+  /**
+  * Notify changes on the service data
+  */
+  public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /** Constructor */
   constructor(
@@ -51,6 +56,7 @@ export class CdbService {
       alarmsIasiosData.forEach(iasio => {
         this.iasAlarmsIasios[iasio.io_id] = new Iasio(iasio);
       });
+      this.iasDataAvailable.next(true);
     });
   }
 

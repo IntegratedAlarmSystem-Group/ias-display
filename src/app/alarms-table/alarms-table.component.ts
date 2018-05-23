@@ -10,6 +10,9 @@ import { ISubscription } from "rxjs/Subscription";
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { CdbService } from '../cdb.service';
+
 
 /**
 * Basic component to display alarms
@@ -26,9 +29,12 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   //TODO: Refactor general structure for alarms and components
 
   /**
-  * Variable to follow the subscription of the component to the alarms
+  * Variables to follow the component subscriptions
   */
-  private subscription: ISubscription;
+  private alarmServiceSubscription: ISubscription;
+  private cdbServiceSubscription: ISubscription;
+
+  public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
   * Locasl data source for the alarms table
@@ -64,9 +70,20 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
       },
       core_id: {
         title: 'Monitor Point',
+        type: 'html',
+        valuePrepareFunction: function(value){
+            return '<div class="id-column"> '+value+' </div>'
+        }
       },
       mode: {
         title: 'Mode'
+      },
+      short_desc: {
+        title: 'Description',
+        type: 'html',
+        valuePrepareFunction: function(value){
+            return '<div class="description-column"> '+value+' </div>'
+        }
       }
     }
   };
@@ -78,6 +95,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   */
   constructor(private alarmService: AlarmService,
               private datePipe: DatePipe,
+              private cdbService: CdbService,
               private modalService: NgbModal){
   }
 
@@ -89,7 +107,13 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.source = new LocalDataSource(this.data);
-    this.subscription = this.alarmService.alarmChangeStream.subscribe(notification => {
+    this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
+      value => {
+        this.iasDataAvailable.next(value);
+        this.loadTableData(this.getTableData());
+      }
+    );
+    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
       this.loadTableData(this.getTableData());  // TODO: Data load evaluation
     });
@@ -99,7 +123,8 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Function executed when the component is destroyed
   */
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    this.cdbServiceSubscription.unsubscribe();
+    this.alarmServiceSubscription.unsubscribe();
   }
 
   /**
@@ -109,12 +134,18 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     this.clearTableData();
     for (let core_id of this.alarmIds){
       let alarm = this.alarmService.alarms[core_id];
+      let alarmDescriptionInfo = '';
+      if (this.iasDataAvailable.getValue() === true) {
+        alarmDescriptionInfo = this.cdbService.getAlarmDescription(alarm.core_id);
+      }
+
       let item = {
         status: this.getAlarmStatusTagsString(alarm),
         timestamp: this.dateFormat(alarm.getCoreTimestampAsDate()),
         core_id: alarm.core_id,
         mode: alarm.getModeAsString(),
-        alarm: alarm
+        alarm: alarm,
+        short_desc: alarmDescriptionInfo,
       };
       this.data.push(item);
     }
