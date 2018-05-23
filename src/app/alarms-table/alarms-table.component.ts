@@ -141,7 +141,8 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
 
       let item = {
         status: this.getAlarmStatusTagsString(alarm),
-        timestamp: this.dateFormat(alarm.getCoreTimestampAsDate()),
+        timestamp: this.dateFormat(alarm.getStateChangeTimestampAsDate()),
+        //timestamp: this.dateFormat(alarm.getCoreTimestampAsDate()),
         core_id: alarm.core_id,
         mode: alarm.getModeAsString(),
         alarm: alarm,
