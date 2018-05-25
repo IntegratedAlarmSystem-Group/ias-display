@@ -37,8 +37,8 @@ export class StatusViewComponent implements ViewCell, OnInit {
     } else if (this.hasTag('unknown')) {
       style.push('status-unknown');
     } else {
-      if (this.hasTag('clear')) {
-        style.push('status-clear');
+      if (this.hasTag('cleared')) {
+        style.push('status-cleared');
       } else if (this.hasTag('set')){
         style.push('status-set');
       } else {
@@ -46,7 +46,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
       }
     }
 
-    if (this.hasTag('invalid')) {
+    if (this.hasTag('unreliable')) {
       style.push('status-invalid');
     }
 
@@ -74,7 +74,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
     if (this.hasTag('set')) {
       visibility = 'visible';
       color = 'white';
-    } else if (this.hasTag('clear')) {
+    } else if (this.hasTag('cleared')) {
       visibility = 'hidden';
       color = 'black';
     } else {

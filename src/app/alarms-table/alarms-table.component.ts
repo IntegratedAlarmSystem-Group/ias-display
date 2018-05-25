@@ -170,7 +170,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Date format
+  * Returns a given date formatted for displaying purposes
   */
   dateFormat(date){
     let stringDate = this.datePipe.transform(date, 'M/d/yy, h:mm:ss a');
@@ -178,24 +178,15 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Alarm status tags
+  * Return Alarm status tags
   */
   getAlarmStatusTagsString(alarm: Alarm): string{
-
     let tags = [];
-
-    if (alarm.value == Value.cleared){
-      tags.push('clear');
-    } else {
-      tags.push('set');
+    let value_tags = alarm.getValueAsString().split('_');
+    for (let tag of value_tags){
+      tags.push(tag);
     }
-
-    if (alarm.validity == Validity.reliable){
-      tags.push('valid');
-    } else {
-      tags.push('invalid');
-    }
-
+    tags.push(alarm.getValidityAsString());
     tags.push(alarm.getModeAsString());
 
     if (alarm.ack){
