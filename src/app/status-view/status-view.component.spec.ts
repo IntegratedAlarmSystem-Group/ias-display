@@ -9,8 +9,8 @@ describe('StatusViewComponent', () => {
   let alarms = [
     {
       'value': 0,
-      'core_id': 'Dummy-clear-valid',
-      'running_id': 'Dummy-clear-valid',
+      'core_id': 'Dummy-cleared-valid',
+      'running_id': 'Dummy-cleared-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '1',
@@ -29,8 +29,8 @@ describe('StatusViewComponent', () => {
     },
     {
       'value': 0,
-      'core_id': 'Dummy-clear-invalid',
-      'running_id': 'Dummy-clear-invalid',
+      'core_id': 'Dummy-cleared-unreliable',
+      'running_id': 'Dummy-cleared-unreliable',
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '0',
@@ -39,8 +39,8 @@ describe('StatusViewComponent', () => {
     },
     {
       'value': 1,
-      'core_id': 'Dummy-set-invalid',
-      'running_id': 'Dummy-set-invalid',
+      'core_id': 'Dummy-set-unreliable',
+      'running_id': 'Dummy-set-unreliable',
       'mode': '5',
       'core_timestamp': 1267252440000,
       'validity': '0',
@@ -49,9 +49,9 @@ describe('StatusViewComponent', () => {
     }
   ];
 
-  let validities = ['', 'invalid'];
+  let validities = ['', 'unreliable'];
   let acks = ['', 'ack'];
-  let values = ['clear', 'set'];
+  let values = ['cleared', 'set-low'];
   let modes = ['operational', 'maintenance', 'unknown'];
 
   beforeEach(async(() => {
@@ -67,7 +67,7 @@ describe('StatusViewComponent', () => {
   });
 
   it('should create', () => {
-    component.value = 'set-valid-maintenance';
+    component.value = 'set-reliable-maintenance';
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
@@ -89,8 +89,8 @@ describe('StatusViewComponent', () => {
               expected_classes['status-' + mode] = true;
             }
 
-            if (validities[val] == 'invalid'){
-              expected_classes['status-invalid'] = true;
+            if (validities[val] == 'unreliable'){
+              expected_classes['status-unreliable'] = true;
             }
 
             if (acks[a] != 'ack'){
