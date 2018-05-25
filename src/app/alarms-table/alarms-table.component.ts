@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { WebSocketBridge } from 'django-channels';
 import { AlarmService } from '../alarm.service';
-import { Alarm, OperationalMode, Validity } from '../alarm';
+import { Alarm, OperationalMode, Validity, Value } from '../alarm';
 import { ISubscription } from "rxjs/Subscription";
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -184,7 +184,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
 
     let tags = [];
 
-    if (alarm.value == 0){
+    if (alarm.value == Value.cleared){
       tags.push('clear');
     } else {
       tags.push('set');
@@ -196,7 +196,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
       tags.push('invalid');
     }
 
-    tags.push(OperationalMode[alarm.mode]);
+    tags.push(alarm.getModeAsString());
 
     if (alarm.ack){
       tags.push('ack');
