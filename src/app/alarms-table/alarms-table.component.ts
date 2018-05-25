@@ -180,20 +180,80 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   /**
   * Return Alarm status tags
   */
-  getAlarmStatusTagsString(alarm: Alarm): string{
-    let tags = [];
+  getAlarmStatusTagsString(alarm: Alarm): string {
     let value_tags = alarm.getValueAsString().split('_');
-    for (let tag of value_tags){
-      tags.push(tag);
-    }
-    tags.push(alarm.getValidityAsString());
-    tags.push(alarm.getModeAsString());
+    let value = value_tags[0];
+    let priority = value_tags[1];
+    let validity = alarm.getValidityAsString();
+    let ack = alarm.ack;
+    let order = this.getAlarmStatusOrder(value, priority, validity, ack);
 
+    let tags = [];
+    tags.push(order);
+    tags.push(alarm.getModeAsString());
+    tags.push(value);
+    tags.push(priority);
+    tags.push(validity);
     if (alarm.ack){
       tags.push('ack');
     }
     return tags.join('-');
   }
+
+  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): number {
+    let order = 0;
+    let priorities = ['critical', 'high', 'medium', 'low'];
+
+    // SET:
+    if (value == 'set') {
+      if (validity == 'reliable') {
+        if (ack == false) {
+          order = priorities.indexOf(priority);
+        }
+        else {
+          order = 4 + priorities.indexOf(priority);
+        }
+      }
+      else {
+        if (ack == false) {
+          order = 8 + priorities.indexOf(priority);
+        }
+        else {
+          order = 12 + priorities.indexOf(priority);
+        }
+      }
+    }
+    // CLEARED:
+    else {
+      if (validity == 'reliable') {
+        if (ack == false) {
+          order = 16;
+        }
+        else {
+          order = 17;
+        }
+      }
+      else {
+        if (ack == false) {
+          order = 18;
+        }
+        else {
+          order = 18;
+        }
+      }
+    }
+    return order;
+  }
+
+  getPriorityNumber(priority: string) {
+    let priorities = ['critical', 'high', 'medium', 'low'];
+    return priorities.indexOf(priority);
+  }
+
+  arrayHasElement(array, element) {
+    return array.indexOf(element) > -1 ? true : false;
+  }
+
 
   /**
   * Handle click on table rows, it triggers the ack modal
