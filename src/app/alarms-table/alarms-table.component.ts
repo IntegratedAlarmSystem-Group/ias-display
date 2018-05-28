@@ -37,9 +37,14 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
-  * Locasl data source for the alarms table
+  * Local data source for the alarms table
   */
   source: LocalDataSource;
+
+  /**
+  * Json that defines the sorting to be used in the table
+  */
+  sort: any;
 
   /**
   * Auxiliary list used to store the core_ids of alarms,
@@ -108,17 +113,26 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
-
+    this.sort = [
+      {
+        field: 'status',
+        direction: 'asc'
+      },
+      {
+        field: 'mode',
+        direction: 'asc'
+      },
+    ];
     this.source = new LocalDataSource(this.data);
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
       value => {
         this.iasDataAvailable.next(value);
-        this.loadTableData(this.getTableData());
+        this.resetTable();
       }
     );
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
-      this.loadTableData(this.getTableData());  // TODO: Data load evaluation
+      this.resetTable();  // TODO: Data load evaluation
     });
   }
 
@@ -165,7 +179,9 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   /**
   * Load data in the table
   */
-  loadTableData(data){
+  resetTable(){
+    let data = this.getTableData();
+    this.source.setSort(this.sort);
     this.source.load(data);
   }
 

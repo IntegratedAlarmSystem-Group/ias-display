@@ -78,12 +78,12 @@ describe('GIVEN AlarmsTableComponent', () => {
   let datepipe = new DatePipe('en');
   let alarms_date = new Date(Date.parse("27 Feb 2010 06:34:00 GMT"));
   let expectedRows = [
-    { 'status': '16-startup-cleared-reliable',
+    { 'status': '2-maintenance-set-medium-reliable',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$1',
-      'mode': 'startup',
-      'alarm': Alarm.asAlarm(alarms[0]),
-      'short_desc': 'Alarm 1 description',
+      'core_id': 'coreid$4',
+      'mode': 'maintenance',
+      'alarm': Alarm.asAlarm(alarms[3]),
+      'short_desc': 'Alarm 4 description',
     },
     { 'status': '2-operational-set-medium-reliable',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
@@ -92,6 +92,13 @@ describe('GIVEN AlarmsTableComponent', () => {
       'alarm': Alarm.asAlarm(alarms[1]),
       'short_desc': 'Alarm 2 description',
     },
+    { 'status': '16-startup-cleared-reliable',
+      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
+      'core_id': 'coreid$1',
+      'mode': 'startup',
+      'alarm': Alarm.asAlarm(alarms[0]),
+      'short_desc': 'Alarm 1 description',
+    },
     { 'status': '18-unknown-cleared-unreliable',
       'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
       'core_id': 'coreid$3',
@@ -99,13 +106,6 @@ describe('GIVEN AlarmsTableComponent', () => {
       'alarm': Alarm.asAlarm(alarms[2]),
       'short_desc': 'Alarm 3 description',
     },
-    { 'status': '2-maintenance-set-medium-reliable',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$4',
-      'mode': 'maintenance',
-      'alarm': Alarm.asAlarm(alarms[3]),
-      'short_desc': 'Alarm 4 description',
-    }
   ];
 
   beforeEach(async(() => {
@@ -205,7 +205,8 @@ describe('GIVEN AlarmsTableComponent', () => {
       alarmService.readAlarmMessagesList(alarms);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        component.source.getAll().then(resp => {
+        component.source.getFilteredAndSorted().then(resp => {
+          console.log('resp = ', resp);
           expect(resp).toEqual(expectedRows);
         });
       });
