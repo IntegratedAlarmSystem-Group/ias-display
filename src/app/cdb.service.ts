@@ -92,7 +92,12 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   */
   getAlarmDescription(alarmCoreId): string {
-    return this.iasAlarmsIasios[alarmCoreId].short_desc;
+    if (alarmCoreId in this.iasAlarmsIasios){
+      return this.iasAlarmsIasios[alarmCoreId].short_desc;
+    }
+    else {
+      return "";
+    }
   }
 
   /**

@@ -14,6 +14,13 @@ export enum Validity {
   reliable = 1
 };
 
+export enum Value {
+  cleared = 0,
+  set_low = 1,
+  set_medium = 2,
+  set_high = 3,
+  set_critical = 4,
+};
 
 /**
 * Class to define Alarm objects
@@ -24,7 +31,7 @@ export class Alarm {
   * Value that represents the state of the {@link Alarm}.
   * Can be either 0 (CLEARED) or 1 (SET)
   */
-  value: number;
+  value: Value;
 
   /** Id used to identify the {@link Alarm} in the IAS Core */
   core_id: string;
@@ -89,7 +96,7 @@ export class Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
-    let value = <string>json['value'];
+    let value = <number>json['value'];
     let core_id = <string>json['core_id'];
     let running_id = <string>json['running_id'];
     let mode = <number>json['mode'];
@@ -129,12 +136,7 @@ export class Alarm {
   * @returns {string} a string representation of the value of the Alarm
   */
   getValueAsString(): string {
-    if (this.value == 0){
-      return 'Cleared';
-    }
-    else {
-      return 'Set';
-    }
+    return Value[this.value];
   }
 
   /**
