@@ -51,7 +51,7 @@ describe('StatusViewComponent', () => {
 
   let validities = ['', 'unreliable'];
   let acks = ['', 'ack'];
-  let values = ['cleared', 'set-low'];
+  let values = ['cleared', 'set'];
   let modes = ['operational', 'maintenance', 'unknown'];
 
   beforeEach(async(() => {

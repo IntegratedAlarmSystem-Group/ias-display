@@ -192,7 +192,9 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     tags.push(order);
     tags.push(alarm.getModeAsString());
     tags.push(value);
-    tags.push(priority);
+    if (priority != undefined) {
+      tags.push(priority);
+    }
     tags.push(validity);
     if (alarm.ack){
       tags.push('ack');

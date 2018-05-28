@@ -47,7 +47,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
     }
 
     if (this.hasTag('unreliable')) {
-      style.push('status-invalid');
+      style.push('status-unreliable');
     }
 
     if (this.hasSecondaryOperationalModeTag()){
