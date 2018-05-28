@@ -51,7 +51,7 @@ describe('StatusViewComponent', () => {
 
   let validities = ['', 'unreliable'];
   let acks = ['', 'ack'];
-  let values = ['cleared', 'set'];
+  let values = ['cleared', 'set_low', 'set_medium', 'set_high', 'set_critical'];
   let modes = ['operational', 'maintenance', 'unknown'];
 
   beforeEach(async(() => {
@@ -77,14 +77,15 @@ describe('StatusViewComponent', () => {
       for (let v in values) {
         for (let a in acks) {
           it('should display the component according to its tags ', () => {
-            component.value = values[v] + '-' + validities[val] + '-' + mode + '-' + acks[a];
+            let value = values[v].split('_')[0];
+            component.value = value + '-' + validities[val] + '-' + mode + '-' + acks[a];
             fixture.detectChanges();
             expect(component).toBeTruthy();
             const classes = fixture.debugElement.query(By.css('.alarm-status')).classes;
             let expected_classes = {'alarm-status': true};
 
             if (mode = 'operational'){
-              expected_classes['status-' + values[v]] = true;
+              expected_classes['status-' + value] = true;
             } else {
               expected_classes['status-' + mode] = true;
             }
