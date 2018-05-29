@@ -37,9 +37,14 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
-  * Locasl data source for the alarms table
+  * Local data source for the alarms table
   */
   source: LocalDataSource;
+
+  /**
+  * Json that defines the sorting to be used in the table
+  */
+  sort: any;
 
   /**
   * Auxiliary list used to store the core_ids of alarms,
@@ -108,17 +113,22 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   * Starts the {@link AlarmService} and subscribes to its messages
   */
   ngOnInit() {
-
+    this.sort = [
+      {
+        field: 'status',
+        direction: 'asc'
+      },
+    ];
     this.source = new LocalDataSource(this.data);
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
       value => {
         this.iasDataAvailable.next(value);
-        this.loadTableData(this.getTableData());
+        this.resetTable();
       }
     );
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarmIds = Object.keys(this.alarmService.alarms);
-      this.loadTableData(this.getTableData());  // TODO: Data load evaluation
+      this.resetTable();  // TODO: Data load evaluation
     });
   }
 
@@ -165,7 +175,9 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
   /**
   * Load data in the table
   */
-  loadTableData(data){
+  resetTable(){
+    let data = this.getTableData();
+    this.source.setSort(this.sort);
     this.source.load(data);
   }
 
@@ -202,7 +214,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     return tags.join('-');
   }
 
-  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): number {
+  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): string {
     let order = 0;
     let priorities = ['critical', 'high', 'medium', 'low'];
 
@@ -240,11 +252,16 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
           order = 18;
         }
         else {
-          order = 18;
+          order = 19;
         }
       }
     }
-    return order;
+    if (order < 10) {
+      return ("0" + order);
+    }
+    else {
+      return ("" + order);
+    }
   }
 
   getPriorityNumber(priority: string) {

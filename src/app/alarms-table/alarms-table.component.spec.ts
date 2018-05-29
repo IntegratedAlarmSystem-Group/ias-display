@@ -16,6 +16,7 @@ import { AckModalComponent } from '../ack-modal/ack-modal.component';
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
+import { MockIasios, MockAlarms, ExpectedTableRows } from './fixtures';
 
 
 describe('GIVEN AlarmsTableComponent', () => {
@@ -28,85 +29,12 @@ describe('GIVEN AlarmsTableComponent', () => {
   let localOffset = (new Date().getTimezoneOffset())*60*1000;
   let modalService: NgbModal;
   let modalRef: NgbModalRef;
-  let alarms = [
-    {
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': '0',
-      'core_timestamp': 1267252440000,
-      'state_change_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'dependencies': [],
-    },
-    {
-      'value': 2,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': '5',
-      'core_timestamp': 1267252440000,
-      'state_change_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'dependencies': [],
-    },
-    {
-      'value': 0,
-      'core_id': 'coreid$3',
-      'running_id': 'coreid$3',
-      'mode': '7',
-      'core_timestamp': 1267252440000,
-      'state_change_timestamp': 1267252440000,
-      'validity': '0',
-      'ack': false,
-      'dependencies': [],
-    },
-    {
-      'value': 2,
-      'core_id': 'coreid$4',
-      'running_id': 'coreid$4',
-      'mode': '4',
-      'core_timestamp': 1267252440000,
-      'state_change_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'dependencies': [],
-    }
-  ];
+  let alarms = MockAlarms;
+  let mockIasAlarmsIasiosResponse = MockIasios;
 
   let datepipe = new DatePipe('en');
   let alarms_date = new Date(Date.parse("27 Feb 2010 06:34:00 GMT"));
-  let expectedRows = [
-    { 'status': '16-startup-cleared-reliable',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$1',
-      'mode': 'startup',
-      'alarm': Alarm.asAlarm(alarms[0]),
-      'short_desc': 'Alarm 1 description',
-    },
-    { 'status': '2-operational-set-medium-reliable',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$2',
-      'mode': 'operational',
-      'alarm': Alarm.asAlarm(alarms[1]),
-      'short_desc': 'Alarm 2 description',
-    },
-    { 'status': '18-unknown-cleared-unreliable',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$3',
-      'mode': 'unknown',
-      'alarm': Alarm.asAlarm(alarms[2]),
-      'short_desc': 'Alarm 3 description',
-    },
-    { 'status': '2-maintenance-set-medium-reliable',
-      'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-      'core_id': 'coreid$4',
-      'mode': 'maintenance',
-      'alarm': Alarm.asAlarm(alarms[3]),
-      'short_desc': 'Alarm 4 description',
-    }
-  ];
+  let expectedRows = ExpectedTableRows;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -154,29 +82,6 @@ describe('GIVEN AlarmsTableComponent', () => {
         .and.callFake(function(){});
       cdbService.iasConfiguration = mockIasConfiguration;
 
-      let mockIasAlarmsIasiosResponse = [
-        {
-            io_id: "coreid$1",
-            short_desc: "Alarm 1 description",
-            ias_type: "ALARM"
-        },
-        {
-            io_id: "coreid$2",
-            short_desc: "Alarm 2 description",
-            ias_type: "ALARM"
-        },
-        {
-            io_id: "coreid$3",
-            short_desc: "Alarm 3 description",
-            ias_type: "ALARM"
-        },
-        {
-            io_id: "coreid$4",
-            short_desc: "Alarm 4 description",
-            ias_type: "ALARM"
-        },
-      ];
-
       for (let iasio of mockIasAlarmsIasiosResponse) {
         let alarmIasio = new Iasio(iasio);
         cdbService.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
@@ -205,7 +110,7 @@ describe('GIVEN AlarmsTableComponent', () => {
       alarmService.readAlarmMessagesList(alarms);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        component.source.getAll().then(resp => {
+        component.source.getFilteredAndSorted().then(resp => {
           expect(resp).toEqual(expectedRows);
         });
       });

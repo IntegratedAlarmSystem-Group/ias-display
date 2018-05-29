@@ -86,7 +86,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      // console.log('notify ', payload);
+      console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
@@ -105,7 +105,7 @@ export class AlarmService {
     const connectionPath = environment.websocketPath;
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    // console.log('Listening on ' + connectionPath);
+    console.log('Listening on ' + connectionPath);
   }
 
   /******* ALARM HANDLING *******/
@@ -239,5 +239,4 @@ export class AlarmService {
       this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
-
 }
