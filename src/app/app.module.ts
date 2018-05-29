@@ -24,7 +24,6 @@ import { NbMenuModule } from '@nebular/theme';
 
 import { RouterModule, Routes } from '@angular/router';
 import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
-
 import { StatusViewComponent } from './status-view/status-view.component';
 
 import { DatePipe } from '@angular/common';
@@ -33,11 +32,15 @@ import { AckModalComponent } from './ack-modal/ack-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TabularViewComponent } from './tabular-view/tabular-view.component';
+import {MatTableModule, MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'alarms', pathMatch: 'full' },
   { path:'alarms', component: AlarmsTableComponent },
+  { path:'tabular', component: TabularViewComponent },
   { path:'modal', component: AckModalComponent }
 ];
 
@@ -50,7 +53,8 @@ const appRoutes: Routes = [
     AlarmsListComponent,
     AlarmsTableComponent,
     StatusViewComponent,
-    AckModalComponent
+    AckModalComponent,
+    TabularViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,9 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatInputModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     HttpClientService,
