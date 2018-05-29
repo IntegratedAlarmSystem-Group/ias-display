@@ -1,0 +1,109 @@
+.ias.overview {
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 0px;
+  margin-bottom: 0;
+}
+
+.ias.overview-card {
+    position: relative;
+    display: block;
+    z-index: 100;
+}
+
+.ias.overview-card>.marker-wrapper{
+    float: left;
+    position: relative;
+    top: 10px;
+    left: -40px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background: #4ac8ff;
+    z-index: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.ias.overview-card>.marker-wrapper>.marker {
+    position: relative;
+    top:0;
+    left:-4px;
+}
+
+.ias.overview-card>.label{
+    position: absolute;
+    top: -1.25em;
+    right: 0;
+    height: 1em;
+    width: 100%;
+    color: #4ac8ff;
+    text-align: right;
+    text-transform: uppercase;
+    font-weight: none;
+    font-family: sans-serif;
+    z-index: 1;
+}
+
+.ias.overview-card>.content-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100px;
+    background: #2b3b4b;
+    width: 100%;
+}
+
+.ias.overview-card>.content-wrapper>.content{
+    padding: 0px;
+}
+
+.ias.sensors{
+    display: inline-block;
+    background: #33475a;
+    width: 100%;
+}
+
+.ias.sensors>.sensors-card-wrapper{
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sensors-card{
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    float: left;
+    max-height: 130px;
+    min-width: 100px;
+    border-right: 1px solid #3a5167;
+    font-family:sans-serif;
+    color: #cdd5d1;
+}
+
+.sensors-card>.title{
+    text-transform: 'uppercase';
+    font-size: 14px;
+}
+
+.sensors-card>.marker{
+    padding: 20px;
+}
+
+.sensors-card>.marker>.marker-img{
+    height: 40px;
+}
+
+.ias.map{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.ias.map>.weather-stations-map{
+    max-height: 500px;
+}

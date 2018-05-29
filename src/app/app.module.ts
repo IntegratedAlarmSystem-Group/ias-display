@@ -37,7 +37,7 @@ import { OverviewComponent } from './overview/overview.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'alarms', pathMatch: 'full' },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path:'overview', component: OverviewComponent },
   { path:'alarms', component: AlarmsTableComponent },
   { path:'modal', component: AckModalComponent }
