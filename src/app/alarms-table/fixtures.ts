@@ -105,56 +105,60 @@ export const MockIasios = [
       short_desc: "Alarm 35 description",
       ias_type: "ALARM"
   },
+  {
+      io_id: "coreid$40",
+      short_desc: "Alarm 41 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$41",
+      short_desc: "Alarm 41 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$42",
+      short_desc: "Alarm 42 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$43",
+      short_desc: "Alarm 43 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$44",
+      short_desc: "Alarm 44 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$45",
+      short_desc: "Alarm 45 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$46",
+      short_desc: "Alarm 46 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$47",
+      short_desc: "Alarm 47 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$48",
+      short_desc: "Alarm 48 description",
+      ias_type: "ALARM"
+  },
+  {
+      io_id: "coreid$49",
+      short_desc: "Alarm 49 description",
+      ias_type: "ALARM"
+  },
 
 ];
 
 export const MockAlarms = [
-  // {
-  //   'value': 0,
-  //   'core_id': 'coreid$1',
-  //   'running_id': 'coreid$1',
-  //   'mode': '0',
-  //   'core_timestamp': 1267252440000,
-  //   'state_change_timestamp': 1267252440000,
-  //   'validity': '1',
-  //   'ack': false,
-  //   'dependencies': [],
-  // },
-  // {
-  //   'value': 2,
-  //   'core_id': 'coreid$2',
-  //   'running_id': 'coreid$2',
-  //   'mode': '5',
-  //   'core_timestamp': 1267252440000,
-  //   'state_change_timestamp': 1267252440000,
-  //   'validity': '1',
-  //   'ack': false,
-  //   'dependencies': [],
-  // },
-  // {
-  //   'value': 0,
-  //   'core_id': 'coreid$3',
-  //   'running_id': 'coreid$3',
-  //   'mode': '7',
-  //   'core_timestamp': 1267252440000,
-  //   'state_change_timestamp': 1267252440000,
-  //   'validity': '0',
-  //   'ack': false,
-  //   'dependencies': [],
-  // },
-  // {
-  //   'value': 2,
-  //   'core_id': 'coreid$4',
-  //   'running_id': 'coreid$4',
-  //   'mode': '4',
-  //   'core_timestamp': 1267252440000,
-  //   'state_change_timestamp': 1267252440000,
-  //   'validity': '1',
-  //   'ack': false,
-  //   'dependencies': [],
-  // },
-
-
   // VALID NOT-ACK
   {
     'value': 4,
@@ -382,16 +386,72 @@ export const MockAlarms = [
     'ack': true,
     'dependencies': [],
   },
+
+  // Repetitions weith different modes:
+  {
+    'value': 4,
+    'core_id': 'coreid$43',
+    'running_id': 'coreid$43',
+    'mode': 3,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  },
+  {
+    'value': 4,
+    'core_id': 'coreid$44',
+    'running_id': 'coreid$44',
+    'mode': 4,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  },
+  {
+    'value': 4,
+    'core_id': 'coreid$47',
+    'running_id': 'coreid$47',
+    'mode': 7,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  },
 ];
 
 export const ExpectedTableRows = [
   // SET VALID NOT-ACK
+  { 'status': '00-maintenance-set-critical-reliable',
+    'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
+    'core_id': 'coreid$44',
+    'mode': 'maintenance',
+    'alarm': Alarm.asAlarm(MockAlarms[21]),
+    'short_desc': 'Alarm 44 description',
+  },
   { 'status': '00-operational-set-critical-reliable',
     'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
     'core_id': 'coreid$1',
     'mode': 'operational',
     'alarm': Alarm.asAlarm(MockAlarms[0]),
     'short_desc': 'Alarm 1 description',
+  },
+  { 'status': '00-shuttedown-set-critical-reliable',
+    'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
+    'core_id': 'coreid$43',
+    'mode': 'shuttedown',
+    'alarm': Alarm.asAlarm(MockAlarms[20]),
+    'short_desc': 'Alarm 43 description',
+  },
+  { 'status': '00-unknown-set-critical-reliable',
+    'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
+    'core_id': 'coreid$47',
+    'mode': 'unknown',
+    'alarm': Alarm.asAlarm(MockAlarms[22]),
+    'short_desc': 'Alarm 47 description',
   },
   { 'status': '01-operational-set-high-reliable',
     'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
@@ -533,37 +593,4 @@ export const ExpectedTableRows = [
     'alarm': Alarm.asAlarm(MockAlarms[19]),
     'short_desc': 'Alarm 35 description',
   },
-
-
-
-
-
-  // { 'status': '2-operational-set-medium-reliable',
-  //   'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-  //   'core_id': 'coreid$2',
-  //   'mode': 'operational',
-  //   'alarm': Alarm.asAlarm(MockAlarms[1]),
-  //   'short_desc': 'Alarm 2 description',
-  // },
-  // { 'status': '16-startup-cleared-reliable',
-  //   'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-  //   'core_id': 'coreid$1',
-  //   'mode': 'startup',
-  //   'alarm': Alarm.asAlarm(MockAlarms[0]),
-  //   'short_desc': 'Alarm 1 description',
-  // },
-  // { 'status': '18-unknown-cleared-unreliable',
-  //   'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-  //   'core_id': 'coreid$3',
-  //   'mode': 'unknown',
-  //   'alarm': Alarm.asAlarm(MockAlarms[2]),
-  //   'short_desc': 'Alarm 3 description',
-  // },
-  // { 'status': '18-unknown-cleared-unreliable',
-  //   'timestamp': datepipe.transform( alarms_date, "M/d/yy, h:mm:ss a"),
-  //   'core_id': 'coreid$3',
-  //   'mode': 'unknown',
-  //   'alarm': Alarm.asAlarm(MockAlarms[2]),
-  //   'short_desc': 'Alarm 3 description',
-  // },
 ];

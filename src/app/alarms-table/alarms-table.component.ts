@@ -118,10 +118,6 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
         field: 'status',
         direction: 'asc'
       },
-      // {
-      //   field: 'mode',
-      //   direction: 'asc'
-      // },
     ];
     this.source = new LocalDataSource(this.data);
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
