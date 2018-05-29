@@ -111,7 +111,6 @@ describe('GIVEN AlarmsTableComponent', () => {
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         component.source.getFilteredAndSorted().then(resp => {
-          console.log('resp = ', resp);
           expect(resp).toEqual(expectedRows);
         });
       });

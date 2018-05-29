@@ -118,10 +118,10 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
         field: 'status',
         direction: 'asc'
       },
-      {
-        field: 'mode',
-        direction: 'asc'
-      },
+      // {
+      //   field: 'mode',
+      //   direction: 'asc'
+      // },
     ];
     this.source = new LocalDataSource(this.data);
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
@@ -218,7 +218,7 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
     return tags.join('-');
   }
 
-  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): number {
+  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): string {
     let order = 0;
     let priorities = ['critical', 'high', 'medium', 'low'];
 
@@ -256,11 +256,16 @@ export class AlarmsTableComponent implements OnInit, OnDestroy {
           order = 18;
         }
         else {
-          order = 18;
+          order = 19;
         }
       }
     }
-    return order;
+    if (order < 10) {
+      return ("0" + order);
+    }
+    else {
+      return ("" + order);
+    }
   }
 
   getPriorityNumber(priority: string) {
