@@ -34,7 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OverviewComponent } from './overview/overview.component';
-import { OverviewComponentCard } from './overview/overview-card.component';
+import { OverviewCardComponent } from './overview-card/overview-card.component';
 
 
 const appRoutes: Routes = [
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
     StatusViewComponent,
     AckModalComponent,
     OverviewComponent,
-    OverviewComponentCard
+    OverviewCardComponent
   ],
   imports: [
     BrowserModule,
