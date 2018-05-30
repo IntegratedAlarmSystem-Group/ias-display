@@ -240,9 +240,10 @@ export class AlarmService {
     });
   }
 
-  findElements(courseId:number, filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 3):  Observable<Alarm[]> {
-    return Observable.of(ALARM_DATA);
-  }
+  // getObservableOfAlarms(id:number, filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 3):  Observable<Alarm[]> {
+  //   console.log('this.alarmsList = ', this.alarmsList);
+  //   return Observable.of(this.alarmsList);
+  // }
 }
 
 const ALARM_DATA: Alarm[] = [
