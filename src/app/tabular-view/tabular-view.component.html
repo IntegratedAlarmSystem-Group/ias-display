@@ -1,37 +1,77 @@
-<div class="example-container mat-elevation-z8">
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+<nb-card>
+
+  <nb-card-header>
+    <div class="alarms-table-header">
+        <div class="main-container">
+          Alarms
+        </div>
+        <div class="secondary-container">
+        </div>
   </div>
+  </nb-card-header>
+  <nb-card-body>
 
-  <mat-table #table [dataSource]="dataSource" matSort>
+    <mat-table #table [dataSource]="dataSource" matSort>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="core_id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Monitoring Point </mat-header-cell>
-      <mat-cell *matCellDef="let alarm"> {{alarm.core_id}} </mat-cell>
-    </ng-container>
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Status </span>
+          <span mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.value}} </mat-cell>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="value">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Value </mat-header-cell>
-      <mat-cell *matCellDef="let alarm"> {{alarm.value}} </mat-cell>
-    </ng-container>
+      <!-- Monitoring Point Column -->
+      <ng-container matColumnDef="monitoring point">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Monitoring Point </span>
+          <span mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.core_id}} </mat-cell>
+      </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="validity">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Validity </mat-header-cell>
-      <mat-cell *matCellDef="let alarm"> {{alarm.validity}} </mat-cell>
-    </ng-container>
+      <!-- Mode Column -->
+      <ng-container matColumnDef="mode">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Mode </span>
+          <span mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.mode}} </mat-cell>
+      </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="mode">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Mode </mat-header-cell>
-      <mat-cell *matCellDef="let alarm"> {{alarm.mode}} </mat-cell>
-    </ng-container>
+      <!-- Timestamp Column -->
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Last Change Time </span>
+          <span mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.getStateChangeTimestampAsDate()}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div>
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Description </span>
+          <span mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.validity}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </nb-card-body>
+  <nb-card-footer></nb-card-footer>
+
+</nb-card>

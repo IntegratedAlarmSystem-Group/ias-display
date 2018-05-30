@@ -175,5 +175,4 @@ export class Alarm {
 
     return date;
   }
-
 }

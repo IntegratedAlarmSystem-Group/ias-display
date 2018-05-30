@@ -15,7 +15,8 @@ import { AlarmService } from '../alarm.service';
 })
 export class TabularViewComponent {
 
-  displayedColumns = ['core_id', 'value', 'validity', 'mode'];
+  // displayedColumns = ['monitoring point', 'value', 'validity', 'mode'];
+  displayedColumns = ['status', 'monitoring point',  'mode', 'timestamp', 'description'];
   dataSource: MatTableDataSource<Alarm>;
   private alarmServiceSubscription: ISubscription;
   public alarmsList: Alarm[] = [];
@@ -42,12 +43,12 @@ export class TabularViewComponent {
     this.dataSource.sort = this.sort;
   }
 
-  //
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  //   this.dataSource.filter = filterValue;
-  // }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 }
 
 // export class AlarmsDataSource extends DataSource<Alarm> {
