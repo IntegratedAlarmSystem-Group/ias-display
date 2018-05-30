@@ -5,29 +5,29 @@
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->
     <ng-container matColumnDef="core_id">
-      <mat-header-cell *matHeaderCellDef> Monitoring Point </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Monitoring Point </mat-header-cell>
       <mat-cell *matCellDef="let alarm"> {{alarm.core_id}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="value">
-      <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Value </mat-header-cell>
       <mat-cell *matCellDef="let alarm"> {{alarm.value}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="validity">
-      <mat-header-cell *matHeaderCellDef> Validity </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Validity </mat-header-cell>
       <mat-cell *matCellDef="let alarm"> {{alarm.validity}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="mode">
-      <mat-header-cell *matHeaderCellDef> Mode </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Mode </mat-header-cell>
       <mat-cell *matCellDef="let alarm"> {{alarm.mode}} </mat-cell>
     </ng-container>
 

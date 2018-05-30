@@ -1,8 +1,8 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISubscription } from "rxjs/Subscription";
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSort } from '@angular/material';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { AlarmService } from '../alarm.service';
@@ -31,6 +31,17 @@ export class TabularViewComponent {
       this.dataSource.data = this.alarmsList;
     });
   }
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  /**
+   * Set the sort after the view init since this component will
+   * be able to query its view for the initialized sort.
+   */
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
   //
   // applyFilter(filterValue: string) {
   //   filterValue = filterValue.trim(); // Remove whitespace
