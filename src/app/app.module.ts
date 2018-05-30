@@ -32,9 +32,10 @@ import { AckModalComponent } from './ack-modal/ack-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TabularViewComponent } from './tabular-view/tabular-view.component';
-import {MatTableModule, MatInputModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { TabularViewComponent, ElementService } from './tabular-view/tabular-view.component';
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+         MatSortModule, MatTableModule } from "@angular/material";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 const appRoutes: Routes = [
@@ -69,9 +70,13 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatInputModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     HttpClientService,
@@ -82,6 +87,7 @@ const appRoutes: Routes = [
     NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
+    ElementService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
