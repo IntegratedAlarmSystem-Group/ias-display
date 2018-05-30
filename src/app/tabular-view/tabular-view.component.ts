@@ -18,17 +18,13 @@ export class TabularViewComponent {
   displayedColumns = ['core_id', 'value', 'validity', 'mode'];
   dataSource: ElementsDataSource;
   private alarmServiceSubscription: ISubscription;
-  public alarmsList: Alarm[] = [];
 
   constructor(private alarmService: AlarmService) {}
 
   ngOnInit() {
     this.dataSource = new ElementsDataSource(this.alarmService);
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      let self = this.alarmService.alarms
-      this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
-      console.log("AlarmsList: ", this.alarmsList);
-      this.dataSource.loadElements(this.alarmsList);
+      this.dataSource.loadAlarms();
     });
   }
 
@@ -44,6 +40,7 @@ export class ElementsDataSource implements DataSource<Alarm> {
   private elementsSubject = new BehaviorSubject<Alarm[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$ = this.loadingSubject.asObservable();
+  public alarmsList: Alarm[] = [];
 
   constructor(private alarmService: AlarmService) {}
 
@@ -56,17 +53,10 @@ export class ElementsDataSource implements DataSource<Alarm> {
       this.loadingSubject.complete();
   }
 
-  loadElements(alarms: Alarm[], filter = '',
-              sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-
+  loadAlarms(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
     this.loadingSubject.next(true);
-    this.elementsSubject.next(alarms);
-
-    // this.alarmService.getObservableOfAlarms(id, filter, sortDirection, pageIndex, pageSize)
-    // // .pipe(
-    // //   catchError(() => of([])),
-    // //   finalize(() => this.loadingSubject.next(false))
-    // // )
-    // .subscribe(elements => this.elementsSubject.next(elements));
+    let self = this.alarmService.alarms;
+    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
+    this.elementsSubject.next(this.alarmsList);
   }
 }

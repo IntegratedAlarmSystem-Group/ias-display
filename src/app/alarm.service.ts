@@ -239,42 +239,4 @@ export class AlarmService {
       this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
-
-  // getObservableOfAlarms(id:number, filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 3):  Observable<Alarm[]> {
-  //   console.log('this.alarmsList = ', this.alarmsList);
-  //   return Observable.of(this.alarmsList);
-  // }
 }
-
-const ALARM_DATA: Alarm[] = [
-  Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'coreid$1',
-    'running_id': 'coreid$1',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'validity': 1,
-    'ack': false,
-    'dependencies': [],
-  }),
-  Alarm.asAlarm({
-    'value': 1,
-    'core_id': 'coreid$2',
-    'running_id': 'coreid$2',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'validity': 1,
-    'ack': false,
-    'dependencies': [],
-  }),
-  Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'coreid$3',
-    'running_id': 'coreid$3',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'validity': 1,
-    'ack': false,
-    'dependencies': [],
-  })
-];
