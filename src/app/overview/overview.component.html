@@ -22,39 +22,7 @@
         <div data="label"> WEATHER </div>
         <div data="marker-img"> <img src="/assets/img/container-weather.svg"/> </div>
         <div data="content">
-          <!-- card-content -->
-          <div class="ias sensors">
-            <div class="row no-vertical-margin">
-              <div class="sensors-card-wrapper">
-                  <div class="sensors-card">
-                      <div class="title">WIND SPEED</div>
-                      <div class="marker">
-                          <img class="marker-img" src="/assets/img/winds-0.svg"/>
-                      </div>
-                  </div>
-              </div>
-              <div class="sensors-card-wrapper">
-                  <div class="sensors-card">
-                      <div class="title">HUMIDITY</div>
-                      <div class="marker">
-                          <img class="marker-img" src="/assets/img/humidity-0-1.svg"/>
-                      </div>
-                  </div>
-              </div>
-              <div class="sensors-card-wrapper">
-                  <div class="sensors-card">
-                      <div class="title">TEMPERATURE</div>
-                      <div class="marker">
-                          <img class="marker-img" src="/assets/img/temp-0.svg"/>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="ias map">
-              <img class="weather-stations-map" src="/assets/img/aos-map-weather_s.svg"/>
-          </div>
-          <!-- card-content -->
+          <app-overview-weather-card-content></app-overview-weather-card-content>
         </div>
       </app-overview-card>
     </div>

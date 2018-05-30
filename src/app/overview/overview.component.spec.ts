@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OverviewComponent } from './overview.component';
-
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
+
+import { OverviewWeatherCardContentComponent } from '../overview-weather-card-content/overview-weather-card-content.component';
 
 
 describe('OverviewComponent', () => {
@@ -13,7 +14,8 @@ describe('OverviewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         OverviewComponent,
-        OverviewCardComponent
+        OverviewCardComponent,
+        OverviewWeatherCardContentComponent
       ]
     })
     .compileComponents();
