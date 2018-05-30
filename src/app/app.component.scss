@@ -23,10 +23,7 @@
     }
 
     .title {
-      font-size: 22px;
-      padding-top: 2px;
-      padding-left: 16px;
-      padding-right: 16px;
+      font-size: 18px;
     }
 
     /deep/ nb-card {
@@ -49,6 +46,9 @@
         }
         nb-layout-header .menu-btn {
             font-size: 1.5rem;
+        }
+        nb-layout-header nav {
+          height: 3.25rem;
         }
     }
 
