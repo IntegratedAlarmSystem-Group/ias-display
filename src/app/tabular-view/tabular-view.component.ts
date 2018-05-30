@@ -16,15 +16,19 @@ import { AlarmService } from '../alarm.service';
 export class TabularViewComponent {
 
   displayedColumns = ['core_id', 'value', 'validity', 'mode'];
-  dataSource: AlarmsDataSource;
+  dataSource: MatTableDataSource<Alarm>;
   private alarmServiceSubscription: ISubscription;
+  public alarmsList: Alarm[] = [];
 
   constructor(private alarmService: AlarmService) {}
 
   ngOnInit() {
-    this.dataSource = new AlarmsDataSource(this.alarmService);
+    // this.dataSource = new AlarmsDataSource(this.alarmService);
+    this.dataSource = new MatTableDataSource();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      this.dataSource.loadAlarms();
+      let self = this.alarmService.alarms;
+      this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
+      this.dataSource.data = this.alarmsList;
     });
   }
   //
@@ -35,26 +39,26 @@ export class TabularViewComponent {
   // }
 }
 
-export class AlarmsDataSource extends DataSource<Alarm> {
-
-  private renderData = new BehaviorSubject<Alarm[]>([]);
-  public alarmsList: Alarm[] = [];
-
-  constructor(private alarmService: AlarmService) {
-    super();
-  }
-
-  connect(collectionViewer: CollectionViewer): BehaviorSubject<Alarm[]> {
-      return this.renderData;
-  }
-
-  disconnect(collectionViewer: CollectionViewer): void {
-      this.renderData.complete();
-  }
-
-  loadAlarms(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-    let self = this.alarmService.alarms;
-    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
-    this.renderData.next(this.alarmsList);
-  }
-}
+// export class AlarmsDataSource extends DataSource<Alarm> {
+//
+//   private renderData = new BehaviorSubject<Alarm[]>([]);
+//   public alarmsList: Alarm[] = [];
+//
+//   constructor(private alarmService: AlarmService) {
+//     super();
+//   }
+//
+//   connect(collectionViewer: CollectionViewer): BehaviorSubject<Alarm[]> {
+//       return this.renderData;
+//   }
+//
+//   disconnect(collectionViewer: CollectionViewer): void {
+//       this.renderData.complete();
+//   }
+//
+//   loadAlarms(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
+//     let self = this.alarmService.alarms;
+//     this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
+//     this.renderData.next(this.alarmsList);
+//   }
+// }
