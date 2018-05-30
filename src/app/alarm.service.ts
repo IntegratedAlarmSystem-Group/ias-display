@@ -239,4 +239,41 @@ export class AlarmService {
       this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
+
+  findElements(courseId:number, filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 3):  Observable<Alarm[]> {
+    return Observable.of(ALARM_DATA);
+  }
 }
+
+const ALARM_DATA: Alarm[] = [
+  Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 0,
+    'core_timestamp': 10000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  }),
+  Alarm.asAlarm({
+    'value': 1,
+    'core_id': 'coreid$2',
+    'running_id': 'coreid$2',
+    'mode': 0,
+    'core_timestamp': 10000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  }),
+  Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'coreid$3',
+    'running_id': 'coreid$3',
+    'mode': 0,
+    'core_timestamp': 10000,
+    'validity': 1,
+    'ack': false,
+    'dependencies': [],
+  })
+];
