@@ -16,18 +16,18 @@ import { AlarmService } from '../alarm.service';
 export class TabularViewComponent {
 
   displayedColumns = ['core_id', 'value', 'validity', 'mode'];
-  dataSource: ElementsDataSource;
+  dataSource: AlarmsDataSource;
   private alarmServiceSubscription: ISubscription;
 
   constructor(private alarmService: AlarmService) {}
 
   ngOnInit() {
-    this.dataSource = new ElementsDataSource(this.alarmService);
+    this.dataSource = new AlarmsDataSource(this.alarmService);
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.dataSource.loadAlarms();
     });
   }
-
+  //
   // applyFilter(filterValue: string) {
   //   filterValue = filterValue.trim(); // Remove whitespace
   //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -35,28 +35,26 @@ export class TabularViewComponent {
   // }
 }
 
-export class ElementsDataSource implements DataSource<Alarm> {
+export class AlarmsDataSource extends DataSource<Alarm> {
 
-  private elementsSubject = new BehaviorSubject<Alarm[]>([]);
-  private loadingSubject = new BehaviorSubject<boolean>(false);
-  public loading$ = this.loadingSubject.asObservable();
+  private renderData = new BehaviorSubject<Alarm[]>([]);
   public alarmsList: Alarm[] = [];
 
-  constructor(private alarmService: AlarmService) {}
+  constructor(private alarmService: AlarmService) {
+    super();
+  }
 
-  connect(collectionViewer: CollectionViewer): Observable<Alarm[]> {
-      return this.elementsSubject.asObservable();
+  connect(collectionViewer: CollectionViewer): BehaviorSubject<Alarm[]> {
+      return this.renderData;
   }
 
   disconnect(collectionViewer: CollectionViewer): void {
-      this.elementsSubject.complete();
-      this.loadingSubject.complete();
+      this.renderData.complete();
   }
 
   loadAlarms(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-    this.loadingSubject.next(true);
     let self = this.alarmService.alarms;
     this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
-    this.elementsSubject.next(this.alarmsList);
+    this.renderData.next(this.alarmsList);
   }
 }
