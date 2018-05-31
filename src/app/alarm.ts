@@ -80,6 +80,7 @@ export class Alarm {
       json.hasOwnProperty("running_id") &&
       json.hasOwnProperty("mode") &&
       json.hasOwnProperty("core_timestamp") &&
+      // json.hasOwnProperty("state_change_timestamp") &&
       json.hasOwnProperty("validity") &&
       json.hasOwnProperty("ack") &&
       json.hasOwnProperty("dependencies")
@@ -107,6 +108,23 @@ export class Alarm {
     let dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
       state_change_timestamp, validity, ack, dependencies });
+  }
+
+  /**
+  * Returns a Date representation of the {@link Alarm.state_change_timestamp}
+  * attribute
+  *
+  * @returns {Date} a date format representation of the Alarm
+  * state_change_timestamp
+  */
+  get timestamp(): Date {
+    return this.getStateChangeTimestampAsDate();
+  }
+
+  getStateChangeTimestampAsDate(): Date {
+    let ts = this.state_change_timestamp;
+    let date: Date = new Date(ts);
+    return date;
   }
 
   /**
@@ -160,20 +178,4 @@ export class Alarm {
 
     return date;
   }
-
-  /**
-  * Returns a Date representation of the {@link Alarm.state_change_timestamp}
-  * attribute
-  *
-  * @returns {Date} a date format representation of the Alarm
-  * state_change_timestamp
-  */
-  getStateChangeTimestampAsDate(): Date {
-
-    let ts = this.state_change_timestamp;
-    let date: Date = new Date(ts);
-
-    return date;
-  }
-
 }
