@@ -17,7 +17,7 @@ import { CdbService } from '../cdb.service';
 })
 export class TabularViewComponent {
 
-  private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description'];
+  private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
   private dateFormat = "M/d/yy, h:mm:ss a";
   private dataSource: MatTableDataSource<DisplayedAlarm>;
   private alarmServiceSubscription: ISubscription;
