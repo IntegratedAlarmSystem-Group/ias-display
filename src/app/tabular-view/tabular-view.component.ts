@@ -12,7 +12,7 @@ import { AlarmService } from '../alarm.service';
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
-  styleUrls: ['./tabular-view.component.css']
+  styleUrls: ['./tabular-view.component.css', './tabular-view.component.scss']
 })
 export class TabularViewComponent {
 
