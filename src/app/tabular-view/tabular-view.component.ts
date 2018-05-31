@@ -2,7 +2,7 @@ import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISubscription } from "rxjs/Subscription";
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
@@ -17,13 +17,13 @@ import { CdbService } from '../cdb.service';
 })
 export class TabularViewComponent {
 
+  @ViewChild(MatSort) sort: MatSort;
   private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
   private dateFormat = "M/d/yy, h:mm:ss a";
   private dataSource: MatTableDataSource<DisplayedAlarm>;
   private alarmServiceSubscription: ISubscription;
   private cdbServiceSubscription: ISubscription;
   public iasDataAvailable = new BehaviorSubject<any>(false);
-
   public alarmsList: DisplayedAlarm[] = [];
 
   public filterPredicate: ((data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
@@ -43,6 +43,10 @@ export class TabularViewComponent {
     private cdbService: CdbService) {}
 
   ngOnInit() {
+    this.sort.sort(<MatSortable> {
+      id: 'status',
+      start: 'asc'
+    });
     this.dataSource = new MatTableDataSource();
     this.dataSource.filterPredicate = this.filterPredicate;
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
@@ -70,8 +74,6 @@ export class TabularViewComponent {
     }
   }
 
-  @ViewChild(MatSort) sort: MatSort;
-
   /**
    * Set the sort after the view init since this component will
    * be able to query its view for the initialized sort.
@@ -82,8 +84,8 @@ export class TabularViewComponent {
 
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 }
