@@ -13,19 +13,18 @@
       cursor: pointer;
     }
 
-    .logo-container {
-      padding-bottom: 2px;
+    .menu-sidebar {
+      margin-top: 2rem;
     }
 
-    .logo-container > img {
-      width: 42px;
+    .nb-sidebar-header {
+      padding: 1.25rem;
+      padding-bottom: 4px;
+      height: initial;
     }
 
     .title {
-      font-size: 22px;
-      padding-top: 2px;
-      padding-left: 16px;
-      padding-right: 16px;
+      font-size: 18px;
     }
 
     /deep/ nb-card {
@@ -49,6 +48,43 @@
         nb-layout-header .menu-btn {
             font-size: 1.5rem;
         }
+        nb-layout-header nav {
+          height: 3.25rem;
+        }
     }
 
+}
+
+nb-sidebar.menu-sidebar {
+
+  .ias.ias-logo-container {
+    display: table;
+    background: #3d628f;
+    width: 100%;
+    padding: .75rem 2.5rem;
+    margin-top: -2rem;
+    border-radius: 4px;
+  }
+
+  img.ias.ias-logo {
+    width: 40px;
+  }
+
+  &.compacted {
+
+    .ias.ias-logo-container {
+      position: relative;
+      top: 0px;
+      left: -12px;
+      padding: 2px;
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      min-width: 42px;
+    }
+
+    img.ias.ias-logo {
+      width: 30px;
+    }
+
+  }
 }

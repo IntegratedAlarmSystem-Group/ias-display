@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   title = 'Integrated Alarm System';
 
   menu: NbMenuItem[] = [
-    { title: 'Alarms', link: '/alarms', icon:'ion-ios-list-box-outline'},
+    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline'},
+    { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
   ];
 
   constructor(

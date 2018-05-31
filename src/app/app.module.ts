@@ -36,10 +36,14 @@ import { TabularViewComponent } from './tabular-view/tabular-view.component';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
          MatSortModule, MatTableModule } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OverviewComponent } from './overview/overview.component';
+import { OverviewCardComponent } from './overview-card/overview-card.component';
+import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'alarms', pathMatch: 'full' },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  { path:'overview', component: OverviewComponent },
   { path:'alarms', component: AlarmsTableComponent },
   { path:'tabular', component: TabularViewComponent },
   { path:'modal', component: AckModalComponent }
@@ -56,6 +60,9 @@ const appRoutes: Routes = [
     StatusViewComponent,
     AckModalComponent,
     TabularViewComponent,
+    OverviewComponent,
+    OverviewCardComponent,
+    OverviewWeatherCardContentComponent
   ],
   imports: [
     BrowserModule,

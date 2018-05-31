@@ -7,12 +7,12 @@ $nb-themes: nb-register-theme((
 
     font-size-header: 1.4rem,
 
-    color-bg: #324459,
+    color-bg: #2e445c,  // background for sidebar and top navbar
     color-bg-active: #40dc7e,
     color-fg: #a4abb3,
     color-fg-heading: #ffffff,
     color-fg-text: #ffffff,
-    color-fg-highlight: white,
+    color-fg-highlight: #4ac8ff,
 
     shadow: none,
 
@@ -21,9 +21,11 @@ $nb-themes: nb-register-theme((
     menu-active-fg: white,
     menu-item-separator: none,
 
-    menu-icon-active-color: white,
-    menu-icon-color: white,
+    menu-icon-active-color: #4ac8ff,
+    menu-icon-color: rgba(74, 200, 250, 0.5),
 
-    smart-table-separator: none
+    layout-bg: #282e38,
+
+    smart-table-separator: none,
 
 ), alma, default); // let's leave it as default
