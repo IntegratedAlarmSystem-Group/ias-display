@@ -26,6 +26,12 @@ export class DisplayedAlarm {
     this._alarm = alarm;
   }
 
+  /** Returns the instance of the {@link Alarm}*/
+  get alarm(): Alarm {
+    console.log('I am the getter ALARM:', this._alarm);
+    return this._alarm;
+  }
+
   /** Reference to the short description associated to the {@link Alarm}*/
   set description(description: string) {
     this._description = description;

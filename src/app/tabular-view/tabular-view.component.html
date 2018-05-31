@@ -61,6 +61,16 @@
         <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
       </ng-container>
 
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Actions </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm">
+          <app-ack-button alarm_id={{alarm.name}}></app-ack-button>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

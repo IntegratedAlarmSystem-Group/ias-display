@@ -39,6 +39,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
+import { AckButtonComponent } from './ack-button/ack-button.component';
 
 
 const appRoutes: Routes = [
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     TabularViewComponent,
     OverviewComponent,
     OverviewCardComponent,
-    OverviewWeatherCardContentComponent
+    OverviewWeatherCardContentComponent,
+    AckButtonComponent
   ],
   imports: [
     BrowserModule,
