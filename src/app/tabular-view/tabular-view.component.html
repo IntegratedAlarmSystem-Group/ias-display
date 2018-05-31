@@ -12,9 +12,9 @@
   <nb-card-body>
 
     <!-- <div class="example-header"> -->
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-      </mat-form-field>
+      <span mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
+      </span>
     <!-- </div> -->
 
     <mat-table #table [dataSource]="dataSource" matSort>
