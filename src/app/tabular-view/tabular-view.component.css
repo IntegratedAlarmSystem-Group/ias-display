@@ -22,10 +22,7 @@
 
 .mat-header-cell {
   padding-top: 20px;
-  padding-left: 14px;
-  /* padding-right: 28px; */
   padding-bottom: 14px;
-  text-align: center;
 }
 
 .mat-header-row {
@@ -49,5 +46,4 @@
 }
 
 .mat-row>.mat-cell {
-  text-align: center;
 }
