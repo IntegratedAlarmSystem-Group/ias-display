@@ -24,7 +24,9 @@
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Status </span>
         </mat-header-cell>
-        <mat-cell *matCellDef="let alarm"> {{alarm.value}} </mat-cell>
+        <mat-cell *matCellDef="let alarm">
+          <app-status-view value={{alarm.status}}></app-status-view>
+        </mat-cell>
       </ng-container>
 
       <!-- Monitoring Point Column -->

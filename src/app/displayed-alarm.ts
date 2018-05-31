@@ -53,12 +53,97 @@ export class DisplayedAlarm {
 
   /** Returns the summarized status of the {@link Alarm}*/
   get status(): string {
-    return this._alarm.getValueAsString();
+    return this.getAlarmStatusTagsString();
   }
 
   toStringForFiltering(): string {
     return [
       this.status, this.description, this.name, this.mode, this.timestamp
     ].join(" ");
+  }
+
+  /**
+  * Return Alarm status tags
+  */
+  getAlarmStatusTagsString(): string {
+    let alarm = this._alarm;
+    let value_tags = alarm.getValueAsString().split('_');
+    let value = value_tags[0];
+    let priority = value_tags[1];
+    let validity = alarm.getValidityAsString();
+    let ack = alarm.ack;
+    let order = this.getAlarmStatusOrder(value, priority, validity, ack);
+
+    let tags = [];
+    tags.push(order);
+    tags.push(alarm.getModeAsString());
+    tags.push(value);
+    if (priority != undefined) {
+      tags.push(priority);
+    }
+    tags.push(validity);
+    if (alarm.ack){
+      tags.push('ack');
+    }
+    return tags.join('-');
+  }
+
+  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): string {
+    let order = 0;
+    let priorities = ['critical', 'high', 'medium', 'low'];
+
+    // SET:
+    if (value == 'set') {
+      if (validity == 'reliable') {
+        if (ack == false) {
+          order = priorities.indexOf(priority);
+        }
+        else {
+          order = 4 + priorities.indexOf(priority);
+        }
+      }
+      else {
+        if (ack == false) {
+          order = 8 + priorities.indexOf(priority);
+        }
+        else {
+          order = 12 + priorities.indexOf(priority);
+        }
+      }
+    }
+    // CLEARED:
+    else {
+      if (validity == 'reliable') {
+        if (ack == false) {
+          order = 16;
+        }
+        else {
+          order = 17;
+        }
+      }
+      else {
+        if (ack == false) {
+          order = 18;
+        }
+        else {
+          order = 19;
+        }
+      }
+    }
+    if (order < 10) {
+      return ("0" + order);
+    }
+    else {
+      return ("" + order);
+    }
+  }
+
+  getPriorityNumber(priority: string) {
+    let priorities = ['critical', 'high', 'medium', 'low'];
+    return priorities.indexOf(priority);
+  }
+
+  arrayHasElement(array, element) {
+    return array.indexOf(element) > -1 ? true : false;
   }
 }
