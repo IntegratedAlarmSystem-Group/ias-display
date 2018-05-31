@@ -5,6 +5,7 @@ import { ISubscription } from "rxjs/Subscription";
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { Alarm, OperationalMode, Validity } from '../alarm';
+import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
 
 
@@ -15,20 +16,35 @@ import { AlarmService } from '../alarm.service';
 })
 export class TabularViewComponent {
 
-  // displayedColumns = ['monitoring point', 'value', 'validity', 'mode'];
-  displayedColumns = ['status', 'core_id',  'mode', 'timestamp', 'description'];
-  dataSource: MatTableDataSource<Alarm>;
+  private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description'];
+  private dateFormat = "M/d/yy, h:mm:ss a";
+  private dataSource: MatTableDataSource<DisplayedAlarm>;
   private alarmServiceSubscription: ISubscription;
-  public alarmsList: Alarm[] = [];
+
+  public alarmsList: DisplayedAlarm[] = [];
+
+  public filterPredicate: ((data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
+    const dataStr = data.toStringForFiltering().toLowerCase();
+    const filters = filterString.toLowerCase().split(" ");
+    for (let filter of filters) {
+      if (dataStr.indexOf(filter) == -1){
+        return false;
+      }
+    }
+    return true;
+  }
+
 
   constructor(private alarmService: AlarmService) {}
 
   ngOnInit() {
-    // this.dataSource = new AlarmsDataSource(this.alarmService);
     this.dataSource = new MatTableDataSource();
+    this.dataSource.filterPredicate = this.filterPredicate;
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       let self = this.alarmService.alarms;
-      this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
+      this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
+        return new DisplayedAlarm(self[key], null);
+      });
       this.dataSource.data = this.alarmsList;
     });
   }
@@ -50,27 +66,3 @@ export class TabularViewComponent {
     this.dataSource.filter = filterValue;
   }
 }
-
-// export class AlarmsDataSource extends DataSource<Alarm> {
-//
-//   private renderData = new BehaviorSubject<Alarm[]>([]);
-//   public alarmsList: Alarm[] = [];
-//
-//   constructor(private alarmService: AlarmService) {
-//     super();
-//   }
-//
-//   connect(collectionViewer: CollectionViewer): BehaviorSubject<Alarm[]> {
-//       return this.renderData;
-//   }
-//
-//   disconnect(collectionViewer: CollectionViewer): void {
-//       this.renderData.complete();
-//   }
-//
-//   loadAlarms(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-//     let self = this.alarmService.alarms;
-//     this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){ return self[key]; });
-//     this.renderData.next(this.alarmsList);
-//   }
-// }

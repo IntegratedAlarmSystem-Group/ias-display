@@ -11,37 +11,34 @@
   </nb-card-header>
   <nb-card-body>
 
+    <!-- <div class="example-header"> -->
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    <!-- </div> -->
+
     <mat-table #table [dataSource]="dataSource" matSort>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Status </span>
-          <span mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.value}} </mat-cell>
       </ng-container>
 
       <!-- Monitoring Point Column -->
-      <ng-container matColumnDef="core_id">
+      <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Monitoring Point </span>
-          <span mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </span>
+          <span mat-sort-header> Alarm Name </span>
         </mat-header-cell>
-        <mat-cell *matCellDef="let alarm"> {{alarm.core_id}} </mat-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>
       </ng-container>
 
       <!-- Mode Column -->
       <ng-container matColumnDef="mode">
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Mode </span>
-          <span mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.mode}} </mat-cell>
       </ng-container>
@@ -50,20 +47,14 @@
       <ng-container matColumnDef="timestamp">
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Last Change Time </span>
-          <span mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </span>
         </mat-header-cell>
-        <mat-cell *matCellDef="let alarm"> {{alarm.timestamp}} </mat-cell>
+        <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat }} </mat-cell>
       </ng-container>
 
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Description </span>
-          <span mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.validity}} </mat-cell>
       </ng-container>
