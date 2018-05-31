@@ -62,6 +62,11 @@ export class DisplayedAlarm {
     return this.getAlarmStatusTagsString();
   }
 
+  /** Returns the url of the documentation for the {@link Alarm}*/
+  get url(): string {
+    return "http://www.inria.cl";
+  }
+
   toStringForFiltering(): string {
     return [
       this.status, this.description, this.name, this.mode, this.timestamp

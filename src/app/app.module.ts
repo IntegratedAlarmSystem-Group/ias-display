@@ -40,6 +40,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
 import { AckButtonComponent } from './ack-button/ack-button.component';
+import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 
 
 const appRoutes: Routes = [
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     OverviewCardComponent,
     OverviewWeatherCardContentComponent,
-    AckButtonComponent
+    AckButtonComponent,
+    WikiButtonComponent
   ],
   imports: [
     BrowserModule,
