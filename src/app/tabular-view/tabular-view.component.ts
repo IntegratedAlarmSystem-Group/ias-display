@@ -16,7 +16,7 @@ import { AlarmService } from '../alarm.service';
 export class TabularViewComponent {
 
   // displayedColumns = ['monitoring point', 'value', 'validity', 'mode'];
-  displayedColumns = ['status', 'monitoring point',  'mode', 'timestamp', 'description'];
+  displayedColumns = ['status', 'core_id',  'mode', 'timestamp', 'description'];
   dataSource: MatTableDataSource<Alarm>;
   private alarmServiceSubscription: ISubscription;
   public alarmsList: Alarm[] = [];
