@@ -54,7 +54,7 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
           </span>
         </mat-header-cell>
-        <mat-cell *matCellDef="let alarm"> {{alarm.getStateChangeTimestampAsDate()}} </mat-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.timestamp}} </mat-cell>
       </ng-container>
 
       <!-- Description Column -->
