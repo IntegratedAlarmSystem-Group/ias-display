@@ -32,7 +32,7 @@ export class TabularViewComponent {
     const dataStr = data.toStringForFiltering().toLowerCase();
     const filters = filterString.toLowerCase().split(" ");
     for (let filter of filters) {
-      if (dataStr.indexOf(filter) == -1){
+      if (dataStr.indexOf(filter) == -1) {
         return false;
       }
     }
@@ -55,24 +55,29 @@ export class TabularViewComponent {
     this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
       value => {
         this.iasDataAvailable.next(value);
+        this.loadTable();
       }
     );
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      let self = this;
-      this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
-        const dataFromCdb = self.getAlarmDataFromCdbService(self.alarmService.alarms[key].core_id);
-        return new DisplayedAlarm(
-          self.alarmService.alarms[key],
-          dataFromCdb.description,
-          dataFromCdb.url
-        );
-      });
-      this.dataSource.data = this.alarmsList;
+      this.loadTable();
     });
     this.filterString = this.route.snapshot.paramMap.get('filter');
     if (this.filterString){
       this.applyFilter(this.filterString);
     }
+  }
+
+  loadTable() {
+    let self = this;
+    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
+      const dataFromCdb = self.getAlarmDataFromCdbService(self.alarmService.alarms[key].core_id);
+      return new DisplayedAlarm(
+        self.alarmService.alarms[key],
+        dataFromCdb.description,
+        dataFromCdb.url
+      );
+    });
+    this.dataSource.data = this.alarmsList;
   }
 
   getAlarmDataFromCdbService(core_id: string) {
