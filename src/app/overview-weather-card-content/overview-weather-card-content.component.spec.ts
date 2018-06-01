@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
 
-describe('OverviewWeatherCardContentComponent', () => {
+xdescribe('OverviewWeatherCardContentComponent', () => {
   let component: OverviewWeatherCardContentComponent;
   let fixture: ComponentFixture<OverviewWeatherCardContentComponent>;
 
