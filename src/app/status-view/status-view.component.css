@@ -44,10 +44,6 @@
   background: transparent;
 }
 
-.low-opacity {
-  opacity: 0.5;
-}
-
 .blink {
   -webkit-animation: BLINK 1s infinite;
   -moz-animation:    BLINK 1s infinite;

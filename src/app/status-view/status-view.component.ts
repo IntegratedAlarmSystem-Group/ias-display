@@ -9,18 +9,6 @@ import { OperationalMode } from '../alarm';
 })
 export class StatusViewComponent implements ViewCell, OnInit {
 
-  /**
-  * Auxiliary list with non principal alarm modes
-  */
-  secondaryModes = [
-    OperationalMode.startup,
-    OperationalMode.initialization,
-    OperationalMode.closing,
-    OperationalMode.shuttedown
-  ];
-
-  secondaryModesTags = [];
-
   alarmTags = [];
 
   @Input() value: string | number;
@@ -32,7 +20,7 @@ export class StatusViewComponent implements ViewCell, OnInit {
   getContainerStyle(): any{
     let style = ['alarm-status'];
 
-    if (this.hasTag('maintenance')) {
+    if (this.hasTag('maintenance') || this.hasTag('shuttedown')) {
       style.push('status-maintenance');
     } else if (this.hasTag('unknown')) {
       style.push('status-unknown');
@@ -48,10 +36,6 @@ export class StatusViewComponent implements ViewCell, OnInit {
 
     if (this.hasTag('unreliable')) {
       style.push('status-unreliable');
-    }
-
-    if (this.hasSecondaryOperationalModeTag()){
-      style.push('low-opacity');
     }
 
     if (!this.hasTag('ack')) {
@@ -95,16 +79,6 @@ export class StatusViewComponent implements ViewCell, OnInit {
     return this.alarmTags.indexOf(tag) > -1 ? true : false;
   }
 
-  hasSecondaryOperationalModeTag(){
-    let found = false;
-    for (let tag of this.alarmTags){
-      if (this.secondaryModesTags.indexOf(tag) > -1){
-        found = true;
-      }
-    }
-    return found;
-  }
-
   ngOnInit(){
     let tags = this.value.toString().split("-");
     if (tags.length >= 2) {
@@ -114,9 +88,6 @@ export class StatusViewComponent implements ViewCell, OnInit {
     } else {
         this.alarmTags = [];
     }
-    for (let mode of this.secondaryModes){
-      this.secondaryModesTags.push(OperationalMode[mode]);
-    }  // TODO: Evaluate refactor to get secondary modes names
   }
 
 }
