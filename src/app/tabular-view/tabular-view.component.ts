@@ -22,6 +22,7 @@ export class TabularViewComponent {
   private filterString: string = null;
   private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
   private dateFormat = "M/d/yy, h:mm:ss a";
+  private filterValueForSetAlarms = "set";
   private dataSource: MatTableDataSource<DisplayedAlarm>;
   private alarmServiceSubscription: ISubscription;
   private cdbServiceSubscription: ISubscription;
@@ -67,6 +68,14 @@ export class TabularViewComponent {
     }
   }
 
+  /**
+   * Set the sort after the view init since this component will
+   * be able to query its view for the initialized sort.
+   */
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
   loadTable() {
     let self = this;
     this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
@@ -95,18 +104,28 @@ export class TabularViewComponent {
     }
   }
 
-  /**
-   * Set the sort after the view init since this component will
-   * be able to query its view for the initialized sort.
-   */
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  changeFilterOnlySetAlarm(filter: boolean) {
+    let filterValue1 = " " + this.filterValueForSetAlarms;
+    let filterValue2 = this.filterValueForSetAlarms + " ";
+    if (filter) {
+      if( this.filterString.indexOf(filterValue1) < 0 &&
+          this.filterString.indexOf(filterValue2) < 0
+      ) {
+        this.filterString =  this.filterString + filterValue1;
+      }
+    } else {
+      if( this.filterString.indexOf(filterValue1) >= 0 ) {
+        this.filterString.replace(filterValue1, "");
+      }
+      else if (this.filterString.indexOf(filterValue2) >= 0 ) {
+        this.filterString.replace(filterValue2, "");
+    }
+
   }
 }
