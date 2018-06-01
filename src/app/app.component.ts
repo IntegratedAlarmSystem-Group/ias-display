@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
 
   menu: NbMenuItem[] = [
     { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline'},
-    { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
     { title: 'Table', link: '/tabular', icon:'ion-ios-list'},
+    // { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
   ];
 
   constructor(

@@ -11,11 +11,13 @@
   </nb-card-header>
   <nb-card-body>
 
-    <!-- <div class="example-header"> -->
-      <span mat-form-field>
-        <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
-      </span>
-    <!-- </div> -->
+    <!-- <mat-slide-toggle>
+      All / Set only
+    </mat-slide-toggle> -->
+
+    <mat-form-field>
+      <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
 
     <mat-table #table [dataSource]="dataSource" matSort>
 
