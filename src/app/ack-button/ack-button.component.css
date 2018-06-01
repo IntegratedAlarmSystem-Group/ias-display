@@ -1,0 +1,10 @@
+.ack-button {
+  color: #4ac8ff;
+  background-color: unset;
+  border: 0;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  outline: none;
+}

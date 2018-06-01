@@ -1,0 +1,13 @@
+.wiki-button {
+  background-color: unset;
+  border: 0;
+  color: #4ac8ff;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.wiki-link {
+  text-decoration: underline;
+}
