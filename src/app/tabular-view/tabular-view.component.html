@@ -15,6 +15,10 @@
       All / Set only
     </mat-slide-toggle> -->
 
+    <button title="Toggle Set Only" mat-raised-button (click)="toggleFilterOnlySetAlarm()">
+        Toggle Filtering of Set Alarms only
+    </button>
+
     <span mat-form-field>
       <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
     </span>
