@@ -38,19 +38,14 @@
   .mat-header-cell .cdk-visually-hidden {
     display: block;
     color: #fafafa;
-    font-size: 12px;
+    font-size: 10px;
     padding-top: 4px;
   }
 
   /* Styles by column */
 
-  .mat-header-cell.mat-column-status {
-    text-align: center !important;
-    padding-left: 4px;
-  }
-
   .mat-column-status {
-    flex: 0 0 10% !important;
+    flex: 0 0 12% !important;
   }
 
   .mat-column-name {
@@ -58,15 +53,21 @@
   }
 
   .mat-column-mode {
-    flex: 0 0 10% !important;
+    flex: 0 0 13% !important;
   }
 
   .mat-column-timestamp {
-    flex: 0 0 20% !important;
+    flex: 0 0 15% !important;
   }
 
   .mat-column-description {
-    flex: 0 0 40% !important;
+    flex: 0 0 25% !important;
   }
+
+  .mat-column-actions {
+    flex: 0 0 15% !important;
+    text-align: center !important;
+  }
+
 
 }
