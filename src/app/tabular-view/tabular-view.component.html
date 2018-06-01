@@ -17,13 +17,22 @@
       All / Set only
     </mat-slide-toggle> -->
 
-    <button title="Toggle Set Only" mat-raised-button (click)="toggleFilterOnlySetAlarm()">
-        Toggle Filtering of Set Alarms only
-    </button>
-
-    <span mat-form-field>
-      <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
-    </span>
+    <div class="row">
+      <div class="col-md-9">
+        <span mat-form-field>
+          <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
+        </span>
+      </div>
+      <div class="col-md-3">
+        <div class="ias checkbox container show-set-alarms">
+          <!-- <input id="set-checkbox" type="checkbox" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()"> -->
+          <label class="ias-checkbox"> Show only set alarms
+            <input type="checkbox" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
+            <span class="ias-checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
 
     <mat-table #table [dataSource]="dataSource" matSort>
 
