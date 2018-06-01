@@ -3,6 +3,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs/Observable';
 import { AckModalComponent } from './ack-modal.component';
 import { HttpClientService } from '../http-client.service';
@@ -35,11 +37,13 @@ describe('AckModalComponent', () => {
         HttpClient,
         AlarmService,
         CdbService,
+        NgxSpinnerService
       ],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
+        NgxSpinnerModule
       ],
     })
     .compileComponents();

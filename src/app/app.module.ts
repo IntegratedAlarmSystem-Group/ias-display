@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import {
   MatInputModule,
   MatPaginatorModule,
@@ -89,7 +90,8 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxSpinnerModule
   ],
   providers: [
     HttpClientService,
