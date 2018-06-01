@@ -146,57 +146,45 @@ export class TabularViewComponent {
   * Applies the filter ot the Table
   * @param {string} filterValue the string containing keywords for filtering
   */
-  applyFilter(filterValue: string) {
-    this.filterString = filterValue;
-    // If "set" IS in the field, then it is activated
-    if (this.filterString.indexOf(this.filterValueForSetAlarms) >= 0 ) {
+  applyFilter(filter: string) {
+    this.filterString = filter;
+    let arrayOfFilters = filter.split(' ');
+    // If "set" IS in the array, then it is activated
+    if (arrayOfFilters.indexOf(this.filterValueForSetAlarms) >= 0 ) {
       this._setFilterActivated = true;
     }
     // If "set" NOT in the field, then it is deactivated
     else {
       this._setFilterActivated = false;
     }
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+    filter = filter.trim();
+    filter = filter.toLowerCase();
+    this.dataSource.filter = filter;
   }
 
   /**
   * Toggle the filtering for only set {@link Alarm} objects ON/OFF
   */
   toggleFilterOnlySetAlarm() {
-    // this._setFilterActivated = !this._setFilterActivated;
     if (this.filterString == null) {
       this.filterString = "";
     }
-    let filterValue1 = " " + this.filterValueForSetAlarms;
-    let filterValue2 = this.filterValueForSetAlarms + " ";
+    let arrayOfFilters = this.filterString.split(' ');
+    let indexOfSet = arrayOfFilters.indexOf(this.filterValueForSetAlarms)
 
     // If activated then should deactivate:
     if (this._setFilterActivated) {
-      // Case when field contains exactly "set":
-      if (this.filterString.length == this.filterValueForSetAlarms.length &&
-          this.filterString.indexOf(this.filterValueForSetAlarms) >= 0
-      ){
-        this.filterString = this.filterString.replace(this.filterValueForSetAlarms, "");
-      }
-      // Case when field contains exactly " set":
-      else if( this.filterString.indexOf(filterValue1) >= 0 ) {
-        this.filterString = this.filterString.replace(filterValue1, "");
-      }
-      // Case when field contains exactly "set ":
-      else if (this.filterString.indexOf(filterValue2) >= 0 ) {
-        this.filterString = this.filterString.replace(filterValue2, "");
-      }
-
-    // If deactivated then should activate:
-    } else {
-      if( this.filterString.indexOf(filterValue1) < 0 &&
-          this.filterString.indexOf(filterValue2) < 0
-      ) {
-        this.filterString =  this.filterString + filterValue1;
+      if ( indexOfSet >= 0 ) {
+        arrayOfFilters.splice(indexOfSet, 1);
       }
     }
+    // If deactivated then should activate:
+    else {
+      if ( indexOfSet < 0 ) {
+        arrayOfFilters.push(this.filterValueForSetAlarms);
+      }
+    }
+    this.filterString = arrayOfFilters.join(' ');
     this.applyFilter(this.filterString);
   }
 }
