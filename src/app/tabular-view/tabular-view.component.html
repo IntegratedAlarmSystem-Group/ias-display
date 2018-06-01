@@ -15,9 +15,9 @@
       All / Set only
     </mat-slide-toggle> -->
 
-    <mat-form-field>
-      <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+    <span mat-form-field>
+      <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
+    </span>
 
     <mat-table #table [dataSource]="dataSource" matSort>
 
