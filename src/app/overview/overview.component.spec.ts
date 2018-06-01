@@ -6,7 +6,7 @@ import { OverviewCardComponent } from '../overview-card/overview-card.component'
 import { OverviewWeatherCardContentComponent } from '../overview-weather-card-content/overview-weather-card-content.component';
 
 
-describe('OverviewComponent', () => {
+xdescribe('OverviewComponent', () => {
   let component: OverviewComponent;
   let fixture: ComponentFixture<OverviewComponent>;
 
