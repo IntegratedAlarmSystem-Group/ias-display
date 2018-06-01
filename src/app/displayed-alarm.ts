@@ -11,14 +11,18 @@ export class DisplayedAlarm {
   /** The short description associated to the {@link Alarm}*/
   private _description: string
 
+  /** The url for the documentation associated to the {@link Alarm}*/
+  private _url: string
+
   /**
   * The "constructor"
   *
   * @param {Alarm} alarm the alarm to display
   */
-  constructor(alarm: Alarm, description: string){
+  constructor(alarm: Alarm, description: string, url: string){
     this._alarm = alarm;
     this._description = description;
+    this._url = url;
   }
 
   /** Reference to the {@link Alarm} to display*/
@@ -28,7 +32,6 @@ export class DisplayedAlarm {
 
   /** Returns the instance of the {@link Alarm}*/
   get alarm(): Alarm {
-    console.log('I am the getter ALARM:', this._alarm);
     return this._alarm;
   }
 
@@ -40,6 +43,16 @@ export class DisplayedAlarm {
   /** Returns the short description of the {@link Alarm}*/
   get description(): string {
     return this._description;
+  }
+
+  /** Reference to the url associated to the {@link Alarm}*/
+  set url(url: string) {
+    this._url = url;
+  }
+
+  /** Returns the url of the documentation for the {@link Alarm}*/
+  get url(): string {
+    return this._url;
   }
 
   /** Returns the core_id of the {@link Alarm}*/
@@ -60,11 +73,6 @@ export class DisplayedAlarm {
   /** Returns the summarized status of the {@link Alarm}*/
   get status(): string {
     return this.getAlarmStatusTagsString();
-  }
-
-  /** Returns the url of the documentation for the {@link Alarm}*/
-  get url(): string {
-    return "http://www.inria.cl";
   }
 
   toStringForFiltering(): string {

@@ -1,9 +1,10 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISubscription } from "rxjs/Subscription";
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
+import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
@@ -18,6 +19,7 @@ import { CdbService } from '../cdb.service';
 export class TabularViewComponent {
 
   @ViewChild(MatSort) sort: MatSort;
+  private filterString: string = null;
   private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
   private dateFormat = "M/d/yy, h:mm:ss a";
   private dataSource: MatTableDataSource<DisplayedAlarm>;
@@ -40,7 +42,8 @@ export class TabularViewComponent {
 
   constructor(
     private alarmService: AlarmService,
-    private cdbService: CdbService) {}
+    private cdbService: CdbService,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.sort.sort(<MatSortable> {
@@ -57,17 +60,27 @@ export class TabularViewComponent {
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       let self = this;
       this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
+        const dataFromCdb = self.getAlarmDataFromCdbService(self.alarmService.alarms[key].core_id);
         return new DisplayedAlarm(
           self.alarmService.alarms[key],
-          self.getAlarmDescription(self.alarmService.alarms[key].core_id));
+          dataFromCdb.description,
+          dataFromCdb.url
+        );
       });
       this.dataSource.data = this.alarmsList;
     });
+    this.filterString = this.route.snapshot.paramMap.get('filter');
+    if (this.filterString){
+      this.applyFilter(this.filterString);
+    }
   }
 
-  getAlarmDescription(core_id: string) {
+  getAlarmDataFromCdbService(core_id: string) {
     if (this.iasDataAvailable.getValue() === true) {
-      return this.cdbService.getAlarmDescription(core_id);
+      return {
+        description: this.cdbService.getAlarmDescription(core_id),
+        url: this.cdbService.getAlarmsInformationUrl()
+      };
     }
     else {
       return "";
