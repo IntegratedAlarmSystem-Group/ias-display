@@ -28,9 +28,6 @@
 .mat-header-row {
   border-bottom-style: hidden;
   background: #2e445c;
-  position: sticky;
-  top: 0;
-  z-index: 9999;
 }
 
 .mat-row {
