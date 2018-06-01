@@ -1,3 +1,7 @@
+.ias.content{
+    cursor: pointer;
+}
+
 .ias.sensors{
     display: inline-block;
     background: #33475a;
