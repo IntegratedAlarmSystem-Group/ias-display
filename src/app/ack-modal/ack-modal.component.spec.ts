@@ -104,7 +104,7 @@ describe('AckModalComponent', () => {
 
   // Information
   it('should display the Alarm ID', () => {
-    expect(modalBody.textContent).toContain(alarm.core_id);
+    expect(modalHeader.textContent).toContain(alarm.core_id);
   });
 
   it('should display the alarm short description', () => {
