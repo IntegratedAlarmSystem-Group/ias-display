@@ -10,58 +10,8 @@
   </div>
   </nb-card-header>
   <nb-card-body>
-
-    <div class="alarm-status-legend">
-
-      <div class="group">
-        <span class="item">
-          <span class="status"><app-status-view value='set-reliable-operational-ack'></app-status-view></span> set-reliable
-        </span>
-        <span class="item">
-          <span class="status"><app-status-view value='cleared-reliable-operational-ack'></app-status-view></span> cleared-reliable
-        </span>
-      </div>
-
-      <div class="group">
-        <span class="item">
-        <span class="status"><app-status-view value='set-unreliable-operational-ack'></app-status-view></span> set-unreliable
-        </span>
-        <span class="item">
-          <span class="status"><app-status-view value='cleared-unreliable-operational-ack'></app-status-view></span> cleared-unreliable
-        </span>
-      </div>
-
-      <div class="group">
-        <span class="item">
-        <span class="status"><app-status-view value='set-reliable-unknown-ack'></app-status-view></span> set-reliable-unknown
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='cleared-reliable-unknown-ack'></app-status-view></span> cleared-reliable-unknown
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='set-unreliable-unknown-ack'></app-status-view></span> set-unreliable-unknown
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='cleared-unreliable-unknown-ack'></app-status-view></span> cleared-unreliable-unknown
-        </span>
-      </div>
-
-      <div class="group">
-        <span class="item">
-        <span class="status"><app-status-view value='set-reliable-maintenance-ack'></app-status-view></span> set-reliable-maintenance
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='cleared-reliable-maintenance-ack'></app-status-view></span> cleared-reliable-maintenance
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='set-unreliable-maintenance-ack'></app-status-view></span> set-unreliable-maintenance
-        </span>
-        <span class="item">
-        <span class="status"><app-status-view value='cleared-unreliable-maintenance-ack'></app-status-view></span> cleared-unreliable-maintenance
-        </span>
-      </div>
-
-    </div>
+    
+    <app-legend></app-legend>
 
     <div>
       <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="onUserRowClick($event)"></ng2-smart-table>
