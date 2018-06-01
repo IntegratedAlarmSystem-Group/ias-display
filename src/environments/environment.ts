@@ -8,5 +8,5 @@ export const environment = {
   websocketPath: 'ws://127.0.0.1:8000/stream/',
   httpUrl: 'http://127.0.0.1:8000',
   cdbApiUrl: 'http://127.0.0.1:8000/cdb-api',
-  wikiUrl: 'https://ictwiki.alma.cl/twiki/bin/view/Management',
+  wikiUrl: 'https://www.alma.cl/',
 };
