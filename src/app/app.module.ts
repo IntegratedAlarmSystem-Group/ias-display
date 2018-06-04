@@ -25,7 +25,7 @@ import {
   MatSlideToggleModule
 } from "@angular/material";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
@@ -98,6 +98,7 @@ const appRoutes: Routes = [
     HttpClient,
     AlarmService,
     CdbService,
+    RoutingService,
     NbSidebarService,
     NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },

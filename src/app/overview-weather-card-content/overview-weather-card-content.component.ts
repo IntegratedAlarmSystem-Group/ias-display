@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { RoutingService} from '../routing.service';
 
 @Component({
   selector: 'app-overview-weather-card-content',
@@ -8,14 +8,13 @@ import { Router} from '@angular/router';
 })
 export class OverviewWeatherCardContentComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private routing: RoutingService) { }
 
   ngOnInit() {
   }
 
   goToTableFilteredBy(filter: string) {
-    filter = filter.replace(' ', '_'); // TODO: This is wrong, fix it
-    this.router.navigate(['/tabular/' + filter]);
+    this.routing.tableWithFilter(filter);
   }
 
 }

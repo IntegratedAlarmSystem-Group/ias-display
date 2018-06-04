@@ -96,8 +96,9 @@ export class TabularViewComponent {
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.loadTable();
     });
-    let filterValue = this.route.snapshot.paramMap.get('filter').replace('_', ' ');
+    let filterValue = this.route.snapshot.paramMap.get('filter');
     if (filterValue && filterValue != ""){
+      filterValue = filterValue.replace('_', ' ');
       this.applyFilter(filterValue);
     }
   }
