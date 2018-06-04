@@ -14,7 +14,7 @@ export class OverviewWeatherCardContentComponent implements OnInit {
   }
 
   goToTableFilteredBy(filter: string) {
-    // filter.replace(' ', '_'); // TODO: This is wrong, fix it
+    filter = filter.replace(' ', '_'); // TODO: This is wrong, fix it
     this.router.navigate(['/tabular/' + filter]);
   }
 
