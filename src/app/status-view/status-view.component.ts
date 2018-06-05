@@ -2,58 +2,81 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
 import { OperationalMode } from '../alarm';
 
+/**
+ * Reusable component to show the state of an alarm
+ */
 @Component({
   selector: 'app-status-view',
   templateUrl: './status-view.component.html',
   styleUrls: ['./status-view.component.css']
 })
-export class StatusViewComponent implements ViewCell, OnInit {
-
-  alarmTags = [];
-
-  @Input() value: string | number;
-  @Input() rowData: any;
+export class StatusViewComponent implements OnInit {
 
   /**
-  * Status container style
+   * Dash-separated string with the tags that define the state of an alarm
+   */
+  @Input() value: string;
+
+  /**
+   * List of tags that define the state of an alarm
+   */
+  private alarmTags = [];
+
+  constructor() { }
+
+  /**
+   * On init it processes the input and push the tags into the {@link alarmTags}
+   */
+  ngOnInit() {
+    const tags = this.value.toString().split('-');
+    if (tags.length >= 2) {
+        for (const tag of this.value.toString().split('-')) {
+          this.alarmTags.push(tag);
+        }
+    } else {
+        this.alarmTags = [];
+    }
+  }
+
+  /**
+  * Return the list of classes that define the main style of the status container
   */
-  getContainerStyle(): any{
-    let style = ['alarm-status'];
+  getContainerClasses(): any {
+    const classes = ['alarm-status'];
 
     if (this.hasTag('maintenance') || this.hasTag('shuttedown')) {
-      style.push('status-maintenance');
+      classes.push('status-maintenance');
     } else if (this.hasTag('unknown')) {
-      style.push('status-unknown');
+      classes.push('status-unknown');
     } else {
       if (this.hasTag('cleared')) {
-        style.push('status-cleared');
-      } else if (this.hasTag('set')){
-        style.push('status-set');
+        classes.push('status-cleared');
+      } else if (this.hasTag('set')) {
+        classes.push('status-set');
       } else {
-        style.push('status-error');
+        classes.push('status-error');
       }
     }
 
     if (this.hasTag('unreliable')) {
-      style.push('status-unreliable');
+      classes.push('status-unreliable');
     }
 
     if (!this.hasTag('ack')) {
-      style.push('blink');
+      classes.push('blink');
     }
 
-    return style;
+    return classes;
   }
 
   /**
-  * Status symbol style
-  *
-  * The alarm should have a 'set' or 'clear' status
+  * Return the status symbol style used to represent if the alarm is SET or
+  * CLEARED
   */
-  getSymbolStyle(): object{
+  getSymbolStyle(): object {
 
-    let color : string;
-    let visibility : string;
+    let color: string;
+    let visibility: string;
 
     if (this.hasTag('set')) {
       visibility = 'visible';
@@ -66,28 +89,21 @@ export class StatusViewComponent implements ViewCell, OnInit {
       color = 'black';  // error
     }
 
-    let styles = {
+    const style = {
       'visibility': visibility,
       'color': color
     };
 
-    return styles;
+    return style;
 
   }
 
-  hasTag(tag){
+  /**
+   * Method to search if the component contains an specific tag
+   * @param tag String of the searched tag
+   */
+  private hasTag(tag) {
     return this.alarmTags.indexOf(tag) > -1 ? true : false;
-  }
-
-  ngOnInit(){
-    let tags = this.value.toString().split("-");
-    if (tags.length >= 2) {
-        for (let tag of this.value.toString().split("-")){
-          this.alarmTags.push(tag);
-        }
-    } else {
-        this.alarmTags = [];
-    }
   }
 
 }

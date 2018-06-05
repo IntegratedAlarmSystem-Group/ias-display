@@ -6,7 +6,6 @@ import { RoutingService} from '../routing.service';
 describe('OverviewWeatherCardContentComponent', () => {
   let component: OverviewWeatherCardContentComponent;
   let fixture: ComponentFixture<OverviewWeatherCardContentComponent>;
-  let routingService: RoutingService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
 
