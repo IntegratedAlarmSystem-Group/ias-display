@@ -1,4 +1,4 @@
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
 import { RoutingService} from '../routing.service';
 
