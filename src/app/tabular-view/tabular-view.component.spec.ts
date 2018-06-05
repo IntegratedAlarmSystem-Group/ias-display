@@ -32,6 +32,7 @@ describe('TabularViewComponent', () => {
   let cdbService: CdbService;
   let alarms = MockAlarms;
   let iasios = MockIasios;
+  let expectedRows = ExpectedTableRows;
 
 
   beforeEach(async(() => {
@@ -111,4 +112,17 @@ describe('TabularViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('AND WHEN the service processes the alarms', () => {
+    it('THEN the Table contains those Alarms sorted', () => {
+      alarmService.readAlarmMessagesList(alarms);
+      // fixture.detectChanges();
+
+      // fixture.whenStable().then(() => {
+        const data = fixture.componentInstance.dataSource!.data;
+        const tableElement = fixture.nativeElement.querySelector('.mat-table')!;
+        // TODO: Finish this test
+    });
+  });
+
 });
