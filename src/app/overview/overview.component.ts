@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Main view that contains the components to redirect to more specific views
+ */
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
