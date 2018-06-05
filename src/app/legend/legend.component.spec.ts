@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from './legend.component';
 
@@ -11,7 +11,7 @@ describe('LegendComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LegendComponent, StatusViewComponent ]
     })
-    .overrideModule( BrowserDynamicTestingModule ,{
+    .overrideModule( BrowserDynamicTestingModule , {
       set: {
         entryComponents: [  StatusViewComponent ]
       }

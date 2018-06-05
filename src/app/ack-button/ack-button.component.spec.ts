@@ -2,7 +2,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NbCardModule } from '@nebular/theme';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
@@ -19,7 +19,6 @@ describe('GIVEN an AckButtonComponent', () => {
   let component: AckButtonComponent;
   let fixture: ComponentFixture<AckButtonComponent>;
   let alarmService: AlarmService;
-  let cdbService: CdbService;
   let debug: DebugElement;
   let html: HTMLElement;
   let modalService: NgbModal;
@@ -47,7 +46,7 @@ describe('GIVEN an AckButtonComponent', () => {
         NgxSpinnerService
       ],
     })
-    .overrideModule( BrowserDynamicTestingModule ,{
+    .overrideModule( BrowserDynamicTestingModule , {
       set: {
         entryComponents: [  AckModalComponent ]
       }
@@ -57,9 +56,9 @@ describe('GIVEN an AckButtonComponent', () => {
 
   beforeEach(
     inject([AlarmService], (service) => {
-      alarmService = service
+      alarmService = service;
 
-      let mockAlarm = {
+      const mockAlarm = {
         'value': 4,
         'core_id': 'coreid$1',
         'running_id': 'coreid$1',
@@ -70,7 +69,7 @@ describe('GIVEN an AckButtonComponent', () => {
         'ack': false,
         'dependencies': [],
       };
-      spyOn(alarmService, 'get').and.callFake(function(){
+      spyOn(alarmService, 'get').and.callFake(function() {
         return Alarm.asAlarm(mockAlarm);
       });
     })
@@ -94,7 +93,7 @@ describe('GIVEN an AckButtonComponent', () => {
 
   describe('AND WHEN the user clicks on it', () => {
     it('THEN the modal is opened', async () => {
-      let mockEvent = {
+      const mockEvent = {
         data: {
           alarm: Alarm.asAlarm(
             {
@@ -114,16 +113,16 @@ describe('GIVEN an AckButtonComponent', () => {
       modalService = TestBed.get(NgbModal);
       modalRef = modalService.open(AckModalComponent);
       modalRef.componentInstance.alarm = mockEvent.data.alarm;
-      spyOn(modalService, "open").and.returnValue(modalRef);
-      spyOn(modalRef.componentInstance, "getAlarmDescription")
-        .and.callFake(function(){
-          return "Short description for the mock alarm from cdb"});
-      spyOn(modalRef.componentInstance, "getAlarmUrl")
-        .and.callFake(function(){
-          return "https://more-information-website/alarm"});
+      spyOn(modalService, 'open').and.returnValue(modalRef);
+      spyOn(modalRef.componentInstance, 'getAlarmDescription')
+        .and.callFake(function() {
+          return 'Short description for the mock alarm from cdb'; });
+      spyOn(modalRef.componentInstance, 'getAlarmUrl')
+        .and.callFake(function() {
+          return 'https://more-information-website/alarm'; });
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        let ackModal = component.onClick(mockEvent);
+        const ackModal = component.onClick(mockEvent);
         expect(modalService.open).toHaveBeenCalled();
         expect(ackModal).toBeTruthy();
         expect(ackModal instanceof NgbModalRef).toBeTruthy();
