@@ -9,6 +9,7 @@ import { AlarmsTableComponent } from './alarms-table.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { NbCardModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +18,7 @@ import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/t
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
 import { MockIasios, MockAlarms, ExpectedTableRows } from './fixtures';
+import { LegendComponent } from '../legend/legend.component';
 
 
 describe('GIVEN AlarmsTableComponent', () => {
@@ -41,14 +43,16 @@ describe('GIVEN AlarmsTableComponent', () => {
       declarations: [
         AlarmsTableComponent,
         StatusViewComponent,
-        AckModalComponent
+        AckModalComponent,
+        LegendComponent
       ],
       imports: [
         NbCardModule,
         Ng2SmartTableModule,
         HttpClientModule,
         NgbModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxSpinnerModule
       ],
       providers: [
         HttpClientService,
@@ -57,6 +61,7 @@ describe('GIVEN AlarmsTableComponent', () => {
         CdbService,
         DatePipe,
         NgbModal,
+        NgxSpinnerService
       ],
     })
     .overrideModule( BrowserDynamicTestingModule ,{
@@ -101,7 +106,7 @@ describe('GIVEN AlarmsTableComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('THEN should create the component', () => {
+  it('THEN should create the component', () => {
     expect(component).toBeTruthy();
   });
 
