@@ -28,7 +28,7 @@ export class AckModalComponent implements OnInit {
    * @param activeModal Reference to itself
    * @param formBuilder Service to manage the form and validators
    * @param alarmService Service used to send the request to acknowledge the alarm
-   * @param cdbService Service to get complementary alarm information
+   * @param cdbService Service used to get complementary alarm information
    * @param spinnerService Service to provide the loading spinner functionality
    */
   constructor(

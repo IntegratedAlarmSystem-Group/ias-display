@@ -10,7 +10,12 @@ import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 
-
+/**
+* Component that dispays all the Alarms in a table
+*
+* The user can change the default sorting by clicking on the headers and filter
+* by typing in an input field
+*/
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
@@ -18,9 +23,9 @@ import { CdbService } from '../cdb.service';
 })
 export class TabularViewComponent {
 
+  /** Reference to the object that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO: Bind this with the state of the slide-toggle-switcher when we replace the button
   /**
   * Defines wether the filter for only SET {@link Alarm} is activated or not.
   * When the user writes either "set", " set" or "set " this field becomes true
@@ -61,7 +66,7 @@ export class TabularViewComponent {
   /** List of {@link DisplayedAlarm} objects */
   public alarmsList: DisplayedAlarm[] = [];
 
-  /** Function to apply the filtering */
+  /** Custom function to apply the filtering to the Table rows*/
   public filterPredicate: ((data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
     const dataStr = data.toStringForFiltering().toLowerCase();
     const filters = filterString.toLowerCase().split(" ");
@@ -73,14 +78,25 @@ export class TabularViewComponent {
     return true;
   }
 
-  /** The Constructor */
+  /**
+   *
+   * @param alarmService Service used to get the Alarms
+   * @param cdbService Service used to get complementary alarm information
+   * @param route Reference to the url that triggered the initialization
+   * of this component
+   */
   constructor(
     private alarmService: AlarmService,
     private cdbService: CdbService,
     private route: ActivatedRoute
   ) {}
 
-  /** Method executed when the component is initiated */
+  /**
+   * Create the table when the component is initializated
+   * Subscribes to IAS configuration information from the {@link CdbService}
+   * Subscribes to new alarms from the {@link AlarmService}
+   * Retrieves filter values passed by the URL and applies them to the table
+   */
   ngOnInit() {
     this.sort.sort(<MatSortable> {
       id: 'status',
@@ -104,12 +120,24 @@ export class TabularViewComponent {
     }
   }
 
-  /** Method executed after the component is initiated */
+  /** Applies the table's default sorting after its initialization */
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
-  /** Load the table with data */
+  /**
+  * Unsubscribes from {@link CdbService} and {@link AlarmService}
+  * when the component is destroyed
+  */
+  ngOnDestroy(){
+    this.cdbServiceSubscription.unsubscribe();
+    this.alarmServiceSubscription.unsubscribe();
+  }
+
+
+  /**
+  * Loads the table with data from {@link CdbService} and {@link AlarmService}
+  */
   loadTable() {
     let self = this;
     this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
