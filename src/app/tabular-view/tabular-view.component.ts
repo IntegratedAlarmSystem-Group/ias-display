@@ -44,7 +44,7 @@ export class TabularViewComponent {
   private filterValueForSetAlarms = 'set';
 
   /** DataSource of the Table */
-  private dataSource: MatTableDataSource<DisplayedAlarm>;
+  public dataSource: MatTableDataSource<DisplayedAlarm>;
 
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
@@ -77,7 +77,8 @@ export class TabularViewComponent {
   constructor(
     private alarmService: AlarmService,
     private cdbService: CdbService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute
+  ) {}
 
   /** Method executed when the component is initiated */
   ngOnInit() {
