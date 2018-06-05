@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Reusable Card to show the summarized state of the subsystems in
+ * the overview
+ */
 @Component({
   selector: 'app-overview-card',
   templateUrl: './overview-card.component.html',
