@@ -16,8 +16,10 @@ export class AckButtonComponent implements OnInit {
   private alarm: Alarm;
   private canAcknowledge: boolean = false;
 
-  constructor(private alarmService: AlarmService,
-              private modalService: NgbModal) { }
+  constructor(
+    private alarmService: AlarmService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.loadAlarm();
