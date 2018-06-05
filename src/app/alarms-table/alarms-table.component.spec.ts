@@ -110,8 +110,8 @@ describe('GIVEN AlarmsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xdescribe('AND WHEN the service processes 4 alarms', () => {
-    it('THEN the Table contains those 4 Alarms', () => {
+  describe('AND WHEN the service processes the alarms', () => {
+    it('THEN the Table contains those Alarms sorted', () => {
       alarmService.readAlarmMessagesList(alarms);
       fixture.detectChanges();
       fixture.whenStable().then(() => {
@@ -122,7 +122,7 @@ describe('GIVEN AlarmsTableComponent', () => {
     });
   });
 
-  xdescribe('AND the user clicks on a row', () => {
+  describe('AND the user clicks on a row', () => {
     it('THEN the modal is opened', async () => {
       let mockEvent = {
         data: {
