@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { NbSidebarService } from '@nebular/theme';
 import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
-
 import { AlarmService } from './alarm.service';
 
 /**

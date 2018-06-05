@@ -45,7 +45,10 @@ export class AlarmService {
   */
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
-  /** The "constructor" of the Service */
+  /**
+   * @param cdbService Service used to get complementary alarm information
+   * @param httpClientService Service used to perform HTTP requests
+   */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
@@ -86,7 +89,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
@@ -105,7 +108,7 @@ export class AlarmService {
     const connectionPath = environment.websocketPath;
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Listening on ' + connectionPath);
+    console.log('Connected to webserver at: ' + connectionPath);
   }
 
   /******* ALARM HANDLING *******/
