@@ -43,7 +43,7 @@ import { LegendComponent } from './legend/legend.component';
 /**
 * Application routes
 */
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },

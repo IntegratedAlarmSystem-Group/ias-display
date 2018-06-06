@@ -1,10 +1,20 @@
+import { Router } from '@angular/router';
 import { TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppModule, appRoutes } from './app.module';
 import { RoutingService } from './routing.service';
 
-xdescribe('RoutingService', () => {
+
+describe('RoutingService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [RoutingService]
+      imports: [
+        RouterTestingModule.withRoutes(appRoutes),
+        AppModule,
+      ],
+      providers: [
+        RoutingService,
+      ]
     });
   });
 
