@@ -13,6 +13,7 @@ import { AlarmService } from './alarm.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   /**
   * Title of the application
   */
@@ -25,16 +26,29 @@ export class AppComponent implements OnInit {
     // { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
   ];
 
+  /**
+   * Instantiates the service
+   * @param {NbSidebarService} sidebarService Service used for the sidebar
+   * @param {NbMenuService} menuService Service used for the menu of the sidebar
+   * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   */
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private alarmService: AlarmService
   ) {}
 
+  /**
+   * Instantiates the {@link AlarmService}
+   */
   ngOnInit() {
     this.alarmService.initialize();
   }
 
+  /**
+   * Toggles expanding-contracting the sidebar
+   * @returns {boolean} false
+   */
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     return false;

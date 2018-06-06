@@ -43,6 +43,7 @@ export class StatusViewComponent implements OnInit {
 
   /**
   * Return the list of classes that define the main style of the status container
+  * @returns {any} list of container classes to apply the style to the component
   */
   getContainerClasses(): any {
     const classes = ['alarm-status'];
@@ -75,6 +76,7 @@ export class StatusViewComponent implements OnInit {
   /**
   * Return the status symbol style used to represent if the alarm is SET or
   * CLEARED
+  * @returns {object} the style for the symbol
   */
   getSymbolStyle(): object {
 
@@ -98,14 +100,14 @@ export class StatusViewComponent implements OnInit {
     };
 
     return style;
-
   }
 
   /**
    * Method to search if the component contains an specific tag
    * @param tag String of the searched tag
+   * @returns {boolean} true if it has the tag, false if not
    */
-  private hasTag(tag) {
+  private hasTag(tag): boolean {
     return this.alarmTags.indexOf(tag) > -1 ? true : false;
   }
 

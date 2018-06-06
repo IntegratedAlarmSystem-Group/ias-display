@@ -15,8 +15,10 @@ export class WikiButtonComponent implements OnInit {
    */
   @Input() url: string;
 
+  /** Builds an instance of the component */
   constructor() { }
 
+  /** Instantiates the component */
   ngOnInit() {
   }
 }

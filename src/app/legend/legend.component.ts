@@ -10,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LegendComponent implements OnInit {
 
+  /** Builds an instance of the component */
   constructor() { }
 
+  /** Instantiates the component */
   ngOnInit() {
   }
 

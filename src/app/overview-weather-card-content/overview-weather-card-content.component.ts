@@ -12,10 +12,12 @@ import { RoutingService} from '../routing.service';
 export class OverviewWeatherCardContentComponent implements OnInit {
 
   /**
+   * Builds an instance of the component
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(private routing: RoutingService) { }
 
+  /** Instantiates the component */
   ngOnInit() {
   }
 

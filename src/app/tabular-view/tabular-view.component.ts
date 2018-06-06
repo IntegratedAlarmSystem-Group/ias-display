@@ -66,7 +66,10 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /** List of {@link DisplayedAlarm} objects */
   public alarmsList: DisplayedAlarm[] = [];
 
-  /** Custom function to apply the filtering to the Table rows*/
+  /**
+  * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values
+  * @returns {boolean} true if the row matches the filter, false if not
+  */
   public filterPredicate: (
     (data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
     const dataStr = data.toStringForFiltering().toLowerCase();
