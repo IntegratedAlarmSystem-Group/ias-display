@@ -135,8 +135,8 @@ export class AlarmService {
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
     .map(
       (response) => {
-        for (let i in alarms_ids) {
-          let alarm = this.get(alarms_ids[i]);
+        for (const id of alarms_ids) {
+          const alarm = this.get(id);
           alarm.acknowledge();
         }
         return response;
@@ -191,8 +191,10 @@ export class AlarmService {
    * Set selected state to alarms under an non-valid connection
    */
   triggerAlarmsNonValidConnectionState() {
-    for (let core_id in this.alarms) {
-      this.alarms[core_id]['validity'] = Validity.unreliable;
+    for (const core_id in this.alarms) {
+      if (this.alarms.hasOwnProperty(core_id)) {
+        this.alarms[core_id]['validity'] = Validity.unreliable;
+      }
     }
     this.changeAlarms('all');
   }
