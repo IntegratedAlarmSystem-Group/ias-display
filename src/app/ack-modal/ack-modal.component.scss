@@ -1,0 +1,40 @@
+/deep/{
+  textarea{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100px;
+  }
+
+  .btn-action {
+    cursor: pointer !important;
+  }
+
+  .btn-action.btn-secondary{
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .btn-action.btn-secondary:hover{
+    background-color: #9e9e9e !important;
+  }
+
+  .modal-action.modal-header {
+    border-bottom: 0px solid #000;
+  }
+
+  .modal-action.modal-footer {
+    border-top: 0px solid #000;
+  }
+
+  .info-message {
+    padding-top: 10px;
+  }
+
+  .alarmUrl {
+      color: #4ac8ff !important;
+  }
+
+  .alarmUrl .alarmLink {
+    text-decoration: underline;
+  }
+
+}
