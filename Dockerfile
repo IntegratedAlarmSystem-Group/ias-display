@@ -35,7 +35,7 @@ COPY . .
 EXPOSE 4200
 
 # test and build project
-# RUN ng test --watch=false --single-run --browser=ChromeDocker && \
+RUN ng test --watch=false --single-run --browser=ChromeDocker --config karma.low_resources.conf.js
 RUN npm run-script build-prod
 
 # copy compiled files to smaller image
