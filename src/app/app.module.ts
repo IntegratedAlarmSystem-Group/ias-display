@@ -23,15 +23,13 @@ import {
   MatSortModule,
   MatTableModule,
   MatSlideToggleModule
-} from "@angular/material";
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { AppComponent } from './app.component';
-import { AlarmsListComponent } from './alarms-list/alarms-list.component';
-import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
 import { AckModalComponent } from './ack-modal/ack-modal.component';
@@ -45,11 +43,10 @@ import { LegendComponent } from './legend/legend.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path:'overview', component: OverviewComponent },
-  { path:'alarms', component: AlarmsTableComponent },
-  { path:'tabular', component: TabularViewComponent },
-  { path:'tabular/:filter', component: TabularViewComponent },
-  { path:'modal', component: AckModalComponent }
+  { path: 'overview', component: OverviewComponent },
+  { path: 'tabular', component: TabularViewComponent },
+  { path: 'tabular/:filter', component: TabularViewComponent },
+  { path: 'modal', component: AckModalComponent }
 ];
 
 /**
@@ -58,8 +55,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AlarmsListComponent,
-    AlarmsTableComponent,
     StatusViewComponent,
     AckModalComponent,
     TabularViewComponent,
