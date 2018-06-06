@@ -1,3 +1,6 @@
+/**
+* List of the possible Operational Modes
+*/
 export enum OperationalMode {
   startup = 0,
   initialization = 1,
@@ -9,11 +12,17 @@ export enum OperationalMode {
   unknown = 7,
 };
 
+/**
+* List of the possible Validity values
+*/
 export enum Validity {
   unreliable = 0,
   reliable = 1
 };
 
+/**
+* List of the possible Values of an Alarm
+*/
 export enum Value {
   cleared = 0,
   set_low = 1,
@@ -140,36 +149,36 @@ export class Alarm {
   }
 
   /**
-  * Returns a string representation of the {@link Alarm.mode} attribute
+  * Returns a string representation of the operational mode of the Alarm
   *
-  * @returns {string} a string representation of the operational mode of the Alarm
+  * @returns {string} a string representation of the {@link Alarm.mode} attribute
   */
   getModeAsString(): string {
     return OperationalMode[this.mode];
   }
 
   /**
-  * Returns a string representation of the {@link Alarm.value} attribute
+  * Returns a string representation of the value of the Alarm
   *
-  * @returns {string} a string representation of the value of the Alarm
+  * @returns {string} a string representation of the {@link Alarm.value} attribute
   */
   getValueAsString(): string {
     return Value[this.value];
   }
 
   /**
-  * Returns a string representation of the {@link Alarm.mode} attribute
+  * Returns a string representation of the validity of the Alarm
   *
-  * @returns {string} a string representation of the validity of the Alarm
+  * @returns {string} a string representation of the {@link Alarm.mode} attribute
   */
   getValidityAsString(): string {
     return Validity[this.validity];
   }
 
   /**
-  * Returns a Date representation of the {@link Alarm.core_timestamp} attribute
+  * Returns a Date representation of the core_timestamp of the Alarm
   *
-  * @returns {Date} a date format representation of the Alarm core_timestamp
+  * @returns {Date} a date format representation of the {@link Alarm.core_timestamp} attribute
   */
   getCoreTimestampAsDate(): Date {
 

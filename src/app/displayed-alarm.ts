@@ -1,7 +1,7 @@
 import { Alarm, OperationalMode, Validity, Value } from './alarm';
 
 /**
-* Class to define Alarm objects
+* Class that stores Alarm information for displaying purposes
 */
 export class DisplayedAlarm {
 
@@ -15,9 +15,11 @@ export class DisplayedAlarm {
   private _url: string
 
   /**
-  * The "constructor"
+  * Builds a new instance
   *
   * @param {Alarm} alarm the alarm to display
+  * @param {string} description description of the alarm to display
+  * @param {string} url url with documentation of the alarm to display
   */
   constructor(alarm: Alarm, description: string, url: string){
     this._alarm = alarm;
@@ -75,6 +77,9 @@ export class DisplayedAlarm {
     return this.getAlarmStatusTagsString();
   }
 
+  /**
+  * Returns a string representation of the {@link Alarm} for filtering purposes
+  */
   toStringForFiltering(): string {
     return [
       this.status, this.description, this.name, this.mode, this.timestamp
@@ -82,7 +87,8 @@ export class DisplayedAlarm {
   }
 
   /**
-  * Return Alarm status tags
+  * Returns the {@link Alarm} status tags, needed for the displaying of status
+  * through instances of {@link StatusViewComponent}
   */
   getAlarmStatusTagsString(): string {
     let alarm = this._alarm;
@@ -107,7 +113,18 @@ export class DisplayedAlarm {
     return tags.join('-');
   }
 
-  getAlarmStatusOrder(value: string, priority: string, validity: string, ack: boolean): string {
+  /**
+  * Returns a string with a number that defines the place where
+  * the {@link Alarm} should be displayed on the Table
+  * according to the sorting by "Status" column
+  *
+   * @param {string} value string representation of the value of the {@link Alarm}
+   * @param {string} priority string representation of the priority of the {@link Alarm}
+   * @param {string} validity string representation of the validity of the {@link Alarm}
+   * @param {boolean} ack the ack status of the {@link Alarm}
+  */
+  getAlarmStatusOrder(
+    value: string, priority: string, validity: string, ack: boolean): string {
     let order = 0;
     let priorities = ['critical', 'high', 'medium', 'low'];
 
@@ -155,14 +172,5 @@ export class DisplayedAlarm {
     else {
       return ("" + order);
     }
-  }
-
-  getPriorityNumber(priority: string) {
-    let priorities = ['critical', 'high', 'medium', 'low'];
-    return priorities.indexOf(priority);
-  }
-
-  arrayHasElement(array, element) {
-    return array.indexOf(element) > -1 ? true : false;
   }
 }

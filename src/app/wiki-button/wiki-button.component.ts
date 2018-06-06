@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+/**
+ * Button used to trigger the event to open the documentation of an Alarm
+ */
 @Component({
   selector: 'app-wiki-button',
   templateUrl: './wiki-button.component.html',
@@ -7,12 +10,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WikiButtonComponent implements OnInit {
 
+  /**
+   * Url of the wiki documentation page
+   */
   @Input() url: string;
 
   constructor() { }
 
   ngOnInit() {
   }
-
-
 }

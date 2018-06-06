@@ -4,7 +4,7 @@ import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing'
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NbCardModule } from '@nebular/theme';
@@ -27,12 +27,12 @@ describe('TabularViewComponent', () => {
   let fixture: ComponentFixture<TabularViewComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
-  let localOffset = (new Date().getTimezoneOffset())*60*1000;
+  const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
   let cdbService: CdbService;
-  let alarms = MockAlarms;
-  let iasios = MockIasios;
-  let expectedRows = ExpectedTableRows;
+  const alarms = MockAlarms;
+  const iasios = MockIasios;
+  const expectedRows = ExpectedTableRows;
 
 
   beforeEach(async(() => {
@@ -68,7 +68,7 @@ describe('TabularViewComponent', () => {
         CdbService,
       ]
     })
-    .overrideModule( BrowserDynamicTestingModule ,{
+    .overrideModule( BrowserDynamicTestingModule , {
       set: {
         entryComponents: [  StatusViewComponent ]
       }
@@ -78,22 +78,22 @@ describe('TabularViewComponent', () => {
 
   beforeEach(
     inject([CdbService], (service) => {
-      cdbService = service
+      cdbService = service;
 
-      let mockIasConfiguration = {
+      const mockIasConfiguration = {
           id: 1,
-          log_level: "INFO",
+          log_level: 'INFO',
           refresh_rate: 2,
           broadcast_factor: 3,
           tolerance: 1,
           properties: []
       };
       spyOn(cdbService, 'initialize')
-        .and.callFake(function(){});
+        .and.callFake(function() {});
       cdbService.iasConfiguration = mockIasConfiguration;
 
-      for (let iasio of iasios) {
-        let alarmIasio = new Iasio(iasio);
+      for (const iasio of iasios) {
+        const alarmIasio = new Iasio(iasio);
         cdbService.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
       }
       cdbService.iasDataAvailable.next(true);

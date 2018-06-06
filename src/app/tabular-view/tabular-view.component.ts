@@ -1,26 +1,31 @@
-import { Component, Injectable, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ISubscription } from "rxjs/Subscription";
+import { ISubscription } from 'rxjs/Subscription';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
-import { CollectionViewer, DataSource } from "@angular/cdk/collections";
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 
-
+/**
+* Component that dispays all the Alarms in a table
+*
+* The user can change the default sorting by clicking on the headers and filter
+* by typing in an input field
+*/
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
   styleUrls: ['./tabular-view.component.css', './tabular-view.component.scss']
 })
-export class TabularViewComponent {
+export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  /** Reference to the object that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO: Bind this with the state of the slide-toggle-switcher when we replace the button
   /**
   * Defines wether the filter for only SET {@link Alarm} is activated or not.
   * When the user writes either "set", " set" or "set " this field becomes true
@@ -30,7 +35,7 @@ export class TabularViewComponent {
   private _setFilterActivated = false;
 
   /** String that stores the test input in the filter textfield */
-  private filterString: string = "";
+  private filterString = '';
 
   /**
   * Array that defines which coulmns are going to be displayed and in which order
@@ -38,7 +43,7 @@ export class TabularViewComponent {
   private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
 
   /** String to define the formatting of dates */
-  private dateFormat = "M/d/yy, h:mm:ss a";
+  private dateFormat = 'M/d/yy, h:mm:ss a';
 
   /** String to define the keyword to filter SET {@link Alarm} */
   private filterValueForSetAlarms = 'set';
@@ -61,26 +66,38 @@ export class TabularViewComponent {
   /** List of {@link DisplayedAlarm} objects */
   public alarmsList: DisplayedAlarm[] = [];
 
-  /** Function to apply the filtering */
-  public filterPredicate: ((data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
+  /** Custom function to apply the filtering to the Table rows*/
+  public filterPredicate: (
+    (data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
     const dataStr = data.toStringForFiltering().toLowerCase();
-    const filters = filterString.toLowerCase().split(" ");
-    for (let filter of filters) {
-      if (dataStr.indexOf(filter) == -1) {
+    const filters = filterString.toLowerCase().split(' ');
+    for (const filter of filters) {
+      if (dataStr.indexOf(filter) === -1) {
         return false;
       }
     }
     return true;
   }
 
-  /** The Constructor */
+  /**
+   *
+   * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {Route} route Reference to the url that triggered the initialization
+   * of this component
+   */
   constructor(
     private alarmService: AlarmService,
     private cdbService: CdbService,
     private route: ActivatedRoute
   ) {}
 
-  /** Method executed when the component is initiated */
+  /**
+   * Create the table when the component is initializated
+   * Subscribes to IAS configuration information from the {@link CdbService}
+   * Subscribes to new alarms from the {@link AlarmService}
+   * Retrieves filter values passed by the URL and applies them to the table
+   */
   ngOnInit() {
     this.sort.sort(<MatSortable> {
       id: 'status',
@@ -98,21 +115,33 @@ export class TabularViewComponent {
       this.loadTable();
     });
     let filterValue = this.route.snapshot.paramMap.get('filter');
-    if (filterValue && filterValue != ""){
+    if (filterValue && filterValue !== '') {
       filterValue = filterValue.replace('_', ' ');
       this.applyFilter(filterValue);
     }
   }
 
-  /** Method executed after the component is initiated */
+  /** Applies the table's default sorting after its initialization */
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
-  /** Load the table with data */
+  /**
+  * Unsubscribes from {@link CdbService} and {@link AlarmService}
+  * when the component is destroyed
+  */
+  ngOnDestroy() {
+    this.cdbServiceSubscription.unsubscribe();
+    this.alarmServiceSubscription.unsubscribe();
+  }
+
+
+  /**
+  * Loads the table with data from {@link CdbService} and {@link AlarmService}
+  */
   loadTable() {
-    let self = this;
-    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key){
+    const self = this;
+    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key) {
       const dataFromCdb = self.getAlarmDataFromCdbService(self.alarmService.alarms[key].core_id);
       return new DisplayedAlarm(
         self.alarmService.alarms[key],
@@ -135,11 +164,10 @@ export class TabularViewComponent {
         description: this.cdbService.getAlarmDescription(core_id),
         url: this.cdbService.getAlarmsInformationUrl()
       };
-    }
-    else {
+    } else {
       return {
-        description: "",
-        url: ""
+        description: '',
+        url: ''
       };
     }
   }
@@ -150,13 +178,12 @@ export class TabularViewComponent {
   */
   applyFilter(filter: string) {
     this.filterString = filter;
-    let arrayOfFilters = filter.split(' ');
+    const arrayOfFilters = filter.split(' ');
     // If "set" IS in the array, then it is activated
     if (arrayOfFilters.indexOf(this.filterValueForSetAlarms) >= 0 ) {
       this._setFilterActivated = true;
-    }
-    // If "set" NOT in the field, then it is deactivated
-    else {
+
+    } else { // If "set" NOT in the field, then it is deactivated
       this._setFilterActivated = false;
     }
     filter = filter.trim();
@@ -169,19 +196,17 @@ export class TabularViewComponent {
   */
   toggleFilterOnlySetAlarm() {
     if (this.filterString == null) {
-      this.filterString = "";
+      this.filterString = '';
     }
-    let arrayOfFilters = this.filterString.split(' ');
-    let indexOfSet = arrayOfFilters.indexOf(this.filterValueForSetAlarms)
+    const arrayOfFilters = this.filterString.split(' ');
+    const indexOfSet = arrayOfFilters.indexOf(this.filterValueForSetAlarms);
 
     // If activated then should deactivate:
     if (this._setFilterActivated) {
       if ( indexOfSet >= 0 ) {
         arrayOfFilters.splice(indexOfSet, 1);
       }
-    }
-    // If deactivated then should activate:
-    else {
+    } else { // If deactivated then should activate:
       if ( indexOfSet < 0 ) {
         arrayOfFilters.push(this.filterValueForSetAlarms);
       }

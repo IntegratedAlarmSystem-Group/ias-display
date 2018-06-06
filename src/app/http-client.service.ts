@@ -27,7 +27,7 @@ export class HttpClientService {
   * Custom get method
   * @param url target url
   */
-  get(url){
+  get(url) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class HttpClientService {
   * @param url target url
   * @param data json with data
   */
-  post(url, data){
+  post(url, data) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export class HttpClientService {
   * @param url target url
   * @param data json with data
   */
-  put(url, data){
+  put(url, data) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export class HttpClientService {
   * Custom delete method
   * @param url target url with the selected object id
   */
-  delete(url){
+  delete(url) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

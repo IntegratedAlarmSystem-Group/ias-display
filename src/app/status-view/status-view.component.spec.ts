@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { StatusViewComponent } from './status-view.component';
 import { By } from '@angular/platform-browser';
 
 describe('StatusViewComponent', () => {
   let component: StatusViewComponent;
   let fixture: ComponentFixture<StatusViewComponent>;
-  let alarms = [
+  const alarms = [
     {
       'value': 0,
       'core_id': 'Dummy-cleared-valid',
@@ -49,10 +48,10 @@ describe('StatusViewComponent', () => {
     }
   ];
 
-  let validities = ['', 'unreliable'];
-  let acks = ['', 'ack'];
-  let values = ['cleared', 'set_low', 'set_medium', 'set_high', 'set_critical'];
-  let modes = ['operational', 'maintenance', 'unknown'];
+  const validities = ['', 'unreliable'];
+  const acks = ['', 'ack'];
+  const values = ['cleared', 'set_low', 'set_medium', 'set_high', 'set_critical'];
+  const modes = ['operational', 'maintenance', 'unknown'];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

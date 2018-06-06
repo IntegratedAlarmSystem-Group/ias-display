@@ -18,7 +18,6 @@ describe('AckModalComponent', () => {
   let fixture: ComponentFixture<AckModalComponent>;
   let alarm: Alarm;
   let alarmIasio: Iasio;
-  let form: FormGroup;
   let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
@@ -52,22 +51,22 @@ describe('AckModalComponent', () => {
     inject([CdbService], (cdbService) => {
       cdbSubject = cdbService;
 
-      let mockIasConfiguration = {
+      const mockIasConfiguration = {
           id: 1,
-          log_level: "INFO",
+          log_level: 'INFO',
           refresh_rate: 2,
           broadcast_factor: 3,
           tolerance: 1,
           properties: []
       };
       spyOn(cdbSubject, 'initialize')
-        .and.callFake(function(){});
+        .and.callFake(function() {});
       cdbSubject.iasConfiguration = mockIasConfiguration;
 
-      let mockIasAlarmsIasiosResponse = [{
-          io_id: "coreid$1",
-          short_desc: "Short description for mock alarm",
-          ias_type: "ALARM"
+      const mockIasAlarmsIasiosResponse = [{
+          io_id: 'coreid$1',
+          short_desc: 'Short description for mock alarm',
+          ias_type: 'ALARM'
       }];
 
       alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
@@ -111,13 +110,13 @@ describe('AckModalComponent', () => {
   });
 
   it('should display the alarm short description', () => {
-    let expected = cdbSubject.getAlarmDescription(alarm.core_id);
+    const expected = cdbSubject.getAlarmDescription(alarm.core_id);
     expect(modalBody.textContent).toContain(expected);
   });
 
   it('should display a link to get more information about the alarms', () => {
-    let expected = cdbSubject.wikiUrl;
-    let compiled = fixture.debugElement.nativeElement;
+    const expected = cdbSubject.wikiUrl;
+    const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.alarmUrl').href)
       .toEqual(expected);
   });
@@ -135,7 +134,7 @@ describe('AckModalComponent', () => {
     describe('such that when the user enters a message', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
-        component.form.controls['message'].setValue("Any Message");
+        component.form.controls['message'].setValue('Any Message');
         expect(component.form.valid).toBeTruthy();
       });
     });
@@ -153,19 +152,19 @@ describe('AckModalComponent', () => {
           modalFooter.querySelector('#acknowledge').click();
           fixture.whenStable().then(() => {
             expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
-          })
+          });
         }));
       });
       describe('and the user has entered a message', () => {
         it('it should call the component acknowledge method', async(() => {
-          component.form.controls['message'].setValue("Any message");
+          component.form.controls['message'].setValue('Any message');
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();
 
           modalFooter.querySelector('#acknowledge').click();
           fixture.whenStable().then(() => {
             expect(alarmService.acknowledgeAlarms).toHaveBeenCalled();
-          })
+          });
         }));
       });
     });
