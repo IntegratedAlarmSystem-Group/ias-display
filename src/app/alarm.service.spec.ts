@@ -15,7 +15,7 @@ let cdbSubject: CdbService;
 let httpSubject: HttpClientService;
 let mockStream: Server;
 
-let alarmsFromWebServer = [  // mock alarm messages from webserver
+const alarmsFromWebServer = [  // mock alarm messages from webserver
   {  // same alarm, different actions
   'stream': 'alarms',
   'payload': {
@@ -66,7 +66,7 @@ let alarmsFromWebServer = [  // mock alarm messages from webserver
 }
 ];
 
-let alarms = [
+const alarms = [
   {
     'value': 0,
     'core_id': 'coreid$1',
@@ -132,7 +132,7 @@ describe('AlarmService', () => {
       */
       // TODO: Evaluation to check periodic calls
       spyOn(subject, 'startLastReceivedMessageTimestampCheck')
-        .and.callFake(function(){});
+        .and.callFake(function() {});
 
       /**
       * Redefinition of the cdb information for the testing environment
@@ -141,16 +141,16 @@ describe('AlarmService', () => {
       * the cdb configuration
       *
       */
-      let mockIasConfiguration = {
+      const mockIasConfiguration = {
           id: 1,
-          log_level: "INFO",
+          log_level: 'INFO',
           refresh_rate: 2,
           broadcast_factor: 3,
           tolerance: 1,
           properties: []
       };
       spyOn(cdbSubject, 'initialize')
-        .and.callFake(function(){});
+        .and.callFake(function() {});
       cdbSubject.iasConfiguration = mockIasConfiguration;
 
   }));
@@ -172,7 +172,7 @@ describe('AlarmService', () => {
     mockStream = new Server(environment.websocketPath);  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
-      for (const alarm of fixtureAlarms){
+      for (const alarm of fixtureAlarms) {
         mockStream.send(JSON.stringify(alarm));
       }
       mockStream.stop();
@@ -181,15 +181,15 @@ describe('AlarmService', () => {
     // Act and assert:
 
     subject.alarmChangeStream.subscribe(notification => {
-      let alarms = subject.alarms;
+      const notified_alarms = subject.alarms;
       if (stage === 0) {  // no messages
-        expect(alarms).toEqual({});
-        expect(Object.keys(alarms).length).toEqual(0);
+        expect(notified_alarms).toEqual({});
+        expect(Object.keys(notified_alarms).length).toEqual(0);
       }
 
       if (stage === 1) {  // create
-        expect(Object.keys(alarms).length).toEqual(1);
-        const storedAlarm = alarms['coreid$1'];
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms['coreid$1'];
         const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
@@ -197,8 +197,8 @@ describe('AlarmService', () => {
       }
 
       if (stage === 2) {  // update
-        expect(Object.keys(alarms).length).toEqual(1);
-        const storedAlarm = alarms['coreid$1'];
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms['coreid$1'];
         const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
@@ -206,7 +206,7 @@ describe('AlarmService', () => {
       }
 
       if (stage === 3) {  // last message has delete action, msg should be removed
-        expect(alarms).toEqual({});
+        expect(notified_alarms).toEqual({});
       }
 
       stage += 1;
@@ -231,15 +231,15 @@ describe('AlarmService', () => {
 
     // Assert
     subject.alarmChangeStream.subscribe(notification => {
-      let alarms = subject.alarms;
+      const notified_alarms = subject.alarms;
       if (stage === 0) {
-        expect(alarms).toEqual({});
-        expect(Object.keys(alarms).length).toEqual(0);
+        expect(notified_alarms).toEqual({});
+        expect(Object.keys(notified_alarms).length).toEqual(0);
       }
 
       if (stage === 1) {
-        expect(Object.keys(alarms).length).toEqual(3);
-        const receivedAlarms = alarms;
+        expect(Object.keys(notified_alarms).length).toEqual(3);
+        const receivedAlarms = notified_alarms;
         const fixtureAlarms = fixtureAlarmsList['payload']['data'];
         let index = 0;
         for ( const core_id of Object.keys(receivedAlarms) ) {
@@ -290,7 +290,7 @@ describe('AlarmService', () => {
     subject.alarms[1] = Alarm.asAlarm(alarms[1]);
     subject.alarms[1]['validity'] = Validity.reliable;
 
-    let expected_validity = Validity.unreliable;
+    const expected_validity = Validity.unreliable;
 
     // Act:
     // Change connection status to invalid
@@ -298,8 +298,10 @@ describe('AlarmService', () => {
 
     // Assert:
     // All the alarms should have an unknown mode
-    for (let pk in subject.alarms){
-      expect(subject.alarms[pk]['validity']).toBe(expected_validity);
+    for (const pk in subject.alarms) {
+      if (subject.alarms.hasOwnProperty(pk)) {
+        expect(subject.alarms[pk]['validity']).toBe(expected_validity);
+      }
     }
 
   });
@@ -354,10 +356,10 @@ describe('AlarmService', () => {
   it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
-    let now = (new Date).getTime();
-    let pars = cdbSubject.getRefreshRateParameters()
-    let maxSecondsWithoutMessages = pars['refreshRate']*pars['broadcastFactor']+1;
-    let delayedTimestamp = now - (maxSecondsWithoutMessages*1000 + 1);
+    const now = (new Date).getTime();
+    const pars = cdbSubject.getRefreshRateParameters();
+    const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + 1;
+    const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000 + 1);
 
     subject.connectionStatusStream.next(true);
     subject.lastReceivedMessageTimestamp = delayedTimestamp;
@@ -375,7 +377,7 @@ describe('AlarmService', () => {
 describe('GIVEN the AlarmService contains Alarms', () => {
 
   let httpSpy;
-  let alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
+  const alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -390,9 +392,11 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
       subject = alarmService;
       httpSubject = httpClientService;
-      let alarmsDict = {};
-      for (let a in alarms) {
-        alarmsDict[alarms[a].core_id] = Alarm.asAlarm(alarms[a]);
+      const alarmsDict = {};
+      for (const a in alarms) {
+        if (alarms.hasOwnProperty(a)) {
+          alarmsDict[alarms[a].core_id] = Alarm.asAlarm(alarms[a]);
+        }
       }
       subject.alarms = alarmsDict;
 
@@ -407,14 +411,16 @@ describe('GIVEN the AlarmService contains Alarms', () => {
   );
 
   it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
-    let ackMessage = 'This is the message';
-    let response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
+    const ackMessage = 'This is the message';
+    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
       (response) => {
         expect(response).toEqual(alarmsToAck);
         expect(httpSpy).toHaveBeenCalled();
-        for (let a in alarmsToAck){
-          let alarm = subject.get(alarmsToAck[a]);
-          expect(alarm.ack).toEqual(true);
+        for (const a in alarmsToAck) {
+          if (alarmsToAck.hasOwnProperty(a)) {
+            const alarm = subject.get(alarmsToAck[a]);
+            expect(alarm.ack).toEqual(true);
+          }
         }
       }
     );

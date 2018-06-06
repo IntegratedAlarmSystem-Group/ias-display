@@ -11,10 +11,10 @@ describe('HttpClientService', () => {
   let subject: HttpClientService;
   let testController: HttpTestingController;
 
-  let testData = { id: 1, name : 'Test Data'};
-  let testDataList = [ testData ];
+  const testData = { id: 1, name : 'Test Data'};
+  const testDataList = [ testData ];
 
-  let testUrl = '/testUrl';
+  const testUrl = '/testUrl';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -79,8 +79,8 @@ describe('HttpClientService', () => {
 
     it('can test HttpClientService.delete', () => {
 
-      subject.delete(testUrl+'/1').subscribe();
-      const req = testController.expectOne({ url: testUrl+'/1' });
+      subject.delete(testUrl + '/1').subscribe();
+      const req = testController.expectOne({ url: testUrl + '/1' });
       expect(req.request.headers.get('Content-Type')).toEqual('application/json');
       expect(req.request.method).toEqual('DELETE');
       testController.verify();
