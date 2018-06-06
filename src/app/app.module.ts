@@ -40,10 +40,16 @@ import { AckButtonComponent } from './ack-button/ack-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
 
-
+/**
+* Application routes
+*/
 const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: OverviewComponent },
+<<<<<<< HEAD
+  { path: 'alarms', component: AlarmsTableComponent },
+=======
+>>>>>>> f49c46b1cd91e84a3ad1b97281311ea0b645c74b
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
   { path: 'modal', component: AckModalComponent }

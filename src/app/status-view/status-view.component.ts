@@ -22,6 +22,9 @@ export class StatusViewComponent implements OnInit {
    */
   private alarmTags = [];
 
+  /*
+  * Instantiates the component
+  */
   constructor() { }
 
   /**

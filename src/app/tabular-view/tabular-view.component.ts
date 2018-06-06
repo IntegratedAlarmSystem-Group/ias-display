@@ -80,7 +80,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   *
+   * Instantiates the service
    * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {Route} route Reference to the url that triggered the initialization

@@ -1,19 +1,25 @@
 /**
-* Class to define Iasio objects
+* Class to define Iasio objects, that represent monitoring points
 */
 export class Iasio {
+
+  /** Core ID of the IASIO */
   io_id: string;
+
+  /** Short description of Alarms associated to this monitoring point */
   short_desc: string;
+
+ /** Type of the IASIO, could be ALARM, DOUBLE, BOOLEAN, etc */
   ias_type: string;
 
   /**
-  * The "constructor"
+  * Builds a new IASIO instance
   *
   * @param {Object} attributes a dictionary containing the attributes to
   * create the object
   */
-  constructor(attributes: Object = {}){
-    Object.assign(this, attributes)
+  constructor(attributes: Object = {}) {
+    Object.assign(this, attributes);
   }
 
   /**
@@ -24,9 +30,9 @@ export class Iasio {
   */
   static isValidIasio(json: any): boolean {
     return (
-      json.hasOwnProperty("io_id") &&
-      json.hasOwnProperty("short_desc") &&
-      json.hasOwnProperty("ias_type")
+      json.hasOwnProperty('io_id') &&
+      json.hasOwnProperty('short_desc') &&
+      json.hasOwnProperty('ias_type')
     );
   }
 
@@ -35,14 +41,15 @@ export class Iasio {
   *
   * @param {any} json the object to convert to an Iasio
   * @param {number} pk the primary key of the Iasio in the database
+  * @returns {Iasio} the object as an {@link Iasio} instance
   */
   static asIasio(json: any): Iasio {
     if (!this.isValidIasio(json)) {
       return null;
     }
-    let io_id = <string>json['io_id'];
-    let short_desc = <string>json['short_desc'];
-    let ias_type = <string>json['ias_type'];
+    const io_id = <string>json['io_id'];
+    const short_desc = <string>json['short_desc'];
+    const ias_type = <string>json['ias_type'];
     return new Iasio({ io_id, short_desc, ias_type });
   }
 

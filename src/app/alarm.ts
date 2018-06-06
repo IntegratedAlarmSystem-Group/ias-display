@@ -10,7 +10,7 @@ export enum OperationalMode {
   operational = 5,
   degraded = 6,
   unknown = 7,
-};
+}
 
 /**
 * List of the possible Validity values
@@ -18,7 +18,7 @@ export enum OperationalMode {
 export enum Validity {
   unreliable = 0,
   reliable = 1
-};
+}
 
 /**
 * List of the possible Values of an Alarm
@@ -29,7 +29,7 @@ export enum Value {
   set_medium = 2,
   set_high = 3,
   set_critical = 4,
-};
+}
 
 /**
 * Class to define Alarm objects
@@ -67,13 +67,13 @@ export class Alarm {
   dependencies: string[];
 
   /**
-  * The "constructor"
+  * Builds a new Alarm instance
   *
   * @param {Object} attributes a dictionary containing the attributes to
   * create the object
   */
-  constructor(attributes: Object = {}){
-    Object.assign(this, attributes)
+  constructor(attributes: Object = {}) {
+    Object.assign(this, attributes);
   }
 
   /**
@@ -84,15 +84,15 @@ export class Alarm {
   */
   static isValidAlarm(json: any): boolean {
     return (
-      json.hasOwnProperty("value") &&
-      json.hasOwnProperty("core_id") &&
-      json.hasOwnProperty("running_id") &&
-      json.hasOwnProperty("mode") &&
-      json.hasOwnProperty("core_timestamp") &&
-      // json.hasOwnProperty("state_change_timestamp") &&
-      json.hasOwnProperty("validity") &&
-      json.hasOwnProperty("ack") &&
-      json.hasOwnProperty("dependencies")
+      json.hasOwnProperty('value') &&
+      json.hasOwnProperty('core_id') &&
+      json.hasOwnProperty('running_id') &&
+      json.hasOwnProperty('mode') &&
+      json.hasOwnProperty('core_timestamp') &&
+      // json.hasOwnProperty('state_change_timestamp') &&
+      json.hasOwnProperty('validity') &&
+      json.hasOwnProperty('ack') &&
+      json.hasOwnProperty('dependencies')
     );
   }
 
@@ -101,20 +101,21 @@ export class Alarm {
   *
   * @param {any} json the object to convert to an Alarm
   * @param {number} pk the primary key of the Alarm in the database
+  * @returns {Alarm} the object as an {@link Alarm} instance
   */
   static asAlarm(json: any): Alarm {
     if (!this.isValidAlarm(json)) {
       return null;
     }
-    let value = <number>json['value'];
-    let core_id = <string>json['core_id'];
-    let running_id = <string>json['running_id'];
-    let mode = <number>json['mode'];
-    let core_timestamp = <number>json['core_timestamp'];
-    let state_change_timestamp = <number>json['state_change_timestamp'];
-    let validity = <number>json['validity'];
-    let ack = <boolean>json['ack'];
-    let dependencies = <string[]>json['dependencies'];
+    const value = <number>json['value'];
+    const core_id = <string>json['core_id'];
+    const running_id = <string>json['running_id'];
+    const mode = <number>json['mode'];
+    const core_timestamp = <number>json['core_timestamp'];
+    const state_change_timestamp = <number>json['state_change_timestamp'];
+    const validity = <number>json['validity'];
+    const ack = <boolean>json['ack'];
+    const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
       state_change_timestamp, validity, ack, dependencies });
   }
@@ -130,9 +131,14 @@ export class Alarm {
     return this.getStateChangeTimestampAsDate();
   }
 
+  /**
+  * Returns a Date representation of the timestamp of the last change of the Alarm
+  *
+  * @returns {Date} a date format representation of the {@link Alarm.state_change_timestamp} attribute
+  */
   getStateChangeTimestampAsDate(): Date {
-    let ts = this.state_change_timestamp;
-    let date: Date = new Date(ts);
+    const ts = this.state_change_timestamp;
+    const date: Date = new Date(ts);
     return date;
   }
 
@@ -145,7 +151,7 @@ export class Alarm {
   */
   acknowledge(): boolean {
     this.ack = true;
-    return this.ack
+    return this.ack;
   }
 
   /**
@@ -182,8 +188,8 @@ export class Alarm {
   */
   getCoreTimestampAsDate(): Date {
 
-    let ts = this.core_timestamp;
-    let date: Date = new Date(ts);
+    const ts = this.core_timestamp;
+    const date: Date = new Date(ts);
 
     return date;
   }
