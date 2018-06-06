@@ -22,7 +22,7 @@ export class StatusViewComponent implements OnInit {
    */
   private alarmTags = [];
 
-  /*
+  /**
   * Instantiates the component
   */
   constructor() { }
@@ -104,7 +104,7 @@ export class StatusViewComponent implements OnInit {
 
   /**
    * Method to search if the component contains an specific tag
-   * @param tag String of the searched tag
+   * @param {string} tag String of the searched tag
    * @returns {boolean} true if it has the tag, false if not
    */
   private hasTag(tag): boolean {
