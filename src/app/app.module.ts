@@ -30,8 +30,6 @@ import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { AppComponent } from './app.component';
-import { AlarmsListComponent } from './alarms-list/alarms-list.component';
-import { AlarmsTableComponent } from './alarms-table/alarms-table.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
 import { AckModalComponent } from './ack-modal/ack-modal.component';
@@ -48,7 +46,10 @@ import { LegendComponent } from './legend/legend.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'overview', component: OverviewComponent },
+<<<<<<< HEAD
   { path: 'alarms', component: AlarmsTableComponent },
+=======
+>>>>>>> f49c46b1cd91e84a3ad1b97281311ea0b645c74b
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
   { path: 'modal', component: AckModalComponent }
@@ -60,8 +61,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AlarmsListComponent,
-    AlarmsTableComponent,
     StatusViewComponent,
     AckModalComponent,
     TabularViewComponent,

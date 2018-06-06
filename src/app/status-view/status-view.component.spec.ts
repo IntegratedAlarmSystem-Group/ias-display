@@ -71,29 +71,29 @@ describe('StatusViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  for (let mode in modes) {
-    for (let val in validities) {
-      for (let v in values) {
-        for (let a in acks) {
+  for (const mode of modes) {
+    for (const validity of validities) {
+      for (const value of values) {
+        for (const ack of acks) {
           it('should display the component according to its tags ', () => {
-            let value = values[v].split('_')[0];
-            component.value = value + '-' + validities[val] + '-' + mode + '-' + acks[a];
+            const processed_value = value.split('_')[0];
+            component.value = processed_value + '-' + validity + '-' + mode + '-' + ack;
             fixture.detectChanges();
             expect(component).toBeTruthy();
             const classes = fixture.debugElement.query(By.css('.alarm-status')).classes;
-            let expected_classes = {'alarm-status': true};
+            const expected_classes = {'alarm-status': true};
 
-            if (mode = 'operational'){
-              expected_classes['status-' + value] = true;
+            if (mode === 'operational') {
+              expected_classes['status-' + processed_value] = true;
             } else {
               expected_classes['status-' + mode] = true;
             }
 
-            if (validities[val] == 'unreliable'){
+            if (validity === 'unreliable') {
               expected_classes['status-unreliable'] = true;
             }
 
-            if (acks[a] != 'ack'){
+            if (ack !== 'ack') {
               expected_classes['blink'] = true;
             }
 
