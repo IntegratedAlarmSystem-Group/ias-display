@@ -18,9 +18,10 @@ export class AppComponent implements OnInit {
   */
   title = 'Integrated Alarm System';
 
+  /** Sidebar Menu of the application */
   menu: NbMenuItem[] = [
-    { title: 'Overview', link: '/overview', icon:'ion-ios-globe-outline'},
-    { title: 'Table', link: '/tabular', icon:'ion-ios-list'},
+    { title: 'Overview', link: '/overview', icon: 'ion-ios-globe-outline'},
+    { title: 'Table', link: '/tabular', icon: 'ion-ios-list'},
     // { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
   ];
 
@@ -28,9 +29,9 @@ export class AppComponent implements OnInit {
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private alarmService: AlarmService
-  ){};
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.alarmService.initialize();
   }
 
@@ -38,6 +39,4 @@ export class AppComponent implements OnInit {
     this.sidebarService.toggle(true, 'menu-sidebar');
     return false;
   }
-
-
 }

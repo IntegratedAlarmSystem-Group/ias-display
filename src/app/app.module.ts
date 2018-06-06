@@ -23,7 +23,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatSlideToggleModule
-} from "@angular/material";
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
@@ -42,14 +42,16 @@ import { AckButtonComponent } from './ack-button/ack-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
 
-
+/**
+* Application routes
+*/
 const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path:'overview', component: OverviewComponent },
-  { path:'alarms', component: AlarmsTableComponent },
-  { path:'tabular', component: TabularViewComponent },
-  { path:'tabular/:filter', component: TabularViewComponent },
-  { path:'modal', component: AckModalComponent }
+  { path: 'overview', component: OverviewComponent },
+  { path: 'alarms', component: AlarmsTableComponent },
+  { path: 'tabular', component: TabularViewComponent },
+  { path: 'tabular/:filter', component: TabularViewComponent },
+  { path: 'modal', component: AckModalComponent }
 ];
 
 /**

@@ -13,10 +13,6 @@ import { Iasio } from './iasio';
 @Injectable()
 export class CdbService {
 
-  /**
-  * Cdb api url from environment settings
-  */
-
   /** IAS Webserver URL for IAS configuration requests */
   iasUrl = environment.cdbApiUrl + '/ias';
 
@@ -48,6 +44,7 @@ export class CdbService {
   public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
+   * Instantiates the service
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    */
   constructor(
@@ -76,6 +73,7 @@ export class CdbService {
 
   /**
   * Get the ias configuration data from the IAS Webserver
+  * @returns {string} URL to request the IAS configuration
   */
   getConfigurationData() {
     return this.httpClientService.get(this.iasUrl);
@@ -83,6 +81,7 @@ export class CdbService {
 
   /**
   * Get information of Iasios from the IAS Webserver
+  * @returns {Date} last change timestamp of the {@link Alarm}
   */
   getAlarmsIasiosData() {
     return this.httpClientService.get(this.iasioAlarmsUrl);
@@ -90,8 +89,8 @@ export class CdbService {
 
   /**
   * Get refresh rate parameters from IAS configuration data
-  *
   * These are refresh rate value and related multiplier factor
+  * @returns {json} contains the 'refreshRate' and 'broadcastFactor' for the refresh rate
   */
   getRefreshRateParameters() {
     return {
@@ -102,8 +101,8 @@ export class CdbService {
 
   /**
   * Get short description from Iasios information for a selected alarm id
-  *
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
+  * @returns {string} the description of the IASIO
   */
   getAlarmDescription(alarmCoreId): string {
     if (alarmCoreId in this.iasAlarmsIasios) {
@@ -115,6 +114,7 @@ export class CdbService {
 
   /**
   * Get link with documentation about the alarms
+  * @returns {string} the documentation URL
   */
   getAlarmsInformationUrl(): string {
     return this.wikiUrl;

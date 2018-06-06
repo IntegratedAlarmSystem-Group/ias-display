@@ -21,9 +21,13 @@ export class AckModalComponent implements OnInit {
    */
   @Input() alarm;
 
+  /**
+   * Object used to manage the form and check the validity of the form input fields
+   */
   form: FormGroup;
 
   /**
+   * Instantiates the component
    * @param {ActiveModal} activeModal Reference to itself
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -59,8 +63,7 @@ export class AckModalComponent implements OnInit {
   }
 
   /**
-   * Send the acknowledge request through the method provided by the
-   * {@link AlarmService} and handle the response.
+   * Send the acknowledge request through the method provided by the {@link AlarmService} and handle the response.
    */
   acknowledge(): void {
     this.spinnerService.show();
@@ -83,16 +86,16 @@ export class AckModalComponent implements OnInit {
   }
 
   /**
-   * Get the alarm description through the method provided by the
-   * {@link CdbService}
+   * Get the alarm description through the method provided by the {@link CdbService}
+   * @returns {string} description of the {@link Alarm}
    */
   getAlarmDescription() {
     return this.cdbService.getAlarmDescription(this.alarm.core_id);
   }
 
   /**
-   * Get the link to the wikipage of the alarm through the method provided
-   * by the {@link CdbService}
+   * Get the link to the wikipage of the alarm through the method provided by the {@link CdbService}
+   * @returns {string} URL for of the documentation of the {@link Alarm}
    */
   getAlarmUrl() {
     return this.cdbService.getAlarmsInformationUrl();

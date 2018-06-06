@@ -46,6 +46,7 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
+   * Instantiates the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    */
@@ -126,6 +127,7 @@ export class AlarmService {
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement
+   * @returns {json} response of the HTTP request of the acknowledge
    */
   acknowledgeAlarms(alarms_ids, message) {
     const data = {
@@ -234,6 +236,7 @@ export class AlarmService {
 
   /**
    * Method to update the last received message timestamp
+   * @returns {InternalObservable} for notifications to check the last received message
    */
   startLastReceivedMessageTimestampCheck() {
     return IntervalObservable.create(1000 * 10)
