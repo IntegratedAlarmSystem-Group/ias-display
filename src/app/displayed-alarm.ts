@@ -114,9 +114,14 @@ export class DisplayedAlarm {
   }
 
   /**
-  * Returns a string to with a number that defines the place where
+  * Returns a string with a number that defines the place where
   * the {@link Alarm} should be displayed on the Table
   * according to the sorting by "Status" column
+  *
+   * @param {string} value string representation of the value of the {@link Alarm}
+   * @param {string} priority string representation of the priority of the {@link Alarm}
+   * @param {string} validity string representation of the validity of the {@link Alarm}
+   * @param {boolean} ack the ack status of the {@link Alarm}
   */
   getAlarmStatusOrder(
     value: string, priority: string, validity: string, ack: boolean): string {
@@ -167,14 +172,5 @@ export class DisplayedAlarm {
     else {
       return ("" + order);
     }
-  }
-
-  getPriorityNumber(priority: string) {
-    let priorities = ['critical', 'high', 'medium', 'low'];
-    return priorities.indexOf(priority);
-  }
-
-  arrayHasElement(array, element) {
-    return array.indexOf(element) > -1 ? true : false;
   }
 }

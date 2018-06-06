@@ -12,7 +12,7 @@ import { RoutingService} from '../routing.service';
 export class OverviewWeatherCardContentComponent implements OnInit {
 
   /**
-   * @param routing Service used to redirect to weather specialized views
+   * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(private routing: RoutingService) { }
 

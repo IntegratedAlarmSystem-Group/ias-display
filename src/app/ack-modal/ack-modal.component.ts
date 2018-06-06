@@ -24,12 +24,11 @@ export class AckModalComponent implements OnInit {
   form: FormGroup;
 
   /**
-   *
-   * @param activeModal Reference to itself
-   * @param formBuilder Service to manage the form and validators
-   * @param alarmService Service used to send the request to acknowledge the alarm
-   * @param cdbService Service used to get complementary alarm information
-   * @param spinnerService Service to provide the loading spinner functionality
+   * @param {ActiveModal} activeModal Reference to itself
+   * @param {FormBuilder} formBuilder Service to manage the form and validators
+   * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
    */
   constructor(
     public activeModal: NgbActiveModal,

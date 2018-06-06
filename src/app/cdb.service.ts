@@ -48,7 +48,7 @@ export class CdbService {
   public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
-   * @param httpClientService Service used to perform HTTP requests
+   * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    */
   constructor(
     private httpClientService: HttpClientService

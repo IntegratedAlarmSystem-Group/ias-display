@@ -80,9 +80,9 @@ export class TabularViewComponent {
 
   /**
    *
-   * @param alarmService Service used to get the Alarms
-   * @param cdbService Service used to get complementary alarm information
-   * @param route Reference to the url that triggered the initialization
+   * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {Route} route Reference to the url that triggered the initialization
    * of this component
    */
   constructor(

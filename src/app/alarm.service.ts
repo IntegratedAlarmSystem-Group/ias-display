@@ -46,8 +46,8 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
-   * @param cdbService Service used to get complementary alarm information
-   * @param httpClientService Service used to perform HTTP requests
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    */
   constructor(
     private cdbService: CdbService,

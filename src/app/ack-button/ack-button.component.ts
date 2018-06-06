@@ -32,8 +32,8 @@ export class AckButtonComponent implements OnInit {
 
   /**
    * The "constructor", injects the {@link AlarmService} and the {@link modalService}
-   * @param alarmService Service to get the alarm object based on the input id
-   * @param modalService Service to manage the Modal Component
+   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
+   * @param {ModalService} modalService Service to manage the Modal Component
    */
   constructor(
     private alarmService: AlarmService,
