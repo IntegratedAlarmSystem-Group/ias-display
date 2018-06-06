@@ -20,7 +20,7 @@ export class AlarmService {
   /**
   * Timestamp related with the last received message
   */
-  public lastReceivedMessageTimestamp : number = (new Date).getTime();
+  public lastReceivedMessageTimestamp: number = (new Date).getTime();
 
   /**
   * Stream of notifications of changes in
@@ -55,7 +55,7 @@ export class AlarmService {
   ) {
     this.connectionStatusStream.subscribe(
       value => {
-        if (value === false){
+        if (value === false) {
           this.triggerAlarmsNonValidConnectionState();
         }
       }
@@ -78,7 +78,7 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    let alarmId = 1;
+    const alarmId = 1;
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -128,10 +128,10 @@ export class AlarmService {
    * @param message message of the acknowledgement
    */
   acknowledgeAlarms(alarms_ids, message) {
-    let data = {
+    const data = {
       'alarms_ids': alarms_ids,
       'message': message,
-    }
+    };
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
     .map(
       (response) => {
@@ -163,7 +163,7 @@ export class AlarmService {
    * @param alarm dictionary with values for alarm fields (as generic object)
    */
   readAlarmMessage(action, obj) {
-    let alarm = Alarm.asAlarm(obj);
+    const alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
       this.alarms[alarm.core_id] = alarm;
     } else if ( action === 'delete') {
@@ -178,8 +178,8 @@ export class AlarmService {
    * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
    */
   readAlarmMessagesList(alarmsList) {
-    for (let obj of alarmsList) {
-      let alarm = Alarm.asAlarm(obj);
+    for (const obj of alarmsList) {
+      const alarm = Alarm.asAlarm(obj);
       this.alarms[alarm.core_id] = alarm;
     }
     this.changeAlarms('all');
@@ -217,18 +217,17 @@ export class AlarmService {
     /* TODO: Evaluate try exception. Here for debug options. */
     try {
       pars = this.cdbService.getRefreshRateParameters();
-    }
-    catch (e) {
+    } catch (e) {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate']*pars['broadcastFactor'] + 1;
+    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + 1;
 
-    let now = (new Date).getTime();
+    const now = (new Date).getTime();
     let millisecondsDelta;
 
     millisecondsDelta = now - this.lastReceivedMessageTimestamp;
-    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ){
+    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ) {
       this.connectionStatusStream.next(false);
     }
   }

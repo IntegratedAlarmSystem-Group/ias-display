@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 import { Observable } from 'rxjs/Rx';
 import { HttpClientService } from './http-client.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -18,13 +18,13 @@ export class CdbService {
   */
 
   /** IAS Webserver URL for IAS configuration requests */
-  iasUrl = environment.cdbApiUrl+'/ias';
+  iasUrl = environment.cdbApiUrl + '/ias';
 
   /** IAS Webserver URL for IASIO requests */
-  iasioUrl = environment.cdbApiUrl+'/iasio';
+  iasioUrl = environment.cdbApiUrl + '/iasio';
 
   /** IAS Webserver URL for requests of IASIOS filtered by Alarms */
-  iasioAlarmsUrl = this.iasioUrl+'/filtered_by_alarm';
+  iasioAlarmsUrl = this.iasioUrl + '/filtered_by_alarm';
 
   /**
   * Twiki url
@@ -64,8 +64,8 @@ export class CdbService {
       this.getAlarmsIasiosData().map((res: Response) => res),
     )
     .subscribe((data: any[]) => {
-      let iasConfigurationData = data[0];
-      let alarmsIasiosData = data[1];
+      const iasConfigurationData = data[0];
+      const alarmsIasiosData = data[1];
       this.iasConfiguration = iasConfigurationData;
       alarmsIasiosData.forEach(iasio => {
         this.iasAlarmsIasios[iasio.io_id] = new Iasio(iasio);
@@ -97,7 +97,7 @@ export class CdbService {
     return {
       'refreshRate': this.iasConfiguration['refresh_rate'],
       'broadcastFactor': this.iasConfiguration['broadcast_factor']
-    }
+    };
   }
 
   /**
@@ -106,11 +106,10 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   */
   getAlarmDescription(alarmCoreId): string {
-    if (alarmCoreId in this.iasAlarmsIasios){
+    if (alarmCoreId in this.iasAlarmsIasios) {
       return this.iasAlarmsIasios[alarmCoreId].short_desc;
-    }
-    else {
-      return "";
+    } else {
+      return '';
     }
   }
 
