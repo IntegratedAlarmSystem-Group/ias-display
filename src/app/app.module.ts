@@ -10,9 +10,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import {
-  Ng2SmartTableModule
-} from 'ng2-smart-table';  //* To remove *//
-import {
   NbThemeModule,
   NbLayoutModule,
   NbCardModule,
@@ -75,7 +72,6 @@ export const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NbSidebarModule.forRoot(), //* To remove *//
     NbMenuModule.forRoot(), //* To remove *//
-    Ng2SmartTableModule, //* To remove *//
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
