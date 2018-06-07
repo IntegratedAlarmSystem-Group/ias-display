@@ -36,6 +36,7 @@ import { AckButtonComponent } from './ack-button/ack-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
 
+
 /**
 * Application routes
 */
