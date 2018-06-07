@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatSlideToggleModule
-} from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
 
 /**
-* Module for required Angular Material components
+* Module for the required Angular Material components
 */
 @NgModule({
   imports: [
@@ -18,7 +20,10 @@ import {
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
   exports: [
     MatInputModule,
@@ -26,7 +31,10 @@ import {
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
   declarations: []
 })
