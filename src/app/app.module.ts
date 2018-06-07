@@ -2,29 +2,28 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { NbThemeModule } from '@nebular/theme';
-import { NbLayoutModule } from '@nebular/theme';
-import { NbCardModule } from '@nebular/theme';
-import { NbSidebarModule } from '@nebular/theme';
-import { NbSidebarService } from '@nebular/theme';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { NbMenuService } from '@nebular/theme';
-import { NbMenuItem } from '@nebular/theme';
-import { NbMenuModule } from '@nebular/theme';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatSlideToggleModule
-} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IasMaterialModule } from './ias-material/ias-material.module';
+import {
+  Ng2SmartTableModule
+} from 'ng2-smart-table';  //* To remove *//
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbCardModule,
+  NbSidebarModule,
+  NbMenuItem,
+  NbMenuModule
+} from '@nebular/theme';  //* To remove *//
+import {
+  NbSidebarService,
+  NbMenuService,
+} from '@nebular/theme';  //* To remove *//
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
@@ -70,24 +69,19 @@ export const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    NbThemeModule.forRoot({ name: 'alma' }),
-    NbLayoutModule,
-    NbCardModule,
+    NbThemeModule.forRoot({ name: 'alma' }), //* To remove *//
+    NbLayoutModule, //* To remove *//
+    NbCardModule, //* To remove *//
     RouterModule.forRoot(appRoutes),
-    NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
-    Ng2SmartTableModule,
+    NbSidebarModule.forRoot(), //* To remove *//
+    NbMenuModule.forRoot(), //* To remove *//
+    Ng2SmartTableModule, //* To remove *//
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatSlideToggleModule,
+    IasMaterialModule,
     NgxSpinnerModule
   ],
   providers: [
@@ -96,8 +90,8 @@ export const appRoutes: Routes = [
     AlarmService,
     CdbService,
     RoutingService,
-    NbSidebarService,
-    NbMenuService,
+    NbSidebarService, //* To remove *//
+    NbMenuService, //* To remove *//
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],
