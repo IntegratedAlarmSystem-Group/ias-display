@@ -2,7 +2,7 @@ import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewIn
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISubscription } from 'rxjs/Subscription';
-import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/material';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../alarm';
@@ -25,6 +25,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Reference to the object that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
+
+  @ViewChild(MatTable) table: MatTable<DisplayedAlarm>;
 
   /**
   * Defines wether the filter for only SET {@link Alarm} is activated or not.
@@ -216,5 +218,13 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.filterString = arrayOfFilters.join(' ');
     this.applyFilter(this.filterString);
+  }
+
+  /**
+  * Returns the filters applied to the Table
+  * @returns {string} filters applied
+  */
+  get filters(): string {
+    return this.filterString;
   }
 }

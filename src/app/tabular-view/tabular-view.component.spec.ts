@@ -113,15 +113,45 @@ describe('TabularViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // TEST SORTING
   describe('AND WHEN the service processes the alarms', () => {
-    it('THEN the Table contains those Alarms sorted', () => {
+    it('THEN the DataSource of the Table contains those Alarms sorted by status', () => {
       alarmService.readAlarmMessagesList(alarms);
-      // fixture.detectChanges();
+      fixture.detectChanges();
+      const sortedData = component.dataSource._orderData(component.dataSource.data);
+      expect(sortedData).toEqual(ExpectedTableRows);
+    });
+  });
 
-      // fixture.whenStable().then(() => {
-        const data = fixture.componentInstance.dataSource!.data;
-        const tableElement = fixture.nativeElement.querySelector('.mat-table')!;
-        // TODO: Finish this test
+  // TEST APPLY_FILTER AND TOGGLE
+  describe('GIVEN the user clicks on the toggle for Set Alarms only', () => {
+    it('WHEN previously the filter is "temperature", THEN the filter should be "temperature set"', () => {
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
+      component.toggleFilterOnlySetAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature set');
+      expect(component.dataSource.filter).toEqual('temperature set');
+    });
+
+    it('WHEN previously the filter is "temperature set", THEN the filter should be "temperature"', () => {
+      component.applyFilter('temperature set');
+      expect(component.filters).toEqual('temperature set');
+      expect(component.dataSource.filter).toEqual('temperature set');
+      component.toggleFilterOnlySetAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
+    });
+
+    it('WHEN previously the filter is "set temperature", THEN the filter should be "temperature"', () => {
+      component.applyFilter('set temperature');
+      expect(component.filters).toEqual('set temperature');
+      expect(component.dataSource.filter).toEqual('set temperature');
+      component.toggleFilterOnlySetAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
     });
   });
 
