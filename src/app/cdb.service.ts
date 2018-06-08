@@ -1,8 +1,11 @@
+
+import {forkJoin as observableForkJoin,  BehaviorSubject } from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs/Rx';
 import { HttpClientService } from './http-client.service';
-import { BehaviorSubject } from 'rxjs';
 import { Iasio } from './iasio';
 
 
@@ -56,9 +59,9 @@ export class CdbService {
   * the component is initializated
   */
   initialize() {
-    return Observable.forkJoin(
-      this.getConfigurationData().map((res: Response) => res[0]),
-      this.getAlarmsIasiosData().map((res: Response) => res),
+    return observableForkJoin(
+      this.getConfigurationData().pipe(map((res: Response) => res[0])),
+      this.getAlarmsIasiosData().pipe(map((res: Response) => res)),
     )
     .subscribe((data: any[]) => {
       const iasConfigurationData = data[0];

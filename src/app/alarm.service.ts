@@ -1,9 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable ,  BehaviorSubject } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Alarm, OperationalMode, Validity } from './alarm';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { IntervalObservable } from 'rxjs/IntervalObservable';
 import { BackendUrls, Streams } from './settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from './http-client.service';
@@ -133,8 +135,8 @@ export class AlarmService {
       'alarms_ids': alarms_ids,
       'message': message,
     };
-    return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data)
-    .map(
+    return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
+    map(
       (response) => {
         for (const id of alarms_ids) {
           const alarm = this.get(id);
@@ -142,7 +144,7 @@ export class AlarmService {
         }
         return response;
       }
-    );
+    ));
   }
 
   /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
