@@ -33,15 +33,15 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
   */
-  private _setFilterActivated = false;
+  public _setFilterActivated = false;
 
   /** String that stores the test input in the filter textfield */
-  private filterString = '';
+  public filterString = '';
 
   /**
   * Array that defines which coulmns are going to be displayed and in which order
   */
-  private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
+  public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
 
   /** String to define the formatting of dates */
   private dateFormat = 'M/d/yy, h:mm:ss a';
