@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NbCardModule } from '@nebular/theme';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AlarmService } from '../alarm.service';
 import { HttpClientService } from '../http-client.service';
 import { CdbService } from '../cdb.service';

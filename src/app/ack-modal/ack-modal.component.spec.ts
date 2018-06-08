@@ -4,7 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { AckModalComponent } from './ack-modal.component';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
@@ -95,7 +95,7 @@ describe('AckModalComponent', () => {
     modalBody = fixture.nativeElement.querySelector('.modal-body');
     modalFooter = fixture.nativeElement.querySelector('.modal-footer');
     spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
-        Observable.of([alarm.core_id])
+        of([alarm.core_id])
     );
     fixture.detectChanges();
   });
