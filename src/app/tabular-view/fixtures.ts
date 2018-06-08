@@ -465,3 +465,13 @@ export const ExpectedTableRows = [
   new DisplayedAlarm(Alarm.asAlarm(MockAlarms[14]), 'Alarm 25 description', 'https://www.alma.cl/'),
   new DisplayedAlarm(Alarm.asAlarm(MockAlarms[19]), 'Alarm 35 description', 'https://www.alma.cl/'),
 ];
+
+/** Set of the rows the that the test expects on the Table after the filter */
+export const ExpectedFilteredTableRows = [
+  ExpectedTableRows[4],
+  ExpectedTableRows[11],
+  ExpectedTableRows[12],
+  ExpectedTableRows[13],
+  ExpectedTableRows[14],
+  ExpectedTableRows[21],
+];

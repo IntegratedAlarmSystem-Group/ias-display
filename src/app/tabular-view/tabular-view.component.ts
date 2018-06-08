@@ -23,10 +23,11 @@ import { CdbService } from '../cdb.service';
 })
 export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  /** Reference to the object that defines the sorting of the table */
-  @ViewChild(MatSort) sort: MatSort;
-
+  /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<DisplayedAlarm>;
+
+  /** Reference to the MatSort, the component that defines the sorting of the table */
+  @ViewChild(MatSort) sort: MatSort;
 
   /**
   * Defines wether the filter for only SET {@link Alarm} is activated or not.
@@ -226,5 +227,13 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   get filters(): string {
     return this.filterString;
+  }
+
+  /**
+  * Returns the status of the Toggle for the filtering of set Alarms
+  * @returns {boolean} filters applied
+  */
+  get toggleStatus(): boolean {
+    return this._setFilterActivated;
   }
 }
