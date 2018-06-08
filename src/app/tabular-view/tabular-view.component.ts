@@ -1,7 +1,5 @@
 import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ISubscription } from 'rxjs/Subscription';
+import { Observable ,  BehaviorSubject ,  SubscriptionLike as ISubscription } from 'rxjs';
 import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/material';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';

@@ -7,7 +7,6 @@ import { NbLayoutModule } from '@nebular/theme';
 import { NbCardModule } from '@nebular/theme';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbSidebarService } from '@nebular/theme';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuModule } from '@nebular/theme';
@@ -76,7 +75,6 @@ export const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    Ng2SmartTableModule,
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,

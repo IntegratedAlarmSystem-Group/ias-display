@@ -1,7 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';

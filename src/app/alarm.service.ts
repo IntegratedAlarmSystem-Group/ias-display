@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  BehaviorSubject } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../environments/environment';
 import { Alarm, OperationalMode, Validity } from './alarm';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { BackendUrls, Streams } from './settings';
 import { CdbService } from './cdb.service';
