@@ -32,12 +32,9 @@ describe('OverviewWeatherCardContentComponent', () => {
   describe('WHEN the component calls goToTableFilteredBy', () => {
     it('THEN the RoutingService.tableWithFilter is called', () => {
       component.goToTableFilteredBy('mock filter');
-      fixture.whenStable().then(() => {
-        expect(spyRoutingTable.tableWithFilter.calls.count())
-          .toBe(1, 'spy method was called once');
-        expect(spyRoutingTable.tableWithFilter.calls.mostRecent().args[0])
-          .toBe('mock filter', 'spy method was called with the right parameters');
-      });
+      expect(spyRoutingTable.tableWithFilter.calls.count()).toBe(1, 'spy method was called once');
+      expect(spyRoutingTable.tableWithFilter.calls.mostRecent().args[0]).
+        toBe('mock filter', 'spy method was called with the right parameters');
     });
   });
 });
