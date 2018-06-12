@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$ias-app-primary: mat-palette($mat-indigo);
+$ias-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$ias-app-warn: mat-palette($mat-red);
+
+$ias-app-theme: mat-dark-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
+
+@include angular-material-theme($ias-app-theme);
