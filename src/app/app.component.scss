@@ -87,4 +87,15 @@ nb-sidebar.menu-sidebar {
     }
 
   }
+
+  /deep/ .menu-item:first-child {
+    border-top: 0px solid black;
+    border-bottom: 0px solid black;
+  }
+
+  /deep/ .menu-item {
+    border-top: 0px solid black;
+    border-bottom: 0px solid black;
+  }
+
 }
