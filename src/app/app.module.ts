@@ -2,28 +2,25 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { NbThemeModule } from '@nebular/theme';
-import { NbLayoutModule } from '@nebular/theme';
-import { NbCardModule } from '@nebular/theme';
-import { NbSidebarModule } from '@nebular/theme';
-import { NbSidebarService } from '@nebular/theme';
-import { NbMenuService } from '@nebular/theme';
-import { NbMenuItem } from '@nebular/theme';
-import { NbMenuModule } from '@nebular/theme';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatSlideToggleModule
-} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IasMaterialModule } from './ias-material/ias-material.module';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbCardModule,
+  NbSidebarModule,
+  NbMenuItem,
+  NbMenuModule
+} from '@nebular/theme';
+import {
+  NbSidebarService,
+  NbMenuService,
+} from '@nebular/theme';
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
@@ -38,6 +35,7 @@ import { OverviewWeatherCardContentComponent } from './overview-weather-card-con
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
+
 
 /**
 * Application routes
@@ -80,12 +78,7 @@ export const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatSlideToggleModule,
+    IasMaterialModule,
     NgxSpinnerModule
   ],
   providers: [
