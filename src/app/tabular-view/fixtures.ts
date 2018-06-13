@@ -13,152 +13,182 @@ export const MockIasios = [
   {
       io_id: 'coreid$1',
       short_desc: 'Alarm 1 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$2',
       short_desc: 'Alarm 2 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$3',
       short_desc: 'Alarm 3 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$4',
       short_desc: 'Alarm 4 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$5',
       short_desc: 'Alarm 5 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$11',
       short_desc: 'Alarm 11 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$12',
       short_desc: 'Alarm 12 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$13',
       short_desc: 'Alarm 13 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$14',
       short_desc: 'Alarm 14 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$15',
       short_desc: 'Alarm 15 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$21',
       short_desc: 'Alarm 21 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$22',
       short_desc: 'Alarm 22 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$23',
       short_desc: 'Alarm 23 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$24',
       short_desc: 'Alarm 24 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$25',
       short_desc: 'Alarm 25 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$31',
       short_desc: 'Alarm 31 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$32',
       short_desc: 'Alarm 32 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$33',
       short_desc: 'Alarm 33 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$34',
       short_desc: 'Alarm 34 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$35',
       short_desc: 'Alarm 35 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$40',
       short_desc: 'Alarm 41 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$41',
       short_desc: 'Alarm 41 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$42',
       short_desc: 'Alarm 42 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$43',
       short_desc: 'Alarm 43 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$44',
       short_desc: 'Alarm 44 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$45',
       short_desc: 'Alarm 45 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$46',
       short_desc: 'Alarm 46 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$47',
       short_desc: 'Alarm 47 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$48',
       short_desc: 'Alarm 48 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
   {
       io_id: 'coreid$49',
       short_desc: 'Alarm 49 description',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   },
 
 ];

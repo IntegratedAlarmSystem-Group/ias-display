@@ -25,12 +25,6 @@ export class CdbService {
   iasioAlarmsUrl = this.iasioUrl + '/filtered_by_alarm';
 
   /**
-  * Twiki url
-  * TODO: Provisory link. To get the link from the cdb database when available.
-  */
-  wikiUrl = environment.wikiUrl;
-
-  /**
   * Variable to store the ias configuration data
   */
   iasConfiguration;
@@ -70,6 +64,7 @@ export class CdbService {
         this.iasAlarmsIasios[iasio.io_id] = new Iasio(iasio);
       });
       this.iasDataAvailable.next(true);
+      console.log('IASIOS: ', this.iasAlarmsIasios);
     });
   }
 
@@ -106,7 +101,7 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   * @returns {string} the description of the IASIO
   */
-  getAlarmDescription(alarmCoreId): string {
+  getAlarmDescription(alarmCoreId: string): string {
     if (alarmCoreId in this.iasAlarmsIasios) {
       return this.iasAlarmsIasios[alarmCoreId].short_desc;
     } else {
@@ -118,8 +113,12 @@ export class CdbService {
   * Get link with documentation about the alarms
   * @returns {string} the documentation URL
   */
-  getAlarmsInformationUrl(): string {
-    return this.wikiUrl;
+  getAlarmsInformationUrl(alarmCoreId: string): string {
+    if (alarmCoreId in this.iasAlarmsIasios) {
+      return this.iasAlarmsIasios[alarmCoreId].doc_url;
+    } else {
+      return '';
+    }
   }
 
 }

@@ -166,7 +166,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.iasDataAvailable.getValue() === true) {
       return {
         description: this.cdbService.getAlarmDescription(core_id),
-        url: this.cdbService.getAlarmsInformationUrl()
+        url: this.cdbService.getAlarmsInformationUrl(core_id)
       };
     } else {
       return {

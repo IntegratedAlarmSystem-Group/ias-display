@@ -12,7 +12,4 @@ export const environment = {
 
   /** URL for HTTP requests to the CDB app */
   cdbApiUrl: '/cdb-api',
-
-  /** URL for wiki documentation */
-  wikiUrl: 'https://www.alma.cl/',
 };

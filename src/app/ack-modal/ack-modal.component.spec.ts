@@ -66,7 +66,8 @@ describe('AckModalComponent', () => {
       const mockIasAlarmsIasiosResponse = [{
           io_id: 'coreid$1',
           short_desc: 'Short description for mock alarm',
-          ias_type: 'ALARM'
+          ias_type: 'ALARM',
+          doc_url: 'https://www.alma.cl/'
       }];
 
       alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
@@ -110,12 +111,12 @@ describe('AckModalComponent', () => {
   });
 
   it('should display the alarm short description', () => {
-    const expected = cdbSubject.getAlarmDescription(alarm.core_id);
+    const expected = alarmIasio.short_desc;
     expect(modalBody.textContent).toContain(expected);
   });
 
   it('should display a link to get more information about the alarms', () => {
-    const expected = cdbSubject.wikiUrl;
+    const expected = alarmIasio.doc_url;
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.alarmUrl').href)
       .toEqual(expected);
