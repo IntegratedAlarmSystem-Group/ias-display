@@ -12,7 +12,6 @@ import { IasMaterialModule } from './ias-material/ias-material.module';
 import {
   NbThemeModule,
   NbLayoutModule,
-  NbCardModule,
   NbSidebarModule,
   NbMenuItem,
   NbMenuModule
@@ -69,7 +68,6 @@ export const appRoutes: Routes = [
     HttpClientModule,
     NbThemeModule.forRoot({ name: 'alma' }),
     NbLayoutModule,
-    NbCardModule,
     RouterModule.forRoot(appRoutes),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

@@ -8,7 +8,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { NbCardModule } from '@nebular/theme';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { Observable } from 'rxjs';
 import { AlarmService } from '../alarm.service';
 import { HttpClientService } from '../http-client.service';
@@ -46,12 +46,12 @@ describe('TabularViewComponent', () => {
         WikiButtonComponent,
       ],
       imports: [
-        NbCardModule,
         MatTableModule,
         HttpClientModule,
         MatSortModule,
         BrowserAnimationsModule,
         NgbModule.forRoot(),
+        IasMaterialModule
       ],
       providers: [
         {

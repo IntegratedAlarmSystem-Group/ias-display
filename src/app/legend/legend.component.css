@@ -19,7 +19,6 @@
 
 .alarm-status-legend .group .item .status {
   display: inline-block;
-  margin-right: 7px;
+  margin-right: 10px;
   text-align: center;
-  width: 36px;
 }
