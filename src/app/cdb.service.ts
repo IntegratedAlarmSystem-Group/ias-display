@@ -64,7 +64,6 @@ export class CdbService {
         this.iasAlarmsIasios[iasio.io_id] = new Iasio(iasio);
       });
       this.iasDataAvailable.next(true);
-      console.log('IASIOS: ', this.iasAlarmsIasios);
     });
   }
 
