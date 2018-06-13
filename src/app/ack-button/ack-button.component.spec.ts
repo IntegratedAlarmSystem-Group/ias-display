@@ -4,7 +4,6 @@ import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { NbCardModule } from '@nebular/theme';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
@@ -31,7 +30,6 @@ describe('GIVEN an AckButtonComponent', () => {
         AckModalComponent,
       ],
       imports: [
-        NbCardModule,
         HttpClientModule,
         NgbModule.forRoot(),
         ReactiveFormsModule,

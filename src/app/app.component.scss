@@ -1,6 +1,14 @@
 @import './@theme/alma';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/deep/ {
+
+  body {
+    background: #282e38;
+  }
+
+}
+
 @include nb-install-component {
 
     .menu-btn {
@@ -25,32 +33,6 @@
 
     .title {
       font-size: 18px;
-    }
-
-    /deep/ nb-card {
-      nb-card-header {
-        background-color: #3c4856;
-        border-bottom: 1px solid #3c4856;
-      }
-      nb-card-body {
-        background-color: #2e3740;
-      }
-      nb-card-footer {
-        background-color: #192531;
-        border-top: 1px solid #192531;
-      }
-    }
-
-    /deep/ nb-layout {
-        nb-layout-column {
-            background-color: #282e38;
-        }
-        nb-layout-header .menu-btn {
-            font-size: 1.5rem;
-        }
-        nb-layout-header nav {
-          height: 3.25rem;
-        }
     }
 
 }
