@@ -27,13 +27,13 @@ describe('CdbService', () => {
   const mockIasAlarmsIasiosResponse = [{
       io_id: 'WS-MeteoTB1-Temperature',
       short_desc: 'Temperature reported by the weather station MeteoTB1 out of range',
-      ias_type: 'ALARM'
+      ias_type: 'ALARM',
+      doc_url: 'https://www.alma.cl/'
   }];
 
   const iasCdbUrl = environment.cdbApiUrl + '/ias';
   const iasioCdbUrl = environment.cdbApiUrl + '/iasio';
   const iasioCdbAlarmsUrl = iasioCdbUrl + '/filtered_by_alarm';
-  const wikiUrl = environment.wikiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -100,7 +100,7 @@ describe('CdbService', () => {
     expect(pars['broadcastFactor']).toEqual(3);
   });
 
-  it('should be able to retrieve the short description for an alarm from the alarm iasio information', () => {
+  it('should be able to retrieve the short description and documentation URL for an alarm from the alarm iasio information', () => {
     /* Arrange */
     subject.initialize();
     const iasCalls = testController.match(
@@ -116,12 +116,8 @@ describe('CdbService', () => {
     const targetAlarm = mockIasAlarmsIasiosResponse[0];
     const alarmCoreId = targetAlarm['io_id'];
     const shortDescription = subject.getAlarmDescription(alarmCoreId);
+    const docUrl = subject.getAlarmsInformationUrl(alarmCoreId);
     expect(shortDescription).toEqual(targetAlarm['short_desc']);
+    expect(docUrl).toEqual(targetAlarm['doc_url']);
   });
-
-  it('should be able to retrieve the link with information about the alarms', () => {
-    const expectedUrl = wikiUrl;
-    expect(expectedUrl).toEqual(subject.getAlarmsInformationUrl());
-  });
-
 });
