@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} Main sidenav compacted state
+   * @returns {boolean} Value of the main sidenav isCompacted variable
    */
   toggleSidenav(): boolean {
     this.isCompacted=!this.isCompacted
