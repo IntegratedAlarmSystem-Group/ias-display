@@ -7,8 +7,6 @@ import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 
-import { NbThemeModule } from '@nebular/theme';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 
@@ -29,7 +27,6 @@ describe('AppComponent', () => {
         AppComponent
       ],
       imports: [
-        NbThemeModule.forRoot({ name: 'default' }),
         RouterModule.forRoot(appRoutes),
         HttpClientModule,
         BrowserAnimationsModule,

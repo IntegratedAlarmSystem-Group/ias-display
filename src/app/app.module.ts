@@ -9,9 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
-
-import { NbThemeModule } from '@nebular/theme';
-
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
@@ -58,7 +55,6 @@ export const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    NbThemeModule.forRoot({ name: 'alma' }),
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     FormsModule,
