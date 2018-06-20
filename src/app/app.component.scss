@@ -1,83 +1,126 @@
-@import './@theme/alma';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* Styles */
 
-/deep/ {
+mat-toolbar {
+  background: #2e445c;
+}
 
-  body {
-    background: #282e38;
+mat-sidenav-container {
+  background: #282e38;
+
+  mat-sidenav {
+    background: #2e445c;
   }
 
+  mat-sidenav-content {
+    background: transparent;
+  }
 }
 
-@include nb-install-component {
-
-    .menu-btn {
-      padding-right: 20px;
-    }
-
-    .main-menu-icon {
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .menu-sidebar {
-      margin-top: 2rem;
-    }
-
-    .nb-sidebar-header {
-      padding: 1.25rem;
-      padding-bottom: 4px;
-      height: initial;
-    }
-
-    .title {
-      font-size: 18px;
-    }
-
+button {
+    outline: 0px;
 }
 
-nb-sidebar.menu-sidebar {
+#main-sidenav {
+
+  position: absolute;
+  top: 65px;
+  bottom: 0;
+  overflow-y: unset;
+  width: 220px;
+
+  p {
+    padding-right: 50px;
+  }
+
+  /deep/ .mat-list-item-content {
+    padding: 0px 12px;
+  }
 
   .ias.ias-logo-container {
-    display: table;
-    background: #3d628f;
-    width: 100%;
+    background: #4F81BD;
     padding: .75rem 2.5rem;
-    margin-top: -2rem;
     border-radius: 4px;
+    text-align: center;
+    width: 80%;
+    position: absolute;
+    top: -1.75rem;
+    left: 10%;
+    display: inline-block;
+    vertical-align: top;
   }
 
   img.ias.ias-logo {
-    width: 40px;
+    width: 35px;
+  }
+
+  mat-nav-list a.mat-list-item {
+
+    height: 80px;
+    padding-left: 10px;
+
+    mat-icon {
+      font-size: 40px;
+      height: 40px;
+      width: 40px;
+    }
+
+    &.active-link {
+      color: #4ac8ff;
+
+      /deep/ .mat-line {
+        color: white;
+        font-weight: bold;
+      }
+
+    }
+
   }
 
   &.compacted {
 
+    width: unset;
+
     .ias.ias-logo-container {
-      position: relative;
-      top: 0px;
-      left: -12px;
-      padding: 2px;
-      padding-top: .75rem;
-      padding-bottom: .75rem;
-      min-width: 42px;
+      padding: .725rem 0;
+      width: 60%;
+      left: 20%;
     }
 
     img.ias.ias-logo {
       width: 30px;
     }
 
+    mat-nav-list a.mat-list-item {
+
+      padding-left: 0px;
+
+      &.active-link {
+        box-shadow: 4px 0px 0px 0px #4ac8ff inset;
+      }
+
+    }
+
+  }
+  /* &.compacted */
+
+}
+
+#main-sidenav-content  {
+  height: calc(100vh - 64px) !important;
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+.app-toolbar {
+
+  padding: 0;
+
+  .btn-wrapper {
+    padding: 0 16px;
   }
 
-  /deep/ .menu-item:first-child {
-    border-top: 0px solid black;
-    border-bottom: 0px solid black;
-  }
-
-  /deep/ .menu-item {
-    border-top: 0px solid black;
-    border-bottom: 0px solid black;
+  .content-wrapper {
+    padding: 0 16px;
+    width: 100%;
   }
 
 }

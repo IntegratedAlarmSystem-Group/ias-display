@@ -19,11 +19,15 @@ export class AppComponent implements OnInit {
   */
   title = 'Integrated Alarm System';
 
+  /**
+  * State of the main sidenav
+  */
+  isCompacted = true;
+
   /** Sidebar Menu of the application */
-  menu: NbMenuItem[] = [
-    { title: 'Overview', link: '/overview', icon: 'ion-ios-globe-outline'},
-    { title: 'Table', link: '/tabular', icon: 'ion-ios-list'},
-    // { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
+  sidenavItems = [
+    { title: 'Overview', link: '/overview', icon: 'language'},
+    { title: 'Table', link: '/tabular', icon: 'list'}
   ];
 
   /**
@@ -47,10 +51,10 @@ export class AppComponent implements OnInit {
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} false
+   * @returns {boolean} Main sidenav compacted state
    */
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
+  toggleSidenav(): boolean {
+    this.isCompacted=!this.isCompacted
+    return this.isCompacted;
   }
 }

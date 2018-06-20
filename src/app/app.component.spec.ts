@@ -15,6 +15,7 @@ import { NbMenuService } from '@nebular/theme';
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuModule } from '@nebular/theme';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ describe('AppComponent', () => {
         NbMenuModule.forRoot(),
         RouterModule.forRoot(appRoutes),
         HttpClientModule,
+        BrowserAnimationsModule,
         IasMaterialModule
       ],
       providers: [
