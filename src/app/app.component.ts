@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NbSidebarService } from '@nebular/theme';
-import { NbMenuService } from '@nebular/theme';
-import { NbMenuItem } from '@nebular/theme';
 import { AlarmService } from './alarm.service';
 
 /**
@@ -32,13 +29,9 @@ export class AppComponent implements OnInit {
 
   /**
    * Instantiates the service
-   * @param {NbSidebarService} sidebarService Service used for the sidebar
-   * @param {NbMenuService} menuService Service used for the menu of the sidebar
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    */
   constructor(
-    private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
     private alarmService: AlarmService
   ) {}
 

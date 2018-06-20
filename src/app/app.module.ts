@@ -9,17 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
-import {
-  NbThemeModule,
-  NbLayoutModule,
-  NbSidebarModule,
-  NbMenuItem,
-  NbMenuModule
-} from '@nebular/theme';
-import {
-  NbSidebarService,
-  NbMenuService,
-} from '@nebular/theme';
+
+import { NbThemeModule } from '@nebular/theme';
+
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
@@ -67,10 +59,7 @@ export const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     NbThemeModule.forRoot({ name: 'alma' }),
-    NbLayoutModule,
     RouterModule.forRoot(appRoutes),
-    NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
@@ -85,8 +74,6 @@ export const appRoutes: Routes = [
     AlarmService,
     CdbService,
     RoutingService,
-    NbSidebarService,
-    NbMenuService,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],
