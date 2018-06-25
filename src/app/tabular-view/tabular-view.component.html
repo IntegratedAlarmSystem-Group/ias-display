@@ -67,7 +67,7 @@
         <mat-header-cell *matHeaderCellDef>
           <span mat-sort-header> Last Change Time </span>
         </mat-header-cell>
-        <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat }} </mat-cell>
+        <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>
       </ng-container>
 
       <!-- Description Column -->

@@ -7,6 +7,7 @@ import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
+import { Locale } from '../settings';
 
 /**
 * Component that dispays all the Alarms in a table
@@ -43,8 +44,11 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
 
-  /** String to define the formatting of dates */
-  private dateFormat = 'M/d/yy, h:mm:ss a';
+  /** String to store the formatting of dates, read form the settings */
+  private dateFormat: string;
+
+  /** String to store the timezone to display dates, read from the settings */
+  private timezone: string;
 
   /** String to define the keyword to filter SET {@link Alarm} */
   private filterValueForSetAlarms = 'set';
@@ -103,6 +107,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
    * Retrieves filter values passed by the URL and applies them to the table
    */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     this.sort.sort(<MatSortable> {
       id: 'status',
       start: 'asc'

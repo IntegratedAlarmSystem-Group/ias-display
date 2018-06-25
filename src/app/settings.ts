@@ -17,3 +17,8 @@ export const Streams = {
 export const StorageItems = {
   TOKEN: 'token',
 };
+
+export const Locale = {
+  DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',
+  TIMEZONE: '+0000',
+};
