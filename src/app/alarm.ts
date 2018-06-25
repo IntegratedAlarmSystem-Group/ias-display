@@ -60,8 +60,11 @@ export class Alarm {
   /** Timestamp at which the {@link Alarm} changed the state or the mode */
   state_change_timestamp: number;
 
-  /** Acknowledgement message */
+  /** Acknowledgement status */
   ack: boolean;
+
+  /** Acknowledgement status */
+  shelved: boolean;
 
   /** List of core_id's of dependent alarms **/
   dependencies: string[];
@@ -92,6 +95,7 @@ export class Alarm {
       // json.hasOwnProperty('state_change_timestamp') &&
       json.hasOwnProperty('validity') &&
       json.hasOwnProperty('ack') &&
+      json.hasOwnProperty('shelved') &&
       json.hasOwnProperty('dependencies')
     );
   }
@@ -115,6 +119,7 @@ export class Alarm {
     const state_change_timestamp = <number>json['state_change_timestamp'];
     const validity = <number>json['validity'];
     const ack = <boolean>json['ack'];
+    const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
       state_change_timestamp, validity, ack, dependencies });
@@ -143,11 +148,11 @@ export class Alarm {
   }
 
   /**
-  * Acknowledges the {@link Alarm} and returns the acknowledge message
+  * Acknowledges the {@link Alarm} and returns the acknowledge status
   *
   * @param {message} string string message of the acknowledgement
   *
-  * @returns {string} a the acknowledgement message
+  * @returns {boolean} a the acknowledgement status
   */
   acknowledge(): boolean {
     this.ack = true;
@@ -192,5 +197,27 @@ export class Alarm {
     const date: Date = new Date(ts);
 
     return date;
+  }
+
+  /**
+  * Shelves the {@link Alarm} and returns the shelve status
+  *
+  * @param {message} string string message of the shelving
+  *
+  * @returns {boolean} a the shelving message
+  */
+  shelve(): boolean {
+    this.shelved = true;
+    return this.shelved;
+  }
+
+  /**
+  * Unshelves the {@link Alarm} and returns the shelve status
+  *
+  * @returns {boolean} a the shelving status
+  */
+  unshelve(): boolean {
+    this.shelved = false;
+    return this.shelved;
   }
 }

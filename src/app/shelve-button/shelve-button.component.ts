@@ -1,21 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AckModalComponent } from '../ack-modal/ack-modal.component';
+import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
-/**
- * Button used to trigger the event to open the Acknowledge Modal
- */
 @Component({
-  selector: 'app-ack-button',
-  templateUrl: './ack-button.component.html',
-  styleUrls: ['./ack-button.component.css']
+  selector: 'app-shelve-button',
+  templateUrl: './shelve-button.component.html',
+  styleUrls: ['./shelve-button.component.css']
 })
-export class AckButtonComponent implements OnInit {
+export class ShelveButtonComponent implements OnInit {
 
   /**
-   * Id of the alarm to be acknowledged
+   * Id of the alarm to be shelved
    */
   @Input() alarm_id: string;
 
@@ -25,9 +22,9 @@ export class AckButtonComponent implements OnInit {
   private alarm: Alarm;
 
   /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
+   * Store if the alarm is shelved.
    */
-  public canAcknowledge = false;
+  public shelved = false;
 
   /**
    * The "constructor", injects the {@link AlarmService} and the {@link modalService}
@@ -45,6 +42,7 @@ export class AckButtonComponent implements OnInit {
    */
   ngOnInit() {
     this.loadAlarm();
+    console.log('ngOnInit: ', this.alarm);
   }
 
   /**
@@ -53,18 +51,19 @@ export class AckButtonComponent implements OnInit {
    */
   loadAlarm() {
     this.alarm = this.alarmService.get(this.alarm_id);
-    this.canAcknowledge = !this.alarm.ack;
+    this.shelved = this.alarm.shelved;
   }
 
   /**
-  * Handle click on table rows, it triggers the ack modal
+  * Handle click on table rows, it triggers the shelve modal
   */
   onClick(event) {
-    const ackModal = this.modalService.open(AckModalComponent,
-      { size: 'lg', centered: true }
-    );
-    ackModal.componentInstance.alarm = this.alarm;
-    return ackModal;
+    // const shelveModal = this.modalService.open(ShelveModalComponent,
+    //   { size: 'lg', centered: true }
+    // );
+    // shelveModal.componentInstance.alarm = this.alarm;
+    this.alarm.shelved = !this.alarm.shelved;
+    console.log('shelving, after: ', this.alarm);
+    // return shelveModal;
   }
-
 }

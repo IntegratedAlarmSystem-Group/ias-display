@@ -1,0 +1,11 @@
+<button class="shelve-button" title="Shelve" mat-raised-button (click)="onClick($event)">
+    <div *ngIf=shelved; else unshelved>
+      <mat-icon mat-list-icon>unarchive</mat-icon>
+    </div>
+    <div *ngIf=!shelved>
+      <mat-icon mat-list-icon>archive</mat-icon>
+    </div>
+    <!-- <ng-template #unshelved>
+      <mat-icon mat-list-icon>archive</mat-icon>
+    </ng-template> -->
+</button>

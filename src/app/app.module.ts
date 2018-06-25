@@ -23,6 +23,8 @@ import { OverviewWeatherCardContentComponent } from './overview-weather-card-con
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
+import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
+import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 
 
 /**
@@ -50,7 +52,9 @@ export const appRoutes: Routes = [
     OverviewWeatherCardContentComponent,
     AckButtonComponent,
     WikiButtonComponent,
-    LegendComponent
+    LegendComponent,
+    ShelveModalComponent,
+    ShelveButtonComponent
   ],
   imports: [
     BrowserModule,
