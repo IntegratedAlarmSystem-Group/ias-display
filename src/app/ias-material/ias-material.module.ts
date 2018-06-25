@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 
@@ -29,6 +31,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCardModule,
     MatSidenavModule,
     MatListModule,
+    MatTreeModule,
+    MatCheckboxModule,
     MatToolbarModule
   ],
   exports: [
@@ -43,6 +47,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCardModule,
     MatSidenavModule,
     MatListModule,
+    MatTreeModule,
+    MatCheckboxModule,
     MatToolbarModule
   ],
   declarations: []
