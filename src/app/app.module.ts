@@ -81,6 +81,7 @@ export const appRoutes: Routes = [
   entryComponents: [
     StatusViewComponent,
     AckModalComponent,
+    ShelveModalComponent,
   ]
 })
 export class AppModule { }

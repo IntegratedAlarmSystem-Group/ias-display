@@ -19,12 +19,8 @@ export class ShelveButtonComponent implements OnInit {
   /**
    * Alarm object related with the alarm id received as input
    */
-  private alarm: Alarm;
+  public alarm: Alarm;
 
-  /**
-   * Store if the alarm is shelved.
-   */
-  public shelved = false;
 
   /**
    * The "constructor", injects the {@link AlarmService} and the {@link modalService}
@@ -42,7 +38,6 @@ export class ShelveButtonComponent implements OnInit {
    */
   ngOnInit() {
     this.loadAlarm();
-    console.log('ngOnInit: ', this.alarm);
   }
 
   /**
@@ -51,19 +46,17 @@ export class ShelveButtonComponent implements OnInit {
    */
   loadAlarm() {
     this.alarm = this.alarmService.get(this.alarm_id);
-    this.shelved = this.alarm.shelved;
   }
 
   /**
   * Handle click on table rows, it triggers the shelve modal
   */
   onClick(event) {
-    // const shelveModal = this.modalService.open(ShelveModalComponent,
-    //   { size: 'lg', centered: true }
-    // );
-    // shelveModal.componentInstance.alarm = this.alarm;
+    const shelveModal = this.modalService.open(ShelveModalComponent,
+      { size: 'lg', centered: true }
+    );
+    shelveModal.componentInstance.alarm = this.alarm;
     this.alarm.shelved = !this.alarm.shelved;
-    console.log('shelving, after: ', this.alarm);
-    // return shelveModal;
+    return shelveModal;
   }
 }

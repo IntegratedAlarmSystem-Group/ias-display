@@ -122,7 +122,7 @@ export class Alarm {
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, ack, dependencies });
+      state_change_timestamp, validity, ack, shelved, dependencies });
   }
 
   /**
