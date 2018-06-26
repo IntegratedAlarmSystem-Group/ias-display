@@ -4,6 +4,8 @@ import { AckTreeComponent } from './ack-tree.component';
 
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 
+import { Alarm } from '../alarm';
+
 
 describe('AckTreeComponent', () => {
   let component: AckTreeComponent;
@@ -20,6 +22,16 @@ describe('AckTreeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AckTreeComponent);
     component = fixture.componentInstance;
+    component.selectedAlarm = Alarm.asAlarm({
+      'value': 0,
+      'core_id': '',
+      'running_id': '',
+      'mode': '',
+      'core_timestamp': 1,
+      'validity': '0',
+      'ack': false,
+      'dependencies': [],
+    });
     fixture.detectChanges();
   });
 

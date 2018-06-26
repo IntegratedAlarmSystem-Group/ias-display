@@ -1,9 +1,9 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Input, OnInit, Injectable } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
-
+import { Alarm } from '../alarm';
 
 /**
 * Tree with checkboxes for a list of alarms
@@ -93,10 +93,14 @@ export class ChecklistDatabase {
 @Component({
   selector: 'app-ack-tree',
   templateUrl: 'ack-tree.component.html',
-  styleUrls: ['ack-tree.component.scss'],
-  providers: [ChecklistDatabase]
+  styleUrls: ['ack-tree.component.scss']
 })
-export class AckTreeComponent {
+export class AckTreeComponent implements OnInit {
+
+  @Input() selectedAlarm: Alarm;
+
+  /** Tree data with dependencies for the selected alarm **/
+  treeData = {};
 
   /** List with ids to ack **/
   ackList: string[] = [];
@@ -122,18 +126,16 @@ export class AckTreeComponent {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<AlarmItemFlatNode>(true /* multiple */);
 
-  constructor(private database: ChecklistDatabase) {
+  constructor() {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<AlarmItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-    database.dataChange.subscribe(data => {
-      this.dataSource.data = data;
-    });
-
     this.checklistSelection.onChange.subscribe(data => { this.updateAckList() })
+  }
 
+  ngOnInit(){
+    this.dataSource.data = this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
   }
 
   getLevel = (node: AlarmItemFlatNode) => { return node.level; };
@@ -147,6 +149,40 @@ export class AckTreeComponent {
   hasChild = (_: number, _nodeData: AlarmItemFlatNode) => { return _nodeData.expandable; };
 
   hasNoContent = (_: number, _nodeData: AlarmItemFlatNode) => { return _nodeData.item === ''; };
+
+  /**
+   * Tree data from selected alarm
+   */
+   getTreeDataFromAlarm(alarm: Alarm){
+     console.log(JSON.stringify(alarm));
+     let tree_data = {};
+     tree_data[alarm.core_id] = [];
+     for (let item of alarm.dependencies){
+       tree_data[alarm.core_id].push(item);
+     }
+     return tree_data;
+   }
+  /**
+   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
+   * The return value is the list of `AlarmItemNode`.
+   */
+  buildFileTree(value: any, level: number) {
+    let data: any[] = [];
+    for (let k in value) {
+      let v = value[k];
+      let node = new AlarmItemNode();
+      node.item = `${k}`;
+      if (v === null || v === undefined) {
+        // no action
+      } else if (typeof v === 'object') {
+        node.children = this.buildFileTree(v, level + 1);
+      } else {
+        node.item = v;
+      }
+      data.push(node);
+    }
+    return data;
+  }
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
@@ -173,6 +209,7 @@ export class AckTreeComponent {
   descendantsPartiallySelected(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    if (this.descendantsAllSelected(node)) this.checklistSelection.select(node);
     return result && !this.descendantsAllSelected(node);
   }
 

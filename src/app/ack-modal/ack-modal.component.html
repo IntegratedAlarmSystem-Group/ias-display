@@ -17,7 +17,7 @@
     </p>
   </div>
   <div class="modal-ack-tree">
-    <app-ack-tree></app-ack-tree>
+    <app-ack-tree [selectedAlarm]="alarm"></app-ack-tree>
   </div>
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
