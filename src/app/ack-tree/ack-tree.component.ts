@@ -4,6 +4,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
 
+
 /**
 * Tree with checkboxes for a list of alarms
 *
@@ -92,10 +93,14 @@ export class ChecklistDatabase {
 @Component({
   selector: 'app-ack-tree',
   templateUrl: 'ack-tree.component.html',
-  styleUrls: ['ack-tree.component.css'],
+  styleUrls: ['ack-tree.component.css', 'ack-tree.component.scss'],
   providers: [ChecklistDatabase]
 })
 export class AckTreeComponent {
+
+  /** List with ids to ack **/
+  ackList: string[] = [];
+
   /** Map from flat node to nested node. This helps us finding a nested node to be modified */
   flatNodeMap: Map<AlarmItemFlatNode, AlarmItemNode> = new Map<AlarmItemFlatNode, AlarmItemNode>();
 
@@ -126,6 +131,9 @@ export class AckTreeComponent {
     database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
+
+    this.checklistSelection.onChange.subscribe(data => { this.updateAckList() })
+
   }
 
   getLevel = (node: AlarmItemFlatNode) => { return node.level; };
@@ -168,6 +176,14 @@ export class AckTreeComponent {
     return result && !this.descendantsAllSelected(node);
   }
 
+  /** Check no dependencies for an extensible node */
+  noSelectedDescendants(node: AlarmItemFlatNode): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    if (!result) this.checklistSelection.deselect(node);
+    return !result;
+  }
+
   /** Toggle the alarm item selection. Select/deselect all the descendants node */
   alarmItemSelectionToggle(node: AlarmItemFlatNode): void {
     this.checklistSelection.toggle(node);
@@ -175,6 +191,17 @@ export class AckTreeComponent {
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
+  }
+
+  /** Update list with ids to ack **/
+  updateAckList(): void {
+    this.ackList = [];
+    const selected = this.checklistSelection.selected;
+    selected.forEach( (flatNode) => {
+      if (flatNode.expandable === false) {
+        this.ackList.push(flatNode.item);
+      }
+    });
   }
 
 }
