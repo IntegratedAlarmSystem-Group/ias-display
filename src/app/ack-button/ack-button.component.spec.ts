@@ -65,6 +65,7 @@ describe('GIVEN an AckButtonComponent', () => {
         'state_change_timestamp': 1267252440000,
         'validity': 1,
         'ack': false,
+        'shelved': false,
         'dependencies': [],
       };
       spyOn(alarmService, 'get').and.callFake(function() {
@@ -103,6 +104,7 @@ describe('GIVEN an AckButtonComponent', () => {
               'state_change_timestamp': 1267252440000,
               'validity': 1,
               'ack': false,
+              'shelved': false,
               'dependencies': [],
             }
           )

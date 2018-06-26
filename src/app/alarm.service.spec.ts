@@ -28,6 +28,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 0,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -44,6 +45,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 1,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -60,6 +62,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 1,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -75,6 +78,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -85,6 +89,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -95,6 +100,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   }
 ];
