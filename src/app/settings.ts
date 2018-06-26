@@ -6,7 +6,7 @@ export const BackendUrls = {
   TICKETS: '/tickets/',
   TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge/',
   SHELVE_API: '/tickets-api/shelve-registries/',
-  UNSHELVE_API: '/tickets-api/shelveregistry/unshelve/',
+  UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */

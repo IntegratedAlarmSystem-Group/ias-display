@@ -21,7 +21,7 @@
   </div>
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
-    <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!form.valid">{{ getActionButtonText() }}</button>
+    <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
   </div>
 </form>
 

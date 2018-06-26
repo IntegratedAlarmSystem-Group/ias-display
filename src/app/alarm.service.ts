@@ -170,6 +170,30 @@ export class AlarmService {
     ));
   }
 
+  /**
+   * Shelves and Alarm with a message
+   * @param alarms id of the alarm to shelve
+   * @param message message of the shelving
+   * @returns {json} response of the HTTP request of the shelve
+   */
+  unshelveAlarms(alarms_ids, message) {
+    const data = {
+      'alarms_ids': alarms_ids,
+    };
+    return this.httpClientService.put(BackendUrls.UNSHELVE_API, data).pipe(
+    map(
+      (response) => {
+        if (response['status'] === 200) {
+          for (const id of alarms_ids) {
+            const alarm = this.get(id);
+            alarm.unshelve();
+          }
+        }
+        return response;
+      }
+    ));
+  }
+
   /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
 
   /**

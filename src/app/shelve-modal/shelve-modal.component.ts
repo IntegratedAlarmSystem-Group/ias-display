@@ -76,9 +76,8 @@ export class ShelveModalComponent implements OnInit {
   }
 
   shelve() {
-    console.log('shelving!!');
     this.spinnerService.show();
-    if (this.form.valid) {
+    if (this.canSend()) {
       this.alarmService.shelveAlarm(
         this.alarm.core_id, this.form.get('message').value).subscribe(
           (response) => {
@@ -97,24 +96,31 @@ export class ShelveModalComponent implements OnInit {
   }
 
   unshelve() {
-    console.log('unshelving!!');
     this.spinnerService.show();
-    // if (this.form.valid) {
-    //   this.alarmService.unshelveAlarms(
-    //     [this.alarm.core_id], this.form.get('message').value).subscribe(
-    //       (response) => {
-    //         this.sendSuccessful(response, false);
-    //         this.spinnerService.hide();
-    //       },
-    //       (error) => {
-    //         console.log('Error: ', error);
-    //         this.spinnerService.hide();
-    //         return error;
-    //       }
-    //     );
-    // } else {
-    //   /* TODO: Show a message, add a red asterisc, etc. */
-    // }
+    if (this.canSend()) {
+      this.alarmService.unshelveAlarms(
+        [this.alarm.core_id], this.form.get('message').value).subscribe(
+          (response) => {
+            this.sendSuccessful(response, false);
+            this.spinnerService.hide();
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    } else {
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  /**
+   * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
+   * @returns {boolean} true if the action can be sent, false if not
+   */
+  canSend(): boolean {
+    return this.alarm.shelved || this.form.valid;
   }
 
   /**
@@ -133,6 +139,10 @@ export class ShelveModalComponent implements OnInit {
     return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
   }
 
+  /**
+   * Returns the text to display in the action button, either "Shelve" or "Unshelve"
+   * @returns {string} the text to display in the button
+   */
   getActionButtonText(): string {
     if (!this.alarm) {
       return null;
@@ -143,5 +153,4 @@ export class ShelveModalComponent implements OnInit {
       return 'Shelve';
     }
   }
-
 }
