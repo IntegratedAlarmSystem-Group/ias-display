@@ -54,8 +54,12 @@ export class ShelveModalComponent implements OnInit {
    * Finally the modal is closed.
    * @param alarms list of sucessfully acknowledged alarms
    */
-  shelveSuccessful(alarms: any): void {
-    console.log('Ack successful for alarms: ', alarms);
+  sendSuccessful(alarms: any, shelve: boolean): void {
+    if (shelve) {
+      console.log('Shelved successful for alarms: ', alarms);
+    } else {
+      console.log('Unshelved successful for alarms: ', alarms);
+    }
     this.activeModal.close();
   }
 
@@ -63,13 +67,43 @@ export class ShelveModalComponent implements OnInit {
    * Send the shelve/unshelve request through the method provided by the {@link AlarmService} and handle the response.
    */
   toggleShelveUnshelve(): void {
-    console.log('toggling!!');
-    // this.spinnerService.show();
+    if (this.alarm.shelved) {
+      this.unshelve();
+    } else {
+      this.shelve();
+    }
+    this.alarm.shelved = !this.alarm.shelved;
+  }
+
+  shelve() {
+    console.log('shelving!!');
+    this.spinnerService.show();
+    if (this.form.valid) {
+      this.alarmService.shelveAlarm(
+        this.alarm.core_id, this.form.get('message').value).subscribe(
+          (response) => {
+            this.sendSuccessful(response, true);
+            this.spinnerService.hide();
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    } else {
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  unshelve() {
+    console.log('unshelving!!');
+    this.spinnerService.show();
     // if (this.form.valid) {
-    //   this.alarmService.acknowledgeAlarms(
+    //   this.alarmService.unshelveAlarms(
     //     [this.alarm.core_id], this.form.get('message').value).subscribe(
     //       (response) => {
-    //         this.shelveSuccessful(response);
+    //         this.sendSuccessful(response, false);
     //         this.spinnerService.hide();
     //       },
     //       (error) => {
