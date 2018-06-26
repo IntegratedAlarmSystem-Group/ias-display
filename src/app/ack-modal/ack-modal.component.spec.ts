@@ -23,7 +23,6 @@ describe('AckModalComponent', () => {
   let modalHeader: any;
   let modalFooter: any;
   let spy;
-
   let cdbSubject: CdbService;
 
   beforeEach(async(() => {

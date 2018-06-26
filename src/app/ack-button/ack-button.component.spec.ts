@@ -33,7 +33,7 @@ describe('GIVEN an AckButtonComponent', () => {
         HttpClientModule,
         NgbModule.forRoot(),
         ReactiveFormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
       ],
       providers: [
         HttpClientService,
