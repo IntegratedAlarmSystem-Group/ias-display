@@ -22,6 +22,18 @@ describe('GIVEN an AckButtonComponent', () => {
   let html: HTMLElement;
   let modalService: NgbModal;
   let modalRef: NgbModalRef;
+  const mockAlarm = {
+    'value': 4,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 5,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -55,19 +67,6 @@ describe('GIVEN an AckButtonComponent', () => {
   beforeEach(
     inject([AlarmService], (service) => {
       alarmService = service;
-
-      const mockAlarm = {
-        'value': 4,
-        'core_id': 'coreid$1',
-        'running_id': 'coreid$1',
-        'mode': 5,
-        'core_timestamp': 1267252440000,
-        'state_change_timestamp': 1267252440000,
-        'validity': 1,
-        'ack': false,
-        'shelved': false,
-        'dependencies': [],
-      };
       spyOn(alarmService, 'get').and.callFake(function() {
         return Alarm.asAlarm(mockAlarm);
       });
@@ -94,20 +93,7 @@ describe('GIVEN an AckButtonComponent', () => {
     it('THEN the modal is opened', async () => {
       const mockEvent = {
         data: {
-          alarm: Alarm.asAlarm(
-            {
-              'value': 4,
-              'core_id': 'coreid$1',
-              'running_id': 'coreid$1',
-              'mode': 5,
-              'core_timestamp': 1267252440000,
-              'state_change_timestamp': 1267252440000,
-              'validity': 1,
-              'ack': false,
-              'shelved': false,
-              'dependencies': [],
-            }
-          )
+          alarm: Alarm.asAlarm(mockAlarm)
         }
       };
       modalService = TestBed.get(NgbModal);

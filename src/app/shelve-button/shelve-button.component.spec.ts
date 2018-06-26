@@ -14,12 +14,26 @@ import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
 
-describe('ShelveButtonComponent', () => {
+describe('GIVEN a ShelveButtonComponent', () => {
   let component: ShelveButtonComponent;
   let fixture: ComponentFixture<ShelveButtonComponent>;
   let alarmService: AlarmService;
   let debug: DebugElement;
   let html: HTMLElement;
+  let modalService: NgbModal;
+  let modalRef: NgbModalRef;
+  const mockAlarm = {
+    'value': 4,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 5,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -54,19 +68,6 @@ describe('ShelveButtonComponent', () => {
   beforeEach(
     inject([AlarmService], (service) => {
       alarmService = service;
-
-      const mockAlarm = {
-        'value': 4,
-        'core_id': 'coreid$1',
-        'running_id': 'coreid$1',
-        'mode': 5,
-        'core_timestamp': 1267252440000,
-        'state_change_timestamp': 1267252440000,
-        'validity': 1,
-        'ack': false,
-        'shelved': false,
-        'dependencies': [],
-      };
       spyOn(alarmService, 'get').and.callFake(function() {
         return Alarm.asAlarm(mockAlarm);
       });
@@ -83,7 +84,37 @@ describe('ShelveButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('THEN it should be created with the given alarm_id and get the Alarm from AlarmService', () => {
     expect(component).toBeTruthy();
+    expect(component.alarm_id).toBe('coreid$1');
+    expect(alarmService.get).toHaveBeenCalledWith('coreid$1');
+  });
+
+  describe('AND WHEN the user clicks on it', () => {
+    it('THEN the modal is opened', async () => {
+      const mockEvent = {
+        data: {
+          alarm: Alarm.asAlarm(mockAlarm)
+        }
+      };
+      modalService = TestBed.get(NgbModal);
+      modalRef = modalService.open(ShelveModalComponent);
+      modalRef.componentInstance.alarm = mockEvent.data.alarm;
+      spyOn(modalService, 'open').and.returnValue(modalRef);
+      spyOn(modalRef.componentInstance, 'getAlarmDescription')
+        .and.callFake(function() {
+          return 'Short description for the mock alarm from cdb'; });
+      spyOn(modalRef.componentInstance, 'getAlarmUrl')
+        .and.callFake(function() {
+          return 'https://more-information-website/alarm'; });
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        const shelveModal = component.onClick(mockEvent);
+        expect(modalService.open).toHaveBeenCalled();
+        expect(shelveModal).toBeTruthy();
+        expect(shelveModal instanceof NgbModalRef).toBeTruthy();
+        expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
+      });
+    });
   });
 });
