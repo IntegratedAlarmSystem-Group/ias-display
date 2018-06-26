@@ -16,6 +16,9 @@
       * The acknowledge button will be enabled after writing the message
     </p>
   </div>
+  <div class="modal-ack-tree">
+    <app-ack-tree></app-ack-tree>
+  </div>
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
     <button id="acknowledge" type="button" class="btn btn-action btn-info" (click)="acknowledge();" [disabled]="!form.valid">Acknowledge</button>

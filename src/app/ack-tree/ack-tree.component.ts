@@ -93,7 +93,7 @@ export class ChecklistDatabase {
 @Component({
   selector: 'app-ack-tree',
   templateUrl: 'ack-tree.component.html',
-  styleUrls: ['ack-tree.component.css', 'ack-tree.component.scss'],
+  styleUrls: ['ack-tree.component.scss'],
   providers: [ChecklistDatabase]
 })
 export class AckTreeComponent {

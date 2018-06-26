@@ -9,7 +9,9 @@ import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { AckButtonComponent } from './ack-button.component';
+import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
 
@@ -28,12 +30,14 @@ describe('GIVEN an AckButtonComponent', () => {
       declarations: [
         AckButtonComponent,
         AckModalComponent,
+        AckTreeComponent,
       ],
       imports: [
         HttpClientModule,
         NgbModule.forRoot(),
         ReactiveFormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        IasMaterialModule
       ],
       providers: [
         HttpClientService,

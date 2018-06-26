@@ -6,6 +6,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { AckModalComponent } from './ack-modal.component';
+import { AckTreeComponent } from '../ack-tree/ack-tree.component';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
@@ -28,12 +30,13 @@ describe('AckModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AckModalComponent ],
+      declarations: [ AckModalComponent, AckTreeComponent ],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        IasMaterialModule
       ],
       providers: [
         NgbActiveModal,
