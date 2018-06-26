@@ -205,6 +205,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -216,6 +217,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -227,6 +229,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -238,6 +241,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -249,6 +253,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
 
@@ -262,6 +267,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -273,6 +279,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -284,6 +291,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -295,6 +303,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -306,6 +315,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
 
@@ -319,6 +329,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -330,6 +341,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -341,6 +353,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -352,6 +365,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -363,6 +377,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
 
@@ -376,6 +391,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -387,6 +403,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -398,6 +415,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -409,6 +427,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -420,6 +439,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 0,
     'ack': true,
+    'shelved': false,
     'dependencies': [],
   },
 
@@ -433,6 +453,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -444,6 +465,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -455,6 +477,7 @@ export const MockAlarms = [
     'state_change_timestamp': 1267252440000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
 ];

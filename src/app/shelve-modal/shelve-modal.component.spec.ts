@@ -1,33 +1,32 @@
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
-import { AckModalComponent } from './ack-modal.component';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
+import { ShelveModalComponent } from './shelve-modal.component';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
 
-
-describe('AckModalComponent', () => {
-  let component: AckModalComponent;
-  let fixture: ComponentFixture<AckModalComponent>;
+describe('ShelveModalComponent', () => {
+  let component: ShelveModalComponent;
+  let fixture: ComponentFixture<ShelveModalComponent>;
   let alarm: Alarm;
   let alarmIasio: Iasio;
   let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
   let modalFooter: any;
-  let spy;
+  let spyShelve;
+  let spyUnshelve;
   let cdbSubject: CdbService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AckModalComponent ],
+      declarations: [ ShelveModalComponent ],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
@@ -76,7 +75,7 @@ describe('AckModalComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AckModalComponent);
+    fixture = TestBed.createComponent(ShelveModalComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
     component = fixture.componentInstance;
     component.ngOnInit();
@@ -95,13 +94,16 @@ describe('AckModalComponent', () => {
     modalHeader = fixture.nativeElement.querySelector('.modal-header');
     modalBody = fixture.nativeElement.querySelector('.modal-body');
     modalFooter = fixture.nativeElement.querySelector('.modal-footer');
-    spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
+    spyShelve = spyOn(alarmService, 'shelveAlarm').and.returnValue(
+        of([alarm.core_id])
+    );
+    spyUnshelve = spyOn(alarmService, 'unshelveAlarms').and.returnValue(
         of([alarm.core_id])
     );
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -139,35 +141,58 @@ describe('AckModalComponent', () => {
         expect(component.form.valid).toBeTruthy();
       });
     });
-
   });
 
-  // Acknowledge button
-  describe('should have an Acknowledge button', () => {
+  // Shelve button
+  describe('WHEN the Alarm is unshelved, it should have a Shelve button', () => {
     it('in the modal footer', () => {
-      expect(modalFooter.querySelector('#acknowledge')).toBeTruthy();
+      const sendButton = modalFooter.querySelector('#send');
+      expect(sendButton).toBeTruthy();
+      expect(sendButton.innerText).toEqual('Shelve');
     });
     describe('and when the user clicks on it,', () => {
       describe('and the user has not entered a message', () => {
-        it('it should not call the component acknowledge method', async(() => {
-          modalFooter.querySelector('#acknowledge').click();
+        it('it should not call the component shelve method', async(() => {
+          modalFooter.querySelector('#send').click();
           fixture.whenStable().then(() => {
-            expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
+            expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
           });
         }));
       });
       describe('and the user has entered a message', () => {
-        it('it should call the component acknowledge method', async(() => {
+        it('it should call the component shelve method', async(() => {
           component.form.controls['message'].setValue('Any message');
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();
-
-          modalFooter.querySelector('#acknowledge').click();
+          modalFooter.querySelector('#send').click();
           fixture.whenStable().then(() => {
-            expect(alarmService.acknowledgeAlarms).toHaveBeenCalled();
+            expect(alarmService.shelveAlarm).toHaveBeenCalled();
+            expect(alarmService.unshelveAlarms).not.toHaveBeenCalled();
           });
         }));
       });
+    });
+  });
+
+  // Unshelve button
+  describe('WHEN the Alarm is shelved, it should have an Unshelve button', () => {
+    it('in the modal footer', () => {
+      component.alarm.shelve();
+      fixture.detectChanges();
+      const sendButton = modalFooter.querySelector('#send');
+      expect(sendButton).toBeTruthy();
+      expect(sendButton.innerText).toEqual('Unshelve');
+    });
+    describe('and when the user clicks on it,', () => {
+      it('it should call the component unshelve method', async(() => {
+        component.alarm.shelve();
+        fixture.detectChanges();
+        modalFooter.querySelector('#send').click();
+        fixture.whenStable().then(() => {
+          expect(alarmService.unshelveAlarms).toHaveBeenCalled();
+          expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
+        });
+      }));
     });
   });
 });

@@ -5,6 +5,8 @@ export const BackendUrls = {
   CDB_IAS: '/cdb-api/ias/',
   TICKETS: '/tickets/',
   TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge/',
+  SHELVE_API: '/tickets-api/shelve-registries/',
+  UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */

@@ -17,6 +17,7 @@ import { TabularViewComponent } from './tabular-view.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { AckButtonComponent } from '../ack-button/ack-button.component';
+import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
 import { WikiButtonComponent } from '../wiki-button/wiki-button.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm } from '../alarm';
@@ -43,6 +44,7 @@ describe('TabularViewComponent', () => {
         StatusViewComponent,
         LegendComponent,
         AckButtonComponent,
+        ShelveButtonComponent,
         WikiButtonComponent,
       ],
       imports: [
@@ -73,7 +75,7 @@ describe('TabularViewComponent', () => {
     })
     .overrideModule( BrowserDynamicTestingModule , {
       set: {
-        entryComponents: [  StatusViewComponent ]
+        entryComponents: [ StatusViewComponent ]
       }
     })
     .compileComponents();

@@ -2,21 +2,22 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
-import { AckButtonComponent } from './ack-button.component';
-import { AckModalComponent } from '../ack-modal/ack-modal.component';
+import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
+import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';
 
-
-describe('GIVEN an AckButtonComponent', () => {
-  let component: AckButtonComponent;
-  let fixture: ComponentFixture<AckButtonComponent>;
+describe('GIVEN a ShelveButtonComponent', () => {
+  let component: ShelveButtonComponent;
+  let fixture: ComponentFixture<ShelveButtonComponent>;
   let alarmService: AlarmService;
   let debug: DebugElement;
   let html: HTMLElement;
@@ -34,18 +35,31 @@ describe('GIVEN an AckButtonComponent', () => {
     'shelved': false,
     'dependencies': [],
   };
+  const mockShelvedAlarm = {
+    'value': 4,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 5,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'shelved': true,
+    'dependencies': [],
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AckButtonComponent,
-        AckModalComponent,
+        ShelveButtonComponent,
+        ShelveModalComponent,
       ],
       imports: [
         HttpClientModule,
         NgbModule.forRoot(),
         ReactiveFormsModule,
         NgxSpinnerModule,
+        IasMaterialModule,
       ],
       providers: [
         HttpClientService,
@@ -58,7 +72,7 @@ describe('GIVEN an AckButtonComponent', () => {
     })
     .overrideModule( BrowserDynamicTestingModule , {
       set: {
-        entryComponents: [  AckModalComponent ]
+        entryComponents: [ ShelveModalComponent ]
       }
     })
     .compileComponents();
@@ -74,7 +88,7 @@ describe('GIVEN an AckButtonComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AckButtonComponent);
+    fixture = TestBed.createComponent(ShelveButtonComponent);
     component = fixture.componentInstance;
     component.alarm_id = 'coreid$1';
     alarmService = fixture.debugElement.injector.get(AlarmService);
@@ -84,9 +98,23 @@ describe('GIVEN an AckButtonComponent', () => {
   });
 
   it('THEN it should be created with the given alarm_id and get the Alarm from AlarmService', () => {
+    const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
     expect(component).toBeTruthy();
     expect(component.alarm_id).toBe('coreid$1');
     expect(alarmService.get).toHaveBeenCalledWith('coreid$1');
+    expect(shelveButton.title).toEqual('Shelve');
+  });
+
+  describe('AND WHEN the Alarm is shelved', () => {
+    it('THEN its tooltip should be "Unshelve"', () => {
+      component.alarm.shelve();
+      const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.alarm_id).toBe('coreid$1');
+      expect(alarmService.get).toHaveBeenCalledWith('coreid$1');
+      expect(shelveButton.title).toEqual('Unshelve');
+    });
   });
 
   describe('AND WHEN the user clicks on it', () => {
@@ -97,7 +125,7 @@ describe('GIVEN an AckButtonComponent', () => {
         }
       };
       modalService = TestBed.get(NgbModal);
-      modalRef = modalService.open(AckModalComponent);
+      modalRef = modalService.open(ShelveModalComponent);
       modalRef.componentInstance.alarm = mockEvent.data.alarm;
       spyOn(modalService, 'open').and.returnValue(modalRef);
       spyOn(modalRef.componentInstance, 'getAlarmDescription')
@@ -108,11 +136,11 @@ describe('GIVEN an AckButtonComponent', () => {
           return 'https://more-information-website/alarm'; });
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        const ackModal = component.onClick(mockEvent);
+        const shelveModal = component.onClick(mockEvent);
         expect(modalService.open).toHaveBeenCalled();
-        expect(ackModal).toBeTruthy();
-        expect(ackModal instanceof NgbModalRef).toBeTruthy();
-        expect(ackModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
+        expect(shelveModal).toBeTruthy();
+        expect(shelveModal instanceof NgbModalRef).toBeTruthy();
+        expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
       });
     });
   });
