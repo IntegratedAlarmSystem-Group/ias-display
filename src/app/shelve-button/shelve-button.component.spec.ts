@@ -2,6 +2,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
@@ -32,6 +33,18 @@ describe('GIVEN a ShelveButtonComponent', () => {
     'validity': 1,
     'ack': false,
     'shelved': false,
+    'dependencies': [],
+  };
+  const mockShelvedAlarm = {
+    'value': 4,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 5,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'ack': false,
+    'shelved': true,
     'dependencies': [],
   };
 
@@ -85,9 +98,23 @@ describe('GIVEN a ShelveButtonComponent', () => {
   });
 
   it('THEN it should be created with the given alarm_id and get the Alarm from AlarmService', () => {
+    const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
     expect(component).toBeTruthy();
     expect(component.alarm_id).toBe('coreid$1');
     expect(alarmService.get).toHaveBeenCalledWith('coreid$1');
+    expect(shelveButton.title).toEqual('Shelve');
+  });
+
+  describe('AND WHEN the Alarm is shelved', () => {
+    it('THEN its tooltip should be "Unshelve"', () => {
+      component.alarm.shelve();
+      const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.alarm_id).toBe('coreid$1');
+      expect(alarmService.get).toHaveBeenCalledWith('coreid$1');
+      expect(shelveButton.title).toEqual('Unshelve');
+    });
   });
 
   describe('AND WHEN the user clicks on it', () => {

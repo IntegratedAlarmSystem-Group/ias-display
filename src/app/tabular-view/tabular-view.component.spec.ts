@@ -75,7 +75,7 @@ describe('TabularViewComponent', () => {
     })
     .overrideModule( BrowserDynamicTestingModule , {
       set: {
-        entryComponents: [  StatusViewComponent ]
+        entryComponents: [ StatusViewComponent ]
       }
     })
     .compileComponents();
