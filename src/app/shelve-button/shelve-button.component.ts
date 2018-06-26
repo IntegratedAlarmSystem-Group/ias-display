@@ -56,7 +56,6 @@ export class ShelveButtonComponent implements OnInit {
       { size: 'lg', centered: true }
     );
     shelveModal.componentInstance.alarm = this.alarm;
-    this.alarm.shelved = !this.alarm.shelved;
     return shelveModal;
   }
 }

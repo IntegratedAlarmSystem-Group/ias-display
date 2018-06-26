@@ -99,4 +99,15 @@ export class ShelveModalComponent implements OnInit {
     return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
   }
 
+  getActionButtonText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'Unshelve';
+    } else {
+      return 'Shelve';
+    }
+  }
+
 }
