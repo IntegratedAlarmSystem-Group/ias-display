@@ -1,4 +1,4 @@
-<button class="shelve-button" title="Shelve" mat-raised-button (click)="onClick($event)">
+<button class="shelve-button" title="{{ getButtonTooltipText() }}" mat-raised-button (click)="onClick($event)">
     <div *ngIf="alarm.shelved; then unshelveIcon; else shelveIcon"></div>
     <ng-template #shelveIcon>
       <mat-icon mat-list-icon>archive</mat-icon>

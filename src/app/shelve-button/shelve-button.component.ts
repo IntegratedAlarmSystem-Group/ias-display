@@ -41,6 +41,21 @@ export class ShelveButtonComponent implements OnInit {
   }
 
   /**
+   * Returns the text to display in the shelve/unshelve button tooltip, either "Shelve" or "Unshelve"
+   * @returns {string} the text to display in the button
+   */
+  getButtonTooltipText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'Unshelve';
+    } else {
+      return 'Shelve';
+    }
+  }
+
+  /**
    * Get the alarm object related with the alarm id received as input using the
    * AlarmService. Initialize the private variables of this component.
    */
