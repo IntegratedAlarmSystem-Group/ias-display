@@ -73,20 +73,25 @@ export class AlarmComponent implements OnInit {
   getImage(): string {
     if (!this.alarm) {
       return this.images.unknown;
-    } else if (this.alarm.mode === OperationalMode.unknown) {
-      return this.images.unknown;
+    }
+    let imagesToUse = this.images;
+    if (this.alarm.validity === 0) {
+      imagesToUse = this.imagesUnreliable;
+    }
+    if (this.alarm.mode === OperationalMode.unknown) {
+      return imagesToUse.unknown;
     } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
-      return this.images.maintenance;
+      return imagesToUse.maintenance;
     } else if (this.alarm.value === Value.cleared) {
-      return this.images.clear;
+      return imagesToUse.clear;
     } else if (this.alarm.value === Value.set_low) {
-      return this.images.set_low;
+      return imagesToUse.set_low;
     } else if (this.alarm.value === Value.set_medium) {
-      return this.images.set_medium;
+      return imagesToUse.set_medium;
     } else if (this.alarm.value === Value.set_high) {
-      return this.images.set_high;
+      return imagesToUse.set_high;
     } else if (this.alarm.value === Value.set_critical) {
-      return this.images.set_critical;
+      return imagesToUse.set_critical;
     }
   }
 

@@ -1,30 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmComponent, AlarmImageSet } from './alarm.component';
 import { Alarm, Value, OperationalMode } from '../alarm';
+import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
 describe('AlarmComponent', () => {
   let component: AlarmComponent;
   let fixture: ComponentFixture<AlarmComponent>;
-  const alarm = Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'Dummy-cleared-valid',
-    'running_id': 'Dummy-cleared-valid',
-    'mode': '5',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'ack': false,
-    'dependencies': [],
-  });
-  const location = '/assets/img/';
-  const imageSet = new AlarmImageSet({
-    clear: this.location + 'temp-1.svg',
-    set_low: this.location + 'temp-2.svg',
-    set_medium: this.location + 'temp-2.svg',
-    set_high: this.location + 'temp-3.svg',
-    set_critical: this.location + 'temp-3.svg',
-    unknown: this.location + 'temp-0.svg',
-    maintenance: this.location + 'temp-0.svg',
-  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,10 +20,28 @@ describe('AlarmComponent', () => {
   });
 
   it('should create', () => {
-    component.alarm = alarm;
-    component.images = imageSet;
-    component.imagesUnreliable = imageSet;
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.images = MockImageSet;
+    component.imagesUnreliable = MockImageUnreliableSet;
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
+
+  for (const alarm of MockAlarms) {
+    it('should display the component according to its tags ', () => {
+      component.alarm = Alarm.asAlarm(alarm);
+      component.images = MockImageSet;
+      component.imagesUnreliable = MockImageUnreliableSet;
+      const value_validity = alarm.core_id.split('_');
+      const value = value_validity[0];
+      const validity = value_validity[1];
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      if (validity) {
+        expect(component.getImage()).toEqual(value + '_' + validity);
+      } else {
+        expect(component.getImage()).toEqual(value);
+      }
+    });
+  }
 });
