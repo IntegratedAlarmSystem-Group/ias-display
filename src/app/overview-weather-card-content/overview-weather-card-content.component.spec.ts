@@ -1,20 +1,46 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
 import { RoutingService} from '../routing.service';
+import { AlarmComponent } from '../alarm//alarm.component';
+import { HttpClientService } from '../http-client.service';
+import { CdbService } from '../cdb.service';
+import { AlarmService } from '../alarm.service';
 
 
 describe('OverviewWeatherCardContentComponent', () => {
   let component: OverviewWeatherCardContentComponent;
   let fixture: ComponentFixture<OverviewWeatherCardContentComponent>;
+  let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OverviewWeatherCardContentComponent ],
-      providers: [
-          { provide: RoutingService, useValue: spyRoutingTable }
+      declarations: [
+        OverviewWeatherCardContentComponent,
+        AlarmComponent,
       ],
+      imports: [
+        HttpClientModule,
+        NgbModule.forRoot(),
+        IasMaterialModule
+      ],
+      providers: [
+        { provide: RoutingService, useValue: spyRoutingTable },
+        AlarmService,
+        CdbService,
+        HttpClientService,
+        HttpClient
+      ],
+    })
+    .overrideModule( BrowserDynamicTestingModule , {
+      set: {
+        entryComponents: [ AlarmComponent ]
+      }
     })
     .compileComponents();
   }));
@@ -22,6 +48,7 @@ describe('OverviewWeatherCardContentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OverviewWeatherCardContentComponent);
     component = fixture.componentInstance;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();
   });
 
