@@ -3,44 +3,36 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { OverviewComponent } from './overview.component';
-import { OverviewCardComponent } from '../overview-card/overview-card.component';
-import {
-  OverviewWeatherCardContentComponent
-} from '../overview-weather-card-content/overview-weather-card-content.component';
+import { IasHealthOverviewComponent } from './ias-health-overview.component';
+import { AlarmComponent } from '../alarm//alarm.component';
 import { RoutingService} from '../routing.service';
 import { HttpClientService } from '../http-client.service';
 import { CdbService } from '../cdb.service';
 import { AlarmService } from '../alarm.service';
-import { AlarmComponent } from '../alarm//alarm.component';
-import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';
 
-
-describe('OverviewComponent', () => {
-  let component: OverviewComponent;
-  let fixture: ComponentFixture<OverviewComponent>;
+describe('IasHealthOverviewComponent', () => {
+  let component: IasHealthOverviewComponent;
+  let fixture: ComponentFixture<IasHealthOverviewComponent>;
+  let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        OverviewComponent,
-        OverviewCardComponent,
-        OverviewWeatherCardContentComponent,
         IasHealthOverviewComponent,
-        AlarmComponent,
+        AlarmComponent
       ],
       imports: [
         HttpClientModule,
         NgbModule.forRoot(),
-        IasMaterialModule,
+        IasMaterialModule
       ],
       providers: [
-          { provide: RoutingService, useValue: spyRoutingTable },
-          AlarmService,
-          CdbService,
-          HttpClientService,
-          HttpClient
+        { provide: RoutingService, useValue: spyRoutingTable },
+        AlarmService,
+        CdbService,
+        HttpClientService,
+        HttpClient
       ],
     })
     .overrideModule( BrowserDynamicTestingModule , {
@@ -52,12 +44,22 @@ describe('OverviewComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OverviewComponent);
+    fixture = TestBed.createComponent(IasHealthOverviewComponent);
     component = fixture.componentInstance;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('WHEN the component calls goToTableFilteredBy', () => {
+    it('THEN the RoutingService.tableWithFilter is called', () => {
+      component.goToTableFilteredBy('mock filter');
+      expect(spyRoutingTable.tableWithFilter.calls.count()).toBe(1, 'spy method was called once');
+      expect(spyRoutingTable.tableWithFilter.calls.mostRecent().args[0]).
+        toBe('mock filter', 'spy method was called with the right parameters');
+    });
   });
 });
