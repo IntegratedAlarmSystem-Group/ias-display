@@ -98,8 +98,8 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
 
     this.humidityImageSet = new AlarmImageSet({
       clear: this.location + 'humidity-1.svg',
-      set_low: this.location + 'humidity-2.svg',
-      set_medium: this.location + 'humidity-2.svg',
+      set_low: this.location + 'humidity-3.svg',
+      set_medium: this.location + 'humidity-3.svg',
       set_high: this.location + 'humidity-3.svg',
       set_critical: this.location + 'humidity-3.svg',
       unknown: this.location + 'humidity-0.svg',
@@ -109,8 +109,8 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
       clear: this.location + 'temp-1.svg',
-      set_low: this.location + 'temp-2.svg',
-      set_medium: this.location + 'temp-2.svg',
+      set_low: this.location + 'temp-3.svg',
+      set_medium: this.location + 'temp-3.svg',
       set_high: this.location + 'temp-3.svg',
       set_critical: this.location + 'temp-3.svg',
       unknown: this.location + 'temp-0.svg',
@@ -120,8 +120,8 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
       clear: this.location + 'winds-1.svg',
-      set_low: this.location + 'winds-2.svg',
-      set_medium: this.location + 'winds-2.svg',
+      set_low: this.location + 'winds-3.svg',
+      set_medium: this.location + 'winds-3.svg',
       set_high: this.location + 'winds-3.svg',
       set_critical: this.location + 'winds-3.svg',
       unknown: this.location + 'winds-0.svg',
