@@ -101,6 +101,7 @@ describe('AckModalComponent', () => {
     spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
         of([alarm.core_id])
     );
+    spyOn(component, 'updateAlarmsToAck').and.callFake(function(){});
     fixture.detectChanges();
   });
 
@@ -161,6 +162,7 @@ describe('AckModalComponent', () => {
       });
       describe('and the user has entered a message', () => {
         it('it should call the component acknowledge method', async(() => {
+          component.alarmsToAck = [alarm.core_id];
           component.form.controls['message'].setValue('Any message');
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();

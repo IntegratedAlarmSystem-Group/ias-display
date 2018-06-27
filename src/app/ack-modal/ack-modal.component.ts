@@ -6,6 +6,7 @@ import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
 
+
 /**
  * Modal used to acknowledge alarms
  */
@@ -17,9 +18,14 @@ import { Alarm } from '../alarm';
 export class AckModalComponent implements OnInit {
 
   /**
-   * Alarm object to be acknowledged
+   * Selected alarm
    */
   @Input() alarm;
+
+  /**
+   * List of alarms to ack according to selection from child component
+   */
+  alarmsToAck: string[] = [];
 
   /**
    * Object used to manage the form and check the validity of the form input fields
@@ -80,10 +86,38 @@ export class AckModalComponent implements OnInit {
             return error;
           }
         );
-    } else {
-      /* TODO: Show a message, add a red asterisc, etc. */
     }
   }
+
+  /**
+   * Ack request through the related {@link AlarmService} method using a list of dependencies
+   * from the selected alarms
+   */
+  ackFromSelection(): void {
+    this.spinnerService.show();
+    if (this.form.valid) {
+      this.alarmService.acknowledgeAlarms(
+        this.alarmsToAck, this.form.get('message').value).subscribe(
+          (response) => {
+            this.ackSuccessful(response);
+            this.spinnerService.hide();
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    }
+  }
+
+  /**
+   * Update the list of alarms to ack from the selection on the child component
+   */
+  updateAlarmsToAck(event): void {
+    this.alarmsToAck = event;
+  }
+
 
   /**
    * Get the alarm description through the method provided by the {@link CdbService}
@@ -99,6 +133,15 @@ export class AckModalComponent implements OnInit {
    */
   getAlarmUrl() {
     return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
+  }
+
+  /**
+  * Method to invalidate ack action
+  */
+  disableAcknowledgment() {
+    let noAlarmsToAck = (this.alarmsToAck.length === 0);
+    let validForm = this.form.valid
+    return (noAlarmsToAck||!validForm)
   }
 
 }

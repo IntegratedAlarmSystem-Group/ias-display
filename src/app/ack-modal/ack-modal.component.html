@@ -13,15 +13,17 @@
     </p>
     <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain the action to be taken"></textarea>
     <p class="info-message">
-      * The acknowledge button will be enabled after writing the message
+      * The acknowledge button will be enabled after writing the message and the selection of the related alarms
     </p>
   </div>
   <div class="modal-ack-tree">
-    <app-ack-tree [selectedAlarm]="alarm"></app-ack-tree>
+    <app-ack-tree [selectedAlarm]="alarm" (alarmsToAckFromSelection)="updateAlarmsToAck($event)"></app-ack-tree>
   </div>
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
-    <button id="acknowledge" type="button" class="btn btn-action btn-info" (click)="acknowledge();" [disabled]="!form.valid">Acknowledge</button>
+    <button id="acknowledge" type="button" class="btn btn-action btn-info"
+            (click)="acknowledge()"
+            [disabled]="disableAcknowledgment()">Acknowledge</button>
   </div>
 </form>
 

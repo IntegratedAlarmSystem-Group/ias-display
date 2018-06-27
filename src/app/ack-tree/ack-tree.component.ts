@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Injectable } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { OnInit, Injectable } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
@@ -28,66 +29,6 @@ export class AlarmItemFlatNode {
 }
 
 /**
- * The Json object for to-do list data.
- */
-const TREE_DATA = {
-  'WS-Meteo-130': [
-    'WS-Meteo-130-Humidity',
-    'WS-Meteo-130-Temperature',
-    'WS-Meteo-130-WindSpeed'
-  ],
-  'Alarmdummy': null
-};
-
-/**
- * Checklist database, it can build a tree structured Json object.
- * Each node in Json object represents a to-do item or a category.
- * If a node is a category, it has children items and new items can be added under the category.
- */
-@Injectable()
-export class ChecklistDatabase {
-  dataChange: BehaviorSubject<AlarmItemNode[]> = new BehaviorSubject<AlarmItemNode[]>([]);
-
-  get data(): AlarmItemNode[] { return this.dataChange.value; }
-
-  constructor() {
-    this.initialize();
-  }
-
-  initialize() {
-    // Build the tree nodes from Json object. The result is a list of `AlarmItemNode` with nested
-    // file node as children.
-    const data = this.buildFileTree(TREE_DATA, 0);
-
-    // Notify the change.
-    this.dataChange.next(data);
-  }
-
-  /**
-   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-   * The return value is the list of `AlarmItemNode`.
-   */
-  buildFileTree(value: any, level: number) {
-    let data: any[] = [];
-    for (let k in value) {
-      let v = value[k];
-      let node = new AlarmItemNode();
-      node.item = `${k}`;
-      if (v === null || v === undefined) {
-        // no action
-      } else if (typeof v === 'object') {
-        node.children = this.buildFileTree(v, level + 1);
-      } else {
-        node.item = v;
-      }
-      data.push(node);
-    }
-    return data;
-  }
-
-}
-
-/**
  * @title Tree with checkboxes
  */
 @Component({
@@ -98,6 +39,7 @@ export class ChecklistDatabase {
 export class AckTreeComponent implements OnInit {
 
   @Input() selectedAlarm: Alarm;
+  @Output() alarmsToAckFromSelection = new EventEmitter();
 
   /** Tree data with dependencies for the selected alarm **/
   treeData = {};
@@ -110,12 +52,6 @@ export class AckTreeComponent implements OnInit {
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
   nestedNodeMap: Map<AlarmItemNode, AlarmItemFlatNode> = new Map<AlarmItemNode, AlarmItemFlatNode>();
-
-  /** A selected parent node */
-  selectedParent: AlarmItemFlatNode | null = null;
-
-  /** The new item's name */
-  // newItemName: string = '';
 
   treeControl: FlatTreeControl<AlarmItemFlatNode>;
 
@@ -239,6 +175,7 @@ export class AckTreeComponent implements OnInit {
         this.ackList.push(flatNode.item);
       }
     });
+    this.alarmsToAckFromSelection.emit(this.ackList);
   }
 
 }
