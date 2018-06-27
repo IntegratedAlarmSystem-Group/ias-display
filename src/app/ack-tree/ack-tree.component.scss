@@ -1,0 +1,13 @@
+/deep/ {
+
+  mat-checkbox.mat-checkbox-checked {
+    &.clear-check-class {
+
+      .mat-checkbox-background {
+        display: none;
+      }
+
+    }
+  }
+
+}

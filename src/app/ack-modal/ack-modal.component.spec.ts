@@ -6,6 +6,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { AckModalComponent } from './ack-modal.component';
+import { AckTreeComponent } from '../ack-tree/ack-tree.component';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
@@ -27,12 +29,13 @@ describe('AckModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AckModalComponent ],
+      declarations: [ AckModalComponent, AckTreeComponent ],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        IasMaterialModule
       ],
       providers: [
         NgbActiveModal,
@@ -98,6 +101,7 @@ describe('AckModalComponent', () => {
     spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
         of([alarm.core_id])
     );
+    spyOn(component, 'updateAlarmsToAck').and.callFake(function(){});
     fixture.detectChanges();
   });
 
@@ -158,6 +162,7 @@ describe('AckModalComponent', () => {
       });
       describe('and the user has entered a message', () => {
         it('it should call the component acknowledge method', async(() => {
+          component.alarmsToAck = [alarm.core_id];
           component.form.controls['message'].setValue('Any message');
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();
