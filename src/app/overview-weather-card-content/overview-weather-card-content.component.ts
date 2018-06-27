@@ -64,19 +64,22 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.defineAlarmsAndImages();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
+      console.log('notification: ', notification);
       if (notification === 'all') {
         this.humidityAlarm = this.alarmService.get(this.humidityAlarmId);
         this.tempAlarm = this.alarmService.get(this.tempAlarmId);
         this.windsAlarm = this.alarmService.get(this.windsAlarmId);
 
-      } else if (notification === this.humidityAlarmId) {
-        this.humidityAlarm = this.alarmService.get(notification);
-
-      } else if (notification === this.tempAlarmId) {
-        this.tempAlarm = this.alarmService.get(notification);
-
-      } else if (notification === this.windsAlarmId) {
-        this.windsAlarm = this.alarmService.get(notification);
+      } else {
+        if (notification === this.windsAlarmId) {
+          this.windsAlarm = this.alarmService.get(notification);
+        }
+        if (notification === this.humidityAlarmId) {
+          this.humidityAlarm = this.alarmService.get(notification);
+        }
+        if (notification === this.tempAlarmId) {
+          this.tempAlarm = this.alarmService.get(notification);
+        }
       }
     });
   }

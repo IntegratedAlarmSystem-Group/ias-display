@@ -5,7 +5,9 @@
           <div class="sensors-card" (click)="goToTableFilteredBy('windspeed');$event.stopPropagation()">
               <div class="title">WIND SPEED</div>
               <div class="marker">
-                  <img class="marker-img" src="/assets/img/winds-0.svg"/>
+                <app-alarm
+                  [alarm]="windsAlarm" [images]="windsImageSet" [imagesUnreliable]="windsImageSet"
+                ></app-alarm>
               </div>
           </div>
       </div>
@@ -26,7 +28,9 @@
           <div class="sensors-card" (click)="goToTableFilteredBy('temperature');$event.stopPropagation()">
               <div class="title">TEMPERATURE</div>
               <div class="marker">
-                  <img class="marker-img" src="/assets/img/temp-0.svg"/>
+                <app-alarm 
+                  [alarm]="tempAlarm" [images]="tempImageSet" [imagesUnreliable]="tempImageSet"
+                ></app-alarm>
               </div>
           </div>
       </div>
