@@ -13,8 +13,13 @@
           <div class="sensors-card" (click)="goToTableFilteredBy('humidity');$event.stopPropagation()">
               <div class="title">HUMIDITY</div>
               <div class="marker">
-                  <img class="marker-img" src="/assets/img/humidity-0-1.svg"/>
+                <app-alarm
+                  [alarm]="humidityAlarm" [images]="humidityImageSet" [imagesUnreliable]="humidityImageSet"
+                ></app-alarm>
               </div>
+              <!-- <div class="marker">
+                  <img class="marker-img" src="/assets/img/humidity-0-1.svg"/>
+              </div> -->
           </div>
       </div>
       <div class="sensors-card-wrapper">
