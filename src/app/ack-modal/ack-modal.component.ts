@@ -154,20 +154,22 @@ export class AckModalComponent implements OnInit {
   * Get the number of missed acknowledgements of the alarm and its children
   */
   getMissingAcksInfo(): void {
-    this.missedAcks = [];
-    this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
-      (response) => {
-        for (const [key, value] of Object.entries(response)) {
-          const count = value.length;
-          if (count > 0) {
-            let text = key + ' has ' + count + ' missed acknowledgement';
-            if (count > 1) {
-              text += 's';
+    if (this.alarm) {
+      this.missedAcks = [];
+      this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
+        (response) => {
+          for (const [key, value] of Object.entries(response)) {
+            const count = value.length;
+            if (count > 0) {
+              let text = key + ' has ' + count + ' missed acknowledgement';
+              if (count > 1) {
+                text += 's';
+              }
+              this.missedAcks.push(text);
             }
-            this.missedAcks.push(text);
           }
         }
-      }
-    );
+      );
+    }
   }
 }

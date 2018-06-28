@@ -18,14 +18,25 @@ import { Iasio } from '../iasio';
 describe('AckModalComponent', () => {
   let component: AckModalComponent;
   let fixture: ComponentFixture<AckModalComponent>;
-  let alarm: Alarm;
   let alarmIasio: Iasio;
   let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
   let modalFooter: any;
   let spy;
+  let spyMissingAcks;
   let cdbSubject: CdbService;
+  const alarm = Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -81,27 +92,20 @@ describe('AckModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AckModalComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
+      of([alarm.core_id])
+    );
+    spyMissingAcks = spyOn(alarmService, 'getMissingAcks').and.returnValue(
+      of( {'coreid$1': [1, 5, 6]} )
+    );
     component = fixture.componentInstance;
-    component.ngOnInit();
-    alarm = Alarm.asAlarm({
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': '0',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
     component.alarm = alarm;
+    component.ngOnInit();
     modalHeader = fixture.nativeElement.querySelector('.modal-header');
     modalBody = fixture.nativeElement.querySelector('.modal-body');
     modalFooter = fixture.nativeElement.querySelector('.modal-footer');
-    spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
-        of([alarm.core_id])
-    );
-    spyOn(component, 'updateAlarmsToAck').and.callFake(function(){});
+    // spyOn(component, 'updateAlarmsToAck').and.callFake(function() {});
+    spyOn(component, 'updateAlarmsToAck');
     fixture.detectChanges();
   });
 
@@ -146,7 +150,7 @@ describe('AckModalComponent', () => {
 
   });
 
-  // Acknowledge button
+  // // Acknowledge button
   describe('should have an Acknowledge button', () => {
     it('in the modal footer', () => {
       expect(modalFooter.querySelector('#acknowledge')).toBeTruthy();

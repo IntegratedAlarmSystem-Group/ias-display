@@ -153,7 +153,6 @@ export class AlarmService {
    * @returns {json} response of the HTTP request with a dictionary with information about missing acks
    */
   getMissingAcks(alarm_id) {
-    console.log('hi from service!!!');
     const url = BackendUrls.TICKETS_INFO + '?alarm_id=' + alarm_id;
     return this.httpClientService.get(url).pipe(
     map(

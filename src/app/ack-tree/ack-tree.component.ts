@@ -189,7 +189,6 @@ export class AckTreeComponent implements OnInit {
 
   /** Update list with ids to ack **/
   updateAckList(): void {
-    console.log('update ack ....');
     this.ackList = [];
     const selected = this.checklistSelection.selected;
     selected.forEach( (flatNode) => {
