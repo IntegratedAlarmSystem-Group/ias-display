@@ -72,7 +72,6 @@ export class ShelveModalComponent implements OnInit {
     } else {
       this.shelve();
     }
-    this.alarm.shelved = !this.alarm.shelved;
   }
 
   shelve() {

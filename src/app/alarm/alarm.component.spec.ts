@@ -28,7 +28,7 @@ describe('AlarmComponent', () => {
   });
 
   for (const alarm of MockAlarms) {
-    it('should display the component according to its tags ', () => {
+    it('should display the icon according to the alarm properties ', () => {
       component.alarm = Alarm.asAlarm(alarm);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
@@ -41,6 +41,24 @@ describe('AlarmComponent', () => {
         expect(component.getImage()).toEqual(value + '_' + validity);
       } else {
         expect(component.getImage()).toEqual(value);
+      }
+    });
+  }
+  for (const alarm of MockAlarms) {
+    it('should display all shleved alarms accordingly ', () => {
+      component.alarm = Alarm.asAlarm(alarm);
+      component.alarm.shelve();
+      component.images = MockImageSet;
+      component.imagesUnreliable = MockImageUnreliableSet;
+      const value_validity = alarm.core_id.split('_');
+      const value = value_validity[0];
+      const validity = value_validity[1];
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      if (validity) {
+        expect(component.getImage()).toEqual('shelved' + '_' + validity);
+      } else {
+        expect(component.getImage()).toEqual('shelved');
       }
     });
   }

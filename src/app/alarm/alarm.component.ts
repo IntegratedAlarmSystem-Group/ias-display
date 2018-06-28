@@ -26,6 +26,9 @@ export class AlarmImageSet {
   /** URL of the image to use for the "maintenance" Alarm value  */
   public maintenance: string;
 
+  /** URL of the image to use for the "shelved" Alarm value  */
+  public shelved: string;
+
   /**
   * Builds a new AlarmImageSet instance
   *
@@ -72,13 +75,15 @@ export class AlarmComponent implements OnInit {
   */
   getImage(): string {
     if (!this.alarm) {
-      return this.images.unknown;
+      return this.imagesUnreliable.unknown;
     }
     let imagesToUse = this.images;
     if (this.alarm.validity === 0) {
       imagesToUse = this.imagesUnreliable;
     }
-    if (this.alarm.mode === OperationalMode.unknown) {
+    if (this.alarm.shelved === true) {
+      return imagesToUse.shelved;
+    } else if (this.alarm.mode === OperationalMode.unknown) {
       return imagesToUse.unknown;
     } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
       return imagesToUse.maintenance;
