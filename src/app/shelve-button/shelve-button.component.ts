@@ -4,6 +4,9 @@ import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
+/**
+ * Button used to trigger the event to open the Shelve Modal
+ */
 @Component({
   selector: 'app-shelve-button',
   templateUrl: './shelve-button.component.html',

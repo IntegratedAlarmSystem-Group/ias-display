@@ -89,6 +89,9 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
     this.alarmServiceSubscription.unsubscribe();
   }
 
+  /**
+  * Define the alarms that the component should listen to and their respective icons
+  */
   defineAlarmsAndImages() {
     /** Set of Humidity icons */
     this.humidityAlarmId = 'Alarmdummy';
