@@ -70,37 +70,36 @@ export class AckTreeComponent implements OnInit {
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.checklistSelection.onChange.subscribe(data => {
       this.updateAckList();
-      this.getMissingAcksInfo();
     });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.dataSource.data = this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
   }
 
-  getLevel = (node: AlarmItemFlatNode) => { return node.level; };
+  getLevel = (node: AlarmItemFlatNode) => node.level;
 
-  isExpandable = (node: AlarmItemFlatNode) => { return node.expandable; };
+  isExpandable = (node: AlarmItemFlatNode) => node.expandable;
 
   getChildren = (node: AlarmItemNode): Observable<AlarmItemNode[]> => {
     return ofObservable(node.children);
   }
 
-  hasChild = (_: number, _nodeData: AlarmItemFlatNode) => { return _nodeData.expandable; };
+  hasChild = (_: number, _nodeData: AlarmItemFlatNode) => _nodeData.expandable;
 
-  hasNoContent = (_: number, _nodeData: AlarmItemFlatNode) => { return _nodeData.item === ''; };
+  hasNoContent = (_: number, _nodeData: AlarmItemFlatNode) => _nodeData.item === '';
 
   /**
    * Tree data from selected alarm
    */
-   getTreeDataFromAlarm(alarm: Alarm){
+   getTreeDataFromAlarm(alarm: Alarm) {
      // TODO: Update definition for alarms with more than one dependency level
-     let tree_data = {};
-     if (alarm.dependencies.length === 0){
+     const tree_data = {};
+     if (alarm.dependencies.length === 0) {
        tree_data[alarm.core_id] = null;
      } else {
        tree_data[alarm.core_id] = [];
-       for (let item of alarm.dependencies){
+       for (const item of alarm.dependencies) {
          tree_data[alarm.core_id].push(item);
        }
      }
@@ -111,19 +110,21 @@ export class AckTreeComponent implements OnInit {
    * The return value is the list of `AlarmItemNode`.
    */
   buildFileTree(value: any, level: number) {
-    let data: any[] = [];
-    for (let k in value) {
-      let v = value[k];
-      let node = new AlarmItemNode();
-      node.item = `${k}`;
-      if (v === null || v === undefined) {
-        // no action
-      } else if (typeof v === 'object') {
+    const data: any[] = [];
+    for (const k in value) {
+      if (k in value) {
+        const v = value[k];
+        const node = new AlarmItemNode();
+        node.item = `${k}`;
+        if (v === null || v === undefined) {
+          // no action
+        } else if (typeof v === 'object') {
         node.children = this.buildFileTree(v, level + 1);
       } else {
         node.item = v;
       }
       data.push(node);
+      }
     }
     return data;
   }
@@ -132,7 +133,7 @@ export class AckTreeComponent implements OnInit {
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
   transformer = (node: AlarmItemNode, level: number) => {
-    let flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node)!.item === node.item
+    const flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node)!.item === node.item
       ? this.nestedNodeMap.get(node)!
       : new AlarmItemFlatNode();
     flatNode.item = node.item;
@@ -153,7 +154,9 @@ export class AckTreeComponent implements OnInit {
   descendantsPartiallySelected(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
-    if (this.descendantsAllSelected(node)) this.checklistSelection.select(node);
+    if (this.descendantsAllSelected(node)) {
+      this.checklistSelection.select(node);
+    }
     return result && !this.descendantsAllSelected(node);
   }
 
@@ -161,7 +164,9 @@ export class AckTreeComponent implements OnInit {
   noSelectedDescendants(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
-    if (!result) this.checklistSelection.deselect(node);
+    if (!result) {
+      this.checklistSelection.deselect(node);
+    }
     return !result;
   }
 
@@ -185,30 +190,6 @@ export class AckTreeComponent implements OnInit {
       }
     });
     this.alarmsToAckFromSelection.emit(this.ackList);
-  }
-
-  /** Method to get the value of the api request for missing acks **/
-  getMissingAcks(alarm_id: string){
-    return this.alarmService.getMissingAcks(alarm_id);
-  }
-
-  /****/
-  getMissingAcksInfo(): void {
-    let info = '';
-    console.log('----- missing!!! -----');
-    for (let alarm_id of this.ackList){
-      this.getMissingAcks(alarm_id).subscribe(
-        (response) => {
-          console.log(response);
-          for (let key in response){
-            console.log(JSON.stringify(key));
-          }
-        }
-      );
-    }
-    console.log('!!!!-----------------------------');
-    console.log(info);
-    console.log('-----------------------------!!!!');
   }
 
 }

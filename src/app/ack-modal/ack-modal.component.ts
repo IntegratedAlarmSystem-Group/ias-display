@@ -33,6 +33,11 @@ export class AckModalComponent implements OnInit {
   form: FormGroup;
 
   /**
+  *
+  */
+  public missedAcks: string[] = [];
+
+  /**
    * Instantiates the component
    * @param {ActiveModal} activeModal Reference to itself
    * @param {FormBuilder} formBuilder Service to manage the form and validators
@@ -56,6 +61,7 @@ export class AckModalComponent implements OnInit {
     this.form = this.formBuilder.group({
       message: [null, [Validators.required]]
     });
+    this.getMissingAcksInfo();
   }
 
   /**
@@ -139,9 +145,29 @@ export class AckModalComponent implements OnInit {
   * Method to invalidate ack action
   */
   disableAcknowledgment() {
-    let noAlarmsToAck = (this.alarmsToAck.length === 0);
-    let validForm = this.form.valid
-    return (noAlarmsToAck||!validForm)
+    const noAlarmsToAck = (this.alarmsToAck.length === 0);
+    const validForm = this.form.valid;
+    return (noAlarmsToAck || !validForm);
   }
 
+  /**
+  * Get the number of missed acknowledgements of the alarm and its children
+  */
+  getMissingAcksInfo(): void {
+    this.missedAcks = [];
+    this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
+      (response) => {
+        for (const [key, value] of Object.entries(response)) {
+          const count = value.length;
+          if (count > 0) {
+            let text = key + ' has ' + count + ' missed acknowledgement';
+            if (count > 1) {
+              text += 's';
+            }
+            this.missedAcks.push(text);
+          }
+        }
+      }
+    );
+  }
 }
