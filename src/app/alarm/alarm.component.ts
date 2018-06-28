@@ -37,6 +37,9 @@ export class AlarmImageSet {
   }
 }
 
+/**
+ * Component that represents an Alarm marker based on an icon, for displaying purposes
+ */
 @Component({
   selector: 'app-alarm',
   templateUrl: './alarm.component.html',
@@ -64,6 +67,9 @@ export class AlarmComponent implements OnInit {
   */
   constructor() { }
 
+  /**
+  * Executed when the component is initiating
+  */
   ngOnInit() {
   }
 

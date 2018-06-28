@@ -104,7 +104,6 @@ describe('AckModalComponent', () => {
     modalHeader = fixture.nativeElement.querySelector('.modal-header');
     modalBody = fixture.nativeElement.querySelector('.modal-body');
     modalFooter = fixture.nativeElement.querySelector('.modal-footer');
-    // spyOn(component, 'updateAlarmsToAck').and.callFake(function() {});
     spyOn(component, 'updateAlarmsToAck');
     fixture.detectChanges();
   });

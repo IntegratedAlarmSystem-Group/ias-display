@@ -8,13 +8,6 @@ import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
 /**
-* Tree with checkboxes for a list of alarms
-*
-* Based on the angular material documentation for the tree component
-*
-*/
-
-/**
  * Node for an alarm item
  */
 export class AlarmItemNode {
@@ -30,8 +23,11 @@ export class AlarmItemFlatNode {
 }
 
 /**
- * @title Tree with checkboxes
- */
+* Tree with checkboxes for a list of alarms
+*
+* Based on the angular material documentation for the tree component
+*
+*/
 @Component({
   selector: 'app-ack-tree',
   templateUrl: 'ack-tree.component.html',
@@ -39,7 +35,10 @@ export class AlarmItemFlatNode {
 })
 export class AckTreeComponent implements OnInit {
 
+  /** The parent Alarm of the tree  */
   @Input() selectedAlarm: Alarm;
+
+  /** EventEmitter used to send the selected alarms to the parent component */
   @Output() alarmsToAckFromSelection = new EventEmitter();
 
   /** Tree data with dependencies for the selected alarm **/
@@ -54,15 +53,22 @@ export class AckTreeComponent implements OnInit {
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
   nestedNodeMap: Map<AlarmItemNode, AlarmItemFlatNode> = new Map<AlarmItemNode, AlarmItemFlatNode>();
 
+  /** Angular Material Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. */
   treeControl: FlatTreeControl<AlarmItemFlatNode>;
 
+  /** Angular Material Tree flattener to convert a normal type of node to node with children & level information */
   treeFlattener: MatTreeFlattener<AlarmItemNode, AlarmItemFlatNode>;
 
+  /** Angular Material Data source for the flat tree */
   dataSource: MatTreeFlatDataSource<AlarmItemNode, AlarmItemFlatNode>;
 
   /** The selection for checklist */
   checklistSelection = new SelectionModel<AlarmItemFlatNode>(true /* multiple */);
 
+  /**
+   * Instantiates the component
+   * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
+   */
   constructor(private alarmService: AlarmService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
@@ -73,26 +79,55 @@ export class AckTreeComponent implements OnInit {
     });
   }
 
+  /**
+   * Creates the component and builds the tree reading the data from the alarm
+   */
   ngOnInit() {
     this.dataSource.data = this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
   }
 
+  /**
+  * Retuns the level of a given node
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {number} the level of the node
+  */
   getLevel = (node: AlarmItemFlatNode) => node.level;
 
+  /**
+  * Checks wether or not the node is expandable
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean} true if the node is expandable, false if not
+  */
   isExpandable = (node: AlarmItemFlatNode) => node.expandable;
 
+  /**
+  * Retuns the children of the node, as an Observable
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {Observable} the children the node
+  */
   getChildren = (node: AlarmItemNode): Observable<AlarmItemNode[]> => {
     return ofObservable(node.children);
   }
 
+  /**
+  * Checks wether or not the node has children
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean}  true if the node has a child, false if not
+  */
   hasChild = (_: number, _nodeData: AlarmItemFlatNode) => _nodeData.expandable;
 
+  /**
+  * Checks wether or not the node has no content
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean}  true if the node has no content, false if not
+  */
   hasNoContent = (_: number, _nodeData: AlarmItemFlatNode) => _nodeData.item === '';
 
   /**
    * Tree data from selected alarm
+   * @returns {dictionary}  the tree data in a JSON format
    */
-   getTreeDataFromAlarm(alarm: Alarm) {
+  getTreeDataFromAlarm(alarm: Alarm) {
      // TODO: Update definition for alarms with more than one dependency level
      const tree_data = {};
      if (alarm.dependencies.length === 0) {
@@ -104,10 +139,13 @@ export class AckTreeComponent implements OnInit {
        }
      }
      return tree_data;
-   }
+  }
+
   /**
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-   * The return value is the list of `AlarmItemNode`.
+   * @param {any} value the node as a Json object, or a sub-tree of a Json object.
+   * @param {number} level the level of the node
+   * @returns {list} the list of `AlarmItemNode`.
    */
   buildFileTree(value: any, level: number) {
     const data: any[] = [];
@@ -131,13 +169,11 @@ export class AckTreeComponent implements OnInit {
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
+   * @param {AlarmItemNode} node the node
+   * @param {number} level the level node
+   * @returns {flatNode} the node converted to a FlatNode
    */
   transformer = (node: AlarmItemNode, level: number) => {
-    // let flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node) !== null &&
-    //   this.nestedNodeMap.get(node).item === node.item
-    //   ? this.nestedNodeMap.get(node)!
-    //   : new AlarmItemFlatNode();
-
     let flatNode;
     if (this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node) !== null && this.nestedNodeMap.get(node).item === node.item) {
       flatNode = this.nestedNodeMap.get(node);
@@ -152,13 +188,19 @@ export class AckTreeComponent implements OnInit {
     return flatNode;
   }
 
-  /** Whether all the descendants of the node are selected */
+  /**
+  * Checks whether all the descendants of the node are selected
+  * @returns {boolean} true if all the descendants of the node are selected, false if not
+  */
   descendantsAllSelected(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     return descendants.every(child => this.checklistSelection.isSelected(child));
   }
 
-  /** Whether part of the descendants are selected */
+  /**
+  * Checks whether part of the descendants are selected
+  * @returns {boolean} true if some of the descendents are selected, false if not
+  */
   descendantsPartiallySelected(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
@@ -168,7 +210,10 @@ export class AckTreeComponent implements OnInit {
     return result && !this.descendantsAllSelected(node);
   }
 
-  /** Check no dependencies for an extensible node */
+  /**
+  * Checks wether or not the node has selected dependencies
+  * @returns {boolean} true if the node has no selected descendents, false if not
+  */
   noSelectedDescendants(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
