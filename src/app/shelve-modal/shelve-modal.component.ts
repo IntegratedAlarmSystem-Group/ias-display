@@ -9,7 +9,7 @@ import { Alarm } from '../alarm';
 @Component({
   selector: 'app-shelve-modal',
   templateUrl: './shelve-modal.component.html',
-  styleUrls: ['./shelve-modal.component.css']
+  styleUrls: ['./shelve-modal.component.css', './shelve-modal.component.scss']
 })
 export class ShelveModalComponent implements OnInit {
 
