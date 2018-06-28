@@ -103,6 +103,7 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
       set_critical: Assets.ICONS + 'humidity-3.svg',
       unknown: Assets.ICONS + 'humidity-0.svg',
       maintenance: Assets.ICONS + 'humidity-0.svg',
+      shelved: Assets.ICONS + 'humidity-1.svg',
     });
 
     /** Set of Temperature icons */
@@ -114,6 +115,7 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
       set_critical: Assets.ICONS + 'temp-3.svg',
       unknown: Assets.ICONS + 'temp-0.svg',
       maintenance: Assets.ICONS + 'temp-0.svg',
+      shelved: Assets.ICONS + 'temp-1.svg',
     });
 
     /** Set of Wind Speed icons */
@@ -125,6 +127,7 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
       set_critical: Assets.ICONS + 'winds-3.svg',
       unknown: Assets.ICONS + 'winds-0.svg',
       maintenance: Assets.ICONS + 'winds-0.svg',
+      shelved: Assets.ICONS + 'winds-1.svg',
     });
   }
 

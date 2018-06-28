@@ -67,6 +67,7 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
       set_critical: Assets.ICONS + 'lifeline-error.svg',
       unknown: Assets.ICONS + 'lifeline-ok.svg',
       maintenance: Assets.ICONS + 'lifeline-ok.svg',
+      shelved: Assets.ICONS + 'lifeline-ok.svg',
     });
   }
   /**

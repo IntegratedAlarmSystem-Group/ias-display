@@ -9,6 +9,7 @@ export const MockImageSet = new AlarmImageSet({
   set_critical: 'critical',
   unknown: 'unknown',
   maintenance: 'maintenance',
+  shelved: 'shelved',
 });
 
 export const MockImageUnreliableSet = new AlarmImageSet({
@@ -19,6 +20,7 @@ export const MockImageUnreliableSet = new AlarmImageSet({
   set_critical: 'critical_unreliable',
   unknown: 'unknown_unreliable',
   maintenance: 'maintenance_unreliable',
+  shelved: 'shelved_unreliable',
 });
 
 export const MockAlarms = [
@@ -106,9 +108,6 @@ export const MockAlarms = [
     'shelved': false,
     'dependencies': [],
   },
-// ];
-//
-// export const MockUnreliableAlarms = [
   {
     'value': 4,
     'core_id': 'critical_unreliable',
