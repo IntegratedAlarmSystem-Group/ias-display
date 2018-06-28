@@ -19,6 +19,14 @@
   <div class="modal-ack-tree">
     <app-ack-tree [selectedAlarm]="alarm" (alarmsToAckFromSelection)="updateAlarmsToAck($event)"></app-ack-tree>
   </div>
+  <div>
+    <ul>
+      <li *ngFor="let text of missedAcks">
+        {{text}}
+      </li>
+    </ul>
+  </div>
+
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
     <button id="acknowledge" type="button" class="btn btn-action btn-info"

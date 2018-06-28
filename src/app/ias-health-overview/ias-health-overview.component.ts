@@ -6,6 +6,9 @@ import { RoutingService } from '../routing.service';
 import { Alarm } from '../alarm';
 import { Assets } from '../settings';
 
+/**
+ * Summarized state of the IAS health
+ */
 @Component({
   selector: 'app-ias-health-overview',
   templateUrl: './ias-health-overview.component.html',
@@ -55,6 +58,9 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
     this.alarmServiceSubscription.unsubscribe();
   }
 
+  /**
+  * Define the alarm that the component should listen to and its icons
+  */
   defineAlarmsAndIcons() {
     /** Set of Humidity icons */
     this.alarmId = 'Alarmdummy';
@@ -70,6 +76,7 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
       shelved: Assets.ICONS + 'lifeline-ok.svg',
     });
   }
+
   /**
    * Redirect to table view applying the specified filter
    * @param filter Space-separated String that contains words used to

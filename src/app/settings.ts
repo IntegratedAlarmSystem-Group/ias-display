@@ -5,6 +5,7 @@ export const BackendUrls = {
   CDB_IAS: '/cdb-api/ias/',
   TICKETS: '/tickets/',
   TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge/',
+  TICKETS_INFO: '/tickets-api/tickets/old_open_info/',
   SHELVE_API: '/tickets-api/shelve-registries/',
   UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
 };
