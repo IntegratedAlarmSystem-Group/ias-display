@@ -4,6 +4,8 @@ import { AckTreeComponent } from './ack-tree.component';
 
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 
+import { AlarmService } from '../alarm.service';
+
 import { Alarm } from '../alarm';
 
 
@@ -14,7 +16,8 @@ describe('AckTreeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AckTreeComponent ],
-      imports: [ IasMaterialModule ]
+      imports: [ IasMaterialModule ],
+      providers: [ AlarmService ]
     })
     .compileComponents();
   }));

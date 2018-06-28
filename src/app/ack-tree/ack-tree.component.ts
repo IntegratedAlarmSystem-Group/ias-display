@@ -4,6 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
+import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
 /**
@@ -62,12 +63,15 @@ export class AckTreeComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<AlarmItemFlatNode>(true /* multiple */);
 
-  constructor() {
+  constructor(private alarmService: AlarmService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<AlarmItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.checklistSelection.onChange.subscribe(data => { this.updateAckList() })
+    this.checklistSelection.onChange.subscribe(data => {
+      this.updateAckList();
+      this.getMissingAcksInfo();
+    });
   }
 
   ngOnInit(){
@@ -90,11 +94,15 @@ export class AckTreeComponent implements OnInit {
    * Tree data from selected alarm
    */
    getTreeDataFromAlarm(alarm: Alarm){
-     console.log(JSON.stringify(alarm));
+     // TODO: Update definition for alarms with more than one dependency level
      let tree_data = {};
-     tree_data[alarm.core_id] = [];
-     for (let item of alarm.dependencies){
-       tree_data[alarm.core_id].push(item);
+     if (alarm.dependencies.length === 0){
+       tree_data[alarm.core_id] = null;
+     } else {
+       tree_data[alarm.core_id] = [];
+       for (let item of alarm.dependencies){
+         tree_data[alarm.core_id].push(item);
+       }
      }
      return tree_data;
    }
@@ -168,6 +176,7 @@ export class AckTreeComponent implements OnInit {
 
   /** Update list with ids to ack **/
   updateAckList(): void {
+    console.log('update ack ....');
     this.ackList = [];
     const selected = this.checklistSelection.selected;
     selected.forEach( (flatNode) => {
@@ -176,6 +185,30 @@ export class AckTreeComponent implements OnInit {
       }
     });
     this.alarmsToAckFromSelection.emit(this.ackList);
+  }
+
+  /** Method to get the value of the api request for missing acks **/
+  getMissingAcks(alarm_id: string){
+    return this.alarmService.getMissingAcks(alarm_id);
+  }
+
+  /****/
+  getMissingAcksInfo(): void {
+    let info = '';
+    console.log('----- missing!!! -----');
+    for (let alarm_id of this.ackList){
+      this.getMissingAcks(alarm_id).subscribe(
+        (response) => {
+          console.log(response);
+          for (let key in response){
+            console.log(JSON.stringify(key));
+          }
+        }
+      );
+    }
+    console.log('!!!!-----------------------------');
+    console.log(info);
+    console.log('-----------------------------!!!!');
   }
 
 }
