@@ -27,6 +27,7 @@ import { LegendComponent } from './legend/legend.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { AlarmComponent } from './alarm/alarm.component';
+import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
 
 
 /**
@@ -58,7 +59,8 @@ export const appRoutes: Routes = [
     LegendComponent,
     ShelveModalComponent,
     ShelveButtonComponent,
-    AlarmComponent
+    AlarmComponent,
+    IasHealthOverviewComponent
   ],
   imports: [
     BrowserModule,

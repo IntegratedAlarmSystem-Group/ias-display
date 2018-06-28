@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutingService} from '../routing.service';
+import { RoutingService } from '../routing.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../alarm/alarm.component';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
+import { Assets } from '../settings';
 
 /**
  * Summarized state of the weather alarm subsystem
@@ -14,8 +15,6 @@ import { Alarm } from '../alarm';
   styleUrls: ['./overview-weather-card-content.component.css']
 })
 export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
-
-  private location = '/assets/img/';
 
   /** Set of Humidity icons */
   public humidityImageSet: AlarmImageSet;
@@ -97,35 +96,35 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
     this.windsAlarmId = 'Alarmdummy';
 
     this.humidityImageSet = new AlarmImageSet({
-      clear: this.location + 'humidity-1.svg',
-      set_low: this.location + 'humidity-3.svg',
-      set_medium: this.location + 'humidity-3.svg',
-      set_high: this.location + 'humidity-3.svg',
-      set_critical: this.location + 'humidity-3.svg',
-      unknown: this.location + 'humidity-0.svg',
-      maintenance: this.location + 'humidity-0.svg',
+      clear: Assets.ICONS + 'humidity-1.svg',
+      set_low: Assets.ICONS + 'humidity-3.svg',
+      set_medium: Assets.ICONS + 'humidity-3.svg',
+      set_high: Assets.ICONS + 'humidity-3.svg',
+      set_critical: Assets.ICONS + 'humidity-3.svg',
+      unknown: Assets.ICONS + 'humidity-0.svg',
+      maintenance: Assets.ICONS + 'humidity-0.svg',
     });
 
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
-      clear: this.location + 'temp-1.svg',
-      set_low: this.location + 'temp-3.svg',
-      set_medium: this.location + 'temp-3.svg',
-      set_high: this.location + 'temp-3.svg',
-      set_critical: this.location + 'temp-3.svg',
-      unknown: this.location + 'temp-0.svg',
-      maintenance: this.location + 'temp-0.svg',
+      clear: Assets.ICONS + 'temp-1.svg',
+      set_low: Assets.ICONS + 'temp-3.svg',
+      set_medium: Assets.ICONS + 'temp-3.svg',
+      set_high: Assets.ICONS + 'temp-3.svg',
+      set_critical: Assets.ICONS + 'temp-3.svg',
+      unknown: Assets.ICONS + 'temp-0.svg',
+      maintenance: Assets.ICONS + 'temp-0.svg',
     });
 
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
-      clear: this.location + 'winds-1.svg',
-      set_low: this.location + 'winds-3.svg',
-      set_medium: this.location + 'winds-3.svg',
-      set_high: this.location + 'winds-3.svg',
-      set_critical: this.location + 'winds-3.svg',
-      unknown: this.location + 'winds-0.svg',
-      maintenance: this.location + 'winds-0.svg',
+      clear: Assets.ICONS + 'winds-1.svg',
+      set_low: Assets.ICONS + 'winds-3.svg',
+      set_medium: Assets.ICONS + 'winds-3.svg',
+      set_high: Assets.ICONS + 'winds-3.svg',
+      set_critical: Assets.ICONS + 'winds-3.svg',
+      unknown: Assets.ICONS + 'winds-0.svg',
+      maintenance: Assets.ICONS + 'winds-0.svg',
     });
   }
 

@@ -24,3 +24,7 @@ export const Locale = {
   DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',
   TIMEZONE: '+0000',
 };
+
+export const Assets = {
+  ICONS: '/assets/img/',
+};
