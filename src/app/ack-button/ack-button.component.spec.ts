@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { of } from 'rxjs';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
@@ -24,6 +25,7 @@ describe('GIVEN an AckButtonComponent', () => {
   let html: HTMLElement;
   let modalService: NgbModal;
   let modalRef: NgbModalRef;
+  let spyMissingAcks;
   const mockAlarm = {
     'value': 4,
     'core_id': 'coreid$1',
@@ -82,6 +84,9 @@ describe('GIVEN an AckButtonComponent', () => {
     component = fixture.componentInstance;
     component.alarm_id = 'coreid$1';
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    spyMissingAcks = spyOn(alarmService, 'getMissingAcks').and.returnValue(
+      of( {'coreid$1': [1, 5, 6]} )
+    );
     debug = fixture.debugElement;
     html = debug.nativeElement;
     fixture.detectChanges();
