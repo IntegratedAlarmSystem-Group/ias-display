@@ -109,7 +109,8 @@ export class DisplayedAlarm {
     const priority = value_tags[1];
     const validity = alarm.getValidityAsString();
     const ack = alarm.ack;
-    const order = this.getAlarmStatusOrder(value, priority, validity, ack);
+    const shelved = alarm.shelved;
+    const order = this.getAlarmStatusOrder(value, priority, validity, ack, shelved);
 
     const tags = [];
     tags.push(order);
@@ -121,6 +122,9 @@ export class DisplayedAlarm {
     tags.push(validity);
     if (alarm.ack) {
       tags.push('ack');
+    }
+    if (alarm.shelved) {
+      tags.push('shelved');
     }
     return tags.join('-');
   }
@@ -136,7 +140,7 @@ export class DisplayedAlarm {
   * @returns {string} order for the {@link Alarm} in the Table
   */
   getAlarmStatusOrder(
-    value: string, priority: string, validity: string, ack: boolean): string {
+    value: string, priority: string, validity: string, ack: boolean, shelved: boolean): string {
     let order = 0;
     const priorities = ['critical', 'high', 'medium', 'low'];
 
