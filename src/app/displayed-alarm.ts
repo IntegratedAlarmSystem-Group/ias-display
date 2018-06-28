@@ -104,12 +104,20 @@ export class DisplayedAlarm {
   */
   getAlarmStatusTagsString(): string {
     const alarm = this._alarm;
-    const value_tags = alarm.getValueAsString().split('_');
-    const value = value_tags[0];
-    const priority = value_tags[1];
-    const validity = alarm.getValidityAsString();
-    const ack = alarm.ack;
     const shelved = alarm.shelved;
+    const value_tags = alarm.getValueAsString().split('_');
+    let value = value_tags[0];
+    let priority = value_tags[1];
+    let validity = alarm.getValidityAsString();
+    let ack = alarm.ack;
+
+    if (shelved) {
+      value = 'cleared';
+      priority = '';
+      validity = 'reliable';
+      ack = true;
+    }
+
     const order = this.getAlarmStatusOrder(value, priority, validity, ack, shelved);
 
     const tags = [];
