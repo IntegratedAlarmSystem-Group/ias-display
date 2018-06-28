@@ -148,6 +148,21 @@ export class AlarmService {
   }
 
   /**
+   * Get information about old tickets related to a target alarm
+   * @param alarm_id id of the target alarm
+   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   */
+  getMissingAcks(alarm_id) {
+    const url = BackendUrls.TICKETS_INFO + '?alarm_id=' + alarm_id;
+    return this.httpClientService.get(url).pipe(
+    map(
+      (response) => {
+        return response;
+      }
+    ));
+  }
+
+  /**
    * Shelves and Alarm with a message
    * @param alarms id of the alarm to shelve
    * @param message message of the shelving
