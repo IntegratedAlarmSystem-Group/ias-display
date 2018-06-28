@@ -19,6 +19,9 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
   /** Set of icons */
   public iconSet: AlarmImageSet;
 
+  /** Set of Unreliable icons */
+  public iconUnreliableSet: AlarmImageSet;
+
   /** Alarm */
   public alarm: Alarm;
 
@@ -62,18 +65,30 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
   * Define the alarm that the component should listen to and its icons
   */
   defineAlarmsAndIcons() {
-    /** Set of Humidity icons */
     this.alarmId = 'Alarmdummy';
 
+    /** Set of icons */
     this.iconSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'lifeline-ok.svg',
-      set_low: Assets.ICONS + 'lifeline-error.svg',
-      set_medium: Assets.ICONS + 'lifeline-error.svg',
-      set_high: Assets.ICONS + 'lifeline-error.svg',
-      set_critical: Assets.ICONS + 'lifeline-error.svg',
-      unknown: Assets.ICONS + 'lifeline-ok.svg',
-      maintenance: Assets.ICONS + 'lifeline-ok.svg',
-      shelved: Assets.ICONS + 'lifeline-ok.svg',
+      clear: Assets.ICONS + 'ias_health-valid-clear.svg',
+      set_low: Assets.ICONS + 'ias_health-valid-critical.svg',
+      set_medium: Assets.ICONS + 'ias_health-valid-critical.svg',
+      set_high: Assets.ICONS + 'ias_health-valid-critical.svg',
+      set_critical: Assets.ICONS + 'ias_health-valid-critical.svg',
+      unknown: Assets.ICONS + 'ias_health-valid-unkn.svg',
+      maintenance: Assets.ICONS + 'ias_health-valid-maint.svg',
+      shelved: Assets.ICONS + 'ias_health-valid-clear.svg',
+    });
+
+    /** Set of Unreliable icons */
+    this.iconUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'ias_health-invalid-clear.svg',
+      set_low: Assets.ICONS + 'ias_health-invalid-critical.svg',
+      set_medium: Assets.ICONS + 'ias_health-invalid-critical.svg',
+      set_high: Assets.ICONS + 'ias_health-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'ias_health-invalid-critical.svg',
+      unknown: Assets.ICONS + 'ias_health-invalid-unkn.svg',
+      maintenance: Assets.ICONS + 'ias_health-invalid-maint.svg',
+      shelved: Assets.ICONS + 'ias_health-invalid-clear.svg',
     });
   }
 

@@ -6,7 +6,7 @@
               <div class="title">WIND SPEED</div>
               <div class="marker">
                 <app-alarm
-                  [alarm]="windsAlarm" [images]="windsImageSet" [imagesUnreliable]="windsImageSet"
+                  [alarm]="windsAlarm" [images]="windsImageSet" [imagesUnreliable]="windsImageUnreliableSet"
                 ></app-alarm>
               </div>
           </div>
@@ -16,7 +16,7 @@
               <div class="title">HUMIDITY</div>
               <div class="marker">
                 <app-alarm
-                  [alarm]="humidityAlarm" [images]="humidityImageSet" [imagesUnreliable]="humidityImageSet"
+                  [alarm]="humidityAlarm" [images]="humidityImageSet" [imagesUnreliable]="humidityImageUnreliableSet"
                 ></app-alarm>
               </div>
               <!-- <div class="marker">
@@ -28,8 +28,8 @@
           <div class="sensors-card" (click)="goToTableFilteredBy('temperature');$event.stopPropagation()">
               <div class="title">TEMPERATURE</div>
               <div class="marker">
-                <app-alarm 
-                  [alarm]="tempAlarm" [images]="tempImageSet" [imagesUnreliable]="tempImageSet"
+                <app-alarm
+                  [alarm]="tempAlarm" [images]="tempImageSet" [imagesUnreliable]="tempImageUnreliableSet"
                 ></app-alarm>
               </div>
           </div>

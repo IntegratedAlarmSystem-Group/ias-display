@@ -25,6 +25,15 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
   /** Set of Wind Speed icons */
   public windsImageSet: AlarmImageSet;
 
+  /** Set of Humidity Unreliable icons */
+  public humidityImageUnreliableSet: AlarmImageSet;
+
+  /** Set of Temperature Unreliable icons */
+  public tempImageUnreliableSet: AlarmImageSet;
+
+  /** Set of Wind Speed Unreliable icons */
+  public windsImageUnreliableSet: AlarmImageSet;
+
   /** Humidity Alarm */
   public humidityAlarm: Alarm;
 
@@ -93,44 +102,80 @@ export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
   * Define the alarms that the component should listen to and their respective icons
   */
   defineAlarmsAndImages() {
-    /** Set of Humidity icons */
     this.humidityAlarmId = 'Alarmdummy';
     this.tempAlarmId = 'Alarmdummy';
     this.windsAlarmId = 'Alarmdummy';
 
+    /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'humidity-1.svg',
-      set_low: Assets.ICONS + 'humidity-3.svg',
-      set_medium: Assets.ICONS + 'humidity-3.svg',
-      set_high: Assets.ICONS + 'humidity-3.svg',
-      set_critical: Assets.ICONS + 'humidity-3.svg',
-      unknown: Assets.ICONS + 'humidity-0.svg',
-      maintenance: Assets.ICONS + 'humidity-0.svg',
-      shelved: Assets.ICONS + 'humidity-1.svg',
+      clear: Assets.ICONS + 'hum-valid-clear.svg',
+      set_low: Assets.ICONS + 'hum-valid-critical.svg',
+      set_medium: Assets.ICONS + 'hum-valid-critical.svg',
+      set_high: Assets.ICONS + 'hum-valid-critical.svg',
+      set_critical: Assets.ICONS + 'hum-valid-critical.svg',
+      unknown: Assets.ICONS + 'hum-valid-unkn.svg',
+      maintenance: Assets.ICONS + 'hum-valid-maint.svg',
+      shelved: Assets.ICONS + 'hum-valid-clear.svg',
     });
 
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-1.svg',
-      set_low: Assets.ICONS + 'temp-3.svg',
-      set_medium: Assets.ICONS + 'temp-3.svg',
-      set_high: Assets.ICONS + 'temp-3.svg',
-      set_critical: Assets.ICONS + 'temp-3.svg',
-      unknown: Assets.ICONS + 'temp-0.svg',
-      maintenance: Assets.ICONS + 'temp-0.svg',
-      shelved: Assets.ICONS + 'temp-1.svg',
+      clear: Assets.ICONS + 'temp-valid-clear.svg',
+      set_low: Assets.ICONS + 'temp-valid-critical.svg',
+      set_medium: Assets.ICONS + 'temp-valid-critical.svg',
+      set_high: Assets.ICONS + 'temp-valid-critical.svg',
+      set_critical: Assets.ICONS + 'temp-valid-critical.svg',
+      unknown: Assets.ICONS + 'temp-valid-unkn.svg',
+      maintenance: Assets.ICONS + 'temp-valid-maint.svg',
+      shelved: Assets.ICONS + 'temp-valid-clear.svg',
     });
 
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'winds-1.svg',
-      set_low: Assets.ICONS + 'winds-3.svg',
-      set_medium: Assets.ICONS + 'winds-3.svg',
-      set_high: Assets.ICONS + 'winds-3.svg',
-      set_critical: Assets.ICONS + 'winds-3.svg',
-      unknown: Assets.ICONS + 'winds-0.svg',
-      maintenance: Assets.ICONS + 'winds-0.svg',
-      shelved: Assets.ICONS + 'winds-1.svg',
+      clear: Assets.ICONS + 'wind_s-valid-clear.svg',
+      set_low: Assets.ICONS + 'wind_s-valid-critical.svg',
+      set_medium: Assets.ICONS + 'wind_s-valid-critical.svg',
+      set_high: Assets.ICONS + 'wind_s-valid-critical.svg',
+      set_critical: Assets.ICONS + 'wind_s-valid-critical.svg',
+      unknown: Assets.ICONS + 'wind_s-valid-unkn.svg',
+      maintenance: Assets.ICONS + 'wind_s-valid-maint.svg',
+      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
+    });
+
+    /** Set of Humidity Unreliable icons */
+    this.humidityImageUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'hum-invalid-clear.svg',
+      set_low: Assets.ICONS + 'hum-invalid-critical.svg',
+      set_medium: Assets.ICONS + 'hum-invalid-critical.svg',
+      set_high: Assets.ICONS + 'hum-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
+      unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
+      maintenance: Assets.ICONS + 'hum-invalid-maint.svg',
+      shelved: Assets.ICONS + 'hum-invalid-clear.svg',
+    });
+
+    /** Set of Temperature Unreliable icons */
+    this.tempImageUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'temp-invalid-clear.svg',
+      set_low: Assets.ICONS + 'temp-invalid-critical.svg',
+      set_medium: Assets.ICONS + 'temp-invalid-critical.svg',
+      set_high: Assets.ICONS + 'temp-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
+      unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
+      maintenance: Assets.ICONS + 'temp-invalid-maint.svg',
+      shelved: Assets.ICONS + 'temp-invalid-clear.svg',
+    });
+
+    /** Set of Wind Speed Unreliable icons */
+    this.windsImageUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'wind_s-invalid-clear.svg',
+      set_low: Assets.ICONS + 'wind_s-invalid-critical.svg',
+      set_medium: Assets.ICONS + 'wind_s-invalid-critical.svg',
+      set_high: Assets.ICONS + 'wind_s-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
+      unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
+      maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
+      shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
     });
   }
 
