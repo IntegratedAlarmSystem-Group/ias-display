@@ -133,9 +133,17 @@ export class AckTreeComponent implements OnInit {
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
   transformer = (node: AlarmItemNode, level: number) => {
-    const flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node)!.item === node.item
-      ? this.nestedNodeMap.get(node)!
-      : new AlarmItemFlatNode();
+    // let flatNode = this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node) !== null &&
+    //   this.nestedNodeMap.get(node).item === node.item
+    //   ? this.nestedNodeMap.get(node)!
+    //   : new AlarmItemFlatNode();
+
+    let flatNode;
+    if (this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node) !== null && this.nestedNodeMap.get(node).item === node.item) {
+      flatNode = this.nestedNodeMap.get(node);
+    } else {
+      flatNode = new AlarmItemFlatNode();
+    }
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.expandable = !!node.children;
