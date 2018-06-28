@@ -27,6 +27,11 @@
     cursor: pointer;
 }
 
+.sensors-card.global-health-status {
+  min-width: 165px;
+  border: 0;
+}
+
 .sensors-card>.title{
     text-transform: 'uppercase';
     font-size: 14px;
