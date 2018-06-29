@@ -529,7 +529,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AckButtonComponent</li>
+  <li>ShelveModalComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -552,14 +552,14 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/ack-button/ack-button.component.ts</code>
+    <code>src/app/shelve-modal/shelve-modal.component.ts</code>
 </p>
 
     <p class="comment">
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Button used to trigger the event to open the Acknowledge Modal</p>
+        <p>Modal used to acknowledge alarms</p>
 
     </p>
 
@@ -589,19 +589,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-ack-button</code></td>
+                <td class="col-md-9"><code>app-shelve-modal</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>ack-button.component.css</code></td>
+                <td class="col-md-9"><code>shelve-modal.component.css,<br>shelve-modal.component.scss</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./ack-button.component.html</code></td>
+                <td class="col-md-9"><code>./shelve-modal.component.html</code></td>
             </tr>
 
 
@@ -622,12 +622,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#alarm">alarm</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#activeModal">activeModal</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#canAcknowledge">canAcknowledge</a>
+                                <a href="#form">form</a>
                             </li>
                         </ul>
                     </td>
@@ -642,13 +641,31 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#loadAlarm">loadAlarm</a>
+                                <a href="#canSend">canSend</a>
+                            </li>
+                            <li>
+                                <a href="#getActionButtonText">getActionButtonText</a>
+                            </li>
+                            <li>
+                                <a href="#getAlarmDescription">getAlarmDescription</a>
+                            </li>
+                            <li>
+                                <a href="#getAlarmUrl">getAlarmUrl</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onClick">onClick</a>
+                                <a href="#sendSuccessful">sendSuccessful</a>
+                            </li>
+                            <li>
+                                <a href="#shelve">shelve</a>
+                            </li>
+                            <li>
+                                <a href="#toggleShelveUnshelve">toggleShelveUnshelve</a>
+                            </li>
+                            <li>
+                                <a href="#unshelve">unshelve</a>
                             </li>
                         </ul>
                     </td>
@@ -663,7 +680,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#alarm_id">alarm_id</a>
+                                <a href="#alarm">alarm</a>
                             </li>
                         </ul>
                     </td>
@@ -682,18 +699,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(alarmService: <a href="../injectables/AlarmService.html">AlarmService</a>, modalService: NgbModal)</code>
+<code>constructor(activeModal: NgbActiveModal, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, alarmService: <a href="../injectables/AlarmService.html">AlarmService</a>, cdbService: <a href="../injectables/CdbService.html">CdbService</a>, spinnerService: NgxSpinnerService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:28</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>The &quot;constructor&quot;, injects the <a href="../injectables/AlarmService.html">AlarmService</a> and the {@link modalService}</p>
+                            <div class="io-description"><p>Instantiates the component</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -708,6 +725,38 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
+                                                        <td>activeModal</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgbActiveModal</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Reference to itself</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Service to manage the form and validators</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
                                                         <td>alarmService</td>
                                                   
                                                         <td>
@@ -719,15 +768,15 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Service to get the alarm object based on the input id</p>
+                                                                <code><p>Service used to send the request to acknowledge the alarm</p>
 </code>
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>modalService</td>
+                                                        <td>cdbService</td>
                                                   
                                                         <td>
-                                                                    <code>NgbModal</code>
+                                                                    <code><a href="../injectables/CdbService.html" target="_self" >CdbService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -735,7 +784,23 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Service to manage the Modal Component</p>
+                                                                <code><p>Service used to get complementary alarm information</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>spinnerService</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxSpinnerService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Service to provide the loading spinner functionality</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -754,21 +819,17 @@
             <tbody>
                 <tr>
                     <td class="col-md-2">
-                        <a name="alarm_id"></a>
-                        <code>alarm_id</code>
+                        <a name="alarm"></a>
+                        <code>alarm</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>Id of the alarm to be acknowledged</p>
+                        <div><p>Alarm object to be shelved/unshelved</p>
 </div>
-                            <p>
-                            <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                            </p>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/ack-button/ack-button.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -786,39 +847,182 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="loadAlarm"></a>
+                        <a name="canSend"></a>
                         <span class="name">
                             <b>
-                            loadAlarm
+                            canSend
                             </b>
-                            <a href="#loadAlarm"><span class="fa fa-link"></span></a>
+                            <a href="#canSend"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>loadAlarm()</code>
+<code>canSend()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/ack-button/ack-button.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:131</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Get the alarm object related with the alarm id received as input using the
-AlarmService. Initialize the private variables of this component.</p>
+                            <div class="io-description"><p>Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form</p>
 </div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>true if the action can be sent, false if not</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getActionButtonText"></a>
+                        <span class="name">
+                            <b>
+                            getActionButtonText
+                            </b>
+                            <a href="#getActionButtonText"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getActionButtonText()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:155</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the text to display in the action button, either &quot;Shelve&quot; or &quot;Unshelve&quot;</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the text to display in the button</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAlarmDescription"></a>
+                        <span class="name">
+                            <b>
+                            getAlarmDescription
+                            </b>
+                            <a href="#getAlarmDescription"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAlarmDescription()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:139</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get the alarm description through the method provided by the <a href="../injectables/CdbService.html">CdbService</a></p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>description of the {</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAlarmUrl"></a>
+                        <span class="name">
+                            <b>
+                            getAlarmUrl
+                            </b>
+                            <a href="#getAlarmUrl"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAlarmUrl()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:147</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get the link to the wikipage of the alarm through the method provided by the <a href="../injectables/CdbService.html">CdbService</a></p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>URL for of the documentation of the {</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -845,15 +1049,14 @@ AlarmService. Initialize the private variables of this component.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/ack-button/ack-button.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:50</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>On init the component initialize the private variables using the method
-{@link loadAlarm}</p>
+                            <div class="io-description"><p>Create the form and check the validity of the form input fields</p>
 </div>
 
                             <div class="io-description">
@@ -868,32 +1071,33 @@ AlarmService. Initialize the private variables of this component.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="onClick"></a>
+                        <a name="sendSuccessful"></a>
                         <span class="name">
                             <b>
-                            onClick
+                            sendSuccessful
                             </b>
-                            <a href="#onClick"><span class="fa fa-link"></span></a>
+                            <a href="#sendSuccessful"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(event: )</code>
+<code>sendSuccessful(alarms: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, shelve: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/ack-button/ack-button.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:61</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on table rows, it triggers the ack modal</p>
+                            <div class="io-description"><p>Actions performed when the acknowledge is made ssuccesfully.
+Finally the modal is closed.</p>
 </div>
 
                             <div class="io-description">
@@ -902,18 +1106,41 @@ AlarmService. Initialize the private variables of this component.</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>event</td>
+                                                        <td>alarms</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>list of sucessfully acknowledged alarms</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>shelve</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -921,12 +1148,132 @@ AlarmService. Initialize the private variables of this component.</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
                                 <div class="io-description">
                                     
                                 </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="shelve"></a>
+                        <span class="name">
+                            <b>
+                            shelve
+                            </b>
+                            <a href="#shelve"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>shelve()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:84</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the webserver to apply the shelving of the alarm</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleShelveUnshelve"></a>
+                        <span class="name">
+                            <b>
+                            toggleShelveUnshelve
+                            </b>
+                            <a href="#toggleShelveUnshelve"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>toggleShelveUnshelve()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:73</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Send the shelve/unshelve request through the method provided by the <a href="../injectables/AlarmService.html">AlarmService</a> and handle the response.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="unshelve"></a>
+                        <span class="name">
+                            <b>
+                            unshelve
+                            </b>
+                            <a href="#unshelve"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>unshelve()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:107</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the webserver to apply the unshelving of the alarm</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -942,38 +1289,37 @@ AlarmService. Initialize the private variables of this component.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="alarm"></a>
+                        <a name="activeModal"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
-                            alarm
+                                <span class="modifier">Public</span>
+                            activeModal
                             </b>
-                            <a href="#alarm"><span class="fa fa-link"></span></a>
+                            <a href="#activeModal"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>alarm:     <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                        <span class="modifier-icon fa fa-reset"></span><code>activeModal:     <code>NgbActiveModal</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                            <i>Type : </i>    <code>NgbActiveModal</code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/ack-button/ack-button.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:39</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Alarm object related with the alarm id received as input</p>
-</div>
+                        <div class="io-description">Reference to itself</div>
                     </td>
                 </tr>
 
@@ -983,36 +1329,36 @@ AlarmService. Initialize the private variables of this component.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="canAcknowledge"></a>
+                        <a name="form"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            canAcknowledge
+                            form
                             </b>
-                            <a href="#canAcknowledge"><span class="fa fa-link"></span></a>
+                            <a href="#form"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>canAcknowledge:     <code></code>
+                        <code>form:     <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                            <i>Type : </i>    <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shelve-modal/shelve-modal.component.ts:28</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
+                        <div class="io-description"><p>Object used to manage the form and check the validity of the form input fields</p>
 </div>
                     </td>
                 </tr>
@@ -1026,82 +1372,213 @@ AlarmService. Initialize the private variables of this component.</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
-import { NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
-import { AckModalComponent } from &#x27;../ack-modal/ack-modal.component&#x27;;
+import { FormGroup, FormControl, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
+import { NgbActiveModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
 import { AlarmService } from &#x27;../alarm.service&#x27;;
+import { CdbService } from &#x27;../cdb.service&#x27;;
 import { Alarm } from &#x27;../alarm&#x27;;
 
+
 /**
- * Button used to trigger the event to open the Acknowledge Modal
+ * Modal used to acknowledge alarms
  */
 @Component({
-  selector: &#x27;app-ack-button&#x27;,
-  templateUrl: &#x27;./ack-button.component.html&#x27;,
-  styleUrls: [&#x27;./ack-button.component.css&#x27;]
+  selector: &#x27;app-shelve-modal&#x27;,
+  templateUrl: &#x27;./shelve-modal.component.html&#x27;,
+  styleUrls: [&#x27;./shelve-modal.component.css&#x27;, &#x27;./shelve-modal.component.scss&#x27;]
 })
-export class AckButtonComponent implements OnInit {
+export class ShelveModalComponent implements OnInit {
 
   /**
-   * Id of the alarm to be acknowledged
+   * Alarm object to be shelved/unshelved
    */
-  @Input() alarm_id: string;
+  @Input() alarm;
 
   /**
-   * Alarm object related with the alarm id received as input
+   * Object used to manage the form and check the validity of the form input fields
    */
-  private alarm: Alarm;
+  form: FormGroup;
 
   /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   */
-  public canAcknowledge &#x3D; false;
-
-  /**
-   * The &quot;constructor&quot;, injects the {@link AlarmService} and the {@link modalService}
-   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
-   * @param {ModalService} modalService Service to manage the Modal Component
+   * Instantiates the component
+   * @param {ActiveModal} activeModal Reference to itself
+   * @param {FormBuilder} formBuilder Service to manage the form and validators
+   * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
    */
   constructor(
+    public activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
     private alarmService: AlarmService,
-    private modalService: NgbModal
-  ) { }
+    private cdbService: CdbService,
+    private spinnerService: NgxSpinnerService,
+  ) {
+  }
 
   /**
-   * On init the component initialize the private variables using the method
-   * {@link loadAlarm}
+   * Create the form and check the validity of the form input fields
    */
   ngOnInit() {
-    this.loadAlarm();
+    this.form &#x3D; this.formBuilder.group({
+      message: [null, [Validators.required]]
+    });
   }
 
   /**
-   * Get the alarm object related with the alarm id received as input using the
-   * AlarmService. Initialize the private variables of this component.
+   * Actions performed when the acknowledge is made ssuccesfully.
+   * Finally the modal is closed.
+   * @param alarms list of sucessfully acknowledged alarms
    */
-  loadAlarm() {
-    this.alarm &#x3D; this.alarmService.get(this.alarm_id);
-    this.canAcknowledge &#x3D; !this.alarm.ack;
+  sendSuccessful(alarms: any, shelve: boolean): void {
+    if (shelve) {
+      console.log(&#x27;Shelved successful for alarms: &#x27;, alarms);
+    } else {
+      console.log(&#x27;Unshelved successful for alarms: &#x27;, alarms);
+    }
+    this.activeModal.close();
   }
 
   /**
-  * Handle click on table rows, it triggers the ack modal
-  */
-  onClick(event) {
-    const ackModal &#x3D; this.modalService.open(AckModalComponent,
-      { size: &#x27;lg&#x27;, centered: true }
-    );
-    ackModal.componentInstance.alarm &#x3D; this.alarm;
-    return ackModal;
+   * Send the shelve/unshelve request through the method provided by the {@link AlarmService} and handle the response.
+   */
+  toggleShelveUnshelve(): void {
+    if (this.alarm.shelved) {
+      this.unshelve();
+    } else {
+      this.shelve();
+    }
   }
 
+  /**
+   * Calls the webserver to apply the shelving of the alarm
+   */
+  shelve() {
+    this.spinnerService.show();
+    if (this.canSend()) {
+      this.alarmService.shelveAlarm(
+        this.alarm.core_id, this.form.get(&#x27;message&#x27;).value).subscribe(
+          (response) &#x3D;&gt; {
+            this.sendSuccessful(response, true);
+            this.spinnerService.hide();
+          },
+          (error) &#x3D;&gt; {
+            console.log(&#x27;Error: &#x27;, error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    } else {
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  /**
+   * Calls the webserver to apply the unshelving of the alarm
+   */
+  unshelve() {
+    this.spinnerService.show();
+    if (this.canSend()) {
+      this.alarmService.unshelveAlarms(
+        [this.alarm.core_id], this.form.get(&#x27;message&#x27;).value).subscribe(
+          (response) &#x3D;&gt; {
+            this.sendSuccessful(response, false);
+            this.spinnerService.hide();
+          },
+          (error) &#x3D;&gt; {
+            console.log(&#x27;Error: &#x27;, error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    } else {
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  /**
+   * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
+   * @returns {boolean} true if the action can be sent, false if not
+   */
+  canSend(): boolean {
+    return this.alarm.shelved || this.form.valid;
+  }
+
+  /**
+   * Get the alarm description through the method provided by the {@link CdbService}
+   * @returns {string} description of the {@link Alarm}
+   */
+  getAlarmDescription() {
+    return this.cdbService.getAlarmDescription(this.alarm.core_id);
+  }
+
+  /**
+   * Get the link to the wikipage of the alarm through the method provided by the {@link CdbService}
+   * @returns {string} URL for of the documentation of the {@link Alarm}
+   */
+  getAlarmUrl() {
+    return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
+  }
+
+  /**
+   * Returns the text to display in the action button, either &quot;Shelve&quot; or &quot;Unshelve&quot;
+   * @returns {string} the text to display in the button
+   */
+  getActionButtonText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return &#x27;Unshelve&#x27;;
+    } else {
+      return &#x27;Shelve&#x27;;
+    }
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; mat-raised-button (click)&#x3D;&quot;onClick($event)&quot; [disabled]&#x3D;&quot;!canAcknowledge&quot;&gt;
-    &lt;i class&#x3D;&quot;ion-ios-share-alt&quot;&gt;&lt;/i&gt;
-&lt;/button&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-action modal-header&quot;&gt;
+  &lt;h4 class&#x3D;&quot;modal-title&quot;&gt;{{alarm?.core_id}}&lt;/h4&gt;
+  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; aria-label&#x3D;&quot;Close&quot; (click)&#x3D;&quot;activeModal.dismiss(&#x27;Cross click&#x27;)&quot;&gt;
+    &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;form class&#x3D;&quot;form-group&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-action modal-body&quot;&gt;
+    &lt;div class&#x3D;&quot;section alarm-info&quot;&gt;
+      &lt;p&gt;{{ getAlarmDescription() }} &lt;/p&gt;
+      &lt;p&gt;
+        &lt;a class&#x3D;&quot;alarmUrl&quot; target&#x3D;&quot;_blank&quot; href&#x3D;&quot;{{ getAlarmUrl() }}&quot;&gt;
+          &lt;span class&#x3D;&quot;alarmLink&quot;&gt;Go to wiki&lt;/span&gt;&amp;nbsp;&lt;i class&#x3D;&quot;ion-md-open&quot;&gt;&lt;/i&gt;
+        &lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;section shelve-action&quot;&gt;
+      &lt;div *ngIf&#x3D;&quot;!alarm.shelved; then shelveForm&quot;&gt;&lt;/div&gt;
+      &lt;ng-template #shelveForm&gt;
+        &lt;textarea name&#x3D;&quot;message&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;message&quot; placeholder&#x3D;&quot;Write a message to explain why the alarm is being shelved&quot;&gt;&lt;/textarea&gt;
+        &lt;div class&#x3D;&quot;action-info&quot;&gt;
+          * The shelve button will be enabled after writing the message
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;modal-action modal-footer&quot;&gt;
+    &lt;button id&#x3D;&quot;cancel&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-action btn-secondary&quot; (click)&#x3D;&quot;activeModal.dismiss(&#x27;Cancel click&#x27;)&quot;&gt;Cancel&lt;/button&gt;
+    &lt;button id&#x3D;&quot;send&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-action btn-info&quot; (click)&#x3D;&quot;toggleShelveUnshelve();&quot; [disabled]&#x3D;&quot;!canSend()&quot;&gt;{{ getActionButtonText() }}&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;ngx-spinner
+  bdColor &#x3D; &quot;rgba(51, 51, 51, 0)&quot;
+  size &#x3D; &quot;large&quot;
+  color &#x3D; &quot;#fff&quot;
+  type &#x3D; &quot;ball-clip-rotate&quot;
+&gt;&lt;/ngx-spinner&gt;
 </code></pre>
     </div>
 
@@ -1130,10 +1607,10 @@ export class AckButtonComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button class="ack-button" title="Acknowledge" mat-raised-button (click)="onClick($event)" [disabled]="!canAcknowledge">    <i class="ion-ios-share-alt"></i></button></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="modal-action modal-header">  <h4 class="modal-title">{{alarm?.core_id}}</h4>  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(\'Cross click\')">    <span aria-hidden="true">&times;</span>  </button></div><form class="form-group" [formGroup]="form">  <div class="modal-action modal-body">    <div class="section alarm-info">      <p>{{ getAlarmDescription() }} </p>      <p>        <a class="alarmUrl" target="_blank" href="{{ getAlarmUrl() }}">          <span class="alarmLink">Go to wiki</span>&nbsp;<i class="ion-md-open"></i>        </a>      </p>    </div>    <div class="section shelve-action">      <div *ngIf="!alarm.shelved; then shelveForm"></div>      <ng-template #shelveForm>        <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain why the alarm is being shelved"></textarea>        <div class="action-info">          * The shelve button will be enabled after writing the message        </div>      </ng-template>    </div>  </div>  <div class="modal-action modal-footer">    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss(\'Cancel click\')">Cancel</button>    <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>  </div></form><ngx-spinner  bdColor = "rgba(51, 51, 51, 0)"  size = "large"  color = "#fff"  type = "ball-clip-rotate"></ngx-spinner></div>'
     var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckModalComponent', 'selector': 'app-ack-modal'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'IasHealthOverviewComponent', 'selector': 'app-ias-health-overview'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'OverviewWeatherCardContentComponent', 'selector': 'app-overview-weather-card-content'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveModalComponent', 'selector': 'app-shelve-modal'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ShelveModalComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1173,7 +1650,7 @@ export class AckButtonComponent implements OnInit {
         <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AckButtonComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ShelveModalComponent.html';
         </script>
 
        <script src="../js/search/search.js"></script>

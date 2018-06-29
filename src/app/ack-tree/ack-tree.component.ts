@@ -11,14 +11,24 @@ import { Alarm } from '../alarm';
  * Node for an alarm item
  */
 export class AlarmItemNode {
+
+  /** List of children nodes */
   children: AlarmItemNode[];
+
+  /** Name of the node */
   item: string;
 }
 
 /** Flat to-do item node with expandable and level information */
 export class AlarmItemFlatNode {
+
+  /** Name of the node */
   item: string;
+
+  /** Level of the node */
   level: number;
+
+  /** True if the node is expandable, false if not */
   expandable: boolean;
 }
 

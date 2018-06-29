@@ -21,11 +21,13 @@ export const StorageItems = {
   TOKEN: 'token',
 };
 
+/** Set of properties to set the formatting of dates */
 export const Locale = {
   DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',
   TIMEZONE: '+0000',
 };
 
+/** Set that defines the locations of assets in the applicaiton */
 export const Assets = {
   ICONS: '/assets/img/',
 };

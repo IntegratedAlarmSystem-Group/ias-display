@@ -33,7 +33,7 @@ export class AckModalComponent implements OnInit {
   form: FormGroup;
 
   /**
-  *
+  * List of messages to mention the alarms with missed acknowledgments
   */
   public missedAcks: string[] = [];
 

@@ -529,7 +529,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AckButtonComponent</li>
+  <li>ShelveButtonComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -552,14 +552,14 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/ack-button/ack-button.component.ts</code>
+    <code>src/app/shelve-button/shelve-button.component.ts</code>
 </p>
 
     <p class="comment">
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Button used to trigger the event to open the Acknowledge Modal</p>
+        <p>Button used to trigger the event to open the Shelve Modal</p>
 
     </p>
 
@@ -589,19 +589,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-ack-button</code></td>
+                <td class="col-md-9"><code>app-shelve-button</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>ack-button.component.css</code></td>
+                <td class="col-md-9"><code>shelve-button.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./ack-button.component.html</code></td>
+                <td class="col-md-9"><code>./shelve-button.component.html</code></td>
             </tr>
 
 
@@ -622,12 +622,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#alarm">alarm</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
-                                <a href="#canAcknowledge">canAcknowledge</a>
+                                <a href="#alarm">alarm</a>
                             </li>
                         </ul>
                     </td>
@@ -641,6 +637,9 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                <a href="#getButtonTooltipText">getButtonTooltipText</a>
+                            </li>
                             <li>
                                 <a href="#loadAlarm">loadAlarm</a>
                             </li>
@@ -687,7 +686,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -758,7 +757,7 @@
                         <code>alarm_id</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>Id of the alarm to be acknowledged</p>
+                        <div><p>Id of the alarm to be shelved</p>
 </div>
                             <p>
                             <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
@@ -768,7 +767,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/ack-button/ack-button.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:20</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -782,6 +781,52 @@
         <h3 id="methods">
             Methods
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getButtonTooltipText"></a>
+                        <span class="name">
+                            <b>
+                            getButtonTooltipText
+                            </b>
+                            <a href="#getButtonTooltipText"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getButtonTooltipText()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the text to display in the shelve/unshelve button tooltip, either &quot;Shelve&quot; or &quot;Unshelve&quot;</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the text to display in the button</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -804,7 +849,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/ack-button/ack-button.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -845,7 +890,7 @@ AlarmService. Initialize the private variables of this component.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/ack-button/ack-button.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -886,14 +931,14 @@ AlarmService. Initialize the private variables of this component.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/ack-button/ack-button.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:72</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on table rows, it triggers the ack modal</p>
+                            <div class="io-description"><p>Handle click on table rows, it triggers the shelve modal</p>
 </div>
 
                             <div class="io-description">
@@ -945,7 +990,7 @@ AlarmService. Initialize the private variables of this component.</p>
                         <a name="alarm"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">Public</span>
                             alarm
                             </b>
                             <a href="#alarm"><span class="fa fa-link"></span></a>
@@ -966,53 +1011,13 @@ AlarmService. Initialize the private variables of this component.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/ack-button/ack-button.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shelve-button/shelve-button.component.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Alarm object related with the alarm id received as input</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="canAcknowledge"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            canAcknowledge
-                            </b>
-                            <a href="#canAcknowledge"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>canAcknowledge:     <code></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
 </div>
                     </td>
                 </tr>
@@ -1027,34 +1032,30 @@ AlarmService. Initialize the private variables of this component.</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
 import { NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
-import { AckModalComponent } from &#x27;../ack-modal/ack-modal.component&#x27;;
+import { ShelveModalComponent } from &#x27;../shelve-modal/shelve-modal.component&#x27;;
 import { AlarmService } from &#x27;../alarm.service&#x27;;
 import { Alarm } from &#x27;../alarm&#x27;;
 
 /**
- * Button used to trigger the event to open the Acknowledge Modal
+ * Button used to trigger the event to open the Shelve Modal
  */
 @Component({
-  selector: &#x27;app-ack-button&#x27;,
-  templateUrl: &#x27;./ack-button.component.html&#x27;,
-  styleUrls: [&#x27;./ack-button.component.css&#x27;]
+  selector: &#x27;app-shelve-button&#x27;,
+  templateUrl: &#x27;./shelve-button.component.html&#x27;,
+  styleUrls: [&#x27;./shelve-button.component.css&#x27;]
 })
-export class AckButtonComponent implements OnInit {
+export class ShelveButtonComponent implements OnInit {
 
   /**
-   * Id of the alarm to be acknowledged
+   * Id of the alarm to be shelved
    */
   @Input() alarm_id: string;
 
   /**
    * Alarm object related with the alarm id received as input
    */
-  private alarm: Alarm;
+  public alarm: Alarm;
 
-  /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   */
-  public canAcknowledge &#x3D; false;
 
   /**
    * The &quot;constructor&quot;, injects the {@link AlarmService} and the {@link modalService}
@@ -1075,32 +1076,51 @@ export class AckButtonComponent implements OnInit {
   }
 
   /**
+   * Returns the text to display in the shelve/unshelve button tooltip, either &quot;Shelve&quot; or &quot;Unshelve&quot;
+   * @returns {string} the text to display in the button
+   */
+  getButtonTooltipText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return &#x27;Unshelve&#x27;;
+    } else {
+      return &#x27;Shelve&#x27;;
+    }
+  }
+
+  /**
    * Get the alarm object related with the alarm id received as input using the
    * AlarmService. Initialize the private variables of this component.
    */
   loadAlarm() {
     this.alarm &#x3D; this.alarmService.get(this.alarm_id);
-    this.canAcknowledge &#x3D; !this.alarm.ack;
   }
 
   /**
-  * Handle click on table rows, it triggers the ack modal
+  * Handle click on table rows, it triggers the shelve modal
   */
   onClick(event) {
-    const ackModal &#x3D; this.modalService.open(AckModalComponent,
+    const shelveModal &#x3D; this.modalService.open(ShelveModalComponent,
       { size: &#x27;lg&#x27;, centered: true }
     );
-    ackModal.componentInstance.alarm &#x3D; this.alarm;
-    return ackModal;
+    shelveModal.componentInstance.alarm &#x3D; this.alarm;
+    return shelveModal;
   }
-
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; mat-raised-button (click)&#x3D;&quot;onClick($event)&quot; [disabled]&#x3D;&quot;!canAcknowledge&quot;&gt;
-    &lt;i class&#x3D;&quot;ion-ios-share-alt&quot;&gt;&lt;/i&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;button class&#x3D;&quot;shelve-button&quot; title&#x3D;&quot;{{ getButtonTooltipText() }}&quot; mat-raised-button (click)&#x3D;&quot;onClick($event)&quot;&gt;
+    &lt;div *ngIf&#x3D;&quot;alarm.shelved; then unshelveIcon; else shelveIcon&quot;&gt;&lt;/div&gt;
+    &lt;ng-template #shelveIcon&gt;
+      &lt;mat-icon mat-list-icon&gt;archive&lt;/mat-icon&gt;
+    &lt;/ng-template&gt;
+    &lt;ng-template #unshelveIcon&gt;
+      &lt;mat-icon mat-list-icon&gt;unarchive&lt;/mat-icon&gt;
+    &lt;/ng-template&gt;
 &lt;/button&gt;
 </code></pre>
     </div>
@@ -1130,10 +1150,10 @@ export class AckButtonComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button class="ack-button" title="Acknowledge" mat-raised-button (click)="onClick($event)" [disabled]="!canAcknowledge">    <i class="ion-ios-share-alt"></i></button></div>'
+        var COMPONENT_TEMPLATE = '<div><button class="shelve-button" title="{{ getButtonTooltipText() }}" mat-raised-button (click)="onClick($event)">    <div *ngIf="alarm.shelved; then unshelveIcon; else shelveIcon"></div>    <ng-template #shelveIcon>      <mat-icon mat-list-icon>archive</mat-icon>    </ng-template>    <ng-template #unshelveIcon>      <mat-icon mat-list-icon>unarchive</mat-icon>    </ng-template></button></div>'
     var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckModalComponent', 'selector': 'app-ack-modal'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'IasHealthOverviewComponent', 'selector': 'app-ias-health-overview'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'OverviewWeatherCardContentComponent', 'selector': 'app-overview-weather-card-content'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveModalComponent', 'selector': 'app-shelve-modal'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ShelveButtonComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1173,7 +1193,7 @@ export class AckButtonComponent implements OnInit {
         <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AckButtonComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ShelveButtonComponent.html';
         </script>
 
        <script src="../js/search/search.js"></script>

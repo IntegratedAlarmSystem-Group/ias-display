@@ -521,17 +521,15 @@
 </nav>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content component">
                    <div class="content-data">
 
 
 
 
-
-
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>AlarmService</li>
+  <li>Components</li>
+  <li>AckTreeComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -541,28 +539,78 @@
         <li >
             <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
         </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>src/app/alarm.service.ts</code>
-        </p>
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/ack-tree/ack-tree.component.ts</code>
+</p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Service that connects and receives <a href="../classes/Alarm.html">Alarm</a> messages from the
-IAS Webserver through Websockets</p>
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Tree with checkboxes for a list of alarms</p>
+<p>Based on the angular material documentation for the tree component</p>
 
-            </p>
+    </p>
 
 
-            <section>
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-ack-tree</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>ack-tree.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>ack-tree.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -575,24 +623,46 @@ IAS Webserver through Websockets</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#alarmChangeStream">alarmChangeStream</a>
+                                <a href="#ackList">ackList</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#alarms">alarms</a>
+                                <a href="#checklistSelection">checklistSelection</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#connectionStatusStream">connectionStatusStream</a>
+                                <a href="#dataSource">dataSource</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#lastReceivedMessageTimestamp">lastReceivedMessageTimestamp</a>
+                                <a href="#flatNodeMap">flatNodeMap</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#webSocketBridge">webSocketBridge</a>
+                                <a href="#getChildren">getChildren</a>
+                            </li>
+                            <li>
+                                <a href="#getLevel">getLevel</a>
+                            </li>
+                            <li>
+                                <a href="#hasChild">hasChild</a>
+                            </li>
+                            <li>
+                                <a href="#hasNoContent">hasNoContent</a>
+                            </li>
+                            <li>
+                                <a href="#isExpandable">isExpandable</a>
+                            </li>
+                            <li>
+                                <a href="#nestedNodeMap">nestedNodeMap</a>
+                            </li>
+                            <li>
+                                <a href="#transformer">transformer</a>
+                            </li>
+                            <li>
+                                <a href="#treeControl">treeControl</a>
+                            </li>
+                            <li>
+                                <a href="#treeData">treeData</a>
+                            </li>
+                            <li>
+                                <a href="#treeFlattener">treeFlattener</a>
                             </li>
                         </ul>
                     </td>
@@ -607,49 +677,58 @@ IAS Webserver through Websockets</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#acknowledgeAlarms">acknowledgeAlarms</a>
+                                <a href="#alarmItemSelectionToggle">alarmItemSelectionToggle</a>
                             </li>
                             <li>
-                                <a href="#changeAlarms">changeAlarms</a>
+                                <a href="#buildFileTree">buildFileTree</a>
                             </li>
                             <li>
-                                <a href="#compareCurrentAndLastReceivedMessageTimestamp">compareCurrentAndLastReceivedMessageTimestamp</a>
+                                <a href="#descendantsAllSelected">descendantsAllSelected</a>
                             </li>
                             <li>
-                                <a href="#connect">connect</a>
+                                <a href="#descendantsPartiallySelected">descendantsPartiallySelected</a>
                             </li>
                             <li>
-                                <a href="#get">get</a>
+                                <a href="#getTreeDataFromAlarm">getTreeDataFromAlarm</a>
                             </li>
                             <li>
-                                <a href="#getAlarmList">getAlarmList</a>
+                                <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#getMissingAcks">getMissingAcks</a>
+                                <a href="#noSelectedDescendants">noSelectedDescendants</a>
                             </li>
                             <li>
-                                <a href="#initialize">initialize</a>
+                                <a href="#updateAckList">updateAckList</a>
                             </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
                             <li>
-                                <a href="#readAlarmMessage">readAlarmMessage</a>
+                                <a href="#selectedAlarm">selectedAlarm</a>
                             </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
                             <li>
-                                <a href="#readAlarmMessagesList">readAlarmMessagesList</a>
-                            </li>
-                            <li>
-                                <a href="#shelveAlarm">shelveAlarm</a>
-                            </li>
-                            <li>
-                                <a href="#startLastReceivedMessageTimestampCheck">startLastReceivedMessageTimestampCheck</a>
-                            </li>
-                            <li>
-                                <a href="#triggerAlarmsNonValidConnectionState">triggerAlarmsNonValidConnectionState</a>
-                            </li>
-                            <li>
-                                <a href="#unshelveAlarms">unshelveAlarms</a>
-                            </li>
-                            <li>
-                                <a href="#updateLastReceivedMessageTimestamp">updateLastReceivedMessageTimestamp</a>
+                                <a href="#alarmsToAckFromSelection">alarmsToAckFromSelection</a>
                             </li>
                         </ul>
                     </td>
@@ -657,30 +736,28 @@ IAS Webserver through Websockets</p>
 
 
 
-
-
         </tbody>
     </table>
 </section>
 
-            <section>
+    <section>
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(cdbService: <a href="../injectables/CdbService.html">CdbService</a>, httpClientService: <a href="../injectables/HttpClientService.html">HttpClientService</a>)</code>
+<code>constructor(alarmService: <a href="../injectables/AlarmService.html">AlarmService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/alarm.service.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:76</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Instantiates the service</p>
+                            <div class="io-description"><p>Instantiates the component</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -695,10 +772,10 @@ IAS Webserver through Websockets</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>cdbService</td>
+                                                        <td>alarmService</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/CdbService.html" target="_self" >CdbService</a></code>
+                                                                    <code><a href="../injectables/AlarmService.html" target="_self" >AlarmService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -706,23 +783,7 @@ IAS Webserver through Websockets</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Service used to get complementary alarm information</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>httpClientService</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/HttpClientService.html" target="_self" >HttpClientService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>Service used to perform HTTP requests</p>
+                                                                <code><p>Service used to send the request to acknowledge the alarm</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -735,7 +796,59 @@ IAS Webserver through Websockets</p>
         </table>
 </section>
 
-            <section>
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="selectedAlarm"></a>
+                        <code>selectedAlarm</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>The parent Alarm of the tree  </p>
+</div>
+                            <p>
+                            <em>Type:</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="alarmsToAckFromSelection"></a>
+                        <code>alarmsToAckFromSelection</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>EventEmitter used to send the selected alarms to the parent component </p>
+</div>
+                        <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:52</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
     
         <h3 id="methods">
             Methods
@@ -744,32 +857,32 @@ IAS Webserver through Websockets</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="acknowledgeAlarms"></a>
+                        <a name="alarmItemSelectionToggle"></a>
                         <span class="name">
                             <b>
-                            acknowledgeAlarms
+                            alarmItemSelectionToggle
                             </b>
-                            <a href="#acknowledgeAlarms"><span class="fa fa-link"></span></a>
+                            <a href="#alarmItemSelectionToggle"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>acknowledgeAlarms(alarms_ids: , message: )</code>
+<code>alarmItemSelectionToggle(node: <a href="../classes/AlarmItemFlatNode.html">AlarmItemFlatNode</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/alarm.service.ts:133</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:237</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Acknowledges a list of Alarms with a message</p>
+                            <div class="io-description"><p>Toggle the alarm item selection. Select/deselect all the descendants node </p>
 </div>
 
                             <div class="io-description">
@@ -778,108 +891,22 @@ IAS Webserver through Websockets</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>alarms_ids</td>
+                                                        <td>node</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >AlarmItemFlatNode</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
-                                                        <td>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>message</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>message of the acknowledgement</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>response of the HTTP request of the acknowledge</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="changeAlarms"></a>
-                        <span class="name">
-                            <b>
-                            changeAlarms
-                            </b>
-                            <a href="#changeAlarms"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>changeAlarms(any: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/alarm.service.ts:73</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Sends an <a href="../classes/Alarm.html">Alarm</a> change event</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>any</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>the core_id of the updated alarm,
-or &#39;all&#39; if all were updated</p>
-</code>
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -901,114 +928,32 @@ or &#39;all&#39; if all were updated</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="compareCurrentAndLastReceivedMessageTimestamp"></a>
+                        <a name="buildFileTree"></a>
                         <span class="name">
                             <b>
-                            compareCurrentAndLastReceivedMessageTimestamp
+                            buildFileTree
                             </b>
-                            <a href="#compareCurrentAndLastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
+                            <a href="#buildFileTree"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>compareCurrentAndLastReceivedMessageTimestamp()</code>
+<code>buildFileTree(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, level: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="279" class="link-to-prism">src/app/alarm.service.ts:279</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:160</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Method to check the last received message timestamp
-Note: If non-valid, the connection state is non-valid
-TODO: Review the life cycle of the connection status.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="connect"></a>
-                        <span class="name">
-                            <b>
-                            connect
-                            </b>
-                            <a href="#connect"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>connect()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/alarm.service.ts:109</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Start connection to the backend through websockets</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="get"></a>
-                        <span class="name">
-                            <b>
-                            get
-                            </b>
-                            <a href="#get"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>get(core_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/alarm.service.ts:123</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns an Alarm object</p>
+                            <div class="io-description"><p>Build the file structure tree. The <code>value</code> is the Json object, or a sub-tree of a Json object.</p>
 </div>
 
                             <div class="io-description">
@@ -1024,9 +969,9 @@ TODO: Review the life cycle of the connection status.</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>core_id</td>
+                                                        <td>value</td>
                                                         <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -1035,7 +980,23 @@ TODO: Review the life cycle of the connection status.</p>
                                                     
 
                                                         <td>
-                                                                <code><p>core_id of the Alarm to return</p>
+                                                                <code><p>the node as a Json object, or a sub-tree of a Json object.</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>level</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>the level of the node</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -1045,11 +1006,11 @@ TODO: Review the life cycle of the connection status.</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                                <b>Returns : </b>    <code>{}</code>
 
                             </div>
                                 <div class="io-description">
-                                    <p>Alarm object corresponding to the given core_id</p>
+                                    <p>the list of <code>AlarmItemNode</code>.</p>
 
                                 </div>
                     </td>
@@ -1060,33 +1021,248 @@ TODO: Review the life cycle of the connection status.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getAlarmList"></a>
+                        <a name="descendantsAllSelected"></a>
                         <span class="name">
                             <b>
-                            getAlarmList
+                            descendantsAllSelected
                             </b>
-                            <a href="#getAlarmList"><span class="fa fa-link"></span></a>
+                            <a href="#descendantsAllSelected"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getAlarmList()</code>
+<code>descendantsAllSelected(node: <a href="../classes/AlarmItemFlatNode.html">AlarmItemFlatNode</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="218" class="link-to-prism">src/app/alarm.service.ts:218</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:205</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Get the complete list of alarms from the webserver database
- through the websocket</p>
+                            <div class="io-description"><p>Checks whether all the descendants of the node are selected</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >AlarmItemFlatNode</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>true if all the descendants of the node are selected, false if not</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="descendantsPartiallySelected"></a>
+                        <span class="name">
+                            <b>
+                            descendantsPartiallySelected
+                            </b>
+                            <a href="#descendantsPartiallySelected"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>descendantsPartiallySelected(node: <a href="../classes/AlarmItemFlatNode.html">AlarmItemFlatNode</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:214</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Checks whether part of the descendants are selected</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >AlarmItemFlatNode</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>true if some of the descendents are selected, false if not</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getTreeDataFromAlarm"></a>
+                        <span class="name">
+                            <b>
+                            getTreeDataFromAlarm
+                            </b>
+                            <a href="#getTreeDataFromAlarm"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getTreeDataFromAlarm(alarm: <a href="../classes/Alarm.html">Alarm</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:140</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Tree data from selected alarm</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>alarm</td>
+                                                        <td>
+                                                                    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>{}</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the tree data in a JSON format</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:95</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates the component and builds the tree reading the data from the alarm</p>
 </div>
 
                             <div class="io-description">
@@ -1101,32 +1277,32 @@ TODO: Review the life cycle of the connection status.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getMissingAcks"></a>
+                        <a name="noSelectedDescendants"></a>
                         <span class="name">
                             <b>
-                            getMissingAcks
+                            noSelectedDescendants
                             </b>
-                            <a href="#getMissingAcks"><span class="fa fa-link"></span></a>
+                            <a href="#noSelectedDescendants"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getMissingAcks(alarm_id: )</code>
+<code>noSelectedDescendants(node: <a href="../classes/AlarmItemFlatNode.html">AlarmItemFlatNode</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/alarm.service.ts:155</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="227" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:227</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Get information about old tickets related to a target alarm</p>
+                            <div class="io-description"><p>Checks wether or not the node has selected dependencies</p>
 </div>
 
                             <div class="io-description">
@@ -1135,23 +1311,22 @@ TODO: Review the life cycle of the connection status.</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>alarm_id</td>
+                                                        <td>node</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >AlarmItemFlatNode</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
-                                                        <td>
-                                                                <code><p>id of the target alarm</p>
-</code>
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1159,11 +1334,11 @@ TODO: Review the life cycle of the connection status.</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                             </div>
                                 <div class="io-description">
-                                    <p>response of the HTTP request with a dictionary with information about missing acks</p>
+                                    <p>true if the node has no selected descendents, false if not</p>
 
                                 </div>
                     </td>
@@ -1174,483 +1349,32 @@ TODO: Review the life cycle of the connection status.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="initialize"></a>
+                        <a name="updateAckList"></a>
                         <span class="name">
                             <b>
-                            initialize
+                            updateAckList
                             </b>
-                            <a href="#initialize"><span class="fa fa-link"></span></a>
+                            <a href="#updateAckList"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>initialize()</code>
+<code>updateAckList()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/alarm.service.ts:82</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:246</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Start connection to the backend through websockets</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="readAlarmMessage"></a>
-                        <span class="name">
-                            <b>
-                            readAlarmMessage
-                            </b>
-                            <a href="#readAlarmMessage"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>readAlarmMessage(action: , obj: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/alarm.service.ts:230</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Reads an alarm message from the Core and modify the service alarms list
-depending on the action value.</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>action</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>create, update or delete</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>obj</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="readAlarmMessagesList"></a>
-                        <span class="name">
-                            <b>
-                            readAlarmMessagesList
-                            </b>
-                            <a href="#readAlarmMessagesList"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>readAlarmMessagesList(alarmsList: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/alarm.service.ts:245</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Reads a list of alarm messages form the Core and add them to the
-service alarms list</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>alarmsList</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>list of dictionaries with values for alarm fields (as generic objects)</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="shelveAlarm"></a>
-                        <span class="name">
-                            <b>
-                            shelveAlarm
-                            </b>
-                            <a href="#shelveAlarm"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>shelveAlarm(alarm_id: , message: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/alarm.service.ts:171</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Shelves and Alarm with a message</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>alarm_id</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>message</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>message of the shelving</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>response of the HTTP request of the shelve</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startLastReceivedMessageTimestampCheck"></a>
-                        <span class="name">
-                            <b>
-                            startLastReceivedMessageTimestampCheck
-                            </b>
-                            <a href="#startLastReceivedMessageTimestampCheck"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>startLastReceivedMessageTimestampCheck()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="306" class="link-to-prism">src/app/alarm.service.ts:306</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method to update the last received message timestamp</p>
-</div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>for notifications to check the last received message</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="triggerAlarmsNonValidConnectionState"></a>
-                        <span class="name">
-                            <b>
-                            triggerAlarmsNonValidConnectionState
-                            </b>
-                            <a href="#triggerAlarmsNonValidConnectionState"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>triggerAlarmsNonValidConnectionState()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/app/alarm.service.ts:258</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Set selected state to alarms under an non-valid connection</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="unshelveAlarms"></a>
-                        <span class="name">
-                            <b>
-                            unshelveAlarms
-                            </b>
-                            <a href="#unshelveAlarms"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>unshelveAlarms(alarms_ids: , message: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/alarm.service.ts:194</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Shelves and Alarm with a message</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>alarms_ids</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>message</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>message of the shelving</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>response of the HTTP request of the shelve</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="updateLastReceivedMessageTimestamp"></a>
-                        <span class="name">
-                            <b>
-                            updateLastReceivedMessageTimestamp
-                            </b>
-                            <a href="#updateLastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>updateLastReceivedMessageTimestamp()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/alarm.service.ts:270</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method to update the last received message timestamp</p>
+                            <div class="io-description"><p>Update list with ids to ack *</p>
 </div>
 
                             <div class="io-description">
@@ -1663,7 +1387,7 @@ service alarms list</p>
         </table>
 </section>
 
-            <section>
+    <section>
     
         <h3 id="inputs">
             Properties
@@ -1672,37 +1396,41 @@ service alarms list</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="alarmChangeStream"></a>
+                        <a name="ackList"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            alarmChangeStream
+                            ackList
                             </b>
-                            <a href="#alarmChangeStream"><span class="fa fa-link"></span></a>
+                            <a href="#ackList"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>alarmChangeStream:     <code></code>
+                        <code>ackList:     <code>string[]</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;any&gt;(true)</code>
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/alarm.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:58</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Stream of notifications of changes in
-the dictionary of <a href="../classes/Alarm.html">Alarm</a> objects</p>
+                        <div class="io-description"><p>List with ids to ack *</p>
 </div>
                     </td>
                 </tr>
@@ -1713,25 +1441,633 @@ the dictionary of <a href="../classes/Alarm.html">Alarm</a> objects</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="alarms"></a>
+                        <a name="checklistSelection"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            alarms
+                            checklistSelection
                             </b>
-                            <a href="#alarms"><span class="fa fa-link"></span></a>
+                            <a href="#checklistSelection"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>alarms:     <code>literal type</code>
+                        <code>checklistSelection:     <code></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>literal type</code>
+                            <i>Default value : </i><code>new SelectionModel&lt;AlarmItemFlatNode&gt;(true /* multiple */)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:76</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The selection for checklist </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dataSource"></a>
+                        <span class="name">
+                            <b>
+                            dataSource
+                            </b>
+                            <a href="#dataSource"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>dataSource:     <code><a href="../classes/AlarmItemNode.html" target="_self" >MatTreeFlatDataSource&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/AlarmItemNode.html" target="_self" >MatTreeFlatDataSource&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:73</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Angular Material Data source for the flat tree </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="flatNodeMap"></a>
+                        <span class="name">
+                            <b>
+                            flatNodeMap
+                            </b>
+                            <a href="#flatNodeMap"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>flatNodeMap:     <code><a href="../classes/AlarmItemNode.html" target="_self" >Map&lt;AlarmItemFlatNode | AlarmItemNode&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/AlarmItemNode.html" target="_self" >Map&lt;AlarmItemFlatNode | AlarmItemNode&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Map&lt;AlarmItemFlatNode, AlarmItemNode&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:61</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Map from flat node to nested node. This helps us finding a nested node to be modified </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getChildren"></a>
+                        <span class="name">
+                            <b>
+                            getChildren
+                            </b>
+                            <a href="#getChildren"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>getChildren:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(node: AlarmItemNode): Observable&lt;AlarmItemNode[]&gt; &#x3D;&gt; {
+    return ofObservable(node.children);
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:118</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Retuns the children of the node, as an Observable</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getLevel"></a>
+                        <span class="name">
+                            <b>
+                            getLevel
+                            </b>
+                            <a href="#getLevel"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>getLevel:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(node: AlarmItemFlatNode) &#x3D;&gt; node.level</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:104</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Retuns the level of a given node</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasChild"></a>
+                        <span class="name">
+                            <b>
+                            hasChild
+                            </b>
+                            <a href="#hasChild"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>hasChild:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(_: number, _nodeData: AlarmItemFlatNode) &#x3D;&gt; _nodeData.expandable</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:127</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Checks wether or not the node has children</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasNoContent"></a>
+                        <span class="name">
+                            <b>
+                            hasNoContent
+                            </b>
+                            <a href="#hasNoContent"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>hasNoContent:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(_: number, _nodeData: AlarmItemFlatNode) &#x3D;&gt; _nodeData.item &#x3D;&#x3D;&#x3D; &#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:134</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Checks wether or not the node has no content</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isExpandable"></a>
+                        <span class="name">
+                            <b>
+                            isExpandable
+                            </b>
+                            <a href="#isExpandable"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>isExpandable:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(node: AlarmItemFlatNode) &#x3D;&gt; node.expandable</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:111</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Checks wether or not the node is expandable</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nestedNodeMap"></a>
+                        <span class="name">
+                            <b>
+                            nestedNodeMap
+                            </b>
+                            <a href="#nestedNodeMap"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>nestedNodeMap:     <code><a href="../classes/AlarmItemNode.html" target="_self" >Map&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/AlarmItemNode.html" target="_self" >Map&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Map&lt;AlarmItemNode, AlarmItemFlatNode&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Map from nested node to flattened node. This helps us to keep the same object for selection </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="transformer"></a>
+                        <span class="name">
+                            <b>
+                            transformer
+                            </b>
+                            <a href="#transformer"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>transformer:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(node: AlarmItemNode, level: number) &#x3D;&gt; {
+    let flatNode;
+    if (this.nestedNodeMap.has(node) &amp;&amp; this.nestedNodeMap.get(node) !&#x3D;&#x3D; null &amp;&amp; this.nestedNodeMap.get(node).item &#x3D;&#x3D;&#x3D; node.item) {
+      flatNode &#x3D; this.nestedNodeMap.get(node);
+    } else {
+      flatNode &#x3D; new AlarmItemFlatNode();
+    }
+    flatNode.item &#x3D; node.item;
+    flatNode.level &#x3D; level;
+    flatNode.expandable &#x3D; !!node.children;
+    this.flatNodeMap.set(flatNode, node);
+    this.nestedNodeMap.set(node, flatNode);
+    return flatNode;
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:186</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Transformer to convert nested node to flat node. Record the nodes in maps for later use.</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>node</td>
+                                                        <td>
+                                                                <code><p>the node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>level</td>
+                                                        <td>
+                                                                <code><p>the level node</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="treeControl"></a>
+                        <span class="name">
+                            <b>
+                            treeControl
+                            </b>
+                            <a href="#treeControl"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>treeControl:     <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >FlatTreeControl&lt;AlarmItemFlatNode&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/AlarmItemFlatNode.html" target="_self" >FlatTreeControl&lt;AlarmItemFlatNode&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:67</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Angular Material Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="treeData"></a>
+                        <span class="name">
+                            <b>
+                            treeData
+                            </b>
+                            <a href="#treeData"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>treeData:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
 
                         </td>
                     </tr>
@@ -1742,13 +2078,13 @@ the dictionary of <a href="../classes/Alarm.html">Alarm</a> objects</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/alarm.service.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:55</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Dictionary of <a href="../classes/Alarm.html">Alarm</a> objects, indexed by their core_ids</p>
+                        <div class="io-description"><p>Tree data with dependencies for the selected alarm *</p>
 </div>
                     </td>
                 </tr>
@@ -1759,130 +2095,36 @@ the dictionary of <a href="../classes/Alarm.html">Alarm</a> objects</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="connectionStatusStream"></a>
+                        <a name="treeFlattener"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            connectionStatusStream
+                            treeFlattener
                             </b>
-                            <a href="#connectionStatusStream"><span class="fa fa-link"></span></a>
+                            <a href="#treeFlattener"><span class="fa fa-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>connectionStatusStream:     <code></code>
+                        <code>treeFlattener:     <code><a href="../classes/AlarmItemNode.html" target="_self" >MatTreeFlattener&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;any&gt;(false)</code>
+                            <i>Type : </i>    <code><a href="../classes/AlarmItemNode.html" target="_self" >MatTreeFlattener&lt;AlarmItemNode | AlarmItemFlatNode&gt;</a></code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/alarm.service.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/ack-tree/ack-tree.component.ts:70</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Stream of notifications of changes in
-the status of the service connection</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="lastReceivedMessageTimestamp"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            lastReceivedMessageTimestamp
-                            </b>
-                            <a href="#lastReceivedMessageTimestamp"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>lastReceivedMessageTimestamp:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>(new Date).getTime()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/alarm.service.ts:24</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Timestamp related with the last received message</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="webSocketBridge"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            webSocketBridge
-                            </b>
-                            <a href="#webSocketBridge"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>webSocketBridge:     <code>WebSocketBridge</code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>WebSocketBridge</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new WebSocketBridge()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/alarm.service.ts:47</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Django Channels WebsocketBridge,
-used to connect to Django Channels through Websockets</p>
+                        <div class="io-description"><p>Angular Material Tree flattener to convert a normal type of node to node with children &amp; level information </p>
 </div>
                     </td>
                 </tr>
@@ -1891,325 +2133,326 @@ used to connect to Django Channels through Websockets</p>
         </table>
 </section>
 
-    </div>
+</div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
-import { Observable ,  BehaviorSubject } from &#x27;rxjs&#x27;;
-import { IntervalObservable } from &#x27;rxjs/observable/IntervalObservable&#x27;;
-import { WebSocketBridge } from &#x27;django-channels&#x27;;
-import { environment } from &#x27;../environments/environment&#x27;;
-import { Alarm, OperationalMode, Validity } from &#x27;./alarm&#x27;;
-import { BackendUrls, Streams } from &#x27;./settings&#x27;;
-import { CdbService } from &#x27;./cdb.service&#x27;;
-import { HttpClientService } from &#x27;./http-client.service&#x27;;
-
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { OnInit, Injectable } from &#x27;@angular/core&#x27;;
+import { SelectionModel } from &#x27;@angular/cdk/collections&#x27;;
+import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
+import { MatTreeFlattener, MatTreeFlatDataSource } from &#x27;@angular/material/tree&#x27;;
+import { of as ofObservable, Observable, BehaviorSubject } from &#x27;rxjs&#x27;;
+import { AlarmService } from &#x27;../alarm.service&#x27;;
+import { Alarm } from &#x27;../alarm&#x27;;
 
 /**
-* Service that connects and receives {@link Alarm} messages from the
-* IAS Webserver through Websockets
+ * Node for an alarm item
+ */
+export class AlarmItemNode {
+
+  /** List of children nodes */
+  children: AlarmItemNode[];
+
+  /** Name of the node */
+  item: string;
+}
+
+/** Flat to-do item node with expandable and level information */
+export class AlarmItemFlatNode {
+
+  /** Name of the node */
+  item: string;
+
+  /** Level of the node */
+  level: number;
+
+  /** True if the node is expandable, false if not */
+  expandable: boolean;
+}
+
+/**
+* Tree with checkboxes for a list of alarms
+*
+* Based on the angular material documentation for the tree component
+*
 */
-@Injectable()
-export class AlarmService {
+@Component({
+  selector: &#x27;app-ack-tree&#x27;,
+  templateUrl: &#x27;ack-tree.component.html&#x27;,
+  styleUrls: [&#x27;ack-tree.component.scss&#x27;]
+})
+export class AckTreeComponent implements OnInit {
+
+  /** The parent Alarm of the tree  */
+  @Input() selectedAlarm: Alarm;
+
+  /** EventEmitter used to send the selected alarms to the parent component */
+  @Output() alarmsToAckFromSelection &#x3D; new EventEmitter();
+
+  /** Tree data with dependencies for the selected alarm **/
+  treeData &#x3D; {};
+
+  /** List with ids to ack **/
+  ackList: string[] &#x3D; [];
+
+  /** Map from flat node to nested node. This helps us finding a nested node to be modified */
+  flatNodeMap: Map&lt;AlarmItemFlatNode, AlarmItemNode&gt; &#x3D; new Map&lt;AlarmItemFlatNode, AlarmItemNode&gt;();
+
+  /** Map from nested node to flattened node. This helps us to keep the same object for selection */
+  nestedNodeMap: Map&lt;AlarmItemNode, AlarmItemFlatNode&gt; &#x3D; new Map&lt;AlarmItemNode, AlarmItemFlatNode&gt;();
+
+  /** Angular Material Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. */
+  treeControl: FlatTreeControl&lt;AlarmItemFlatNode&gt;;
+
+  /** Angular Material Tree flattener to convert a normal type of node to node with children &amp; level information */
+  treeFlattener: MatTreeFlattener&lt;AlarmItemNode, AlarmItemFlatNode&gt;;
+
+  /** Angular Material Data source for the flat tree */
+  dataSource: MatTreeFlatDataSource&lt;AlarmItemNode, AlarmItemFlatNode&gt;;
+
+  /** The selection for checklist */
+  checklistSelection &#x3D; new SelectionModel&lt;AlarmItemFlatNode&gt;(true /* multiple */);
 
   /**
-  * Timestamp related with the last received message
-  */
-  public lastReceivedMessageTimestamp: number &#x3D; (new Date).getTime();
-
-  /**
-  * Stream of notifications of changes in
-  * the status of the service connection
-  */
-  public connectionStatusStream &#x3D; new BehaviorSubject&lt;any&gt;(false);
-
-  /**
-  * Dictionary of {@link Alarm} objects, indexed by their core_ids
-  */
-  public alarms: {[core_id: string]: Alarm } &#x3D; {};
-
-  /**
-  * Stream of notifications of changes in
-  * the dictionary of {@link Alarm} objects
-  */
-  public alarmChangeStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
-
-  /**
-  * Django Channels WebsocketBridge,
-  * used to connect to Django Channels through Websockets
-  */
-  private webSocketBridge: WebSocketBridge &#x3D; new WebSocketBridge();
-
-  /**
-   * Instantiates the service
-   * @param {CdbService} cdbService Service used to get complementary alarm information
-   * @param {HttpClientService} httpClientService Service used to perform HTTP requests
+   * Instantiates the component
+   * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
    */
-  constructor(
-    private cdbService: CdbService,
-    private httpClientService: HttpClientService,
-  ) {
-    this.connectionStatusStream.subscribe(
-      value &#x3D;&gt; {
-        if (value &#x3D;&#x3D;&#x3D; false) {
-          this.triggerAlarmsNonValidConnectionState();
-        }
-      }
-    );
-  }
-
-  /**
-  * Sends an {@link Alarm} change event
-  *
-  * @param {Any} any the core_id of the updated alarm,
-  * or &#x27;all&#x27; if all were updated
-  */
-  changeAlarms(any) {
-    this.alarmChangeStream.next(any);
-  }
-
-  /******* SERVICE INITIALIZATION *******/
-
-  /**
-  * Start connection to the backend through websockets
-  */
-  initialize() {
-    const alarmId &#x3D; 1;
-    this.connect();
-    this.webSocketBridge.socket.addEventListener(
-      &#x27;open&#x27;, () &#x3D;&gt; {
-        this.connectionStatusStream.next(true);
-        /* TODO: Evaluate function for webserver requests */
-        this.getAlarmList();
-        this.cdbService.initialize();
-      }
-    );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) &#x3D;&gt; {
-      // console.log(&#x27;notify &#x27;, payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessage(payload.action, payload.data);
-    });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) &#x3D;&gt; {
-      // console.log(&#x27;request&#x27;, payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessagesList(payload.data);
-    });
-    this.startLastReceivedMessageTimestampCheck();
-  }
-
-   /**
-   *  Start connection to the backend through websockets
-   */
-  connect() {
-    const connectionPath &#x3D; environment.websocketPath;
-    this.webSocketBridge.connect(connectionPath);
-    this.webSocketBridge.listen(connectionPath);
-    console.log(&#x27;Connected to webserver at: &#x27; + connectionPath);
-  }
-
-  /******* ALARM HANDLING *******/
-
-  /**
-   * Returns an Alarm object
-   * @param core_id core_id of the Alarm to return
-   * @returns {Alarm} Alarm object corresponding to the given core_id
-   */
-  get(core_id: string): Alarm {
-    return this.alarms[core_id] as Alarm;
-  }
-
-  /**
-   * Acknowledges a list of Alarms with a message
-   * @param alarms list of ids of the alarms to acknowledge
-   * @param message message of the acknowledgement
-   * @returns {json} response of the HTTP request of the acknowledge
-   */
-  acknowledgeAlarms(alarms_ids, message) {
-    const data &#x3D; {
-      &#x27;alarms_ids&#x27;: alarms_ids,
-      &#x27;message&#x27;: message,
-    };
-    return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
-    map(
-      (response) &#x3D;&gt; {
-        for (const id of alarms_ids) {
-          const alarm &#x3D; this.get(id);
-          alarm.acknowledge();
-        }
-        return response;
-      }
-    ));
-  }
-
-  /**
-   * Get information about old tickets related to a target alarm
-   * @param alarm_id id of the target alarm
-   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
-   */
-  getMissingAcks(alarm_id) {
-    const url &#x3D; BackendUrls.TICKETS_INFO + &#x27;?alarm_id&#x3D;&#x27; + alarm_id;
-    return this.httpClientService.get(url).pipe(
-    map(
-      (response) &#x3D;&gt; {
-        return response;
-      }
-    ));
-  }
-
-  /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
-   * @returns {json} response of the HTTP request of the shelve
-   */
-  shelveAlarm(alarm_id, message) {
-    const data &#x3D; {
-      &#x27;alarm_id&#x27;: alarm_id,
-      &#x27;message&#x27;: message,
-    };
-    return this.httpClientService.post(BackendUrls.SHELVE_API, data).pipe(
-    map(
-      (response) &#x3D;&gt; {
-        if (response[&#x27;status&#x27;] &#x3D;&#x3D;&#x3D; 201) {
-          const alarm &#x3D; this.get(alarm_id);
-          alarm.shelve();
-        }
-        return response;
-      }
-    ));
-  }
-
-  /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
-   * @returns {json} response of the HTTP request of the shelve
-   */
-  unshelveAlarms(alarms_ids, message) {
-    const data &#x3D; {
-      &#x27;alarms_ids&#x27;: alarms_ids,
-    };
-    return this.httpClientService.put(BackendUrls.UNSHELVE_API, data).pipe(
-    map(
-      (response) &#x3D;&gt; {
-        if (response[&#x27;status&#x27;] &#x3D;&#x3D;&#x3D; 200) {
-          for (const id of alarms_ids) {
-            const alarm &#x3D; this.get(id);
-            alarm.unshelve();
-          }
-        }
-        return response;
-      }
-    ));
-  }
-
-  /******* HANDLING OF ALARM MESSAGES FROM THE CORE *******/
-
-  /**
-  * Get the complete list of alarms from the webserver database
-   * through the websocket
-   */
-  getAlarmList() {
-    this.webSocketBridge.stream(Streams.UPDATES).send({
-      &#x27;action&#x27;: &#x27;list&#x27;
+  constructor(private alarmService: AlarmService) {
+    this.treeFlattener &#x3D; new MatTreeFlattener(this.transformer, this.getLevel,
+      this.isExpandable, this.getChildren);
+    this.treeControl &#x3D; new FlatTreeControl&lt;AlarmItemFlatNode&gt;(this.getLevel, this.isExpandable);
+    this.dataSource &#x3D; new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.checklistSelection.onChange.subscribe(data &#x3D;&gt; {
+      this.updateAckList();
     });
   }
 
   /**
-   * Reads an alarm message from the Core and modify the service alarms list
-   * depending on the action value.
-   * @param action create, update or delete
-   * @param alarm dictionary with values for alarm fields (as generic object)
+   * Creates the component and builds the tree reading the data from the alarm
    */
-  readAlarmMessage(action, obj) {
-    const alarm &#x3D; Alarm.asAlarm(obj);
-    if ( action &#x3D;&#x3D;&#x3D; &#x27;create&#x27; || action &#x3D;&#x3D;&#x3D; &#x27;update&#x27; ) {
-      this.alarms[alarm.core_id] &#x3D; alarm;
-    } else if ( action &#x3D;&#x3D;&#x3D; &#x27;delete&#x27;) {
-      delete this.alarms[alarm.core_id];
-    }
-    this.changeAlarms(alarm.core_id);
+  ngOnInit() {
+    this.dataSource.data &#x3D; this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
   }
 
   /**
-   * Reads a list of alarm messages form the Core and add them to the
-   * service alarms list
-   * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
-   */
-  readAlarmMessagesList(alarmsList) {
-    for (const obj of alarmsList) {
-      const alarm &#x3D; Alarm.asAlarm(obj);
-      this.alarms[alarm.core_id] &#x3D; alarm;
-    }
-    this.changeAlarms(&#x27;all&#x27;);
-  }
-
-  /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
+  * Retuns the level of a given node
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {number} the level of the node
+  */
+  getLevel &#x3D; (node: AlarmItemFlatNode) &#x3D;&gt; node.level;
 
   /**
-   * Set selected state to alarms under an non-valid connection
+  * Checks wether or not the node is expandable
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean} true if the node is expandable, false if not
+  */
+  isExpandable &#x3D; (node: AlarmItemFlatNode) &#x3D;&gt; node.expandable;
+
+  /**
+  * Retuns the children of the node, as an Observable
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {Observable} the children the node
+  */
+  getChildren &#x3D; (node: AlarmItemNode): Observable&lt;AlarmItemNode[]&gt; &#x3D;&gt; {
+    return ofObservable(node.children);
+  }
+
+  /**
+  * Checks wether or not the node has children
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean}  true if the node has a child, false if not
+  */
+  hasChild &#x3D; (_: number, _nodeData: AlarmItemFlatNode) &#x3D;&gt; _nodeData.expandable;
+
+  /**
+  * Checks wether or not the node has no content
+  * @param {AlarmItemFlatNode} node the node
+  * @returns {boolean}  true if the node has no content, false if not
+  */
+  hasNoContent &#x3D; (_: number, _nodeData: AlarmItemFlatNode) &#x3D;&gt; _nodeData.item &#x3D;&#x3D;&#x3D; &#x27;&#x27;;
+
+  /**
+   * Tree data from selected alarm
+   * @returns {dictionary}  the tree data in a JSON format
    */
-  triggerAlarmsNonValidConnectionState() {
-    for (const core_id in this.alarms) {
-      if (this.alarms.hasOwnProperty(core_id)) {
-        this.alarms[core_id][&#x27;validity&#x27;] &#x3D; Validity.unreliable;
+  getTreeDataFromAlarm(alarm: Alarm) {
+     // TODO: Update definition for alarms with more than one dependency level
+     const tree_data &#x3D; {};
+     if (alarm.dependencies.length &#x3D;&#x3D;&#x3D; 0) {
+       tree_data[alarm.core_id] &#x3D; null;
+     } else {
+       tree_data[alarm.core_id] &#x3D; [];
+       for (const item of alarm.dependencies) {
+         tree_data[alarm.core_id].push(item);
+       }
+     }
+     return tree_data;
+  }
+
+  /**
+   * Build the file structure tree. The &#x60;value&#x60; is the Json object, or a sub-tree of a Json object.
+   * @param {any} value the node as a Json object, or a sub-tree of a Json object.
+   * @param {number} level the level of the node
+   * @returns {list} the list of &#x60;AlarmItemNode&#x60;.
+   */
+  buildFileTree(value: any, level: number) {
+    const data: any[] &#x3D; [];
+    for (const k in value) {
+      if (k in value) {
+        const v &#x3D; value[k];
+        const node &#x3D; new AlarmItemNode();
+        node.item &#x3D; &#x60;${k}&#x60;;
+        if (v &#x3D;&#x3D;&#x3D; null || v &#x3D;&#x3D;&#x3D; undefined) {
+          // no action
+        } else if (typeof v &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+        node.children &#x3D; this.buildFileTree(v, level + 1);
+      } else {
+        node.item &#x3D; v;
+      }
+      data.push(node);
       }
     }
-    this.changeAlarms(&#x27;all&#x27;);
+    return data;
   }
 
   /**
-   * Method to update the last received message timestamp
+   * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
+   * @param {AlarmItemNode} node the node
+   * @param {number} level the level node
+   * @returns {flatNode} the node converted to a FlatNode
    */
-  updateLastReceivedMessageTimestamp() {
-    this.lastReceivedMessageTimestamp &#x3D; (new Date()).getTime();
-  }
-
-  /**
-   * Method to check the last received message timestamp
-   * Note: If non-valid, the connection state is non-valid
-   * TODO: Review the life cycle of the connection status.
-   */
-  compareCurrentAndLastReceivedMessageTimestamp() {
-
-    /* Refresh rate parameters */
-    let pars;
-
-    /* TODO: Evaluate try exception. Here for debug options. */
-    try {
-      pars &#x3D; this.cdbService.getRefreshRateParameters();
-    } catch (e) {
-      pars &#x3D; {&#x27;refreshRate&#x27;: 5, &#x27;broadcastFactor&#x27;: 1};
+  transformer &#x3D; (node: AlarmItemNode, level: number) &#x3D;&gt; {
+    let flatNode;
+    if (this.nestedNodeMap.has(node) &amp;&amp; this.nestedNodeMap.get(node) !&#x3D;&#x3D; null &amp;&amp; this.nestedNodeMap.get(node).item &#x3D;&#x3D;&#x3D; node.item) {
+      flatNode &#x3D; this.nestedNodeMap.get(node);
+    } else {
+      flatNode &#x3D; new AlarmItemFlatNode();
     }
-
-    const MAX_SECONDS_WITHOUT_MESSAGES &#x3D; pars[&#x27;refreshRate&#x27;] * pars[&#x27;broadcastFactor&#x27;] + 1;
-
-    const now &#x3D; (new Date).getTime();
-    let millisecondsDelta;
-
-    millisecondsDelta &#x3D; now - this.lastReceivedMessageTimestamp;
-    if (millisecondsDelta &gt;&#x3D; 1000 * MAX_SECONDS_WITHOUT_MESSAGES ) {
-      this.connectionStatusStream.next(false);
-    }
+    flatNode.item &#x3D; node.item;
+    flatNode.level &#x3D; level;
+    flatNode.expandable &#x3D; !!node.children;
+    this.flatNodeMap.set(flatNode, node);
+    this.nestedNodeMap.set(node, flatNode);
+    return flatNode;
   }
 
   /**
-   * Method to update the last received message timestamp
-   * @returns {InternalObservable} for notifications to check the last received message
-   */
-  startLastReceivedMessageTimestampCheck() {
-    return IntervalObservable.create(1000 * 10)
-      .subscribe(() &#x3D;&gt; {
-      this.compareCurrentAndLastReceivedMessageTimestamp();
+  * Checks whether all the descendants of the node are selected
+  * @returns {boolean} true if all the descendants of the node are selected, false if not
+  */
+  descendantsAllSelected(node: AlarmItemFlatNode): boolean {
+    const descendants &#x3D; this.treeControl.getDescendants(node);
+    return descendants.every(child &#x3D;&gt; this.checklistSelection.isSelected(child));
+  }
+
+  /**
+  * Checks whether part of the descendants are selected
+  * @returns {boolean} true if some of the descendents are selected, false if not
+  */
+  descendantsPartiallySelected(node: AlarmItemFlatNode): boolean {
+    const descendants &#x3D; this.treeControl.getDescendants(node);
+    const result &#x3D; descendants.some(child &#x3D;&gt; this.checklistSelection.isSelected(child));
+    if (this.descendantsAllSelected(node)) {
+      this.checklistSelection.select(node);
+    }
+    return result &amp;&amp; !this.descendantsAllSelected(node);
+  }
+
+  /**
+  * Checks wether or not the node has selected dependencies
+  * @returns {boolean} true if the node has no selected descendents, false if not
+  */
+  noSelectedDescendants(node: AlarmItemFlatNode): boolean {
+    const descendants &#x3D; this.treeControl.getDescendants(node);
+    const result &#x3D; descendants.some(child &#x3D;&gt; this.checklistSelection.isSelected(child));
+    if (!result) {
+      this.checklistSelection.deselect(node);
+    }
+    return !result;
+  }
+
+  /** Toggle the alarm item selection. Select/deselect all the descendants node */
+  alarmItemSelectionToggle(node: AlarmItemFlatNode): void {
+    this.checklistSelection.toggle(node);
+    const descendants &#x3D; this.treeControl.getDescendants(node);
+    this.checklistSelection.isSelected(node)
+      ? this.checklistSelection.select(...descendants)
+      : this.checklistSelection.deselect(...descendants);
+  }
+
+  /** Update list with ids to ack **/
+  updateAckList(): void {
+    this.ackList &#x3D; [];
+    const selected &#x3D; this.checklistSelection.selected;
+    selected.forEach( (flatNode) &#x3D;&gt; {
+      if (flatNode.expandable &#x3D;&#x3D;&#x3D; false) {
+        this.ackList.push(flatNode.item);
+      }
     });
+    this.alarmsToAckFromSelection.emit(this.ackList);
   }
+
 }
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-tree [dataSource]&#x3D;&quot;dataSource&quot; [treeControl]&#x3D;&quot;treeControl&quot;&gt;
+  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node&quot; matTreeNodeToggle matTreeNodePadding&gt;
+    &lt;button mat-icon-button disabled&gt;&lt;/button&gt;
+    &lt;mat-checkbox class&#x3D;&quot;checklist-leaf-node&quot;
+                  [checked]&#x3D;&quot;checklistSelection.isSelected(node)&quot;
+                  (change)&#x3D;&quot;checklistSelection.toggle(node);&quot;&gt;{{node.item}}&lt;/mat-checkbox&gt;
+  &lt;/mat-tree-node&gt;
+  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node; when: hasChild&quot; matTreeNodePadding&gt;
+    &lt;button mat-icon-button matTreeNodeToggle&gt;
+      &lt;mat-icon class&#x3D;&quot;mat-icon-rtl-mirror&quot;&gt;
+        {{treeControl.isExpanded(node) ? &#x27;expand_more&#x27; : &#x27;chevron_right&#x27;}}
+      &lt;/mat-icon&gt;
+    &lt;/button&gt;
+    &lt;mat-checkbox [ngClass]&#x3D;&quot;{&#x27;clear-check-class&#x27;: noSelectedDescendants(node)}&quot;
+                  [checked]&#x3D;&quot;descendantsAllSelected(node)&quot;
+                  [indeterminate]&#x3D;&quot;descendantsPartiallySelected(node)&quot;
+                  (change)&#x3D;&quot;alarmItemSelectionToggle(node)&quot;&gt;{{node.item}}&lt;/mat-checkbox&gt;
+  &lt;/mat-tree-node&gt;
+&lt;/mat-tree&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
 </div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-tree [dataSource]="dataSource" [treeControl]="treeControl">  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>    <button mat-icon-button disabled></button>    <mat-checkbox class="checklist-leaf-node"                  [checked]="checklistSelection.isSelected(node)"                  (change)="checklistSelection.toggle(node);">{{node.item}}</mat-checkbox>  </mat-tree-node>  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>    <button mat-icon-button matTreeNodeToggle>      <mat-icon class="mat-icon-rtl-mirror">        {{treeControl.isExpanded(node) ? \'expand_more\' : \'chevron_right\'}}      </mat-icon>    </button>    <mat-checkbox [ngClass]="{\'clear-check-class\': noSelectedDescendants(node)}"                  [checked]="descendantsAllSelected(node)"                  [indeterminate]="descendantsPartiallySelected(node)"                  (change)="alarmItemSelectionToggle(node)">{{node.item}}</mat-checkbox>  </mat-tree-node></mat-tree></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckModalComponent', 'selector': 'app-ack-modal'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'IasHealthOverviewComponent', 'selector': 'app-ias-health-overview'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'OverviewWeatherCardContentComponent', 'selector': 'app-overview-weather-card-content'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveModalComponent', 'selector': 'app-shelve-modal'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AckTreeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
 
 
 
@@ -2244,8 +2487,8 @@ export class AlarmService {
 
         <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AlarmService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AckTreeComponent.html';
         </script>
 
        <script src="../js/search/search.js"></script>
