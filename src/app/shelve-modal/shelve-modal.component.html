@@ -7,17 +7,23 @@
 
 <form class="form-group" [formGroup]="form">
   <div class="modal-action modal-body">
-    <p>{{ getAlarmDescription() }} </p>
-    <p>
-      <a class="alarmUrl" target="_blank" href="{{ getAlarmUrl() }}"> <span class="alarmLink">Go to wiki</span>&nbsp;<i class="ion-md-open"></i> </a>
-    </p>
-    <div *ngIf="!alarm.shelved; then shelveForm"></div>
-    <ng-template #shelveForm>
-      <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain why the alarm is being shelved"></textarea>
-      <p class="info-message">
-        * The shelve button will be enabled after writing the message
+    <div class="section alarm-info">
+      <p>{{ getAlarmDescription() }} </p>
+      <p>
+        <a class="alarmUrl" target="_blank" href="{{ getAlarmUrl() }}">
+          <span class="alarmLink">Go to wiki</span>&nbsp;<i class="ion-md-open"></i>
+        </a>
       </p>
-    </ng-template>
+    </div>
+    <div class="section shelve-action">
+      <div *ngIf="!alarm.shelved; then shelveForm"></div>
+      <ng-template #shelveForm>
+        <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain why the alarm is being shelved"></textarea>
+        <div class="action-info">
+          * The shelve button will be enabled after writing the message
+        </div>
+      </ng-template>
+    </div>
   </div>
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>

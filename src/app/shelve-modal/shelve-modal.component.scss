@@ -12,22 +12,45 @@
   &.modal-header {
     background: transparent;
     border-bottom: 0px solid #000;
+
+    .modal-title {
+      padding: 8px 4px;
+    }
+
   }
 
   &.modal-body {
     background: transparent;
 
-    textarea {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100px;
-      background: #2e404e;
-      color: white;
-      border-color: #495d6e;
-    }
+    .section {
+      padding: 10px 8px;
 
-    .form-control:focus {
-      border: 1px solid #235285;
+      &.alarm-info {}
+
+      &.shelve-action {
+
+        textarea {
+          box-sizing: border-box;
+          width: 100%;
+          height: 100px;
+          background: #2e404e;
+          color: white;
+          border-color: #495d6e;
+        }
+
+        .form-control:focus {
+          border: 1px solid #235285;
+        }
+
+        .action-info {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          font-size: 14px;
+          color: #a4acac;
+        }
+
+      }
+
     }
 
   }
