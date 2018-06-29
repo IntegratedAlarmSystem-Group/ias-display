@@ -26,8 +26,8 @@
       <span class="title"> Select alarms for acknowledgment </span>
       <app-ack-tree [selectedAlarm]="alarm" (alarmsToAckFromSelection)="updateAlarmsToAck($event)"></app-ack-tree>
     </div>
-    <div *ngIf="missedAcks.length > 0" class="section missing-acks">
-      <span class="title"> Missing acknowledgments </span>
+    <div *ngIf="missedAcks.length > 0" class="section missed-acks">
+      <span class="title"> Missed acknowledgments </span>
       <ul>
         <li *ngFor="let text of missedAcks">
           {{text}}
