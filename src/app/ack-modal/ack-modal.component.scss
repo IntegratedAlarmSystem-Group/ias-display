@@ -12,22 +12,64 @@
   &.modal-header {
     background: transparent;
     border-bottom: 0px solid #000;
+
+    .modal-title {
+      padding: 8px 4px;
+    }
+
   }
 
   &.modal-body {
     background: transparent;
 
-    textarea {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100px;
-      background: #2e404e;
-      color: white;
-      border-color: #495d6e;
+    .title {
+      display: block;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 4px 0;
     }
 
-    .form-control:focus {
-      border: 1px solid #235285;
+    .section {
+      padding: 10px 8px;
+
+      &.alarm-info {}
+
+      &.ack-action {
+
+        textarea {
+          box-sizing: border-box;
+          width: 100%;
+          height: 100px;
+          background: #2e404e;
+          color: white;
+          border-color: #495d6e;
+        }
+
+        .form-control:focus {
+          border: 1px solid #235285;
+        }
+
+        .action-info {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          font-size: 14px;
+          color: #a4acac;
+        }
+
+      }
+
+      &.ack-tree {}
+
+      &.missing-acks {
+        border-top: 1px solid #495d6e;
+        color: lightslategray;
+
+        ul {
+          padding: 0 16px;
+          font-size: 14px;
+        }
+      }
+
     }
 
   }
@@ -55,10 +97,6 @@
   p {
     margin-top: 0;
     margin-bottom: 1.15rem;
-  }
-
-  .info-message {
-    padding-top: 10px;
   }
 
   .alarmUrl {
