@@ -4,8 +4,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { AckModalComponent } from './ack-modal.component';
+import { AckTreeComponent } from '../ack-tree/ack-tree.component';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
@@ -16,24 +18,35 @@ import { Iasio } from '../iasio';
 describe('AckModalComponent', () => {
   let component: AckModalComponent;
   let fixture: ComponentFixture<AckModalComponent>;
-  let alarm: Alarm;
   let alarmIasio: Iasio;
   let alarmService: AlarmService;
   let modalBody: any;
   let modalHeader: any;
   let modalFooter: any;
   let spy;
-
+  let spyMissingAcks;
   let cdbSubject: CdbService;
+  const alarm = Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AckModalComponent ],
+      declarations: [ AckModalComponent, AckTreeComponent ],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        IasMaterialModule
       ],
       providers: [
         NgbActiveModal,
@@ -66,7 +79,8 @@ describe('AckModalComponent', () => {
       const mockIasAlarmsIasiosResponse = [{
           io_id: 'coreid$1',
           short_desc: 'Short description for mock alarm',
-          ias_type: 'ALARM'
+          ias_type: 'ALARM',
+          doc_url: 'https://www.alma.cl/'
       }];
 
       alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
@@ -78,25 +92,19 @@ describe('AckModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AckModalComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
+      of([alarm.core_id])
+    );
+    spyMissingAcks = spyOn(alarmService, 'getMissingAcks').and.returnValue(
+      of( {'coreid$1': [1, 5, 6]} )
+    );
     component = fixture.componentInstance;
-    component.ngOnInit();
-    alarm = Alarm.asAlarm({
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': '0',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'dependencies': [],
-    });
     component.alarm = alarm;
+    component.ngOnInit();
     modalHeader = fixture.nativeElement.querySelector('.modal-header');
     modalBody = fixture.nativeElement.querySelector('.modal-body');
     modalFooter = fixture.nativeElement.querySelector('.modal-footer');
-    spy = spyOn(alarmService, 'acknowledgeAlarms').and.returnValue(
-        Observable.of([alarm.core_id])
-    );
+    spyOn(component, 'updateAlarmsToAck');
     fixture.detectChanges();
   });
 
@@ -110,12 +118,12 @@ describe('AckModalComponent', () => {
   });
 
   it('should display the alarm short description', () => {
-    const expected = cdbSubject.getAlarmDescription(alarm.core_id);
+    const expected = alarmIasio.short_desc;
     expect(modalBody.textContent).toContain(expected);
   });
 
   it('should display a link to get more information about the alarms', () => {
-    const expected = cdbSubject.wikiUrl;
+    const expected = alarmIasio.doc_url;
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.alarmUrl').href)
       .toEqual(expected);
@@ -141,7 +149,7 @@ describe('AckModalComponent', () => {
 
   });
 
-  // Acknowledge button
+  // // Acknowledge button
   describe('should have an Acknowledge button', () => {
     it('in the modal footer', () => {
       expect(modalFooter.querySelector('#acknowledge')).toBeTruthy();
@@ -157,6 +165,7 @@ describe('AckModalComponent', () => {
       });
       describe('and the user has entered a message', () => {
         it('it should call the component acknowledge method', async(() => {
+          component.alarmsToAck = [alarm.core_id];
           component.form.controls['message'].setValue('Any message');
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();

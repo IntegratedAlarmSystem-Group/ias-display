@@ -9,7 +9,7 @@ ENV CHROME_BIN=/opt/google/chrome/chrome \
   CHROME_PATH=/opt/google/chrome
 
 # install nodejs
-RUN sh -c "curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -" && \
+RUN sh -c "curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -" && \
   yum install -y nodejs gcc-c++ make
 
 # create project folder
@@ -23,7 +23,7 @@ USER node
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global \
   PATH="/home/node/.npm-global/bin:${PATH}"
 RUN cd /home/node && \
-  npm install -g @angular/cli@1.7.4
+  npm install -g @angular/cli@6.0.8
 
 # install project requirements
 COPY package.json .
@@ -35,7 +35,7 @@ COPY . .
 EXPOSE 4200
 
 # test and build project
-# RUN ng test --watch=false --single-run --browser=ChromeDocker && \
+RUN ng test --watch=false --browsers=ChromeDocker --karma-config karma.low_resources.conf.js
 RUN npm run-script build-prod
 
 # copy compiled files to smaller image

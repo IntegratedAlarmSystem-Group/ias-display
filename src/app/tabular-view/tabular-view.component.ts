@@ -1,14 +1,13 @@
 import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ISubscription } from 'rxjs/Subscription';
-import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
+import { Observable ,  BehaviorSubject ,  SubscriptionLike as ISubscription } from 'rxjs';
+import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/material';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
 import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
+import { Locale } from '../settings';
 
 /**
 * Component that dispays all the Alarms in a table
@@ -23,7 +22,10 @@ import { CdbService } from '../cdb.service';
 })
 export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  /** Reference to the object that defines the sorting of the table */
+  /** Reference to the MatTable, the component that defines the table */
+  @ViewChild(MatTable) table: MatTable<DisplayedAlarm>;
+
+  /** Reference to the MatSort, the component that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
 
   /**
@@ -32,18 +34,21 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
   */
-  private _setFilterActivated = false;
+  public _setFilterActivated = false;
 
   /** String that stores the test input in the filter textfield */
-  private filterString = '';
+  public filterString = '';
 
   /**
   * Array that defines which coulmns are going to be displayed and in which order
   */
-  private displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
+  public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
 
-  /** String to define the formatting of dates */
-  private dateFormat = 'M/d/yy, h:mm:ss a';
+  /** String to store the formatting of dates, read form the settings */
+  private dateFormat: string;
+
+  /** String to store the timezone to display dates, read from the settings */
+  private timezone: string;
 
   /** String to define the keyword to filter SET {@link Alarm} */
   private filterValueForSetAlarms = 'set';
@@ -102,6 +107,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
    * Retrieves filter values passed by the URL and applies them to the table
    */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     this.sort.sort(<MatSortable> {
       id: 'status',
       start: 'asc'
@@ -165,7 +172,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.iasDataAvailable.getValue() === true) {
       return {
         description: this.cdbService.getAlarmDescription(core_id),
-        url: this.cdbService.getAlarmsInformationUrl()
+        url: this.cdbService.getAlarmsInformationUrl(core_id)
       };
     } else {
       return {
@@ -216,5 +223,21 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.filterString = arrayOfFilters.join(' ');
     this.applyFilter(this.filterString);
+  }
+
+  /**
+  * Returns the filters applied to the Table
+  * @returns {string} filters applied
+  */
+  get filters(): string {
+    return this.filterString;
+  }
+
+  /**
+  * Returns the status of the Toggle for the filtering of set Alarms
+  * @returns {boolean} filters applied
+  */
+  get toggleStatus(): boolean {
+    return this._setFilterActivated;
   }
 }

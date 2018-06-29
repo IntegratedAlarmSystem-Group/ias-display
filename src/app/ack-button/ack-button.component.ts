@@ -25,10 +25,9 @@ export class AckButtonComponent implements OnInit {
   private alarm: Alarm;
 
   /**
-   * Define if the alarm can be acknowledge based on if it was acknowledge
-   * before.
+   * Define if the alarm can be acknowledged based on if it was acknowledged before.
    */
-  private canAcknowledge = false;
+  public canAcknowledge = false;
 
   /**
    * The "constructor", injects the {@link AlarmService} and the {@link modalService}

@@ -1,7 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { Alarm, OperationalMode, Validity } from './alarm';
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './alarm.service';
@@ -28,6 +28,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 0,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -44,6 +45,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 1,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -60,6 +62,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'core_timestamp': 10000,
       'validity': 1,
       'ack': false,
+      'shelved': false,
       'dependencies': [],
     }
   }
@@ -75,6 +78,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -85,6 +89,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   },
   {
@@ -95,6 +100,7 @@ const alarms = [
     'core_timestamp': 10000,
     'validity': 1,
     'ack': false,
+    'shelved': false,
     'dependencies': [],
   }
 ];
@@ -404,7 +410,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       * Redefinition of acknowledge of Alarms
       */
       httpSpy = spyOn(httpSubject, 'put').and.returnValue(
-          Observable.of(alarmsToAck)
+          of(alarmsToAck)
       );
       }
     )

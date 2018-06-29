@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ViewCell } from 'ng2-smart-table';
 import { OperationalMode } from '../alarm';
 
 /**
@@ -48,6 +47,11 @@ export class StatusViewComponent implements OnInit {
   getContainerClasses(): any {
     const classes = ['alarm-status'];
 
+    if (this.hasTag('shelved')) {
+      classes.push('status-cleared');
+      return classes;
+    }
+
     if (this.hasTag('maintenance') || this.hasTag('shuttedown')) {
       classes.push('status-maintenance');
     } else if (this.hasTag('unknown')) {
@@ -83,7 +87,10 @@ export class StatusViewComponent implements OnInit {
     let color: string;
     let visibility: string;
 
-    if (this.hasTag('set')) {
+    if (this.hasTag('shelved')) {
+      visibility = 'hidden';
+      color = 'black';
+    } else if (this.hasTag('set')) {
       visibility = 'visible';
       color = 'white';
     } else if (this.hasTag('cleared')) {

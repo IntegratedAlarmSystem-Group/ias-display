@@ -1,8 +1,10 @@
+
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import {forkJoin as observableForkJoin,  BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
+import { environment } from '../environments/environment';
 import { HttpClientService } from './http-client.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Iasio } from './iasio';
 
 
@@ -21,12 +23,6 @@ export class CdbService {
 
   /** IAS Webserver URL for requests of IASIOS filtered by Alarms */
   iasioAlarmsUrl = this.iasioUrl + '/filtered_by_alarm';
-
-  /**
-  * Twiki url
-  * TODO: Provisory link. To get the link from the cdb database when available.
-  */
-  wikiUrl = environment.wikiUrl;
 
   /**
   * Variable to store the ias configuration data
@@ -56,9 +52,9 @@ export class CdbService {
   * the component is initializated
   */
   initialize() {
-    return Observable.forkJoin(
-      this.getConfigurationData().map((res: Response) => res[0]),
-      this.getAlarmsIasiosData().map((res: Response) => res),
+    return observableForkJoin(
+      this.getConfigurationData().pipe(map((res: Response) => res[0])),
+      this.getAlarmsIasiosData().pipe(map((res: Response) => res)),
     )
     .subscribe((data: any[]) => {
       const iasConfigurationData = data[0];
@@ -104,7 +100,7 @@ export class CdbService {
   * @param {string} alarmCoreID Alarm identifier for the alarm in the core system
   * @returns {string} the description of the IASIO
   */
-  getAlarmDescription(alarmCoreId): string {
+  getAlarmDescription(alarmCoreId: string): string {
     if (alarmCoreId in this.iasAlarmsIasios) {
       return this.iasAlarmsIasios[alarmCoreId].short_desc;
     } else {
@@ -116,8 +112,12 @@ export class CdbService {
   * Get link with documentation about the alarms
   * @returns {string} the documentation URL
   */
-  getAlarmsInformationUrl(): string {
-    return this.wikiUrl;
+  getAlarmsInformationUrl(alarmCoreId: string): string {
+    if (alarmCoreId in this.iasAlarmsIasios) {
+      return this.iasAlarmsIasios[alarmCoreId].doc_url;
+    } else {
+      return '';
+    }
   }
 
 }

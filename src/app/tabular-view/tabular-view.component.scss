@@ -1,5 +1,31 @@
 /deep/ {
 
+  .mat-card {
+    padding: 0 !important;
+    border-radius: 0.375em !important;
+  }
+
+  .mat-card .mat-card-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #3c4856;
+    font-size: 18px;
+    font-weight: bold;
+    border-top-left-radius: 0.375em;
+    border-top-right-radius: 0.375em;
+  }
+
+  .mat-card-header-text {
+    margin: 0 10px !important;
+  }
+
+  .mat-card .mat-card-content {
+    padding: 20px;
+    background: #2e3740;
+    border-bottom-left-radius: 0.375em;
+    border-bottom-right-radius: 0.375em;
+  }
+
   input.mat-input-element {
     width: 100%;
     border: 2px solid #818b98;

@@ -1,28 +1,37 @@
-<nb-layout>
+<div class="main-layout">
 
-  <nb-layout-header fixed class="ias-header">
-    <div class="menu-btn">
-      <a (click)="toggleSidebar()">
-        <i class="main-menu-icon ion-md-menu"></i>
-      </a>
+  <mat-toolbar class="app-toolbar">
+    <div class="btn-wrapper">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon mat-list-icon>menu</mat-icon>
+      </button>
     </div>
-    <span class="title"> {{ title }} </span>
-  </nb-layout-header>
-
-
-  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" left state="compacted">
-    <nb-sidebar-header style="text-align: center;">
-    <div class="ias ias-logo-container">
-      <img class="ias ias-logo" src="/assets/img/logo-ias_white.svg">
+    <div class="content-wrapper">
+      <span class='app-title'> Integrated Alarm System </span>
     </div>
-    </nb-sidebar-header>
-    <nb-menu [items]="menu"></nb-menu>
-  </nb-sidebar>
+  </mat-toolbar>
 
-  <nb-layout-column>
+  <mat-sidenav-container autosize>
+    <mat-sidenav id="main-sidenav" [class.compacted]="isCompacted" mode="side" opened="true">
+      <mat-list>
+        <mat-list-item>
+          <div class="ias ias-logo-container">
+            <img class="ias ias-logo" src="/assets/img/logo-ias_white.svg">
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <mat-nav-list>
+        <div *ngFor="let item of sidenavItems">
+          <a mat-list-item routerLink="{{ item.link }}" routerLinkActive="active-link">
+            <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+            <p matLine *ngIf="!isCompacted">{{ item.title }} </p>
+          </a>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content id="main-sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-    <router-outlet></router-outlet>
-
-  </nb-layout-column>
-
-</nb-layout>
+</div>

@@ -4,7 +4,10 @@ export const BackendUrls = {
   CDB: '/cdb-api/',
   CDB_IAS: '/cdb-api/ias/',
   TICKETS: '/tickets/',
-  TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge_many/',
+  TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge/',
+  TICKETS_INFO: '/tickets-api/tickets/old_open_info/',
+  SHELVE_API: '/tickets-api/shelve-registries/',
+  UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */
@@ -16,4 +19,13 @@ export const Streams = {
 /** Set of items to store in the browser cache */
 export const StorageItems = {
   TOKEN: 'token',
+};
+
+export const Locale = {
+  DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',
+  TIMEZONE: '+0000',
+};
+
+export const Assets = {
+  ICONS: '/assets/img/',
 };

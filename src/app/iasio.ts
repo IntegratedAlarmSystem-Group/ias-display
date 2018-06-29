@@ -9,8 +9,11 @@ export class Iasio {
   /** Short description of Alarms associated to this monitoring point */
   short_desc: string;
 
- /** Type of the IASIO, could be ALARM, DOUBLE, BOOLEAN, etc */
+  /** Type of the IASIO, could be ALARM, DOUBLE, BOOLEAN, etc */
   ias_type: string;
+
+  /** URL of the documentation of the IASIO */
+  doc_url: string;
 
   /**
   * Builds a new IASIO instance
@@ -32,7 +35,8 @@ export class Iasio {
     return (
       json.hasOwnProperty('io_id') &&
       json.hasOwnProperty('short_desc') &&
-      json.hasOwnProperty('ias_type')
+      json.hasOwnProperty('ias_type') &&
+      json.hasOwnProperty('doc_url')
     );
   }
 
@@ -50,7 +54,8 @@ export class Iasio {
     const io_id = <string>json['io_id'];
     const short_desc = <string>json['short_desc'];
     const ias_type = <string>json['ias_type'];
-    return new Iasio({ io_id, short_desc, ias_type });
+    const doc_url = <string>json['doc_url'];
+    return new Iasio({ io_id, short_desc, ias_type, doc_url });
   }
 
 }

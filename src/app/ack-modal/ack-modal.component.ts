@@ -6,6 +6,7 @@ import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
 
+
 /**
  * Modal used to acknowledge alarms
  */
@@ -17,14 +18,24 @@ import { Alarm } from '../alarm';
 export class AckModalComponent implements OnInit {
 
   /**
-   * Alarm object to be acknowledged
+   * Selected alarm
    */
   @Input() alarm;
+
+  /**
+   * List of alarms to ack according to selection from child component
+   */
+  alarmsToAck: string[] = [];
 
   /**
    * Object used to manage the form and check the validity of the form input fields
    */
   form: FormGroup;
+
+  /**
+  *
+  */
+  public missedAcks: string[] = [];
 
   /**
    * Instantiates the component
@@ -50,6 +61,7 @@ export class AckModalComponent implements OnInit {
     this.form = this.formBuilder.group({
       message: [null, [Validators.required]]
     });
+    this.getMissingAcksInfo();
   }
 
   /**
@@ -80,10 +92,38 @@ export class AckModalComponent implements OnInit {
             return error;
           }
         );
-    } else {
-      /* TODO: Show a message, add a red asterisc, etc. */
     }
   }
+
+  /**
+   * Ack request through the related {@link AlarmService} method using a list of dependencies
+   * from the selected alarms
+   */
+  ackFromSelection(): void {
+    this.spinnerService.show();
+    if (this.form.valid) {
+      this.alarmService.acknowledgeAlarms(
+        this.alarmsToAck, this.form.get('message').value).subscribe(
+          (response) => {
+            this.ackSuccessful(response);
+            this.spinnerService.hide();
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.spinnerService.hide();
+            return error;
+          }
+        );
+    }
+  }
+
+  /**
+   * Update the list of alarms to ack from the selection on the child component
+   */
+  updateAlarmsToAck(event): void {
+    this.alarmsToAck = event;
+  }
+
 
   /**
    * Get the alarm description through the method provided by the {@link CdbService}
@@ -98,7 +138,38 @@ export class AckModalComponent implements OnInit {
    * @returns {string} URL for of the documentation of the {@link Alarm}
    */
   getAlarmUrl() {
-    return this.cdbService.getAlarmsInformationUrl();
+    return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
   }
 
+  /**
+  * Method to invalidate ack action
+  */
+  disableAcknowledgment() {
+    const noAlarmsToAck = (this.alarmsToAck.length === 0);
+    const validForm = this.form.valid;
+    return (noAlarmsToAck || !validForm);
+  }
+
+  /**
+  * Get the number of missed acknowledgements of the alarm and its children
+  */
+  getMissingAcksInfo(): void {
+    if (this.alarm) {
+      this.missedAcks = [];
+      this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
+        (response) => {
+          for (const [key, value] of Object.entries(response)) {
+            const count = value.length;
+            if (count > 0) {
+              let text = key + ' has ' + count + ' missed acknowledgement';
+              if (count > 1) {
+                text += 's';
+              }
+              this.missedAcks.push(text);
+            }
+          }
+        }
+      );
+    }
+  }
 }

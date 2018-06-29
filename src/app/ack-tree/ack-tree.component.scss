@@ -1,0 +1,13 @@
+mat-checkbox.mat-checkbox-checked {
+  &.clear-check-class {
+
+    .mat-checkbox-background {
+      display: none;
+    }
+
+  }
+}
+
+mat-tree {
+  background: transparent;
+}

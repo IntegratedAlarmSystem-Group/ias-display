@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NbSidebarService } from '@nebular/theme';
-import { NbMenuService } from '@nebular/theme';
-import { NbMenuItem } from '@nebular/theme';
 import { AlarmService } from './alarm.service';
 
 /**
@@ -19,22 +16,22 @@ export class AppComponent implements OnInit {
   */
   title = 'Integrated Alarm System';
 
+  /**
+  * State of the main sidenav
+  */
+  isCompacted = true;
+
   /** Sidebar Menu of the application */
-  menu: NbMenuItem[] = [
-    { title: 'Overview', link: '/overview', icon: 'ion-ios-globe-outline'},
-    { title: 'Table', link: '/tabular', icon: 'ion-ios-list'},
-    // { title: 'Alarms', link: '/alarms', icon:'ion-ios-list'},
+  sidenavItems = [
+    { title: 'Overview', link: '/overview', icon: 'language'},
+    { title: 'Table', link: '/tabular', icon: 'list'}
   ];
 
   /**
    * Instantiates the service
-   * @param {NbSidebarService} sidebarService Service used for the sidebar
-   * @param {NbMenuService} menuService Service used for the menu of the sidebar
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    */
   constructor(
-    private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
     private alarmService: AlarmService
   ) {}
 
@@ -47,10 +44,10 @@ export class AppComponent implements OnInit {
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} false
+   * @returns {boolean} Value of the main sidenav isCompacted variable
    */
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
+  toggleSidenav(): boolean {
+    this.isCompacted=!this.isCompacted
+    return this.isCompacted;
   }
 }
