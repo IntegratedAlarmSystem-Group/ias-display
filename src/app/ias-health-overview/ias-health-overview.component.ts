@@ -65,7 +65,7 @@ export class IasHealthOverviewComponent implements OnInit, OnDestroy {
   * Define the alarm that the component should listen to and its icons
   */
   defineAlarmsAndIcons() {
-    this.alarmId = 'Alarmdummy';
+    this.alarmId = 'IAS-Health-Global';
 
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
