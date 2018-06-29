@@ -1,6 +1,7 @@
 import { Alarm } from '../alarm';
 import { AlarmImageSet } from './alarm.component';
 
+/** Set of mock icons alarms for the tests */
 export const MockImageSet = new AlarmImageSet({
   clear: 'clear',
   set_low: 'low',
@@ -12,6 +13,7 @@ export const MockImageSet = new AlarmImageSet({
   shelved: 'shelved',
 });
 
+/** Set of mock icons for unreliable alarms for the tests */
 export const MockImageUnreliableSet = new AlarmImageSet({
   clear: 'clear_unreliable',
   set_low: 'low_unreliable',
@@ -23,6 +25,7 @@ export const MockImageUnreliableSet = new AlarmImageSet({
   shelved: 'shelved_unreliable',
 });
 
+/** Set of mock Alarms for the tests */
 export const MockAlarms = [
   {
     'value': 4,

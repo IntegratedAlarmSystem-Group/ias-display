@@ -521,16 +521,16 @@
 </nav>
                </div>
                <!-- START CONTENT -->
-               <div class="content component">
+               <div class="content module">
                    <div class="content-data">
 
 
 
-
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li>AckButtonComponent</li>
+  <li>Modules</li>
+  <li>IasMaterialModule</li>
 </ol>
+
 
 <ul class="nav nav-tabs" role="tablist">
         <li class="active">
@@ -539,603 +539,96 @@
         <li >
             <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
-        </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
-    <h3>File</h3>
-</p>
-<p class="comment">
-    <code>src/app/ack-button/ack-button.component.ts</code>
-</p>
-
-    <p class="comment">
-        <h3>Description</h3>
-    </p>
-    <p class="comment">
-        <p>Button used to trigger the event to open the Acknowledge Modal</p>
-
-    </p>
-
-
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-    </p>
-
-
-<section>
-    <h3>Metadata</h3>
-    <table class="table table-sm table-hover">
-        <tbody>
-
-
-
-
-
-
-
-
-
-
-
-            <tr>
-                <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-ack-button</code></td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>ack-button.component.css</code></td>
-            </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./ack-button.component.html</code></td>
-            </tr>
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#alarm">alarm</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#canAcknowledge">canAcknowledge</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#loadAlarm">loadAlarm</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#onClick">onClick</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Inputs</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#alarm_id">alarm_id</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(alarmService: <a href="../injectables/AlarmService.html">AlarmService</a>, modalService: NgbModal)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>The &quot;constructor&quot;, injects the <a href="../injectables/AlarmService.html">AlarmService</a> and the {@link modalService}</p>
-</div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>alarmService</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/AlarmService.html" target="_self" >AlarmService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>Service to get the alarm object based on the input id</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>modalService</td>
-                                                  
-                                                        <td>
-                                                                    <code>NgbModal</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>Service to manage the Modal Component</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-    <section>
-    <h3 id="inputs">Inputs</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-2">
-                        <a name="alarm_id"></a>
-                        <code>alarm_id</code>
-                    </td>
-                    <td class="col-md-10">
-                        <div><p>Id of the alarm to be acknowledged</p>
-</div>
-                            <p>
-                            <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                            </p>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/ack-button/ack-button.component.ts:20</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-</section>
-
-
-
-    <section>
-    
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadAlarm"></a>
-                        <span class="name">
-                            <b>
-                            loadAlarm
-                            </b>
-                            <a href="#loadAlarm"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>loadAlarm()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/ack-button/ack-button.component.ts:54</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Get the alarm object related with the alarm id received as input using the
-AlarmService. Initialize the private variables of this component.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/ack-button/ack-button.component.ts:46</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>On init the component initialize the private variables using the method
-{@link loadAlarm}</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onClick"></a>
-                        <span class="name">
-                            <b>
-                            onClick
-                            </b>
-                            <a href="#onClick"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>onClick(event: )</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/ack-button/ack-button.component.ts:62</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on table rows, it triggers the ack modal</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>event</td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-    <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="alarm"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            alarm
-                            </b>
-                            <a href="#alarm"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>alarm:     <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/ack-button/ack-button.component.ts:25</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Alarm object related with the alarm id received as input</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="canAcknowledge"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            canAcknowledge
-                            </b>
-                            <a href="#canAcknowledge"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>canAcknowledge:     <code></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ack-button/ack-button.component.ts:30</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
-
-</div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
-import { NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
-import { AckModalComponent } from &#x27;../ack-modal/ack-modal.component&#x27;;
-import { AlarmService } from &#x27;../alarm.service&#x27;;
-import { Alarm } from &#x27;../alarm&#x27;;
-
-/**
- * Button used to trigger the event to open the Acknowledge Modal
- */
-@Component({
-  selector: &#x27;app-ack-button&#x27;,
-  templateUrl: &#x27;./ack-button.component.html&#x27;,
-  styleUrls: [&#x27;./ack-button.component.css&#x27;]
-})
-export class AckButtonComponent implements OnInit {
-
-  /**
-   * Id of the alarm to be acknowledged
-   */
-  @Input() alarm_id: string;
-
-  /**
-   * Alarm object related with the alarm id received as input
-   */
-  private alarm: Alarm;
-
-  /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   */
-  public canAcknowledge &#x3D; false;
-
-  /**
-   * The &quot;constructor&quot;, injects the {@link AlarmService} and the {@link modalService}
-   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
-   * @param {ModalService} modalService Service to manage the Modal Component
-   */
-  constructor(
-    private alarmService: AlarmService,
-    private modalService: NgbModal
-  ) { }
-
-  /**
-   * On init the component initialize the private variables using the method
-   * {@link loadAlarm}
-   */
-  ngOnInit() {
-    this.loadAlarm();
-  }
-
-  /**
-   * Get the alarm object related with the alarm id received as input using the
-   * AlarmService. Initialize the private variables of this component.
-   */
-  loadAlarm() {
-    this.alarm &#x3D; this.alarmService.get(this.alarm_id);
-    this.canAcknowledge &#x3D; !this.alarm.ack;
-  }
-
-  /**
-  * Handle click on table rows, it triggers the ack modal
-  */
-  onClick(event) {
-    const ackModal &#x3D; this.modalService.open(AckModalComponent,
-      { size: &#x27;lg&#x27;, centered: true }
-    );
-    ackModal.componentInstance.alarm &#x3D; this.alarm;
-    return ackModal;
-  }
-
-}
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; mat-raised-button (click)&#x3D;&quot;onClick($event)&quot; [disabled]&#x3D;&quot;!canAcknowledge&quot;&gt;
-    &lt;i class&#x3D;&quot;ion-ios-share-alt&quot;&gt;&lt;/i&gt;
-&lt;/button&gt;
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="c-tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
+    <div class="tab-pane fade active in" id="c-info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/ias-material/ias-material.module.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Module for the required Angular Material components</p>
+
+            </p>
+        
+
+        <div class="container-fluid module">
+            <div class="row">
             </div>
         </div>
     </div>
 
-    
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatPaginatorModule } from &#x27;@angular/material/paginator&#x27;;
+import { MatProgressSpinnerModule } from &#x27;@angular/material/progress-spinner&#x27;;
+import { MatSlideToggleModule } from &#x27;@angular/material/slide-toggle&#x27;;
+import { MatSortModule } from &#x27;@angular/material/sort&#x27;;
+import { MatTableModule } from &#x27;@angular/material/table&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatSidenavModule } from &#x27;@angular/material/sidenav&#x27;;
+import { MatListModule } from &#x27;@angular/material/list&#x27;;
+import { MatTreeModule } from &#x27;@angular/material/tree&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
+
+
+/**
+* Module for the required Angular Material components
+*/
+@NgModule({
+  imports: [
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    MatToolbarModule
+  ],
+  exports: [
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    MatToolbarModule
+  ],
+  declarations: []
+})
+export class IasMaterialModule { }
+</code></pre>
+    </div>
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><button class="ack-button" title="Acknowledge" mat-raised-button (click)="onClick($event)" [disabled]="!canAcknowledge">    <i class="ion-ios-share-alt"></i></button></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckModalComponent', 'selector': 'app-ack-modal'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'IasHealthOverviewComponent', 'selector': 'app-ias-health-overview'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'OverviewWeatherCardContentComponent', 'selector': 'app-overview-weather-card-content'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveModalComponent', 'selector': 'app-shelve-modal'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
-</script>
-<script src="../js/tree.js"></script>
 
 
 
@@ -1172,8 +665,8 @@ export class AckButtonComponent implements OnInit {
 
         <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AckButtonComponent.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'IasMaterialModule.html';
         </script>
 
        <script src="../js/search/search.js"></script>

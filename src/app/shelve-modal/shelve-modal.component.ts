@@ -6,6 +6,10 @@ import { AlarmService } from '../alarm.service';
 import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
 
+
+/**
+ * Modal used to acknowledge alarms
+ */
 @Component({
   selector: 'app-shelve-modal',
   templateUrl: './shelve-modal.component.html',
@@ -74,6 +78,9 @@ export class ShelveModalComponent implements OnInit {
     }
   }
 
+  /**
+   * Calls the webserver to apply the shelving of the alarm
+   */
   shelve() {
     this.spinnerService.show();
     if (this.canSend()) {
@@ -94,6 +101,9 @@ export class ShelveModalComponent implements OnInit {
     }
   }
 
+  /**
+   * Calls the webserver to apply the unshelving of the alarm
+   */
   unshelve() {
     this.spinnerService.show();
     if (this.canSend()) {
