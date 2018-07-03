@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
-import { AlarmComponent, AlarmImageSet } from '../alarm/alarm.component';
+import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { AlarmService } from '../data/alarm.service';
 import { RoutingService } from '../data/routing.service';
 import { Alarm } from '../data/alarm';

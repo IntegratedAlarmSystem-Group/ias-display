@@ -5,7 +5,7 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../data/data.module';
 import { IasHealthOverviewComponent } from './ias-health-overview.component';
-import { AlarmComponent } from '../alarm//alarm.component';
+import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { RoutingService} from '../data/routing.service';
 import { AlarmService } from '../data/alarm.service';
 

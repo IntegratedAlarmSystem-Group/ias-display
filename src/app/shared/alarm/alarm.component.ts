@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Alarm, Value, OperationalMode } from '../data/alarm';
+import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
 * Class that models the relation of image URLS and Alarm statuses, for displaying purposes
