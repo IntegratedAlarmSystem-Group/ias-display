@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShelveModalComponent } from '../../shelve-modal/shelve-modal.component';
+import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 

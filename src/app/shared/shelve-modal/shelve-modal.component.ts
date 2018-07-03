@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../data/cdb.service';
-import { Alarm } from '../data/alarm';
+import { AlarmService } from '../../data/alarm.service';
+import { CdbService } from '../../data/cdb.service';
+import { Alarm } from '../../data/alarm';
 
 
 /**

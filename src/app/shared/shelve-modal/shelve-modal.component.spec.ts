@@ -4,12 +4,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
-import { DataModule } from '../data/data.module';
-import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../data/cdb.service';
+import { DataModule } from '../../data/data.module';
+import { AlarmService } from '../../data/alarm.service';
+import { CdbService } from '../../data/cdb.service';
 import { ShelveModalComponent } from './shelve-modal.component';
-import { Alarm } from '../data/alarm';
-import { Iasio } from '../data/iasio';
+import { Alarm } from '../../data/alarm';
+import { Iasio } from '../../data/iasio';
 
 describe('ShelveModalComponent', () => {
   let component: ShelveModalComponent;
@@ -48,22 +48,22 @@ describe('ShelveModalComponent', () => {
       cdbSubject = cdbService;
 
       const mockIasConfiguration = {
-          id: 1,
-          log_level: 'INFO',
-          refresh_rate: 2,
-          broadcast_factor: 3,
-          tolerance: 1,
-          properties: []
+        id: 1,
+        log_level: 'INFO',
+        refresh_rate: 2,
+        broadcast_factor: 3,
+        tolerance: 1,
+        properties: []
       };
       spyOn(cdbSubject, 'initialize')
         .and.callFake(function() {});
       cdbSubject.iasConfiguration = mockIasConfiguration;
 
       const mockIasAlarmsIasiosResponse = [{
-          io_id: 'coreid$1',
-          short_desc: 'Short description for mock alarm',
-          ias_type: 'ALARM',
-          doc_url: 'https://www.alma.cl/'
+        io_id: 'coreid$1',
+        short_desc: 'Short description for mock alarm',
+        ias_type: 'ALARM',
+        doc_url: 'https://www.alma.cl/'
       }];
 
       alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
