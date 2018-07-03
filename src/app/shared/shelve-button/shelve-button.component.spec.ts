@@ -6,13 +6,13 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { DataModule } from '../data/data.module';
-import { AlarmService } from '../data/alarm.service';
-import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { DataModule } from '../../data/data.module';
+import { AlarmService } from '../../data/alarm.service';
+import { ShelveModalComponent } from '../../shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button.component';
-import { Alarm } from '../data/alarm';
-import { Iasio } from '../data/iasio';
+import { Alarm } from '../../data/alarm';
+import { Iasio } from '../../data/iasio';
 
 describe('GIVEN a ShelveButtonComponent', () => {
   let component: ShelveButtonComponent;

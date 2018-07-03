@@ -18,7 +18,6 @@ import { TabularViewComponent } from './tabular-view.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { AckButtonComponent } from '../ack-button/ack-button.component';
-import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm } from '../data/alarm';
 import { Iasio } from '../data/iasio';
@@ -44,7 +43,6 @@ describe('TabularViewComponent', () => {
         StatusViewComponent,
         LegendComponent,
         AckButtonComponent,
-        ShelveButtonComponent,
       ],
       imports: [
         MatTableModule,

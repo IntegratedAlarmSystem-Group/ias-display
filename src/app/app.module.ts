@@ -22,7 +22,6 @@ import { OverviewWeatherCardContentComponent } from './overview-weather-card-con
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { LegendComponent } from './legend/legend.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
-import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
 
@@ -54,7 +53,6 @@ export const appRoutes: Routes = [
     AckTreeComponent,
     LegendComponent,
     ShelveModalComponent,
-    ShelveButtonComponent,
     AlarmComponent,
     IasHealthOverviewComponent
   ],
