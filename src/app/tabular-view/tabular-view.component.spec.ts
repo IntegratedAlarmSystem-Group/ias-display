@@ -9,9 +9,9 @@ import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { DataModule } from '../data/data.module';
 import { Observable } from 'rxjs';
 import { AlarmService } from '../data/alarm.service';
-import { HttpClientService } from '../data/http-client.service';
 import { CdbService } from '../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
@@ -53,7 +53,8 @@ describe('TabularViewComponent', () => {
         MatSortModule,
         BrowserAnimationsModule,
         NgbModule.forRoot(),
-        IasMaterialModule
+        IasMaterialModule,
+        DataModule
       ],
       providers: [
         {
@@ -66,10 +67,7 @@ describe('TabularViewComponent', () => {
             }
           },
         },
-        HttpClientService,
         HttpClient,
-        AlarmService,
-        CdbService,
         NgbModal,
       ]
     })

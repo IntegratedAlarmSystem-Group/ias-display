@@ -3,11 +3,10 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DataModule } from '../data/data.module';
 import { IasHealthOverviewComponent } from './ias-health-overview.component';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { RoutingService} from '../data/routing.service';
-import { HttpClientService } from '../data/http-client.service';
-import { CdbService } from '../data/cdb.service';
 import { AlarmService } from '../data/alarm.service';
 
 describe('IasHealthOverviewComponent', () => {
@@ -25,13 +24,11 @@ describe('IasHealthOverviewComponent', () => {
       imports: [
         HttpClientModule,
         NgbModule.forRoot(),
-        IasMaterialModule
+        IasMaterialModule,
+        DataModule,
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
-        AlarmService,
-        CdbService,
-        HttpClientService,
         HttpClient
       ],
     })

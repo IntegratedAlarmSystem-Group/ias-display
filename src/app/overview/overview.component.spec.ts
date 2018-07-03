@@ -10,8 +10,6 @@ import {
   OverviewWeatherCardContentComponent
 } from '../overview-weather-card-content/overview-weather-card-content.component';
 import { RoutingService} from '../data/routing.service';
-import { HttpClientService } from '../data/http-client.service';
-import { CdbService } from '../data/cdb.service';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';
 
@@ -38,8 +36,6 @@ describe('OverviewComponent', () => {
       ],
       providers: [
           { provide: RoutingService, useValue: spyRoutingTable },
-          CdbService,
-          HttpClientService,
           HttpClient
       ],
     })

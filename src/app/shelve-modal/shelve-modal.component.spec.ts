@@ -4,7 +4,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
-import { HttpClientService } from '../data/http-client.service';
+import { DataModule } from '../data/data.module';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { ShelveModalComponent } from './shelve-modal.component';
@@ -31,14 +31,12 @@ describe('ShelveModalComponent', () => {
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        DataModule,
       ],
       providers: [
         NgbActiveModal,
-        HttpClientService,
         HttpClient,
-        AlarmService,
-        CdbService,
         NgxSpinnerService
       ],
     })

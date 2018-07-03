@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
 import { AckTreeComponent } from './ack-tree.component';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { HttpClientService } from '../data/http-client.service';
-import { CdbService } from '../data/cdb.service';
 import { Alarm } from '../alarm';
 
 
@@ -23,8 +21,6 @@ describe('AckTreeComponent', () => {
         DataModule,
       ],
       providers: [
-        CdbService,
-        HttpClientService,
         HttpClient,
       ]
     })

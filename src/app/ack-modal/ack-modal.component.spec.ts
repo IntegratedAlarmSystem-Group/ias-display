@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
+import { DataModule } from '../data/data.module';
 import { AckModalComponent } from './ack-modal.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { Alarm } from '../alarm';
@@ -46,14 +46,12 @@ describe('AckModalComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         NgxSpinnerModule,
-        IasMaterialModule
+        IasMaterialModule,
+        DataModule,
       ],
       providers: [
         NgbActiveModal,
-        HttpClientService,
         HttpClient,
-        AlarmService,
-        CdbService,
         NgxSpinnerService
       ],
     })

@@ -7,9 +7,8 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { HttpClientService } from '../data/http-client.service';
+import { DataModule } from '../data/data.module';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../data/cdb.service';
 import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../alarm';
@@ -60,12 +59,10 @@ describe('GIVEN a ShelveButtonComponent', () => {
         ReactiveFormsModule,
         NgxSpinnerModule,
         IasMaterialModule,
+        DataModule,
       ],
       providers: [
-        HttpClientService,
         HttpClient,
-        AlarmService,
-        CdbService,
         NgbModal,
         NgxSpinnerService
       ],

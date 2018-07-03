@@ -7,9 +7,7 @@ import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
-import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../data/cdb.service';
 import { AckButtonComponent } from './ack-button.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
@@ -56,9 +54,7 @@ describe('GIVEN an AckButtonComponent', () => {
         DataModule,
       ],
       providers: [
-        HttpClientService,
         HttpClient,
-        CdbService,
         NgbModal,
         NgxSpinnerService
       ],
