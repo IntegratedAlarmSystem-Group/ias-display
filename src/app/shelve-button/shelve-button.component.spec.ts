@@ -9,7 +9,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../alarm';

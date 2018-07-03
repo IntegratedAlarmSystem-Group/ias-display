@@ -6,7 +6,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { ShelveModalComponent } from './shelve-modal.component';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';

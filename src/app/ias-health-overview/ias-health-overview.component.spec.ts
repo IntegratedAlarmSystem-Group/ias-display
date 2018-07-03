@@ -7,7 +7,7 @@ import { IasHealthOverviewComponent } from './ias-health-overview.component';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { RoutingService} from '../routing.service';
 import { HttpClientService } from '../http-client.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { AlarmService } from '../data/alarm.service';
 
 describe('IasHealthOverviewComponent', () => {

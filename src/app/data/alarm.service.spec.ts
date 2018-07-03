@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';

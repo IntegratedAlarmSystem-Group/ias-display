@@ -3,11 +3,11 @@ import { TestRequest } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
-import { BackendUrls } from './settings';
+import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
-import { HttpClientService } from './http-client.service';
-import { environment } from '../environments/environment';
-import { Iasio } from './iasio';
+import { HttpClientService } from '../http-client.service';
+import { environment } from '../../environments/environment';
+import { Iasio } from '../iasio';
 
 
 describe('CdbService', () => {

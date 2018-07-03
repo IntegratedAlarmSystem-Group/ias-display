@@ -12,7 +12,7 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { Observable } from 'rxjs';
 import { AlarmService } from '../data/alarm.service';
 import { HttpClientService } from '../http-client.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';

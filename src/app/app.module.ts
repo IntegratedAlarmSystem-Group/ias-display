@@ -13,8 +13,6 @@ import { DataModule } from './data/data.module';
 
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
-// import { AlarmService } from './alarm.service';
-import { CdbService } from './cdb.service';
 import { AppComponent } from './app.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
@@ -74,12 +72,12 @@ export const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     IasMaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DataModule,
   ],
   providers: [
     HttpClientService,
     HttpClient,
-    CdbService,
     RoutingService,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,

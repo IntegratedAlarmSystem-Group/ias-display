@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { AckButtonComponent } from './ack-button.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';

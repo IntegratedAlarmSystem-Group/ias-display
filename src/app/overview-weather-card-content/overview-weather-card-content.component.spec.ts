@@ -7,7 +7,7 @@ import { OverviewWeatherCardContentComponent } from './overview-weather-card-con
 import { RoutingService} from '../routing.service';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { HttpClientService } from '../http-client.service';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { AlarmService } from '../data/alarm.service';
 
 

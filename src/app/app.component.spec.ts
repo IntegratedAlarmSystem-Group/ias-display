@@ -1,14 +1,11 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { DataModule } from './data/data.module';
 
 import { HttpClientService } from './http-client.service';
-import { AlarmService } from './data/alarm.service';
-import { CdbService } from './cdb.service';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 
 import { AppComponent } from './app.component';
@@ -37,7 +34,6 @@ describe('AppComponent', () => {
       providers: [
         HttpClientService,
         HttpClient,
-        CdbService,
         { provide: APP_BASE_HREF, useValue: '/' }
       ],
     }).compileComponents();

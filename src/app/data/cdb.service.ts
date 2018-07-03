@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import {forkJoin as observableForkJoin,  BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { environment } from '../environments/environment';
-import { HttpClientService } from './http-client.service';
-import { Iasio } from './iasio';
+import { environment } from '../../environments/environment';
+import { HttpClientService } from '../http-client.service';
+import { Iasio } from '../iasio';
 
 
 /**

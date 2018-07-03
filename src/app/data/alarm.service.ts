@@ -7,7 +7,7 @@ import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { BackendUrls, Streams } from '../settings';
-import { CdbService } from '../cdb.service';
+import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from '../http-client.service';
 
 
