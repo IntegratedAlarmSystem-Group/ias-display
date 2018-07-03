@@ -7,7 +7,7 @@ import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from '../data/http-client.service';
 import { environment } from '../../environments/environment';
-import { Iasio } from '../iasio';
+import { Iasio } from '../data/iasio';
 
 
 describe('CdbService', () => {

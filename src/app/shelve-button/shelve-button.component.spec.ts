@@ -11,8 +11,8 @@ import { DataModule } from '../data/data.module';
 import { AlarmService } from '../data/alarm.service';
 import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button.component';
-import { Alarm } from '../alarm';
-import { Iasio } from '../iasio';
+import { Alarm } from '../data/alarm';
+import { Iasio } from '../data/iasio';
 
 describe('GIVEN a ShelveButtonComponent', () => {
   let component: ShelveButtonComponent;

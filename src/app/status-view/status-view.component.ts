@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OperationalMode } from '../alarm';
+import { OperationalMode } from '../data/alarm';
 
 /**
  * Reusable component to show the state of an alarm

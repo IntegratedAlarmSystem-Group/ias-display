@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmComponent, AlarmImageSet } from './alarm.component';
-import { Alarm, Value, OperationalMode } from '../alarm';
+import { Alarm, Value, OperationalMode } from '../data/alarm';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
 describe('AlarmComponent', () => {

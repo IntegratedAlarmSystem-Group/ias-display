@@ -12,8 +12,8 @@ import { AckButtonComponent } from './ack-button.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { AckModalComponent } from '../ack-modal/ack-modal.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { Alarm } from '../alarm';
-import { Iasio } from '../iasio';
+import { Alarm } from '../data/alarm';
+import { Iasio } from '../data/iasio';
 
 
 describe('GIVEN an AckButtonComponent', () => {

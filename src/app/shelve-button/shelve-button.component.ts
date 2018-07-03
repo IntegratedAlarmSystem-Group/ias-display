@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../data/alarm.service';
-import { Alarm } from '../alarm';
+import { Alarm } from '../data/alarm';
 
 /**
  * Button used to trigger the event to open the Shelve Modal

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
 import { HttpClientService } from '../data/http-client.service';
-import { Iasio } from '../iasio';
+import { Iasio } from '../data/iasio';
 
 
 /**

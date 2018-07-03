@@ -11,8 +11,8 @@ import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
-import { Alarm } from '../alarm';
-import { Iasio } from '../iasio';
+import { Alarm } from '../data/alarm';
+import { Iasio } from '../data/iasio';
 
 
 describe('AckModalComponent', () => {

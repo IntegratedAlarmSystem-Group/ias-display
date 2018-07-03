@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 import { AlarmComponent, AlarmImageSet } from '../alarm/alarm.component';
 import { AlarmService } from '../data/alarm.service';
 import { RoutingService } from '../data/routing.service';
-import { Alarm } from '../alarm';
+import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
 
 /**

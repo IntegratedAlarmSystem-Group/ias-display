@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
 import { AckTreeComponent } from './ack-tree.component';
-import { Alarm } from '../alarm';
+import { Alarm } from '../data/alarm';
 
 
 describe('AckTreeComponent', () => {

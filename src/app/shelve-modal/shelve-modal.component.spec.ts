@@ -8,8 +8,8 @@ import { DataModule } from '../data/data.module';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { ShelveModalComponent } from './shelve-modal.component';
-import { Alarm } from '../alarm';
-import { Iasio } from '../iasio';
+import { Alarm } from '../data/alarm';
+import { Iasio } from '../data/iasio';
 
 describe('ShelveModalComponent', () => {
   let component: ShelveModalComponent;

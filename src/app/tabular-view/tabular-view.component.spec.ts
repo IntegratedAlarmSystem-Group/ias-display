@@ -20,8 +20,8 @@ import { AckButtonComponent } from '../ack-button/ack-button.component';
 import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
 import { WikiButtonComponent } from '../wiki-button/wiki-button.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
-import { Alarm } from '../alarm';
-import { Iasio } from '../iasio';
+import { Alarm } from '../data/alarm';
+import { Iasio } from '../data/iasio';
 
 
 describe('TabularViewComponent', () => {

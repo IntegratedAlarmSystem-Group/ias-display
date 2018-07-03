@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
-import { Alarm } from '../alarm';
+import { Alarm } from '../data/alarm';
 
 
 /**

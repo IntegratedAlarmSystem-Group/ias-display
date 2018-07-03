@@ -3,8 +3,8 @@ import { Observable ,  BehaviorSubject ,  SubscriptionLike as ISubscription } fr
 import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/material';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
-import { Alarm, OperationalMode, Validity } from '../alarm';
-import { DisplayedAlarm } from '../displayed-alarm';
+import { Alarm, OperationalMode, Validity } from '../data/alarm';
+import { DisplayedAlarm } from '../data/displayed-alarm';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { Locale } from '../settings';

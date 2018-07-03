@@ -2,7 +2,7 @@ import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
 import { of } from 'rxjs';
-import { Alarm, OperationalMode, Validity } from '../alarm';
+import { Alarm, OperationalMode, Validity } from '../data/alarm';
 import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';

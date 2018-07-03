@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Alarm } from '../alarm';
-import { DisplayedAlarm } from '../displayed-alarm';
+import { Alarm } from '../data/alarm';
+import { DisplayedAlarm } from '../data/displayed-alarm';
 
 /** Object used to format the dates as needed */
 const datepipe = new DatePipe('en');

@@ -1,4 +1,4 @@
-import { Alarm } from '../alarm';
+import { Alarm } from '../data/alarm';
 import { AlarmImageSet } from './alarm.component';
 
 /** Set of mock icons alarms for the tests */
