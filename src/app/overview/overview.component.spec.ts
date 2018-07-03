@@ -9,7 +9,7 @@ import { OverviewCardComponent } from '../overview-card/overview-card.component'
 import {
   OverviewWeatherCardContentComponent
 } from '../overview-weather-card-content/overview-weather-card-content.component';
-import { RoutingService} from '../routing.service';
+import { RoutingService} from '../data/routing.service';
 import { HttpClientService } from '../data/http-client.service';
 import { CdbService } from '../data/cdb.service';
 import { AlarmComponent } from '../alarm//alarm.component';

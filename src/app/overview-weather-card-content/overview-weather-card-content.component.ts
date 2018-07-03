@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutingService } from '../routing.service';
+import { RoutingService } from '../data/routing.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../alarm/alarm.component';
 import { AlarmService } from '../data/alarm.service';

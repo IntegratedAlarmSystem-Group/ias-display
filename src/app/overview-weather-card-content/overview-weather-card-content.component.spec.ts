@@ -4,7 +4,7 @@ import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
-import { RoutingService} from '../routing.service';
+import { RoutingService} from '../data/routing.service';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { HttpClientService } from '../data/http-client.service';
 import { CdbService } from '../data/cdb.service';

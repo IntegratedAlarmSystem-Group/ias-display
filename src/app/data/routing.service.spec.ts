@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppModule, appRoutes } from './app.module';
+import { AppModule, appRoutes } from '../app.module';
 import { RoutingService } from './routing.service';
 
 

@@ -10,8 +10,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
-
-import { RoutingService} from './routing.service';
 import { AppComponent } from './app.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
@@ -76,7 +74,6 @@ export const appRoutes: Routes = [
   ],
   providers: [
     HttpClient,
-    RoutingService,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],
