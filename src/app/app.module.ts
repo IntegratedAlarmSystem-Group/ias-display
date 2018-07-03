@@ -10,6 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
@@ -19,7 +20,6 @@ import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
 import { AckButtonComponent } from './ack-button/ack-button.component';
-import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { LegendComponent } from './legend/legend.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
@@ -52,7 +52,6 @@ export const appRoutes: Routes = [
     OverviewWeatherCardContentComponent,
     AckButtonComponent,
     AckTreeComponent,
-    WikiButtonComponent,
     LegendComponent,
     ShelveModalComponent,
     ShelveButtonComponent,
@@ -71,6 +70,7 @@ export const appRoutes: Routes = [
     IasMaterialModule,
     NgxSpinnerModule,
     DataModule,
+    SharedModule,
   ],
   providers: [
     HttpClient,

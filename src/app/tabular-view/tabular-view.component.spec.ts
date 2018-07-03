@@ -8,9 +8,10 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
-import { Observable } from 'rxjs';
+import { SharedModule } from '../shared/shared.module';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
@@ -18,7 +19,6 @@ import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { AckButtonComponent } from '../ack-button/ack-button.component';
 import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
-import { WikiButtonComponent } from '../wiki-button/wiki-button.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm } from '../data/alarm';
 import { Iasio } from '../data/iasio';
@@ -45,7 +45,6 @@ describe('TabularViewComponent', () => {
         LegendComponent,
         AckButtonComponent,
         ShelveButtonComponent,
-        WikiButtonComponent,
       ],
       imports: [
         MatTableModule,
@@ -54,7 +53,8 @@ describe('TabularViewComponent', () => {
         BrowserAnimationsModule,
         NgbModule.forRoot(),
         IasMaterialModule,
-        DataModule
+        DataModule,
+        SharedModule,
       ],
       providers: [
         {
