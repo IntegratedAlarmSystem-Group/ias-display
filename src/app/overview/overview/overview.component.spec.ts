@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { DataModule } from '../data/data.module';
-import { SharedModule } from '../shared/shared.module';
+import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
 import { OverviewComponent } from './overview.component';
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
 import {
   OverviewWeatherCardContentComponent
 } from '../overview-weather-card-content/overview-weather-card-content.component';
-import { RoutingService} from '../data/routing.service';
-import { AlarmComponent } from '../shared/alarm/alarm.component';
+import { RoutingService} from '../../data/routing.service';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';
 
 

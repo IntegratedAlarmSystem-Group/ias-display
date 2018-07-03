@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutingService } from '../data/routing.service';
+import { RoutingService } from '../../data/routing.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
-import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
-import { AlarmService } from '../data/alarm.service';
-import { Alarm } from '../data/alarm';
-import { Assets } from '../settings';
+import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmService } from '../../data/alarm.service';
+import { Alarm } from '../../data/alarm';
+import { Assets } from '../../settings';
 
 /**
  * Summarized state of the weather alarm subsystem

@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { DataModule } from '../data/data.module';
-import { SharedModule } from '../shared/shared.module';
+import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
-import { RoutingService} from '../data/routing.service';
-import { AlarmComponent } from '../shared/alarm/alarm.component';
-import { AlarmService } from '../data/alarm.service';
+import { RoutingService} from '../../data/routing.service';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
+import { AlarmService } from '../../data/alarm.service';
 
 
 describe('OverviewWeatherCardContentComponent', () => {
