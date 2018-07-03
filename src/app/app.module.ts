@@ -19,7 +19,6 @@ import { AckTreeComponent } from './ack-tree/ack-tree.component';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
-import { AckButtonComponent } from './ack-button/ack-button.component';
 import { LegendComponent } from './legend/legend.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { AlarmComponent } from './alarm/alarm.component';
@@ -49,7 +48,6 @@ export const appRoutes: Routes = [
     OverviewComponent,
     OverviewCardComponent,
     OverviewWeatherCardContentComponent,
-    AckButtonComponent,
     AckTreeComponent,
     LegendComponent,
     ShelveModalComponent,

@@ -6,14 +6,14 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
-import { DataModule } from '../data/data.module';
-import { AlarmService } from '../data/alarm.service';
+import { DataModule } from '../../data/data.module';
+import { AlarmService } from '../../data/alarm.service';
 import { AckButtonComponent } from './ack-button.component';
-import { AckTreeComponent } from '../ack-tree/ack-tree.component';
-import { AckModalComponent } from '../ack-modal/ack-modal.component';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { Alarm } from '../data/alarm';
-import { Iasio } from '../data/iasio';
+import { AckTreeComponent } from '../../ack-tree/ack-tree.component';
+import { AckModalComponent } from '../../ack-modal/ack-modal.component';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { Alarm } from '../../data/alarm';
+import { Iasio } from '../../data/iasio';
 
 
 describe('GIVEN an AckButtonComponent', () => {
