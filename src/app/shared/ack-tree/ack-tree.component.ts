@@ -4,8 +4,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
-import { AlarmService } from '../data/alarm.service';
-import { Alarm } from '../data/alarm';
+import { AlarmService } from '../../data/alarm.service';
+import { Alarm } from '../../data/alarm';
 
 /**
  * Node for an alarm item

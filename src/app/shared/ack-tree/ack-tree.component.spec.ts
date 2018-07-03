@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { DataModule } from '../data/data.module';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { DataModule } from '../../data/data.module';
 import { AckTreeComponent } from './ack-tree.component';
-import { Alarm } from '../data/alarm';
+import { Alarm } from '../../data/alarm';
 
 
 describe('AckTreeComponent', () => {
