@@ -37,5 +37,9 @@ import { WikiButtonComponent } from './wiki-button/wiki-button.component';
     ShelveModalComponent,
     WikiButtonComponent,
   ],
+  entryComponents: [
+    AckModalComponent,
+    ShelveModalComponent,
+  ]
 })
 export class SharedModule { }

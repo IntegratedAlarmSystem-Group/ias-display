@@ -51,12 +51,6 @@ describe('GIVEN the RoutingService', () => {
     expect(location.path()).toBe('/tabular');
   }));
 
-  it('WHEN we navigate to /modal, THEN it should go to /modal', fakeAsync(() => {
-    router.navigate(['/modal']);
-    tick(1);
-    expect(location.path()).toBe('/modal');
-  }));
-
   it('WHEN we call tableWithFilter, THEN it should go to /tabular', fakeAsync(() => {
     subject.tableWithFilter('');
     tick(1);

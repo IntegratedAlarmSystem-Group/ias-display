@@ -14,12 +14,10 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
-import { AckModalComponent } from './shared/ack-modal/ack-modal.component';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
 import { LegendComponent } from './legend/legend.component';
-import { ShelveModalComponent } from './shared/shelve-modal/shelve-modal.component';
 import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
 
 
@@ -31,7 +29,6 @@ export const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
-  { path: 'modal', component: AckModalComponent }
 ];
 
 /**
@@ -70,8 +67,6 @@ export const appRoutes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [
     StatusViewComponent,
-    AckModalComponent,
-    ShelveModalComponent,
   ]
 })
 export class AppModule { }
