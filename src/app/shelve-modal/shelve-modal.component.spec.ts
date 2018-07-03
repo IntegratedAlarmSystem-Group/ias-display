@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { HttpClientService } from '../http-client.service';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../cdb.service';
 import { ShelveModalComponent } from './shelve-modal.component';
 import { Alarm } from '../alarm';

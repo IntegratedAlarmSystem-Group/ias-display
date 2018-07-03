@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmService } from './alarm.service';
+import { AlarmService } from './data/alarm.service';
 
 /**
 * Main component of the application

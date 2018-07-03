@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../alarm';
 
 /**

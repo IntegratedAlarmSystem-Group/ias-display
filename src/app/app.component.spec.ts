@@ -4,7 +4,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HttpClientService } from './http-client.service';
-import { AlarmService } from './alarm.service';
+import { AlarmService } from './data/alarm.service';
 import { CdbService } from './cdb.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

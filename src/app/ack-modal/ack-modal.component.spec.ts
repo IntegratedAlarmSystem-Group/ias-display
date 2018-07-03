@@ -9,7 +9,7 @@ import { AckModalComponent } from './ack-modal.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientService } from '../http-client.service';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../cdb.service';
 import { Alarm } from '../alarm';
 import { Iasio } from '../iasio';

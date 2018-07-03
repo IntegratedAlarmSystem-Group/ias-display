@@ -9,9 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
+import { DataModule } from './data/data.module';
+
 import { RoutingService} from './routing.service';
 import { HttpClientService } from './http-client.service';
-import { AlarmService } from './alarm.service';
+// import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { AppComponent } from './app.component';
 import { StatusViewComponent } from './status-view/status-view.component';
@@ -77,7 +79,6 @@ export const appRoutes: Routes = [
   providers: [
     HttpClientService,
     HttpClient,
-    AlarmService,
     CdbService,
     RoutingService,
     { provide: APP_BASE_HREF, useValue: '/' },

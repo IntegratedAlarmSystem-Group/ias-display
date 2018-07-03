@@ -8,7 +8,7 @@ import { AlarmComponent } from '../alarm//alarm.component';
 import { RoutingService} from '../routing.service';
 import { HttpClientService } from '../http-client.service';
 import { CdbService } from '../cdb.service';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 
 describe('IasHealthOverviewComponent', () => {
   let component: IasHealthOverviewComponent;

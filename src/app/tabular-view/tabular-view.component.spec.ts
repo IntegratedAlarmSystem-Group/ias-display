@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { Observable } from 'rxjs';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 import { HttpClientService } from '../http-client.service';
 import { CdbService } from '../cdb.service';
 import { TabularViewComponent } from './tabular-view.component';

@@ -5,7 +5,7 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { DisplayedAlarm } from '../displayed-alarm';
-import { AlarmService } from '../alarm.service';
+import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../cdb.service';
 import { Locale } from '../settings';
 

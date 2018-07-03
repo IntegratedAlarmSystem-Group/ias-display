@@ -4,11 +4,11 @@ import { map } from 'rxjs/operators';
 import { Observable ,  BehaviorSubject } from 'rxjs';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { WebSocketBridge } from 'django-channels';
-import { environment } from '../environments/environment';
-import { Alarm, OperationalMode, Validity } from './alarm';
-import { BackendUrls, Streams } from './settings';
-import { CdbService } from './cdb.service';
-import { HttpClientService } from './http-client.service';
+import { environment } from '../../environments/environment';
+import { Alarm, OperationalMode, Validity } from '../alarm';
+import { BackendUrls, Streams } from '../settings';
+import { CdbService } from '../cdb.service';
+import { HttpClientService } from '../http-client.service';
 
 
 /**
