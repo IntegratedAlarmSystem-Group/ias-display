@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../data/data.module';
 import { AckTreeComponent } from './ack-tree.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../data/http-client.service';
 import { CdbService } from '../data/cdb.service';
 import { Alarm } from '../alarm';
 

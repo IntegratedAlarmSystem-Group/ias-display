@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable ,  BehaviorSubject } from 'rxjs';
@@ -8,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Alarm, OperationalMode, Validity } from '../alarm';
 import { BackendUrls, Streams } from '../settings';
 import { CdbService } from '../data/cdb.service';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from './http-client.service';
 
 
 /**

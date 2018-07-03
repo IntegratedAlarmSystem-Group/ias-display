@@ -3,11 +3,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { DataModule } from './data/data.module';
-
-import { HttpClientService } from './http-client.service';
 import { IasMaterialModule } from './ias-material/ias-material.module';
-
+import { DataModule } from './data/data.module';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
@@ -32,7 +29,6 @@ describe('AppComponent', () => {
         DataModule,
       ],
       providers: [
-        HttpClientService,
         HttpClient,
         { provide: APP_BASE_HREF, useValue: '/' }
       ],

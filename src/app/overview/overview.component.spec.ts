@@ -10,7 +10,7 @@ import {
   OverviewWeatherCardContentComponent
 } from '../overview-weather-card-content/overview-weather-card-content.component';
 import { RoutingService} from '../routing.service';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../data/http-client.service';
 import { CdbService } from '../data/cdb.service';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';

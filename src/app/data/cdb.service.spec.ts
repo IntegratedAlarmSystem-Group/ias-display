@@ -5,7 +5,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../data/http-client.service';
 import { environment } from '../../environments/environment';
 import { Iasio } from '../iasio';
 

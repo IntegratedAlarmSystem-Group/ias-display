@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { AckModalComponent } from './ack-modal.component';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { Alarm } from '../alarm';

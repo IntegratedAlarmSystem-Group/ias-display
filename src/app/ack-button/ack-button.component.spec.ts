@@ -7,7 +7,7 @@ import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
 import { AckButtonComponent } from './ack-button.component';
