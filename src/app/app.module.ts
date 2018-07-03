@@ -11,13 +11,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
 import { SharedModule } from './shared/shared.module';
+import { TabularModule } from './tabular/tabular.module';
 import { AppComponent } from './app.component';
-import { StatusViewComponent } from './status-view/status-view.component';
-import { TabularViewComponent } from './tabular-view/tabular-view.component';
+import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
-import { LegendComponent } from './legend/legend.component';
 import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
 
 
@@ -37,12 +36,9 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    StatusViewComponent,
-    TabularViewComponent,
     OverviewComponent,
     OverviewCardComponent,
     OverviewWeatherCardContentComponent,
-    LegendComponent,
     IasHealthOverviewComponent
   ],
   imports: [
@@ -58,15 +54,13 @@ export const appRoutes: Routes = [
     NgxSpinnerModule,
     DataModule,
     SharedModule,
+    TabularModule,
   ],
   providers: [
     HttpClient,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    StatusViewComponent,
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

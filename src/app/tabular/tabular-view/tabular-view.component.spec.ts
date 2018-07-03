@@ -9,17 +9,17 @@ import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { DataModule } from '../data/data.module';
-import { SharedModule } from '../shared/shared.module';
-import { AlarmService } from '../data/alarm.service';
-import { CdbService } from '../data/cdb.service';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
+import { AlarmService } from '../../data/alarm.service';
+import { CdbService } from '../../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
-import { Alarm } from '../data/alarm';
-import { Iasio } from '../data/iasio';
+import { Alarm } from '../../data/alarm';
+import { Iasio } from '../../data/iasio';
 
 
 describe('TabularViewComponent', () => {
