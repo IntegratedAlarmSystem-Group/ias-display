@@ -7,9 +7,7 @@ import { AlarmService } from './alarm.service';
     CommonModule
   ],
   declarations: [
-    DataModule,
-    AlarmService,
   ],
-  providers: []
+  providers: [AlarmService]
 })
 export class DataModule { }

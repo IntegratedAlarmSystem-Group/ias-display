@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
    * @returns {boolean} Value of the main sidenav isCompacted variable
    */
   toggleSidenav(): boolean {
-    this.isCompacted=!this.isCompacted
+    this.isCompacted = !this.isCompacted;
     return this.isCompacted;
   }
 }

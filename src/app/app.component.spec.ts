@@ -2,6 +2,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { DataModule } from './data/data.module';
 
 import { HttpClientService } from './http-client.service';
 import { AlarmService } from './data/alarm.service';
@@ -30,12 +31,12 @@ describe('AppComponent', () => {
         RouterModule.forRoot(appRoutes),
         HttpClientModule,
         BrowserAnimationsModule,
-        IasMaterialModule
+        IasMaterialModule,
+        DataModule,
       ],
       providers: [
         HttpClientService,
         HttpClient,
-        AlarmService,
         CdbService,
         { provide: APP_BASE_HREF, useValue: '/' }
       ],

@@ -6,6 +6,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
+import { DataModule } from '../data/data.module';
 import { HttpClientService } from '../http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../cdb.service';
@@ -51,12 +52,12 @@ describe('GIVEN an AckButtonComponent', () => {
         NgbModule.forRoot(),
         ReactiveFormsModule,
         NgxSpinnerModule,
-        IasMaterialModule
+        IasMaterialModule,
+        DataModule,
       ],
       providers: [
         HttpClientService,
         HttpClient,
-        AlarmService,
         CdbService,
         NgbModal,
         NgxSpinnerService

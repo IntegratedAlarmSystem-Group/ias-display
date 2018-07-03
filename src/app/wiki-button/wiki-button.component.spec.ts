@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WikiButtonComponent } from './wiki-button.component';
 
 describe('WikiButtonComponent', () => {

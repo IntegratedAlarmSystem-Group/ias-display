@@ -3,6 +3,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DataModule } from '../data/data.module';
 import { OverviewComponent } from './overview.component';
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
 import {
@@ -11,7 +12,6 @@ import {
 import { RoutingService} from '../routing.service';
 import { HttpClientService } from '../http-client.service';
 import { CdbService } from '../cdb.service';
-import { AlarmService } from '../data/alarm.service';
 import { AlarmComponent } from '../alarm//alarm.component';
 import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';
 
@@ -23,6 +23,12 @@ describe('OverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        NgbModule.forRoot(),
+        IasMaterialModule,
+        DataModule,
+      ],
       declarations: [
         OverviewComponent,
         OverviewCardComponent,
@@ -30,14 +36,8 @@ describe('OverviewComponent', () => {
         IasHealthOverviewComponent,
         AlarmComponent,
       ],
-      imports: [
-        HttpClientModule,
-        NgbModule.forRoot(),
-        IasMaterialModule,
-      ],
       providers: [
           { provide: RoutingService, useValue: spyRoutingTable },
-          AlarmService,
           CdbService,
           HttpClientService,
           HttpClient
