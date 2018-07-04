@@ -10,6 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
+import { HealthModule } from './health/health.module';
 import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
 import { TabularModule } from './tabular/tabular.module';
@@ -17,7 +18,6 @@ import { WeatherModule } from './weather/weather.module';
 import { AppComponent } from './app.component';
 import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview/overview.component';
-import { IasHealthOverviewComponent } from './overview/ias-health-overview/ias-health-overview.component';
 
 
 /**
@@ -49,6 +49,7 @@ export const appRoutes: Routes = [
     IasMaterialModule,
     NgxSpinnerModule,
     DataModule,
+    HealthModule,
     OverviewModule,
     SharedModule,
     TabularModule,

@@ -10,11 +10,11 @@ import { Assets } from '../../settings';
  * Summarized state of the IAS health
  */
 @Component({
-  selector: 'app-ias-health-overview',
-  templateUrl: './ias-health-overview.component.html',
-  styleUrls: ['./ias-health-overview.component.css']
+  selector: 'app-health-summary',
+  templateUrl: './health-summary.component.html',
+  styleUrls: ['./health-summary.component.css']
 })
-export class IasHealthOverviewComponent implements OnInit, OnDestroy {
+export class HealthSummaryComponent implements OnInit, OnDestroy {
 
   /** Set of icons */
   public iconSet: AlarmImageSet;

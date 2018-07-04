@@ -4,21 +4,21 @@ import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../../data/data.module';
-import { IasHealthOverviewComponent } from './ias-health-overview.component';
+import { HealthSummaryComponent } from './health-summary.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmService } from '../../data/alarm.service';
 
-describe('IasHealthOverviewComponent', () => {
-  let component: IasHealthOverviewComponent;
-  let fixture: ComponentFixture<IasHealthOverviewComponent>;
+describe('HealthSummaryComponent', () => {
+  let component: HealthSummaryComponent;
+  let fixture: ComponentFixture<HealthSummaryComponent>;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        IasHealthOverviewComponent,
+        HealthSummaryComponent,
         AlarmComponent
       ],
       imports: [
@@ -41,7 +41,7 @@ describe('IasHealthOverviewComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IasHealthOverviewComponent);
+    fixture = TestBed.createComponent(HealthSummaryComponent);
     component = fixture.componentInstance;
     alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();

@@ -5,12 +5,12 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
+import { HealthModule } from '../../health/health.module';
 import { WeatherModule } from '../../weather/weather.module';
 import { OverviewComponent } from './overview.component';
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { IasHealthOverviewComponent } from '../ias-health-overview/ias-health-overview.component';
 
 
 describe('OverviewComponent', () => {
@@ -25,13 +25,13 @@ describe('OverviewComponent', () => {
         NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
+        HealthModule,
         SharedModule,
         WeatherModule,
       ],
       declarations: [
         OverviewComponent,
-        OverviewCardComponent,
-        IasHealthOverviewComponent,
+        OverviewCardComponent
       ],
       providers: [
           { provide: RoutingService, useValue: spyRoutingTable },

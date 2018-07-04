@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HealthModule } from '../../health/health.module';
 import { WeatherModule } from '../../weather/weather.module';
 import { OverviewCardComponent } from './overview-card.component';
 
@@ -12,6 +13,7 @@ describe('OverviewCardComponent', () => {
         OverviewCardComponent
       ],
       imports: [
+        HealthModule,
         WeatherModule
       ]
     })
