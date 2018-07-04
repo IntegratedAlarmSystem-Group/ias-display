@@ -102,9 +102,9 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
   * Define the alarms that the component should listen to and their respective icons
   */
   defineAlarmsAndImages() {
-    this.humidityAlarmId = 'WS-Humidity-Global';
-    this.tempAlarmId = 'WS-Temperature-Global';
-    this.windsAlarmId = 'WS-WindSpeed-Global';
+    this.humidityAlarmId = 'WS-Humidity';
+    this.tempAlarmId = 'WS-Temperature';
+    this.windsAlarmId = 'WS-WindSpeed';
 
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
