@@ -8,7 +8,10 @@ import { WeatherModule } from '../weather/weather.module';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
 
-
+/**
+* This module contains the general components associated to the overview.
+* It is worth noting that the overview of each system is defined in the module of the system
+*/
 @NgModule({
   imports: [
     CommonModule,
