@@ -10,11 +10,11 @@ import { Assets } from '../../settings';
  * Summarized state of the weather alarm subsystem
  */
 @Component({
-  selector: 'app-overview-weather-card-content',
-  templateUrl: './overview-weather-card-content.component.html',
-  styleUrls: ['./overview-weather-card-content.component.css']
+  selector: 'app-weather-summary',
+  templateUrl: './weather-summary.component.html',
+  styleUrls: ['./weather-summary.component.css']
 })
-export class OverviewWeatherCardContentComponent implements OnInit, OnDestroy {
+export class WeatherSummaryComponent implements OnInit, OnDestroy {
 
   /** Set of Humidity icons */
   public humidityImageSet: AlarmImageSet;

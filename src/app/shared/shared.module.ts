@@ -39,6 +39,7 @@ import { WikiButtonComponent } from './wiki-button/wiki-button.component';
   ],
   entryComponents: [
     AckModalComponent,
+    AlarmComponent,
     ShelveModalComponent,
   ]
 })

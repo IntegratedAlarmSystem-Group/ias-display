@@ -5,9 +5,7 @@ import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { OverviewComponent } from './overview/overview.component';
 import { OverviewCardComponent } from './overview-card/overview-card.component';
-import {
-  OverviewWeatherCardContentComponent
-} from './overview-weather-card-content/overview-weather-card-content.component';
+import { WeatherModule } from '../weather/weather.module';
 import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
 
 
@@ -17,17 +15,16 @@ import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-ove
     IasMaterialModule,
     DataModule,
     SharedModule,
+    WeatherModule,
   ],
   declarations: [
     OverviewComponent,
     OverviewCardComponent,
-    OverviewWeatherCardContentComponent,
     IasHealthOverviewComponent
   ],
   exports: [
     OverviewComponent,
     OverviewCardComponent,
-    OverviewWeatherCardContentComponent,
     IasHealthOverviewComponent
   ]
 })

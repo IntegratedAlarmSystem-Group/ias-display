@@ -5,15 +5,15 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
-import { OverviewWeatherCardContentComponent } from './overview-weather-card-content.component';
+import { WeatherSummaryComponent } from './weather-summary.component';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 
 
-describe('OverviewWeatherCardContentComponent', () => {
-  let component: OverviewWeatherCardContentComponent;
-  let fixture: ComponentFixture<OverviewWeatherCardContentComponent>;
+describe('WeatherSummaryComponent', () => {
+  let component: WeatherSummaryComponent;
+  let fixture: ComponentFixture<WeatherSummaryComponent>;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
@@ -21,7 +21,7 @@ describe('OverviewWeatherCardContentComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        OverviewWeatherCardContentComponent,
+        WeatherSummaryComponent,
       ],
       imports: [
         HttpClientModule,
@@ -44,7 +44,7 @@ describe('OverviewWeatherCardContentComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OverviewWeatherCardContentComponent);
+    fixture = TestBed.createComponent(WeatherSummaryComponent);
     component = fixture.componentInstance;
     alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();
