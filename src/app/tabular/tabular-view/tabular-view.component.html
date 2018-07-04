@@ -1,0 +1,99 @@
+<mat-card>
+
+  <mat-card-header>
+    <div class="alarms-table-header">
+        <div class="main-container">
+          Alarms
+        </div>
+        <div class="secondary-container">
+        </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+
+    <app-legend></app-legend>
+
+    <!-- <mat-slide-toggle>
+      All / Set only
+    </mat-slide-toggle> -->
+
+    <div class="row">
+      <div class="col-md-9">
+        <span mat-form-field>
+          <input matInput [value]="filterString" (keyup)="applyFilter($event.target.value)" placeholder="Enter keyword...">
+        </span>
+      </div>
+      <div class="col-md-3">
+        <div class="ias checkbox container show-set-alarms">
+          <!-- <input id="set-checkbox" type="checkbox" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()"> -->
+          <label class="ias-checkbox"> Show only set alarms
+            <input type="checkbox" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
+            <span class="ias-checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Status </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm">
+          <app-status-view value={{alarm.status}}></app-status-view>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Monitoring Point Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Alarm Name </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Mode Column -->
+      <ng-container matColumnDef="mode">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Mode </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.mode}} </mat-cell>
+      </ng-container>
+
+      <!-- Timestamp Column -->
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Last Change Time </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dat2eFormat: timezone }} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Description </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> Actions </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm">
+          <app-ack-button alarm_id={{alarm.name}}></app-ack-button>
+          <app-shelve-button alarm_id={{alarm.name}}></app-shelve-button>
+          <app-wiki-button url={{alarm.url}}></app-wiki-button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+
+</mat-card>

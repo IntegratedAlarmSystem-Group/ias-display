@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmService } from './alarm.service';
+import { AlarmService } from './data/alarm.service';
 
 /**
 * Main component of the application
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
    * @returns {boolean} Value of the main sidenav isCompacted variable
    */
   toggleSidenav(): boolean {
-    this.isCompacted=!this.isCompacted
+    this.isCompacted = !this.isCompacted;
     return this.isCompacted;
   }
 }
