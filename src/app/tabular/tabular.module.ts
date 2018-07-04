@@ -6,6 +6,9 @@ import { LegendComponent } from './legend/legend.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
+/**
+* This module contains all the components related to the Table view
+*/
 @NgModule({
   imports: [
     CommonModule,

@@ -11,6 +11,13 @@ import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 
+/**
+* This module contains all the shared components, that are meant to be used bty the other modules.
+* For example:
+ * - Acknowledge and shelve components
+ * - Acknowledge, shelve and action buttons
+ * - Alarm components
+*/
 @NgModule({
   imports: [
     CommonModule,
