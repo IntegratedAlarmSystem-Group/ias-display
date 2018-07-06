@@ -7,6 +7,12 @@ import { CdbService } from '../../data/cdb.service';
 import { Alarm } from '../../data/alarm';
 
 
+export interface TimeoutOption {
+  value: string;
+  viewValue: string;
+}
+
+
 /**
  * Modal used to acknowledge alarms
  */
@@ -16,6 +22,12 @@ import { Alarm } from '../../data/alarm';
   styleUrls: ['./shelve-modal.component.css', './shelve-modal.component.scss']
 })
 export class ShelveModalComponent implements OnInit {
+
+  timeouts: TimeoutOption[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
 
   /**
    * Alarm object to be shelved/unshelved

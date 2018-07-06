@@ -21,10 +21,10 @@ import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 @NgModule({
   imports: [
     CommonModule,
+    IasMaterialModule,
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    IasMaterialModule,
   ],
   declarations: [
     AckButtonComponent,
