@@ -183,6 +183,20 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
+  * This function is executed after a key is pressed in the keywords input box
+  * If the user pressed "Escape", then the filters are reset, if not, the filters are applied normally
+  * @param {event} event the event that triggered the function
+  */
+  onKeyUp(event) {
+    if (event.key === 'Escape') {
+      this.filterString = '';
+      this.applyFilter(this.filterString);
+    } else {
+      this.applyFilter(event.target.value);
+    }
+  }
+
+  /**
   * Applies the filter ot the Table
   * @param {string} filterValue the string containing keywords for filtering
   */
