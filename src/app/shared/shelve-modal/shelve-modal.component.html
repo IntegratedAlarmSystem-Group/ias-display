@@ -17,14 +17,24 @@
     </div>
     <div class="section shelve-action">
       <div *ngIf="!alarm.shelved; then shelveForm"></div>
+
       <ng-template #shelveForm>
         <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain why the alarm is being shelved"></textarea>
+        <mat-form-field class="timeout-form-field">
+          <mat-select placeholder="Select a timeout" formControlName="timeout">
+            <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
+              {{timeout.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <div class="action-info">
-          * The shelve button will be enabled after writing the message
+          * The shelve button will be enabled after writing the message and selecting a timeout
         </div>
       </ng-template>
+
     </div>
   </div>
+
   <div class="modal-action modal-footer">
     <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="activeModal.dismiss('Cancel click')">Cancel</button>
     <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>

@@ -1,7 +1,6 @@
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -54,15 +53,14 @@ describe('GIVEN a ShelveButtonComponent', () => {
         ShelveModalComponent,
       ],
       imports: [
-        HttpClientModule,
         NgbModule.forRoot(),
+        FormsModule,
         ReactiveFormsModule,
         NgxSpinnerModule,
         IasMaterialModule,
         DataModule,
       ],
       providers: [
-        HttpClient,
         NgbModal,
         NgxSpinnerService
       ],
@@ -132,13 +130,11 @@ describe('GIVEN a ShelveButtonComponent', () => {
         .and.callFake(function() {
           return 'https://more-information-website/alarm'; });
       fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        const shelveModal = component.onClick(mockEvent);
-        expect(modalService.open).toHaveBeenCalled();
-        expect(shelveModal).toBeTruthy();
-        expect(shelveModal instanceof NgbModalRef).toBeTruthy();
-        expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
-      });
+      const shelveModal = component.onClick(mockEvent);
+      expect(modalService.open).toHaveBeenCalled();
+      expect(shelveModal).toBeTruthy();
+      expect(shelveModal instanceof NgbModalRef).toBeTruthy();
+      expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
     });
   });
 });

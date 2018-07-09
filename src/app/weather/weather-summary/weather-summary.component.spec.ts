@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
 import { WeatherSummaryComponent } from './weather-summary.component';
@@ -24,7 +23,6 @@ describe('WeatherSummaryComponent', () => {
         WeatherSummaryComponent,
       ],
       imports: [
-        HttpClientModule,
         NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
@@ -32,7 +30,6 @@ describe('WeatherSummaryComponent', () => {
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
-        HttpClient
       ],
     })
     .overrideModule( BrowserDynamicTestingModule , {
