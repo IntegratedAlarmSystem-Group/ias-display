@@ -130,13 +130,11 @@ describe('GIVEN a ShelveButtonComponent', () => {
         .and.callFake(function() {
           return 'https://more-information-website/alarm'; });
       fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        const shelveModal = component.onClick(mockEvent);
-        // expect(modalService.open).toHaveBeenCalled();
-        expect(shelveModal).toBeTruthy();
-        expect(shelveModal instanceof NgbModalRef).toBeTruthy();
-        expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
-      });
+      const shelveModal = component.onClick(mockEvent);
+      expect(modalService.open).toHaveBeenCalled();
+      expect(shelveModal).toBeTruthy();
+      expect(shelveModal instanceof NgbModalRef).toBeTruthy();
+      expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
     });
   });
 });
