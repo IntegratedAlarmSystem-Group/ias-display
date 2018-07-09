@@ -24,9 +24,12 @@ export interface TimeoutOption {
 export class ShelveModalComponent implements OnInit {
 
   timeouts: TimeoutOption[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+    {value: '0:15:00', viewValue: '15 minutes'},
+    {value: '0:30:00', viewValue: '30 minutes'},
+    {value: '1:00:00', viewValue: '1 hour'},
+    {value: '2:00:00', viewValue: '2 hours'},
+    {value: '6:00:00', viewValue: '6 hours'},
+    {value: '12:00:00', viewValue: '12 hours'},
   ];
 
   /**
@@ -61,7 +64,8 @@ export class ShelveModalComponent implements OnInit {
    */
   ngOnInit() {
     this.form = this.formBuilder.group({
-      message: [null, [Validators.required]]
+      message: [null, [Validators.required]],
+      timeout: [null, [Validators.required]]
     });
   }
 
@@ -95,9 +99,10 @@ export class ShelveModalComponent implements OnInit {
    */
   shelve() {
     this.spinnerService.show();
+    const message = this.form.get('message').value;
+    const timeout = this.form.get('timeout').value;
     if (this.canSend()) {
-      this.alarmService.shelveAlarm(
-        this.alarm.core_id, this.form.get('message').value).subscribe(
+      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
           (response) => {
             this.sendSuccessful(response, true);
             this.spinnerService.hide();
