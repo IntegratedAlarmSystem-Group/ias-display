@@ -7,7 +7,6 @@ import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
 import { HealthModule } from './health/health.module';
@@ -44,7 +43,6 @@ export const appRoutes: Routes = [
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     IasMaterialModule,
     NgxSpinnerModule,
     DataModule,

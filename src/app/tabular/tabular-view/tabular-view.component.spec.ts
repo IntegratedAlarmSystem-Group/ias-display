@@ -3,7 +3,6 @@ import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -46,7 +45,6 @@ describe('TabularViewComponent', () => {
         MatTableModule,
         HttpClientModule,
         MatSortModule,
-        BrowserAnimationsModule,
         NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,

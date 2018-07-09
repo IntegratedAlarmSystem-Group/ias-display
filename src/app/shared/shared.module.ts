@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { DataModule } from '../data/data.module';
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { AckModalComponent } from './ack-modal/ack-modal.component';
 import { AckTreeComponent } from './ack-tree/ack-tree.component';
@@ -21,6 +22,7 @@ import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 @NgModule({
   imports: [
     CommonModule,
+    DataModule,
     IasMaterialModule,
     NgxSpinnerModule,
     FormsModule,
