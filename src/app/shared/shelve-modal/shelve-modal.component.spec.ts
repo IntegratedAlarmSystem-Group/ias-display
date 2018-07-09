@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
@@ -31,7 +30,6 @@ describe('ShelveModalComponent', () => {
       declarations: [ ShelveModalComponent ],
       imports: [
         CommonModule,
-        HttpClientModule,
         IasMaterialModule,
         FormsModule,
         ReactiveFormsModule,
@@ -40,7 +38,6 @@ describe('ShelveModalComponent', () => {
       ],
       providers: [
         NgbActiveModal,
-        HttpClient,
         NgxSpinnerService
       ],
     })

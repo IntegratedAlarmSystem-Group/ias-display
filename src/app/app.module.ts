@@ -1,7 +1,6 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,7 +37,6 @@ export const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     FormsModule,
@@ -53,7 +51,6 @@ export const appRoutes: Routes = [
     WeatherModule,
   ],
   providers: [
-    HttpClient,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],

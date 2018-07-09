@@ -1,5 +1,4 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { IasMaterialModule } from './ias-material/ias-material.module';
@@ -22,12 +21,10 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
-        HttpClientModule,
         IasMaterialModule,
         DataModule,
       ],
       providers: [
-        HttpClient,
         { provide: APP_BASE_HREF, useValue: '/' }
       ],
     }).compileComponents();
