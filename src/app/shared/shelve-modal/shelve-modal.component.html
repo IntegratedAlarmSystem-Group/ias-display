@@ -24,13 +24,10 @@
           * The shelve button will be enabled after writing the message
         </div>
         <mat-form-field>
-          <mat-select placeholder="Shelve timeout">
-            <mat-option>Option 1</mat-option>
-            <mat-option>Option 2</mat-option>
-            <mat-option>Option 3</mat-option>
-            <!-- <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
+          <mat-select placeholder="Shelve timeout" formControlName="timeout">
+            <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
               {{timeout.viewValue}}
-            </mat-option> -->
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </ng-template>
