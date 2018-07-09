@@ -8,6 +8,7 @@
     </div>
     <div class="content-wrapper">
       <span class='app-title'> Integrated Alarm System </span>
+      <button style="margin-left:40px;" mat-raised-button (click)="actionsdrawer.toggle()">Actions drawer</button>
     </div>
   </mat-toolbar>
 
@@ -29,9 +30,15 @@
         </div>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content id="main-sidenav-content">
+
+    <mat-sidenav-content id="main-sidenav-content" autosize>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
+    <mat-sidenav id="actions-sidenav" style="padding:20px; min-width:300px;" #actionsdrawer position="end" mode="side" opened="false">
+      <router-outlet name="actions-drawer"></router-outlet>
+    </mat-sidenav>
+    
   </mat-sidenav-container>
 
 </div>
