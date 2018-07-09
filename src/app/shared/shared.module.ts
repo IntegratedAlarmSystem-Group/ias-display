@@ -10,6 +10,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
+import { AckComponent } from './ack/ack.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -34,6 +35,7 @@ import { WikiButtonComponent } from './wiki-button/wiki-button.component';
     ShelveButtonComponent,
     ShelveModalComponent,
     WikiButtonComponent,
+    AckComponent,
   ],
   exports: [
     AckButtonComponent,
