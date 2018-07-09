@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -28,9 +30,11 @@ describe('ShelveModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ShelveModalComponent ],
       imports: [
+        CommonModule,
         HttpClientModule,
-        ReactiveFormsModule,
+        IasMaterialModule,
         FormsModule,
+        ReactiveFormsModule,
         NgxSpinnerModule,
         DataModule,
       ],
@@ -122,20 +126,41 @@ describe('ShelveModalComponent', () => {
       .toEqual(expected);
   });
 
-  // TextArea
-  describe('should have an input field', () => {
-    it('in the modal body', () => {
+  // Form
+  describe('should have a form', () => {
+    it('with an input field and a select', () => {
       expect(modalBody.querySelector('textarea')).toBeTruthy();
+      expect(modalBody.querySelector('mat-select')).toBeTruthy();
     });
     describe('such that when it is empty', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when the user enters a message', () => {
+    describe('such that when it is empty', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message but does not select a timeout', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['message'].setValue('Any Message');
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user selects a timeout but does not enter a message ', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['timeout'].setValue(component.timeouts[0]);
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message but and selects a timeout ', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
         component.form.controls['message'].setValue('Any Message');
+        component.form.controls['timeout'].setValue(component.timeouts[0]);
         expect(component.form.valid).toBeTruthy();
       });
     });
@@ -149,7 +174,7 @@ describe('ShelveModalComponent', () => {
       expect(sendButton.innerText).toEqual('Shelve');
     });
     describe('and when the user clicks on it,', () => {
-      describe('and the user has not entered a message', () => {
+      describe('and the user has not entered a message and selected a timeout', () => {
         it('it should not call the component shelve method', async(() => {
           modalFooter.querySelector('#send').click();
           fixture.whenStable().then(() => {
@@ -157,9 +182,10 @@ describe('ShelveModalComponent', () => {
           });
         }));
       });
-      describe('and the user has entered a message', () => {
+      describe('and the user has entered a message and selected a timeout', () => {
         it('it should call the component shelve method', async(() => {
           component.form.controls['message'].setValue('Any message');
+          component.form.controls['timeout'].setValue(component.timeouts[0]);
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();
           modalFooter.querySelector('#send').click();

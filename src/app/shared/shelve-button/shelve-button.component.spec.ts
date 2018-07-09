@@ -14,7 +14,7 @@ import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
 import { Iasio } from '../../data/iasio';
 
-describe('GIVEN a ShelveButtonComponent', () => {
+xdescribe('GIVEN a ShelveButtonComponent', () => {
   let component: ShelveButtonComponent;
   let fixture: ComponentFixture<ShelveButtonComponent>;
   let alarmService: AlarmService;

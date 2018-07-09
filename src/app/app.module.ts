@@ -45,7 +45,6 @@ export const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     IasMaterialModule,
     NgxSpinnerModule,
     DataModule,
