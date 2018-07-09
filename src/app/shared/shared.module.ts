@@ -11,6 +11,7 @@ import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { AckComponent } from './ack/ack.component';
+import { ShelveComponent } from './shelve/shelve.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -29,21 +30,24 @@ import { AckComponent } from './ack/ack.component';
   ],
   declarations: [
     AckButtonComponent,
+    AckComponent,
     AlarmComponent,
     AckModalComponent,
     AckTreeComponent,
     ShelveButtonComponent,
     ShelveModalComponent,
+    ShelveComponent,
     WikiButtonComponent,
-    AckComponent,
   ],
   exports: [
     AckButtonComponent,
+    AckComponent,
     AlarmComponent,
     AckModalComponent,
     AckTreeComponent,
     ShelveButtonComponent,
     ShelveModalComponent,
+    ShelveComponent,
     WikiButtonComponent,
   ],
   entryComponents: [

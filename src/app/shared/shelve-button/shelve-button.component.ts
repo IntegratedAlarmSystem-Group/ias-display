@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
+import { Router } from '@angular/router';
 
 /**
  * Button used to trigger the event to open the Shelve Modal
@@ -32,7 +33,8 @@ export class ShelveButtonComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   /**
@@ -67,13 +69,10 @@ export class ShelveButtonComponent implements OnInit {
   }
 
   /**
-  * Handle click on table rows, it triggers the shelve modal
+  * Handle click on table rows, it triggers the shelve sidebar
   */
   onClick(event) {
-    const shelveModal = this.modalService.open(ShelveModalComponent,
-      { size: 'lg', centered: true }
-    );
-    shelveModal.componentInstance.alarm = this.alarm;
-    return shelveModal;
+    this.router.navigate([{outlets: {primary: 'tabular' ,sidebar: 'shelve/' + this.alarm_id}}]);
   }
+
 }

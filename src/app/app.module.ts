@@ -18,6 +18,9 @@ import { WeatherModule } from './weather/weather.module';
 import { AppComponent } from './app.component';
 import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview/overview.component';
+import { AckComponent } from './shared/ack/ack.component';
+import { ShelveComponent } from './shared/shelve/shelve.component';
+
 
 
 /**
@@ -28,6 +31,8 @@ export const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
+  { path: 'ack', component: AckComponent, outlet: 'sidebar'},
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'sidebar'}
 ];
 
 /**
