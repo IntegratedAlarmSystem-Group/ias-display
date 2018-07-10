@@ -10,6 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
+import { ActionsModule } from './actions/actions.module';
 import { HealthModule } from './health/health.module';
 import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
@@ -42,6 +43,7 @@ export const appRoutes: Routes = [
     AppComponent,
   ],
   imports: [
+    ActionsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),

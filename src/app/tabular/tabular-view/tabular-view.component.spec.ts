@@ -5,7 +5,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -30,6 +30,7 @@ describe('TabularViewComponent', () => {
   const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
   let cdbService: CdbService;
+  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const alarms = MockAlarms;
   const iasios = MockIasios;
   const expectedRows = ExpectedTableRows;
@@ -63,6 +64,7 @@ describe('TabularViewComponent', () => {
             }
           },
         },
+        { provide: Router, useValue: spyRoutingTable },
         HttpClient,
         NgbModal,
       ]
