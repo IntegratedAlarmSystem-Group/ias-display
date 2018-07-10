@@ -8,12 +8,11 @@
     </div>
     <div class="content-wrapper">
       <span class='app-title'> Integrated Alarm System </span>
-      <button style="margin-left:40px;" mat-raised-button (click)="sidenavService.toggle()">Actions drawer</button>
     </div>
   </mat-toolbar>
 
   <mat-sidenav-container autosize>
-    <mat-sidenav id="main-sidenav" [class.compacted]="isCompacted" mode="side" opened="true">
+    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true">
       <mat-list>
         <mat-list-item>
           <div class="ias ias-logo-container">
@@ -22,16 +21,16 @@
         </mat-list-item>
       </mat-list>
       <mat-nav-list>
-        <div *ngFor="let item of sidenavItems">
+        <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[{outlets: {primary: item.link, actions: null}}]' routerLinkActive="active-link">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
-            <p matLine *ngIf="!isCompacted">{{ item.title }} </p>
+            <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
         </div>
       </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content id="main-sidenav-content" autosize>
+    <mat-sidenav-content id="navigation-sidenav-content" autosize>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 

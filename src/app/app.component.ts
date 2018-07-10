@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { AlarmService } from './data/alarm.service';
-import { RoutingService } from './data/routing.service';
 import { SidenavService } from './actions/sidenav.service';
 
 /**
@@ -14,6 +13,9 @@ import { SidenavService } from './actions/sidenav.service';
 })
 export class AppComponent implements OnInit {
 
+  /*
+  * Reference to the Actions sidenav (right sidenav)
+  */
   @ViewChild('actionsSidenav') public actionsSidenav: MatSidenav;
 
   /**
@@ -24,10 +26,10 @@ export class AppComponent implements OnInit {
   /**
   * State of the main sidenav
   */
-  isCompacted = true;
+  isNavigationCompacted = true;
 
-  /** Sidebar Menu of the application */
-  sidenavItems = [
+  /** Navigation Sidenav Menu of the application (left sidenav) */
+  navigationSidenavItems = [
     { title: 'Overview', link: 'overview', icon: 'language'},
     { title: 'Table', link: 'tabular', icon: 'list'}
   ];
@@ -38,8 +40,7 @@ export class AppComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
-    public sidenavService: SidenavService,
-    public routingService: RoutingService
+    public actionsSidenavService: SidenavService
   ) {}
 
   /**
@@ -47,15 +48,15 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.alarmService.initialize();
-    this.sidenavService.setSidenav(this.actionsSidenav);
+    this.actionsSidenavService.setSidenav(this.actionsSidenav);
   }
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} Value of the main sidenav isCompacted variable
+   * @returns {boolean} Value of the main sidenav isNavigationCompacted variable
    */
   toggleSidenav(): boolean {
-    this.isCompacted = !this.isCompacted;
-    return this.isCompacted;
+    this.isNavigationCompacted = !this.isNavigationCompacted;
+    return this.isNavigationCompacted;
   }
 }
