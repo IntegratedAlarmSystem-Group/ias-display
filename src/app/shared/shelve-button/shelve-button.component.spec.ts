@@ -5,12 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Router } from '@angular/router';
-import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
+import { AppModule, appRoutes } from '../../app.module';
 import { AlarmService } from '../../data/alarm.service';
-import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
 import { Iasio } from '../../data/iasio';
@@ -21,8 +20,6 @@ describe('GIVEN a ShelveButtonComponent', () => {
   let alarmService: AlarmService;
   let debug: DebugElement;
   let html: HTMLElement;
-  let modalService: NgbModal;
-  let modalRef: NgbModalRef;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const mockAlarm = {
     'value': 4,
@@ -53,27 +50,17 @@ describe('GIVEN a ShelveButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ShelveButtonComponent,
-        ShelveModalComponent,
       ],
       imports: [
         HttpClientModule,
         NgbModule.forRoot(),
-        ReactiveFormsModule,
-        NgxSpinnerModule,
         IasMaterialModule,
         DataModule,
       ],
       providers: [
         HttpClient,
         { provide: Router, useValue: spyRoutingTable },
-        NgbModal,
-        NgxSpinnerService
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ ShelveModalComponent ]
-      }
     })
     .compileComponents();
   }));
@@ -116,32 +103,19 @@ describe('GIVEN a ShelveButtonComponent', () => {
       expect(shelveButton.title).toEqual('Unshelve');
     });
   });
-  //
-  // describe('AND WHEN the user clicks on it', () => {
-  //   it('THEN the modal is opened', async () => {
-  //     const mockEvent = {
-  //       data: {
-  //         alarm: Alarm.asAlarm(mockAlarm)
-  //       }
-  //     };
-  //     modalService = TestBed.get(NgbModal);
-  //     modalRef = modalService.open(ShelveModalComponent);
-  //     modalRef.componentInstance.alarm = mockEvent.data.alarm;
-  //     spyOn(modalService, 'open').and.returnValue(modalRef);
-  //     spyOn(modalRef.componentInstance, 'getAlarmDescription')
-  //       .and.callFake(function() {
-  //         return 'Short description for the mock alarm from cdb'; });
-  //     spyOn(modalRef.componentInstance, 'getAlarmUrl')
-  //       .and.callFake(function() {
-  //         return 'https://more-information-website/alarm'; });
-  //     fixture.detectChanges();
-  //     fixture.whenStable().then(() => {
-  //       const shelveModal = component.onClick(mockEvent);
-  //       expect(modalService.open).toHaveBeenCalled();
-  //       expect(shelveModal).toBeTruthy();
-  //       expect(shelveModal instanceof NgbModalRef).toBeTruthy();
-  //       expect(shelveModal.componentInstance.alarm).toEqual(mockEvent.data.alarm);
-  //     });
-  //   });
-  // });
+
+  describe('AND WHEN the user clicks on it', () => {
+    it('THEN the sidenav is opened with ShelveComponent as content', () => {
+      const mockEvent = {
+        data: {
+          alarm: Alarm.asAlarm(mockAlarm)
+        }
+      };
+      component.onClick(null);
+      const expectedargs = [{outlets: {actions: ['shelve', component.alarm_id]}}];
+      expect(spyRoutingTable.navigate.calls.count()).toBe(1, 'spy method was called once');
+      expect(spyRoutingTable.navigate.calls.mostRecent().args[0]).
+        toEqual(expectedargs, 'spy method was called with the right parameters');
+    });
+  });
 });

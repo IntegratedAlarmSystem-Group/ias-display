@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 import { Router } from '@angular/router';
@@ -27,13 +25,11 @@ export class ShelveButtonComponent implements OnInit {
 
 
   /**
-   * The "constructor", injects the {@link AlarmService} and the {@link modalService}
+   * The "constructor", injects the {@link AlarmService}
    * @param {AlarmService} alarmService Service to get the alarm object based on the input id
-   * @param {ModalService} modalService Service to manage the Modal Component
    */
   constructor(
     private alarmService: AlarmService,
-    private modalService: NgbModal,
     private router: Router
   ) { }
 
