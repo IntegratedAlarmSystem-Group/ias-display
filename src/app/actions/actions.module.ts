@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
+import { SidenavService } from './sidenav.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { DataModule } from '../data/data.module';
   declarations: [
     AckComponent,
     ShelveComponent,
+  ],
+  providers: [
+    SidenavService,
   ],
   exports: [
     AckComponent,
