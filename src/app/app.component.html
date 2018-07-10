@@ -22,12 +22,12 @@
         </mat-list-item>
       </mat-list>
       <mat-nav-list>
-        <mat-list-item *ngFor="let item of sidenavItems">
-          <a routerLink="{{ item.link }}" routerLinkActive="active-link">
+        <div *ngFor="let item of sidenavItems">
+          <a mat-list-item [routerLink]='[{outlets: {primary: item.link, actions: null}}]' routerLinkActive="active-link">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
             <p matLine *ngIf="!isCompacted">{{ item.title }} </p>
           </a>
-        </mat-list-item>
+        </div>
       </mat-nav-list>
     </mat-sidenav>
 
@@ -35,8 +35,8 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav #sidenav id="actions-sidenav" style="padding:20px; min-width:300px;" position="end" mode="side" opened="false">
-      <router-outlet name="sidebar"></router-outlet>
+    <mat-sidenav #actionsSidenav id="actions-sidenav" style="padding:20px; min-width:300px;" position="end" mode="side" opened="false">
+      <router-outlet name="actions"></router-outlet>
     </mat-sidenav>
   </mat-sidenav-container>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { AlarmService } from './data/alarm.service';
+import { RoutingService } from './data/routing.service';
 import { SidenavService } from './actions/sidenav.service';
 
 /**
@@ -13,7 +14,7 @@ import { SidenavService } from './actions/sidenav.service';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('sidenav') public sidenav: MatSidenav;
+  @ViewChild('actionsSidenav') public actionsSidenav: MatSidenav;
 
   /**
   * Title of the application
@@ -27,11 +28,8 @@ export class AppComponent implements OnInit {
 
   /** Sidebar Menu of the application */
   sidenavItems = [
-    // { title: 'Overview', link: '/overview', sidelink: null, icon: 'language'},
-    // { title: 'Table', link: '/tabular', sidelink: null, icon: 'list'}
-    { title: 'Overview', link: '/overview', icon: 'language'},
-    { title: 'Overview', link: "[{outlets: {primary: 'tabular', sidebar: null}}]", icon: 'language'},
-    { title: 'Table', link: '/tabular', icon: 'list'}
+    { title: 'Overview', link: 'overview', icon: 'language'},
+    { title: 'Table', link: 'tabular', icon: 'list'}
   ];
 
   /**
@@ -40,7 +38,8 @@ export class AppComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
-    public sidenavService: SidenavService
+    public sidenavService: SidenavService,
+    public routingService: RoutingService
   ) {}
 
   /**
@@ -48,7 +47,7 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.alarmService.initialize();
-    this.sidenavService.setSidenav(this.sidenav);
+    this.sidenavService.setSidenav(this.actionsSidenav);
   }
 
   /**

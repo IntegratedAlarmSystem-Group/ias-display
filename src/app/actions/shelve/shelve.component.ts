@@ -21,13 +21,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
     });
-    console.log('alarm_id = ', this.alarm_id);
-    console.log('Gonna open sidenav');
     this.sidenavService.open();
   }
 
   ngOnDestroy() {
-    console.log('Gonna close sidenav');
     this.sidenavService.close();
   }
 

@@ -30,8 +30,8 @@ export const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
-  { path: 'ack', component: AckComponent, outlet: 'sidebar'},
-  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'sidebar'}
+  { path: 'ack', component: AckComponent, outlet: 'actions'},
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'}
 ];
 
 /**

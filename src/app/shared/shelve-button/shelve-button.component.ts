@@ -72,7 +72,7 @@ export class ShelveButtonComponent implements OnInit {
   * Handle click on table rows, it triggers the shelve sidebar
   */
   onClick(event) {
-    this.router.navigate([{outlets: {sidebar: 'shelve/' + this.alarm_id}}]);
+    this.router.navigate([{outlets: {actions: ['shelve', this.alarm_id]}}]);
   }
 
 }
