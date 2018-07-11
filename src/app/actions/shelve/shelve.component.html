@@ -1,5 +1,5 @@
 <div class="component-action component-header">
-  <h4 class="component-title"> ALARM SHELVING </h4>
+  <div class="component-title"> ALARM SHELVING </div>
   <button type="button" class="close" aria-label="Close" (click)="onClose()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -8,30 +8,41 @@
 <form class="form-group" [formGroup]="form">
   <div class="component-action component-body">
     <div class="section alarm-info">
-      <p>{{ getAlarmDescription() }} </p>
-      <p>
-        <a class="alarmUrl" target="_blank" href="{{ getAlarmUrl() }}">
-          <span class="alarmLink">Go to wiki</span>&nbsp;<i class="ion-md-open"></i>
-        </a>
-      </p>
+      <table>
+        <tr>
+          <th>Alarm ID</th>
+          <td>{{alarm?.core_id}}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{{ getAlarmDescription() }}</td>
+        </tr>
+      </table>
     </div>
     <div class="section shelve-action">
       <div *ngIf="!alarm.shelved; then shelveForm"></div>
 
       <ng-template #shelveForm>
-        <textarea name="message" class="form-control" formControlName="message" placeholder="Write a message to explain why the alarm is being shelved"></textarea>
-        <mat-form-field class="timeout-form-field">
-          <mat-select placeholder="Select a timeout" formControlName="timeout">
+        <div class="section-title">Information required to shelve the Alarm</div>
+        <mat-form-field class="message-form-field" appearance="outline">
+          <mat-label> Reason for shelving </mat-label>
+          <textarea matInput name="message" formControlName="message" placeholder="Please write here the reason for shelving the Alarm"></textarea>
+        </mat-form-field>
+
+        <!-- <div class="section-title">Shelving duration</div> -->
+        <mat-form-field class="timeout-form-field" appearance="outline">
+          <mat-label> Time in shelf </mat-label>
+          <mat-select placeholder="Select duration" formControlName="timeout">
             <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
               {{timeout.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <div class="action-info">
-          * The shelve button will be enabled after writing the message
-        </div>
+        <!-- <div class="action-info">
+          * The shelve button will be enabled after writing the message and selecting a duration
+        </div> -->
       </ng-template>
-      
+
     </div>
   </div>
   <div class="component-action component-footer">

@@ -5,10 +5,9 @@ mat-toolbar {
 }
 
 mat-sidenav-container {
-  background: #282e38;
+  background: #212d3a;
 
   mat-sidenav {
-    background: #2e445c;
   }
 
   mat-sidenav-content {
@@ -22,6 +21,7 @@ button {
 
 #navigation-sidenav {
 
+  background: #2e445c;
   position: absolute;
   top: 65px;
   bottom: 0;
@@ -104,6 +104,13 @@ button {
   /* &.compacted */
 
 }
+
+#actions-sidenav  {
+  background: transparent;
+  width: 500px;
+  padding: 24px;
+}
+
 
 #main-content  {
   height: calc(100vh - 64px) !important;

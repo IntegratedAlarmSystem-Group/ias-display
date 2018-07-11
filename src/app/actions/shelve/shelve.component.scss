@@ -11,32 +11,51 @@
 
   &.component-header {
     background: transparent;
-    border-bottom: 0px solid #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 0px;
 
     .component-title {
-      padding: 8px 4px;
+      display: inline;
     }
 
   }
 
   &.component-body {
     background: transparent;
+    font-size: 14px;
 
     .section {
-      padding: 10px 8px;
+      padding: 24px 0px 10px 0px;
 
-      &.alarm-info {}
+      .section-title {
+        font-weight: bold;
+        padding-bottom: 16px;
+      }
+
+      &.alarm-info {
+        table {
+          vertical-align: top;
+        }
+
+        th {
+          padding-right: 16px;
+          font-weight: normal;
+        }
+
+        td {
+          color: #4ac8ff;
+        }
+      }
 
       &.shelve-action {
 
         textarea {
-          box-sizing: border-box;
-          width: 100%;
-          height: 100px;
-          background: #2e404e;
-          color: white;
-          border-color: #495d6e;
-          padding-bottom: 10px;
+          // box-sizing: border-box;
+          // width: 100%;
+          min-height: 150px;
+          // background: #2e404e;
+          // color: white;
+          // border-color: #495d6e;
         }
 
         .form-control:focus {
@@ -44,15 +63,19 @@
         }
 
         .action-info {
-          padding-top: 10px;
-          padding-bottom: 10px;
           font-size: 14px;
           color: #a4acac;
         }
 
+        .message-form-field {
+          width: 100%;
+          color: #4ac8ff;
+          // border-color: #495d6e;
+        }
+
         .timeout-form-field {
-          padding-top: 10px;
-          padding-bottom: 10px;
+          color: #4ac8ff;
+          width: 100%;
         }
 
       }
@@ -64,6 +87,7 @@
   &.component-footer {
     background: transparent;
     border-top: 0px solid #000;
+    font-size: 14px;
 
     .btn.btn-action {
 
