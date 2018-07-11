@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="component-action component-footer">
-    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="this.close()">Cancel</button>
+    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="close()">Cancel</button>
     <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
   </div>
 </form>
