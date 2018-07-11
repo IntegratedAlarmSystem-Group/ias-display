@@ -71,7 +71,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   /*
   * Closes the sidenav
   */
-  close() {
+  onClose() {
     this.router.navigate([{outlets: {actions: null}}]);
   }
 
@@ -86,7 +86,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     } else {
       console.log('Unshelved successful for alarms: ', alarms);
     }
-    this.close();
+    this.onClose();
   }
 
   /**

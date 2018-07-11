@@ -17,11 +17,11 @@ fdescribe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
   let alarmIasio: Iasio;
-  let alarmService: AlarmService;
   let componentBody: any;
   let componentHeader: any;
   let componentFooter: any;
-  let cdbSubject: CdbService;
+  let alarmService: AlarmService;
+  let cdbService: CdbService;
   let sidenavService: SidenavService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const mockIasConfiguration = {
@@ -83,27 +83,21 @@ fdescribe('ShelveComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(
-    inject([CdbService], (cdbService) => {
-      cdbSubject = cdbService;
-      spyOn(cdbSubject, 'initialize')
-        .and.callFake(function() {});
-      cdbSubject.iasConfiguration = mockIasConfiguration;
-      alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
-      cdbSubject.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
-    })
-  );
-
   beforeEach(() => {
     fixture = TestBed.createComponent(ShelveComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    cdbService = fixture.debugElement.injector.get(CdbService);
     sidenavService = fixture.debugElement.injector.get(SidenavService);
+    spyOn(cdbService, 'initialize').and.callFake(function() {});
     spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
     spyOn(sidenavService, 'close');
     spyOn(sidenavService, 'toggle');
+    cdbService.iasConfiguration = mockIasConfiguration;
+    alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
+    cdbService.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
     component = fixture.componentInstance;
     component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
@@ -111,6 +105,10 @@ fdescribe('ShelveComponent', () => {
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
@@ -123,87 +121,87 @@ fdescribe('ShelveComponent', () => {
     expect(componentBody.textContent).toContain(component.alarm_id);
   });
 
-  // it('should display the alarm short description', () => {
-  //   const expected = alarmIasio.short_desc;
-  //   expect(componentBody.textContent).toContain(expected);
-  // });
-  //
-  // it('should display a link to get more information about the alarms', () => {
-  //   const expected = alarmIasio.doc_url;
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('.alarmUrl').href)
-  //     .toEqual(expected);
-  // });
-  //
-  // // TextArea
-  // describe('should have an input field', () => {
-  //   it('in the modal body', () => {
-  //     expect(componentBody.querySelector('textarea')).toBeTruthy();
-  //   });
-  //   describe('such that when it is empty', () => {
-  //     it('the form should be invalid', () => {
-  //       expect(component.form.valid).toBeFalsy();
-  //     });
-  //   });
-  //   describe('such that when the user enters a message', () => {
-  //     it('the form should be valid', () => {
-  //       expect(component.form.valid).toBeFalsy();
-  //       component.form.controls['message'].setValue('Any Message');
-  //       expect(component.form.valid).toBeTruthy();
-  //     });
-  //   });
-  // });
-  //
-  // // Shelve button
-  // describe('WHEN the Alarm is unshelved, it should have a Shelve button', () => {
-  //   it('in the modal footer', () => {
-  //     const sendButton = componentFooter.querySelector('#send');
-  //     expect(sendButton).toBeTruthy();
-  //     expect(sendButton.innerText).toEqual('Shelve');
-  //   });
-  //   describe('and when the user clicks on it,', () => {
-  //     describe('and the user has not entered a message', () => {
-  //       it('it should not call the component shelve method', async(() => {
-  //         componentFooter.querySelector('#send').click();
-  //         fixture.whenStable().then(() => {
-  //           expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
-  //         });
-  //       }));
-  //     });
-  //     describe('and the user has entered a message', () => {
-  //       it('it should call the component shelve method', async(() => {
-  //         component.form.controls['message'].setValue('Any message');
-  //         expect(component.form.valid).toBeTruthy();
-  //         fixture.detectChanges();
-  //         componentFooter.querySelector('#send').click();
-  //         fixture.whenStable().then(() => {
-  //           expect(alarmService.shelveAlarm).toHaveBeenCalled();
-  //           expect(alarmService.unshelveAlarms).not.toHaveBeenCalled();
-  //         });
-  //       }));
-  //     });
-  //   });
-  // });
-  //
-  // // Unshelve button
-  // describe('WHEN the Alarm is shelved, it should have an Unshelve button', () => {
-  //   it('in the modal footer', () => {
-  //     component.alarm.shelve();
-  //     fixture.detectChanges();
-  //     const sendButton = componentFooter.querySelector('#send');
-  //     expect(sendButton).toBeTruthy();
-  //     expect(sendButton.innerText).toEqual('Unshelve');
-  //   });
-  //   describe('and when the user clicks on it,', () => {
-  //     it('it should call the component unshelve method', async(() => {
-  //       component.alarm.shelve();
-  //       fixture.detectChanges();
-  //       componentFooter.querySelector('#send').click();
-  //       fixture.whenStable().then(() => {
-  //         expect(alarmService.unshelveAlarms).toHaveBeenCalled();
-  //         expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
-  //       });
-  //     }));
-  //   });
-  // });
+  it('should display the alarm short description', () => {
+    const expected = alarmIasio.short_desc;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display a link to get more information about the alarms', () => {
+    const expected = alarmIasio.doc_url;
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.alarmUrl').href)
+      .toEqual(expected);
+  });
+
+  // TextArea
+  describe('should have an input field', () => {
+    it('in the modal body', () => {
+      expect(componentBody.querySelector('textarea')).toBeTruthy();
+    });
+    describe('such that when it is empty', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message', () => {
+      it('the form should be valid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['message'].setValue('Any Message');
+        expect(component.form.valid).toBeTruthy();
+      });
+    });
+  });
+
+  // Shelve button
+  describe('WHEN the Alarm is unshelved, it should have a Shelve button', () => {
+    it('in the modal footer', () => {
+      const sendButton = componentFooter.querySelector('#send');
+      expect(sendButton).toBeTruthy();
+      expect(sendButton.innerText).toEqual('Shelve');
+    });
+    describe('and when the user clicks on it,', () => {
+      describe('and the user has not entered a message', () => {
+        it('it should not call the component shelve method', async(() => {
+          componentFooter.querySelector('#send').click();
+          fixture.whenStable().then(() => {
+            expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
+          });
+        }));
+      });
+      describe('and the user has entered a message', () => {
+        it('it should call the component shelve method', async(() => {
+          component.form.controls['message'].setValue('Any message');
+          expect(component.form.valid).toBeTruthy();
+          fixture.detectChanges();
+          componentFooter.querySelector('#send').click();
+          fixture.whenStable().then(() => {
+            expect(alarmService.shelveAlarm).toHaveBeenCalled();
+            expect(alarmService.unshelveAlarms).not.toHaveBeenCalled();
+          });
+        }));
+      });
+    });
+  });
+
+  // Unshelve button
+  describe('WHEN the Alarm is shelved, it should have an Unshelve button', () => {
+    it('in the modal footer', () => {
+      component.alarm.shelve();
+      fixture.detectChanges();
+      const sendButton = componentFooter.querySelector('#send');
+      expect(sendButton).toBeTruthy();
+      expect(sendButton.innerText).toEqual('Unshelve');
+    });
+    describe('and when the user clicks on it,', () => {
+      it('it should call the component unshelve method', async(() => {
+        component.alarm.shelve();
+        fixture.detectChanges();
+        componentFooter.querySelector('#send').click();
+        fixture.whenStable().then(() => {
+          expect(alarmService.unshelveAlarms).toHaveBeenCalled();
+          expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
+        });
+      }));
+    });
+  });
 });

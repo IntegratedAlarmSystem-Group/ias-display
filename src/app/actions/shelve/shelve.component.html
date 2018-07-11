@@ -1,6 +1,6 @@
 <div class="component-action component-header">
   <h4 class="component-title"> ALARM SHELVING </h4>
-  <button type="button" class="close" aria-label="Close" (click)="close()">
+  <button type="button" class="close" aria-label="Close" (click)="onClose()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="component-action component-footer">
-    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="close()">Cancel</button>
+    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
     <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
   </div>
 </form>
