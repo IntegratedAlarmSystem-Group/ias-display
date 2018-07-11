@@ -1,7 +1,6 @@
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Router } from '@angular/router';
@@ -52,13 +51,11 @@ describe('GIVEN a ShelveButtonComponent', () => {
         ShelveButtonComponent,
       ],
       imports: [
-        HttpClientModule,
         NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
       ],
       providers: [
-        HttpClient,
         { provide: Router, useValue: spyRoutingTable },
       ],
     })

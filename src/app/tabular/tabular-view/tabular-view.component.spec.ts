@@ -1,9 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -45,9 +43,7 @@ describe('TabularViewComponent', () => {
       ],
       imports: [
         MatTableModule,
-        HttpClientModule,
         MatSortModule,
-        BrowserAnimationsModule,
         NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
@@ -65,7 +61,6 @@ describe('TabularViewComponent', () => {
           },
         },
         { provide: Router, useValue: spyRoutingTable },
-        HttpClient,
         NgbModal,
       ]
     })

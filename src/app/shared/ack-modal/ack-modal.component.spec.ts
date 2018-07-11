@@ -1,5 +1,4 @@
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -42,7 +41,6 @@ describe('AckModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AckModalComponent, AckTreeComponent ],
       imports: [
-        HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
         NgxSpinnerModule,
@@ -51,7 +49,6 @@ describe('AckModalComponent', () => {
       ],
       providers: [
         NgbActiveModal,
-        HttpClient,
         NgxSpinnerService
       ],
     })

@@ -22,11 +22,7 @@
       </div>
       <div class="col-md-3">
         <div class="ias checkbox container show-set-alarms">
-          <!-- <label class="ias-checkbox"> Show only set alarms
-            <input type="checkbox" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
-            <span class="ias-checkmark"></span>
-          </label> -->
-          <mat-slide-toggle color="primary" [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
+          <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
             Show only set alarms
           </mat-slide-toggle>
         </div>

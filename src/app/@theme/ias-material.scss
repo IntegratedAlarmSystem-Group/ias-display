@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$ias-app-primary: mat-palette($mat-indigo);
+$ias-app-primary: mat-palette($mat-grey, 50);
 $ias-app-accent: mat-palette($mat-pink, A200, A100, A400);
 $ias-app-warn: mat-palette($mat-red);
 

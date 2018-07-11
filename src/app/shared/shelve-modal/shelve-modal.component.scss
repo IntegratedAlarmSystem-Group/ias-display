@@ -36,6 +36,7 @@
           background: #2e404e;
           color: white;
           border-color: #495d6e;
+          padding-bottom: 10px;
         }
 
         .form-control:focus {
@@ -47,6 +48,11 @@
           padding-bottom: 10px;
           font-size: 14px;
           color: #a4acac;
+        }
+
+        .timeout-form-field {
+          padding-top: 10px;
+          padding-bottom: 10px;
         }
 
       }

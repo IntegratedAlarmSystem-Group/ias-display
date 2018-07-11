@@ -1,7 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
@@ -23,13 +21,10 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
-        HttpClientModule,
-        BrowserAnimationsModule,
         IasMaterialModule,
         DataModule,
       ],
       providers: [
-        HttpClient,
         { provide: APP_BASE_HREF, useValue: '/' }
       ],
     }).compileComponents();

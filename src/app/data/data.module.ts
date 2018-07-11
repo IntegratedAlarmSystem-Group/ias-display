@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from './http-client.service';
@@ -10,14 +11,19 @@ import { RoutingService } from './routing.service';
 */
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   declarations: [],
   providers: [
     AlarmService,
     CdbService,
+    HttpClient,
     HttpClientService,
     RoutingService,
+  ],
+  exports: [
+    HttpClientModule
   ]
 })
 export class DataModule { }

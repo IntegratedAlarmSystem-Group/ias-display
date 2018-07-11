@@ -1,13 +1,11 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
 import { ActionsModule } from './actions/actions.module';
@@ -45,13 +43,10 @@ export const appRoutes: Routes = [
   imports: [
     ActionsModule,
     BrowserModule,
-    HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
     IasMaterialModule,
     NgxSpinnerModule,
     DataModule,
@@ -62,7 +57,6 @@ export const appRoutes: Routes = [
     WeatherModule,
   ],
   providers: [
-    HttpClient,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],

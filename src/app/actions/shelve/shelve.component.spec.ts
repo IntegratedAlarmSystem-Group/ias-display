@@ -13,7 +13,7 @@ import { ShelveComponent } from './shelve.component';
 import { Alarm } from '../../data/alarm';
 import { Iasio } from '../../data/iasio';
 
-fdescribe('ShelveComponent', () => {
+describe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
   let alarmIasio: Iasio;
@@ -133,20 +133,41 @@ fdescribe('ShelveComponent', () => {
       .toEqual(expected);
   });
 
-  // TextArea
-  describe('should have an input field', () => {
-    it('in the modal body', () => {
+  // Form
+  describe('should have a form', () => {
+    it('with an input field and a select', () => {
       expect(componentBody.querySelector('textarea')).toBeTruthy();
+      expect(componentBody.querySelector('mat-select')).toBeTruthy();
     });
     describe('such that when it is empty', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when the user enters a message', () => {
+    describe('such that when it is empty', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message but does not select a timeout', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['message'].setValue('Any Message');
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user selects a timeout but does not enter a message ', () => {
+      it('the form should be invalid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['timeout'].setValue(component.timeouts[0]);
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message but and selects a timeout ', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
         component.form.controls['message'].setValue('Any Message');
+        component.form.controls['timeout'].setValue(component.timeouts[0]);
         expect(component.form.valid).toBeTruthy();
       });
     });
@@ -160,7 +181,7 @@ fdescribe('ShelveComponent', () => {
       expect(sendButton.innerText).toEqual('Shelve');
     });
     describe('and when the user clicks on it,', () => {
-      describe('and the user has not entered a message', () => {
+      describe('and the user has not entered a message and selected a timeout', () => {
         it('it should not call the component shelve method', async(() => {
           componentFooter.querySelector('#send').click();
           fixture.whenStable().then(() => {
@@ -168,9 +189,10 @@ fdescribe('ShelveComponent', () => {
           });
         }));
       });
-      describe('and the user has entered a message', () => {
+      describe('and the user has entered a message and selected a timeout', () => {
         it('it should call the component shelve method', async(() => {
           component.form.controls['message'].setValue('Any message');
+          component.form.controls['timeout'].setValue(component.timeouts[0]);
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();
           componentFooter.querySelector('#send').click();
