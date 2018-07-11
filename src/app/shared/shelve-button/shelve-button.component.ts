@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
-import { Router } from '@angular/router';
 
 /**
  * Button used to trigger the event to open the Shelve Modal

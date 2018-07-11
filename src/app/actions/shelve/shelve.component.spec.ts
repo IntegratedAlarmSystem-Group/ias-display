@@ -112,9 +112,9 @@ fdescribe('ShelveComponent', () => {
       'dependencies': [],
     });
     component.alarm_id = alarm['core_id'];
-    componentHeader = fixture.nativeElement.querySelector('.modal-header');
-    componentBody = fixture.nativeElement.querySelector('.modal-body');
-    componentFooter = fixture.nativeElement.querySelector('.modal-footer');
+    componentHeader = fixture.nativeElement.querySelector('.component-header');
+    componentBody = fixture.nativeElement.querySelector('.component-body');
+    componentFooter = fixture.nativeElement.querySelector('.component-footer');
     spyShelve = spyOn(alarmService, 'shelveAlarm').and.returnValue(
         of([alarm.core_id])
     );
@@ -129,10 +129,11 @@ fdescribe('ShelveComponent', () => {
   });
 
   // Information
-  // it('should display the Alarm ID', () => {
-  //   expect(componentHeader.textContent).toContain(alarm.core_id);
-  // });
-  //
+  it('should display the Alarm ID', () => {
+  expect(componentBody).toBeTruthy();
+    expect(componentBody.textContent).toContain(component.alarm_id);
+  });
+
   // it('should display the alarm short description', () => {
   //   const expected = alarmIasio.short_desc;
   //   expect(componentBody.textContent).toContain(expected);
