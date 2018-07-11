@@ -1,9 +1,10 @@
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { SidenavService } from '../sidenav.service';
@@ -15,30 +16,56 @@ import { Iasio } from '../../data/iasio';
 fdescribe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
-  let alarm: Alarm;
   let alarmIasio: Iasio;
   let alarmService: AlarmService;
   let componentBody: any;
   let componentHeader: any;
   let componentFooter: any;
-  let spyShelve;
-  let spyUnshelve;
   let cdbSubject: CdbService;
   let sidenavService: SidenavService;
+  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  const mockIasConfiguration = {
+    id: 1,
+    log_level: 'INFO',
+    refresh_rate: 2,
+    broadcast_factor: 3,
+    tolerance: 1,
+    properties: []
+  };
+  const mockIasAlarmsIasiosResponse = [{
+    io_id: 'coreid$1',
+    short_desc: 'Short description for mock alarm',
+    ias_type: 'ALARM',
+    doc_url: 'https://www.alma.cl/'
+  }];
+  const mockAlarm = Alarm.asAlarm({
+      'value': 0,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': '0',
+      'core_timestamp': 1267252440000,
+      'validity': '1',
+      'ack': false,
+      'shelved': false,
+      'dependencies': [],
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ShelveComponent ],
       imports: [
         HttpClientModule,
-        ReactiveFormsModule,
         FormsModule,
+        ReactiveFormsModule,
         NgxSpinnerModule,
+        IasMaterialModule,
         DataModule,
       ],
       providers: [
         HttpClient,
         NgxSpinnerService,
+        SidenavService,
+        { provide: Router, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -59,68 +86,30 @@ fdescribe('ShelveComponent', () => {
   beforeEach(
     inject([CdbService], (cdbService) => {
       cdbSubject = cdbService;
-
-      const mockIasConfiguration = {
-        id: 1,
-        log_level: 'INFO',
-        refresh_rate: 2,
-        broadcast_factor: 3,
-        tolerance: 1,
-        properties: []
-      };
       spyOn(cdbSubject, 'initialize')
         .and.callFake(function() {});
       cdbSubject.iasConfiguration = mockIasConfiguration;
-
-      const mockIasAlarmsIasiosResponse = [{
-        io_id: 'coreid$1',
-        short_desc: 'Short description for mock alarm',
-        ias_type: 'ALARM',
-        doc_url: 'https://www.alma.cl/'
-      }];
-
       alarmIasio = new Iasio(mockIasAlarmsIasiosResponse[0]);
       cdbSubject.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
-
     })
   );
-
-  beforeEach(
-    inject([SidenavService], (sideNavService) => {
-      sidenavService = sideNavService;
-      spyOn(sidenavService, 'open');
-      spyOn(sidenavService, 'close');
-      spyOn(sidenavService, 'toggle');
-    })
-  );
-
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShelveComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    sidenavService = fixture.debugElement.injector.get(SidenavService);
+    spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
+    spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
+    spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
+    spyOn(sidenavService, 'open');
+    spyOn(sidenavService, 'close');
+    spyOn(sidenavService, 'toggle');
     component = fixture.componentInstance;
+    component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
-    alarm = Alarm.asAlarm({
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': '0',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
-    component.alarm_id = alarm['core_id'];
     componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
-    spyShelve = spyOn(alarmService, 'shelveAlarm').and.returnValue(
-        of([alarm.core_id])
-    );
-    spyUnshelve = spyOn(alarmService, 'unshelveAlarms').and.returnValue(
-        of([alarm.core_id])
-    );
     fixture.detectChanges();
   });
 
