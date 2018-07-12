@@ -22,7 +22,7 @@
       </mat-list>
       <mat-nav-list>
         <div *ngFor="let item of navigationSidenavItems">
-          <a mat-list-item [routerLink]='[{outlets: {primary: item.link, actions: null}}]' routerLinkActive="active-link">
+          <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
             <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
