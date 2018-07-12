@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { delay } from 'rxjs/operators';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -144,22 +145,23 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Calls the webserver to apply the shelving of the alarm
    */
   shelve() {
-    this.spinnerService.show();
+    this.showSpinner();
     const message = this.message.value;
     const timeout = this.timeout.value;
     if (this.canSend()) {
-      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
+      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).pipe(delay(4000)).subscribe(
           (response) => {
             this.sendSuccessful(response, true);
-            this.spinnerService.hide();
+            this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
-            this.spinnerService.hide();
+            this.hideSpinner();
             return error;
           }
         );
     } else {
+      this.hideSpinner();
       /* TODO: Show a message, add a red asterisc, etc. */
     }
   }
@@ -168,23 +170,34 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Calls the webserver to apply the unshelving of the alarm
    */
   unshelve() {
-    this.spinnerService.show();
+    this.showSpinner();
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
-        [this.alarm.core_id], this.form.get('message').value).subscribe(
+        [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
           (response) => {
             this.sendSuccessful(response, false);
-            this.spinnerService.hide();
+            this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
-            this.spinnerService.hide();
+            this.hideSpinner();
             return error;
           }
         );
     } else {
+      this.hideSpinner();
       /* TODO: Show a message, add a red asterisc, etc. */
     }
+  }
+
+  private showSpinner() {
+    this.sidenavService.canClose = false;
+    this.spinnerService.show();
+  }
+
+  private hideSpinner() {
+    this.spinnerService.hide();
+    this.sidenavService.canClose = true;
   }
 
   /**

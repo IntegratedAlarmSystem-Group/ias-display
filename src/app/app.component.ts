@@ -51,6 +51,14 @@ export class AppComponent implements OnInit {
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
   }
 
+  getActionsLink(item: any) {
+    if (this.actionsSidenavService.canClose) {
+      return {outlets: { primary: item.link, actions: null }};
+    } else {
+      return {outlets: { primary: item.link }};
+    }
+  }
+
   /**
    * Toggles expanding-contracting the sidebar
    * @returns {boolean} Value of the main sidenav isNavigationCompacted variable

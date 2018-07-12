@@ -10,6 +10,8 @@ export class SidenavService {
 
   private sidenav: MatSidenav;
 
+  public canClose = true;
+
 
   public setSidenav(sidenav: MatSidenav) {
     this.sidenav = sidenav;
