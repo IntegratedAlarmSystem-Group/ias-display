@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AckModalComponent } from '../ack-modal/ack-modal.component';
 import { AlarmService } from '../../data/alarm.service';
+import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -36,7 +36,8 @@ export class AckButtonComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   /**
@@ -60,11 +61,7 @@ export class AckButtonComponent implements OnInit {
   * Handle click on table rows, it triggers the ack modal
   */
   onClick(event) {
-    const ackModal = this.modalService.open(AckModalComponent,
-      { size: 'lg', centered: true }
-    );
-    ackModal.componentInstance.alarm = this.alarm;
-    return ackModal;
+    this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm_id]}}]);
   }
 
 }
