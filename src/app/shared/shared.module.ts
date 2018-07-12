@@ -7,7 +7,6 @@ import { DataModule } from '../data/data.module';
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
-import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { ActionsModule } from '../actions/actions.module';
 
@@ -31,19 +30,16 @@ import { ActionsModule } from '../actions/actions.module';
     AckButtonComponent,
     AlarmComponent,
     ShelveButtonComponent,
-    ShelveModalComponent,
     WikiButtonComponent,
   ],
   exports: [
     AckButtonComponent,
     AlarmComponent,
     ShelveButtonComponent,
-    ShelveModalComponent,
     WikiButtonComponent,
   ],
   entryComponents: [
     AlarmComponent,
-    ShelveModalComponent,
   ]
 })
 export class SharedModule { }
