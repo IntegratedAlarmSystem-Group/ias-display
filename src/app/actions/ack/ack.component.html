@@ -26,6 +26,7 @@
       <mat-form-field class="message-form-field" appearance="fill">
         <mat-label> Action to be taken </mat-label>
         <textarea matInput name="message" formControlName="message" placeholder="Please write here the action to be taken"></textarea>
+        <mat-error *ngIf="message.invalid"> You must write a message in order to Acknowledge </mat-error>
       </mat-form-field>
     </div>
 

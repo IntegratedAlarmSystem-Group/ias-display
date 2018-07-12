@@ -31,6 +31,11 @@ export class AckComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   /**
+  * FormControl for the shelve message
+  */
+  message: FormControl;
+
+  /**
   * List of alarms to ack according to selection from child component
   */
   alarmsToAck: string[] = [];
@@ -59,8 +64,9 @@ export class AckComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.message = new FormControl('', [Validators.required]);
     this.form = this.formBuilder.group({
-      message: [null, [Validators.required]]
+      message: this.message,
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
