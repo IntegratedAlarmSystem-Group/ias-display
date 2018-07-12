@@ -68,6 +68,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   timeout: FormControl;
 
   /**
+  *
+  */
+  successful = false;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -127,7 +132,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
     } else {
       console.log('Unshelved successful for alarms: ', alarms);
     }
-    this.onClose();
+    this.successful = true;
+    // this.onClose();
   }
 
   /**
@@ -244,6 +250,21 @@ export class ShelveComponent implements OnInit, OnDestroy {
       return 'Unshelve';
     } else {
       return 'Shelve';
+    }
+  }
+
+  /**
+   * Returns the text to display when the shelve or unshelve action is performed
+   * @returns {string} the text to display
+   */
+  getSuccessfullMessageText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (!this.alarm.shelved) {
+      return 'The Alarm ' + this.alarm.core_id + ' was shelve succesfully';
+    } else {
+      return 'The Alarm ' + this.alarm.core_id + ' was unshelve succesfully';
     }
   }
 
