@@ -8,6 +8,8 @@
 }
 
 .component-action {
+  // position: relative;
+  // min-height: 100%;
 
   &.component-header {
     background: transparent;
@@ -81,16 +83,28 @@
   }
 
   &.component-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
     background: transparent;
     border-top: 0px solid #000;
     font-size: 14px;
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    // Fix this properly, in order to make the body scrollable
+    padding-bottom: 24px;
 
     .btn.btn-action {
 
       cursor: pointer !important;
+      margin: 0px 10px 0px 10px;
 
       &.btn-secondary{
-        background-color: rgba(0, 0, 0, 0);
+        background-color: #344a5d;
+        border-color: #344a5d;
       }
 
       &.btn-secondary:hover{

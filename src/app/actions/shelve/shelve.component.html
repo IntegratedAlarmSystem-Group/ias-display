@@ -31,7 +31,6 @@
           <mat-error *ngIf="message.invalid"> You must write a message in order to Shelve </mat-error>
         </mat-form-field>
 
-        <!-- <div class="section-title">Shelving duration</div> -->
         <mat-form-field class="timeout-form-field" appearance="fill">
           <mat-label> Time in shelf </mat-label>
           <mat-select formControlName="timeout">
@@ -41,9 +40,6 @@
           </mat-select>
           <mat-error *ngIf="timeout.invalid"> You must select a duration in order to Shelve </mat-error>
         </mat-form-field>
-        <!-- <div class="action-info">
-          * The shelve button will be enabled after writing the message and selecting a duration
-        </div> -->
       </ng-template>
 
     </div>
