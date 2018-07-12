@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { delay } from 'rxjs/operators';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -97,17 +98,17 @@ export class AckComponent implements OnInit, OnDestroy {
    * {@link AlarmService} and handle the response.
    */
   acknowledge(): void {
-    this.spinnerService.show();
+    this.showSpinner();
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
-        [this.alarm.core_id], this.form.get('message').value).subscribe(
+        [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
           (response) => {
             this.ackSuccessful(response);
-            this.spinnerService.hide();
+            this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
-            this.spinnerService.hide();
+            this.hideSpinner();
             return error;
           }
         );
@@ -119,21 +120,39 @@ export class AckComponent implements OnInit, OnDestroy {
    * from the selected alarms
    */
   ackFromSelection(): void {
-    this.spinnerService.show();
+    this.showSpinner();
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
         this.alarmsToAck, this.form.get('message').value).subscribe(
           (response) => {
             this.ackSuccessful(response);
-            this.spinnerService.hide();
+            this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
-            this.spinnerService.hide();
+            this.hideSpinner();
             return error;
           }
         );
     }
+  }
+
+  /**
+  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
+  * It also blocks closing and navigation of the the Sidebar
+  */
+  private showSpinner() {
+    this.sidenavService.canClose = false;
+    this.spinnerService.show();
+  }
+
+  /**
+  * Hides the spinner after the Alarm has been shelved/unshelved
+  * It also unblocks closing and navigation of the the Sidebar
+  */
+  private hideSpinner() {
+    this.spinnerService.hide();
+    this.sidenavService.canClose = true;
   }
 
   /**

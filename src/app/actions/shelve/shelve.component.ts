@@ -190,11 +190,19 @@ export class ShelveComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
+  * It also blocks closing and navigation of the the Sidebar
+  */
   private showSpinner() {
     this.sidenavService.canClose = false;
     this.spinnerService.show();
   }
 
+  /**
+  * Hides the spinner after the Alarm has been shelved/unshelved
+  * It also unblocks closing and navigation of the the Sidebar
+  */
   private hideSpinner() {
     this.spinnerService.hide();
     this.sidenavService.canClose = true;
