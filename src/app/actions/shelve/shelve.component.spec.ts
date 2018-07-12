@@ -126,13 +126,6 @@ describe('ShelveComponent', () => {
     expect(componentBody.textContent).toContain(expected);
   });
 
-  it('should display a link to get more information about the alarms', () => {
-    const expected = alarmIasio.doc_url;
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.alarmUrl').href)
-      .toEqual(expected);
-  });
-
   // Form
   describe('should have a form', () => {
     it('with an input field and a select', () => {
@@ -149,13 +142,13 @@ describe('ShelveComponent', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when the user enters a message but does not select a timeout', () => {
-      it('the form should be invalid', () => {
-        expect(component.form.valid).toBeFalsy();
-        component.form.controls['message'].setValue('Any Message');
-        expect(component.form.valid).toBeFalsy();
-      });
-    });
+    // describe('such that when the user enters a message but does not select a timeout', () => {
+    //   it('the form should be invalid', () => {
+    //     expect(component.form.valid).toBeFalsy();
+    //     component.form.controls['message'].setValue('Any Message');
+    //     expect(component.form.valid).toBeFalsy();
+    //   });
+    // });
     describe('such that when the user selects a timeout but does not enter a message ', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
@@ -163,7 +156,7 @@ describe('ShelveComponent', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when the user enters a message but and selects a timeout ', () => {
+    describe('such that when the user enters a message and selects a timeout ', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
         component.form.controls['message'].setValue('Any Message');

@@ -50,12 +50,7 @@
       &.shelve-action {
 
         textarea {
-          // box-sizing: border-box;
-          // width: 100%;
           min-height: 150px;
-          // background: #2e404e;
-          // color: #4ac8ff;
-          // border-color: #495d6e;
         }
 
         .form-control:focus {
@@ -70,12 +65,13 @@
         .message-form-field {
           width: 100%;
           color: #4ac8ff;
-          border-color: #495d6e;
+          // border-color: #495d6e;
         }
 
         .timeout-form-field {
           color: #4ac8ff;
           width: 100%;
+          margin-top: 14px;
         }
 
       }
