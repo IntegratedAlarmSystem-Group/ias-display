@@ -8,8 +8,6 @@
 }
 
 .component-action {
-  // position: relative;
-  // min-height: 100%;
 
   &.component-header {
     background: transparent;
@@ -49,7 +47,7 @@
         }
       }
 
-      &.shelve-action {
+      &.ack-action {
 
         textarea {
           min-height: 150px;
@@ -69,12 +67,10 @@
           color: #4ac8ff;
         }
 
-        .timeout-form-field {
-          color: #4ac8ff;
-          width: 100%;
-          margin-top: 14px;
-        }
+      }
 
+      &.missed-acks {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
 
     }
