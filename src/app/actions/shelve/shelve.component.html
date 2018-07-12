@@ -23,24 +23,23 @@
       <div *ngIf="!alarm.shelved; then shelveForm"></div>
 
       <ng-template #shelveForm>
-        <div class="section-title">Information required to shelve the Alarm</div>
+        <div class="section-title"> Information required to shelve the Alarm </div>
+
         <mat-form-field class="message-form-field" appearance="fill">
           <mat-label> Reason for shelving </mat-label>
-          <textarea matInput name="message" formControlName="message" placeholder="Please write here the reason for shelving the Alarm"></textarea>
+          <textarea matInput name="message" formControlName="message"></textarea>
+          <mat-error *ngIf="message.invalid"> You must write a message in order to Shelve </mat-error>
         </mat-form-field>
 
-        <!-- <div class="section-title">Shelving duration</div> -->
         <mat-form-field class="timeout-form-field" appearance="fill">
           <mat-label> Time in shelf </mat-label>
-          <mat-select placeholder="Select duration" formControlName="timeout">
+          <mat-select formControlName="timeout">
             <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
               {{timeout.viewValue}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="timeout.invalid"> You must select a duration in order to Shelve </mat-error>
         </mat-form-field>
-        <!-- <div class="action-info">
-          * The shelve button will be enabled after writing the message and selecting a duration
-        </div> -->
       </ng-template>
 
     </div>

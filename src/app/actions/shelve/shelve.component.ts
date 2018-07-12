@@ -7,11 +7,21 @@ import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
 import { Alarm } from '../../data/alarm';
 
+/**
+* Definition of a timeout option for shelving an alarm
+*/
 export interface TimeoutOption {
+
+  /** The actual value to be sent to the server */
   value: string;
+
+  /** The value to be displayed to the user */
   viewValue: string;
 }
 
+/**
+ * Component used to acknowledge alarms
+ */
 @Component({
   selector: 'app-shelve',
   templateUrl: './shelve.component.html',
@@ -19,6 +29,9 @@ export interface TimeoutOption {
 })
 export class ShelveComponent implements OnInit, OnDestroy {
 
+  /**
+  * Timeout options for shelving alarms
+  */
   timeouts: TimeoutOption[] = [
     {value: '0:15:00', viewValue: '15 minutes'},
     {value: '0:30:00', viewValue: '30 minutes'},
@@ -44,6 +57,16 @@ export class ShelveComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   /**
+  * FormControl for the shelve message
+  */
+  message: FormControl;
+
+  /**
+  * FormControl for the shelve timeout
+  */
+  timeout: FormControl;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -65,9 +88,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Get the alarmID from the url, create the form and open the sidenav
    */
   ngOnInit() {
+    this.message = new FormControl('', [Validators.required]);
+    this.timeout = new FormControl(this.timeouts[0].value, [Validators.required]);
     this.form = this.formBuilder.group({
-      message: [null, [Validators.required]],
-      timeout: [null, [Validators.required]]
+      message: this.message,
+      timeout: this.timeout
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
@@ -120,8 +145,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   shelve() {
     this.spinnerService.show();
-    const message = this.form.get('message').value;
-    const timeout = this.form.get('timeout').value;
+    const message = this.message.value;
+    const timeout = this.timeout.value;
     if (this.canSend()) {
       this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
           (response) => {
