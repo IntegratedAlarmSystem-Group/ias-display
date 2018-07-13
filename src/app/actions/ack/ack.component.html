@@ -5,34 +5,36 @@
   </button>
 </div>
 
-<div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
+<form class="form-group" [formGroup]="form">
+  <div class="component-action component-body">
 
-<ng-template #responseMessage>
-    <div class="component-action successful-message"> {{ getResponseMessageText() }} </div>
-    <ul>
-      <li *ngFor="let alarm of acknowledgedAlarms">
-        {{ alarm }}
-      </li>
-    </ul>
-</ng-template>
+    <div class="section alarm-info">
+      <table>
+        <tr>
+          <th>Alarm ID</th>
+          <td>{{alarm?.core_id}}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{{ getAlarmDescription() }}</td>
+        </tr>
+      </table>
+    </div>
 
-<ng-template #actionProcess>
-  <form class="form-group" [formGroup]="form">
-    <div class="component-action component-body">
-
-      <div class="section alarm-info">
-        <table>
-          <tr>
-            <th>Alarm ID</th>
-            <td>{{alarm?.core_id}}</td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>{{ getAlarmDescription() }}</td>
-          </tr>
-        </table>
+    <div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
+    <ng-template #responseMessage>
+      <div class="section ack-action">
+        <div class="section-title"> Acknowledgement results </div>
+        <div> {{ getResponseMessageText() }} </div>
+        <ul>
+          <li *ngFor="let alarm of acknowledgedAlarms">
+            {{ alarm }}
+          </li>
+        </ul>
       </div>
+    </ng-template>
 
+    <ng-template #actionProcess>
       <div class="section ack-action">
         <div class="section-title">Information required to acknowledge the Alarm</div>
         <mat-form-field class="message-form-field" appearance="fill">
@@ -55,16 +57,23 @@
           </li>
         </ul>
       </div>
+    </ng-template>
 
-    </div>
-    <div class="component-action component-footer">
+  </div>
+  <div class="component-action component-footer">
+    <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
+    <ng-template #responseButtons>
+      <button id="close" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Close</button>
+    </ng-template>
+
+    <ng-template #actionButtons>
       <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
       <button id="acknowledge" type="button" class="btn btn-action btn-info"
               (click)="acknowledge()"
               [disabled]="disableAcknowledgment()">Acknowledge</button>
-    </div>
-  </form>
-</ng-template>
+    </ng-template>
+  </div>
+</form>
 
 <ngx-spinner
   bdColor = "rgba(51, 51, 51, 0)"

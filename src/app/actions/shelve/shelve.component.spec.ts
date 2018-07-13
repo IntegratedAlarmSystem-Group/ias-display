@@ -117,7 +117,7 @@ describe('ShelveComponent', () => {
 
   // Information
   it('should display the Alarm ID', () => {
-  expect(componentBody).toBeTruthy();
+    expect(componentBody).toBeTruthy();
     expect(componentBody.textContent).toContain(component.alarm_id);
   });
 

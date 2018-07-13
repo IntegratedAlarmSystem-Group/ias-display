@@ -5,30 +5,37 @@
   </button>
 </div>
 
-<div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
+<!-- BODY begin -->
+<form class="form-group" [formGroup]="form">
+  <div class="component-action component-body">
+    <div class="section alarm-info">
+      <table>
+        <tr>
+          <th>Alarm ID</th>
+          <td>{{alarm?.core_id}}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{{ getAlarmDescription() }}</td>
+        </tr>
+      </table>
+    </div>
 
-<ng-template #responseMessage>
-    <div class="component-action successful-message"> {{ getResponseMessageText() }} </div>
-</ng-template>
+    <div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
 
-<ng-template #actionProcess>
-  <form class="form-group" [formGroup]="form">
-    <div class="component-action component-body">
-      <div class="section alarm-info">
-        <table>
-          <tr>
-            <th>Alarm ID</th>
-            <td>{{alarm?.core_id}}</td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>{{ getAlarmDescription() }}</td>
-          </tr>
-        </table>
+    <ng-template #responseMessage>
+      <div class="section shelve-action" >
+        <div class="section-title"> {{ getResponseMessageTitle() }} </div>
+        <div> {{ getResponseMessageText() }} </div>
       </div>
-      <div class="section shelve-action">
+    </ng-template>
 
+    <!-- SHELVE / UNSHELVE begin -->
+    <ng-template #actionProcess>
+      <div class="section shelve-action" >
         <div *ngIf="!alarm.shelved; then shelveForm"></div>
+
+        <!-- SHELVE FORM begin -->
         <ng-template #shelveForm>
           <div class="section-title"> Information required to shelve the Alarm </div>
 
@@ -49,13 +56,25 @@
           </mat-form-field>
         </ng-template>
       </div>
-    </div>
-    <div class="component-action component-footer">
+      <!-- SHELVE FORM end -->
+
+    </ng-template>
+    <!-- SHELVE / UNSHELVE end -->
+  </div>
+  <!-- BODY end -->
+
+  <div class="component-action component-footer">
+    <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
+    <ng-template #responseButtons>
+      <button id="close" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Close</button>
+    </ng-template>
+
+    <ng-template #actionButtons>
       <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
       <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
-    </div>
-  </form>
-</ng-template>
+    </ng-template>
+  </div>
+</form>
 
 <ngx-spinner
   bdColor = "rgba(51, 51, 51, 0)"

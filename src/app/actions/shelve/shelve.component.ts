@@ -273,6 +273,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
     }
   }
 
+  getResponseMessageTitle(): string {
+    if (!this.alarm.shelved) {
+      return 'Shelving results';
+    } else {
+      return 'Unshelving results';
+    }
+  }
+
   /**
    * Returns the text to display when the shelve or unshelve action is performed
    * @returns {string} the text to display
