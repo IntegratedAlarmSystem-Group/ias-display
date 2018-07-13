@@ -110,6 +110,12 @@
 
   }
 
+  &.successful-message {
+    font-size: 14px;
+    text-align: left;
+    padding: 24px 0px 10px 0px;
+  }
+
   p {
     margin-top: 0;
     margin-bottom: 1.15rem;

@@ -5,53 +5,66 @@
   </button>
 </div>
 
-<form class="form-group" [formGroup]="form">
-  <div class="component-action component-body">
+<div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
 
-    <div class="section alarm-info">
-      <table>
-        <tr>
-          <th>Alarm ID</th>
-          <td>{{alarm?.core_id}}</td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td>{{ getAlarmDescription() }}</td>
-        </tr>
-      </table>
+<ng-template #responseMessage>
+    <div class="component-action successful-message"> {{ getResponseMessageText() }} </div>
+    <ul>
+      <li *ngFor="let alarm of acknowledgedAlarms">
+        {{ alarm }}
+      </li>
+    </ul>
+</ng-template>
+
+<ng-template #actionProcess>
+  <form class="form-group" [formGroup]="form">
+    <div class="component-action component-body">
+
+      <div class="section alarm-info">
+        <table>
+          <tr>
+            <th>Alarm ID</th>
+            <td>{{alarm?.core_id}}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ getAlarmDescription() }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section ack-action">
+        <div class="section-title">Information required to acknowledge the Alarm</div>
+        <mat-form-field class="message-form-field" appearance="fill">
+          <mat-label> Action to be taken </mat-label>
+          <textarea matInput name="message" formControlName="message" placeholder="Please write here the action to be taken"></textarea>
+          <mat-error *ngIf="message.invalid"> You must write a message in order to Acknowledge </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section ack-tree">
+        <div class="section-title"> Select alarms for acknowledgment </div>
+        <app-ack-tree [selectedAlarm]="alarm" (alarmsToAckFromSelection)="updateAlarmsToAck($event)"></app-ack-tree>
+      </div>
+
+      <div *ngIf="missedAcks.length > 0" class="section missed-acks">
+        <div class="section-title"> Missed acknowledgements </div>
+        <ul>
+          <li *ngFor="let text of missedAcks">
+            {{text}}
+          </li>
+        </ul>
+      </div>
+
     </div>
-
-    <div class="section ack-action">
-      <div class="section-title">Information required to acknowledge the Alarm</div>
-      <mat-form-field class="message-form-field" appearance="fill">
-        <mat-label> Action to be taken </mat-label>
-        <textarea matInput name="message" formControlName="message" placeholder="Please write here the action to be taken"></textarea>
-        <mat-error *ngIf="message.invalid"> You must write a message in order to Acknowledge </mat-error>
-      </mat-form-field>
+    <div class="component-action component-footer">
+      <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
+      <button id="acknowledge" type="button" class="btn btn-action btn-info"
+              (click)="acknowledge()"
+              [disabled]="disableAcknowledgment()">Acknowledge</button>
     </div>
-
-    <div class="section ack-tree">
-      <div class="section-title"> Select alarms for acknowledgment </div>
-      <app-ack-tree [selectedAlarm]="alarm" (alarmsToAckFromSelection)="updateAlarmsToAck($event)"></app-ack-tree>
-    </div>
-
-    <div *ngIf="missedAcks.length > 0" class="section missed-acks">
-      <div class="section-title"> Missed acknowledgements </div>
-      <ul>
-        <li *ngFor="let text of missedAcks">
-          {{text}}
-        </li>
-      </ul>
-    </div>
-
-  </div>
-  <div class="component-action component-footer">
-    <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
-    <button id="acknowledge" type="button" class="btn btn-action btn-info"
-            (click)="acknowledge()"
-            [disabled]="disableAcknowledgment()">Acknowledge</button>
-  </div>
-</form>
+  </form>
+</ng-template>
 
 <ngx-spinner
   bdColor = "rgba(51, 51, 51, 0)"

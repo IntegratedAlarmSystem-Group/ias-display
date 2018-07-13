@@ -41,10 +41,22 @@ export class AckComponent implements OnInit, OnDestroy {
   alarmsToAck: string[] = [];
 
   /**
+  * List of alarms that were acknowledged by the request
+  */
+  acknowledgedAlarms: string[] = [];
+
+  /**
   * List of messages to mention the alarms with missed acknowledgments
   */
   public missedAcks: string[] = [];
 
+  /**
+  * Stores wether or not the action has been executed requestStatusly
+  * If requestStatus = 0, the request has not been sent yet
+  * If requestStatus = 1, the request was successfully
+  * If requestStatus = -1, the request has failed
+  */
+  requestStatus = 0;
 
   /**
    * Instantiates the component
@@ -70,7 +82,7 @@ export class AckComponent implements OnInit, OnDestroy {
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.alarm = this.alarmService.get(this.alarm_id);
+      this.reload();
     });
     this.sidenavService.open();
     this.getMissingAcksInfo();
@@ -83,20 +95,20 @@ export class AckComponent implements OnInit, OnDestroy {
     this.sidenavService.close();
   }
 
+  /**
+  * Cleans the component and reloads the Alarm
+  */
+  reload() {
+    this.alarm = this.alarmService.get(this.alarm_id);
+    this.requestStatus = 0;
+    this.message.reset();
+  }
+
   /*
   * Closes the sidenav
   */
   onClose() {
     this.router.navigate([{outlets: {actions: null}}]);
-  }
-
-  /**
-   * Actions performed when the acknowledge is made ssuccesfully.
-   * @param alarms list of sucessfully acknowledged alarms
-   */
-  ackSuccessful(alarms: any): void {
-    console.log('Ack successful for alarms: ', alarms);
-    this.onClose();
   }
 
   /**
@@ -109,11 +121,13 @@ export class AckComponent implements OnInit, OnDestroy {
       this.alarmService.acknowledgeAlarms(
         [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
           (response) => {
-            this.ackSuccessful(response);
+            this.acknowledgedAlarms = <string[]> response;
+            this.requestStatus = 1;
             this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
+            this.requestStatus = -1;
             this.hideSpinner();
             return error;
           }
@@ -131,11 +145,12 @@ export class AckComponent implements OnInit, OnDestroy {
       this.alarmService.acknowledgeAlarms(
         this.alarmsToAck, this.form.get('message').value).subscribe(
           (response) => {
-            this.ackSuccessful(response);
+            this.requestStatus = 1;
             this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
+            this.requestStatus = -1;
             this.hideSpinner();
             return error;
           }
@@ -214,5 +229,24 @@ export class AckComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  /**
+   * Returns the text to display when the shelve or unshelve action is performed
+   * @returns {string} the text to display
+   */
+  getResponseMessageText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    let response = '';
+    if (this.requestStatus === 1) {
+      response = 'The following alarms have been acknowledged succesfully:';
+
+    } else if (this.requestStatus === -1) {
+      response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been acknowledged.';
+      response += ' Please try again. If the problem persists, contact the system administrator.';
+    }
+    return response;
   }
 }
