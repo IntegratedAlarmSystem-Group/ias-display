@@ -43,6 +43,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   ];
 
   /**
+   * Default timeout for shelving
+   */
+  defaultTimeout = this.timeouts[0].value;
+
+  /**
    * Id of the Alarm object to be shelved/unshelved
    */
   alarm_id: string;
@@ -95,14 +100,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.message = new FormControl('', [Validators.required]);
-    this.timeout = new FormControl(this.timeouts[0].value, [Validators.required]);
+    this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);
     this.form = this.formBuilder.group({
       message: this.message,
       timeout: this.timeout
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.alarm = this.alarmService.get(this.alarm_id);
+      this.reload();
     });
     this.sidenavService.open();
   }
@@ -112,6 +117,16 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   ngOnDestroy() {
     this.sidenavService.close();
+  }
+
+  /**
+  * Cleans the component and reloads the Alarm
+  */
+  reload() {
+    this.alarm = this.alarmService.get(this.alarm_id);
+    this.successful = false;
+    this.message.reset();
+    this.timeout.reset(this.defaultTimeout);
   }
 
   /*
@@ -239,6 +254,21 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Returns the text to display in the title, depeding if the alarm is "Shelved" or "Unshelved"
+   * @returns {string} the text to display in the title
+   */
+  getTitleText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'ALARM UNSHELVING';
+    } else {
+      return 'ALARM SHELVING';
+    }
+  }
+
+  /**
    * Returns the text to display in the action button, either "Shelve" or "Unshelve"
    * @returns {string} the text to display in the button
    */
@@ -262,9 +292,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
       return null;
     }
     if (!this.alarm.shelved) {
-      return 'The Alarm ' + this.alarm.core_id + ' was shelve succesfully';
+      return 'The Alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
+        this.timeouts.find(t => t.value === this.timeout.value).viewValue;
     } else {
-      return 'The Alarm ' + this.alarm.core_id + ' was unshelve succesfully';
+      return 'The Alarm ' + this.alarm.core_id + ' was unshelved succesfully';
     }
   }
 
