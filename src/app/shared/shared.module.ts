@@ -4,9 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
-import { AckButtonComponent } from './ack-button/ack-button.component';
 import { AlarmComponent } from './alarm/alarm.component';
-import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { ActionsModule } from '../actions/actions.module';
 
@@ -27,15 +25,11 @@ import { ActionsModule } from '../actions/actions.module';
     ReactiveFormsModule,
   ],
   declarations: [
-    AckButtonComponent,
     AlarmComponent,
-    ShelveButtonComponent,
     WikiButtonComponent,
   ],
   exports: [
-    AckButtonComponent,
     AlarmComponent,
-    ShelveButtonComponent,
     WikiButtonComponent,
   ],
   entryComponents: [

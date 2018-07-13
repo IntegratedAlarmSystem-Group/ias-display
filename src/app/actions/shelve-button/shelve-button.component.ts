@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlarmService } from '../../data/alarm.service';
+import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -30,6 +31,7 @@ export class ShelveButtonComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
+    public sidenavService: SidenavService,
     private router: Router
   ) { }
 
@@ -62,6 +64,14 @@ export class ShelveButtonComponent implements OnInit {
    */
   loadAlarm() {
     this.alarm = this.alarmService.get(this.alarm_id);
+  }
+
+  /**
+   * Defines wether or not the button is disabled
+   * @returns {boolean} true if the button is disabled, false if not.
+   */
+  isDisabled() {
+    return !this.sidenavService.canClose;
   }
 
   /**

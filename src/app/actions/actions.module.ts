@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AckComponent } from './ack/ack.component';
 import { ShelveComponent } from './shelve/shelve.component';
+import { AckButtonComponent } from './ack-button/ack-button.component';
+import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { AckTreeComponent } from './ack-tree/ack-tree.component';
 import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +26,8 @@ import { SidenavService } from './sidenav.service';
   declarations: [
     AckComponent,
     ShelveComponent,
+    AckButtonComponent,
+    ShelveButtonComponent,
     AckTreeComponent,
   ],
   providers: [
@@ -32,6 +36,8 @@ import { SidenavService } from './sidenav.service';
   exports: [
     AckComponent,
     ShelveComponent,
+    AckButtonComponent,
+    ShelveButtonComponent,
   ]
 })
 export class ActionsModule { }

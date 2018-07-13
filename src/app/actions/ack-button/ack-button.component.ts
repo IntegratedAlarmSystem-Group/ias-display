@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmService } from '../../data/alarm.service';
+import { SidenavService } from '../sidenav.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 
@@ -36,6 +37,7 @@ export class AckButtonComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
+    public sidenavService: SidenavService,
     private modalService: NgbModal,
     private router: Router
   ) { }
@@ -55,6 +57,14 @@ export class AckButtonComponent implements OnInit {
   loadAlarm() {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.canAcknowledge = !this.alarm.ack;
+  }
+
+  /**
+   * Defines wether or not the button is disabled
+   * @returns {boolean} true if the button is disabled, false if not.
+   */
+  isDisabled() {
+    return !this.sidenavService.canClose || !this.canAcknowledge;
   }
 
   /**

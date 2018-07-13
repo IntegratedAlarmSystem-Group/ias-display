@@ -9,6 +9,7 @@ import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
+import { ActionsModule } from '../../actions/actions.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -48,6 +49,7 @@ describe('TabularViewComponent', () => {
         IasMaterialModule,
         DataModule,
         SharedModule,
+        ActionsModule,
       ],
       providers: [
         {
