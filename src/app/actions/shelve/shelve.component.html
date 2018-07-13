@@ -5,10 +5,10 @@
   </button>
 </div>
 
-<div *ngIf="successful; then successfulMessage else actionProcess"> </div>
+<div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
 
-<ng-template #successfulMessage>
-    <div class="component-action successful-message"> {{ getSuccessfullMessageText() }} </div>
+<ng-template #responseMessage>
+    <div class="component-action successful-message"> {{ getResponseMessageText() }} </div>
 </ng-template>
 
 <ng-template #actionProcess>

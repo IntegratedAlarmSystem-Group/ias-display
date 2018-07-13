@@ -73,9 +73,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
   timeout: FormControl;
 
   /**
-  *
+  * Stores wether or not the action has been executed requestStatusly
+  * If requestStatus = 0, the request has not been sent yet
+  * If requestStatus = 1, the request was successfully
+  * If requestStatus = -1, the request has failed
   */
-  successful = false;
+  requestStatus = 0;
 
   /**
    * Instantiates the component
@@ -124,7 +127,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   reload() {
     this.alarm = this.alarmService.get(this.alarm_id);
-    this.successful = false;
+    this.requestStatus = 0;
     this.message.reset();
     this.timeout.reset(this.defaultTimeout);
   }
@@ -134,21 +137,6 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   onClose() {
     this.router.navigate([{outlets: {actions: null}}]);
-  }
-
-  /**
-   * Actions performed when the acknowledge is made ssuccesfully.
-   * Finally the modal is closed.
-   * @param alarms list of sucessfully acknowledged alarms
-   */
-  sendSuccessful(alarms: any, shelve: boolean): void {
-    if (shelve) {
-      console.log('Shelved successful for alarms: ', alarms);
-    } else {
-      console.log('Unshelved successful for alarms: ', alarms);
-    }
-    this.successful = true;
-    // this.onClose();
   }
 
   /**
@@ -172,11 +160,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
     if (this.canSend()) {
       this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).pipe(delay(4000)).subscribe(
           (response) => {
-            this.sendSuccessful(response, true);
+            this.requestStatus = 1;
             this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
+            this.requestStatus = -1;
             this.hideSpinner();
             return error;
           }
@@ -196,11 +185,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
       this.alarmService.unshelveAlarms(
         [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
           (response) => {
-            this.sendSuccessful(response, false);
+            this.requestStatus = 1;
             this.hideSpinner();
           },
           (error) => {
             console.log('Error: ', error);
+            this.requestStatus = -1;
             this.hideSpinner();
             return error;
           }
@@ -287,15 +277,26 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Returns the text to display when the shelve or unshelve action is performed
    * @returns {string} the text to display
    */
-  getSuccessfullMessageText(): string {
+  getResponseMessageText(): string {
     if (!this.alarm) {
       return null;
     }
-    if (!this.alarm.shelved) {
-      return 'The Alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
-        this.timeouts.find(t => t.value === this.timeout.value).viewValue;
-    } else {
-      return 'The Alarm ' + this.alarm.core_id + ' was unshelved succesfully';
+    if (this.requestStatus === 1) {
+      if (!this.alarm.shelved) {
+        return 'The alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
+        this.timeouts.find(t => t.value === this.timeout.value).viewValue + '.';
+      } else {
+        return 'The alarm ' + this.alarm.core_id + ' was unshelved succesfully.';
+      }
+    } else if (this.requestStatus === -1) {
+      let response = '';
+      if (!this.alarm.shelved) {
+        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been shelved.';
+      } else {
+        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
+      }
+      response += 'Please try again. If the problem persists, contact the system administrator.';
+      return response;
     }
   }
 
