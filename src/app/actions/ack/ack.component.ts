@@ -119,32 +119,9 @@ export class AckComponent implements OnInit, OnDestroy {
     this.showSpinner();
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
-        [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
+        this.alarmsToAck, this.form.get('message').value).pipe(delay(4000)).subscribe(
           (response) => {
             this.acknowledgedAlarms = <string[]> response;
-            this.requestStatus = 1;
-            this.hideSpinner();
-          },
-          (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
-            this.hideSpinner();
-            return error;
-          }
-        );
-    }
-  }
-
-  /**
-   * Ack request through the related {@link AlarmService} method using a list of dependencies
-   * from the selected alarms
-   */
-  ackFromSelection(): void {
-    this.showSpinner();
-    if (this.form.valid) {
-      this.alarmService.acknowledgeAlarms(
-        this.alarmsToAck, this.form.get('message').value).subscribe(
-          (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
           },
