@@ -11,6 +11,10 @@
   box-shadow: none !important;
 }
 
+.ack-button-icon {
+  width: 26px;
+}
+
 button.ack-button:disabled {
     color: #212d3a;
 }
