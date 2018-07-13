@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { AlarmService } from './data/alarm.service';
+import { SidenavService } from './actions/sidenav.service';
 
 /**
 * Main component of the application
@@ -11,6 +13,11 @@ import { AlarmService } from './data/alarm.service';
 })
 export class AppComponent implements OnInit {
 
+  /*
+  * Reference to the Actions sidenav (right sidenav)
+  */
+  @ViewChild('actionsSidenav') public actionsSidenav: MatSidenav;
+
   /**
   * Title of the application
   */
@@ -19,12 +26,12 @@ export class AppComponent implements OnInit {
   /**
   * State of the main sidenav
   */
-  isCompacted = true;
+  isNavigationCompacted = true;
 
-  /** Sidebar Menu of the application */
-  sidenavItems = [
-    { title: 'Overview', link: '/overview', icon: 'language'},
-    { title: 'Table', link: '/tabular', icon: 'list'}
+  /** Navigation Sidenav Menu of the application (left sidenav) */
+  navigationSidenavItems = [
+    { title: 'Overview', link: 'overview', icon: 'language'},
+    { title: 'Table', link: 'tabular', icon: 'list'}
   ];
 
   /**
@@ -32,7 +39,8 @@ export class AppComponent implements OnInit {
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    */
   constructor(
-    private alarmService: AlarmService
+    private alarmService: AlarmService,
+    public actionsSidenavService: SidenavService
   ) {}
 
   /**
@@ -40,14 +48,23 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.alarmService.initialize();
+    this.actionsSidenavService.setSidenav(this.actionsSidenav);
+  }
+
+  getActionsLink(item: any) {
+    if (this.actionsSidenavService.canClose) {
+      return {outlets: { primary: item.link, actions: null }};
+    } else {
+      return {outlets: { primary: item.link }};
+    }
   }
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} Value of the main sidenav isCompacted variable
+   * @returns {boolean} Value of the main sidenav isNavigationCompacted variable
    */
   toggleSidenav(): boolean {
-    this.isCompacted = !this.isCompacted;
-    return this.isCompacted;
+    this.isNavigationCompacted = !this.isNavigationCompacted;
+    return this.isNavigationCompacted;
   }
 }

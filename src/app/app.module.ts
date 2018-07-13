@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
+import { ActionsModule } from './actions/actions.module';
 import { HealthModule } from './health/health.module';
 import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
@@ -16,6 +17,8 @@ import { WeatherModule } from './weather/weather.module';
 import { AppComponent } from './app.component';
 import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview/overview.component';
+import { AckComponent } from './actions/ack/ack.component';
+import { ShelveComponent } from './actions/shelve/shelve.component';
 
 
 /**
@@ -26,6 +29,8 @@ export const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
+  { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'}
 ];
 
 /**
@@ -36,6 +41,7 @@ export const appRoutes: Routes = [
     AppComponent,
   ],
   imports: [
+    ActionsModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),

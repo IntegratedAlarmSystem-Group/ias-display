@@ -3,12 +3,13 @@ import { DebugElement } from '@angular/core';
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
+import { ActionsModule } from '../../actions/actions.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -28,6 +29,7 @@ describe('TabularViewComponent', () => {
   const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
   let cdbService: CdbService;
+  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const alarms = MockAlarms;
   const iasios = MockIasios;
   const expectedRows = ExpectedTableRows;
@@ -47,6 +49,7 @@ describe('TabularViewComponent', () => {
         IasMaterialModule,
         DataModule,
         SharedModule,
+        ActionsModule,
       ],
       providers: [
         {
@@ -59,6 +62,7 @@ describe('TabularViewComponent', () => {
             }
           },
         },
+        { provide: Router, useValue: spyRoutingTable },
         NgbModal,
       ]
     })

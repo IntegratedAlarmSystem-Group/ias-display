@@ -1,29 +1,34 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShelveModalComponent } from '../shelve-modal/shelve-modal.component';
 import { AlarmService } from '../../data/alarm.service';
+import { SidenavService } from '../sidenav.service';
+import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 
 /**
- * Button used to trigger the event to open the Shelve Modal
+ * Button used to trigger the event to open the Acknowledge Modal
  */
 @Component({
-  selector: 'app-shelve-button',
-  templateUrl: './shelve-button.component.html',
-  styleUrls: ['./shelve-button.component.css']
+  selector: 'app-ack-button',
+  templateUrl: './ack-button.component.html',
+  styleUrls: ['./ack-button.component.css']
 })
-export class ShelveButtonComponent implements OnInit {
+export class AckButtonComponent implements OnInit {
 
   /**
-   * Id of the alarm to be shelved
+   * Id of the alarm to be acknowledged
    */
   @Input() alarm_id: string;
 
   /**
    * Alarm object related with the alarm id received as input
    */
-  public alarm: Alarm;
+  private alarm: Alarm;
 
+  /**
+   * Define if the alarm can be acknowledged based on if it was acknowledged before.
+   */
+  public canAcknowledge = false;
 
   /**
    * The "constructor", injects the {@link AlarmService} and the {@link modalService}
@@ -32,7 +37,9 @@ export class ShelveButtonComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
-    private modalService: NgbModal
+    public sidenavService: SidenavService,
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   /**
@@ -44,36 +51,27 @@ export class ShelveButtonComponent implements OnInit {
   }
 
   /**
-   * Returns the text to display in the shelve/unshelve button tooltip, either "Shelve" or "Unshelve"
-   * @returns {string} the text to display in the button
-   */
-  getButtonTooltipText(): string {
-    if (!this.alarm) {
-      return null;
-    }
-    if (this.alarm.shelved) {
-      return 'Unshelve';
-    } else {
-      return 'Shelve';
-    }
-  }
-
-  /**
    * Get the alarm object related with the alarm id received as input using the
    * AlarmService. Initialize the private variables of this component.
    */
   loadAlarm() {
     this.alarm = this.alarmService.get(this.alarm_id);
+    this.canAcknowledge = !this.alarm.ack;
   }
 
   /**
-  * Handle click on table rows, it triggers the shelve modal
+   * Defines wether or not the button is disabled
+   * @returns {boolean} true if the button is disabled, false if not.
+   */
+  isDisabled() {
+    return !this.sidenavService.canClose || !this.canAcknowledge;
+  }
+
+  /**
+  * Handle click on table rows, it triggers the ack modal
   */
   onClick(event) {
-    const shelveModal = this.modalService.open(ShelveModalComponent,
-      { size: 'lg', centered: true }
-    );
-    shelveModal.componentInstance.alarm = this.alarm;
-    return shelveModal;
+    this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm_id]}}]);
   }
+
 }

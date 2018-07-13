@@ -12,7 +12,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container autosize>
-    <mat-sidenav id="main-sidenav" [class.compacted]="isCompacted" mode="side" opened="true">
+    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true">
       <mat-list>
         <mat-list-item>
           <div class="ias ias-logo-container">
@@ -21,17 +21,24 @@
         </mat-list-item>
       </mat-list>
       <mat-nav-list>
-        <div *ngFor="let item of sidenavItems">
-          <a mat-list-item routerLink="{{ item.link }}" routerLinkActive="active-link">
+        <div *ngFor="let item of navigationSidenavItems">
+          <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
             <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
-            <p matLine *ngIf="!isCompacted">{{ item.title }} </p>
+            <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
         </div>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content id="main-sidenav-content">
+
+    <mat-sidenav-content id="main-content" autosize>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
+    <mat-sidenav #actionsSidenav id="actions-sidenav" position="end" mode="side" opened="false">
+      <router-outlet name="actions"></router-outlet>
+    </mat-sidenav>
   </mat-sidenav-container>
+
+
 
 </div>
