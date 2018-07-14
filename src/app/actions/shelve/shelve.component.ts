@@ -158,7 +158,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     const message = this.message.value;
     const timeout = this.timeout.value;
     if (this.canSend()) {
-      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).pipe(delay(4000)).subscribe(
+      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
           (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
@@ -183,7 +183,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     this.showSpinner();
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
-        [this.alarm.core_id], this.form.get('message').value).pipe(delay(4000)).subscribe(
+        [this.alarm.core_id], this.form.get('message').value).subscribe(
           (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
