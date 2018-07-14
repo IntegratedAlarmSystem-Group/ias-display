@@ -1,9 +1,10 @@
 .alarm-status-legend {
   font-size: 12px;
-  text-align: center;
-  display: inline-table;
+  font-weight: normal;
+  text-align: left;
+  /* display: inline-table; */
   width: 100%;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 .alarm-status-legend .group {
@@ -13,12 +14,35 @@
 .alarm-status-legend .group .item {
   display: inline-block;
   color: #f2f2f2;
-  padding-right: 55px;
+  padding-right: 24px;
   padding-bottom: 20px;
 }
 
 .alarm-status-legend .group .item .status {
   display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 18px;
+  font-weight: bold;
+}
+
+.alarm-status-legend .group .item .priority {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 28px;
+  font-weight: bold;
+}
+
+.alarm-status-legend .group .item .title {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* .alarm-status-legend .group .item .status {
+  display: inline-block;
   margin-right: 10px;
   text-align: center;
-}
+} */

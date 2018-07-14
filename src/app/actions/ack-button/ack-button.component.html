@@ -1,3 +1,10 @@
 <button class="ack-button" title="Acknowledge" mat-raised-button (click)="onClick($event)" [disabled]="isDisabled()">
-    <i class="ion-ios-share-alt"></i>
+    <!-- <i class="ion-ios-share-alt"></i> -->
+    <div *ngIf="isDisabled(); then ackOff else ackOn"></div>
+    <ng-template #ackOn>
+      <div class="ack-button-icon"> <img src="/assets/img/ack-on.svg"/> </div>
+    </ng-template>
+    <ng-template #ackOff>
+      <div class="ack-button-icon"> <img src="/assets/img/ack-off.svg"/> </div>
+    </ng-template>
 </button>
