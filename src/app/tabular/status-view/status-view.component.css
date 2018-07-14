@@ -1,16 +1,28 @@
 .alarm-status {
-  text-align: center;
-  display: block;
-  width: 64px;
-  height: 28px;
+  width: 90px !important;
+  height: 40px;
   padding-top: 2px;
   padding-bottom: 2px;
-  border-style: solid;
-  border-width: 2px;
-  opacity: 1;
 }
 
-.status-cleared {
+.alarm-icon {
+  width: 26px;
+  height: 24px;
+  padding-right: 10px;
+}
+
+.priority-icon {
+  width: 26px;
+  height: 24px;
+}
+/*
+.marker-img {
+  width: 26px;
+  height: 24px;
+  padding-right: 10px;
+} */
+
+/* .status-cleared {
   color: #95ff95;
   border-color: #95ff95;
   background: #95ff95;
@@ -66,4 +78,4 @@
 @keyframes BLINK {
   0%   { opacity: 0; }
   100% { opacity: 1; }
-}
+} */

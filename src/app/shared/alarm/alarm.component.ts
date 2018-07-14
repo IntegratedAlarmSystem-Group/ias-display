@@ -103,6 +103,8 @@ export class AlarmComponent implements OnInit {
       return imagesToUse.set_high;
     } else if (this.alarm.value === Value.set_critical) {
       return imagesToUse.set_critical;
+    } else {
+      return this.imagesUnreliable.unknown;
     }
   }
 
