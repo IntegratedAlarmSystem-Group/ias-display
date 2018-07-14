@@ -14,7 +14,6 @@ import { Assets } from '../../settings';
 })
 export class StatusViewComponent implements OnInit {
 
-
   /**
    * Alarm object associated to the component
    */
@@ -53,84 +52,6 @@ export class StatusViewComponent implements OnInit {
     } else {
         this.alarmTags = [];
     }
-  }
-
-  /**
-  * Return the list of classes that define the main style of the status container
-  * @returns {any} list of container classes to apply the style to the component
-  */
-  getContainerClasses(): any {
-    const classes = ['alarm-status'];
-
-    if (this.hasTag('shelved')) {
-      classes.push('status-cleared');
-      return classes;
-    }
-
-    if (this.hasTag('maintenance') || this.hasTag('shuttedown')) {
-      classes.push('status-maintenance');
-    } else if (this.hasTag('unknown')) {
-      classes.push('status-unknown');
-    } else {
-      if (this.hasTag('cleared')) {
-        classes.push('status-cleared');
-      } else if (this.hasTag('set')) {
-        classes.push('status-set');
-      } else {
-        classes.push('status-error');
-      }
-    }
-
-    if (this.hasTag('unreliable')) {
-      classes.push('status-unreliable');
-    }
-
-    if (!this.hasTag('ack')) {
-      classes.push('blink');
-    }
-
-    return classes;
-  }
-
-  /**
-  * Return the status symbol style used to represent if the alarm is SET or
-  * CLEARED
-  * @returns {object} the style for the symbol
-  */
-  getSymbolStyle(): object {
-
-    let color: string;
-    let visibility: string;
-
-    if (this.hasTag('shelved')) {
-      visibility = 'hidden';
-      color = 'black';
-    } else if (this.hasTag('set')) {
-      visibility = 'visible';
-      color = 'white';
-    } else if (this.hasTag('cleared')) {
-      visibility = 'hidden';
-      color = 'black';
-    } else {
-      visibility = 'visible';
-      color = 'black';  // error
-    }
-
-    const style = {
-      'visibility': visibility,
-      'color': color
-    };
-
-    return style;
-  }
-
-  /**
-   * Method to search if the component contains an specific tag
-   * @param {string} tag String of the searched tag
-   * @returns {boolean} true if it has the tag, false if not
-   */
-  private hasTag(tag): boolean {
-    return this.alarmTags.indexOf(tag) > -1 ? true : false;
   }
 
   /**

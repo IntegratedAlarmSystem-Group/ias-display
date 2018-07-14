@@ -1,62 +1,21 @@
-.alarm-status {
-  width: 90px !important;
-  height: 40px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+.status-view {
+  display: inline-flex;
+  width: 80px;
+}
+
+.status-view-icon {
+  height: 24px;
 }
 
 .alarm-icon {
-  width: 26px;
-  height: 24px;
   padding-right: 10px;
 }
 
 .priority-icon {
-  width: 26px;
-  height: 24px;
-}
-/*
-.marker-img {
-  width: 26px;
-  height: 24px;
-  padding-right: 10px;
-} */
 
-/* .status-cleared {
-  color: #95ff95;
-  border-color: #95ff95;
-  background: #95ff95;
 }
 
-.status-set {
-  color: white;
-  border-color: red;
-  background: red;
-}
-
-.status-error {
-  color: black;
-  border-color: black;
-  background: black;
-}
-
-.status-maintenance {
-  color: #9b9797;
-  border-color: #9b9797;
-  background: #9b9797;
-}
-
-.status-unknown {
-  color: #73adf0;
-  border-color: #73adf0;
-  background: #73adf0;
-}
-
-.status-unreliable {
-  background: transparent;
-}
-
-.blink {
+/* .blink {
   -webkit-animation: BLINK 1s infinite;
   -moz-animation:    BLINK 1s infinite;
   -o-animation:      BLINK 1s infinite;

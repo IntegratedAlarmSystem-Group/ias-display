@@ -1,14 +1,10 @@
-<!-- <div class="alarm-status" [ngClass]="getContainerClasses()">
-  <span [ngStyle]="getSymbolStyle()"> &#9650; </span>
-</div> -->
-
-<div class="alarm-status">
-  <div class="alarm-status-icon">
+<div class="status-view">
+  <div class="status-view-icon alarm-icon">
     <app-alarm
       [alarm]="alarm" [images]="alarmIconsSet" [imagesUnreliable]="alarmIconsUnreliableSet"
     ></app-alarm>
   </div>
-  <div  class="alarm-status-icon">
+  <div class="status-view-icon">
     <app-alarm
       [alarm]="alarm" [images]="alarmIconsPrioritySet" [imagesUnreliable]="alarmIconsPrioritySet"
     ></app-alarm>
