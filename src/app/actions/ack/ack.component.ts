@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { delay } from 'rxjs/operators';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
