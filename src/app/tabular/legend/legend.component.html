@@ -2,39 +2,50 @@
 
   <div class="row">
 
-    <div class="col-md-7">
-
-      <div class="group">
-        <span class="item">
-          <span class="status"><app-status-view value='set-reliable-operational-ack'></app-status-view></span> set reliable
-        </span>
-        <span class="item">
-          <span class="status"><app-status-view value='set-unreliable-operational-ack'></app-status-view></span> set unreliable
-        </span>
-      </div>
-
-      <div class="group">
-        <span class="item">
-          <span class="status"><app-status-view value='cleared-reliable-operational-ack'></app-status-view></span> cleared reliable
-        </span>
-        <span class="item">
-          <span class="status"><app-status-view value='cleared-unreliable-operational-ack'></app-status-view></span> cleared unreliable
-        </span>
-      </div>
-
-    </div>
     <div class="col-md-5">
-
       <div class="group">
         <span class="item">
-          <span class="status"><app-status-view value='cleared-reliable-unknown-ack'></app-status-view></span> unknown mode
+          <span class="title">LEGEND</span>
+        </span>
+      </div>
+      <div class="group">
+        <span class="item">
+          <span class="status"><img class="marker-img" src="{{ clear_valid }}"/></span> Clear Valid
         </span>
         <span class="item">
-          <span class="status"><app-status-view value='cleared-reliable-maintenance-ack'></app-status-view></span> maintenance -or- shutteddown mode
+          <span class="status"><img class="marker-img" src="{{ clear_invalid }}"/></span> Clear Invalid
+        </span>
+      <!-- </div>
+      <div class="group"> -->
+        <span class="item">
+          <span class="status"><img class="marker-img" src="{{ set_valid }}"/></span> Set Valid
+        </span>
+        <span class="item">
+          <span class="status"><img class="marker-img" src="{{ set_invalid }}"/></span> Set Invalid
         </span>
       </div>
 
     </div>
+
+    <div class="col-md-4">
+      <div class="group">
+        <span class="item">
+          <span class="priority"><img class="marker-img" src="{{ priority_4 }}"/></span> Critical
+        </span>
+        <span class="item">
+          <span class="priority"><img class="marker-img" src="{{ priority_3 }}"/></span> High
+        </span>
+      <!-- </div>
+      <div class="group"> -->
+        <span class="item">
+          <span class="priority"><img class="marker-img" src="{{ priority_2 }}"/></span> Medium
+        </span>
+        <span class="item">
+          <span class="priority"><img class="marker-img" src="{{ priority_1 }}"/></span> Low
+        </span>
+      </div>
+    </div>
+
 
   </div>
 
