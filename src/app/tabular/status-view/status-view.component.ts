@@ -44,14 +44,6 @@ export class StatusViewComponent implements OnInit {
    */
   ngOnInit() {
     this.defineAlarmsAndImages();
-    const tags = this.value.toString().split('-');
-    if (tags.length >= 2) {
-        for (const tag of this.value.toString().split('-')) {
-          this.alarmTags.push(tag);
-        }
-    } else {
-        this.alarmTags = [];
-    }
   }
 
   /**
