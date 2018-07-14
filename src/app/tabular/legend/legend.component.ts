@@ -20,6 +20,8 @@ export class LegendComponent implements OnInit {
 
   clear_valid = Assets.ICONS + 'clear-valid.svg';
   clear_invalid = Assets.ICONS + 'clear-invalid.svg';
+  unknown = Assets.ICONS + 'unknown-valid.svg';
+  maintenance = Assets.ICONS + 'maintenance-valid.svg';
   set_valid = Assets.ICONS + 'set-valid.svg';
   set_invalid = Assets.ICONS + 'set-invalid.svg';
   priority_0 = Assets.ICONS + 'priority-0.svg';
