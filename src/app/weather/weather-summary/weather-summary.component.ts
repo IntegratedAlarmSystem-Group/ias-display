@@ -109,8 +109,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',
-      set_low: Assets.ICONS + 'hum-valid-critical.svg',
-      set_medium: Assets.ICONS + 'hum-valid-critical.svg',
+      set_low: Assets.ICONS + 'hum-valid-low.svg',
+      set_medium: Assets.ICONS + 'hum-valid-low.svg',
       set_high: Assets.ICONS + 'hum-valid-critical.svg',
       set_critical: Assets.ICONS + 'hum-valid-critical.svg',
       unknown: Assets.ICONS + 'hum-valid-unkn.svg',
@@ -121,8 +121,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'temp-valid-clear.svg',
-      set_low: Assets.ICONS + 'temp-valid-critical.svg',
-      set_medium: Assets.ICONS + 'temp-valid-critical.svg',
+      set_low: Assets.ICONS + 'temp-valid-low.svg',
+      set_medium: Assets.ICONS + 'temp-valid-low.svg',
       set_high: Assets.ICONS + 'temp-valid-critical.svg',
       set_critical: Assets.ICONS + 'temp-valid-critical.svg',
       unknown: Assets.ICONS + 'temp-valid-unkn.svg',
@@ -133,8 +133,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'wind_s-valid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-valid-critical.svg',
-      set_medium: Assets.ICONS + 'wind_s-valid-critical.svg',
+      set_low: Assets.ICONS + 'wind_s-valid-low.svg',
+      set_medium: Assets.ICONS + 'wind_s-valid-low.svg',
       set_high: Assets.ICONS + 'wind_s-valid-critical.svg',
       set_critical: Assets.ICONS + 'wind_s-valid-critical.svg',
       unknown: Assets.ICONS + 'wind_s-valid-unkn.svg',
@@ -145,8 +145,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Humidity Unreliable icons */
     this.humidityImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-invalid-clear.svg',
-      set_low: Assets.ICONS + 'hum-invalid-critical.svg',
-      set_medium: Assets.ICONS + 'hum-invalid-critical.svg',
+      set_low: Assets.ICONS + 'hum-invalid-low.svg',
+      set_medium: Assets.ICONS + 'hum-invalid-low.svg',
       set_high: Assets.ICONS + 'hum-invalid-critical.svg',
       set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
       unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
@@ -157,8 +157,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Temperature Unreliable icons */
     this.tempImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'temp-invalid-clear.svg',
-      set_low: Assets.ICONS + 'temp-invalid-critical.svg',
-      set_medium: Assets.ICONS + 'temp-invalid-critical.svg',
+      set_low: Assets.ICONS + 'temp-invalid-low.svg',
+      set_medium: Assets.ICONS + 'temp-invalid-low.svg',
       set_high: Assets.ICONS + 'temp-invalid-critical.svg',
       set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
       unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
@@ -169,8 +169,8 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     /** Set of Wind Speed Unreliable icons */
     this.windsImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'wind_s-invalid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      set_medium: Assets.ICONS + 'wind_s-invalid-critical.svg',
+      set_low: Assets.ICONS + 'wind_s-invalid-low.svg',
+      set_medium: Assets.ICONS + 'wind_s-invalid-low.svg',
       set_high: Assets.ICONS + 'wind_s-invalid-critical.svg',
       set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
       unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',

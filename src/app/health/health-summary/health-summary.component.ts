@@ -70,8 +70,8 @@ export class HealthSummaryComponent implements OnInit, OnDestroy {
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
       clear: Assets.ICONS + 'ias_health-valid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-valid-critical.svg',
-      set_medium: Assets.ICONS + 'ias_health-valid-critical.svg',
+      set_low: Assets.ICONS + 'ias_health-valid-low.svg',
+      set_medium: Assets.ICONS + 'ias_health-valid-low.svg',
       set_high: Assets.ICONS + 'ias_health-valid-critical.svg',
       set_critical: Assets.ICONS + 'ias_health-valid-critical.svg',
       unknown: Assets.ICONS + 'ias_health-valid-unkn.svg',
@@ -82,8 +82,8 @@ export class HealthSummaryComponent implements OnInit, OnDestroy {
     /** Set of Unreliable icons */
     this.iconUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'ias_health-invalid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-invalid-critical.svg',
-      set_medium: Assets.ICONS + 'ias_health-invalid-critical.svg',
+      set_low: Assets.ICONS + 'ias_health-invalid-low.svg',
+      set_medium: Assets.ICONS + 'ias_health-invalid-low.svg',
       set_high: Assets.ICONS + 'ias_health-invalid-critical.svg',
       set_critical: Assets.ICONS + 'ias_health-invalid-critical.svg',
       unknown: Assets.ICONS + 'ias_health-invalid-unkn.svg',
