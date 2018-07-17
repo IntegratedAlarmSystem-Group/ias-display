@@ -58,8 +58,8 @@ export class StatusViewComponent implements OnInit {
       set_medium: Assets.ICONS + 'set-valid-low.svg',
       set_high: Assets.ICONS + 'set-valid.svg',
       set_critical: Assets.ICONS + 'set-valid.svg',
-      unknown: Assets.ICONS + 'clear-valid.svg',
-      maintenance: Assets.ICONS + 'clear-valid.svg',
+      unknown: Assets.ICONS + 'unknown-valid.svg',
+      maintenance: Assets.ICONS + 'maintenance-valid.svg',
       shelved: Assets.ICONS + 'clear-valid.svg',
     });
 
@@ -70,9 +70,9 @@ export class StatusViewComponent implements OnInit {
       set_medium: Assets.ICONS + 'set-invalid-low.svg',
       set_high: Assets.ICONS + 'set-invalid.svg',
       set_critical: Assets.ICONS + 'set-invalid.svg',
-      unknown: Assets.ICONS + 'clear-invalid.svg',
-      maintenance: Assets.ICONS + 'clear-invalid.svg',
-      shelved: Assets.ICONS + 'clear-invalid.svg',
+      unknown: Assets.ICONS + 'unknown-invalid.svg',
+      maintenance: Assets.ICONS + 'maintenance-invalid.svg',
+      shelved: Assets.ICONS + 'clear-valid.svg',
     });
 
     /** Set of icons for priorities */
