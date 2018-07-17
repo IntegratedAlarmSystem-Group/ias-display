@@ -1,4 +1,60 @@
-<div class="alarm-status-legend">
+<div fxFlexFill>
+<div fxLayout="row wrap">
+    <!-- <span class="title">LEGEND</span> -->
+    <div fxFlex="nogrow" class="legend-item">LEGEND</div>
+
+    <div fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px" fxFlex class="legend-item">
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ clear_valid }}"/></span> Clear Valid
+          </div>
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ clear_invalid }}"/></span> Clear Invalid
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ set_valid }}"/></span> Set Valid
+          </div>
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ set_invalid }}"/></span> Set Invalid
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ maintenance }}"/></span> Maintenance
+          </div>
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ unknown }}"/></span> Unknown
+          </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ priority_4 }}"/></span> Critical
+          </div>
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ priority_3 }}"/></span> High
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ priority_2 }}"/></span> Medium
+          </div>
+          <div fxLayout="row">
+            <span class="legend-icon"><img src="{{ priority_1 }}"/></span> Low
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<!-- <div class="alarm-status-legend">
 
   <div class="row">
 
@@ -56,4 +112,4 @@
 
   </div>
 
-</div>
+</div> -->

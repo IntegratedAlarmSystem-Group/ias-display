@@ -1,10 +1,8 @@
-.alarm-status-legend {
+/* .alarm-status-legend {
   font-size: 12px;
   font-weight: normal;
   text-align: left;
-  /* display: inline-table; */
   width: 100%;
-  /* margin-bottom: 50px; */
 }
 
 .alarm-status-legend .group {
@@ -39,10 +37,25 @@
   margin-right: 6px;
   text-align: center;
   font-weight: bold;
-}
+} */
 
 /* .alarm-status-legend .group .item .status {
   display: inline-block;
   margin-right: 10px;
   text-align: center;
 } */
+
+.legend-item {
+  border: 2px solid red;
+  /* padding-right: 24px;
+  padding-bottom: 20px; */
+}
+
+.legend-icon {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 18px;
+  font-weight: bold;
+  border: 2px solid blue;
+}
