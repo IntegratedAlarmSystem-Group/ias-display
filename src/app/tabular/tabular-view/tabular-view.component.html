@@ -7,7 +7,7 @@
 
   <mat-card-content>
 
-    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
       <span mat-form-field fxFlex>
         <input matInput [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
       </span>
