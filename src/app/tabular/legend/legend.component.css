@@ -12,3 +12,11 @@
   width: 18px;
   font-weight: bold;
 }
+
+.legend-priority {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 24px;
+  font-weight: bold;
+}
