@@ -4,7 +4,9 @@
 
 .mat-header-row {
   border-bottom-style: hidden;
-  background: #2e445c;
+  padding-top: 20px;
+  min-height: 0px;
+  // background: #2e445c;
 }
 
 .mat-row {
@@ -90,7 +92,7 @@
   /* Styles by column */
 
   .mat-column-status {
-    flex: 0 0 12% !important;
+    flex: 0 0 10% !important;
   }
 
   .mat-column-name {
@@ -98,7 +100,7 @@
   }
 
   .mat-column-mode {
-    flex: 0 0 13% !important;
+    flex: 0 0 10% !important;
   }
 
   .mat-column-timestamp {
@@ -106,12 +108,12 @@
   }
 
   .mat-column-description {
-    flex: 0 0 25% !important;
+    // flex: 0 0 25% !important;
   }
 
   .mat-column-actions {
     flex: 0 0 15% !important;
-    text-align: center !important;
+    text-align: left !important;
   }
 
 
