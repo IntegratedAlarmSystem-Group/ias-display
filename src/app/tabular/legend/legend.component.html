@@ -1,11 +1,11 @@
-<div fxFlexFill>
-<div fxLayout="row wrap">
-    <!-- <span class="title">LEGEND</span> -->
-    <div fxFlex="nogrow" class="legend-item">LEGEND</div>
+<div fxLayout="row wrap" fxLayoutGap="20px" class="legend">
+    <div fxFlex="nogrow" class="legend-title">LEGEND</div>
 
-    <div fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px" fxFlex class="legend-item">
-      <div fxLayout="row wrap" fxLayoutGap="10px">
-        <div fxLayout="row wrap" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px" fxFlex="1 1 auto">
+
+      <div fxLayout="row wrap" fxLayoutGap="20px">
+
+        <div fxLayout="row wrap" fxLayoutGap="20px">
           <div fxLayout="row">
             <span class="legend-icon"><img src="{{ clear_valid }}"/></span> Clear Valid
           </div>
@@ -13,7 +13,8 @@
             <span class="legend-icon"><img src="{{ clear_invalid }}"/></span> Clear Invalid
           </div>
         </div>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
+
+        <div fxLayout="row wrap" fxLayoutGap="20px">
           <div fxLayout="row">
             <span class="legend-icon"><img src="{{ set_valid }}"/></span> Set Valid
           </div>
@@ -21,9 +22,10 @@
             <span class="legend-icon"><img src="{{ set_invalid }}"/></span> Set Invalid
           </div>
         </div>
+
       </div>
 
-      <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div fxLayout="row wrap" fxLayoutGap="20px">
           <div fxLayout="row">
             <span class="legend-icon"><img src="{{ maintenance }}"/></span> Maintenance
           </div>
@@ -32,8 +34,9 @@
           </div>
       </div>
 
-      <div fxLayout="row wrap" fxLayoutGap="10px">
-        <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div fxLayout="row wrap" fxLayoutGap="20px">
+
+        <div fxLayout="row wrap" fxLayoutGap="20px">
           <div fxLayout="row">
             <span class="legend-icon"><img src="{{ priority_4 }}"/></span> Critical
           </div>
@@ -41,7 +44,8 @@
             <span class="legend-icon"><img src="{{ priority_3 }}"/></span> High
           </div>
         </div>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
+
+        <div fxLayout="row wrap" fxLayoutGap="20px">
           <div fxLayout="row">
             <span class="legend-icon"><img src="{{ priority_2 }}"/></span> Medium
           </div>
@@ -49,67 +53,7 @@
             <span class="legend-icon"><img src="{{ priority_1 }}"/></span> Low
           </div>
         </div>
+
       </div>
     </div>
 </div>
-</div>
-
-<!-- <div class="alarm-status-legend">
-
-  <div class="row">
-
-    <div class="col-md-1">
-      <div class="group">
-        <span class="item">
-          <span class="title">LEGEND</span>
-        </span>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="group">
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ clear_valid }}"/></span> Clear Valid
-        </span>
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ clear_invalid }}"/></span> Clear Invalid
-        </span>
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ set_valid }}"/></span> Set Valid
-        </span>
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ set_invalid }}"/></span> Set Invalid
-        </span>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="group">
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ maintenance }}"/></span> Maintenance
-        </span>
-        <span class="item">
-          <span class="status"><img class="marker-img" src="{{ unknown }}"/></span> Unknown
-        </span>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="group">
-        <span class="item">
-          <span class="priority"><img class="marker-img" src="{{ priority_4 }}"/></span> Critical
-        </span>
-        <span class="item">
-          <span class="priority"><img class="marker-img" src="{{ priority_3 }}"/></span> High
-        </span>
-        <span class="item">
-          <span class="priority"><img class="marker-img" src="{{ priority_2 }}"/></span> Medium
-        </span>
-        <span class="item">
-          <span class="priority"><img class="marker-img" src="{{ priority_1 }}"/></span> Low
-        </span>
-      </div>
-    </div>
-
-  </div>
-
-</div> -->
