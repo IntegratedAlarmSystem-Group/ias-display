@@ -1,10 +1,4 @@
-:host-context(.component-dialog) {
-  background: transparent;
-}
-
-:host-context(.component-content) {
-  background: #2e445c;
-  color: white;
+form {
 }
 
 .component-action {
@@ -12,6 +6,7 @@
   // min-height: 100%;
 
   &.component-header {
+    font-family: 'Arial, Helvetica, sans-serif';
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 14px 0px;
