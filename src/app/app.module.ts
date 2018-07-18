@@ -19,6 +19,7 @@ import { TabularViewComponent } from './tabular/tabular-view/tabular-view.compon
 import { OverviewComponent } from './overview/overview/overview.component';
 import { AckComponent } from './actions/ack/ack.component';
 import { ShelveComponent } from './actions/shelve/shelve.component';
+import { WeatherComponent } from './weather/weather/weather.component';
 
 
 /**
@@ -30,7 +31,8 @@ export const appRoutes: Routes = [
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
   { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
-  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'}
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
+  { path: 'weather', component: WeatherComponent},
 ];
 
 /**
