@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { WeatherSidebarComponent } from './weather-sidebar.component';
 
 describe('WeatherSidebarComponent', () => {
@@ -8,7 +8,12 @@ describe('WeatherSidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherSidebarComponent ]
+      declarations: [
+        WeatherSidebarComponent
+      ],
+      imports: [
+        IasMaterialModule,
+      ],
     })
     .compileComponents();
   }));

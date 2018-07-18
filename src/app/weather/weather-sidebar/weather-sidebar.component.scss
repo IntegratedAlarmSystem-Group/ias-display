@@ -1,0 +1,14 @@
+.weather-sidebar-title {
+  background: #2e445c;
+  padding: 12px;
+}
+
+.weather-sidebar-content {
+  background: #2b3b4b;
+  padding: 12px;
+  height: calc(100vh - 150px) !important;
+
+  .mat-expansion-panel {
+    background: #33475a;
+  }
+}

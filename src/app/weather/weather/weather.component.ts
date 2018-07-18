@@ -8,6 +8,8 @@ import { MatSidenav } from '@angular/material';
 })
 export class WeatherComponent implements OnInit {
 
+  panelOpenState = false;
+
   constructor() { }
 
   ngOnInit() {

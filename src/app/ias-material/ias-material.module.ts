@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 /**
@@ -39,7 +40,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatExpansionModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -58,7 +60,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatExpansionModule,
   ],
   declarations: []
 })
