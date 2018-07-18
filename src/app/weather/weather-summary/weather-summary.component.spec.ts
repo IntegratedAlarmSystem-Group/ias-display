@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -23,7 +22,6 @@ describe('WeatherSummaryComponent', () => {
         WeatherSummaryComponent,
       ],
       imports: [
-        NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
         SharedModule,

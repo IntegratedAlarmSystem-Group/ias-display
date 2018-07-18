@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from './ias-material/ias-material.module';
@@ -44,7 +43,6 @@ export const appRoutes: Routes = [
     ActionsModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     IasMaterialModule,

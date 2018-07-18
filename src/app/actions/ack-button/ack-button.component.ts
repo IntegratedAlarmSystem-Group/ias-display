@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmService } from '../../data/alarm.service';
 import { SidenavService } from '../sidenav.service';
 import { Router } from '@angular/router';
@@ -31,14 +30,11 @@ export class AckButtonComponent implements OnInit {
   public canAcknowledge = false;
 
   /**
-   * The "constructor", injects the {@link AlarmService} and the {@link modalService}
    * @param {AlarmService} alarmService Service to get the alarm object based on the input id
-   * @param {ModalService} modalService Service to manage the Modal Component
    */
   constructor(
     private alarmService: AlarmService,
     public sidenavService: SidenavService,
-    private modalService: NgbModal,
     private router: Router
   ) { }
 
