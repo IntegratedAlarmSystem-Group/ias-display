@@ -1,3 +1,31 @@
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  background: transparent;
+}
+
+.mat-header-row {
+  border-bottom-style: hidden;
+  background: #2e445c;
+}
+
+.mat-row {
+  border-bottom-style: hidden;
+  background: rgba(57, 66, 75, 1.0);
+  margin-top: 4px;
+  opacity: 1.0;
+}
+
+.mat-row:hover {
+  background: rgba(245, 247, 252, 0.1);
+}
+
+.mat-row>.mat-cell {
+}
+
 /deep/ {
 
   .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
@@ -62,14 +90,6 @@
     }
 
   }
-
-  .mat-header-cell .cdk-visually-hidden {
-    display: block;
-    color: #fafafa;
-    font-size: 10px;
-    padding-top: 4px;
-  }
-
   /* Styles by column */
 
   .mat-column-status {
