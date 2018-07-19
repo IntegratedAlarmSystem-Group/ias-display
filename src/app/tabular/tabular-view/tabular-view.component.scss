@@ -20,18 +20,6 @@
   background: rgba(245, 247, 252, 0.1);
 }
 
-.mat-slide-toggle {
-  padding-left: 20px;
-}
-
-.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color: rgb(74, 200, 255);
-}
-
-.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  background-color: #fefefe;
-}
-
 .mat-card {
   padding: 0 !important;
   border-radius: 0.375em !important;
@@ -53,6 +41,18 @@
 }
 
 /deep/ {
+
+  .mat-slide-toggle {
+    padding-left: 20px;
+  }
+
+  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: rgb(74, 200, 255);
+  }
+
+  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #fefefe;
+  }
 
   input.mat-input-element {
     width: 100%;

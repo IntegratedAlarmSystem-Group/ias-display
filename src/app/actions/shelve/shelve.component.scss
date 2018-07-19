@@ -1,134 +1,140 @@
-mat-card {
+:host-context(.component-dialog) {
   background: transparent;
-  padding: 24px;
 }
 
-.component-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: left;
-  padding-bottom: 24px;
-
-  .header-title {
-    height: 36px;
-    line-height: 36px;
-    padding-left: 2px;
-  }
+:host-context(.component-content) {
+  background: #2e445c;
+  color: white;
 }
 
-.component-body {
-  font-size: 14px;
+.component-action {
+  // position: relative;
+  // min-height: 100%;
 
-  .section {
-    padding: 24px 0px 10px 0px;
+  &.component-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 0px;
 
-    .section-title {
-      font-weight: bold;
-      padding-bottom: 16px;
-    }
-
-    &.alarm-info {
-      table {
-        vertical-align: top;
-      }
-
-      th {
-        padding-right: 16px;
-        font-weight: normal;
-        text-align: left;
-      }
-
-      td {
-        color: #4ac8ff;
-      }
-    }
-
-    &.shelve-action {
-
-      textarea {
-        min-height: 150px;
-      }
-
-      .form-control:focus {
-        border: 1px solid #235285;
-      }
-
-      .action-info {
-        font-size: 14px;
-        color: #a4acac;
-      }
-
-      .message-form-field {
-        width: 100%;
-        color: #4ac8ff;
-      }
-
-      .timeout-form-field {
-        color: #4ac8ff;
-        width: 100%;
-        margin-top: 14px;
-      }
-
+    .component-title {
+      display: inline;
     }
 
   }
 
-}
+  &.component-body {
+    background: transparent;
+    font-size: 14px;
 
-.component-footer {
-  // position: fixed;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  border-top: 0px solid #000;
-  font-size: 14px;
-  display: table;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  // Fix this properly, in order to make the body scrollable
-  // padding-bottom: 24px;
+    .section {
+      padding: 24px 0px 10px 0px;
 
-  .btn.btn-action {
+      .section-title {
+        font-weight: bold;
+        padding-bottom: 16px;
+      }
 
-    cursor: pointer !important;
-    margin: 0px 10px 0px 10px;
+      &.alarm-info {
+        table {
+          vertical-align: top;
+        }
 
-    &.btn-secondary{
-      background-color: #344a5d;
-      border-color: #344a5d;
-    }
+        th {
+          padding-right: 16px;
+          font-weight: normal;
+        }
 
-    &.btn-secondary:hover{
-      background-color: #9e9e9e !important;
+        td {
+          color: #4ac8ff;
+        }
+      }
+
+      &.shelve-action {
+
+        textarea {
+          min-height: 150px;
+        }
+
+        .form-control:focus {
+          border: 1px solid #235285;
+        }
+
+        .action-info {
+          font-size: 14px;
+          color: #a4acac;
+        }
+
+        .message-form-field {
+          width: 100%;
+          color: #4ac8ff;
+        }
+
+        .timeout-form-field {
+          color: #4ac8ff;
+          width: 100%;
+          margin-top: 14px;
+        }
+
+      }
+
     }
 
   }
 
-}
+  &.component-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: transparent;
+    border-top: 0px solid #000;
+    font-size: 14px;
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    // Fix this properly, in order to make the body scrollable
+    padding-bottom: 24px;
 
-p {
-  margin-top: 0;
-  margin-bottom: 1.15rem;
-}
+    .btn.btn-action {
 
-.info-message {
-  padding-top: 10px;
-}
+      cursor: pointer !important;
+      margin: 0px 10px 0px 10px;
+      outline: none;
 
-.alarmUrl {
-    color: #4ac8ff !important;
-}
+      &.btn-secondary{
+        background-color: #344a5d;
+        border-color: #344a5d;
+      }
 
-.alarmUrl .alarmLink {
-  text-decoration: underline;
-}
+      &.btn-secondary:hover{
+        background-color: #9e9e9e !important;
+      }
 
-.close {
-  color: lightgray;
-  font-size: 28px;
-  background: transparent;
-  border: 0px solid transparent;
-  padding: 0px;
-  min-width: unset;
-  width: 28px;
+    }
+
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1.15rem;
+  }
+
+  .info-message {
+    padding-top: 10px;
+  }
+
+  .alarmUrl {
+      color: #4ac8ff !important;
+  }
+
+  .alarmUrl .alarmLink {
+    text-decoration: underline;
+  }
+
+  .close {
+    color: lightgray;
+    outline: none;
+  }
+
 }
