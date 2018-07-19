@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { WeatherSidebarComponent } from './weather-sidebar.component';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('WeatherSidebarComponent', () => {
   let component: WeatherSidebarComponent;
@@ -13,6 +14,7 @@ describe('WeatherSidebarComponent', () => {
       ],
       imports: [
         IasMaterialModule,
+        SharedModule,
       ],
     })
     .compileComponents();

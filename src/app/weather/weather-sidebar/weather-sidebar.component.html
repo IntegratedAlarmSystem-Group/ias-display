@@ -3,36 +3,38 @@
 </div>
 
 <div class="weather-sidebar-content">
-  <mat-accordion>
+  <mat-accordion *ngFor="let alarm of this.WeatherAlarmsIds">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Personal data
+          {{alarm.station}}
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          Three alarm Icons
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Age">
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Self aware panel
-        </mat-panel-title>
-        <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
+      <table>
+        <tr>
+          <td>{{alarm.station}}</td>
+          <td><app-status-view [alarm]="this.WeatherAlarms[alarm.station]" [value]="this.WeatherAlarms[alarm.station].status"></app-status-view></td>
+          <td> Button actions </td>
+        </tr>
+        <tr>
+          <td><app-alarm [alarm]="this.getAlarm(alarm.windspeed)" [images]="windsImageSet" [imagesUnreliable]="windsImageUnreliableSet"></app-alarm></td>
+          <td><app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [value]="this.getAlarm(alarm.windspeed).value" ></app-status-view></td>
+          <td> Button actions </td>
+        </tr>
+        <tr>
+          <td><app-alarm [alarm]="this.getAlarm(alarm.humidity)" [images]="humidityImageSet" [imagesUnreliable]="humidityImageUnreliableSet"></app-alarm></td>
+          <td><app-status-view [alarm]="this.getAlarm(alarm.humidity)" [value]="this.getAlarm(alarm.humidity).value" ></app-status-view></td>
+          <td> Button actions </td>
+        </tr>
+        <tr>
+          <td><app-alarm [alarm]="this.getAlarm(alarm.temperature)" [images]="tempImageSet" [imagesUnreliable]="tempImageUnreliableSet"></app-alarm></td>
+          <td><app-status-view [alarm]="this.getAlarm(alarm.temperature)" [value]="this.getAlarm(alarm.temperature).value" ></app-status-view></td>
+          <td> Button actions </td>
+        </tr>
+      </table>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
