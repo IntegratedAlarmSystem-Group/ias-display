@@ -1,5 +1,3 @@
-<!-- <div class="component-action component-header"> -->
-
 <mat-card>
   <div class="component-header">
     <span fxFlex class="header-title" > {{ getTitleText() }} </span>
@@ -10,7 +8,7 @@
 
   <!-- BODY begin -->
   <form class="form-group" [formGroup]="form">
-    <div class="component-body">
+    <mat-card-content class="component-body">
       <div class="section alarm-info">
         <table>
           <tr>
@@ -50,11 +48,11 @@
 
             <mat-form-field class="timeout-form-field" appearance="fill">
               <mat-label> Time in shelf </mat-label>
-              <mat-select formControlName="timeout">
-                <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
-                  {{timeout.viewValue}}
-                </mat-option>
-              </mat-select>
+                <mat-select formControlName="timeout">
+                  <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
+                    {{timeout.viewValue}}
+                  </mat-option>
+                </mat-select>
               <mat-error *ngIf="timeout.invalid"> You must select a duration in order to Shelve </mat-error>
             </mat-form-field>
           </ng-template>
@@ -63,20 +61,22 @@
 
       </ng-template>
       <!-- SHELVE / UNSHELVE end -->
-    </div>
+    </mat-card-content>
     <!-- BODY end -->
 
-    <div class="component-footer">
-      <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
-      <ng-template #responseButtons>
-        <button id="close" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Close</button>
-      </ng-template>
+    <!-- <div class="component-footer"> -->
+      <mat-card-actions class="component-footer">
+        <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
+        <ng-template #responseButtons>
+          <button mat-button id="close" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Close</button>
+        </ng-template>
 
-      <ng-template #actionButtons>
-        <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
-        <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
-      </ng-template>
-    </div>
+        <ng-template #actionButtons>
+          <button mat-button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
+          <button mat-button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
+        </ng-template>
+      </mat-card-actions>
+    <!-- </div> -->
   </form>
 </mat-card>
 
