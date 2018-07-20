@@ -22,7 +22,7 @@ export class WeatherSidebarComponent implements OnInit {
    * @param {WeatherService} weatherService Service used to get the Alarms
    */
   constructor(
-    private weatherService: WeatherService,
+    public weatherService: WeatherService,
   ) { }
 
   ngOnInit() {
