@@ -7,6 +7,7 @@ import { WeatherSummaryComponent } from './weather-summary/weather-summary.compo
 import { WeatherMapComponent } from './weather-map/weather-map.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.component';
+import { WeatherService } from './weather.service';
 
 /**
 * This module contains all the components related to the Weather system
@@ -17,6 +18,9 @@ import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.compo
     DataModule,
     SharedModule,
     IasMaterialModule,
+  ],
+  providers: [
+    WeatherService
   ],
   declarations: [
     WeatherSummaryComponent,
