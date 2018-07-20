@@ -7,19 +7,13 @@
 
   <mat-card-content>
 
-    <div class="row">
-      <div class="col-md-9">
-        <span mat-form-field>
-          <input matInput [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
-        </span>
-      </div>
-      <div class="col-md-3">
-        <div class="ias checkbox container show-set-alarms">
-          <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
-            Show only set alarms
-          </mat-slide-toggle>
-        </div>
-      </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
+      <span mat-form-field fxFlex >
+        <input matInput [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
+      </span>
+      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
+        Show only set alarms
+      </mat-slide-toggle>
     </div>
 
     <mat-table #table [dataSource]="dataSource" matSort>

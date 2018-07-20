@@ -5,7 +5,6 @@ import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgbModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
@@ -43,7 +42,6 @@ describe('TabularViewComponent', () => {
       imports: [
         MatTableModule,
         MatSortModule,
-        NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
         SharedModule,
@@ -61,7 +59,6 @@ describe('TabularViewComponent', () => {
           },
         },
         { provide: Router, useValue: spyRoutingTable },
-        NgbModal,
       ]
     })
     .compileComponents();

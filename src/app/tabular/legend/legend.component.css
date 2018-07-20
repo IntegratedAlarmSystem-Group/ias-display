@@ -1,24 +1,11 @@
-.alarm-status-legend {
+.legend {
   font-size: 12px;
   font-weight: normal;
   text-align: left;
-  /* display: inline-table; */
   width: 100%;
-  /* margin-bottom: 50px; */
 }
 
-.alarm-status-legend .group {
-  display: inline-block;
-}
-
-.alarm-status-legend .group .item {
-  display: inline-block;
-  color: #f2f2f2;
-  padding-right: 24px;
-  padding-bottom: 20px;
-}
-
-.alarm-status-legend .group .item .status {
+.legend-icon {
   display: inline-block;
   margin-right: 6px;
   text-align: center;
@@ -26,23 +13,10 @@
   font-weight: bold;
 }
 
-.alarm-status-legend .group .item .priority {
+.legend-priority {
   display: inline-block;
   margin-right: 6px;
   text-align: center;
-  width: 28px;
+  width: 24px;
   font-weight: bold;
 }
-
-.alarm-status-legend .group .item .title {
-  display: inline-block;
-  margin-right: 6px;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* .alarm-status-legend .group .item .status {
-  display: inline-block;
-  margin-right: 10px;
-  text-align: center;
-} */
