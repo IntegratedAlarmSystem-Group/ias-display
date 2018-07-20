@@ -17,12 +17,6 @@ export class WeatherSidebarComponent implements OnInit {
   /** Dictionary of Weather Alarms indexed by alarm_id **/
   @Input() alarms: {[core_id: string]: Alarm };
 
-  // public WeatherAlarms: {} = {};
-  //
-  // /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
-  // private alarmServiceSubscription: ISubscription;
-  //
-
   /**
    * Builds an instance of the component
    * @param {WeatherService} weatherService Service used to get the Alarms
@@ -32,9 +26,6 @@ export class WeatherSidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-    //   // manage the notifications
-    // });
   }
 
   getAlarm(alarm_id): Alarm {
