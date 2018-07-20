@@ -40,14 +40,7 @@ export class WeatherSidebarComponent implements OnInit {
     humidity: string
   }[];
 
-  // /** Alarms Ids grouped by Weather Station**/
-  // public WeatherAlarmsIds: {
-  //   station: string,
-  //   temperature: string,
-  //   windspeed: string,
-  //   humidity: string
-  // }[];
-  //
+
   // /** Dictionary of Weather Alarms indexed by alarm_id **/
   // public WeatherAlarms: {} = {};
   //
@@ -61,6 +54,7 @@ export class WeatherSidebarComponent implements OnInit {
   constructor( ) { }
 
   ngOnInit() {
+    console.log('WeatherSidebarComponent, this.alarms = ', this.alarms);
     this.defineAlarmsAndImages();
 
 
@@ -78,21 +72,6 @@ export class WeatherSidebarComponent implements OnInit {
   * Define the alarms that the component should listen to and their respective icons
   */
   defineAlarmsAndImages() {
-    this.alarmsIds = [
-      {
-        station: 'Alarm ID STATION 1',
-        temperature: 'Alarm ID TEMP 1',
-        windspeed: 'Alarm ID WIND 1',
-        humidity: 'Alarm ID HUM 1',
-      },
-      {
-        station: 'Alarm ID STATION 1',
-        temperature: 'Alarm ID TEMP 1',
-        windspeed: 'Alarm ID WIND 1',
-        humidity: 'Alarm ID HUM 1',
-      },
-    ];
-
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',

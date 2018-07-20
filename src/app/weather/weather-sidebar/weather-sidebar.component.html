@@ -3,7 +3,7 @@
 </div>
 
 <div class="weather-sidebar-content">
-  <mat-accordion *ngFor="let alarm of this.WeatherAlarmsIds">
+  <mat-accordion *ngFor="let alarm of this.alarmsIds">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -16,7 +16,7 @@
       <table>
         <tr>
           <td>{{alarm.station}}</td>
-          <td><app-status-view [alarm]="this.WeatherAlarms[alarm.station]" [value]="this.WeatherAlarms[alarm.station].status"></app-status-view></td>
+          <td><app-status-view [alarm]="this.alarms[alarm.station]" [value]="this.alarms[alarm.station].status"></app-status-view></td>
           <td> Button actions components </td>
         </tr>
         <tr>

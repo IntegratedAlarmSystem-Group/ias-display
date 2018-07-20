@@ -14,7 +14,7 @@ export class WeatherComponent implements OnInit {
   panelOpenState = false;
 
   /** Alarms Ids grouped by Weather Station**/
-  public WeatherAlarmsIds: {
+  public alarmsIds: {
     station: string,
     temperature: string,
     windspeed: string,
@@ -22,7 +22,7 @@ export class WeatherComponent implements OnInit {
   }[];
 
   /** Dictionary of Weather Alarms indexed by alarm_id **/
-  public WeatherAlarms: {[core_id: string]: Alarm };
+  public alarms: {[core_id: string]: Alarm } = {};
 
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
@@ -36,8 +36,22 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alarmsIds = [
+      {
+        station: 'Alarm ID STATION 1',
+        temperature: 'Alarm ID TEMP 1',
+        windspeed: 'Alarm ID WIND 1',
+        humidity: 'Alarm ID HUM 1',
+      },
+      {
+        station: 'Alarm ID STATION 1',
+        temperature: 'Alarm ID TEMP 1',
+        windspeed: 'Alarm ID WIND 1',
+        humidity: 'Alarm ID HUM 1',
+      },
+    ];
 
-    this.WeatherAlarms['Alarm ID STATION 1'] = Alarm.asAlarm({
+    this.alarms['Alarm ID STATION 1'] = Alarm.asAlarm({
       'value': 1,
       'core_id': 'Alarm ID STATION 1',
       'running_id': 'Dummy-cleared-valid',
@@ -48,7 +62,7 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.WeatherAlarms['Alarm ID TEMP 1'] = Alarm.asAlarm({
+    this.alarms['Alarm ID TEMP 1'] = Alarm.asAlarm({
       'value': 1,
       'core_id': 'Alarm ID TEMP 1',
       'running_id': 'Dummy-cleared-valid',
@@ -59,7 +73,7 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.WeatherAlarms['Alarm ID WIND 1'] = Alarm.asAlarm({
+    this.alarms['Alarm ID WIND 1'] = Alarm.asAlarm({
       'value': 1,
       'core_id': 'Alarm ID WIND 1',
       'running_id': 'Dummy-cleared-valid',
@@ -70,7 +84,7 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.WeatherAlarms['Alarm ID HUM 1'] = Alarm.asAlarm({
+    this.alarms['Alarm ID HUM 1'] = Alarm.asAlarm({
       'value': 1,
       'core_id': 'Alarm ID HUM 1',
       'running_id': 'Dummy-cleared-valid',
@@ -81,6 +95,7 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
+    console.log('WeatherComponent, this.alarms = ', this.alarms);
   }
 
 }
