@@ -11,6 +11,10 @@
   box-shadow: none !important;
 }
 
+.shelve-button-icon {
+  width: 26px;
+}
+
 button.shelve-button:disabled {
     color: #212d3a;
 }
