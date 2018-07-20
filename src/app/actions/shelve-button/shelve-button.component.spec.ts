@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Router } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AppModule, appRoutes } from '../../app.module';
@@ -52,7 +51,6 @@ describe('GIVEN a ShelveButtonComponent', () => {
         ShelveButtonComponent,
       ],
       imports: [
-        NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
       ],

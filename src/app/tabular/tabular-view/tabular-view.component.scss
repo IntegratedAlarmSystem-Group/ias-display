@@ -1,4 +1,50 @@
+.mat-table {
+  background: transparent;
+}
+
+.mat-header-row {
+  border-bottom-style: hidden;
+  padding-top: 20px;
+  min-height: 0px;
+  // background: #2e445c;
+}
+
+.mat-row {
+  border-bottom-style: hidden;
+  background: rgba(57, 66, 75, 1.0);
+  margin-top: 4px;
+  opacity: 1.0;
+}
+
+.mat-row:hover {
+  background: rgba(245, 247, 252, 0.1);
+}
+
+.mat-card {
+  padding: 0 !important;
+  border-radius: 0.375em !important;
+}
+
+.mat-card .mat-card-header {
+  display: block;
+  padding: 20px 20px 20px 20px;
+  background: #3c4856;
+  border-top-left-radius: 0.375em;
+  border-top-right-radius: 0.375em;
+}
+
+.mat-card .mat-card-content {
+  padding: 20px;
+  background: #2e3740;
+  border-bottom-left-radius: 0.375em;
+  border-bottom-right-radius: 0.375em;
+}
+
 /deep/ {
+
+  .mat-slide-toggle {
+    padding-left: 20px;
+  }
 
   .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color: rgb(74, 200, 255);
@@ -6,40 +52,6 @@
 
   .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
     background-color: #fefefe;
-  }
-
-  .mat-card {
-    padding: 0 !important;
-    border-radius: 0.375em !important;
-  }
-
-  .mat-card .mat-card-header {
-    display: block;
-    padding: 20px 20px 0px 20px;
-    background: #3c4856;
-    border-top-left-radius: 0.375em;
-    border-top-right-radius: 0.375em;
-  }
-
-  // .mat-card .mat-card-header {
-  //   padding-top: 20px;
-  //   padding-bottom: 20px;
-  //   background: #3c4856;
-  //   font-size: 18px;
-  //   font-weight: bold;
-  //   border-top-left-radius: 0.375em;
-  //   border-top-right-radius: 0.375em;
-  // }
-  //
-  // .mat-card-header-text {
-  //   margin: 0 10px !important;
-  // }
-
-  .mat-card .mat-card-content {
-    padding: 20px;
-    background: #2e3740;
-    border-bottom-left-radius: 0.375em;
-    border-bottom-right-radius: 0.375em;
   }
 
   input.mat-input-element {
@@ -76,18 +88,10 @@
     }
 
   }
-
-  .mat-header-cell .cdk-visually-hidden {
-    display: block;
-    color: #fafafa;
-    font-size: 10px;
-    padding-top: 4px;
-  }
-
   /* Styles by column */
 
   .mat-column-status {
-    flex: 0 0 12% !important;
+    flex: 0 0 10% !important;
   }
 
   .mat-column-name {
@@ -95,7 +99,7 @@
   }
 
   .mat-column-mode {
-    flex: 0 0 13% !important;
+    flex: 0 0 10% !important;
   }
 
   .mat-column-timestamp {
@@ -103,12 +107,12 @@
   }
 
   .mat-column-description {
-    flex: 0 0 25% !important;
+    // flex: 0 0 25% !important;
   }
 
   .mat-column-actions {
     flex: 0 0 15% !important;
-    text-align: center !important;
+    text-align: left !important;
   }
 
 

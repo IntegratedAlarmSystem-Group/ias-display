@@ -18,7 +18,7 @@ import { Locale } from '../../settings';
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
-  styleUrls: ['./tabular-view.component.css', './tabular-view.component.scss']
+  styleUrls: ['./tabular-view.component.scss']
 })
 export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 

@@ -3,7 +3,6 @@ import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Router } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
@@ -40,7 +39,6 @@ describe('GIVEN an AckButtonComponent', () => {
         AckButtonComponent,
       ],
       imports: [
-        NgbModule.forRoot(),
         IasMaterialModule,
         DataModule,
       ],

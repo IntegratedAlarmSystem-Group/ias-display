@@ -25,7 +25,7 @@ export interface TimeoutOption {
 @Component({
   selector: 'app-shelve',
   templateUrl: './shelve.component.html',
-  styleUrls: ['./shelve.component.css', './shelve.component.scss']
+  styleUrls: ['./shelve.component.scss']
 })
 export class ShelveComponent implements OnInit, OnDestroy {
 
