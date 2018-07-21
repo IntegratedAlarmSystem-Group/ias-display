@@ -26,6 +26,8 @@ export class WeatherSidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('Weather Sidebar, alarms = ', this.alarms);
+    console.log('Weather Sidebar, weatherService.alarmsIds = ', this.weatherService.alarmsIds);
   }
 
   getAlarm(alarm_id): Alarm {

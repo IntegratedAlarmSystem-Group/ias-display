@@ -8,6 +8,11 @@ import { Assets } from '../settings';
 @Injectable()
 export class WeatherService {
 
+  /**
+  * Stream of notifications of changes in the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeStream = new BehaviorSubject<any>(true);
+
   /** Set of Humidity icons */
   public humidityImageSet: AlarmImageSet;
 
@@ -57,6 +62,32 @@ export class WeatherService {
   initialize() {
     this.defineAlarmsIds();
     this.defineAlarmsAndImages();
+    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
+      // if (notification === 'all') {
+      const alarms = {};
+        for (const ids of this.alarmsIds) {
+          if (ids) {
+            for (const id in ids) {
+              if (id) {
+                const alarm_id = ids[id];
+                alarms[alarm_id] = this.alarmService.get(alarm_id);
+              }
+            }
+          }
+        }
+
+      // } else {
+        // if (notification === this.windsAlarmId) {
+        //   this.windsAlarm = this.alarmService.get(notification);
+        // }
+        // if (notification === this.humidityAlarmId) {
+        //   this.humidityAlarm = this.alarmService.get(notification);
+        // }
+        // if (notification === this.tempAlarmId) {
+        //   this.tempAlarm = this.alarmService.get(notification);
+        // }
+      // }
+    });
   }
 
   /**
@@ -65,18 +96,64 @@ export class WeatherService {
   defineAlarmsIds() {
     this.alarmsIds = [
       {
-        station: 'Alarm ID STATION 1',
-        temperature: 'Alarm ID TEMP 1',
-        windspeed: 'Alarm ID WIND 1',
-        humidity: 'Alarm ID HUM 1',
+        station: 'WS-MeteoCentral-Temperature',
+        temperature: 'WS-MeteoCentral-Temperature',
+        windspeed: 'WS-MeteoCentral-WindSpeed',
+        humidity: 'WS-MeteoCentral-Humidity',
       },
       {
-        station: 'Alarm ID STATION 1',
-        temperature: 'Alarm ID TEMP 1',
-        windspeed: 'Alarm ID WIND 1',
-        humidity: 'Alarm ID HUM 1',
+        station: 'WS-MeteoOSF-Temperature',
+        temperature: 'WS-MeteoOSF-Temperature',
+        windspeed: 'WS-MeteoOSF-WindSpeed',
+        humidity: 'WS-MeteoOSF-Humidity',
       },
     ];
+
+    // this.alarmService.alarms['WS-MeteoCentral'] = Alarm.asAlarm({
+    //   'value': 1,
+    //   'core_id': 'WS-MeteoCentral',
+    //   'running_id': 'Dummy-cleared-valid',
+    //   'mode': '5',
+    //   'core_timestamp': 1267252440000,
+    //   'validity': '1',
+    //   'ack': false,
+    //   'shelved': false,
+    //   'dependencies': [],
+    // });
+    // this.alarmService.alarms['WS-MeteoCentral-Temperature'] = Alarm.asAlarm({
+    //   'value': 1,
+    //   'core_id': 'WS-MeteoCentral-Temperature',
+    //   'running_id': 'Dummy-cleared-valid',
+    //   'mode': '5',
+    //   'core_timestamp': 1267252440000,
+    //   'validity': '1',
+    //   'ack': false,
+    //   'shelved': false,
+    //   'dependencies': [],
+    // });
+    // this.alarmService.alarms['WS-MeteoCentral-WindSpeed'] = Alarm.asAlarm({
+    //   'value': 1,
+    //   'core_id': 'WS-MeteoCentral-WindSpeed',
+    //   'running_id': 'Dummy-cleared-valid',
+    //   'mode': '5',
+    //   'core_timestamp': 1267252440000,
+    //   'validity': '1',
+    //   'ack': false,
+    //   'shelved': false,
+    //   'dependencies': [],
+    // });
+    // this.alarmService.alarms['WS-MeteoCentral-Humidity'] = Alarm.asAlarm({
+    //   'value': 1,
+    //   'core_id': 'WS-MeteoCentral-Humidity',
+    //   'running_id': 'Dummy-cleared-valid',
+    //   'mode': '5',
+    //   'core_timestamp': 1267252440000,
+    //   'validity': '1',
+    //   'ack': false,
+    //   'shelved': false,
+    //   'dependencies': [],
+    // });
+    // this.alarmService.changeAlarms('all');
   }
 
   /**

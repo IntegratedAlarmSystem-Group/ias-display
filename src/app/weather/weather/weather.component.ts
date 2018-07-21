@@ -28,9 +28,9 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alarms['Alarm ID STATION 1'] = Alarm.asAlarm({
+    this.alarms['WS-MeteoCentral'] = Alarm.asAlarm({
       'value': 1,
-      'core_id': 'Alarm ID STATION 1',
+      'core_id': 'WS-MeteoCentral',
       'running_id': 'Dummy-cleared-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
@@ -39,9 +39,9 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.alarms['Alarm ID TEMP 1'] = Alarm.asAlarm({
+    this.alarms['WS-MeteoCentral-Temperature'] = Alarm.asAlarm({
       'value': 1,
-      'core_id': 'Alarm ID TEMP 1',
+      'core_id': 'WS-MeteoCentral-Temperature',
       'running_id': 'Dummy-cleared-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
@@ -50,9 +50,9 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.alarms['Alarm ID WIND 1'] = Alarm.asAlarm({
+    this.alarms['WS-MeteoCentral-WindSpeed'] = Alarm.asAlarm({
       'value': 1,
-      'core_id': 'Alarm ID WIND 1',
+      'core_id': 'WS-MeteoCentral-WindSpeed',
       'running_id': 'Dummy-cleared-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
@@ -61,9 +61,9 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
-    this.alarms['Alarm ID HUM 1'] = Alarm.asAlarm({
+    this.alarms['WS-MeteoCentral-Humidity'] = Alarm.asAlarm({
       'value': 1,
-      'core_id': 'Alarm ID HUM 1',
+      'core_id': 'WS-MeteoCentral-Humidity',
       'running_id': 'Dummy-cleared-valid',
       'mode': '5',
       'core_timestamp': 1267252440000,
@@ -72,6 +72,7 @@ export class WeatherComponent implements OnInit {
       'shelved': false,
       'dependencies': [],
     });
+    console.log('Weather Component, alarms = ', this.alarms);
   }
 
 }
