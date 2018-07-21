@@ -28,51 +28,8 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alarms['WS-MeteoCentral'] = Alarm.asAlarm({
-      'value': 1,
-      'core_id': 'WS-MeteoCentral',
-      'running_id': 'Dummy-cleared-valid',
-      'mode': '5',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
+    this.weatherServiceSubscription = this.weatherService.alarmChangeStream.subscribe(alarms => {
+      this.alarms = alarms;
     });
-    this.alarms['WS-MeteoCentral-Temperature'] = Alarm.asAlarm({
-      'value': 1,
-      'core_id': 'WS-MeteoCentral-Temperature',
-      'running_id': 'Dummy-cleared-valid',
-      'mode': '5',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
-    this.alarms['WS-MeteoCentral-WindSpeed'] = Alarm.asAlarm({
-      'value': 1,
-      'core_id': 'WS-MeteoCentral-WindSpeed',
-      'running_id': 'Dummy-cleared-valid',
-      'mode': '5',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
-    this.alarms['WS-MeteoCentral-Humidity'] = Alarm.asAlarm({
-      'value': 1,
-      'core_id': 'WS-MeteoCentral-Humidity',
-      'running_id': 'Dummy-cleared-valid',
-      'mode': '5',
-      'core_timestamp': 1267252440000,
-      'validity': '1',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
-    console.log('Weather Component, alarms = ', this.alarms);
   }
-
 }
