@@ -24,7 +24,9 @@
           <span mat-sort-header> Status </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm">
-          <app-status-view [alarm]="alarm.alarm" [value]="alarm.status" ></app-status-view>
+          <div class="status-icon">
+            <app-status-view [alarm]="alarm.alarm" [value]="alarm.status" ></app-status-view>
+          </div>
         </mat-cell>
       </ng-container>
 

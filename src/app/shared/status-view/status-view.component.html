@@ -1,10 +1,10 @@
-<div class="status-view">
-  <div class="status-view-icon alarm-icon">
+<div fxLayout="row">
+  <div class="alarm-icon">
     <app-alarm
       [alarm]="alarm" [images]="alarmIconsSet" [imagesUnreliable]="alarmIconsUnreliableSet"
     ></app-alarm>
   </div>
-  <div class="status-view-icon">
+  <div class="priority-icon">
     <app-alarm
       [alarm]="alarm" [images]="alarmIconsPrioritySet" [imagesUnreliable]="alarmIconsPrioritySet"
     ></app-alarm>

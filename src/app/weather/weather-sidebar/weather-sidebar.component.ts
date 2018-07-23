@@ -10,7 +10,7 @@ import { Assets } from '../../settings';
 @Component({
   selector: 'app-weather-sidebar',
   templateUrl: './weather-sidebar.component.html',
-  styleUrls: ['./weather-sidebar.component.css', './weather-sidebar.component.scss']
+  styleUrls: ['./weather-sidebar.component.scss']
 })
 export class WeatherSidebarComponent implements OnInit {
 

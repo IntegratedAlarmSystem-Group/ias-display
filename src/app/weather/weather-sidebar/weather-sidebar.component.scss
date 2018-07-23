@@ -10,5 +10,18 @@
 
   .mat-expansion-panel {
     background: #33475a;
+
+      td {
+        padding: 5px;
+        height: 40px;
+
+      }
+      .icon {
+        padding-left: 20px;
+      }
+      .status {
+        height: 10px;
+        border: 2px solid red;
+      }
   }
 }

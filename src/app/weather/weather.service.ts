@@ -63,18 +63,18 @@ export class WeatherService {
     this.defineAlarmsIds();
     this.defineAlarmsAndImages();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      const alarms = {};
+      this.alarms = {};
         for (const ids of this.alarmsIds) {
           if (ids) {
             for (const id in ids) {
               if (id) {
                 const alarm_id = ids[id];
-                alarms[alarm_id] = this.alarmService.get(alarm_id);
+                this.alarms[alarm_id] = this.alarmService.get(alarm_id);
               }
             }
           }
         }
-      this.alarmChangeStream.next(alarms);
+      this.alarmChangeStream.next(this.alarms);
     });
   }
 
