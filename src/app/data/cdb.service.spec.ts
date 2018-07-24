@@ -3,10 +3,10 @@ import { TestRequest } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
+import { environment } from '../../environments/environment';
 import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from '../data/http-client.service';
-import { environment } from '../../environments/environment';
 import { Iasio } from '../data/iasio';
 
 
@@ -31,9 +31,9 @@ describe('CdbService', () => {
       doc_url: 'https://www.alma.cl/'
   }];
 
-  const iasCdbUrl = environment.cdbApiUrl + '/ias';
-  const iasioCdbUrl = environment.cdbApiUrl + '/iasio';
-  const iasioCdbAlarmsUrl = iasioCdbUrl + '/filtered_by_alarm';
+  const iasCdbUrl = environment.httpUrl + BackendUrls.CDB_IAS;
+  const iasioCdbUrl = environment.httpUrl + BackendUrls.CDB_IASIO;
+  const iasioCdbAlarmsUrl = iasioCdbUrl + 'filtered_by_alarm';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,9 +44,14 @@ describe('CdbService', () => {
 
   beforeEach(inject(
     [ HttpTestingController, CdbService ],
-    ( httpTestingController: HttpTestingController, cdbService: CdbService ) => {
+    ( httpTestingController: HttpTestingController, cdbService: CdbService) => {
       subject = cdbService;
       testController = httpTestingController;
+      // spyOn(httpClientService, 'read_url').and.callFake(
+      //   function(arg) {
+      //     return arg;
+      //   }
+      // );
     })
   );
 

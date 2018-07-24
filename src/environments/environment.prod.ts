@@ -9,7 +9,4 @@ export const environment = {
 
   /** Base URL for HTTP requests */
   httpUrl: '',
-
-  /** URL for HTTP requests to the CDB app */
-  cdbApiUrl: '/cdb-api',
 };

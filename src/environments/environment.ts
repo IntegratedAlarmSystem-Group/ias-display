@@ -14,7 +14,4 @@ export const environment = {
 
   /** Base URL for HTTP requests */
   httpUrl: 'http://127.0.0.1:8000',
-
-  /** URL for HTTP requests to the CDB app */
-  cdbApiUrl: 'http://127.0.0.1:8000/cdb-api',
 };
