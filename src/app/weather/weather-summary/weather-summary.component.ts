@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '../../data/routing.service';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
@@ -56,7 +56,7 @@ export class WeatherSummaryComponent implements OnInit {
   */
   defineAlarmsAndImages() {
     this.humidityAlarmId = 'WS-Humidity';
-    this.tempAlarmId = 'Alarmdummy';
+    this.tempAlarmId = 'WS-Temperature';
     this.windsAlarmId = 'WS-WindSpeed';
   }
 

@@ -5,20 +5,29 @@ import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
 
+/**
+* Stores the IDs of the {@link Alarm} objects associated to a WeatherStation
+*/
 export class WeatherStationConfig {
+
+  /** ID of the main {@link Alarm} of the Weather Station */
   public station: string;
+
+  /** ID of the temperature {@link Alarm} of the Weather Station */
   public temperature: string;
+
+  /** ID of the windspeed {@link Alarm} of the Weather Station */
   public windspeed: string;
+
+  /** ID of the humidity {@link Alarm} of the Weather Station */
   public humidity: string;
 }
 
+/**
+* Service that stores and handles all configuration needed by the components of the {@link WeatherModule}
+*/
 @Injectable()
 export class WeatherService {
-
-  /**
-  * Stream of notifications of changes in the dictionary of {@link Alarm} objects
-  */
-  public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /** Set of Humidity icons */
   public humidityImageSet: AlarmImageSet;
@@ -38,22 +47,16 @@ export class WeatherService {
   /** Set of Wind Speed Unreliable icons */
   public windsImageUnreliableSet: AlarmImageSet;
 
-  /** Alarms Ids grouped by Weather Station**/
+  /** Alarms Ids for the weather summary **/
+  public weatherSummaryConfig: WeatherStationConfig;
+
+  /** List of Alarm Ids of the Weather Stations **/
   public weatherStationsConfig: WeatherStationConfig[];
 
-
-  /** Dictionary of Weather Alarms indexed by alarm_id **/
-  public alarms: {[core_id: string]: Alarm } = {};
-
-  /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
-  private alarmServiceSubscription: ISubscription;
-
   /**
-   * Builds an instance of the component
-   * @param {AlarmService} alarmService Service used to get the Alarms
+   * Builds an instance of the service
    */
   constructor(
-    private alarmService: AlarmService,
   ) {
     this.initialize();
   }
@@ -64,20 +67,6 @@ export class WeatherService {
   initialize() {
     this.setWeatherStationsConfig();
     this.setAlarmsAndImages();
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      this.alarms = {};
-        for (const ids of this.weatherStationsConfig) {
-          if (ids) {
-            for (const id in ids) {
-              if (id) {
-                const alarm_id = ids[id];
-                this.alarms[alarm_id] = this.alarmService.get(alarm_id);
-              }
-            }
-          }
-        }
-      this.alarmChangeStream.next(this.alarms);
-    });
   }
 
   /**
