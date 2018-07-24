@@ -23,12 +23,13 @@ export class WeatherSidebarComponent implements OnInit {
    */
   constructor(
     public weatherService: WeatherService,
+    public alarmService: AlarmService,
   ) { }
 
   ngOnInit() {
   }
 
   getAlarm(alarm_id): Alarm {
-    return this.alarms[alarm_id];
+    return this.alarmService.get(alarm_id);
   }
 }

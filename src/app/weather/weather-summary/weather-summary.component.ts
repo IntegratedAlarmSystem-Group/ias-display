@@ -44,6 +44,9 @@ export class WeatherSummaryComponent implements OnInit {
     this.defineAlarmsAndImages();
   }
 
+  /** Returns the instance of the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm}
+  */
   getAlarm(alarmID: string): Alarm {
     return this.alarmService.get(alarmID);
   }
