@@ -4,6 +4,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
+import { WeatherService } from '../weather.service';
 
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
@@ -15,6 +16,9 @@ describe('WeatherComponent', () => {
         WeatherComponent,
         WeatherMapComponent,
         WeatherSidebarComponent,
+      ],
+      providers: [
+        WeatherService
       ],
       imports: [
         IasMaterialModule,

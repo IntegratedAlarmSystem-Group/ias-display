@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import { DataModule } from '../data/data.module';
 import { WeatherService } from './weather.service';
 
 describe('WeatherService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WeatherService]
+      providers: [WeatherService],
+      imports: [DataModule],
     });
   });
 
