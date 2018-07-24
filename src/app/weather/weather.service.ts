@@ -5,6 +5,13 @@ import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
 
+export class WeatherStationConfig {
+  public station: string;
+  public temperature: string;
+  public windspeed: string;
+  public humidity: string;
+}
+
 @Injectable()
 export class WeatherService {
 
@@ -32,12 +39,7 @@ export class WeatherService {
   public windsImageUnreliableSet: AlarmImageSet;
 
   /** Alarms Ids grouped by Weather Station**/
-  public alarmsIds: {
-    station: string,
-    temperature: string,
-    windspeed: string,
-    humidity: string
-  }[];
+  public weatherStationsConfig: WeatherStationConfig[];
 
 
   /** Dictionary of Weather Alarms indexed by alarm_id **/
@@ -60,11 +62,11 @@ export class WeatherService {
   * Initializes the Service, subscribing to AlarmService and getting configuration from Webserver
   */
   initialize() {
-    this.defineAlarmsIds();
-    this.defineAlarmsAndImages();
+    this.setWeatherStationsConfig();
+    this.setAlarmsAndImages();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
       this.alarms = {};
-        for (const ids of this.alarmsIds) {
+        for (const ids of this.weatherStationsConfig) {
           if (ids) {
             for (const id in ids) {
               if (id) {
@@ -81,8 +83,8 @@ export class WeatherService {
   /**
   * Define the IDs of the alarms that the component should listen to
   */
-  defineAlarmsIds() {
-    this.alarmsIds = [
+  setWeatherStationsConfig() {
+    this.weatherStationsConfig = [
       {
         station: 'Alarmdummy',
         temperature: 'WS-MeteoCentral-Temperature',
@@ -101,7 +103,7 @@ export class WeatherService {
   /**
   * Define the alarms that the component should listen to and their respective icons
   */
-  defineAlarmsAndImages() {
+  setAlarmsAndImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',
