@@ -57,7 +57,6 @@ export class WeatherSummaryComponent implements OnInit {
   defineAlarmsAndImages() {
     this.humidityAlarmId = 'WS-Humidity';
     this.tempAlarmId = 'Alarmdummy';
-    // this.tempAlarmId = 'WS-Temperature';
     this.windsAlarmId = 'WS-WindSpeed';
   }
 
