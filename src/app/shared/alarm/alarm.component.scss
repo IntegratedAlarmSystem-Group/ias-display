@@ -1,0 +1,24 @@
+.alarm-component{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-gap: 0px 0px;
+}
+
+.alarm-icon{
+    height: 100%;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.badges{
+    height: 100%;
+    width: 100%;
+
+    .badge-icon{
+        height: 33%;
+        // width: 10%;
+    }
+}
