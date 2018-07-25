@@ -1,1 +1,12 @@
-<img class="marker-img" src="{{ getImage() }}"/>
+<div class="marker-img">
+  <img class="marker-img" src="{{ getImage() }}"/>
+</div>
+<div *ngIf="showActionBadges">
+  <div *ngIf="alarm.ack; then ackOff else ackOn"></div>
+  <ng-template #ackOn>
+    <div class="ack-button-icon"> <img src="/assets/img/ack-on.svg"/> </div>
+  </ng-template>
+  <ng-template #ackOff>
+    <div class="ack-button-icon"> <img src="/assets/img/ack-off.svg"/> </div>
+  </ng-template>
+</div>

@@ -66,6 +66,12 @@ export class AlarmComponent implements OnInit {
   @Input() imagesUnreliable: AlarmImageSet;
 
   /**
+   * Defines wether or not the component will display the action badges ("pending acknowledgement" and "alarm in shelf") besides the icon.
+   * This value is "true" by default
+   */
+  @Input() showActionBadges = true;
+
+  /**
   * Instantiates the component
   */
   constructor() { }
