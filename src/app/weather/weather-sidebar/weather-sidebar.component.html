@@ -6,12 +6,7 @@
   <mat-accordion *ngFor="let alarm of weatherService.weatherStationsConfig">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{alarm.station}}
-        </mat-panel-title>
-        <mat-panel-description>
-          Three alarm Icons
-        </mat-panel-description>
+        <app-weather-station-sidebar [stationConfig]="alarm"></app-weather-station-sidebar>
       </mat-expansion-panel-header>
       <table>
         <tr>

@@ -1,0 +1,16 @@
+<div class="row weather-station-sidebar">
+  <div class="col-md-6 weather-station-name">
+    {{this.stationConfig.station}}
+  </div>
+  <div class="col-md-6 row weather-icons">
+    <div class="col-md-4">
+      <app-alarm [alarm]="this.getAlarm(stationConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
+    </div>
+    <div class="col-md-4">
+      <app-alarm [alarm]="this.getAlarm(stationConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
+    </div>
+    <div class="col-md-4">
+      <app-alarm [alarm]="this.getAlarm(stationConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
+    </div>
+  </div>
+</div>

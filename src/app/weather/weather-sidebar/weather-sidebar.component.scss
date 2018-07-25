@@ -23,4 +23,14 @@
         width: 60px;
       }
   }
+
+  app-weather-station-sidebar {
+    width: 100%;
+  }
+
+  mat-expansion-panel {
+    margin: 6px;
+    border-radius: 4px;
+    box-shadow: none;
+  }
 }

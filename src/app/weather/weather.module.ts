@@ -8,6 +8,7 @@ import { WeatherMapComponent } from './weather-map/weather-map.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.component';
 import { WeatherService } from './weather.service';
+import { WeatherStationSidebarComponent } from './weather-station-sidebar/weather-station-sidebar.component';
 
 /**
 * This module contains all the components related to the Weather system
@@ -27,6 +28,7 @@ import { WeatherService } from './weather.service';
     WeatherMapComponent,
     WeatherComponent,
     WeatherSidebarComponent,
+    WeatherStationSidebarComponent,
   ],
   exports: [
     WeatherSummaryComponent,

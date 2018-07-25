@@ -76,7 +76,7 @@ export class WeatherService {
     this.weatherStationsConfig = [
       {
         station: 'Alarmdummy',
-        temperature: 'WS-MeteoCentral-Temperature',
+        temperature: 'Alarmdummy',
         windspeed: 'WS-MeteoCentral-WindSpeed',
         humidity: 'WS-MeteoCentral-Humidity',
       },
