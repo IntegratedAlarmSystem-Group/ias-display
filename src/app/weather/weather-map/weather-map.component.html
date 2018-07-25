@@ -1,3 +1,5 @@
-<p>
-  weather-map works!
-</p>
+<div class="alarm-comp-test">
+  <app-alarm
+    [alarm]="this.alarmService.get('Alarmdummy')" [images]="this.weatherService.tempImageSet" [imagesUnreliable]="this.weatherService.tempImageUnreliableSet"
+  ></app-alarm>
+</div>

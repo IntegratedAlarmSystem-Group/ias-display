@@ -35,6 +35,7 @@
 .sensors-card>.marker{
     padding: 20px;
     height: 85px;
+    width: fit-content;
 }
 .sensors-card>.marker>.marker-img{
     height: 40px;
