@@ -10,7 +10,7 @@
         <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
       </ng-template>
       <ng-template #ackOff>
-        <img class="badge-icon ack-icon" src="/assets/img/ack-off.svg"/>
+        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
       </ng-template>
 
       <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
@@ -18,7 +18,7 @@
         <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
       </ng-template>
       <ng-template #shelvedOff>
-        <img class="badge-icon shelve-icon" src="/assets/img/shelve.svg"/>
+        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>
       </ng-template>
 
     </div>
