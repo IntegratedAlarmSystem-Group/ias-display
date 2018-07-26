@@ -5,7 +5,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
 import { AlarmComponent } from './alarm/alarm.component';
-import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { ActionsModule } from '../actions/actions.module';
 
@@ -27,12 +26,10 @@ import { ActionsModule } from '../actions/actions.module';
   ],
   declarations: [
     AlarmComponent,
-    WikiButtonComponent,
     StatusViewComponent,
   ],
   exports: [
     AlarmComponent,
-    WikiButtonComponent,
     StatusViewComponent,
   ],
   entryComponents: [

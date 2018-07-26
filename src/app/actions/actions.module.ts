@@ -4,6 +4,7 @@ import { AckComponent } from './ack/ack.component';
 import { ShelveComponent } from './shelve/shelve.component';
 import { AckButtonComponent } from './ack-button/ack-button.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
+import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { AckTreeComponent } from './ack-tree/ack-tree.component';
 import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,21 +26,24 @@ import { ButtonsComponent } from './buttons/buttons.component';
     SharedModule,
   ],
   declarations: [
-    AckComponent,
-    ShelveComponent,
     AckButtonComponent,
-    ShelveButtonComponent,
+    AckComponent,
     AckTreeComponent,
     ButtonsComponent,
+    ShelveComponent,
+    ShelveButtonComponent,
+    WikiButtonComponent,
   ],
   providers: [
     SidenavService,
   ],
   exports: [
-    AckComponent,
-    ShelveComponent,
     AckButtonComponent,
+    AckComponent,
+    ButtonsComponent,
+    ShelveComponent,
     ShelveButtonComponent,
+    WikiButtonComponent,
   ]
 })
 export class ActionsModule { }
