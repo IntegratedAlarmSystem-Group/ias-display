@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
-import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
 
@@ -62,7 +61,7 @@ export class WeatherService {
   }
 
   /**
-  * Initializes the Service, subscribing to AlarmService and getting configuration from Webserver
+  * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
     this.setWeatherStationsConfig();

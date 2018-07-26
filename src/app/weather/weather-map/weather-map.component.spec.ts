@@ -1,14 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeatherMapComponent } from './weather-map.component';
+import { WeatherService } from '../weather.service';
+
+import { DataModule } from '../../data/data.module';
+
 
 describe('WeatherMapComponent', () => {
   let component: WeatherMapComponent;
   let fixture: ComponentFixture<WeatherMapComponent>;
 
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherMapComponent ]
+      declarations: [ WeatherMapComponent ],
+      imports: [ DataModule ],
+      providers: [ WeatherService ]
     })
     .compileComponents();
   }));
