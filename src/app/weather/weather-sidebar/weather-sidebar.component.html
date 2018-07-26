@@ -18,34 +18,46 @@
           <td>{{alarm.station}}</td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.station)" [value]="this.getAlarm(alarm.station)?.status"></app-status-view>
+              <app-status-view [alarm]="this.getAlarm(alarm.station)" [value]="this.getAlarm(alarm.station)?.status" [showActionBadges]="false"></app-status-view>
             </div>
           </td>
           <td> Button actions </td>
         </tr>
         <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm></td>
+          <td>
+            <div class="icon">
+              <app-alarm [alarm]="this.getAlarm(alarm.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
+            </div>
+          </td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [value]="this.getAlarm(alarm.windspeed)?.value" ></app-status-view>
+              <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [value]="this.getAlarm(alarm.windspeed)?.value" [showActionBadges]="false" ></app-status-view>
             </div>
           </td>
           <td> Button actions </td>
         </tr>
         <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm></td>
+          <td>
+            <div class="icon">
+              <app-alarm [alarm]="this.getAlarm(alarm.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
+            </div>
+          </td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [value]="this.getAlarm(alarm.humidity)?.value" ></app-status-view>
+              <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [value]="this.getAlarm(alarm.humidity)?.value" [showActionBadges]="false" ></app-status-view>
             </div>
           </td>
           <td> Button actions </td>
         </tr>
         <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm></td>
+          <td>
+            <div class="icon">
+              <app-alarm [alarm]="this.getAlarm(alarm.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
+            </div>
+          </td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [value]="this.getAlarm(alarm.temperature)?.value" ></app-status-view>
+              <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [value]="this.getAlarm(alarm.temperature)?.value" [showActionBadges]="false" ></app-status-view>
             </div>
           </td>
           <td> Button actions </td>
