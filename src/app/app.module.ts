@@ -21,6 +21,7 @@ import { ShelveComponent } from './actions/shelve/shelve.component';
 import { WeatherComponent } from './weather/weather/weather.component';
 import { AlarmComponent } from './shared/alarm/alarm.component';
 
+import { HttpModule } from '@angular/http';
 
 /**
 * Application routes
@@ -56,6 +57,7 @@ export const appRoutes: Routes = [
     SharedModule,
     TabularModule,
     WeatherModule,
+    HttpModule,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

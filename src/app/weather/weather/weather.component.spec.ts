@@ -3,6 +3,8 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
+import { WeatherTestWSDataComponent } from '../weather-map/weather-map.component';
+import { WeatherTestWSMarkerComponent } from '../weather-map/weather-map.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
 import { WeatherService } from '../weather.service';
 
@@ -16,6 +18,8 @@ describe('WeatherComponent', () => {
         WeatherComponent,
         WeatherMapComponent,
         WeatherSidebarComponent,
+        WeatherTestWSDataComponent,
+        WeatherTestWSMarkerComponent
       ],
       providers: [
         WeatherService

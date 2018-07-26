@@ -9,6 +9,10 @@ import { WeatherComponent } from './weather/weather.component';
 import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.component';
 import { WeatherService } from './weather.service';
 
+import { WeatherTestWSMarkerComponent } from './weather-map/weather-map.component';
+import { WeatherTestWSDataComponent } from './weather-map/weather-map.component';
+
+
 /**
 * This module contains all the components related to the Weather system
 */
@@ -27,6 +31,8 @@ import { WeatherService } from './weather.service';
     WeatherMapComponent,
     WeatherComponent,
     WeatherSidebarComponent,
+    WeatherTestWSMarkerComponent,
+    WeatherTestWSDataComponent,
   ],
   exports: [
     WeatherSummaryComponent,

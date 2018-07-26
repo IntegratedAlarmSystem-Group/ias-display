@@ -1,0 +1,36 @@
+.ws-map {
+  width: 100%;
+  height: calc(100vh - 130px)
+}
+
+svg g.ws-primary-group {
+  cursor: pointer;
+}
+
+svg g.ws-primary-group:hover .ws-connector {
+  stroke: #a3bbc6;
+};
+
+svg g.pads-p-arm {
+  &.selected {
+    circle { stroke: white; }
+  }
+}
+
+svg g.pads-morita-inner {
+  &.selected {
+    circle { stroke: white; }
+  }
+}
+
+svg g.pads-s-arm {
+  &.selected {
+    circle { stroke: white; }
+  }
+}
+
+svg g.pads-w-arm {
+  &.selected {
+    circle { stroke: white; }
+  }
+}
