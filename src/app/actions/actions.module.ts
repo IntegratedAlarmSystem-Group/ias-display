@@ -12,6 +12,7 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { SidenavService } from './sidenav.service';
+import { ButtonsComponent } from './buttons/buttons.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { SidenavService } from './sidenav.service';
     AckButtonComponent,
     ShelveButtonComponent,
     AckTreeComponent,
+    ButtonsComponent,
   ],
   providers: [
     SidenavService,

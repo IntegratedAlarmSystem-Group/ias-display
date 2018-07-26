@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlarmService } from '../../data/alarm.service';
 import { SidenavService } from '../sidenav.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
@@ -15,14 +14,9 @@ import { Alarm } from '../../data/alarm';
 export class AckButtonComponent implements OnInit {
 
   /**
-   * Id of the alarm to be acknowledged
-   */
-  @Input() alarm_id: string;
-
-  /**
    * Alarm object related with the alarm id received as input
    */
-  private alarm: Alarm;
+  @Input() alarm: Alarm;
 
   /**
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
@@ -30,28 +24,25 @@ export class AckButtonComponent implements OnInit {
   public canAcknowledge = false;
 
   /**
-   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
+   * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
+   * @param {Router} router system Router to handle navigation
    */
   constructor(
-    private alarmService: AlarmService,
     public sidenavService: SidenavService,
     private router: Router
   ) { }
 
   /**
-   * On init the component initialize the private variables using the method
-   * {@link loadAlarm}
+   * On init the component initialize the private variables using the method {@link loadAlarm}
    */
   ngOnInit() {
     this.loadAlarm();
   }
 
   /**
-   * Get the alarm object related with the alarm id received as input using the
-   * AlarmService. Initialize the private variables of this component.
+   * Initializes the private variable {@link canAcknowledge} of this component.
    */
   loadAlarm() {
-    this.alarm = this.alarmService.get(this.alarm_id);
     this.canAcknowledge = !this.alarm.ack;
   }
 
@@ -67,7 +58,7 @@ export class AckButtonComponent implements OnInit {
   * Handle click on table rows, it triggers the ack modal
   */
   onClick(event) {
-    this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm_id]}}]);
+    this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm.core_id]}}]);
   }
 
 }

@@ -15,32 +15,24 @@ import { Alarm } from '../../data/alarm';
 export class ShelveButtonComponent implements OnInit {
 
   /**
-   * Id of the alarm to be shelved
-   */
-  @Input() alarm_id: string;
-
-  /**
    * Alarm object related with the alarm id received as input
    */
-  public alarm: Alarm;
+  @Input() alarm: Alarm;
 
 
   /**
-   * The "constructor", injects the {@link AlarmService}
-   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
+   * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
+   * @param {Router} router system Router to handle navigation
    */
   constructor(
-    private alarmService: AlarmService,
     public sidenavService: SidenavService,
     private router: Router
   ) { }
 
   /**
-   * On init the component initialize the private variables using the method
-   * {@link loadAlarm}
+   * Initialize the component
    */
   ngOnInit() {
-    this.loadAlarm();
   }
 
   /**
@@ -59,14 +51,6 @@ export class ShelveButtonComponent implements OnInit {
   }
 
   /**
-   * Get the alarm object related with the alarm id received as input using the
-   * AlarmService. Initialize the private variables of this component.
-   */
-  loadAlarm() {
-    this.alarm = this.alarmService.get(this.alarm_id);
-  }
-
-  /**
    * Defines wether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
@@ -78,7 +62,7 @@ export class ShelveButtonComponent implements OnInit {
   * Handle click on table rows, it triggers the shelve sidebar
   */
   onClick(event) {
-    this.router.navigate([{outlets: {actions: ['shelve', this.alarm_id]}}]);
+    this.router.navigate([{outlets: {actions: ['shelve', this.alarm.core_id]}}]);
   }
 
 }
