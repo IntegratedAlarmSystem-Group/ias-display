@@ -44,3 +44,4 @@ Thumbs.db
 *.idea
 
 /src/assets/temp/*
+!/src/assets/temp/README.md
