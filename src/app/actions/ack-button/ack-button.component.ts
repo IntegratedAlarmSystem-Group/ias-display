@@ -14,7 +14,7 @@ import { Alarm } from '../../data/alarm';
 export class AckButtonComponent implements OnInit {
 
   /**
-   * Alarm object related with the alarm id received as input
+   * Alarm object associated to the button
    */
   @Input() alarm: Alarm;
 
