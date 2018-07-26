@@ -1,6 +1,15 @@
 .weather-station-sidebar {
-    height: 40px;
-    line-height: 40px;
+    height: 48px;
+    line-height: 48px;
+    width: 100%;
+    border-left: 24px solid green;
+    border-radius: 4px;
+    margin-right: 0px;
+    margin-left: 0px;
+    background: #33475a;
+    position: absolute;
+    top:0;
+    left:0;
 
     .weather-station-name {
       vertical-align: middle;

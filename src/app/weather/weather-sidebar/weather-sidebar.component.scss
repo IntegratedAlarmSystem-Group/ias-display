@@ -9,11 +9,11 @@
   height: calc(100vh - 150px) !important;
 
   .mat-expansion-panel {
-    background: #33475a;
+    background: transparent;
 
       td {
         padding: 5px;
-        height: 40px;
+        height: 100%;
 
       }
       .icon {
@@ -32,5 +32,18 @@
     margin: 6px;
     border-radius: 4px;
     box-shadow: none;
+    background: transparent;
   }
+
+  .weather-sidebar-header {
+    padding-left: 0px;
+    position: relative;
+    background: transparent;
+
+    &.mat-expanded {
+      background: transparent !important;
+    }
+  }
+
+
 }

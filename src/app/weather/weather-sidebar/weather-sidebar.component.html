@@ -5,7 +5,7 @@
 <div class="weather-sidebar-content">
   <mat-accordion *ngFor="let alarm of weatherService.weatherStationsConfig">
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="weather-sidebar-header">
         <app-weather-station-sidebar [stationConfig]="alarm"></app-weather-station-sidebar>
       </mat-expansion-panel-header>
       <table>
