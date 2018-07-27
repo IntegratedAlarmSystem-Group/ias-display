@@ -8,6 +8,7 @@ import { AlarmComponent } from './alarm/alarm.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { ActionsModule } from '../actions/actions.module';
+import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -29,15 +30,18 @@ import { ActionsModule } from '../actions/actions.module';
     AlarmComponent,
     WikiButtonComponent,
     StatusViewComponent,
+    AlarmHeaderComponent,
   ],
   exports: [
     AlarmComponent,
     WikiButtonComponent,
     StatusViewComponent,
+    AlarmHeaderComponent,
   ],
   entryComponents: [
     AlarmComponent,
     StatusViewComponent,
+    AlarmHeaderComponent,
   ]
 })
 export class SharedModule { }

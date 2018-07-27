@@ -1,8 +1,6 @@
-<div class="row weather-station-sidebar">
-  <div class="col-md-6 weather-station-name">
-    {{this.stationConfig.station}}
-  </div>
-  <div class="col-md-6 row weather-icons">
+<div class="weather-station-sidebar">
+  <app-alarm-header fxFlex [alarm]="this.getAlarm(stationConfig.station)"></app-alarm-header>
+  <div fxFlex=50% class="row weather-icons">
     <div class="col-md-4">
       <app-alarm [alarm]="this.getAlarm(stationConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
     </div>

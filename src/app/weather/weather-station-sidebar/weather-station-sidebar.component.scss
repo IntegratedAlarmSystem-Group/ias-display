@@ -1,8 +1,7 @@
 .weather-station-sidebar {
-    height: 48px;
-    line-height: 48px;
+    height: 52px;
+    line-height: 52px;
     width: 100%;
-    border-left: 24px solid green;
     border-radius: 4px;
     margin-right: 0px;
     margin-left: 0px;
@@ -10,6 +9,14 @@
     position: absolute;
     top:0;
     left:0;
+    padding-right: 30px;
+
+    .weather-station-alarm {
+      height: 52px;
+      width: 10px;
+      border-radius: 4px 0px 0px 4px;
+      margin-right: 10px;
+    }
 
     .weather-station-name {
       vertical-align: middle;
@@ -19,4 +26,34 @@
       vertical-align: middle;
       height: 26px;
     }
+
+    .green {
+      border: 2px solid #54c073;
+      background: #54c073;
+    }
+
+    .yellow {
+      border: 2px solid #dcb33d;
+      background: #dcb33d;
+    }
+
+    .red {
+      border: 2px solid #b63f36;
+      background: #b63f36;
+    }
+
+    .gray {
+      border: 2px solid #abb4b4;
+      background: #abb4b4;
+    }
+
+    .blue {
+      border: 2px solid #4ac8ff;
+      background: #4ac8ff;
+    }
+
+    .invalid {
+      background: transparent;
+    }
+
 }

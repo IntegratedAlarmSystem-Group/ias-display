@@ -37,4 +37,6 @@ export class WeatherStationSidebarComponent implements OnInit {
     return this.alarmService.get(alarm_id);
   }
 
+
+
 }
