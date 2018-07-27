@@ -1,11 +1,9 @@
-<button mat-flat-button class="shelve-button" title="{{ getButtonTooltipText() }}" [disabled]="isDisabled()" (click)="onClick($event)">
+<button mat-flat-button id="shelve-button" class="shelve-button" title="{{ getButtonTooltipText() }}" [disabled]="isDisabled()" (click)="onClick($event)">
     <div *ngIf="alarm?.shelved; then unshelveIcon; else shelveIcon"></div>
     <ng-template #shelveIcon>
-      <!-- <mat-icon mat-list-icon>archive</mat-icon> -->
       <div class="shelve-button-icon"> <img src="/assets/img/shelve.svg"/> </div>
     </ng-template>
     <ng-template #unshelveIcon>
-      <!-- <mat-icon mat-list-icon>unarchive</mat-icon> -->
       <div class="shelve-button-icon"> <img src="/assets/img/unshelve.svg"/> </div>
     </ng-template>
 </button>
