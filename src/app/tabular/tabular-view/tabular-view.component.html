@@ -68,9 +68,7 @@
           <span mat-sort-header> Actions </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm">
-          <app-ack-button alarm_id={{alarm.name}}></app-ack-button>
-          <app-shelve-button alarm_id={{alarm.name}}></app-shelve-button>
-          <app-wiki-button url={{alarm.url}}></app-wiki-button>
+          <app-buttons [alarm]="alarm.alarm" [url]="alarm.url"></app-buttons>
         </mat-cell>
       </ng-container>
 

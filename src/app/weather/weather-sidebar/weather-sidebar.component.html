@@ -3,49 +3,71 @@
 </div>
 
 <div class="weather-sidebar-content">
-  <mat-accordion *ngFor="let alarm of weatherService.weatherStationsConfig">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header class="weather-sidebar-header">
-        <app-weather-station-sidebar [stationConfig]="alarm"></app-weather-station-sidebar>
-      </mat-expansion-panel-header>
-      <table>
-        <tr>
-          <td>{{alarm.station}}</td>
-          <td>
-            <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.station)" [value]="this.getAlarm(alarm.station)?.status"></app-status-view>
-            </div>
-          </td>
-          <td> Button actions </td>
-        </tr>
-        <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm></td>
-          <td>
-            <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [value]="this.getAlarm(alarm.windspeed)?.value" ></app-status-view>
-            </div>
-          </td>
-          <td> Button actions </td>
-        </tr>
-        <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm></td>
-          <td>
-            <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [value]="this.getAlarm(alarm.humidity)?.value" ></app-status-view>
-            </div>
-          </td>
-          <td> Button actions </td>
-        </tr>
-        <tr>
-          <td class="icon"><app-alarm [alarm]="this.getAlarm(alarm.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm></td>
-          <td>
-            <div class="status">
-              <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [value]="this.getAlarm(alarm.temperature)?.value" ></app-status-view>
-            </div>
-          </td>
-          <td> Button actions </td>
-        </tr>
-      </table>
-    </mat-expansion-panel>
+  <mat-accordion>
+    <div multi="false" *ngFor="let alarm of weatherService.weatherStationsConfig">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header class="weather-sidebar-header">
+          <app-weather-station-sidebar [stationConfig]="alarm"></app-weather-station-sidebar>
+        </mat-expansion-panel-header>
+        <table>
+          <tr>
+            <td>{{alarm.station}}</td>
+            <td>
+              <div class="status">
+                <app-status-view [alarm]="this.getAlarm(alarm.station)" [showActionBadges]="false"></app-status-view>
+              </div>
+            </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.station)" [url]=""></app-buttons>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="icon">
+                <app-alarm [alarm]="this.getAlarm(alarm.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
+              </div>
+            </td>
+            <td>
+              <div class="status">
+                <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [showActionBadges]="false" ></app-status-view>
+              </div>
+            </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.windspeed)" [url]=""></app-buttons>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="icon">
+                <app-alarm [alarm]="this.getAlarm(alarm.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
+              </div>
+            </td>
+            <td>
+              <div class="status">
+                <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [showActionBadges]="false" ></app-status-view>
+              </div>
+            </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.humidity)" [url]=""></app-buttons>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="icon">
+                <app-alarm [alarm]="this.getAlarm(alarm.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
+              </div>
+            </td>
+            <td>
+              <div class="status">
+                <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [showActionBadges]="false" ></app-status-view>
+              </div>
+            </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.temperature)" [url]=""></app-buttons>
+            </td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+    </div>
   </mat-accordion>
 </div>

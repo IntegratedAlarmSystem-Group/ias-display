@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActionsModule } from '../actions/actions.module';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
@@ -10,12 +11,17 @@ import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.compo
 import { WeatherService } from './weather.service';
 import { WeatherStationSidebarComponent } from './weather-station-sidebar/weather-station-sidebar.component';
 
+import { WeatherTestWSMarkerComponent } from './weather-map/weather-map.component';
+import { WeatherTestWSDataComponent } from './weather-map/weather-map.component';
+
+
 /**
 * This module contains all the components related to the Weather system
 */
 @NgModule({
   imports: [
     CommonModule,
+    ActionsModule,
     DataModule,
     SharedModule,
     IasMaterialModule,
@@ -29,6 +35,8 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar/weathe
     WeatherComponent,
     WeatherSidebarComponent,
     WeatherStationSidebarComponent,
+    WeatherTestWSMarkerComponent,
+    WeatherTestWSDataComponent,
   ],
   exports: [
     WeatherSummaryComponent,

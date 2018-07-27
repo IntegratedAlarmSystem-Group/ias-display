@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
-import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
+
+import { HttpClient } from '@angular/common/http';
+
 
 /**
 * Stores the IDs of the {@link Alarm} objects associated to a WeatherStation
@@ -57,12 +59,13 @@ export class WeatherService {
    * Builds an instance of the service
    */
   constructor(
+    private http: HttpClient
   ) {
     this.initialize();
   }
 
   /**
-  * Initializes the Service, subscribing to AlarmService and getting configuration from Webserver
+  * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
     this.setWeatherStationsConfig();
@@ -165,5 +168,14 @@ export class WeatherService {
       shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
     });
   }
+
+  /**
+  * Data request for the weather station map
+  * TODO: To change the source to the webserver
+  */
+  getMapData() {
+    return this.http.get('/assets/temp/map_data.json');
+  }
+
 
 }
