@@ -1,13 +1,13 @@
 <div class="weather-station-sidebar">
   <app-alarm-header fxFlex [alarm]="this.getAlarm(stationConfig.station)"></app-alarm-header>
-  <div fxFlex=50% class="row weather-icons">
-    <div class="col-md-4">
+  <div fxLayout="row" class="weather-icons">
+    <div class="icon">
       <app-alarm [alarm]="this.getAlarm(stationConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
     </div>
-    <div class="col-md-4">
+    <div class="icon">
       <app-alarm [alarm]="this.getAlarm(stationConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
     </div>
-    <div class="col-md-4">
+    <div class="icon">
       <app-alarm [alarm]="this.getAlarm(stationConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
     </div>
   </div>

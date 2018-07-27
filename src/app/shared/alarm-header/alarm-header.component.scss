@@ -1,4 +1,4 @@
-#alarm-header-color {
+.alarm-header-color {
   height: 100%;
   width: 10px;
   border-radius: 4px 0px 0px 4px;
@@ -8,6 +8,35 @@
   display: flex;
 }
 
-#alarm-header-name {
+.alarm-header-name {
   vertical-align: middle;
+}
+
+.green {
+  border: 2px solid #54c073;
+  background: #54c073;
+}
+
+.yellow {
+  border: 2px solid #dcb33d;
+  background: #dcb33d;
+}
+
+.red {
+  border: 2px solid #b63f36;
+  background: #b63f36;
+}
+
+.gray {
+  border: 2px solid #abb4b4;
+  background: #abb4b4;
+}
+
+.blue {
+  border: 2px solid #4ac8ff;
+  background: #4ac8ff;
+}
+
+.invalid {
+  background: transparent;
 }
