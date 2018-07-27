@@ -59,4 +59,22 @@ export class AlarmHeaderComponent implements OnInit {
     return result;
   }
 
+  showAsPendingAck(): boolean {
+    return this.showActionBadges && this.alarm != null && !this.alarm.ack;
+  }
+
+  showAsShelved(): boolean {
+    return this.showActionBadges && this.alarm != null && this.alarm.shelved;
+  }
+
+  getAlarmName(): string {
+    if (this.alarm) {
+      if (this.alarm.core_id.length > 20) {
+        return this.alarm.core_id.substring(0, 20) + '...';
+      } else {
+        return this.alarm.core_id;
+      }
+    }
+  }
+
 }

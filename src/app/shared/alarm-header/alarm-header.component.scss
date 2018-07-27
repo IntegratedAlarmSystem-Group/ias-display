@@ -7,7 +7,33 @@
 }
 
 .alarm-header-name {
-  vertical-align: middle;
+  padding-right: 4px;
+}
+
+.alarm-header-badges {
+  position: relative;
+  margin: 12px 0 12px 0px;
+}
+
+.badges{
+
+  .badge-icon{
+    position: absolute;
+    height: 35%;
+    left: 106%;
+  }
+
+  .ack-icon{
+    top: 2%;
+  }
+
+  .shelve-icon{
+    bottom: 2%;
+  }
+
+  .badge-off{
+    opacity: 0.08;
+  }
 }
 
 .green {
