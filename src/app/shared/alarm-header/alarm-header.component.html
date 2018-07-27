@@ -1,6 +1,4 @@
-<!-- <div fxFlex> -->
-  <div fxFlex="10px" class="alarm-header-color"></div>
-  <div fxFlex class="alarm-header-name">
-    <span>{{this.alarm.core_id}}</span>
-  </div>
-<!-- </div> -->
+<div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div>
+<div fxFlex class="alarm-header-name">
+  <span>{{this.alarm?.core_id}}</span>
+</div>

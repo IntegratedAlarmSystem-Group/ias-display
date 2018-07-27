@@ -13,9 +13,50 @@ export class AlarmHeaderComponent implements OnInit {
   */
   @Input() alarm: Alarm;
 
+  /**
+   * Defines wether or not the component will display the action badges ("pending acknowledgement" and "alarm in shelf") besides the icon.
+   * This value is "true" by default
+   */
+  @Input() showActionBadges = true;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  /**
+  * Returns the URL of the current image to use depending on the Alarm status
+  */
+  getClass(): string[] {
+    const result = [];
+    if (!this.alarm) {
+      result.push('blue');
+      result.push('invalid');
+      return result;
+    }
+    if (this.alarm.shelved === true) {
+      result.push('green');
+    } else if (this.alarm.mode === OperationalMode.unknown) {
+      result.push('blue');
+    } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
+      result.push('gray');
+    } else if (this.alarm.value === Value.cleared) {
+      result.push('green');
+    } else if (this.alarm.value === Value.set_low) {
+      result.push('yellow');
+    } else if (this.alarm.value === Value.set_medium) {
+      result.push('yellow');
+    } else if (this.alarm.value === Value.set_high) {
+      result.push('red');
+    } else if (this.alarm.value === Value.set_critical) {
+      result.push('red');
+    } else {
+      result.push('blue');
+    }
+    if (this.alarm.validity === 0) {
+      result.push('invalid');
+    }
+    return result;
   }
 
 }
