@@ -20,7 +20,7 @@ export class StatusViewComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /** Dash-separated string with the tags that define the state of an alarm */
-  @Input() value: string;
+  @Input() value = '';
 
   /** List of tags that define the state of an alarm */
   private alarmTags = [];

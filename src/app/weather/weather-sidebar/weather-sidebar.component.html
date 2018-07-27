@@ -19,10 +19,12 @@
             <td>{{alarm.station}}</td>
             <td>
               <div class="status">
-                <app-status-view [alarm]="this.getAlarm(alarm.station)" [value]="this.getAlarm(alarm.station)?.status" [showActionBadges]="false"></app-status-view>
+                <app-status-view [alarm]="this.getAlarm(alarm.station)" [showActionBadges]="false"></app-status-view>
               </div>
             </td>
-            <td> Button actions </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.station)" [url]=""></app-buttons>
+            </td>
           </tr>
           <tr>
             <td>
@@ -32,10 +34,12 @@
             </td>
             <td>
               <div class="status">
-                <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [value]="this.getAlarm(alarm.windspeed)?.value" [showActionBadges]="false" ></app-status-view>
+                <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td> Button actions </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.windspeed)" [url]=""></app-buttons>
+            </td>
           </tr>
           <tr>
             <td>
@@ -45,10 +49,12 @@
             </td>
             <td>
               <div class="status">
-                <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [value]="this.getAlarm(alarm.humidity)?.value" [showActionBadges]="false" ></app-status-view>
+                <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td> Button actions </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.humidity)" [url]=""></app-buttons>
+            </td>
           </tr>
           <tr>
             <td>
@@ -58,10 +64,12 @@
             </td>
             <td>
               <div class="status">
-                <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [value]="this.getAlarm(alarm.temperature)?.value" [showActionBadges]="false" ></app-status-view>
+                <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td> Button actions </td>
+            <td>
+              <app-buttons [alarm]="this.getAlarm(alarm.temperature)" [url]=""></app-buttons>
+            </td>
           </tr>
         </table>
       </mat-expansion-panel>

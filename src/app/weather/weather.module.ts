@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActionsModule } from '../actions/actions.module';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
@@ -19,6 +20,7 @@ import { WeatherTestWSDataComponent } from './weather-map/weather-map.component'
 @NgModule({
   imports: [
     CommonModule,
+    ActionsModule,
     DataModule,
     SharedModule,
     IasMaterialModule,

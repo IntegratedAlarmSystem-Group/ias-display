@@ -19,11 +19,6 @@ export class AckButtonComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   */
-  public canAcknowledge = false;
-
-  /**
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
    */
@@ -33,17 +28,21 @@ export class AckButtonComponent implements OnInit {
   ) { }
 
   /**
-   * On init the component initialize the private variables using the method {@link loadAlarm}
+   * Initializes the component
    */
   ngOnInit() {
-    this.loadAlarm();
   }
 
   /**
-   * Initializes the private variable {@link canAcknowledge} of this component.
+   * Define if the alarm can be acknowledged based on if it was acknowledged before.
+   * @returns {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
-  loadAlarm() {
-    this.canAcknowledge = !this.alarm.ack;
+  canAcknowledge() {
+    if (this.alarm != null) {
+      return !this.alarm.ack;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -51,7 +50,7 @@ export class AckButtonComponent implements OnInit {
    * @returns {boolean} true if the button is disabled, false if not.
    */
   isDisabled() {
-    return !this.sidenavService.canClose || !this.canAcknowledge;
+    return !this.sidenavService.canClose || !this.canAcknowledge();
   }
 
   /**
