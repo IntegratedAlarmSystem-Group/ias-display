@@ -15,6 +15,8 @@ export class WeatherStationSidebarComponent implements OnInit {
   /* Alarms Ids of the weather station */
   @Input() stationConfig: WeatherStationConfig;
 
+  @Input() selectedAlarm: string;
+
   /**
   * Builds an instance of the component
   * @param {WeatherService} weatherService Service used to get the configuration needed by the component
@@ -37,6 +39,11 @@ export class WeatherStationSidebarComponent implements OnInit {
     return this.alarmService.get(alarm_id);
   }
 
-
+  getClass() {
+      if (this.selectedAlarm === this.stationConfig.station) {
+        return 'highlighted';
+      }
+      return '';
+  }
 
 }

@@ -15,6 +15,8 @@ import { Assets } from '../../settings';
 })
 export class WeatherSidebarComponent implements OnInit {
 
+  selectedAlarm = '';
+
   /**
   * Builds an instance of the component
   * @param {WeatherService} weatherService Service used to get the configuration needed by the component

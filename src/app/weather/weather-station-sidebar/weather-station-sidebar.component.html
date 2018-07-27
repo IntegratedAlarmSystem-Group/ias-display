@@ -1,4 +1,4 @@
-<div class="weather-station-sidebar">
+<div class="weather-station-sidebar" [ngClass]="getClass()">
   <app-alarm-header fxFlex [alarm]="this.getAlarm(stationConfig.station)"></app-alarm-header>
   <div fxLayout="row" class="weather-icons">
     <div class="icon">
