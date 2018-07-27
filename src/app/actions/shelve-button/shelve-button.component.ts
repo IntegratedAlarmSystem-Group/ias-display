@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { Router } from '@angular/router';
 import { AlarmService } from '../../data/alarm.service';
 import { SidenavService } from '../sidenav.service';
@@ -12,7 +13,7 @@ import { Alarm } from '../../data/alarm';
   templateUrl: './shelve-button.component.html',
   styleUrls: ['./shelve-button.component.css']
 })
-export class ShelveButtonComponent implements OnInit {
+export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
    * Alarm object  associated to the button
@@ -23,16 +24,29 @@ export class ShelveButtonComponent implements OnInit {
   /**
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
+   * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
+   * @param {ElementRef} elementRef reference to this component in the DOM
    */
   constructor(
     public sidenavService: SidenavService,
-    private router: Router
+    private router: Router,
+    private focusMonitor: FocusMonitor,
+    private elementRef: ElementRef
   ) { }
 
   /**
    * Initialize the component
    */
   ngOnInit() {
+  }
+
+  /**
+  * Method executed after the component is initialized.
+  * It is used here to stop focus monitoring of the button, in order to fix some visual issues
+  */
+  ngAfterViewInit() {
+    const buttonRef = this.elementRef.nativeElement.children[0];
+    this.focusMonitor.stopMonitoring(buttonRef);
   }
 
   /**
