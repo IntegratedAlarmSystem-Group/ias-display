@@ -9,7 +9,7 @@ import { WeatherService } from '../weather.service';
 @Component({
     selector: 'app-test-ws-marker-component',
     template: `
-      <div class="ws-marker"> <div class="triangle"></div> </div>
+      <div class="ws-marker"> hola <div class="triangle"></div> </div>
     `,
     styles: [
       `.ws-marker {
@@ -114,31 +114,30 @@ export class WeatherMapComponent implements OnInit {
   constructor(
     public weatherService: WeatherService,
     public alarmService: AlarmService,
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.setUpMap();
   }
 
-  ngOnInit() {
-  }
-
   setUpMap() {
-    this.weatherService.getMapData()
-      .subscribe( ( data ) => {
-        const mapdata = data;
-        this.wstations = mapdata['placemarkers']['wstations'];
-        this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
-        this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
-        this.pads = mapdata['placemarkers']['pads'];
-        this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
-        this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
-        this.w_arm_pads = mapdata['relations']['antenna_groups']['W_ARM']['pads'];
-        this.s_arm_pads = mapdata['relations']['antenna_groups']['S_ARM']['pads'];
-        this.paths = mapdata['paths'];
-        this.placemarksAdjustment();
-        this.svgPaths = this.getSVGPaths();
-        this.ws2AntennaGroup = mapdata['relations']['ws2antennas'];
-        this.datarelations = mapdata['relations'];
-      });
+    const mapdata = this.weatherService.getMapData();
+    this.wstations = mapdata['placemarkers']['wstations'];
+    console.log('Number of stations: ', this.wstations.length);
+    this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
+    console.log('Number of prim stations: ', this.primary_wstations.length);
+    this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
+    console.log('Number of back stations: ', this.backup_wstations.length);
+    this.pads = mapdata['placemarkers']['pads'];
+    this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
+    this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
+    this.w_arm_pads = mapdata['relations']['antenna_groups']['W_ARM']['pads'];
+    this.s_arm_pads = mapdata['relations']['antenna_groups']['S_ARM']['pads'];
+    this.paths = mapdata['paths'];
+    this.placemarksAdjustment();
+    this.svgPaths = this.getSVGPaths();
+    this.ws2AntennaGroup = mapdata['relations']['ws2antennas'];
+    this.datarelations = mapdata['relations'];
   }
 
   placemarksAdjustment() {

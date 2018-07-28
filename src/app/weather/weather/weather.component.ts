@@ -11,8 +11,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
 
-  panelOpenState = false;
-
   /**
    * Builds an instance of the component
    */
