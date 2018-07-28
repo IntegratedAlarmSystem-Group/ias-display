@@ -174,7 +174,6 @@ export class WeatherService {
   * TODO: To change the source to the webserver
   */
   getMapData() {
-    console.log('ejecutando getMapData');
     return Map;
   }
 

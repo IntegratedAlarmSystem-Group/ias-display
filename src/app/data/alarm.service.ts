@@ -90,7 +90,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });

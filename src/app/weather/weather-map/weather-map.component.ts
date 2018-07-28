@@ -9,7 +9,7 @@ import { WeatherService } from '../weather.service';
 @Component({
     selector: 'app-test-ws-marker-component',
     template: `
-      <div class="ws-marker"> hola <div class="triangle"></div> </div>
+      <div class="ws-marker"> <div class="triangle"></div> </div>
     `,
     styles: [
       `.ws-marker {
@@ -123,11 +123,8 @@ export class WeatherMapComponent implements OnInit {
   setUpMap() {
     const mapdata = this.weatherService.getMapData();
     this.wstations = mapdata['placemarkers']['wstations'];
-    console.log('Number of stations: ', this.wstations.length);
     this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
-    console.log('Number of prim stations: ', this.primary_wstations.length);
     this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
-    console.log('Number of back stations: ', this.backup_wstations.length);
     this.pads = mapdata['placemarkers']['pads'];
     this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
     this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
@@ -280,9 +277,7 @@ export class WeatherMapComponent implements OnInit {
 
   updateAntennagroupDisplay(placemark) {
     const selectedGroup = this.ws2AntennaGroup[placemark.name][0];
-    console.log(selectedGroup);
     this.antennaGroupsDisplay[selectedGroup]['selected'] = !this.antennaGroupsDisplay[selectedGroup]['selected'];
-    console.log(this.antennaGroupsDisplay[selectedGroup]['selected']);
   }
 
 }
