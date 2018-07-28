@@ -99,7 +99,7 @@ export class AlarmService {
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessagesList(payload.data);
     });
-    // this.startLastReceivedMessageTimestampCheck();
+    this.startLastReceivedMessageTimestampCheck();
   }
 
    /**
