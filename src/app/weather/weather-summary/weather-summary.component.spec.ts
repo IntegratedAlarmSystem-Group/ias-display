@@ -7,6 +7,7 @@ import { WeatherSummaryComponent } from './weather-summary.component';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
+import { WeatherService } from '../weather.service';
 
 
 describe('WeatherSummaryComponent', () => {
@@ -28,6 +29,7 @@ describe('WeatherSummaryComponent', () => {
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
+        WeatherService
       ],
     })
     .overrideModule( BrowserDynamicTestingModule , {

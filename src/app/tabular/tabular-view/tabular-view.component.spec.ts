@@ -13,7 +13,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
-import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm } from '../../data/alarm';
@@ -38,7 +37,6 @@ describe('TabularViewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         TabularViewComponent,
-        StatusViewComponent,
         LegendComponent,
       ],
       imports: [
@@ -62,11 +60,6 @@ describe('TabularViewComponent', () => {
         },
         { provide: Router, useValue: spyRoutingTable },
       ]
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ StatusViewComponent ]
-      }
     })
     .compileComponents();
   }));

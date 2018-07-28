@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../data/routing.service';
@@ -14,7 +13,7 @@ import { Assets } from '../../settings';
   templateUrl: './health-summary.component.html',
   styleUrls: ['./health-summary.component.css']
 })
-export class HealthSummaryComponent implements OnInit, OnDestroy {
+export class HealthSummaryComponent implements OnInit {
 
   /** Set of icons */
   public iconSet: AlarmImageSet;
@@ -22,14 +21,8 @@ export class HealthSummaryComponent implements OnInit, OnDestroy {
   /** Set of Unreliable icons */
   public iconUnreliableSet: AlarmImageSet;
 
-  /** Alarm */
-  public alarm: Alarm;
-
   /** ID of the Alarm */
   public alarmId: string;
-
-  /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
-  private alarmServiceSubscription: ISubscription;
 
   /**
    * Builds an instance of the component
@@ -47,18 +40,13 @@ export class HealthSummaryComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.defineAlarmsAndIcons();
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      if (notification === 'all' || notification === this.alarmId) {
-        this.alarm = this.alarmService.get(this.alarmId);
-      }
-    });
   }
 
-  /**
-  * Unsubscribes from  {@link AlarmService} when the component is destroyed
+  /** Returns the instance of the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm}
   */
-  ngOnDestroy() {
-    this.alarmServiceSubscription.unsubscribe();
+  get alarm(): Alarm {
+    return this.alarmService.get(this.alarmId);
   }
 
   /**

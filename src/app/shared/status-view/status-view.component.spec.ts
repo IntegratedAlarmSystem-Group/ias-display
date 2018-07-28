@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared/shared.module';
 import { StatusViewComponent } from './status-view.component';
+import { AlarmComponent } from '../alarm/alarm.component';
 import { Alarm } from '../../data/alarm';
 import { By } from '@angular/platform-browser';
 
@@ -20,10 +20,7 @@ describe('StatusViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatusViewComponent ],
-      imports: [
-        SharedModule,
-      ],
+      declarations: [ StatusViewComponent, AlarmComponent ],
     })
     .compileComponents();
   }));

@@ -1,0 +1,51 @@
+.weather-sidebar-title {
+  background: #2e445c;
+  padding: 12px;
+}
+
+.weather-sidebar-content {
+  background: #2b3b4b;
+  padding: 12px;
+  height: calc(100vh - 150px) !important;
+
+  .mat-expansion-panel {
+    background: transparent;
+
+      td {
+        padding: 5px;
+        height: 40px;
+
+      }
+      .icon {
+        padding-left: 20px;
+        height: 30px;
+        width: fit-content;
+      }
+      .status {
+        width: 60px;
+      }
+  }
+
+  app-weather-station-sidebar {
+    width: 100%;
+  }
+
+  mat-expansion-panel {
+    margin: 10px 0px;
+    border-radius: 4px;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .weather-sidebar-header {
+    padding-left: 0px;
+    position: relative;
+    background: transparent;
+
+    &.mat-expanded {
+      background: transparent;
+    }
+  }
+
+
+}

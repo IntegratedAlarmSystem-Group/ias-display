@@ -20,7 +20,7 @@ export class StatusViewComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /** Dash-separated string with the tags that define the state of an alarm */
-  @Input() value: string;
+  @Input() value = '';
 
   /** List of tags that define the state of an alarm */
   private alarmTags = [];
@@ -33,6 +33,12 @@ export class StatusViewComponent implements OnInit {
 
   /** Set of alarm priority icons */
   public alarmIconsPrioritySet: AlarmImageSet;
+
+  /**
+   * Defines wether or not the component will display the action badges ("pending acknowledgement" and "alarm in shelf") besides the icon.
+   * This value is "true" by default
+   */
+  @Input() showActionBadges = true;
 
   /**
   * Instantiates the component

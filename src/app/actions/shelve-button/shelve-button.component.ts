@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { Router } from '@angular/router';
-import { AlarmService } from '../../data/alarm.service';
 import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
 
@@ -12,35 +12,40 @@ import { Alarm } from '../../data/alarm';
   templateUrl: './shelve-button.component.html',
   styleUrls: ['./shelve-button.component.css']
 })
-export class ShelveButtonComponent implements OnInit {
+export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
-   * Id of the alarm to be shelved
+   * Alarm object  associated to the button
    */
-  @Input() alarm_id: string;
-
-  /**
-   * Alarm object related with the alarm id received as input
-   */
-  public alarm: Alarm;
+  @Input() alarm: Alarm;
 
 
   /**
-   * The "constructor", injects the {@link AlarmService}
-   * @param {AlarmService} alarmService Service to get the alarm object based on the input id
+   * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
+   * @param {Router} router system Router to handle navigation
+   * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
+   * @param {ElementRef} elementRef reference to this component in the DOM
    */
   constructor(
-    private alarmService: AlarmService,
     public sidenavService: SidenavService,
-    private router: Router
+    private router: Router,
+    private focusMonitor: FocusMonitor,
+    private elementRef: ElementRef
   ) { }
 
   /**
-   * On init the component initialize the private variables using the method
-   * {@link loadAlarm}
+   * Initialize the component
    */
   ngOnInit() {
-    this.loadAlarm();
+  }
+
+  /**
+  * Method executed after the component is initialized.
+  * It is used here to stop focus monitoring of the button, in order to fix some visual issues
+  */
+  ngAfterViewInit() {
+    const buttonRef = this.elementRef.nativeElement.children[0];
+    this.focusMonitor.stopMonitoring(buttonRef);
   }
 
   /**
@@ -59,14 +64,6 @@ export class ShelveButtonComponent implements OnInit {
   }
 
   /**
-   * Get the alarm object related with the alarm id received as input using the
-   * AlarmService. Initialize the private variables of this component.
-   */
-  loadAlarm() {
-    this.alarm = this.alarmService.get(this.alarm_id);
-  }
-
-  /**
    * Defines wether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
@@ -78,7 +75,7 @@ export class ShelveButtonComponent implements OnInit {
   * Handle click on table rows, it triggers the shelve sidebar
   */
   onClick(event) {
-    this.router.navigate([{outlets: {actions: ['shelve', this.alarm_id]}}]);
+    this.router.navigate([{outlets: {actions: ['shelve', this.alarm.core_id]}}]);
   }
 
 }

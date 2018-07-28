@@ -40,6 +40,10 @@
   border-bottom-right-radius: 0.375em;
 }
 
+.status-icon {
+  width: 80px;
+}
+
 /deep/ {
 
   .mat-slide-toggle {
@@ -91,7 +95,7 @@
   /* Styles by column */
 
   .mat-column-status {
-    flex: 0 0 10% !important;
+    flex: 0 0 15% !important;
   }
 
   .mat-column-name {
@@ -103,7 +107,7 @@
   }
 
   .mat-column-timestamp {
-    flex: 0 0 15% !important;
+    flex: 0 0 10% !important;
   }
 
   .mat-column-description {

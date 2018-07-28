@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SharedModule } from '../../shared/shared.module';
-import { StatusViewComponent } from '../status-view/status-view.component';
 import { LegendComponent } from './legend.component';
 
 describe('LegendComponent', () => {
@@ -10,15 +9,10 @@ describe('LegendComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LegendComponent, StatusViewComponent ],
+      declarations: [ LegendComponent ],
       imports: [
         SharedModule,
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [  StatusViewComponent ]
-      }
     }).compileComponents();
   }));
 

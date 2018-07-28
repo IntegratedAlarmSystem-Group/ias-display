@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '../../data/routing.service';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
+import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
 
@@ -14,34 +14,7 @@ import { Assets } from '../../settings';
   templateUrl: './weather-summary.component.html',
   styleUrls: ['./weather-summary.component.css']
 })
-export class WeatherSummaryComponent implements OnInit, OnDestroy {
-
-  /** Set of Humidity icons */
-  public humidityImageSet: AlarmImageSet;
-
-  /** Set of Temperature icons */
-  public tempImageSet: AlarmImageSet;
-
-  /** Set of Wind Speed icons */
-  public windsImageSet: AlarmImageSet;
-
-  /** Set of Humidity Unreliable icons */
-  public humidityImageUnreliableSet: AlarmImageSet;
-
-  /** Set of Temperature Unreliable icons */
-  public tempImageUnreliableSet: AlarmImageSet;
-
-  /** Set of Wind Speed Unreliable icons */
-  public windsImageUnreliableSet: AlarmImageSet;
-
-  /** Humidity Alarm */
-  public humidityAlarm: Alarm;
-
-  /** Temperature Alarm */
-  public tempAlarm: Alarm;
-
-  /** Wind Speed Alarm */
-  public windsAlarm: Alarm;
+export class WeatherSummaryComponent implements OnInit {
 
   /** ID of the Humidity Alarm */
   public humidityAlarmId: string;
@@ -52,9 +25,6 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
   /** Wind ID of the Speed Alarm */
   public windsAlarmId: string;
 
-  /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
-  private alarmServiceSubscription: ISubscription;
-
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
@@ -62,6 +32,7 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
    */
   constructor(
     private alarmService: AlarmService,
+    public weatherService: WeatherService,
     private routing: RoutingService,
   ) { }
 
@@ -71,31 +42,13 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.defineAlarmsAndImages();
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      if (notification === 'all') {
-        this.humidityAlarm = this.alarmService.get(this.humidityAlarmId);
-        this.tempAlarm = this.alarmService.get(this.tempAlarmId);
-        this.windsAlarm = this.alarmService.get(this.windsAlarmId);
-
-      } else {
-        if (notification === this.windsAlarmId) {
-          this.windsAlarm = this.alarmService.get(notification);
-        }
-        if (notification === this.humidityAlarmId) {
-          this.humidityAlarm = this.alarmService.get(notification);
-        }
-        if (notification === this.tempAlarmId) {
-          this.tempAlarm = this.alarmService.get(notification);
-        }
-      }
-    });
   }
 
-  /**
-  * Unsubscribes from  {@link AlarmService} when the component is destroyed
+  /** Returns the instance of the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm}
   */
-  ngOnDestroy() {
-    this.alarmServiceSubscription.unsubscribe();
+  getAlarm(alarmID: string): Alarm {
+    return this.alarmService.get(alarmID);
   }
 
   /**
@@ -105,78 +58,6 @@ export class WeatherSummaryComponent implements OnInit, OnDestroy {
     this.humidityAlarmId = 'WS-Humidity';
     this.tempAlarmId = 'WS-Temperature';
     this.windsAlarmId = 'WS-WindSpeed';
-
-    /** Set of Humidity icons */
-    this.humidityImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-valid-clear.svg',
-      set_low: Assets.ICONS + 'hum-valid-low.svg',
-      set_medium: Assets.ICONS + 'hum-valid-low.svg',
-      set_high: Assets.ICONS + 'hum-valid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-valid-critical.svg',
-      unknown: Assets.ICONS + 'hum-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-valid-maint.svg',
-      shelved: Assets.ICONS + 'hum-valid-clear.svg',
-    });
-
-    /** Set of Temperature icons */
-    this.tempImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-valid-clear.svg',
-      set_low: Assets.ICONS + 'temp-valid-low.svg',
-      set_medium: Assets.ICONS + 'temp-valid-low.svg',
-      set_high: Assets.ICONS + 'temp-valid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-valid-critical.svg',
-      unknown: Assets.ICONS + 'temp-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-valid-maint.svg',
-      shelved: Assets.ICONS + 'temp-valid-clear.svg',
-    });
-
-    /** Set of Wind Speed icons */
-    this.windsImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-valid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-valid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-valid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-valid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
-    });
-
-    /** Set of Humidity Unreliable icons */
-    this.humidityImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-invalid-clear.svg',
-      set_low: Assets.ICONS + 'hum-invalid-low.svg',
-      set_medium: Assets.ICONS + 'hum-invalid-low.svg',
-      set_high: Assets.ICONS + 'hum-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
-      unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-invalid-maint.svg',
-      shelved: Assets.ICONS + 'hum-invalid-clear.svg',
-    });
-
-    /** Set of Temperature Unreliable icons */
-    this.tempImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-invalid-clear.svg',
-      set_low: Assets.ICONS + 'temp-invalid-low.svg',
-      set_medium: Assets.ICONS + 'temp-invalid-low.svg',
-      set_high: Assets.ICONS + 'temp-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
-      unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-invalid-maint.svg',
-      shelved: Assets.ICONS + 'temp-invalid-clear.svg',
-    });
-
-    /** Set of Wind Speed Unreliable icons */
-    this.windsImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-invalid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
-    });
   }
 
   /**

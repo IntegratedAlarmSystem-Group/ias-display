@@ -1,9 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-
 import { TestBed, inject } from '@angular/core/testing';
-
 import { HttpClientService } from './http-client.service';
 
 describe('HttpClientService', () => {
@@ -28,7 +26,11 @@ describe('HttpClientService', () => {
     ( httpTestingController: HttpTestingController, httpClientService: HttpClientService ) => {
       subject = httpClientService;
       testController = httpTestingController;
-
+      spyOn(subject, 'read_url').and.callFake(
+        function(arg) {
+          return arg;
+        }
+      );
     })
   );
 

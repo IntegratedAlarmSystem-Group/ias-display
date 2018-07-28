@@ -46,7 +46,7 @@ export class AlarmImageSet {
 @Component({
   selector: 'app-alarm',
   templateUrl: './alarm.component.html',
-  styleUrls: ['./alarm.component.css']
+  styleUrls: ['./alarm.component.scss']
 })
 export class AlarmComponent implements OnInit {
 
@@ -64,6 +64,12 @@ export class AlarmComponent implements OnInit {
    * Set of names for the images to use for unreliable states
    */
   @Input() imagesUnreliable: AlarmImageSet;
+
+  /**
+   * Defines wether or not the component will display the action badges ("pending acknowledgement" and "alarm in shelf") besides the icon.
+   * This value is "true" by default
+   */
+  @Input() showActionBadges = true;
 
   /**
   * Instantiates the component
@@ -106,6 +112,14 @@ export class AlarmComponent implements OnInit {
     } else {
       return this.imagesUnreliable.unknown;
     }
+  }
+
+  showAsPendingAck(): boolean {
+    return this.showActionBadges && this.alarm != null && !this.alarm.ack;
+  }
+
+  showAsShelved(): boolean {
+    return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
 
 }

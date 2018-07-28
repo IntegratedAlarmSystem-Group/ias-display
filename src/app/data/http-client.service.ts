@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 
@@ -25,7 +26,8 @@ export class HttpClientService {
 
   /**
   * Custom get method
-  * @param url target url
+  * @param {string} url target url
+  * @returns {Response} the response of the request
   */
   get(url) {
     const httpOptions = {
@@ -33,13 +35,14 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.get(url, httpOptions);
+    return this.http.get(this.read_url(url), httpOptions);
   }
 
   /**
   * Custom post method
-  * @param url target url
+  * @param {string} url target url
   * @param data json with data
+  * @returns {Response} the response of the request
   */
   post(url, data) {
     const httpOptions = {
@@ -47,13 +50,14 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post(url, data, httpOptions);
+    return this.http.post(this.read_url(url), data, httpOptions);
   }
 
   /**
   * Custom put method
-  * @param url target url
+  * @param {string} url target url
   * @param data json with data
+  * @returns {Response} the response of the request
   */
   put(url, data) {
     const httpOptions = {
@@ -61,12 +65,13 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.put(url, data, httpOptions);
+    return this.http.put(this.read_url(url), data, httpOptions);
   }
 
   /**
   * Custom delete method
-  * @param url target url with the selected object id
+  * @param {string} url target url with the selected object id
+  * @returns {Response} the response of the request
   */
   delete(url) {
     const httpOptions = {
@@ -74,7 +79,16 @@ export class HttpClientService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.delete(url, httpOptions);
+    return this.http.delete(this.read_url(url), httpOptions);
+  }
+
+  /**
+  * Proesses the url for the request by adding the base url for http requests
+  * @param {string} url target url
+  * @returns {string} the processed target url
+  */
+  read_url(url: string): string {
+    return environment.httpUrl + url;
   }
 
 }

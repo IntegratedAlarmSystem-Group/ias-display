@@ -3,6 +3,7 @@ export const BackendUrls = {
   TOKEN: '/get-token/',
   CDB: '/cdb-api/',
   CDB_IAS: '/cdb-api/ias/',
+  CDB_IASIO: '/cdb-api/iasio/',
   TICKETS: '/tickets/',
   TICKETS_MULTIPLE_ACK: '/tickets-api/tickets/acknowledge/',
   TICKETS_INFO: '/tickets-api/tickets/old_open_info/',

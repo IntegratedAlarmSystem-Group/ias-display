@@ -1,9 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import {forkJoin as observableForkJoin,  BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { environment } from '../../environments/environment';
+import { BackendUrls } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
 import { Iasio } from '../data/iasio';
 
@@ -16,13 +15,10 @@ import { Iasio } from '../data/iasio';
 export class CdbService {
 
   /** IAS Webserver URL for IAS configuration requests */
-  iasUrl = environment.cdbApiUrl + '/ias';
-
-  /** IAS Webserver URL for IASIO requests */
-  iasioUrl = environment.cdbApiUrl + '/iasio';
+  iasUrl = BackendUrls.CDB_IAS;
 
   /** IAS Webserver URL for requests of IASIOS filtered by Alarms */
-  iasioAlarmsUrl = this.iasioUrl + '/filtered_by_alarm';
+  iasioAlarmsUrl = BackendUrls.CDB_IASIO + 'filtered_by_alarm';
 
   /**
   * Variable to store the ias configuration data

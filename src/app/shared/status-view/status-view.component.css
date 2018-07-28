@@ -1,18 +1,17 @@
 .status-view {
-  display: inline-flex;
-  width: 80px;
-}
-
-.status-view-icon {
-  height: 24px;
+  height: 100%;
+  width: 100%;
 }
 
 .alarm-icon {
-  padding-right: 10px;
+  margin-right: 12%;
+  height: 100%;
+  width: 33%;
 }
 
 .priority-icon {
-
+  height: 100%;
+  width: 55%;
 }
 
 /* .blink {
