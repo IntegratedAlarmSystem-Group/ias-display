@@ -14,15 +14,18 @@
       td {
         padding: 5px;
         height: 40px;
-
       }
       .icon {
         padding-left: 20px;
         height: 30px;
         width: fit-content;
+        align: right;
       }
       .status {
         width: 60px;
+      }
+      .buttons {
+        width: 100%;
       }
   }
 

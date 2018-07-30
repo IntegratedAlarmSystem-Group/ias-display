@@ -24,8 +24,5 @@ import { TabularViewComponent } from './tabular-view/tabular-view.component';
   exports: [
     TabularViewComponent,
   ],
-  // entryComponents: [
-  //   StatusViewComponent,
-  // ]
 })
 export class TabularModule { }

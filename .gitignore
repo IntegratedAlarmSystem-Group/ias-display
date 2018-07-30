@@ -46,4 +46,4 @@ Thumbs.db
 /src/assets/temp/*
 !/src/assets/temp/README.md
 
-/src/app/weather/fixtures.ts
+/src/app/weather/temp_fixtures.ts
