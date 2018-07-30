@@ -65,7 +65,7 @@ export class CdbService {
 
   /**
   * Get the ias configuration data from the IAS Webserver
-  * @returns {string} URL to request the IAS configuration
+  * @returns {json} IAS configuration
   */
   getConfigurationData() {
     return this.httpClientService.get(this.iasUrl);
@@ -73,7 +73,7 @@ export class CdbService {
 
   /**
   * Get information of Iasios from the IAS Webserver
-  * @returns {Date} last change timestamp of the {@link Alarm}
+  * @returns {json} IASIOs data
   */
   getAlarmsIasiosData() {
     return this.httpClientService.get(this.iasioAlarmsUrl);
