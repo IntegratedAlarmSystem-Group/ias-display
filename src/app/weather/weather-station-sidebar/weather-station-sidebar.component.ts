@@ -39,6 +39,10 @@ export class WeatherStationSidebarComponent implements OnInit {
     return this.alarmService.get(alarm_id);
   }
 
+  /**
+  * Returns the corresponding highlighted class when the component is selected
+  * @returns {string} the highlighted class
+  */
   getClass() {
       if (this.selectedAlarm === this.stationConfig.station) {
         return 'highlighted';
