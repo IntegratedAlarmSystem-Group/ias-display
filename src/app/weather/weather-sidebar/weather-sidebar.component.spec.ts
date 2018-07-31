@@ -6,67 +6,83 @@ import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { WeatherSidebarComponent } from './weather-sidebar.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
+import { AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
+import { StatusViewComponent } from '../../shared/status-view/status-view.component';
+import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 const mockWeatherStationsConfig = [
   {
-    station: 'MockAlarm1',
-    temperature: 'MockAlarm1',
-    windspeed: 'MockAlarm1',
-    humidity: 'MockAlarm1'
+    station: 'mockAlarm-0',
+    temperature: 'mockAlarm-0',
+    windspeed: 'mockAlarm-0',
+    humidity: 'mockAlarm-0'
   },
   {
-    station: 'MockAlarm2',
-    temperature: 'MockAlarm2',
-    windspeed: 'MockAlarm2',
-    humidity: 'MockAlarm2'
+    station: 'mockAlarm-1',
+    temperature: 'mockAlarm-1',
+    windspeed: 'mockAlarm-1',
+    humidity: 'mockAlarm-1'
   },
 ];
 
-const mockAlarm = Alarm.asAlarm({
-  'value': 0,
-  'core_id': 'coreid$1',
-  'running_id': 'coreid$1',
-  'mode': '0',
-  'core_timestamp': 1267252440000,
-  'validity': '1',
-  'ack': false,
-  'shelved': false,
-  'dependencies': [],
-});
-
-class SpecService {
-  queryAttributes(fixture: ComponentFixture<any>, cssSelector: string): any {
-    fixture.detectChanges();
-
-    const debugElement = fixture.debugElement.query(By.css(cssSelector));
-    const attributes: any = {};
-    if (debugElement) {
-      for (let i = 0, length = debugElement.nativeElement.attributes.length; i < length; i++) {
-        const attributeName = debugElement.nativeElement.attributes[i].name;
-        attributes[this.clean(attributeName)] = debugElement.nativeElement.getAttribute(attributeName);
-      }
-    }
-    return attributes;
-  }
-
-  clean(name: string): string {
-    let new_name = name.replace('ng-reflect-', '');
-    for (let i = 0; i < new_name.length; i++ ) {
-      if ( new_name.charAt(i) === '-' ) {
-        new_name = new_name.substring(0, i) + new_name.substr(i + 1, 1).toUpperCase() + new_name.substring(i + 2);
-      }
-    }
-    return new_name;
+const mockImagesSets = {};
+const alarm_types = ['winds', 'hum', 'temp'];
+for ( const item in alarm_types) {
+  if (alarm_types[item] !== null ) {
+    mockImagesSets[item] = new AlarmImageSet({
+      clear: alarm_types[item] + 'ImageSet',
+      set_low: alarm_types[item] + 'ImageSet',
+      set_medium: alarm_types[item] + 'ImageSet',
+      set_high: alarm_types[item] + 'ImageSet',
+      set_critical: alarm_types[item] + 'ImageSet',
+      unknown: alarm_types[item] + 'ImageSet',
+      maintenance: alarm_types[item] + 'ImageSet',
+      shelved: alarm_types[item] + 'ImageSet',
+    });
+    mockImagesSets[item + '-unreliable'] = new AlarmImageSet({
+      clear: alarm_types[item] + 'UnreliableImageSet',
+      set_low: alarm_types[item] + 'UnreliableImageSet',
+      set_medium: alarm_types[item] + 'UnreliableImageSet',
+      set_high: alarm_types[item] + 'UnreliableImageSet',
+      set_critical: alarm_types[item] + 'UnreliableImageSet',
+      unknown: alarm_types[item] + 'UnreliableImageSet',
+      maintenance: alarm_types[item] + 'UnreliableImageSet',
+      shelved: alarm_types[item] + 'UnreliableImageSet',
+    });
   }
 }
 
-const specServ = new SpecService();
+const mockAlarms = {
+  'mockAlarm-0': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-0',
+    'running_id': 'mockAlarm-0',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-1': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-1',
+    'running_id': 'mockAlarm-1',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  })
+};
 
-fdescribe('WeatherSidebarComponent', () => {
-  let component: WeatherSidebarComponent;
+describe('WeatherSidebarComponent', () => {
+  let sidebarComponent: WeatherSidebarComponent;
   let fixture: ComponentFixture<WeatherSidebarComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
@@ -99,25 +115,33 @@ fdescribe('WeatherSidebarComponent', () => {
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
+      weatherService.windsImageSet = mockImagesSets['0'];
+      weatherService.humidityImageSet = mockImagesSets['1'];
+      weatherService.tempImageSet = mockImagesSets['2'];
+      weatherService.windsImageUnreliableSet = mockImagesSets['0-unreliable'];
+      weatherService.humidityImageUnreliableSet = mockImagesSets['1-unreliable'];
+      weatherService.tempImageUnreliableSet = mockImagesSets['2-unreliable'];
     })
   );
 
   beforeEach(
     inject([AlarmService], (service) => {
       alarmService = service;
-      spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
+      spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+        return mockAlarms[alarm_id];
+      });
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherSidebarComponent);
-    component = fixture.componentInstance;
+    sidebarComponent = fixture.componentInstance;
     content = fixture.nativeElement.querySelector('.weather-sidebar-content');
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(sidebarComponent).toBeTruthy();
   });
 
   describe('Should have a mat accordion', () => {
@@ -131,25 +155,57 @@ fdescribe('WeatherSidebarComponent', () => {
         expect(panels.length).toBe(2);
       });
 
-      it('with a header that contains a weather station sidebar component', () => {
-        const panels = content.querySelectorAll('mat-expansion-panel');
-        for (const panel of panels) {
-          const header = panel.querySelector('mat-expansion-panel-header');
-          expect(header.querySelector('app-weather-station-sidebar')).toBeTruthy();
-          const attributes = specServ.queryAttributes(fixture, 'app-weather-station-sidebar');
-          expect(attributes['selectedAlarm']).toEqual('');
+      it('Each panel contains a weather station sidebar component as header\
+        that receive the weather station configuration as input', () => {
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const panel = panels[i];
+            const header = panel.query(By.css('mat-expansion-panel-header'));
+            expect(header).toBeTruthy();
+            const stationSidebarDebugElement = header.query(By.directive(WeatherStationSidebarComponent));
+            const stationSidebarComponent = stationSidebarDebugElement.componentInstance;
+            expect(stationSidebarComponent).toBeTruthy();
+            expect(stationSidebarComponent.stationConfig).toEqual(mockWeatherStationsConfig[i]);
+            expect(stationSidebarComponent.selectedAlarm).toEqual('');
+          }
         }
       });
 
-      it('with a body that contains a table with the alarms related to each weather station', () => {
-        for (const panel of content.querySelectorAll('mat-expansion-panel')) {
-          expect(panel.querySelector('table')).toBeTruthy();
-          for (const row of panel.querySelectorAll('tr')) {
-            expect(row.querySelector('app-alarm')).toBeTruthy();
-            expect(row.querySelector('app-status-view')).toBeTruthy();
-            expect(row.querySelector('app-buttons')).toBeTruthy();
-          }
+      it('Each panel contains a table with the alarms configured for each weather station', () => {
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const panel = panels[i];
+            const table = panel.query(By.css('table'));
+            expect(table).toBeTruthy();
+            const tableRows = table.queryAll(By.css('tr'));
 
+            for (const j in tableRows) {
+              if (tableRows[j] !== null ) {
+                const columns = tableRows[j].queryAll(By.css('td'));
+
+                if ( j !== '0' ) {
+                  const index = Number(j) - 1;
+                  const alarm = columns[0].query(By.directive(AlarmComponent)).componentInstance;
+                  expect(alarm).toBeTruthy();
+                  expect(alarm.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
+                  expect(alarm.images).toEqual(mockImagesSets[index]);
+                  expect(alarm.imagesUnreliable).toEqual(mockImagesSets[index + '-unreliable']);
+                }
+
+                const statusView = columns[1].query(By.directive(StatusViewComponent)).componentInstance;
+                expect(statusView).toBeTruthy();
+                expect(statusView.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
+                expect(statusView.showActionBadges).toEqual(false);
+
+                const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
+                expect(buttons).toBeTruthy();
+                expect(buttons.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
+                // expect(buttons.url).toEqual('');
+              }
+            }
+          }
         }
       });
     });
