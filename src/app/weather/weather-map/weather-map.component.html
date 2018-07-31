@@ -75,7 +75,7 @@
     <!--  Weather stations -->
 
     <!--  Weather stations:  primary group -->
-    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="updateAntennagroupDisplay(p)">
+    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="updateAntennaGroupsDisplay(p)">
       <path class="ws-connector"
         [attr.d]="getSVGVirtualConnectorPath(p, 125, -50)"
         stroke="#39505f"
@@ -91,7 +91,7 @@
     </g>
 
     <!--  Weather stations:  backup group -->
-    <g class="ws-backup-group" *ngFor="let p of backup_wstations" (click)="groupAction(p)">
+    <g class="ws-backup-group" *ngFor="let p of backup_wstations">
       <foreignObject [attr.x]="p.opt_cx-25" [attr.y]="p.opt_cy-25" width="50" height="50">
         <xhtml:app-test-ws-marker-component></xhtml:app-test-ws-marker-component>
       </foreignObject>

@@ -89,7 +89,6 @@ export class WeatherMapComponent implements OnInit {
     'S_ARM': {'selected': false},
   };
 
-
   /**
   * Variables to manage the graphical elements
   */
@@ -276,9 +275,17 @@ export class WeatherMapComponent implements OnInit {
     return pathString;
   }
 
-  updateAntennagroupDisplay(placemark) {
+  updateAntennaGroupsDisplay(placemark) {
+
     const selectedGroup = this.ws2AntennaGroup[placemark.name][0];
-    this.antennaGroupsDisplay[selectedGroup]['selected'] = !this.antennaGroupsDisplay[selectedGroup]['selected'];
+    const displayValue = this.antennaGroupsDisplay[selectedGroup]['selected'];
+    /* Clean antenna groups from the map */
+    for (const group of Object.keys(this.antennaGroupsDisplay)) {
+      this.antennaGroupsDisplay[group]['selected'] = false;
+    }
+    /* Update display status for the selected group */
+    this.antennaGroupsDisplay[selectedGroup]['selected'] = !displayValue;
+
   }
 
 }
