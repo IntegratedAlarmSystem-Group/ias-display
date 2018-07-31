@@ -3,7 +3,6 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
-import { Map } from './temp_fixtures';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, WeatherSettings } from '../settings';
 
