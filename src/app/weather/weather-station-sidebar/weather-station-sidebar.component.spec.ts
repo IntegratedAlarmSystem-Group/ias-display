@@ -90,7 +90,7 @@ for ( const item in alarm_types) {
   }
 }
 
-fdescribe('WeatherStationSidebarComponent', () => {
+describe('WeatherStationSidebarComponent', () => {
   let component: WeatherStationSidebarComponent;
   let fixture: ComponentFixture<WeatherStationSidebarComponent>;
   let alarmService: AlarmService;
