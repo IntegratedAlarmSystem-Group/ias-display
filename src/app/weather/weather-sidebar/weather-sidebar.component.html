@@ -17,8 +17,8 @@
                 <app-status-view [alarm]="this.getAlarm(alarm.station)" [showActionBadges]="false"></app-status-view>
               </div>
             </td>
-            <td>
-              <app-buttons [alarm]="this.getAlarm(alarm.station)" [url]=""></app-buttons>
+            <td class="buttons" align="right">
+              <app-buttons [alarm]="this.getAlarm(alarm.station)" [url]="this.getAlarmUrl(alarm.station)"></app-buttons>
             </td>
           </tr>
           <tr>
@@ -32,8 +32,8 @@
                 <app-status-view [alarm]="this.getAlarm(alarm.windspeed)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td>
-              <app-buttons [alarm]="this.getAlarm(alarm.windspeed)" [url]=""></app-buttons>
+            <td class="buttons" align="right">
+              <app-buttons [alarm]="this.getAlarm(alarm.windspeed)" [url]="this.getAlarmUrl(alarm.windspeed)"></app-buttons>
             </td>
           </tr>
           <tr>
@@ -47,8 +47,8 @@
                 <app-status-view [alarm]="this.getAlarm(alarm.humidity)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td>
-              <app-buttons [alarm]="this.getAlarm(alarm.humidity)" [url]=""></app-buttons>
+            <td class="buttons" align="right">
+              <app-buttons [alarm]="this.getAlarm(alarm.humidity)" [url]="this.getAlarmUrl(alarm.humidity)"></app-buttons>
             </td>
           </tr>
           <tr>
@@ -62,8 +62,8 @@
                 <app-status-view [alarm]="this.getAlarm(alarm.temperature)" [showActionBadges]="false" ></app-status-view>
               </div>
             </td>
-            <td>
-              <app-buttons [alarm]="this.getAlarm(alarm.temperature)" [url]=""></app-buttons>
+            <td class="buttons" align="right">
+              <app-buttons [alarm]="this.getAlarm(alarm.temperature)" [url]="this.getAlarmUrl(alarm.temperature)"></app-buttons>
             </td>
           </tr>
         </table>

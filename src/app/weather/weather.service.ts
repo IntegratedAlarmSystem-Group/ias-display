@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
-import { Map } from './fixtures';
+import { Map } from './temp_fixtures';
 import { HttpClient } from '@angular/common/http';
 
 

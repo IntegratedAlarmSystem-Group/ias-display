@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   /** Navigation Sidenav Menu of the application (left sidenav) */
   navigationSidenavItems = [
     { title: 'Overview', link: 'overview', icon: 'language'},
+    { title: 'Weather', link: 'weather', icon: 'wb_sunny'},
     { title: 'Table', link: 'tabular', icon: 'list'}
   ];
 
