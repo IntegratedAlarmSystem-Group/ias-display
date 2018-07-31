@@ -121,20 +121,21 @@ export class WeatherMapComponent implements OnInit {
   }
 
   setUpMap() {
-    const mapdata = this.weatherService.getMapData();
-    this.wstations = mapdata['placemarkers']['wstations'];
-    this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
-    this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
-    this.pads = mapdata['placemarkers']['pads'];
-    this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
-    this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
-    this.w_arm_pads = mapdata['relations']['antenna_groups']['W_ARM']['pads'];
-    this.s_arm_pads = mapdata['relations']['antenna_groups']['S_ARM']['pads'];
-    this.paths = mapdata['paths'];
-    this.placemarksAdjustment();
-    this.svgPaths = this.getSVGPaths();
-    this.ws2AntennaGroup = mapdata['relations']['ws2antennas'];
-    this.datarelations = mapdata['relations'];
+    this.weatherService.getMapData().subscribe((mapdata) => {
+      this.wstations = mapdata['placemarkers']['wstations'];
+      this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
+      this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
+      this.pads = mapdata['placemarkers']['pads'];
+      this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
+      this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
+      this.w_arm_pads = mapdata['relations']['antenna_groups']['W_ARM']['pads'];
+      this.s_arm_pads = mapdata['relations']['antenna_groups']['S_ARM']['pads'];
+      this.paths = mapdata['paths'];
+      this.placemarksAdjustment();
+      this.svgPaths = this.getSVGPaths();
+      this.ws2AntennaGroup = mapdata['relations']['ws2antennas'];
+      this.datarelations = mapdata['relations'];
+    });
   }
 
   placemarksAdjustment() {

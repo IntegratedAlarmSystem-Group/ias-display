@@ -4,7 +4,8 @@ import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { Alarm } from '../data/alarm';
 import { Assets } from '../settings';
 import { Map } from './temp_fixtures';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../data/http-client.service';
+import { BackendUrls, WeatherSettings } from '../settings';
 
 
 /**
@@ -55,11 +56,14 @@ export class WeatherService {
   /** List of Alarm Ids of the Weather Stations **/
   public weatherStationsConfig: WeatherStationConfig[];
 
+  /** Key to retrieve the JSON with coordinates to draw the Weather Map */
+  public weatherMapName = WeatherSettings.mapKey;
+
   /**
-   * Builds an instance of the service
+   * Builds an instance of the service and initializes it calling the {@link initialize} method
    */
   constructor(
-    private http: HttpClient
+    private httpClient: HttpClientService
   ) {
     this.initialize();
   }
@@ -68,14 +72,23 @@ export class WeatherService {
   * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
-    this.setWeatherStationsConfig();
-    this.setAlarmsAndImages();
+    this.loadWeatherStationsConfig();
+    this.loadAlarmsAndImages();
+  }
+
+  /**
+  * Requests data for the weather station map
+  * @returns {Observable<Object>} observable of the data in a JSON
+  */
+  getMapData(): Observable<Object> {
+    const url = BackendUrls.FILES_JSON + this.weatherMapName;
+    return this.httpClient.get(url);
   }
 
   /**
   * Define the IDs of the alarms that the component should listen to
   */
-  setWeatherStationsConfig() {
+  loadWeatherStationsConfig() {
     this.weatherStationsConfig = [
       {
         station: 'Alarmdummy',
@@ -95,7 +108,7 @@ export class WeatherService {
   /**
   * Define the alarms that the component should listen to and their respective icons
   */
-  setAlarmsAndImages() {
+  loadAlarmsAndImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',
@@ -168,14 +181,4 @@ export class WeatherService {
       shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
     });
   }
-
-  /**
-  * Data request for the weather station map
-  * TODO: To change the source to the webserver
-  */
-  getMapData() {
-    return Map;
-  }
-
-
 }

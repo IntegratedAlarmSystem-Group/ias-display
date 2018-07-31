@@ -9,6 +9,7 @@ export const BackendUrls = {
   TICKETS_INFO: '/tickets-api/tickets/old_open_info/',
   SHELVE_API: '/tickets-api/shelve-registries/',
   UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
+  FILES_JSON: '/panels-api/files/get_json/?key='
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */
@@ -31,4 +32,8 @@ export const Locale = {
 /** Set that defines the locations of assets in the applicaiton */
 export const Assets = {
   ICONS: '/assets/img/',
+};
+
+export const WeatherSettings = {
+  mapKey: 'weather',
 };
