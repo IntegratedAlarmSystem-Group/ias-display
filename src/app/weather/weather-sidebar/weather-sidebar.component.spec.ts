@@ -12,6 +12,7 @@ import { StatusViewComponent } from '../../shared/status-view/status-view.compon
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
+import { CdbService } from '../../data/cdb.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 const mockWeatherStationsConfig = [
@@ -81,12 +82,13 @@ const mockAlarms = {
   })
 };
 
-describe('WeatherSidebarComponent', () => {
+fdescribe('WeatherSidebarComponent', () => {
   let sidebarComponent: WeatherSidebarComponent;
   let fixture: ComponentFixture<WeatherSidebarComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
   let alarmService: AlarmService;
+  let cdbService: CdbService;
   let content: any;
 
   beforeEach(async(() => {
@@ -129,6 +131,15 @@ describe('WeatherSidebarComponent', () => {
       alarmService = service;
       spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
         return mockAlarms[alarm_id];
+      });
+    })
+  );
+
+  beforeEach(
+    inject([CdbService], (service) => {
+      cdbService = service;
+      spyOn(cdbService, 'getAlarmsInformationUrl').and.callFake(function(alarm_id) {
+        return 'url-' + alarm_id;
       });
     })
   );
@@ -185,7 +196,7 @@ describe('WeatherSidebarComponent', () => {
               if (tableRows[j] !== null ) {
                 const columns = tableRows[j].queryAll(By.css('td'));
 
-                if ( j !== '0' ) {
+                if ( j !== '0' ) { // Because the first row show the alarm name
                   const index = Number(j) - 1;
                   const alarm = columns[0].query(By.directive(AlarmComponent)).componentInstance;
                   expect(alarm).toBeTruthy();
@@ -202,7 +213,7 @@ describe('WeatherSidebarComponent', () => {
                 const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
                 expect(buttons).toBeTruthy();
                 expect(buttons.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
-                // expect(buttons.url).toEqual('');
+                expect(buttons.url).toEqual('url-mockAlarm-' + i);
               }
             }
           }
