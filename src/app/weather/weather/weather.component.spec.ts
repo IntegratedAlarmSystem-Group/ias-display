@@ -6,6 +6,8 @@ import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
+import { WeatherMarkerMapComponent } from '../weather-marker-map/weather-marker-map.component';
+import { WeatherDataMapComponent } from '../weather-data-map/weather-data-map.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
 import { WeatherService } from '../weather.service';
@@ -23,6 +25,8 @@ describe('WeatherComponent', () => {
       declarations: [
         WeatherComponent,
         WeatherMapComponent,
+        WeatherMarkerMapComponent,
+        WeatherDataMapComponent,
         WeatherSidebarComponent,
         WeatherStationSidebarComponent,
       ],

@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { WeatherSummaryComponent } from './weather-summary/weather-summary.component';
 import { WeatherMapComponent } from './weather-map/weather-map.component';
+import { WeatherMarkerMapComponent } from './weather-marker-map/weather-marker-map.component';
+import { WeatherDataMapComponent } from './weather-data-map/weather-data-map.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.component';
 import { WeatherService } from './weather.service';
@@ -29,6 +31,8 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar/weathe
   declarations: [
     WeatherSummaryComponent,
     WeatherMapComponent,
+    WeatherMarkerMapComponent,
+    WeatherDataMapComponent,
     WeatherComponent,
     WeatherSidebarComponent,
     WeatherStationSidebarComponent,
