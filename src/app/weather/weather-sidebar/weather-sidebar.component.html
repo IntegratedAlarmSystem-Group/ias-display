@@ -5,7 +5,7 @@
 <div class="weather-sidebar-content">
   <mat-accordion>
     <div multi="false" *ngFor="let alarm of weatherService.weatherStationsConfig">
-      <mat-expansion-panel (opened)="this.selectedAlarm = alarm.station" (closed)="this.selectedAlarm = ''">
+      <mat-expansion-panel (opened)="this.onPanelOpen(alarm.station)" (closed)="this.onPanelClose(alarm.station)">
         <mat-expansion-panel-header class="weather-sidebar-header">
           <app-weather-station-sidebar [stationConfig]="alarm" [selectedAlarm]="this.selectedAlarm"></app-weather-station-sidebar>
         </mat-expansion-panel-header>

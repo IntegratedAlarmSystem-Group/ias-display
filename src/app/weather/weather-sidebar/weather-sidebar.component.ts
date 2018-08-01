@@ -53,4 +53,14 @@ export class WeatherSidebarComponent implements OnInit {
   getAlarmUrl(alarm_id: string): string {
     return this.cdbService.getAlarmsInformationUrl(alarm_id);
   }
+
+  onPanelClose(station: string) {
+    if (this.selectedAlarm === station) {
+      this.selectedAlarm = '';
+    }
+  }
+
+  onPanelOpen(station: string) {
+    this.selectedAlarm = station;
+  }
 }
