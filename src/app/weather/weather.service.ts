@@ -12,6 +12,9 @@ import { BackendUrls, WeatherSettings } from '../settings';
 */
 export class WeatherStationConfig {
 
+  /** ID to map the {@link Alarm} to the location on the map */
+  public placemark: string;
+
   /** ID of the main {@link Alarm} of the Weather Station */
   public station: string;
 
@@ -52,8 +55,9 @@ export class WeatherService {
   /** Alarms Ids for the weather summary **/
   public weatherSummaryConfig: WeatherStationConfig;
 
-  /** List of Alarm Ids of the Weather Stations **/
-  public weatherStationsConfig: WeatherStationConfig[];
+  /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
+  public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
+  // public weatherStationsConfig: WeatherStationConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -84,24 +88,44 @@ export class WeatherService {
     return this.httpClient.get(url);
   }
 
+  getArrayValues() {
+    return Object.values(this.weatherStationsConfig);
+  }
+
   /**
   * Define the IDs of the alarms that the component should listen to
   */
   loadWeatherStationsConfig() {
-    this.weatherStationsConfig = [
-      {
+    this.weatherStationsConfig =  {
+      'Meteo201': {
+        placemark: 'Meteo201',
         station: 'Alarmdummy',
-        temperature: 'Alarmdummy',
+        temperature: 'WS-MeteoOSF-Temperature',
         windspeed: 'WS-MeteoCentral-WindSpeed',
         humidity: 'WS-MeteoCentral-Humidity',
       },
-      {
-        station: 'WS-MeteoOSF-Temperature',
+      'MeteoCentral': {
+        placemark: 'MeteoCentral',
+        station: 'Alarmdummy',
+        temperature: 'WS-MeteoCentral-Temperature',
+        windspeed: 'WS-MeteoCentral-WindSpeed',
+        humidity: 'WS-MeteoCentral-Humidity',
+      },
+      'Meteo410': {
+        placemark: 'Meteo410',
+        station: 'Alarmdummy',
         temperature: 'WS-MeteoOSF-Temperature',
         windspeed: 'WS-MeteoOSF-WindSpeed',
         humidity: 'WS-MeteoOSF-Humidity',
       },
-    ];
+      'Meteo309': {
+        placemark: 'Meteo309',
+        station: 'Alarmdummy',
+        temperature: 'WS-MeteoCentral-WindSpeed-Temperature',
+        windspeed: 'WS-MeteoCentral-WindSpeed',
+        humidity: 'WS-MeteoCentral-Humidity',
+      },
+    };
   }
 
   /**
