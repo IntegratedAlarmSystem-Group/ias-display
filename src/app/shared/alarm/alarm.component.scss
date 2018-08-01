@@ -6,29 +6,29 @@
   height: 100%;
   min-width: fit-content;
   position: relative;
-}
 
-.alarm-icon{
-  height: 100%;
-}
-
-.badges{
-
-  .badge-icon{
-    position: absolute;
-    height: 35%;
-    left: 106%;
+  .alarm-icon{
+    height: 100%;
   }
 
-  .ack-icon{
-    top: 2%;
-  }
+  .badges{
 
-  .shelve-icon{
-    bottom: 2%;
-  }
+    .badge-icon{
+      position: absolute;
+      height: 35%;
+      left: 106%;
 
-  .badge-off{
-    opacity: 0.08;
+      &.ack-icon{
+        top: 2%;
+      }
+
+      &.shelve-icon{
+        bottom: 2%;
+      }
+      
+      &.badge-off{
+        opacity: 0.08;
+      }
+    }
   }
 }
