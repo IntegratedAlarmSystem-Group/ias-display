@@ -119,8 +119,8 @@ describe('WeatherSidebarComponent', () => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
-      spyOn(weatherService, 'getMapData')
-        .and.returnValue(of([Map]));
+      // spyOn(weatherService, 'getMapData')
+      //   .and.returnValue(of([Map]));
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
       weatherService.windsImageSet = mockImagesSets['0'];
       weatherService.humidityImageSet = mockImagesSets['1'];

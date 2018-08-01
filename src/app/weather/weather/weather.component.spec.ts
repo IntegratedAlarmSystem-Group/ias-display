@@ -14,7 +14,7 @@ import { WeatherService } from '../weather.service';
 import { Router } from '@angular/router';
 import { Map } from '../fixtures';
 
-describe('WeatherComponent', () => {
+xdescribe('WeatherComponent', () => {
   let component: WeatherComponent;
   let fixture: ComponentFixture<WeatherComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
