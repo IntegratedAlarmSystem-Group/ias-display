@@ -82,19 +82,10 @@
         stroke-width="3"
         fill="none"
       />
-      <foreignObject [attr.x]="p.opt_cx-25" [attr.y]="p.opt_cy-25" width="50" height="50">
-        <xhtml:app-test-ws-marker-component></xhtml:app-test-ws-marker-component>
-      </foreignObject>
-      <foreignObject class="fobject" [attr.x]="(p.opt_cx-50) + 125" [attr.y]="(p.opt_cy-50) - 25" width="100" height="100">
-        <xhtml:app-test-ws-data-component></xhtml:app-test-ws-data-component>
-      </foreignObject>
     </g>
 
     <!--  Weather stations:  backup group -->
     <g class="ws-backup-group" *ngFor="let p of backup_wstations">
-      <foreignObject [attr.x]="p.opt_cx-25" [attr.y]="p.opt_cy-25" width="50" height="50">
-        <xhtml:app-test-ws-marker-component></xhtml:app-test-ws-marker-component>
-      </foreignObject>
     </g>
 
   </svg>

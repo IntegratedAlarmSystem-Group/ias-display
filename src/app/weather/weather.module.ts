@@ -11,9 +11,6 @@ import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.compo
 import { WeatherService } from './weather.service';
 import { WeatherStationSidebarComponent } from './weather-station-sidebar/weather-station-sidebar.component';
 
-import { WeatherTestWSMarkerComponent } from './weather-map/weather-map.component';
-import { WeatherTestWSDataComponent } from './weather-map/weather-map.component';
-
 
 /**
 * This module contains all the components related to the Weather system
@@ -35,8 +32,6 @@ import { WeatherTestWSDataComponent } from './weather-map/weather-map.component'
     WeatherComponent,
     WeatherSidebarComponent,
     WeatherStationSidebarComponent,
-    WeatherTestWSMarkerComponent,
-    WeatherTestWSDataComponent,
   ],
   exports: [
     WeatherSummaryComponent,

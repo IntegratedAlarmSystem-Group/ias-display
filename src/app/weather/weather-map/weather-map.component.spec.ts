@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { WeatherMapComponent } from './weather-map.component';
-import { WeatherTestWSDataComponent } from './weather-map.component';
-import { WeatherTestWSMarkerComponent } from './weather-map.component';
 import { WeatherService } from '../weather.service';
 import { DataModule } from '../../data/data.module';
 import { Map } from '../fixtures';
@@ -17,8 +15,6 @@ describe('WeatherMapComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         WeatherMapComponent,
-        WeatherTestWSDataComponent,
-        WeatherTestWSMarkerComponent
       ],
       imports: [ DataModule ],
       providers: [ WeatherService ]
