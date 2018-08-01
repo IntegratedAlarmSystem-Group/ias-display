@@ -15,6 +15,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
+
 const mockWeatherStationsConfig = [
   {
     station: 'mockAlarm-0',
