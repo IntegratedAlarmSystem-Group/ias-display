@@ -16,20 +16,22 @@ import { CdbService } from '../../data/cdb.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 
-const mockWeatherStationsConfig = [
-  {
+const mockWeatherStationsConfig = {
+  'mockAlarm-0': {
+    placemark: 'mockAlarm-0',
     station: 'mockAlarm-0',
     temperature: 'mockAlarm-0',
     windspeed: 'mockAlarm-0',
     humidity: 'mockAlarm-0'
   },
-  {
+  'mockAlarm-1': {
+    placemark: 'mockAlarm-1',
     station: 'mockAlarm-1',
     temperature: 'mockAlarm-1',
     windspeed: 'mockAlarm-1',
     humidity: 'mockAlarm-1'
   },
-];
+};
 
 const mockImagesSets = {};
 const alarm_types = ['winds', 'hum', 'temp'];
@@ -182,7 +184,8 @@ describe('WeatherSidebarComponent', () => {
             const stationSidebarDebugElement = header.query(By.directive(WeatherStationSidebarComponent));
             const stationSidebarComponent = stationSidebarDebugElement.componentInstance;
             expect(stationSidebarComponent).toBeTruthy();
-            expect(stationSidebarComponent.stationConfig).toEqual(mockWeatherStationsConfig[i]);
+            const wskeys = Object.keys(mockWeatherStationsConfig);
+            expect(stationSidebarComponent.stationConfig).toEqual(mockWeatherStationsConfig[wskeys[i]]);
             expect(stationSidebarComponent.selectedAlarm).toEqual('');
           }
         }

@@ -10,6 +10,7 @@ import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { Alarm } from '../../data/alarm';
 
 const mockConfiguration = {
+  placemark: 'MockStationAlarm',
   station: 'MockStationAlarm',
   windspeed: 'MockWindSpeedAlarm',
   temperature: 'MockTemperatureAlarm',
