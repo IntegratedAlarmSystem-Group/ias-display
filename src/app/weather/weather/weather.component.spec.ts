@@ -14,7 +14,7 @@ import { WeatherService } from '../weather.service';
 import { Router } from '@angular/router';
 import { Map } from '../fixtures';
 
-xdescribe('WeatherComponent', () => {
+describe('WeatherComponent', () => {
   let component: WeatherComponent;
   let fixture: ComponentFixture<WeatherComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
@@ -47,8 +47,9 @@ xdescribe('WeatherComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherComponent);
     weatherService = fixture.debugElement.injector.get(WeatherService);
-    spyOn(weatherService, 'getMapData')
-      .and.returnValue(of([Map]));
+    spyOn(weatherService, 'getMapData').and.callFake(function() {
+      return of(Map);
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

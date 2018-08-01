@@ -121,7 +121,6 @@ export class WeatherMapComponent implements OnInit {
 
   setUpMap() {
     this.weatherService.getMapData().subscribe((mapdata) => {
-      console.log('++++++++++++++++++++++++++++ - WeatherMAp MapDATA: ', mapdata);
       this.wstations = mapdata['placemarkers']['wstations'];
       this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
       this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];

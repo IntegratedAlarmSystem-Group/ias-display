@@ -13,11 +13,9 @@ describe('WeatherService', () => {
   });
 
   beforeEach(inject([WeatherService], (weatherService) => {
-      spyOn(weatherService, 'getMapData')
-        .and.callFake(function() {
-          console.log('********************* - WeatherService');
-          return of(Map);
-        });
+      spyOn(weatherService, 'getMapData').and.callFake(function() {
+        return of(Map);
+      });
   }));
 
   it('should be created', inject([WeatherService], (service: WeatherService) => {

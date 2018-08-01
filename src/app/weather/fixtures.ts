@@ -1,7 +1,7 @@
 export const Map = {
     'relations': {
         'antenna_groups': {
-            'PM': {
+            'P_ARM': {
                 'pads': [
                     {
                         'description': 'description',
@@ -11,7 +11,7 @@ export const Map = {
                     }
                 ]
             },
-            'MI': {
+            'MORITA_AND_INNER': {
                 'pads': [
                     {
                         'description': 'description',
@@ -21,7 +21,7 @@ export const Map = {
                     }
                 ]
             },
-            'WM': {
+            'W_ARM': {
                 'pads': [
                     {
                         'description': 'description',
@@ -31,7 +31,7 @@ export const Map = {
                     }
                 ]
             },
-            'SM': {
+            'S_ARM': {
                 'pads': [
                     {
                         'description': 'description',

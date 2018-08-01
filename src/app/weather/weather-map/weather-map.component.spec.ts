@@ -29,11 +29,9 @@ describe('WeatherMapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherMapComponent);
     weatherService = fixture.debugElement.injector.get(WeatherService);
-    spyOn(weatherService, 'getMapData')
-      .and.callFake(function() {
-        console.log('MAP:', Map);
-        return of(Map);
-      });
+    spyOn(weatherService, 'getMapData').and.callFake(function() {
+      return of(Map);
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
