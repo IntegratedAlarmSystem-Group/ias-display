@@ -1,5 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
@@ -7,6 +8,7 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar.compon
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmHeaderComponent } from '../../shared/alarm-header/alarm-header.component';
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { Map } from '../fixtures';
 import { Alarm } from '../../data/alarm';
 
 const mockConfiguration = {
@@ -116,6 +118,8 @@ describe('WeatherStationSidebarComponent', () => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
+      spyOn(weatherService, 'getMapData')
+        .and.returnValue(of([Map]));
       weatherService.windsImageSet = mockImagesSets['0'];
       weatherService.humidityImageSet = mockImagesSets['1'];
       weatherService.tempImageSet = mockImagesSets['2'];
