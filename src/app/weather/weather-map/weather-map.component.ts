@@ -4,67 +4,6 @@ import { WeatherService } from '../weather.service';
 
 
 /**
-* Dummy component for weather station marker
-*/
-@Component({
-    selector: 'app-test-ws-marker-component',
-    template: `
-      <div class="ws-marker"> <div class="triangle"></div> </div>
-    `,
-    styles: [
-      `.ws-marker {
-        color: #54c073;
-        text-align: center;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 5px;
-      }`,
-      `
-      .triangle {
-        width: 0;
-        height: 0;
-        border-top: 20px solid transparent;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-        border-bottom: 20px solid #54c073;
-        margin-top: -10px;
-      }
-      `
-    ]
-})
-export class WeatherTestWSMarkerComponent {}
-
-
-/**
-* Dummy component for weather station data
-*/
-@Component({
-    selector: 'app-test-ws-data-component',
-    template: `
-      <div class="ws-data">  DATA  </div>
-    `,
-    styles: [
-      `
-      .ws-data {
-        color: white;
-        background: #39505f;
-        border: 2px solid #39505f;
-        border-radius: 4px;
-        padding: 10px;
-        text-align: center;
-        font-size: 16px;
-      }
-      :host-context(svg .ws-primary-group:hover) .ws-data {
-        border: 2px solid #a3bbc6;
-      };
-      `
-    ]
-})
-export class WeatherTestWSDataComponent {}
-
-
-/**
 * Main component for the weather station map
 */
 @Component({

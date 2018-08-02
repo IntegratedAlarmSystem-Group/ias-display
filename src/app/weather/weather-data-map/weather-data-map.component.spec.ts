@@ -1,22 +1,20 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { WeatherMapComponent } from './weather-map.component';
-import { WeatherMarkerMapComponent } from '../weather-marker-map/weather-marker-map.component';
-import { WeatherDataMapComponent } from '../weather-data-map/weather-data-map.component';
+
+import { WeatherDataMapComponent } from './weather-data-map.component';
 import { WeatherService } from '../weather.service';
-import { DataModule } from '../../data/data.module';
-import { Map } from '../fixtures';
 
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 
+import { DataModule } from '../../data/data.module';
+
 const mockWeatherStationsConfig = {
-  'name': {
-    placemark: 'name',
-    station: 'name-0',
-    temperature: 'name-0',
-    windspeed: 'name-0',
-    humidity: 'name-0'
+  'mockAlarm-0': {
+    placemark: 'mockAlarm-0',
+    station: 'mockAlarm-0',
+    temperature: 'mockAlarm-0',
+    windspeed: 'mockAlarm-0',
+    humidity: 'mockAlarm-0'
   },
   'mockAlarm-1': {
     placemark: 'mockAlarm-1',
@@ -26,28 +24,6 @@ const mockWeatherStationsConfig = {
     humidity: 'mockAlarm-1'
   },
 };
-
-const mockMarkerImagesSets = {};
-mockMarkerImagesSets['set'] = new AlarmImageSet({
-  clear: 'ImageSet',
-  set_low: 'ImageSet',
-  set_medium: 'ImageSet',
-  set_high: 'ImageSet',
-  set_critical: 'ImageSet',
-  unknown: 'ImageSet',
-  maintenance: 'ImageSet',
-  shelved: 'ImageSet',
-});
-mockMarkerImagesSets['set-unreliable'] = new AlarmImageSet({
-  clear: 'UnreliableImageSet',
-  set_low: 'UnreliableImageSet',
-  set_medium: 'UnreliableImageSet',
-  set_high: 'UnreliableImageSet',
-  set_critical: 'UnreliableImageSet',
-  unknown: 'UnreliableImageSet',
-  maintenance: 'UnreliableImageSet',
-  shelved: 'UnreliableImageSet',
-});
 
 const mockImagesSets = {};
 const alarm_types = ['winds', 'hum', 'temp'];
@@ -76,26 +52,23 @@ for ( const item in alarm_types) {
   }
 }
 
-
-describe('WeatherMapComponent', () => {
-  let component: WeatherMapComponent;
-  let fixture: ComponentFixture<WeatherMapComponent>;
-  let componentDataMap: WeatherDataMapComponent;
-  let fixtureDataMap: ComponentFixture<WeatherDataMapComponent>;
-  let componentMarkerMap: WeatherMarkerMapComponent;
-  let fixtureMarkerMap: ComponentFixture<WeatherMarkerMapComponent>;
+describe('WeatherDataMapComponent', () => {
+  let component: WeatherDataMapComponent;
+  let fixture: ComponentFixture<WeatherDataMapComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        WeatherMapComponent,
-        WeatherMarkerMapComponent,
         WeatherDataMapComponent,
         AlarmComponent
       ],
-      imports: [ DataModule ],
-      providers: [ WeatherService ]
+      imports: [
+        DataModule
+      ],
+      providers: [
+        WeatherService
+      ]
     })
     .compileComponents();
   }));
@@ -115,31 +88,16 @@ describe('WeatherMapComponent', () => {
     })
   );
 
-
   beforeEach(() => {
-
-    fixture = TestBed.createComponent(WeatherMapComponent);
-    weatherService = fixture.debugElement.injector.get(WeatherService);
-    spyOn(weatherService, 'getMapData').and.callFake(function() {
-      return of(Map);
-    });
+    fixture = TestBed.createComponent(WeatherDataMapComponent);
     component = fixture.componentInstance;
-
-    fixtureDataMap = TestBed.createComponent(WeatherDataMapComponent);
-    componentDataMap = fixtureDataMap.componentInstance;
-    componentDataMap.placemark = 'name';
-
-    fixtureMarkerMap = TestBed.createComponent(WeatherMarkerMapComponent);
-    componentMarkerMap = fixtureMarkerMap.componentInstance;
-    componentMarkerMap.placemark = 'name';
-    componentMarkerMap.iconSet = mockMarkerImagesSets['set'];
-    componentMarkerMap.iconUnreliableSet = mockMarkerImagesSets['set-unreliable'];
-
-    fixtureMarkerMap.detectChanges();
+    component.placemark = 'mockAlarm-0';
+    fixture.detectChanges();
   });
-
 
   it('should create', () => {
+    expect(component.alarmConfig.placemark).toEqual(component.placemark);
     expect(component).toBeTruthy();
   });
+
 });

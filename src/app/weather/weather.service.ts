@@ -107,9 +107,9 @@ export class WeatherService {
       'MeteoCentral': {
         placemark: 'MeteoCentral',
         station: 'Alarmdummy',
-        temperature: 'WS-MeteoCentral-Temperature',
-        windspeed: 'WS-MeteoCentral-WindSpeed',
-        humidity: 'WS-MeteoCentral-Humidity',
+        temperature: 'Alarmdummy', // 'WS-MeteoCentral-Temperature',
+        windspeed: 'Alarmdummy', // 'WS-MeteoCentral-WindSpeed',
+        humidity: 'Alarmdummy', // 'WS-MeteoCentral-Humidity',
       },
       'Meteo410': {
         placemark: 'Meteo410',
