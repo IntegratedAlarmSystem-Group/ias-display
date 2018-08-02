@@ -1,34 +1,65 @@
-.alarm-component-box{
-  height: 100%;
-}
-
 .alarm-component{
   height: 100%;
-  min-width: fit-content;
-  position: relative;
+  border: 1px solid red;
+  width: 100%;
 
-  .alarm-icon{
+  .icon {
+    border: 1px solid yellow;
+    display: inline-block;
+    width: 70%;
     height: 100%;
+    vertical-align: middle;
+
+    .alarm-icon{
+      height: 100%;
+      background: yellow;
+    }
+
   }
 
   .badges{
-
-    .badge-icon{
-      position: absolute;
-      height: 35%;
-      left: 106%;
-
-      &.ack-icon{
-        top: 2%;
-      }
-
-      &.shelve-icon{
-        bottom: 2%;
-      }
-
-      &.badge-off{
-        opacity: 0.08;
-      }
-    }
+    border: 1px solid green;
+    display: inline-block;
+    border: 1px solid gray;
+    background: lightgray;
+    vertical-align: middle;
+    width: 30%;
   }
+
 }
+
+
+// .alarm-component-box{
+//   height: 100%;
+// }
+//
+// .alarm-component{
+//   height: 100%;
+//   min-width: fit-content;
+//   position: relative;
+//
+//   .alarm-icon{
+//     height: 100%;
+//   }
+//
+//   .badges{
+//
+//     .badge-icon{
+//       position: absolute;
+//       height: 35%;
+//       left: 106%;
+//
+//       &.ack-icon{
+//         top: 2%;
+//       }
+//
+//       &.shelve-icon{
+//         bottom: 2%;
+//       }
+//
+//       &.badge-off{
+//         opacity: 0.08;
+//       }
+//     }
+//   }
+// }
