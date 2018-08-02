@@ -18,6 +18,8 @@ const expected_classes = {
   'clear_unreliable': ['green', 'unreliable'],
   'unknown_unreliable': ['blue', 'unreliable'],
   'maintenance_unreliable': ['gray', 'unreliable'],
+  'shelved': ['green'],
+  'shelved_unreliable': ['green', 'unreliable'],
 };
 
 describe('AlarmHeaderComponent', () => {
@@ -48,6 +50,20 @@ describe('AlarmHeaderComponent', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+    });
+  }
+
+  for (const alarm of MockAlarms) {
+    it('should display the shelved alarm accordingly', () => {
+      component.alarm = Alarm.asAlarm(alarm);
+      component.alarm.shelve();
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      if (component.alarm.validity) {
+        expect(component.getClass()).toEqual(expected_classes['shelved']);
+      } else {
+        expect(component.getClass()).toEqual(expected_classes['shelved_unreliable']);
+      }
     });
   }
 
