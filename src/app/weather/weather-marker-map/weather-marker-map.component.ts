@@ -54,7 +54,6 @@ export class WeatherMarkerMapComponent implements OnInit {
   * to be displayed on the weather map
   */
   initialize () {
-    console.log(this.placemark);
     this.alarmConfig = this.getAlarmConfig(this.placemark);
     this.defineAlarmsAndIcons();
   }
