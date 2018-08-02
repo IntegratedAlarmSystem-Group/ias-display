@@ -3,6 +3,10 @@
   height: calc(100vh - 130px)
 }
 
+.fobject {
+  overflow: visible;
+}
+
 svg g.ws-primary-group {
   cursor: pointer;
 }
