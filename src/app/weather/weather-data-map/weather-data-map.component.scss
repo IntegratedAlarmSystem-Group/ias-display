@@ -1,0 +1,13 @@
+.ws-data-container {
+  color: white;
+  background: #39505f;
+  border: 2px solid #39505f;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+:host-context(svg .ws-primary-group:hover) .ws-data-container {
+  border: 2px solid #a3bbc6;
+}

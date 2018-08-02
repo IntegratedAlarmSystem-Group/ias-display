@@ -86,7 +86,7 @@
         <xhtml:app-weather-marker-map></xhtml:app-weather-marker-map>
       </foreignObject>
       <foreignObject class="fobject" [attr.x]="(p.opt_cx-50) + 125" [attr.y]="(p.opt_cy-50) - 25" width="100" height="100">
-        <xhtml:app-weather-data-map></xhtml:app-weather-data-map>
+        <xhtml:app-weather-data-map [placemark]="p.name"></xhtml:app-weather-data-map>
       </foreignObject>
     </g>
 
