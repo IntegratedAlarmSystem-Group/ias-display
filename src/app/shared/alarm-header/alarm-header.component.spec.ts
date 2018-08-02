@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { AlarmHeaderComponent } from './alarm-header.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -44,17 +45,17 @@ describe('AlarmHeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  for (const alarm of MockAlarms) {
-    it('should display the color of the alarm according to the alarm properties', () => {
+  it('should display the color of the alarms according to each alarm properties', () => {
+    for (const alarm of MockAlarms) {
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
-    });
-  }
+    }
+  });
 
-  for (const alarm of MockAlarms) {
-    it('should display the shelved alarm accordingly', () => {
+  it('should display the shelved alarms accordingly', () => {
+    for (const alarm of MockAlarms) {
       component.alarm = Alarm.asAlarm(alarm);
       component.alarm.shelve();
       fixture.detectChanges();
@@ -64,7 +65,97 @@ describe('AlarmHeaderComponent', () => {
       } else {
         expect(component.getClass()).toEqual(expected_classes['shelved_unreliable']);
       }
+    }
+  });
+
+  describe('should have a method to determine if the alarm must be shown as acknoledged or not', () => {
+    it('based on the alarm ack value when the showActionBadges is true (by default)', () => {
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm.ack = true;
+      expect(component.showAsPendingAck()).toEqual(false);
+      component.alarm.ack = false;
+      expect(component.showAsPendingAck()).toEqual(true);
     });
-  }
+
+    it('that return false when the showActionBadges is set to false', () => {
+      component.showActionBadges = false;
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm.ack = true;
+      expect(component.showAsPendingAck()).toEqual(false);
+      component.alarm.ack = false;
+      expect(component.showAsPendingAck()).toEqual(false);
+    });
+  });
+
+  describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
+    it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm.shelved = false;
+      expect(component.showAsShelved()).toEqual(false);
+      component.alarm.shelved = true;
+      expect(component.showAsShelved()).toEqual(true);
+    });
+
+    it('that return false when the showActionBadges is set to false', () => {
+      component.showActionBadges = false;
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm.shelved = false;
+      expect(component.showAsShelved()).toEqual(false);
+      component.alarm.shelved = true;
+      expect(component.showAsShelved()).toEqual(false);
+    });
+  });
+
+  it('should show the action badges images when the showActionBadges is true (by default)', () => {
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    fixture.detectChanges();
+    const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
+    const images = badges.querySelectorAll('img');
+    expect(images.length).toEqual(2);
+  });
+
+  it('should not show the action badges images when the showActionBadges is false', () => {
+    component.showActionBadges = false;
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    fixture.detectChanges();
+    const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
+    const images = badges.querySelectorAll('img');
+    expect(images.length).toEqual(0);
+  });
+
+  it('should turn on/off the badges according to the ack and shelve values', () => {
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.alarm.ack = true;
+    component.alarm.shelved = false;
+    fixture.detectChanges();
+    let badges = fixture.nativeElement.querySelector('.badges');
+    let images = badges.querySelectorAll('img');
+    expect(images[0].className).toEqual('badge-icon ack-icon badge-off');
+    expect(images[1].className).toEqual('badge-icon shelve-icon badge-off');
+
+    component.alarm.ack = false;
+    component.alarm.shelved = false;
+    fixture.detectChanges();
+    badges = fixture.nativeElement.querySelector('.badges');
+    images = badges.querySelectorAll('img');
+    expect(images[0].className).toEqual('badge-icon ack-icon');
+    expect(images[1].className).toEqual('badge-icon shelve-icon badge-off');
+
+    component.alarm.ack = false;
+    component.alarm.shelved = true;
+    fixture.detectChanges();
+    badges = fixture.nativeElement.querySelector('.badges');
+    images = badges.querySelectorAll('img');
+    expect(images[0].className).toEqual('badge-icon ack-icon');
+    expect(images[1].className).toEqual('badge-icon shelve-icon');
+
+    component.alarm.ack = true;
+    component.alarm.shelved = true;
+    fixture.detectChanges();
+    badges = fixture.nativeElement.querySelector('.badges');
+    images = badges.querySelectorAll('img');
+    expect(images[0].className).toEqual('badge-icon ack-icon badge-off');
+    expect(images[1].className).toEqual('badge-icon shelve-icon');
+  });
 
 });
