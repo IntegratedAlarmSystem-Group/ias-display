@@ -1,3 +1,10 @@
-<p>
-  weather-marker-map works!
-</p>
+<div class="ws-marker-container">
+
+  <app-alarm
+    [alarm]="this.getAlarm(this.alarmConfig.station)"
+    [images]="iconSet"
+    [imagesUnreliable]="iconUnreliableSet"
+  >
+  </app-alarm>
+
+</div>

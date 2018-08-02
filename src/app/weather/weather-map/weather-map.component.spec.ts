@@ -27,6 +27,28 @@ const mockWeatherStationsConfig = {
   },
 };
 
+const mockMarkerImagesSets = {};
+mockMarkerImagesSets['set'] = new AlarmImageSet({
+  clear: 'ImageSet',
+  set_low: 'ImageSet',
+  set_medium: 'ImageSet',
+  set_high: 'ImageSet',
+  set_critical: 'ImageSet',
+  unknown: 'ImageSet',
+  maintenance: 'ImageSet',
+  shelved: 'ImageSet',
+});
+mockMarkerImagesSets['set-unreliable'] = new AlarmImageSet({
+  clear: 'UnreliableImageSet',
+  set_low: 'UnreliableImageSet',
+  set_medium: 'UnreliableImageSet',
+  set_high: 'UnreliableImageSet',
+  set_critical: 'UnreliableImageSet',
+  unknown: 'UnreliableImageSet',
+  maintenance: 'UnreliableImageSet',
+  shelved: 'UnreliableImageSet',
+});
+
 const mockImagesSets = {};
 const alarm_types = ['winds', 'hum', 'temp'];
 for ( const item in alarm_types) {
@@ -60,6 +82,8 @@ describe('WeatherMapComponent', () => {
   let fixture: ComponentFixture<WeatherMapComponent>;
   let componentDataMap: WeatherDataMapComponent;
   let fixtureDataMap: ComponentFixture<WeatherDataMapComponent>;
+  let componentMarkerMap: WeatherMarkerMapComponent;
+  let fixtureMarkerMap: ComponentFixture<WeatherMarkerMapComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
@@ -91,22 +115,29 @@ describe('WeatherMapComponent', () => {
     })
   );
 
+
   beforeEach(() => {
+
     fixture = TestBed.createComponent(WeatherMapComponent);
     weatherService = fixture.debugElement.injector.get(WeatherService);
     spyOn(weatherService, 'getMapData').and.callFake(function() {
       return of(Map);
     });
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  beforeEach(() => {
     fixtureDataMap = TestBed.createComponent(WeatherDataMapComponent);
     componentDataMap = fixtureDataMap.componentInstance;
     componentDataMap.placemark = 'name';
-    fixtureDataMap.detectChanges();
+
+    fixtureMarkerMap = TestBed.createComponent(WeatherMarkerMapComponent);
+    componentMarkerMap = fixtureMarkerMap.componentInstance;
+    componentMarkerMap.placemark = 'name';
+    componentMarkerMap.iconSet = mockMarkerImagesSets['set'];
+    componentMarkerMap.iconUnreliableSet = mockMarkerImagesSets['set-unreliable'];
+
+    fixtureMarkerMap.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
