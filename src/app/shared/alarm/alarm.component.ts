@@ -72,6 +72,13 @@ export class AlarmComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
+   * Defines the size of the component, can be either of the following options: xs, sm, md, lg
+   */
+  @Input() size = 'md';
+
+  private sizeOptions = ['xs', 'sm', 'md', 'lg'];
+
+  /**
   * Instantiates the component
   */
   constructor() { }
@@ -80,6 +87,9 @@ export class AlarmComponent implements OnInit {
   * Executed when the component is initiating
   */
   ngOnInit() {
+    if (this.sizeOptions.indexOf(this.size) < 0) {
+      this.size = 'md';
+    }
   }
 
   /**
@@ -122,4 +132,7 @@ export class AlarmComponent implements OnInit {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
 
+  getClass(): string {
+    return 'alarm-component-' + this.size;
+  }
 }
