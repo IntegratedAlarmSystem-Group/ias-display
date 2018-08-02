@@ -31,7 +31,7 @@ export class AlarmHeaderComponent implements OnInit {
     const result = [];
     if (!this.alarm) {
       result.push('blue');
-      result.push('invalid');
+      result.push('unreliable');
       return result;
     }
     if (this.alarm.shelved === true) {
@@ -54,7 +54,7 @@ export class AlarmHeaderComponent implements OnInit {
       result.push('blue');
     }
     if (this.alarm.validity === 0) {
-      result.push('invalid');
+      result.push('unreliable');
     }
     return result;
   }
