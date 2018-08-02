@@ -3,7 +3,6 @@
     <img class="alarm-icon" src="{{ getImage() }}"/>
 
     <div class="badges" *ngIf="showActionBadges">
-    <div class="badges">
 
       <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
       <ng-template #ackOn>
