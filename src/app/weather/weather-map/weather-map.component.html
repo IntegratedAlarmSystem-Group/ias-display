@@ -75,7 +75,7 @@
     <!--  Weather stations -->
 
     <!--  Weather stations:  primary group -->
-    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="updateSelectedStation(p)">
+    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="onClick(p)">
       <path class="ws-connector"
         [attr.d]="getSVGVirtualConnectorPath(p, 125, -50)"
         stroke="#39505f"

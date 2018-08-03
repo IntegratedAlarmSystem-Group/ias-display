@@ -25,7 +25,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeSelectedAlarm(selectedAlarm: string) {
-    this.selectedStation = selectedAlarm;
+  changeSelectedStation(selectedStation: string) {
+    this.selectedStation = selectedStation;
   }
 }

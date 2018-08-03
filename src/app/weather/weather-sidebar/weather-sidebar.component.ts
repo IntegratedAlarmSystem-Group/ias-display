@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -16,9 +16,9 @@ import { Assets } from '../../settings';
 })
 export class WeatherSidebarComponent implements OnInit {
 
-  @Output() panelClicked = new EventEmitter<string>();
+  @Input() selectedStation = '';
 
-  selectedAlarm = '';
+  @Output() panelClicked = new EventEmitter<string>();
 
   /**
   * Builds an instance of the component
@@ -56,15 +56,16 @@ export class WeatherSidebarComponent implements OnInit {
     return this.cdbService.getAlarmsInformationUrl(alarm_id);
   }
 
-  onPanelClose(station: string) {
-    if (this.selectedAlarm === station) {
-      this.selectedAlarm = '';
-      this.panelClicked.emit(this.selectedAlarm);
-    }
+  isSelected(station: string) {
+    return this.selectedStation === station;
   }
 
-  onPanelOpen(station: string) {
-    this.selectedAlarm = station;
-    this.panelClicked.emit(this.selectedAlarm);
+  onClick(station: string) {
+    if ( this.selectedStation !== station) {
+      this.selectedStation = station;
+    } else {
+      this.selectedStation = '';
+    }
+    this.panelClicked.emit(this.selectedStation);
   }
 }

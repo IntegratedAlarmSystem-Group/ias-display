@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 
@@ -14,6 +14,8 @@ import { WeatherService } from '../weather.service';
 export class WeatherMapComponent implements OnInit {
 
   @Input() selectedStation: string;
+
+  @Output() placemarkClicked = new EventEmitter<string>();
 
   /**
   * Viewbox values to be set after loading the map data
@@ -216,26 +218,14 @@ export class WeatherMapComponent implements OnInit {
     return pathString;
   }
 
-  updateAntennaGroupsDisplay(placemark) {
-    // this.selectedStation = this.weatherService.weatherStationsConfig[placemark.name].station;
-    const selectedGroup = this.ws2AntennaGroup[placemark.name][0];
-    const displayValue = this.antennaGroupsDisplay[selectedGroup]['selected'];
-    /* Clean antenna groups from the map */
-    for (const group of Object.keys(this.antennaGroupsDisplay)) {
-      this.antennaGroupsDisplay[group]['selected'] = false;
-    }
-    /* Update display status for the selected group */
-    this.antennaGroupsDisplay[selectedGroup]['selected'] = !displayValue;
-
-  }
-
-  updateSelectedStation(placemark) {
+  onClick(placemark) {
     const selectedGroup = this.weatherService.weatherStationsConfig[placemark.name];
     if ( this.selectedStation !== selectedGroup.station) {
       this.selectedStation = selectedGroup.station;
     } else {
       this.selectedStation = '';
     }
+    this.placemarkClicked.emit(this.selectedStation);
   }
 
   isSelected(placemark: string): boolean {
