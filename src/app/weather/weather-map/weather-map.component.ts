@@ -217,7 +217,7 @@ export class WeatherMapComponent implements OnInit {
   }
 
   updateAntennaGroupsDisplay(placemark) {
-    this.selectedStation = this.weatherService.weatherStationsConfig[placemark.name].station;
+    // this.selectedStation = this.weatherService.weatherStationsConfig[placemark.name].station;
     const selectedGroup = this.ws2AntennaGroup[placemark.name][0];
     const displayValue = this.antennaGroupsDisplay[selectedGroup]['selected'];
     /* Clean antenna groups from the map */
@@ -227,6 +227,21 @@ export class WeatherMapComponent implements OnInit {
     /* Update display status for the selected group */
     this.antennaGroupsDisplay[selectedGroup]['selected'] = !displayValue;
 
+  }
+
+  updateSelectedStation(placemark) {
+    const selectedGroup = this.weatherService.weatherStationsConfig[placemark.name];
+    if ( this.selectedStation !== selectedGroup.station) {
+      this.selectedStation = selectedGroup.station;
+    } else {
+      this.selectedStation = '';
+    }
+  }
+
+  isSelected(placemark: string): boolean {
+    if (this.weatherService.weatherStationsConfig[placemark]) {
+      return this.weatherService.weatherStationsConfig[placemark].station === this.selectedStation;
+    }
   }
 
 }

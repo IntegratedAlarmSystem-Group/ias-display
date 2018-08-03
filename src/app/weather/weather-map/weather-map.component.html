@@ -27,7 +27,7 @@
     </g>
 
     <!--  Pads by antenna group -->
-    <g class="pads-morita-inner" [ngClass]="{'selected': this.antennaGroupsDisplay['MORITA_AND_INNER']['selected'] === true}">
+    <g class="pads-morita-inner" [ngClass]="{'selected': isSelected('MeteoCentral')}">
       <circle *ngFor="let p of this.morita_and_inner_pads"
         [attr.cx]="p.opt_cx"
         [attr.cy]="p.opt_cy"
@@ -38,7 +38,7 @@
         fill="#212d3a"
       />
     </g>
-    <g class="pads-p-arm" [ngClass]="{'selected': this.antennaGroupsDisplay['P_ARM']['selected'] === true}">
+    <g class="pads-p-arm" [ngClass]="{'selected': isSelected('Meteo410')}">
       <circle *ngFor="let p of this.p_arm_pads"
         [attr.cx]="p.opt_cx"
         [attr.cy]="p.opt_cy"
@@ -49,7 +49,7 @@
         fill="#212d3a"
       />
     </g>
-    <g class="pads-s-arm" [ngClass]="{'selected': this.antennaGroupsDisplay['S_ARM']['selected'] === true}">
+    <g class="pads-s-arm" [ngClass]="{'selected': isSelected('Meteo309')}">
       <circle *ngFor="let p of this.s_arm_pads"
         [attr.cx]="p.opt_cx"
         [attr.cy]="p.opt_cy"
@@ -60,7 +60,7 @@
         fill="#212d3a"
       />
     </g>
-    <g class="pads-w-arm" [ngClass]="{'selected': this.antennaGroupsDisplay['W_ARM']['selected'] === true}">
+    <g class="pads-w-arm" [ngClass]="{'selected': isSelected('Meteo201')}">
       <circle *ngFor="let p of this.w_arm_pads"
         [attr.cx]="p.opt_cx"
         [attr.cy]="p.opt_cy"
@@ -75,7 +75,7 @@
     <!--  Weather stations -->
 
     <!--  Weather stations:  primary group -->
-    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="updateAntennaGroupsDisplay(p)">
+    <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="updateSelectedStation(p)">
       <path class="ws-connector"
         [attr.d]="getSVGVirtualConnectorPath(p, 125, -50)"
         stroke="#39505f"
