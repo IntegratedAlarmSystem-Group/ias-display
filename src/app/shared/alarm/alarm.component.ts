@@ -72,11 +72,11 @@ export class AlarmComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
-   * Defines the size of the component, can be either of the following options: xs, sm, md, lg
+   * Defines the size of the component, can be either of the options defined by {@link sizeOptions}
    */
   @Input() size = 'md';
 
-  private sizeOptions = ['xs', 'sm', 'md', 'lg'];
+  private sizeOptions = ['xs', 'sm', 'md', 'lg', 'st'];
 
   /**
   * Instantiates the component

@@ -3,6 +3,7 @@ $xs-cem: 1*$cem;
 $sm-cem: 1.2*$cem;
 $md-cem: 1.6*$cem;
 $lg-cem: 2.2*$cem;
+$st-cem: 1*$cem;
 
 .alarm-component{
 
@@ -80,5 +81,29 @@ $lg-cem: 2.2*$cem;
   .badges{
     @extend .badges;
     width: 8*$lg-cem;
+  }
+}
+
+.alarm-component-st {
+  @extend .alarm-component;
+  height: 19*$st-cem;
+
+  .badges{
+    @extend .badges;
+    width: 11*$st-cem;
+
+    .badge-icon{
+      @extend .badge-icon;
+
+      &.ack-icon{
+        @extend .ack-icon;
+        margin-top: 0;
+      }
+
+      &.shelve-icon{
+        @extend .shelve-icon;
+        margin-bottom: 0;
+      }
+    }
   }
 }
