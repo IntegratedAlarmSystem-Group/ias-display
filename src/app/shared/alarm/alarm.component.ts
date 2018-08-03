@@ -76,7 +76,7 @@ export class AlarmComponent implements OnInit {
    */
   @Input() size = 'md';
 
-  private sizeOptions = ['xs', 'sm', 'md', 'lg', 'st'];
+  private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
 
   /**
   * Instantiates the component

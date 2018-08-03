@@ -3,7 +3,7 @@ $xs-cem: 1*$cem;
 $sm-cem: 1.2*$cem;
 $md-cem: 1.6*$cem;
 $lg-cem: 2.2*$cem;
-$st-cem: 1*$cem;
+$status-cem: 1*$cem;
 
 .alarm-component{
 
@@ -84,13 +84,13 @@ $st-cem: 1*$cem;
   }
 }
 
-.alarm-component-st {
+.alarm-component-status {
   @extend .alarm-component;
-  height: 19*$st-cem;
+  height: 19*$status-cem;
 
   .badges{
     @extend .badges;
-    width: 11*$st-cem;
+    width: 11*$status-cem;
 
     .badge-icon{
       @extend .badge-icon;
