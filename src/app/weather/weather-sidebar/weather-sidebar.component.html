@@ -5,8 +5,8 @@
 <div class="weather-sidebar-content">
   <mat-accordion>
     <div multi="false" *ngFor="let alarm of this.weatherService.getArrayValues()">
-      <mat-expansion-panel [expanded]="isSelected(alarm.station)" (click)="onClick(alarm.station)">
-        <mat-expansion-panel-header class="weather-sidebar-header">
+      <mat-expansion-panel [expanded]="isSelected(alarm.station)">
+        <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(alarm.station)">
           <app-weather-station-sidebar [stationConfig]="alarm" [selectedAlarm]="this.selectedStation"></app-weather-station-sidebar>
         </mat-expansion-panel-header>
         <table>
