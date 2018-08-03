@@ -1,11 +1,11 @@
 <mat-sidenav-container autosize>
 
   <mat-sidenav-content id="weather-map" autosize>
-    <app-weather-map></app-weather-map>
+    <app-weather-map [selectedStation]="selectedStation"></app-weather-map>
   </mat-sidenav-content>
 
   <mat-sidenav #weatherSidenav id="weather-sidenav" position="end" mode="side" opened="true">
-    <app-weather-sidebar></app-weather-sidebar>
+    <app-weather-sidebar (panelClicked)="changeSelectedAlarm($event)">></app-weather-sidebar>
   </mat-sidenav>
 
 </mat-sidenav-container>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 
@@ -12,6 +12,8 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather-map.component.scss']
 })
 export class WeatherMapComponent implements OnInit {
+
+  @Input() selectedStation: string;
 
   /**
   * Viewbox values to be set after loading the map data
@@ -215,7 +217,7 @@ export class WeatherMapComponent implements OnInit {
   }
 
   updateAntennaGroupsDisplay(placemark) {
-
+    this.selectedStation = this.weatherService.weatherStationsConfig[placemark.name].station;
     const selectedGroup = this.ws2AntennaGroup[placemark.name][0];
     const displayValue = this.antennaGroupsDisplay[selectedGroup]['selected'];
     /* Clean antenna groups from the map */
