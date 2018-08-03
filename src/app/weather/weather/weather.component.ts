@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 
 /**
 * Component used to display Weather Alarms both in a sidebar (instantiated in a {@link WeatherSidebar}),
@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
 
+  selectedStation = '';
+
   /**
    * Builds an instance of the component
    */
@@ -21,5 +23,9 @@ export class WeatherComponent implements OnInit {
    * Executed after the component is instantiated
    */
   ngOnInit() {
+  }
+
+  changeSelectedStation(selectedStation: string) {
+    this.selectedStation = selectedStation;
   }
 }
