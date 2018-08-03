@@ -37,9 +37,6 @@
     height: 85px;
     width: fit-content;
 }
-.sensors-card>.marker>.marker-img{
-    height: 40px;
-}
 
 .ias.map{
     display: inline-block;

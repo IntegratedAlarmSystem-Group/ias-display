@@ -6,6 +6,16 @@
   padding: 10px;
   text-align: center;
   font-size: 16px;
+  min-width: fit-content;
+
+  .weather-icons {
+  }
+
+  .icon {
+    padding: 0px 10px;
+    width: fit-content;
+  }
+
 }
 
 :host-context(svg .ws-primary-group:hover) .ws-data-container {

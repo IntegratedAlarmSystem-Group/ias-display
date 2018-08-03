@@ -1,33 +1,108 @@
-.alarm-component-box{
-  height: 100%;
-}
+$cem: 1px;
+$xs-cem: 1*$cem;
+$sm-cem: 1.2*$cem;
+$md-cem: 1.6*$cem;
+$lg-cem: 2.2*$cem;
+$status-cem: 1*$cem;
 
 .alarm-component{
-  height: 100%;
-  min-width: fit-content;
-  position: relative;
 
-  .alarm-icon{
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
     height: 100%;
+
+    .alarm-icon{
+      height: 100%;
+    }
   }
 
   .badges{
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
 
     .badge-icon{
-      position: absolute;
-      height: 35%;
-      left: 106%;
+      width: 100%;
 
       &.ack-icon{
-        top: 2%;
+        margin-top: 6%;
       }
 
       &.shelve-icon{
-        bottom: 2%;
+        margin-bottom: 6%;
       }
 
       &.badge-off{
         opacity: 0.08;
+      }
+    }
+
+    &.hidden {
+      visibility: hidden;
+    }
+  }
+}
+
+.alarm-component-xs {
+  @extend .alarm-component;
+  height: 19*$xs-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$xs-cem;
+  }
+}
+
+.alarm-component-sm {
+  @extend .alarm-component;
+  height: 19*$sm-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$sm-cem;
+  }
+}
+
+.alarm-component-md {
+  @extend .alarm-component;
+  height: 19*$md-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$md-cem;
+  }
+}
+
+.alarm-component-lg {
+  @extend .alarm-component;
+  height: 19*$lg-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$lg-cem;
+  }
+}
+
+.alarm-component-status {
+  @extend .alarm-component;
+  height: 19*$status-cem;
+
+  .badges{
+    @extend .badges;
+    width: 11*$status-cem;
+
+    .badge-icon{
+      @extend .badge-icon;
+
+      &.ack-icon{
+        @extend .ack-icon;
+        margin-top: 0;
+      }
+
+      &.shelve-icon{
+        @extend .shelve-icon;
+        margin-bottom: 0;
       }
     }
   }

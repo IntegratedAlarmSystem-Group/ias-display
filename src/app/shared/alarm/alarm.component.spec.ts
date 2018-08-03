@@ -121,14 +121,15 @@ describe('AlarmComponent', () => {
     expect(images.length).toEqual(2);
   });
 
-  it('should not show the action badges images when the showActionBadges is false', () => {
+  it('should hide the action badges images when the showActionBadges is false', () => {
     component.showActionBadges = false;
     component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.badges');
-    expect(badges).toBeFalsy();
+    expect(badges).toBeTruthy();
+    expect(badges.className).toContain('hidden');
   });
 
   it('should turn on/off the badges according to the ack and shelve values', () => {
