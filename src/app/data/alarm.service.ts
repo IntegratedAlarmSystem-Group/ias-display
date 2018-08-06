@@ -8,6 +8,7 @@ import { Alarm, OperationalMode, Validity } from '../data/alarm';
 import { BackendUrls, Streams } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
+import { DisplayedAlarm } from '../data/displayed-alarm';
 
 
 /**
@@ -32,6 +33,10 @@ export class AlarmService {
   * Dictionary of {@link Alarm} objects, indexed by their core_ids
   */
   public alarms: {[core_id: string]: Alarm } = {};
+
+  public alarmsArray: DisplayedAlarm[] = [];
+
+  public alarmsIndexes: {[core_id: string]: number} = {};
 
   /**
   * Stream of notifications of changes in
@@ -90,7 +95,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      // console.log('notify ', payload);
+      console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
@@ -229,8 +234,15 @@ export class AlarmService {
    */
   readAlarmMessage(action, obj) {
     const alarm = Alarm.asAlarm(obj);
+    const displayedAlarm = new DisplayedAlarm(alarm, '', '');
     if ( action === 'create' || action === 'update' ) {
       this.alarms[alarm.core_id] = alarm;
+      if (alarm.core_id in this.alarmsIndexes) {
+        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = displayedAlarm;
+      } else {
+        const newLength = this.alarmsArray.push(displayedAlarm);
+        this.alarmsIndexes[alarm.core_id] = newLength - 1;
+      }
     } else if ( action === 'delete') {
       delete this.alarms[alarm.core_id];
     }
@@ -246,6 +258,21 @@ export class AlarmService {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
       this.alarms[alarm.core_id] = alarm;
+      const displayedAlarm = new DisplayedAlarm(alarm, '', '');
+      if (alarm.core_id in this.alarmsIndexes) {
+        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = displayedAlarm;
+      } else {
+        const newLength = this.alarmsArray.push(displayedAlarm);
+        this.alarmsIndexes[alarm.core_id] = newLength - 1;
+      }
+    }
+    for (const core_id in this.alarmsIndexes ) {
+      if ( this.alarmsIndexes[core_id] !== null ) {
+        // const index = this.alarmsIndexes[core_id];
+        // if ( core_id === 'Alarmdummy' ) {
+        //   console.log('{', core_id, ':', index, '}, Alarm.core_id:', this.alarmsArray[index]);
+        // }
+      }
     }
     this.changeAlarms('all');
   }
