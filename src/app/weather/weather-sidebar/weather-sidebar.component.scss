@@ -54,14 +54,37 @@
     border-top: 2px solid #33475a;
   }
 
-  .antennas-title {
-    font-weight: bold;
+  .antennas-list-line {
+    margin-bottom: 0.2rem;
+  }
+
+  .antennas-list-header {
+    height: 37.27px;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .antennas-title {
+      line-height: 40px;
+      font-weight: bold;
+    }
+
+    .copy-antennas-button {
+      border: 0;
+      color: #4ac8ff;
+      cursor: pointer;
+      padding-left: 0;
+      padding-right: 0;
+      outline: none;
+      background-color: unset !important;
+      min-width: unset !important;
+      box-shadow: none !important;
+    }
   }
 
   .antennas-list {
     margin-top: 10px;
     color: #8e9296;
   }
-
 
 }
