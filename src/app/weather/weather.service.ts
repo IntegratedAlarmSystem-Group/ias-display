@@ -89,13 +89,18 @@ export class WeatherService {
   }
 
   /**
-  *
-  *
+  * Return list of antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
   */
-  getAntennas(placemark: string): string[] {
+  getAntennas(station: string): string[] {
     return ['A001', 'A002', 'A003'];
   }
 
+  /**
+  * Transforms the dictionary of weather stations configurations into a list
+  * @returns {Object[]} a list with the weather stations configurations
+  */
   getArrayValues() {
     return Object.values(this.weatherStationsConfig);
   }

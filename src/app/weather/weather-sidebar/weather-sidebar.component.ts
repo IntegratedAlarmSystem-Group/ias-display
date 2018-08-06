@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ClipboardService } from 'ngx-clipboard';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -30,12 +31,34 @@ export class WeatherSidebarComponent implements OnInit {
     public weatherService: WeatherService,
     public alarmService: AlarmService,
     public cdbService: CdbService,
+    private clipboardService: ClipboardService
   ) { }
 
   /**
   * Executed after the component is instantiated
   */
   ngOnInit() {
+  }
+
+  /**
+  * Copy list of antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {boolean} true if the data was copied to the clipboard, false if not
+  */
+  copyAntennas(station: string): boolean {
+    const antennas = this.getAntennas(station);
+    const result = antennas.join(',');
+    const status = this.clipboardService.copyFromContent(result);
+    return status;
+  }
+
+  /**
+  * Return list of antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getAntennas(station: string): string[] {
+    return this.weatherService.getAntennas(station);
   }
 
   /**
