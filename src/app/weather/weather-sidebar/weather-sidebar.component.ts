@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { ClipboardService } from 'ngx-clipboard';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { CdbService } from '../../data/cdb.service';
@@ -30,12 +32,42 @@ export class WeatherSidebarComponent implements OnInit {
     public weatherService: WeatherService,
     public alarmService: AlarmService,
     public cdbService: CdbService,
+    private clipboardService: ClipboardService,
+    public snackBar: MatSnackBar
   ) { }
 
   /**
   * Executed after the component is instantiated
   */
   ngOnInit() {
+  }
+
+  /**
+  * Copy list of antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {boolean} true if the data was copied to the clipboard, false if not
+  */
+  copyAntennas(station: string): boolean {
+    const antennas = this.getAntennas(station);
+    const result = antennas.join(',');
+    const status = this.clipboardService.copyFromContent(result);
+    let message = '';
+    if (status) {
+      message = 'Antennas copied to clipboard';
+    } else {
+      message = 'ERROR: Antennas were not copied!';
+    }
+    this.openSnackBar(message, 'Done');
+    return status;
+  }
+
+  /**
+  * Return list of antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getAntennas(station: string): string[] {
+    return this.weatherService.getAntennas(station);
   }
 
   /**
@@ -67,5 +99,11 @@ export class WeatherSidebarComponent implements OnInit {
       this.selectedStation = '';
     }
     this.panelClicked.emit(this.selectedStation);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

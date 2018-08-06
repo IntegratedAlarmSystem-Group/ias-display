@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClipboardModule } from 'ngx-clipboard';
 import { ActionsModule } from '../actions/actions.module';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
@@ -20,6 +21,7 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar/weathe
 @NgModule({
   imports: [
     CommonModule,
+    ClipboardModule,
     ActionsModule,
     DataModule,
     SharedModule,

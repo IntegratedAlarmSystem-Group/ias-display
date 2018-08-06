@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -43,6 +44,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatSnackBarModule,
     FlexLayoutModule
   ],
   exports: [
@@ -64,6 +66,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatSnackBarModule,
     FlexLayoutModule
   ],
   declarations: []

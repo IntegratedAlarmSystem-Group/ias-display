@@ -67,6 +67,18 @@
             </td>
           </tr>
         </table>
+        <hr class="antennas-list-line">
+        <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">
+          <div class="antennas-title"> Nearby Antennas </div>
+          <button mat-flat-button class="copy-antennas-button" (click)="copyAntennas(alarm.station)">
+            <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>
+          </button>
+        </div>
+        <div class="antennas-list">
+          <ul>
+            <li *ngFor="let antenna of this.getAntennas(alarm.station)"> {{antenna}} </li>
+          </ul>
+        </div>
       </mat-expansion-panel>
     </div>
   </mat-accordion>
