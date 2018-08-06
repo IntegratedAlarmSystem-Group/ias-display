@@ -138,7 +138,7 @@ export class WeatherMapComponent implements OnInit {
 
     }
 
-    const vBoxW = 1.1 * (maxCX - minCX);
+    const vBoxW = 1.25 * (maxCX - minCX);
     const vBoxH = 1.1 * (maxCY - minCY);
     this.viewbox = '0 0 ' + vBoxW + ' ' + vBoxH;
 
