@@ -93,7 +93,7 @@ export class WeatherService {
   *
   */
   getAntennas(placemark: string): string[] {
-    return ['P001', 'P002', 'P003'];
+    return ['A001', 'A002', 'A003'];
   }
 
   getArrayValues() {
