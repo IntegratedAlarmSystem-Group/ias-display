@@ -88,6 +88,14 @@ export class WeatherService {
     return this.httpClient.get(url);
   }
 
+  /**
+  *
+  *
+  */
+  getAntennas(placemark: string): string[] {
+    return ['P001', 'P002', 'P003'];
+  }
+
   getArrayValues() {
     return Object.values(this.weatherStationsConfig);
   }
