@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
@@ -31,7 +32,8 @@ export class WeatherSidebarComponent implements OnInit {
     public weatherService: WeatherService,
     public alarmService: AlarmService,
     public cdbService: CdbService,
-    private clipboardService: ClipboardService
+    private clipboardService: ClipboardService,
+    public snackBar: MatSnackBar
   ) { }
 
   /**
@@ -49,6 +51,13 @@ export class WeatherSidebarComponent implements OnInit {
     const antennas = this.getAntennas(station);
     const result = antennas.join(',');
     const status = this.clipboardService.copyFromContent(result);
+    let message = '';
+    if (status) {
+      message = 'Antennas copied to clipboard';
+    } else {
+      message = 'ERROR: Antennas were not copied!';
+    }
+    this.openSnackBar(message, 'Done');
     return status;
   }
 
@@ -90,5 +99,11 @@ export class WeatherSidebarComponent implements OnInit {
       this.selectedStation = '';
     }
     this.panelClicked.emit(this.selectedStation);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

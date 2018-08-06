@@ -1,5 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ClipboardModule } from 'ngx-clipboard';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
@@ -105,6 +106,7 @@ describe('WeatherSidebarComponent', () => {
         { provide: Router, useValue: spyRoutingTable },
       ],
       imports: [
+        ClipboardModule,
         IasMaterialModule,
         SharedModule,
         ActionsModule,
