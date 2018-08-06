@@ -1,6 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardModule, ClipboardService } from 'ngx-clipboard';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
@@ -98,6 +98,7 @@ fdescribe('WeatherSidebarComponent', () => {
   let weatherService: WeatherService;
   let alarmService: AlarmService;
   let cdbService: CdbService;
+  let clipboardService: ClipboardService;
   let content: any;
 
   beforeEach(async(() => {
@@ -155,6 +156,13 @@ fdescribe('WeatherSidebarComponent', () => {
       spyOn(cdbService, 'getAlarmsInformationUrl').and.callFake(function(alarm_id) {
         return 'url-' + alarm_id;
       });
+    })
+  );
+
+  beforeEach(
+    inject([ClipboardService], (service) => {
+      clipboardService = service;
+      spyOn(clipboardService, 'copyFromContent').and.callFake(function() { return true });
     })
   );
 
@@ -240,7 +248,6 @@ fdescribe('WeatherSidebarComponent', () => {
       });
 
       it('Each panel contains a list with the names of nearby antennas', () => {
-        fixture.detectChanges();
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
         const mockWeatherStationsConfigArray = Object.values(mockWeatherStationsConfig);
         for (const i in panels) {
@@ -252,6 +259,21 @@ fdescribe('WeatherSidebarComponent', () => {
             for (const antenna of expectedAntennas) {
               expect(list.textContent).toContain(antenna);
             }
+          }
+        }
+      });
+
+      it('Each panel contains a button to copy the names of nearby antennas', () => {
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        const mockWeatherStationsConfigArray = Object.values(mockWeatherStationsConfig);
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfigArray[i].station];
+            const panel = panels[i];
+            const button = panel.nativeElement.querySelector('.copy-antennas-button');
+            expect(button).toBeTruthy();
+            button.click();
+            expect(clipboardService.copyFromContent).toHaveBeenCalledWith(expectedAntennas.join(','));
           }
         }
       });
