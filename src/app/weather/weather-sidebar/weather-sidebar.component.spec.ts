@@ -86,7 +86,12 @@ const mockAlarms = {
   })
 };
 
-describe('WeatherSidebarComponent', () => {
+const mockAntennas = {
+  'mockAlarm-0': ['Antenna1', 'Antenna2', 'Antenna3'],
+  'mockAlarm-1': ['Antenna4', 'Antenna5', 'Antenna6'],
+};
+
+fdescribe('WeatherSidebarComponent', () => {
   let sidebarComponent: WeatherSidebarComponent;
   let fixture: ComponentFixture<WeatherSidebarComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
@@ -119,8 +124,12 @@ describe('WeatherSidebarComponent', () => {
   beforeEach(
     inject([WeatherService], (service) => {
       weatherService = service;
-      spyOn(weatherService, 'initialize')
-        .and.callFake(function() {});
+      spyOn(weatherService, 'initialize').and.callFake(function() {});
+      spyOn(weatherService, 'getAntennas').and.callFake(
+        function(station: string) {
+          return mockAntennas[station];
+        }
+      );
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
       weatherService.windsImageSet = mockImagesSets['0'];
       weatherService.humidityImageSet = mockImagesSets['1'];
@@ -225,6 +234,23 @@ describe('WeatherSidebarComponent', () => {
                 expect(buttons.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
                 expect(buttons.url).toEqual('url-mockAlarm-' + i);
               }
+            }
+          }
+        }
+      });
+
+      it('Each panel contains a list with the names of nearby antennas', () => {
+        fixture.detectChanges();
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        const mockWeatherStationsConfigArray = Object.values(mockWeatherStationsConfig);
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfigArray[i].station];
+            const panel = panels[i];
+            const list = panel.nativeElement.querySelector('.antennas-list');
+            expect(list).toBeTruthy();
+            for (const antenna of expectedAntennas) {
+              expect(list.textContent).toContain(antenna);
             }
           }
         }
