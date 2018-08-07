@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Alarm, OperationalMode } from '../../data/alarm';
-import { DisplayedAlarm, } from '../../data/displayed-alarm';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { Assets } from '../../settings';
 
