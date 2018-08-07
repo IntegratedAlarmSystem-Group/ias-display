@@ -60,18 +60,23 @@ export class Alarm {
   /** Timestamp at which the {@link Alarm} changed the state or the mode */
   state_change_timestamp: number;
 
+  /** List of core_id's of dependent alarms **/
+  dependencies: string[];
+
+  /** Short description of the {@link Alarm} */
+  description: string;
+
+  /** Documentation url of the {@link Alarm} */
+  url: string;
+
   /** Acknowledgement status */
   ack: boolean;
 
   /** Acknowledgement status */
   shelved: boolean;
 
-  /** List of core_id's of dependent alarms **/
-  dependencies: string[];
-
   /**
   * Builds a new Alarm instance
-  *
   * @param {Object} attributes a dictionary containing the attributes to
   * create the object
   */
@@ -81,7 +86,6 @@ export class Alarm {
 
   /**
   * Class method that checks if an object corresponds to an Alarm object
-  *
   * @param {any} json the object to check
   * @returns {boolean} true if it is an {@link Alarm}, false if not
   */
@@ -92,8 +96,10 @@ export class Alarm {
       json.hasOwnProperty('running_id') &&
       json.hasOwnProperty('mode') &&
       json.hasOwnProperty('core_timestamp') &&
-      // json.hasOwnProperty('state_change_timestamp') &&
+      json.hasOwnProperty('state_change_timestamp') &&
       json.hasOwnProperty('validity') &&
+      json.hasOwnProperty('description') &&
+      json.hasOwnProperty('url') &&
       json.hasOwnProperty('ack') &&
       json.hasOwnProperty('shelved') &&
       json.hasOwnProperty('dependencies')
@@ -102,7 +108,6 @@ export class Alarm {
 
   /**
   * Class method that receives an object and returns copy as an {@link Alarm}
-  *
   * @param {any} json the object to convert to an Alarm
   * @param {number} pk the primary key of the Alarm in the database
   * @returns {Alarm} the object as an {@link Alarm} instance
@@ -118,19 +123,18 @@ export class Alarm {
     const core_timestamp = <number>json['core_timestamp'];
     const state_change_timestamp = <number>json['state_change_timestamp'];
     const validity = <number>json['validity'];
+    const description = <string>json['description'];
+    const url = <string>json['url'];
     const ack = <boolean>json['ack'];
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, ack, shelved, dependencies });
+      state_change_timestamp, validity, description, url, ack, shelved, dependencies });
   }
 
   /**
-  * Returns a Date representation of the {@link Alarm.state_change_timestamp}
-  * attribute
-  *
-  * @returns {Date} a date format representation of the Alarm
-  * state_change_timestamp
+  * Returns a Date representation of the {@link Alarm.state_change_timestamp} attribute
+  * @returns {Date} a date format representation of the Alarm state_change_timestamp
   */
   get timestamp(): Date {
     return this.getStateChangeTimestampAsDate();
@@ -138,7 +142,6 @@ export class Alarm {
 
   /**
   * Returns a Date representation of the timestamp of the last change of the Alarm
-  *
   * @returns {Date} a date format representation of the {@link Alarm.state_change_timestamp} attribute
   */
   getStateChangeTimestampAsDate(): Date {
@@ -149,9 +152,7 @@ export class Alarm {
 
   /**
   * Acknowledges the {@link Alarm} and returns the acknowledge status
-  *
   * @param {message} string string message of the acknowledgement
-  *
   * @returns {boolean} a the acknowledgement status
   */
   acknowledge(): boolean {
@@ -161,7 +162,6 @@ export class Alarm {
 
   /**
   * Returns a string representation of the operational mode of the Alarm
-  *
   * @returns {string} a string representation of the {@link Alarm.mode} attribute
   */
   getModeAsString(): string {
@@ -179,7 +179,6 @@ export class Alarm {
 
   /**
   * Returns a string representation of the validity of the Alarm
-  *
   * @returns {string} a string representation of the {@link Alarm.mode} attribute
   */
   getValidityAsString(): string {
@@ -192,10 +191,8 @@ export class Alarm {
   * @returns {Date} a date format representation of the {@link Alarm.core_timestamp} attribute
   */
   getCoreTimestampAsDate(): Date {
-
     const ts = this.core_timestamp;
     const date: Date = new Date(ts);
-
     return date;
   }
 
