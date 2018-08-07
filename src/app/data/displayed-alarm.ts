@@ -46,12 +46,12 @@ export class DisplayedAlarm {
 
   /** Returns the short description of the {@link Alarm}*/
   get description(): string {
-    return this._description;
+    return this._alarm.description;
   }
 
   /** Reference to the url associated to the {@link Alarm}*/
   set url(url: string) {
-    this._url = url;
+    this._url = this._alarm.url;
   }
 
   /** Returns the url of the documentation for the {@link Alarm}*/
@@ -67,7 +67,7 @@ export class DisplayedAlarm {
 
   /** Returns the operational mode of the {@link Alarm}*/
   get mode(): string {
-    return this._alarm.getModeAsString();
+    return this._alarm.operationalMode;
   }
 
   /**
@@ -105,10 +105,10 @@ export class DisplayedAlarm {
   getAlarmStatusTagsString(): string {
     const alarm = this._alarm;
     const shelved = alarm.shelved;
-    const value_tags = alarm.getValueAsString().split('_');
+    const value_tags = alarm.alarmValue.split('_');
     let value = value_tags[0];
     let priority = value_tags[1];
-    let validity = alarm.getValidityAsString();
+    let validity = alarm.alarmValidity;
     let ack = alarm.ack;
 
     if (shelved) {
@@ -122,7 +122,7 @@ export class DisplayedAlarm {
 
     const tags = [];
     tags.push(order);
-    tags.push(alarm.getModeAsString());
+    tags.push(alarm.operationalMode);
     tags.push(value);
     if (priority !== undefined) {
       tags.push(priority);

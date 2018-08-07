@@ -133,18 +133,47 @@ export class Alarm {
   }
 
   /**
+  * Returns a string representation of the validity of the Alarm
+  * @returns {string} a string representation of the {@link Alarm.mode} attribute
+  */
+  get alarmValidity(): string {
+    return Validity[this.validity];
+  }
+
+  /**
+  * Returns a string representation of the value of the Alarm
+  *
+  * @returns {string} a string representation of the {@link Alarm.value} attribute
+  */
+  get alarmValue(): string {
+    return Value[this.value];
+  }
+
+  /**
+  * Returns the core_id of the {@link Alarm}*/
+  get name(): string {
+    return this.core_id;
+  }
+
+  /** Returns the operational mode of the {@link Alarm} as a string*/
+  get operationalMode(): string {
+    return OperationalMode[this.mode];
+  }
+
+  /**
+  * Getter that returns the {@link Alarm} status tags, needed for the displaying of status
+  * through instances of {@link StatusViewComponent}. Calls {@link _getAlarmStatusTagsString()}
+  * @returns {string} tags of the {@link Alarm} joined by "-"
+  */
+  get status(): string {
+    return this._getAlarmStatusTagsString();
+  }
+
+  /**
   * Returns a Date representation of the {@link Alarm.state_change_timestamp} attribute
   * @returns {Date} a date format representation of the Alarm state_change_timestamp
   */
   get timestamp(): Date {
-    return this.getStateChangeTimestampAsDate();
-  }
-
-  /**
-  * Returns a Date representation of the timestamp of the last change of the Alarm
-  * @returns {Date} a date format representation of the {@link Alarm.state_change_timestamp} attribute
-  */
-  getStateChangeTimestampAsDate(): Date {
     const ts = this.state_change_timestamp;
     const date: Date = new Date(ts);
     return date;
@@ -161,46 +190,8 @@ export class Alarm {
   }
 
   /**
-  * Returns a string representation of the operational mode of the Alarm
-  * @returns {string} a string representation of the {@link Alarm.mode} attribute
-  */
-  getModeAsString(): string {
-    return OperationalMode[this.mode];
-  }
-
-  /**
-  * Returns a string representation of the value of the Alarm
-  *
-  * @returns {string} a string representation of the {@link Alarm.value} attribute
-  */
-  getValueAsString(): string {
-    return Value[this.value];
-  }
-
-  /**
-  * Returns a string representation of the validity of the Alarm
-  * @returns {string} a string representation of the {@link Alarm.mode} attribute
-  */
-  getValidityAsString(): string {
-    return Validity[this.validity];
-  }
-
-  /**
-  * Returns a Date representation of the core_timestamp of the Alarm
-  *
-  * @returns {Date} a date format representation of the {@link Alarm.core_timestamp} attribute
-  */
-  getCoreTimestampAsDate(): Date {
-    const ts = this.core_timestamp;
-    const date: Date = new Date(ts);
-    return date;
-  }
-
-  /**
   * Shelves the {@link Alarm} and returns the shelve status
-  *
   * @param {message} string string message of the shelving
-  *
   * @returns {boolean} a the shelving message
   */
   shelve(): boolean {
@@ -210,11 +201,112 @@ export class Alarm {
 
   /**
   * Unshelves the {@link Alarm} and returns the shelve status
-  *
   * @returns {boolean} a the shelving status
   */
   unshelve(): boolean {
     this.shelved = false;
     return this.shelved;
+  }
+
+  /**
+  * Returns a string representation of the {@link Alarm} for filtering purposes
+  * @returns {string} info of the {@link Alarm} for filtering purposes, joined by " "
+  */
+  toStringForFiltering(): string {
+    return [
+      this.status, this.description, this.name, this.operationalMode, this.timestamp
+    ].join(' ');
+  }
+
+  /**
+  * Returns the {@link Alarm} status tags, needed for the displaying of status
+  * through instances of {@link StatusViewComponent}
+  * @returns {string} tags of the {@link Alarm} joined by "-"
+  */
+  private _getAlarmStatusTagsString(): string {
+    const shelved = this.shelved;
+    const value_tags = this.alarmValue.split('_');
+    let value = value_tags[0];
+    let priority = value_tags[1];
+    let validity = this.alarmValidity;
+    let ack = this.ack;
+
+    if (shelved) {
+      value = 'cleared';
+      priority = '';
+      validity = 'reliable';
+      ack = true;
+    }
+
+    const order = this._getAlarmStatusOrder(value, priority, validity, ack, shelved);
+
+    const tags = [];
+    tags.push(order);
+    tags.push(this.operationalMode);
+    tags.push(value);
+    if (priority !== undefined) {
+      tags.push(priority);
+    }
+    tags.push(validity);
+    if (this.ack) {
+      tags.push('ack');
+    }
+    if (this.shelved) {
+      tags.push('shelved');
+    }
+    return tags.join('-');
+  }
+
+  /**
+  * Returns a string with a number that defines the place where the {@link Alarm} should be displayed on the Table according to the
+  * sorting by "Status" column
+  *
+  * @param {string} value string representation of the value of the {@link Alarm}
+  * @param {string} priority string representation of the priority of the {@link Alarm}
+  * @param {string} validity string representation of the validity of the {@link Alarm}
+  * @param {boolean} ack the ack status of the {@link Alarm}
+  * @returns {string} order for the {@link Alarm} in the Table
+  */
+  private _getAlarmStatusOrder(
+    value: string, priority: string, validity: string, ack: boolean, shelved: boolean): string {
+    let order = 0;
+    const priorities = ['critical', 'high', 'medium', 'low'];
+
+    // SET:
+    if (value === 'set') {
+      if (validity === 'reliable') {
+        if (ack === false) {
+          order = priorities.indexOf(priority);
+        } else {
+          order = 4 + priorities.indexOf(priority);
+        }
+      } else {
+        if (ack === false) {
+          order = 8 + priorities.indexOf(priority);
+        } else {
+          order = 12 + priorities.indexOf(priority);
+        }
+      }
+    } else {
+    // CLEARED:
+      if (validity === 'reliable') {
+        if (ack === false) {
+          order = 16;
+        } else {
+          order = 17;
+        }
+      } else {
+        if (ack === false) {
+          order = 18;
+        } else {
+          order = 19;
+        }
+      }
+    }
+    if (order < 10) {
+      return ('0' + order);
+    } else {
+      return ('' + order);
+    }
   }
 }
