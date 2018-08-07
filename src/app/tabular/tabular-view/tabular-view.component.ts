@@ -159,8 +159,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
         dataFromCdb.url
       );
     });
-    this.dataSource.data = this.alarmsList;
-    // this.dataSource.data = this.alarmService.alarmsArray;
+    // this.dataSource.data = this.alarmsList;
+    this.dataSource.data = this.alarmService.alarmsArray;
   }
 
   /**
