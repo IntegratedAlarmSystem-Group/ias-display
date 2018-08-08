@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$ias-blue: (
+$ias-dark: (
   50:  #E5EFFF,
   100: #C5D8ED,
   200: #A8BCD5,
@@ -33,8 +33,39 @@ $ias-blue: (
   )
 );
 
+$ias-blue: (
+  50:  #E1F6FF,
+  100: #B3E7FF,
+  200: #80D8FF,
+  300: #4AC8FF,
+  400: #17BCFF,
+  500: #00AFFF,
+  600: #00A1EF,
+  700: #008EDB,
+  800: #007CC7,
+  900: #005CA4,
+  A100: #E1F6FF,
+  A400: #4AC8FF,
+  A700: #005CA4,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.6),
+    A400: #212D3A,
+    A700: rgba(255, 255, 255, 0.6),
+  )
+);
+
 // $ias-app-primary: mat-palette($mat-grey, 50);
-$ias-app-primary: mat-palette($ias-blue, 800);
+$ias-app-primary: mat-palette($ias-dark, 800, 100, 900);
 $ias-app-accent: mat-palette($ias-blue, A400, A100, A700);
 $ias-app-warn: mat-palette($mat-red);
 
