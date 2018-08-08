@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Alarm } from '../../data/alarm';
-import { DisplayedAlarm } from '../../data/displayed-alarm';
 
 /** Object used to format the dates as needed */
 const datepipe = new DatePipe('en');
@@ -563,38 +562,6 @@ export const ExpectedTableRows = [
   Alarm.asAlarm(MockAlarms[9]),
   Alarm.asAlarm(MockAlarms[14]),
   Alarm.asAlarm(MockAlarms[19]),
-  // // SET VALID NOT-ACK
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[21]), 'Alarm 44 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[0]), 'Alarm 1 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[20]), 'Alarm 43 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[22]), 'Alarm 47 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[1]), 'Alarm 2 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[2]), 'Alarm 3 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[3]), 'Alarm 4 description', 'https://www.alma.cl/'),
-  //
-  // // SET VALID ACK
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[5]), 'Alarm 11 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[6]), 'Alarm 12 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[7]), 'Alarm 13 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[8]), 'Alarm 14 description', 'https://www.alma.cl/'),
-  //
-  // // SET INVALID NOT-ACK
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[10]), 'Alarm 21 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[11]), 'Alarm 22 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[12]), 'Alarm 23 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[13]), 'Alarm 24 description', 'https://www.alma.cl/'),
-  //
-  // // SET INVALID ACK
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[15]), 'Alarm 31 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[16]), 'Alarm 32 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[17]), 'Alarm 33 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[18]), 'Alarm 34 description', 'https://www.alma.cl/'),
-  //
-  // // CLEARED:
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[4]), 'Alarm 5 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[9]), 'Alarm 15 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[14]), 'Alarm 25 description', 'https://www.alma.cl/'),
-  // new DisplayedAlarm(Alarm.asAlarm(MockAlarms[19]), 'Alarm 35 description', 'https://www.alma.cl/'),
 ];
 
 /** Set of the rows the that the test expects on the Table after the filter */
