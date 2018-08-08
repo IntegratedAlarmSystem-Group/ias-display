@@ -417,12 +417,18 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       subject = alarmService;
       httpSubject = httpClientService;
       const alarmsDict = {};
+      const alarmsArray = [];
+      const alarmsIndexes = {};
       for (const a in alarms) {
         if (alarms.hasOwnProperty(a)) {
           alarmsDict[alarms[a].core_id] = Alarm.asAlarm(alarms[a]);
+          const index = alarmsArray.push(Alarm.asAlarm(alarms[a]));
+          alarmsIndexes[alarms[a].core_id] = index - 1;
         }
       }
       subject.alarms = alarmsDict;
+      subject.alarmsArray = alarmsArray;
+      subject.alarmsIndexes = alarmsIndexes;
 
       /**
       * Redefinition of acknowledge of Alarms

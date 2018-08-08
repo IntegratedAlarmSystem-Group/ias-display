@@ -124,7 +124,7 @@ export class AlarmService {
    * @returns {Alarm} Alarm object corresponding to the given core_id
    */
   get(core_id: string): Alarm {
-    return this.alarms[core_id] as Alarm;
+    return this.alarmsArray[this.alarmsIndexes[core_id]] as Alarm;
   }
 
   /**
