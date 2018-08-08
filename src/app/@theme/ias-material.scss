@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$ias-dark: (
+$ias-dark-blue: (
   50:  #E5EFFF,
   100: #C5D8ED,
   200: #A8BCD5,
@@ -64,12 +64,60 @@ $ias-blue: (
   )
 );
 
+// custom background and foreground palettes
+$ias-dark-theme-background: (
+  status-bar: green,
+  app-bar:    map_get($ias-dark-blue, 800),
+  background: map_get($ias-dark-blue, 900),
+  // background: #212d3a,
+  hover:      rgba(white, 0.04),
+  card:       map_get($mat-red, 800),
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+$ias-dark-theme-foreground: (
+  base:              yellow,
+  divider:           $white-12-opacity,
+  dividers:          $white-12-opacity,
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              yellow,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+// instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
+@function create-ias-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $ias-dark-theme-foreground,
+    background: $ias-dark-theme-background,
+  );
+}
+
 // $ias-app-primary: mat-palette($mat-grey, 50);
-$ias-app-primary: mat-palette($ias-dark, 800, 100, 900);
+$ias-app-primary: mat-palette($ias-dark-blue, 800, 100, 900);
 $ias-app-accent: mat-palette($ias-blue, A400, A100, A700);
 $ias-app-warn: mat-palette($mat-red);
 
-$ias-app-theme: mat-dark-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
+$ias-app-theme: create-ias-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
 
 $ias-app-typography: mat-typography-config(
   $font-family: 'Arial, Helvetica, sans-serif'
