@@ -29,9 +29,14 @@ export class AlarmService {
   public connectionStatusStream = new BehaviorSubject<any>(false);
 
   /**
-  * Dictionary of {@link Alarm} objects, indexed by their core_ids
+  * Array of {@link Alarm} objects
   */
-  public alarms: {[core_id: string]: Alarm } = {};
+  public alarmsArray: Alarm[] = [];
+
+  /**
+  * Index for the alarmsArray { core_id: arrayIndex }
+  */
+  public alarmsIndexes: {[core_id: string]: number} = {};
 
   /**
   * Stream of notifications of changes in
@@ -120,7 +125,7 @@ export class AlarmService {
    * @returns {Alarm} Alarm object corresponding to the given core_id
    */
   get(core_id: string): Alarm {
-    return this.alarms[core_id] as Alarm;
+    return this.alarmsArray[this.alarmsIndexes[core_id]] as Alarm;
   }
 
   /**
@@ -230,9 +235,12 @@ export class AlarmService {
   readAlarmMessage(action, obj) {
     const alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
-      this.alarms[alarm.core_id] = alarm;
-    } else if ( action === 'delete') {
-      delete this.alarms[alarm.core_id];
+      if (alarm.core_id in this.alarmsIndexes) {
+        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
+      } else {
+        const newLength = this.alarmsArray.push(alarm);
+        this.alarmsIndexes[alarm.core_id] = newLength - 1;
+      }
     }
     this.changeAlarms(alarm.core_id);
   }
@@ -245,7 +253,12 @@ export class AlarmService {
   readAlarmMessagesList(alarmsList) {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
-      this.alarms[alarm.core_id] = alarm;
+      if (alarm.core_id in this.alarmsIndexes) {
+        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
+      } else {
+        const newLength = this.alarmsArray.push(alarm);
+        this.alarmsIndexes[alarm.core_id] = newLength - 1;
+      }
     }
     this.changeAlarms('all');
   }
@@ -256,10 +269,8 @@ export class AlarmService {
    * Set selected state to alarms under an non-valid connection
    */
   triggerAlarmsNonValidConnectionState() {
-    for (const core_id in this.alarms) {
-      if (this.alarms.hasOwnProperty(core_id)) {
-        this.alarms[core_id]['validity'] = Validity.unreliable;
-      }
+    for (const alarm of this.alarmsArray) {
+      alarm.validity = Validity.unreliable;
     }
     this.changeAlarms('all');
   }

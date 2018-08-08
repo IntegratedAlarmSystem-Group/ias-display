@@ -26,7 +26,10 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': 0,
       'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
       'validity': 0,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -43,24 +46,10 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': 1,
       'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
       'validity': 1,
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'delete',
-    'data': {
-      'value': 1,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -76,7 +65,10 @@ const alarms = [
     'running_id': 'coreid$1',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -87,7 +79,10 @@ const alarms = [
     'running_id': 'coreid$2',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -98,7 +93,10 @@ const alarms = [
     'running_id': 'coreid$3',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -187,15 +185,15 @@ describe('AlarmService', () => {
     // Act and assert:
 
     subject.alarmChangeStream.subscribe(notification => {
-      const notified_alarms = subject.alarms;
+      const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
-        expect(notified_alarms).toEqual({});
+        expect(notified_alarms).toEqual([]);
         expect(Object.keys(notified_alarms).length).toEqual(0);
       }
 
       if (stage === 1) {  // create
         expect(Object.keys(notified_alarms).length).toEqual(1);
-        const storedAlarm = notified_alarms['coreid$1'];
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
@@ -204,15 +202,11 @@ describe('AlarmService', () => {
 
       if (stage === 2) {  // update
         expect(Object.keys(notified_alarms).length).toEqual(1);
-        const storedAlarm = notified_alarms['coreid$1'];
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
-      }
-
-      if (stage === 3) {  // last message has delete action, msg should be removed
-        expect(notified_alarms).toEqual({});
       }
 
       stage += 1;
@@ -237,20 +231,21 @@ describe('AlarmService', () => {
 
     // Assert
     subject.alarmChangeStream.subscribe(notification => {
-      const notified_alarms = subject.alarms;
+      const notified_alarms = subject.alarmsArray;
+      const alarms_indexes = subject.alarmsIndexes;
       if (stage === 0) {
-        expect(notified_alarms).toEqual({});
-        expect(Object.keys(notified_alarms).length).toEqual(0);
+        expect(notified_alarms).toEqual([]);
+        expect(notified_alarms.length).toEqual(0);
       }
 
       if (stage === 1) {
-        expect(Object.keys(notified_alarms).length).toEqual(3);
+        expect(notified_alarms.length).toEqual(3);
         const receivedAlarms = notified_alarms;
         const fixtureAlarms = fixtureAlarmsList['payload']['data'];
         let index = 0;
-        for ( const core_id of Object.keys(receivedAlarms) ) {
-          for (const key of Object.keys(receivedAlarms[core_id])) {
-            expect(receivedAlarms[core_id][key]).toEqual(
+        for (const core_id of Object.keys(alarms_indexes)) {
+          for (const key of Object.keys(receivedAlarms[alarms_indexes[core_id]])) {
+            expect(receivedAlarms[subject.alarmsIndexes[core_id]][key]).toEqual(
               fixtureAlarms[index][key]);
           }
           index += 1;
@@ -291,10 +286,10 @@ describe('AlarmService', () => {
     // Arrange:
     subject.connectionStatusStream.next(true);
     // Initial alarms dictionary
-    subject.alarms[0] = Alarm.asAlarm(alarms[0]);
-    subject.alarms[0]['validity'] = Validity.reliable;
-    subject.alarms[1] = Alarm.asAlarm(alarms[1]);
-    subject.alarms[1]['validity'] = Validity.reliable;
+    subject.alarmsArray[0] = Alarm.asAlarm(alarms[0]);
+    subject.alarmsArray[0]['validity'] = Validity.reliable;
+    subject.alarmsArray[1] = Alarm.asAlarm(alarms[1]);
+    subject.alarmsArray[1]['validity'] = Validity.reliable;
 
     const expected_validity = Validity.unreliable;
 
@@ -304,10 +299,8 @@ describe('AlarmService', () => {
 
     // Assert:
     // All the alarms should have an unknown mode
-    for (const pk in subject.alarms) {
-      if (subject.alarms.hasOwnProperty(pk)) {
-        expect(subject.alarms[pk]['validity']).toBe(expected_validity);
-      }
+    for (const alarm of subject.alarmsArray) {
+      expect(alarm.validity).toBe(expected_validity);
     }
 
   });
@@ -398,13 +391,16 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
       subject = alarmService;
       httpSubject = httpClientService;
-      const alarmsDict = {};
+      const alarmsArray = [];
+      const alarmsIndexes = {};
       for (const a in alarms) {
         if (alarms.hasOwnProperty(a)) {
-          alarmsDict[alarms[a].core_id] = Alarm.asAlarm(alarms[a]);
+          const index = alarmsArray.push(Alarm.asAlarm(alarms[a]));
+          alarmsIndexes[alarms[a].core_id] = index - 1;
         }
       }
-      subject.alarms = alarmsDict;
+      subject.alarmsArray = alarmsArray;
+      subject.alarmsIndexes = alarmsIndexes;
 
       /**
       * Redefinition of acknowledge of Alarms

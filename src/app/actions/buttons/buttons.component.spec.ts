@@ -20,11 +20,13 @@ describe('ButtonsComponent', () => {
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
   });
-  const mockAlarmUrl = 'this.is.a.mock.url';
+  const mockAlarmUrl = 'https://www.alma.cl';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,7 +48,6 @@ describe('ButtonsComponent', () => {
     fixture = TestBed.createComponent(ButtonsComponent);
     component = fixture.componentInstance;
     component.alarm = mockAlarm;
-    component.url = mockAlarmUrl;
     fixture.detectChanges();
   });
 

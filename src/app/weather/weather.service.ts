@@ -112,7 +112,7 @@ export class WeatherService {
     this.weatherStationsConfig =  {
       'Meteo201': {
         placemark: 'Meteo201',
-        station: 'WS-Meteo201-Temperature',
+        station: 'Alarmdummy',
         temperature: 'WS-Meteo201-Temperature',
         windspeed: 'WS-Meteo201-WindSpeed',
         humidity: 'WS-Meteo201-Humidity',

@@ -4,9 +4,7 @@ import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/mat
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../../data/alarm';
-import { DisplayedAlarm } from '../../data/displayed-alarm';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { Locale } from '../../settings';
 
 /**
@@ -23,7 +21,7 @@ import { Locale } from '../../settings';
 export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Reference to the MatTable, the component that defines the table */
-  @ViewChild(MatTable) table: MatTable<DisplayedAlarm>;
+  @ViewChild(MatTable) table: MatTable<Alarm>;
 
   /** Reference to the MatSort, the component that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
@@ -54,29 +52,17 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   private filterValueForSetAlarms = 'set';
 
   /** DataSource of the Table */
-  public dataSource: MatTableDataSource<DisplayedAlarm>;
+  public dataSource: MatTableDataSource<Alarm>;
 
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
-
-  /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
-  private cdbServiceSubscription: ISubscription;
-
-  /**
-  * Subscription to be notified when there is data available from the
-  * IAS Table in the  {@link CdbService}
-  */
-  public iasDataAvailable = new BehaviorSubject<any>(false);
-
-  /** List of {@link DisplayedAlarm} objects */
-  public alarmsList: DisplayedAlarm[] = [];
 
   /**
   * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values
   * @returns {boolean} true if the row matches the filter, false if not
   */
   public filterPredicate: (
-    (data: DisplayedAlarm, filterString: string) => boolean) = (data: DisplayedAlarm, filterString: string): boolean => {
+    (data: Alarm, filterString: string) => boolean) = (data: Alarm, filterString: string): boolean => {
     const dataStr = data.toStringForFiltering().toLowerCase();
     const filters = filterString.toLowerCase().split(' ');
     for (const filter of filters) {
@@ -90,19 +76,16 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Instantiates the service
    * @param {AlarmService} alarmService Service used to get the Alarms
-   * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {Route} route Reference to the url that triggered the initialization
    * of this component
    */
   constructor(
     private alarmService: AlarmService,
-    private cdbService: CdbService,
     private route: ActivatedRoute
   ) {}
 
   /**
    * Create the table when the component is initializated
-   * Subscribes to IAS configuration information from the {@link CdbService}
    * Subscribes to new alarms from the {@link AlarmService}
    * Retrieves filter values passed by the URL and applies them to the table
    */
@@ -114,15 +97,10 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
       start: 'asc'
     });
     this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.alarmService.alarmsArray;
     this.dataSource.filterPredicate = this.filterPredicate;
-    this.cdbServiceSubscription = this.cdbService.iasDataAvailable.subscribe(
-      value => {
-        this.iasDataAvailable.next(value);
-        this.loadTable();
-      }
-    );
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
-      this.loadTable();
+      this.dataSource.data = this.alarmService.alarmsArray;
     });
     let filterValue = this.route.snapshot.paramMap.get('filter');
     if (filterValue && filterValue !== '') {
@@ -141,45 +119,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * when the component is destroyed
   */
   ngOnDestroy() {
-    this.cdbServiceSubscription.unsubscribe();
     this.alarmServiceSubscription.unsubscribe();
-  }
-
-
-  /**
-  * Loads the table with data from {@link CdbService} and {@link AlarmService}
-  */
-  loadTable() {
-    const self = this;
-    this.alarmsList = Object.keys(this.alarmService.alarms).map(function(key) {
-      const dataFromCdb = self.getAlarmDataFromCdbService(self.alarmService.alarms[key].core_id);
-      return new DisplayedAlarm(
-        self.alarmService.alarms[key],
-        dataFromCdb.description,
-        dataFromCdb.url
-      );
-    });
-    this.dataSource.data = this.alarmsList;
-  }
-
-  /**
-  * Gets data (short description and url) from the {@link CdbService}
-  * for a given {@link Alarm}
-  * @param {string} core_id the core_id of the {@link Alarm} for which to retriev info,
-  * @returns {JSON} A JSON with 2 key: description and url
-  */
-  getAlarmDataFromCdbService(core_id: string) {
-    if (this.iasDataAvailable.getValue() === true) {
-      return {
-        description: this.cdbService.getAlarmDescription(core_id),
-        url: this.cdbService.getAlarmsInformationUrl(core_id)
-      };
-    } else {
-      return {
-        description: '',
-        url: ''
-      };
-    }
   }
 
   /**

@@ -13,11 +13,6 @@ export class ButtonsComponent implements OnInit {
    */
   @Input() alarm: Alarm;
 
-  /**
-   * Url of the wiki documentation page
-   */
-  @Input() url: string;
-
   constructor() { }
 
   ngOnInit() {

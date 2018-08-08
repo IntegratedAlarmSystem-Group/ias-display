@@ -11,7 +11,6 @@ import { DataModule } from '../../data/data.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
@@ -26,7 +25,6 @@ describe('TabularViewComponent', () => {
   let html: HTMLElement;
   const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
-  let cdbService: CdbService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const alarms = MockAlarms;
   const iasios = MockIasios;
@@ -63,30 +61,6 @@ describe('TabularViewComponent', () => {
     })
     .compileComponents();
   }));
-
-  beforeEach(
-    inject([CdbService], (service) => {
-      cdbService = service;
-
-      const mockIasConfiguration = {
-          id: 1,
-          log_level: 'INFO',
-          refresh_rate: 2,
-          broadcast_factor: 3,
-          tolerance: 1,
-          properties: []
-      };
-      spyOn(cdbService, 'initialize')
-        .and.callFake(function() {});
-      cdbService.iasConfiguration = mockIasConfiguration;
-
-      for (const iasio of iasios) {
-        const alarmIasio = new Iasio(iasio);
-        cdbService.iasAlarmsIasios[alarmIasio['io_id']] = alarmIasio;
-      }
-      cdbService.iasDataAvailable.next(true);
-    })
-  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TabularViewComponent);
