@@ -5,7 +5,6 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { Locale } from '../../settings';
 
 /**
@@ -57,12 +56,6 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
-
-  /**
-  * Subscription to be notified when there is data available from the
-  * IAS Table in the  {@link CdbService}
-  */
-  public iasDataAvailable = new BehaviorSubject<any>(false);
 
   /**
   * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values

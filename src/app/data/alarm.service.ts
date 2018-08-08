@@ -94,12 +94,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
-      console.log('request', payload);
+      // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessagesList(payload.data);
     });
