@@ -3,7 +3,6 @@ import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
@@ -26,12 +25,10 @@ export class WeatherSidebarComponent implements OnInit {
   * Builds an instance of the component
   * @param {WeatherService} weatherService Service used to get the configuration needed by the component
   * @param {AlarmService} alarmService Service used to get the Alarms
-  * @param {CdbService} cdbService Service used to get configuration from the Configuration Database
    */
   constructor(
     public weatherService: WeatherService,
     public alarmService: AlarmService,
-    public cdbService: CdbService,
     private clipboardService: ClipboardService,
     public snackBar: MatSnackBar
   ) { }
@@ -77,15 +74,6 @@ export class WeatherSidebarComponent implements OnInit {
   */
   getAlarm(alarm_id: string): Alarm {
     return this.alarmService.get(alarm_id);
-  }
-
-  /**
-  * Finds and returns the documentation url of an {@link Alarm} by ID in the {@link CdbService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
-  * @returns {string} the URl
-  */
-  getAlarmUrl(alarm_id: string): string {
-    return this.cdbService.getAlarmsInformationUrl(alarm_id);
   }
 
   isSelected(station: string) {

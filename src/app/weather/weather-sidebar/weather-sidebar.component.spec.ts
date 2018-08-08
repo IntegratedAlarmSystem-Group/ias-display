@@ -13,7 +13,6 @@ import { StatusViewComponent } from '../../shared/status-view/status-view.compon
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 
@@ -69,6 +68,9 @@ const mockAlarms = {
     'mode': '0',
     'core_timestamp': 1267252440000,
     'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -80,6 +82,9 @@ const mockAlarms = {
     'mode': '0',
     'core_timestamp': 1267252440000,
     'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma2.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -97,7 +102,6 @@ describe('WeatherSidebarComponent', () => {
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
   let alarmService: AlarmService;
-  let cdbService: CdbService;
   let clipboardService: ClipboardService;
   let content: any;
 
@@ -151,18 +155,9 @@ describe('WeatherSidebarComponent', () => {
   );
 
   beforeEach(
-    inject([CdbService], (service) => {
-      cdbService = service;
-      spyOn(cdbService, 'getAlarmsInformationUrl').and.callFake(function(alarm_id) {
-        return 'url-' + alarm_id;
-      });
-    })
-  );
-
-  beforeEach(
     inject([ClipboardService], (service) => {
       clipboardService = service;
-      spyOn(clipboardService, 'copyFromContent').and.callFake(function() { return true });
+      spyOn(clipboardService, 'copyFromContent').and.callFake(function() { return true; });
     })
   );
 
@@ -240,7 +235,6 @@ describe('WeatherSidebarComponent', () => {
                 const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
                 expect(buttons).toBeTruthy();
                 expect(buttons.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
-                expect(buttons.url).toEqual('url-mockAlarm-' + i);
               }
             }
           }

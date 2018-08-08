@@ -13,7 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { Alarm } from '../../data/alarm';
 
-fdescribe('AckComponent', () => {
+describe('AckComponent', () => {
   let component: AckComponent;
   let fixture: ComponentFixture<AckComponent>;
   let componentBody: any;
@@ -31,7 +31,7 @@ fdescribe('AckComponent', () => {
     'validity': '1',
     'state_change_timestamp': 1267252440000,
     'description': 'Short description for mock alarm',
-    'url': 'www.alma.cl',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],

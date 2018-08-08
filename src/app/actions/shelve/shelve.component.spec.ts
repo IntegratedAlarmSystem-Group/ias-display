@@ -11,7 +11,7 @@ import { SidenavService } from '../sidenav.service';
 import { ShelveComponent } from './shelve.component';
 import { Alarm } from '../../data/alarm';
 
-fdescribe('ShelveComponent', () => {
+describe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
   let componentBody: any;
