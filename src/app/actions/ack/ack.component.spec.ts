@@ -78,7 +78,6 @@ describe('AckComponent', () => {
     fixture = TestBed.createComponent(AckComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
     sidenavService = fixture.debugElement.injector.get(SidenavService);
-    console.log('mockAlarm = ', mockAlarm);
     spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
     spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
