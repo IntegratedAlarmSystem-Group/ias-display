@@ -26,6 +26,8 @@ describe('GIVEN an AckButtonComponent', () => {
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],

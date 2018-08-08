@@ -91,7 +91,7 @@ const mockAntennas = {
   'mockAlarm-1': ['Antenna4', 'Antenna5', 'Antenna6'],
 };
 
-fdescribe('WeatherSidebarComponent', () => {
+describe('WeatherSidebarComponent', () => {
   let sidebarComponent: WeatherSidebarComponent;
   let fixture: ComponentFixture<WeatherSidebarComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);

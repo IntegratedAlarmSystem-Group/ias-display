@@ -26,7 +26,10 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': 0,
       'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
       'validity': 0,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -43,7 +46,10 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': 1,
       'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
       'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -60,7 +66,10 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'running_id': 'coreid$1',
       'mode': 1,
       'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
       'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -76,7 +85,10 @@ const alarms = [
     'running_id': 'coreid$1',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -87,7 +99,10 @@ const alarms = [
     'running_id': 'coreid$2',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -98,7 +113,10 @@ const alarms = [
     'running_id': 'coreid$3',
     'mode': 0,
     'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
     'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -116,7 +134,7 @@ const fixtureAlarmsList = {
   }
 };
 
-describe('AlarmService', () => {
+fdescribe('AlarmService', () => {
 
 
   beforeEach(() => {

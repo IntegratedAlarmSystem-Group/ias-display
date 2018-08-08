@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
-import { CdbService } from '../../data/cdb.service';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -83,13 +82,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
-   * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
    */
   constructor(
     private formBuilder: FormBuilder,
     private alarmService: AlarmService,
-    private cdbService: CdbService,
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
@@ -224,22 +221,6 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   canSend(): boolean {
     return this.alarm.shelved || this.form.valid;
-  }
-
-  /**
-   * Get the alarm description through the method provided by the {@link CdbService}
-   * @returns {string} description of the {@link Alarm}
-   */
-  getAlarmDescription() {
-    return this.cdbService.getAlarmDescription(this.alarm.core_id);
-  }
-
-  /**
-   * Get the link to the wikipage of the alarm through the method provided by the {@link CdbService}
-   * @returns {string} URL for of the documentation of the {@link Alarm}
-   */
-  getAlarmUrl() {
-    return this.cdbService.getAlarmsInformationUrl(this.alarm.core_id);
   }
 
   /**
