@@ -29,12 +29,13 @@ export class AlarmService {
   public connectionStatusStream = new BehaviorSubject<any>(false);
 
   /**
-  * Dictionary of {@link Alarm} objects, indexed by their core_ids
+  * Array of {@link Alarm} objects
   */
-  private alarms: {[core_id: string]: Alarm } = {};
-
   public alarmsArray: Alarm[] = [];
 
+  /**
+  * Index for the alarmsArray { core_id: arrayIndex }
+  */
   public alarmsIndexes: {[core_id: string]: number} = {};
 
   /**
