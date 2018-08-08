@@ -68,7 +68,7 @@ export class AlarmHeaderComponent implements OnInit {
   }
 
   getAlarmName(): string {
-    const maxSize = 10;
+    const maxSize = 20;
     if (this.alarm) {
       if (this.alarm.core_id.length > maxSize) {
         return this.alarm.core_id.substring(0, maxSize) + '...';
