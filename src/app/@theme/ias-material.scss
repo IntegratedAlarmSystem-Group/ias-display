@@ -4,10 +4,12 @@
 
 $ias-surface: (
   100: #52677E,
-  800: #334151,
+  600: #334151,
+  800: rgba(43, 59, 75, 0.69),
   900: #212D3A,
   contrast: (
     100: white,
+    600: white,
     800: white,
     900: white,
   )
@@ -78,7 +80,7 @@ $ias-blue: (
 // custom background and foreground palettes
 $ias-dark-theme-background: (
   status-bar: green,
-  app-bar:    map_get($ias-surface, 800),
+  app-bar:    map_get($ias-surface, 600),
   background: map_get($ias-surface, 900),
   hover:      rgba(white, 0.04),
   card:       map_get($mat-blue, 800),
@@ -117,7 +119,7 @@ $ias-dark-theme-foreground: (
     primary: $primary,
     accent: $accent,
     warn: $warn,
-    is-dark: false,
+    is-dark: true,
     foreground: $ias-dark-theme-foreground,
     background: $ias-dark-theme-background,
   );
@@ -126,7 +128,7 @@ $ias-dark-theme-foreground: (
 // $ias-app-primary: mat-palette($mat-grey, 50);
 $ias-app-primary: mat-palette($ias-dark-blue, 800, 100, 900);
 $ias-app-accent: mat-palette($ias-blue, A400, A100, A700);
-$ias-app-warn: mat-palette($ias-blue);
+$ias-app-warn: mat-palette($mat-red);
 
 $ias-app-theme: create-ias-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
 

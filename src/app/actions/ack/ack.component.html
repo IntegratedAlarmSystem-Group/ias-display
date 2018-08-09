@@ -37,7 +37,7 @@
     <ng-template #actionProcess>
       <div class="section ack-action">
         <div class="section-title">Information required to acknowledge the Alarm</div>
-        <mat-form-field class="message-form-field" appearance="fill">
+        <mat-form-field color="accent" class="message-form-field" appearance="fill">
           <mat-label> Action to be taken </mat-label>
           <textarea matInput name="message" formControlName="message" placeholder="Please write here the action to be taken"></textarea>
           <mat-error *ngIf="message.invalid"> You must write a message in order to Acknowledge </mat-error>
