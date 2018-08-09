@@ -1,5 +1,7 @@
 /* Styles */
 
+
+
 mat-toolbar {
   // background: #2e445c;
 }
@@ -11,17 +13,13 @@ mat-sidenav-container {
   }
 
   mat-sidenav-content {
-    background: transparent;
+    // background: transparent;
   }
-}
-
-button {
-    outline: 0px;
 }
 
 #navigation-sidenav {
 
-  background: #2e445c;
+  // background: #2e445c;
   position: absolute;
   top: 65px;
   bottom: 0;
@@ -106,7 +104,7 @@ button {
 }
 
 #actions-sidenav  {
-  background: transparent;
+  // background: transparent;
   width: 500px;
   padding: 24px;
 }

@@ -2,6 +2,17 @@
 
 @include mat-core();
 
+$ias-surface: (
+  100: #52677E,
+  800: #334151,
+  900: #212D3A,
+  contrast: (
+    100: white,
+    800: white,
+    900: white,
+  )
+);
+
 $ias-dark-blue: (
   50:  #E5EFFF,
   100: #C5D8ED,
@@ -67,12 +78,11 @@ $ias-blue: (
 // custom background and foreground palettes
 $ias-dark-theme-background: (
   status-bar: green,
-  app-bar:    map_get($ias-dark-blue, 800),
-  background: map_get($ias-dark-blue, 900),
-  // background: #212d3a,
+  app-bar:    map_get($ias-surface, 800),
+  background: map_get($ias-surface, 900),
   hover:      rgba(white, 0.04),
-  card:       map_get($mat-red, 800),
-  dialog:     map_get($mat-grey, 800),
+  card:       map_get($mat-blue, 800),
+  dialog:     map_get($ias-dark-blue, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
@@ -84,17 +94,18 @@ $ias-dark-theme-background: (
 );
 
 $ias-dark-theme-foreground: (
-  base:              yellow,
+  base:              white,
   divider:           $white-12-opacity,
   dividers:          $white-12-opacity,
   disabled:          rgba(white, 0.3),
   disabled-button:   rgba(white, 0.3),
   disabled-text:     rgba(white, 0.3),
   hint-text:         rgba(white, 0.3),
+  // hint-text:         rgba(white, 0.3),
   secondary-text:    rgba(white, 0.7),
   icon:              white,
   icons:             white,
-  text:              yellow,
+  text:              white,
   slider-min:        white,
   slider-off:        rgba(white, 0.3),
   slider-off-active: rgba(white, 0.3),
@@ -115,7 +126,7 @@ $ias-dark-theme-foreground: (
 // $ias-app-primary: mat-palette($mat-grey, 50);
 $ias-app-primary: mat-palette($ias-dark-blue, 800, 100, 900);
 $ias-app-accent: mat-palette($ias-blue, A400, A100, A700);
-$ias-app-warn: mat-palette($mat-red);
+$ias-app-warn: mat-palette($ias-blue);
 
 $ias-app-theme: create-ias-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
 
@@ -125,3 +136,8 @@ $ias-app-typography: mat-typography-config(
 
 @include angular-material-theme($ias-app-theme);
 @include mat-core($ias-app-typography);
+
+
+button:focus {
+  outline: none;
+}
