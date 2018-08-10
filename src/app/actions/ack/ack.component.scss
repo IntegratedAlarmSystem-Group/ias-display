@@ -1,7 +1,6 @@
 .component-action {
 
   &.component-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 14px 0px;
 
     .component-title {
@@ -39,10 +38,6 @@
           min-height: 150px;
         }
 
-        .form-control:focus {
-          border: 1px solid #235285;
-        }
-
         .action-info {
           font-size: 14px;
         }
@@ -51,10 +46,6 @@
           width: 100%;
         }
 
-      }
-
-      &.missed-acks {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
 
     }
