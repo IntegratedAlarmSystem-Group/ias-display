@@ -1,4 +1,4 @@
-@mixin ias-ack-theme($theme) {
+@mixin ack-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);

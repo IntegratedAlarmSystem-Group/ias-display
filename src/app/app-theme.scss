@@ -1,4 +1,4 @@
-@mixin ias-app-theme($theme) {
+@mixin app-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
@@ -6,7 +6,7 @@
   $foreground: map-get($theme, foreground);
 
   #actions-sidenav {
-    background: mat-color($primary, default, 0.5);
+    background: mat-color($primary, default, 0.4);
   }
 
 }

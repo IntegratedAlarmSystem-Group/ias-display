@@ -1,0 +1,20 @@
+@mixin weather-station-sidebar-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .weather-station-sidebar {
+    background: mat-color($background, card, 0.5);
+
+    &:hover {
+      background: mat-color($background, hover);
+    }
+  }
+
+  .highlighted {
+    background: mat-color($background, hover, 0.7);
+  }
+
+}

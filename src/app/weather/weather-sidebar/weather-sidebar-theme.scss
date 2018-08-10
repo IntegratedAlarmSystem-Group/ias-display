@@ -1,0 +1,16 @@
+@mixin weather-sidebar-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .weather-sidebar-title {
+    background: mat-color($background, dialog);
+  }
+
+  .weather-sidebar-content {
+    background: mat-color($background, app-bar);
+  }
+
+}

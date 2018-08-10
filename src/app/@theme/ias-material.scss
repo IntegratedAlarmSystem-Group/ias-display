@@ -1,6 +1,8 @@
 @import '~@angular/material/theming';
-@import '../actions/ack/ias-ack-theme.scss';
-@import '../ias-app-theme.scss';
+@import '../actions/ack/ack-theme.scss';
+@import '../weather/weather-sidebar/weather-sidebar-theme.scss';
+@import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
+@import '../app-theme.scss';
 
 @include mat-core();
 
@@ -82,11 +84,11 @@ $ias-blue: (
 // custom background and foreground palettes
 $ias-dark-theme-background: (
   status-bar: green,
-  app-bar:    map_get($ias-dark-blue, 800),
+  app-bar:    rgba(map_get($ias-dark-blue, 800), 0.65),
   background: map_get($ias-dark-blue, 900),
-  hover:      rgba(white, 0.04),
+  hover:      map_get($ias-dark-blue, 600),
   card:       map_get($ias-dark-blue, 700),
-  dialog:     map_get($ias-dark-blue, 700),
+  dialog:     map_get($ias-dark-blue, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
@@ -154,13 +156,19 @@ $ias-typography: mat-typography-config(
 );
 
 @mixin ias-theme($theme) {
-  @include ias-ack-theme($theme);
-  @include ias-app-theme($theme);
+  @include ack-theme($theme);
+  @include app-theme($theme);
+  @include weather-sidebar-theme($theme);
+  @include weather-station-sidebar-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
 @include ias-theme($ias-theme);
 @include mat-core($ias-typography);
+
+body {
+  background: map_get($ias-dark-blue, 900);
+}
 
 button.close {
   color: lightgray;
