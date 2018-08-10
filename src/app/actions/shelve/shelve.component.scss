@@ -1,19 +1,6 @@
-:host-context(.component-dialog) {
-  background: transparent;
-}
-
-:host-context(.component-content) {
-  background: #2e445c;
-  color: white;
-}
-
 .component-action {
-  // position: relative;
-  // min-height: 100%;
 
   &.component-header {
-    background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 14px 0px;
 
     .component-title {
@@ -23,7 +10,6 @@
   }
 
   &.component-body {
-    background: transparent;
     font-size: 14px;
 
     .section {
@@ -44,9 +30,6 @@
           font-weight: normal;
         }
 
-        td {
-          color: #4ac8ff;
-        }
       }
 
       &.shelve-action {
@@ -55,22 +38,15 @@
           min-height: 150px;
         }
 
-        .form-control:focus {
-          border: 1px solid #235285;
-        }
-
         .action-info {
           font-size: 14px;
-          color: #a4acac;
         }
 
         .message-form-field {
           width: 100%;
-          color: #4ac8ff;
         }
 
         .timeout-form-field {
-          color: #4ac8ff;
           width: 100%;
           margin-top: 14px;
         }
@@ -86,7 +62,6 @@
     bottom: 0px;
     left: 0px;
     width: 100%;
-    background: transparent;
     border-top: 0px solid #000;
     font-size: 14px;
     display: table;
@@ -96,21 +71,9 @@
     // Fix this properly, in order to make the body scrollable
     padding-bottom: 24px;
 
-    .btn.btn-action {
-
+    button {
       cursor: pointer !important;
       margin: 0px 10px 0px 10px;
-      outline: none;
-
-      &.btn-secondary{
-        background-color: #344a5d;
-        border-color: #344a5d;
-      }
-
-      &.btn-secondary:hover{
-        background-color: #9e9e9e !important;
-      }
-
     }
 
   }
@@ -124,17 +87,8 @@
     padding-top: 10px;
   }
 
-  .alarmUrl {
-      color: #4ac8ff !important;
-  }
-
   .alarmUrl .alarmLink {
     text-decoration: underline;
-  }
-
-  .close {
-    color: lightgray;
-    outline: none;
   }
 
 }

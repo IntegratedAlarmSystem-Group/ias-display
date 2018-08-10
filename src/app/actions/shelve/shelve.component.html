@@ -39,13 +39,13 @@
         <ng-template #shelveForm>
           <div class="section-title"> Information required to shelve the Alarm </div>
 
-          <mat-form-field class="message-form-field" appearance="fill">
+          <mat-form-field color="accent" class="message-form-field" appearance="fill">
             <mat-label> Reason for shelving </mat-label>
             <textarea matInput name="message" formControlName="message"></textarea>
             <mat-error *ngIf="message.invalid"> You must write a message in order to Shelve </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="timeout-form-field" appearance="fill">
+          <mat-form-field color="accent" class="timeout-form-field" appearance="fill">
             <mat-label> Time in shelf </mat-label>
             <mat-select formControlName="timeout">
               <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
@@ -66,12 +66,12 @@
   <div class="component-action component-footer">
     <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
     <ng-template #responseButtons>
-      <button id="close" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Close</button>
+      <button id="close" mat-flat-button color="primary" (click)="onClose()">Close</button>
     </ng-template>
 
     <ng-template #actionButtons>
-      <button id="cancel" type="button" class="btn btn-action btn-secondary" (click)="onClose()">Cancel</button>
-      <button id="send" type="button" class="btn btn-action btn-info" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
+      <button id="cancel" mat-flat-button color="primary" (click)="onClose()">Cancel</button>
+      <button id="send" mat-flat-button color="accent" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
     </ng-template>
   </div>
 </form>

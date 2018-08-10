@@ -83,12 +83,12 @@ $ias-dark-theme-background: (
   app-bar:    map_get($ias-surface, 600),
   background: map_get($ias-surface, 900),
   hover:      rgba(white, 0.04),
-  card:       map_get($mat-blue, 800),
+  card:       map_get($ias-surface, 100),
   dialog:     map_get($ias-dark-blue, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
-  selected-button: map_get($mat-grey, 900),
+  selected-button: map_get($ias-dark-blue, 900),
   selected-disabled-button: map_get($mat-grey, 800),
   disabled-button-toggle: black,
   unselected-chip: map_get($mat-grey, 700),
@@ -127,7 +127,7 @@ $ias-dark-theme-foreground: (
 
 // $ias-app-primary: mat-palette($mat-grey, 50);
 $ias-app-primary: mat-palette($ias-dark-blue, 800, 100, 900);
-$ias-app-accent: mat-palette($ias-blue, A400, A100, A700);
+$ias-app-accent: mat-palette($ias-blue, 300, A100, A700);
 $ias-app-warn: mat-palette($mat-red);
 
 $ias-app-theme: create-ias-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
