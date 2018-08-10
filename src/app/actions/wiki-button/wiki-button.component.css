@@ -1,20 +1,9 @@
 .wiki-button {
-  border: 0;
-  color: #4ac8ff;
-  cursor: pointer;
   padding-left: 10px;
-  padding-right: 0;
-  outline: none;
-  background-color: unset !important;
-  min-width: unset !important;
-  box-shadow: none !important;
+  padding-right: 10px;
 }
 
 .wiki-button-icon {
   font-size: 16pt;
   font-weight: bold;
-}
-
-.wiki-link {
-  text-decoration: underline;
 }

@@ -72,7 +72,7 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Handle click on table rows, it triggers the shelve sidebar
+  * Handle click on shelve button, it triggers the shelve sidebar
   */
   onClick(event) {
     this.router.navigate([{outlets: {actions: ['shelve', this.alarm.core_id]}}]);

@@ -1,20 +1,8 @@
 .ack-button {
-  color: #4ac8ff;
-  border: 0;
-  font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  cursor: pointer;
-  outline: none;
-  background-color: unset !important;
-  min-width: unset !important;
-  box-shadow: none !important;
 }
 
 .ack-button-icon {
   width: 20px;
-}
-
-button.ack-button:disabled {
-    color: #212d3a;
 }
