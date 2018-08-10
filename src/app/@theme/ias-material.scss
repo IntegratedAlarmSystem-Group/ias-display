@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import '../actions/ack/ias-ack-theme.scss';
+@import '../ias-app-theme.scss';
 
 @include mat-core();
 
@@ -81,20 +82,36 @@ $ias-blue: (
 // custom background and foreground palettes
 $ias-dark-theme-background: (
   status-bar: green,
-  app-bar:    map_get($ias-surface, 600),
-  background: map_get($ias-surface, 900),
+  app-bar:    map_get($ias-dark-blue, 800),
+  background: map_get($ias-dark-blue, 900),
   hover:      rgba(white, 0.04),
-  card:       map_get($ias-surface, 100),
-  dialog:     map_get($ias-dark-blue, 800),
+  card:       map_get($ias-dark-blue, 700),
+  dialog:     map_get($ias-dark-blue, 700),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
-  selected-button: map_get($ias-dark-blue, 900),
+  selected-button: map_get($ias-dark-blue, 600),
   selected-disabled-button: map_get($mat-grey, 800),
   disabled-button-toggle: black,
   unselected-chip: map_get($mat-grey, 700),
   disabled-list-option: black,
 );
+// $ias-dark-theme-background: (
+//   status-bar: green,
+//   app-bar:    map_get($ias-surface, 600),
+//   background: map_get($ias-surface, 900),
+//   hover:      rgba(white, 0.04),
+//   card:       map_get($ias-surface, 100),
+//   dialog:     map_get($ias-dark-blue, 800),
+//   disabled-button: $white-12-opacity,
+//   raised-button: map-get($mat-grey, 800),
+//   focused-button: $white-6-opacity,
+//   selected-button: map_get($ias-dark-blue, 900),
+//   selected-disabled-button: map_get($mat-grey, 800),
+//   disabled-button-toggle: black,
+//   unselected-chip: map_get($mat-grey, 700),
+//   disabled-list-option: black,
+// );
 
 $ias-dark-theme-foreground: (
   base:              white,
@@ -126,23 +143,24 @@ $ias-dark-theme-foreground: (
 }
 
 // $ias-app-primary: mat-palette($mat-grey, 50);
-$ias-app-primary: mat-palette($ias-dark-blue, 800, 100, 900);
-$ias-app-accent: mat-palette($ias-blue, 300, A100, A700);
-$ias-app-warn: mat-palette($mat-red);
+$ias-primary: mat-palette($ias-dark-blue, 800, 100, 900);
+$ias-accent: mat-palette($ias-blue, 300, A100, A700);
+$ias-warn: mat-palette($mat-red);
 
-$ias-app-theme: create-ias-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
+$ias-theme: create-ias-theme($ias-primary, $ias-accent, $ias-warn);
 
-$ias-app-typography: mat-typography-config(
-$font-family: 'Arial, Helvetica, sans-serif'
+$ias-typography: mat-typography-config(
+  $font-family: 'Arial, Helvetica, sans-serif'
 );
 
-@mixin ias-app-theme($theme) {
+@mixin ias-theme($theme) {
   @include ias-ack-theme($theme);
+  @include ias-app-theme($theme);
 }
 
-@include angular-material-theme($ias-app-theme);
-@include ias-app-theme($ias-app-theme);
-@include mat-core($ias-app-typography);
+@include angular-material-theme($ias-theme);
+@include ias-theme($ias-theme);
+@include mat-core($ias-typography);
 
 button.close {
   color: lightgray;
