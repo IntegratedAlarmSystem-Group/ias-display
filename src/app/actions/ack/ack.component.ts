@@ -9,7 +9,7 @@ import { Alarm } from '../../data/alarm';
 @Component({
   selector: 'app-ack',
   templateUrl: './ack.component.html',
-  styleUrls: ['./ack.component.css', './ack.component.scss']
+  styleUrls: ['./ack.component.scss']
 })
 export class AckComponent implements OnInit, OnDestroy {
 

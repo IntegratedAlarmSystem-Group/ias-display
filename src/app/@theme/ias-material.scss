@@ -138,6 +138,16 @@ $ias-app-typography: mat-typography-config(
 @include angular-material-theme($ias-app-theme);
 @include mat-core($ias-app-typography);
 
+button.close {
+  color: lightgray;
+  outline: none;
+
+}
+
+button.close:hover {
+  color: lightgray;
+  outline: none;
+}
 
 button:focus {
   outline: none;
