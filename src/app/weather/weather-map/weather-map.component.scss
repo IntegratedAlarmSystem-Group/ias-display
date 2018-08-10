@@ -15,25 +15,7 @@ svg g.ws-primary-group:hover .ws-connector {
   stroke: #a3bbc6;
 };
 
-svg g.pads-p-arm {
-  &.selected {
-    circle { stroke: white; }
-  }
-}
-
-svg g.pads-morita-inner {
-  &.selected {
-    circle { stroke: white; }
-  }
-}
-
-svg g.pads-s-arm {
-  &.selected {
-    circle { stroke: white; }
-  }
-}
-
-svg g.pads-w-arm {
+svg g.pad-groups {
   &.selected {
     circle { stroke: white; }
   }

@@ -23,24 +23,13 @@ export class WeatherMapComponent implements OnInit {
   viewbox;
 
   /**
-  * Display control for the groups of pads defined as 'antenna groups'
-  */
-  antennaGroupsDisplay = {
-    'MORITA_AND_INNER': {'selected': false},
-    'W_ARM': {'selected': false},
-    'P_ARM': {'selected': false},
-    'S_ARM': {'selected': false},
-  };
-
-  /**
   * Variables to manage the graphical elements
   */
 
   pads: any;
-  morita_and_inner_pads: any;
-  p_arm_pads: any;
-  w_arm_pads: any;
-  s_arm_pads: any;
+  antennaGroups = [];
+  antennaGroupsPads = {};
+  antennaGroup2placemarker: any;
 
   wstations: any;
   primary_wstations: any;
@@ -48,8 +37,6 @@ export class WeatherMapComponent implements OnInit {
 
   paths: any;
   svgPaths: any;
-
-  ws2AntennaGroup: any;
 
   datarelations: any;
 
@@ -64,18 +51,20 @@ export class WeatherMapComponent implements OnInit {
 
   setUpMap() {
     this.weatherService.getMapData().subscribe((mapdata) => {
+      for (const group of Object.keys(mapdata['relations']['antenna_groups'])) {
+        this.antennaGroups.push(group);
+      }
       this.wstations = mapdata['placemarkers']['wstations'];
       this.primary_wstations = mapdata['relations']['wstations_groups']['primary']['wstations'];
       this.backup_wstations = mapdata['relations']['wstations_groups']['backup']['wstations'];
       this.pads = mapdata['placemarkers']['pads'];
-      this.morita_and_inner_pads = mapdata['relations']['antenna_groups']['MORITA_AND_INNER']['pads'];
-      this.p_arm_pads = mapdata['relations']['antenna_groups']['P_ARM']['pads'];
-      this.w_arm_pads = mapdata['relations']['antenna_groups']['W_ARM']['pads'];
-      this.s_arm_pads = mapdata['relations']['antenna_groups']['S_ARM']['pads'];
+      for (const group of this.antennaGroups) {
+        this.antennaGroupsPads[group] = mapdata['relations']['antenna_groups'][group]['pads'];
+      }
       this.paths = mapdata['paths'];
       this.placemarksAdjustment();
       this.svgPaths = this.getSVGPaths();
-      this.ws2AntennaGroup = mapdata['relations']['ws2antennas'];
+      this.antennaGroup2placemarker = mapdata['relations']['antennaGroup2placemarker'];
       this.datarelations = mapdata['relations'];
     });
   }
@@ -87,11 +76,11 @@ export class WeatherMapComponent implements OnInit {
       this.wstations,
       this.primary_wstations,
       this.backup_wstations,
-      this.morita_and_inner_pads,
-      this.p_arm_pads,
-      this.w_arm_pads,
-      this.s_arm_pads
     ];
+
+    for (const group of this.antennaGroups) {
+      pointsGroups.push(this.antennaGroupsPads[group]);
+    }
 
     const pathsGroups = [
       this.paths,
