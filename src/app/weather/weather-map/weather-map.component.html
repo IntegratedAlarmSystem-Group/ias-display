@@ -26,49 +26,21 @@
     </g>
 
     <!--  Pads by antenna group -->
-    <g class="pads-morita-inner" [ngClass]="{'selected': isSelected('MeteoCentral')}">
-      <circle *ngFor="let p of this.morita_and_inner_pads"
-        [attr.cx]="p.opt_cx"
-        [attr.cy]="p.opt_cy"
-        [attr.data]="p.name"
-        r="5"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="#212d3a"
-      />
-    </g>
-    <g class="pads-p-arm" [ngClass]="{'selected': isSelected('Meteo410')}">
-      <circle *ngFor="let p of this.p_arm_pads"
-        [attr.cx]="p.opt_cx"
-        [attr.cy]="p.opt_cy"
-        [attr.data]="p.name"
-        r="5"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="#212d3a"
-      />
-    </g>
-    <g class="pads-s-arm" [ngClass]="{'selected': isSelected('Meteo309')}">
-      <circle *ngFor="let p of this.s_arm_pads"
-        [attr.cx]="p.opt_cx"
-        [attr.cy]="p.opt_cy"
-        [attr.data]="p.name"
-        r="5"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="#212d3a"
-      />
-    </g>
-    <g class="pads-w-arm" [ngClass]="{'selected': isSelected('Meteo201')}">
-      <circle *ngFor="let p of this.w_arm_pads"
-        [attr.cx]="p.opt_cx"
-        [attr.cy]="p.opt_cy"
-        [attr.data]="p.name"
-        r="5"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="#212d3a"
-      />
+
+    <g *ngFor="let group of antennaGroups" >
+
+      <g class="pad-groups" [ngClass]="{'selected': isSelected(antennaGroup2placemarker[group])}" >
+        <circle *ngFor="let p of antennaGroupsPads[group]"
+          [attr.cx]="p.opt_cx"
+          [attr.cy]="p.opt_cy"
+          [attr.data]="p.name"
+          r="5"
+          stroke="#636b74"
+          stroke-width="3"
+          fill="#212d3a"
+        />
+      </g>
+
     </g>
 
     <!--  Weather stations -->
