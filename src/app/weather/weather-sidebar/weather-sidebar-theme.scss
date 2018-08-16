@@ -2,6 +2,7 @@
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
@@ -11,6 +12,17 @@
 
   .weather-sidebar-content {
     background: mat-color($background, app-bar);
+
+    .antennas-list-header {
+
+      .copy-antennas-button {
+        color: mat-color($accent, 300);
+      }
+    }
+
+    .antennas-list {
+      color: mat-color($foreground, secondary-text);
+    }
   }
 
 }

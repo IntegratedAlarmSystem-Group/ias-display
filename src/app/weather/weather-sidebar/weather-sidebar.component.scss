@@ -1,13 +1,10 @@
 .weather-sidebar-title {
-  // background: #2e445c;
   padding: 12px;
 }
 
 .weather-sidebar-content {
-  // background: #2b3b4b;
   padding: 12px;
   height: calc(100vh - 112px) !important;
-  // height: 100%;
 
   .mat-expansion-panel {
     background: transparent;
@@ -45,19 +42,13 @@
   .weather-sidebar-header {
     padding-left: 0px;
     position: relative;
-    background: transparent;
 
     &.mat-expanded {
-      background: transparent;
     }
 
     &:hover {
       background: transparent;
     }
-  }
-
-  hr {
-    border-top: 2px solid #33475a;
   }
 
   .antennas-list-line {
@@ -76,21 +67,13 @@
     }
 
     .copy-antennas-button {
-      border: 0;
-      color: #4ac8ff;
-      cursor: pointer;
-      padding-left: 0;
-      padding-right: 0;
-      outline: none;
-      background-color: unset !important;
-      min-width: unset !important;
-      box-shadow: none !important;
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 
   .antennas-list {
     margin-top: 10px;
-    color: #8e9296;
   }
 
 }
