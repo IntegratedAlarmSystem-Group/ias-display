@@ -6,16 +6,41 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  svg g.ws-primary-group:hover .ws-connector {
-    stroke: mat-color($foreground, secondary-text);
-  };
+  $map_stroke: #636b74;
+  $selected_pad: mat-color($foreground, text);
+  $map_background: mat-color($background, background);
+  $marker_stroke: mat-color($background, dialog);
+  $selected_marker_stroke: mat-color($foreground, secondary-text);
+
+  svg g.paths {
+    stroke: $map_stroke;
+  }
+
+  svg g.pads {
+    stroke: $map_stroke;
+    fill: $map_background
+  }
 
   svg g.pad-groups {
+
     &.selected {
       circle {
-        stroke: mat-color($foreground, text);
+        stroke: $selected_pad;
       }
     }
+
+    circle {
+      stroke: $map_stroke;
+      fill: $map_background;
+    }
   }
+
+  svg g.ws-primary-group {
+    stroke: $marker_stroke;
+  }
+
+  svg g.ws-primary-group:hover .ws-connector {
+    stroke: $selected_marker_stroke;
+  };
 
 }

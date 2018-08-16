@@ -3,6 +3,7 @@
 @import '../weather/weather-sidebar/weather-sidebar-theme.scss';
 @import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
 @import '../weather/weather-map/weather-map-theme.scss';
+@import '../weather/weather-data-map/weather-data-map-theme.scss';
 @import '../app-theme.scss';
 
 @include mat-core();
@@ -146,6 +147,7 @@ $ias-typography: mat-typography-config(
   @include weather-sidebar-theme($theme);
   @include weather-station-sidebar-theme($theme);
   @include weather-map-theme($theme);
+  @include weather-data-map-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
