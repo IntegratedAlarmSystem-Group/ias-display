@@ -12,11 +12,13 @@ svg g.ws-primary-group {
 }
 
 svg g.ws-primary-group:hover .ws-connector {
-  stroke: #a3bbc6;
+  // stroke: #a3bbc6;
 };
 
 svg g.pad-groups {
   &.selected {
-    circle { stroke: white; }
+    circle {
+      // stroke: white;
+    }
   }
 }
