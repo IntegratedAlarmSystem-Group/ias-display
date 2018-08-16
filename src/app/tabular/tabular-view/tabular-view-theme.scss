@@ -13,7 +13,7 @@
   .mat-row {
     background: mat-color($background, dialog);
 
-    .hover {
+    &:hover {
       background: mat-color($background, hover);
     }
   }
