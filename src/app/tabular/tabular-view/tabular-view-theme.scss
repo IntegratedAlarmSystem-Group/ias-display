@@ -1,0 +1,34 @@
+@mixin tabular-view-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-table {
+    background: transparent;
+  }
+
+  .mat-row {
+    background: mat-color($background, dialog);
+
+    .hover {
+      background: mat-color($background, hover);
+    }
+  }
+
+  .mat-card {
+    background: transparent;
+
+    .mat-card-header {
+      padding: 20px;
+      background:  mat-color($background, dialog);
+    }
+
+    .mat-card-content {
+      background: mat-color($primary, default, 0.4);
+    }
+  }
+
+}
