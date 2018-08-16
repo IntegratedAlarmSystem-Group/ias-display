@@ -4,7 +4,6 @@
 
 .ias.sensors{
     display: inline-block;
-    background: #33475a;
     width: 100%;
 }
 
@@ -21,9 +20,8 @@
     float: left;
     max-height: 130px;
     min-width: 100px;
-    border-right: 1px solid #3a5167;
-    font-family:sans-serif;
-    color: #cdd5d1;
+    border-right-width: 1px;
+    border-right-style: solid;
     cursor: pointer;
 
     .global-health-status {
@@ -42,8 +40,3 @@
         width: fit-content;
     }
 }
-
-// .no-vertical-margin {
-//   margin-left: 0 !important;
-//   margin-right: 0 !important;
-// }
