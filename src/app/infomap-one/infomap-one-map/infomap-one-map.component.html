@@ -1,0 +1,47 @@
+<app-map
+  [mapConfig]="this.mapConfig"
+  [mapdataAvailable]="this.mapdataAvailable.value"
+>
+
+  <ng-container data="svg-elements">
+
+      <svg:path *ngFor="let path of svgPaths"
+        [attr.d]="path"
+        stroke="#636b74"
+        stroke-width="3"
+        fill="none"
+      />
+
+      <svg:circle *ngFor="let p of placemarks['pads']"
+        [attr.cx]="p.opt_cx"
+        [attr.cy]="p.opt_cy"
+        [attr.data]="p.name"
+        r="5"
+        stroke="#636b74"
+        stroke-width="3"
+        fill="#212d3a"
+      />
+
+      <ng-container *ngFor="let p of placemarks['pads']">
+        <ng-container *ngIf="alarmHasLocation(p.name)">
+          <svg:foreignObject
+            [attr.x]="p.opt_cx-25"
+            [attr.y]="p.opt_cy-25"
+            width="50"
+            height="50">
+            <xhtml:app-antenna-marker
+              [placemark]="p.name"
+              [cx]=25
+              [cy]=25
+              [r]=5
+              [alarm]="getAlarm(getAlarmConfig(p.name).alarm)"
+            >
+          </xhtml:app-antenna-marker>
+        </svg:foreignObject>
+        </ng-container>
+      </ng-container>
+
+
+  </ng-container>
+
+</app-map>

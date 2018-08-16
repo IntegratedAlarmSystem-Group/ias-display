@@ -13,6 +13,7 @@ import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
 import { TabularModule } from './tabular/tabular.module';
 import { WeatherModule } from './weather/weather.module';
+import { MapModule } from './map/map.module';
 import { AppComponent } from './app.component';
 import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview/overview.component';
@@ -20,6 +21,9 @@ import { AckComponent } from './actions/ack/ack.component';
 import { ShelveComponent } from './actions/shelve/shelve.component';
 import { WeatherComponent } from './weather/weather/weather.component';
 import { AlarmComponent } from './shared/alarm/alarm.component';
+
+import { InfomapOneComponent } from './infomap-one/infomap-one/infomap-one.component';
+import { InfomapOneModule } from './infomap-one/infomap-one.module';
 
 import { HttpModule } from '@angular/http';
 
@@ -33,7 +37,8 @@ export const appRoutes: Routes = [
   { path: 'tabular/:filter', component: TabularViewComponent },
   { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
   { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
-  { path: 'weather', component: WeatherComponent}
+  { path: 'weather', component: WeatherComponent },
+  { path: 'infomap-one', component: InfomapOneComponent },
 ];
 
 /**
@@ -58,6 +63,8 @@ export const appRoutes: Routes = [
     TabularModule,
     WeatherModule,
     HttpModule,
+    MapModule,
+    InfomapOneModule,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
