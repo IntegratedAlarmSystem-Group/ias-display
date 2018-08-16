@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 @import '../actions/ack/ack-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
+@import '../weather/weather-summary/weather-summary-theme.scss';
 @import '../weather/weather-sidebar/weather-sidebar-theme.scss';
 @import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
 @import '../weather/weather-map/weather-map-theme.scss';
@@ -146,6 +147,7 @@ $ias-typography: mat-typography-config(
   @include ack-theme($theme);
   @include app-theme($theme);
   @include overview-card-theme($theme);
+  @include weather-summary-theme($theme);
   @include weather-sidebar-theme($theme);
   @include weather-station-sidebar-theme($theme);
   @include weather-map-theme($theme);
