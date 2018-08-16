@@ -25,25 +25,17 @@
     font-family:sans-serif;
     color: #cdd5d1;
     cursor: pointer;
-}
 
-.sensors-card.global-health-status {
-  min-width: 165px;
-  border: 0;
-}
+    .title{
+        text-transform: 'uppercase';
+        font-size: 14px;
+    }
 
-.sensors-card>.title{
-    text-transform: 'uppercase';
-    font-size: 14px;
-}
-
-.sensors-card>.marker{
-    padding: 20px;
-    height: 85px;
-    width: fit-content;
-}
-.sensors-card>.marker>.marker-img{
-    height: 40px;
+    .marker{
+        padding: 20px;
+        height: 85px;
+        width: fit-content;
+    }
 }
 
 .ias.map{
@@ -51,10 +43,10 @@
     width: 100%;
     text-align: center;
     padding: 10px;
-}
 
-.ias.map>.weather-stations-map{
-    max-height: 500px;
+    .weather-stations-map{
+        max-height: 500px;
+    }
 }
 
 .no-vertical-margin {

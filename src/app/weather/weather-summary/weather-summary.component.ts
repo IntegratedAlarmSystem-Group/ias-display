@@ -12,7 +12,7 @@ import { Assets } from '../../settings';
 @Component({
   selector: 'app-weather-summary',
   templateUrl: './weather-summary.component.html',
-  styleUrls: ['./weather-summary.component.css']
+  styleUrls: ['./weather-summary.component.scss']
 })
 export class WeatherSummaryComponent implements OnInit {
 

@@ -25,28 +25,26 @@
     font-family:sans-serif;
     color: #cdd5d1;
     cursor: pointer;
-}
 
-.sensors-card>.title{
-    text-transform: 'uppercase';
-    font-size: 14px;
-}
+    .global-health-status {
+      min-width: 165px;
+      border: 0;
+    }
 
-.sensors-card>.marker{
-    padding: 20px;
-    height: 85px;
-    width: fit-content;
-}
+    .title{
+        text-transform: 'uppercase';
+        font-size: 14px;
+    }
 
-.ias.map{
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-}
+    .marker{
+        padding: 20px;
+        height: 85px;
+        width: fit-content;
 
-.ias.map>.weather-stations-map{
-    max-height: 500px;
+        .marker-img{
+            height: 40px;
+        }
+    }
 }
 
 .no-vertical-margin {
