@@ -1,7 +1,6 @@
 /* Styles */
 #navigation-sidenav {
 
-  // background: #2e445c;
   position: absolute;
   top: 65px;
   bottom: 0;
@@ -17,7 +16,6 @@
   }
 
   .ias.ias-logo-container {
-    background: #4F81BD;
     padding: .75rem 2.5rem;
     border-radius: 4px;
     text-align: center;
@@ -45,10 +43,8 @@
     }
 
     &.active-link {
-      color: #4ac8ff;
 
       /deep/ .mat-line {
-        color: white;
         font-weight: bold;
       }
 
@@ -74,14 +70,9 @@
 
       padding-left: 0px;
 
-      &.active-link {
-        box-shadow: 4px 0px 0px 0px #4ac8ff inset;
-      }
-
     }
 
   }
-  /* &.compacted */
 
 }
 

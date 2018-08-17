@@ -2,11 +2,47 @@
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  $inactive-link: mat-color($foreground, text);
+  $active-link: mat-color($foreground, hint-text);
+
   #actions-sidenav {
     background: mat-color($primary, default, 0.4);
+  }
+
+  #navigation-sidenav {
+
+    .ias.ias-logo-container {
+      background: mat-color($accent, 800);
+    }
+
+    mat-nav-list a.mat-list-item {
+      &.active-link {
+        color: $active-link;
+
+        /deep/ .mat-line {
+          color: $inactive-link;
+        }
+
+      }
+
+    }
+
+    &.compacted {
+
+      mat-nav-list a.mat-list-item {
+
+        &.active-link {
+          box-shadow: 4px 0px 0px 0px $active-link inset;
+        }
+
+      }
+
+    }
+
   }
 
 }
