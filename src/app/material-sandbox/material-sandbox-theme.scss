@@ -70,4 +70,136 @@
     background: mat-color($primary, A100);
     color: mat-contrast($primary, A100);
   }
+
+
+  #panel900accent {
+    background: mat-color($accent, 900);
+    color: mat-contrast($accent, 890);
+  }
+
+  #panel800accent {
+    background: mat-color($accent, 800);
+    color: mat-contrast($accent, 800);
+  }
+
+  #panel700accent {
+    background: mat-color($accent, 700);
+    color: mat-contrast($accent, 700);
+  }
+
+  #panel600accent {
+    background: mat-color($accent, 600);
+    color: mat-contrast($accent, 600);
+  }
+
+  #panel500accent {
+    background: mat-color($accent, 500);
+    color: mat-contrast($accent, 500);
+  }
+
+  #panel400accent {
+    background: mat-color($accent, 400);
+    color: mat-contrast($accent, 400);
+  }
+
+  #panel300accent {
+    background: mat-color($accent, 300);
+    color: mat-contrast($accent, 300);
+  }
+
+  #panel200accent {
+    background: mat-color($accent, 200);
+    color: mat-contrast($accent, 200);
+  }
+
+  #panel100accent {
+    background: mat-color($accent, 100);
+    color: mat-contrast($accent, 100);
+  }
+
+  #panel50accent {
+    background: mat-color($accent, 50);
+    color: mat-color($accent, 50);
+  }
+
+  #panelA700accent {
+    background: mat-color($accent, A700);
+    color: mat-contrast($accent, A700);
+  }
+
+  #panelA400accent {
+    background: mat-color($accent, A400);
+    color: mat-contrast($accent, A400);
+  }
+
+  #panelA100accent {
+    background: mat-color($accent, A100);
+    color: mat-contrast($accent, A100);
+  }
+
+
+  #panel900warn {
+    background: mat-color($warn, 900);
+    color: mat-contrast($warn, 890);
+  }
+
+  #panel800warn {
+    background: mat-color($warn, 800);
+    color: mat-contrast($warn, 800);
+  }
+
+  #panel700warn {
+    background: mat-color($warn, 700);
+    color: mat-contrast($warn, 700);
+  }
+
+  #panel600warn {
+    background: mat-color($warn, 600);
+    color: mat-contrast($warn, 600);
+  }
+
+  #panel500warn {
+    background: mat-color($warn, 500);
+    color: mat-contrast($warn, 500);
+  }
+
+  #panel400warn {
+    background: mat-color($warn, 400);
+    color: mat-contrast($warn, 400);
+  }
+
+  #panel300warn {
+    background: mat-color($warn, 300);
+    color: mat-contrast($warn, 300);
+  }
+
+  #panel200warn {
+    background: mat-color($warn, 200);
+    color: mat-contrast($warn, 200);
+  }
+
+  #panel100warn {
+    background: mat-color($warn, 100);
+    color: mat-contrast($warn, 100);
+  }
+
+  #panel50warn {
+    background: mat-color($warn, 50);
+    color: mat-color($warn, 50);
+  }
+
+  #panelA700warn {
+    background: mat-color($warn, A700);
+    color: mat-contrast($warn, A700);
+  }
+
+  #panelA400warn {
+    background: mat-color($warn, A400);
+    color: mat-contrast($warn, A400);
+  }
+
+  #panelA100warn {
+    background: mat-color($warn, A100);
+    color: mat-contrast($warn, A100);
+  }
 }
