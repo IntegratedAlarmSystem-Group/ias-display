@@ -24,7 +24,7 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Status </span>
+          <span mat-sort-header> STATUS </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm">
           <div class="status-icon">
@@ -36,7 +36,7 @@
       <!-- Monitoring Point Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Alarm Name </span>
+          <span mat-sort-header> ALARM NAME </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>
       </ng-container>
@@ -44,7 +44,7 @@
       <!-- Mode Column -->
       <ng-container matColumnDef="mode">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Mode </span>
+          <span mat-sort-header> MODE </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.operationalMode}} </mat-cell>
       </ng-container>
@@ -52,7 +52,7 @@
       <!-- Timestamp Column -->
       <ng-container matColumnDef="timestamp">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Last Change Time </span>
+          <span mat-sort-header> LAST CHANGE TIME </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>
       </ng-container>
@@ -60,7 +60,7 @@
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Description </span>
+          <span mat-sort-header> DESCRIPTION </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
       </ng-container>
@@ -68,7 +68,7 @@
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>
-          <span mat-sort-header> Actions </span>
+          <span mat-sort-header> ACTIONS </span>
         </mat-header-cell>
         <mat-cell *matCellDef="let alarm">
           <app-buttons [alarm]="alarm"></app-buttons>
