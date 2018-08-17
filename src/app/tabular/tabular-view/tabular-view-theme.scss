@@ -13,6 +13,14 @@
   .mat-row {
     background: mat-color($background, dialog);
 
+    &:nth-child(odd){
+      background-color: mat-color($background, dialog);
+    }
+
+    &:nth-child(even){
+      background-color: transparent;
+    }
+
     &:hover {
       background: mat-color($background, hover);
     }

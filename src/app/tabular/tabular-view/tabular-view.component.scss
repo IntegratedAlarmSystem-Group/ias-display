@@ -1,6 +1,6 @@
 .mat-header-row {
-  border-bottom-style: hidden;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   min-height: 0px;
 }
 
@@ -11,7 +11,6 @@
 
 .mat-row {
   border-bottom-style: hidden;
-  margin-top: 4px;
 }
 
 .mat-card {
@@ -28,10 +27,6 @@
     border-bottom-left-radius: 0.375em;
     border-bottom-right-radius: 0.375em;
   }
-}
-
-.mat-form-field {
-  // padding-top: 5px;
 }
 
 
