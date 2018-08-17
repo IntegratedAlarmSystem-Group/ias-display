@@ -136,7 +136,7 @@ $ias-dark-theme-foreground: (
 
 // $ias-app-primary: mat-palette($mat-grey, 50);
 $ias-primary: mat-palette($ias-dark-blue, 800, 100, 900);
-$ias-accent: mat-palette($ias-blue, 300, A100, A700);
+$ias-accent: mat-palette($ias-blue, 400, A100, A700);
 $ias-warn: mat-palette($mat-red);
 
 $ias-theme: create-ias-theme($ias-primary, $ias-accent, $ias-warn);

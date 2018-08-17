@@ -6,8 +6,8 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  $inactive-link: mat-color($foreground, text);
-  $active-link: mat-color($foreground, hint-text);
+  $active-link: mat-color($accent, default);
+  $inactive-link: rgba($active-link, 0.65);
 
   #actions-sidenav {
     background: mat-color($primary, default, 0.4);
@@ -15,18 +15,12 @@
 
   #navigation-sidenav {
 
-    .ias.ias-logo-container {
-      background: mat-color($accent, 800);
-    }
-
     mat-nav-list a.mat-list-item {
+
+      color: $inactive-link;
+
       &.active-link {
         color: $active-link;
-
-        /deep/ .mat-line {
-          color: $inactive-link;
-        }
-
       }
 
     }
