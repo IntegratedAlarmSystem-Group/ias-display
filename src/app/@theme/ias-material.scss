@@ -9,21 +9,40 @@
 @import '../weather/weather-map/weather-map-theme.scss';
 @import '../weather/weather-data-map/weather-data-map-theme.scss';
 @import '../app-theme.scss';
+@import '../material-sandbox/material-sandbox-theme.scss';
 
 @include mat-core();
 
-// $ias-surface: (
-//   100: #52677E,
-//   600: #334151,
-//   800: rgba(43, 59, 75, 0.69),
-//   900: #212D3A,
-//   contrast: (
-//     100: white,
-//     600: white,
-//     800: white,
-//     900: white,
-//   )
-// );
+$ias-palette: (
+  50:  #E5EFFF,
+  100: #C5D8ED,
+  200: #A8BCD5,
+  300: #89A1BE,
+  400: #728CAC,
+  500: #5A799B,
+  600: #4C6A89,
+  700: #3D5772,
+  800: #2E445C,
+  900: #1B3044,
+  A100: #E5EFFF,
+  A400: #2E445C,
+  A700: #2E445C,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.6),
+    A400: #FAFAFA,
+    A700: rgba(255, 255, 255, 0.6),
+  )
+);
 
 $ias-dark-blue: (
   50:  #E5EFFF,
@@ -89,14 +108,12 @@ $ias-blue: (
 
 // custom background and foreground palettes
 $ias-dark-theme-background: (
-  status-bar: green,
-  app-bar:    rgba(map_get($ias-dark-blue, 800), 1),
-  // app-bar:    rgba(map_get($ias-dark-blue, 800), 0.65),
+  status-bar: map_get($ias-dark-blue, 800),
+  app-bar:    map_get($ias-dark-blue, 800),
   background: map_get($ias-dark-blue, 900),
   hover:      map_get($ias-dark-blue, 600),
   card:       map_get($ias-dark-blue, 700),
-  dialog:     rgba(map_get($ias-dark-blue, 800), 1),
-  // dialog:     map_get($ias-dark-blue, 800),
+  dialog:     map_get($ias-dark-blue, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
@@ -137,7 +154,7 @@ $ias-dark-theme-foreground: (
 }
 
 // $ias-app-primary: mat-palette($mat-grey, 50);
-$ias-primary: mat-palette($ias-dark-blue, 800, 100, 900);
+$ias-primary: mat-palette($ias-palette, 800, 100, 900);
 $ias-accent: mat-palette($ias-blue, 400, A100, A700);
 $ias-warn: mat-palette($mat-red);
 
@@ -158,6 +175,7 @@ $ias-typography: mat-typography-config(
   @include weather-station-sidebar-theme($theme);
   @include weather-map-theme($theme);
   @include weather-data-map-theme($theme);
+  @include material-sandbox-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);

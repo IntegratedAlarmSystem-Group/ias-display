@@ -1,0 +1,73 @@
+@mixin material-sandbox-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  #panel900 {
+    background: mat-color($primary, 900);
+    color: mat-contrast($primary, 890);
+  }
+
+  #panel800 {
+    background: mat-color($primary, 800);
+    color: mat-contrast($primary, 800);
+  }
+
+  #panel700 {
+    background: mat-color($primary, 700);
+    color: mat-contrast($primary, 700);
+  }
+
+  #panel600 {
+    background: mat-color($primary, 600);
+    color: mat-contrast($primary, 600);
+  }
+
+  #panel500 {
+    background: mat-color($primary, 500);
+    color: mat-contrast($primary, 500);
+  }
+
+  #panel400 {
+    background: mat-color($primary, 400);
+    color: mat-contrast($primary, 400);
+  }
+
+  #panel300 {
+    background: mat-color($primary, 300);
+    color: mat-contrast($primary, 300);
+  }
+
+  #panel200 {
+    background: mat-color($primary, 200);
+    color: mat-contrast($primary, 200);
+  }
+
+  #panel100 {
+    background: mat-color($primary, 100);
+    color: mat-contrast($primary, 100);
+  }
+
+  #panel50 {
+    background: mat-color($primary, 50);
+    color: mat-contrast($primary, 50);
+  }
+
+  #panelA700 {
+    background: mat-color($primary, A700);
+    color: mat-contrast($primary, A700);
+  }
+
+  #panelA400 {
+    background: mat-color($primary, A400);
+    color: mat-contrast($primary, A400);
+  }
+
+  #panelA100 {
+    background: mat-color($primary, A100);
+    color: mat-contrast($primary, A100);
+  }
+}
