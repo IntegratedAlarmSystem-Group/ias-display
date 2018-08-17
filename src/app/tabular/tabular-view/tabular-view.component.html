@@ -8,9 +8,12 @@
   <mat-card-content>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
-      <span mat-form-field fxFlex >
-        <input matInput [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
-      </span>
+      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" fxFlex >
+        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
+        <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
       <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
         Show only set alarms
       </mat-slide-toggle>

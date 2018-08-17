@@ -129,11 +129,15 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   onKeyUp(event) {
     if (event.key === 'Escape') {
-      this.filterString = '';
-      this.applyFilter(this.filterString);
+      this.clearFilter();
     } else {
       this.applyFilter(event.target.value);
     }
+  }
+
+  clearFilter() {
+    this.filterString = '';
+    this.applyFilter(this.filterString);
   }
 
   /**
