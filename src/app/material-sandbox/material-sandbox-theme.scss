@@ -6,9 +6,10 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  // PRIMARY
   #panel900 {
     background: mat-color($primary, 900);
-    color: mat-contrast($primary, 890);
+    color: mat-contrast($primary, 900);
   }
 
   #panel800 {
@@ -72,9 +73,10 @@
   }
 
 
+  // ACCENT
   #panel900accent {
     background: mat-color($accent, 900);
-    color: mat-contrast($accent, 890);
+    color: mat-contrast($accent, 900);
   }
 
   #panel800accent {
@@ -119,7 +121,7 @@
 
   #panel50accent {
     background: mat-color($accent, 50);
-    color: mat-color($accent, 50);
+    color: mat-contrast($accent, 50);
   }
 
   #panelA700accent {
@@ -138,9 +140,10 @@
   }
 
 
+  // WARN
   #panel900warn {
     background: mat-color($warn, 900);
-    color: mat-contrast($warn, 890);
+    color: mat-contrast($warn, 800);
   }
 
   #panel800warn {
@@ -185,7 +188,7 @@
 
   #panel50warn {
     background: mat-color($warn, 50);
-    color: mat-color($warn, 50);
+    color: mat-contrast($warn, 50);
   }
 
   #panelA700warn {
@@ -202,4 +205,114 @@
     background: mat-color($warn, A100);
     color: mat-contrast($warn, A100);
   }
+
+  #status-bar {
+    background: mat-color($background, status-bar);
+  }
+
+  #app-bar {
+    background: mat-color($background, app-bar);
+  }
+
+  #background {
+    background: mat-color($background, background);
+  }
+
+  #hover {
+    background: mat-color($background, hover);
+  }
+
+  #card {
+    background: mat-color($background, card);
+  }
+
+  #dialog {
+    background: mat-color($background, dialog);
+  }
+
+  #disabled-button {
+    background: mat-color($background, disabled-button);
+  }
+
+  #raised-button {
+    background: mat-color($background, raised-button);
+  }
+
+  #focused-button {
+    background: mat-color($background, focused-button);
+  }
+
+  #selected-button {
+    background: mat-color($background, selected-button);
+  }
+
+  #selected-disabled-button {
+    background: mat-color($background, selected-disabled-button);
+  }
+
+  #disabled-button-toggle {
+    background: mat-color($background, disabled-button-toggle);
+  }
+
+  #unselected-chip {
+    background: mat-color($background, unselected-chip);
+  }
+
+  #disabled-list-option {
+    background: mat-color($background, disabled-list-option);
+  }
+
+  // Foreground
+  #base {
+    color: mat-color($foreground, base);
+  }
+
+  #divider {
+    color: mat-color($foreground, divider);
+  }
+
+  #dividers {
+    color: mat-color($foreground, dividers);
+  }
+
+  #disabled-button {
+    color: mat-color($foreground, disabled-button);
+  }
+
+  #disabled-text {
+    color: mat-color($foreground, disabled-text);
+  }
+
+  #hint-text {
+    color: mat-color($foreground, hint-text);
+  }
+
+  #secondary-text {
+    color: mat-color($foreground, secondary-text);
+  }
+
+  #icon {
+    color: mat-color($foreground, icon);
+  }
+
+  #icons {
+    color: mat-color($foreground, icons);
+  }
+
+  #text {
+    color: mat-color($foreground, text);
+  }
+
+  #slider-min {
+    color: mat-color($foreground, slider-min);
+  }
+
+  #slider-off {
+    color: mat-color($foreground, slider-off);
+  }
+
+  #slider-off-active {
+    color: mat-color($foreground, slider-off-active);
+  }
+
 }
