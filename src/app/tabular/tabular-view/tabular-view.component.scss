@@ -30,15 +30,19 @@
   }
 }
 
+.mat-form-field {
+  // padding-top: 5px;
+}
+
 
 /deep/ {
 
+  // Removes
   .mat-form-field-infix {
-    border: 0;
+    border-top-width: 2px;
   }
 
-  /* Styles by column */
-
+  // Size percentage by column
   .mat-column-status {
     flex: 0 0 10% !important;
   }
