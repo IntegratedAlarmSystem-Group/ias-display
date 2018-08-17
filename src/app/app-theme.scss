@@ -15,6 +15,8 @@
 
   #navigation-sidenav {
 
+    background: rgba(map_get($ias-dark-blue, 800), 0.65);
+
     mat-nav-list a.mat-list-item {
 
       color: $inactive-link;

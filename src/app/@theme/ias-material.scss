@@ -12,18 +12,18 @@
 
 @include mat-core();
 
-$ias-surface: (
-  100: #52677E,
-  600: #334151,
-  800: rgba(43, 59, 75, 0.69),
-  900: #212D3A,
-  contrast: (
-    100: white,
-    600: white,
-    800: white,
-    900: white,
-  )
-);
+// $ias-surface: (
+//   100: #52677E,
+//   600: #334151,
+//   800: rgba(43, 59, 75, 0.69),
+//   900: #212D3A,
+//   contrast: (
+//     100: white,
+//     600: white,
+//     800: white,
+//     900: white,
+//   )
+// );
 
 $ias-dark-blue: (
   50:  #E5EFFF,
@@ -90,11 +90,13 @@ $ias-blue: (
 // custom background and foreground palettes
 $ias-dark-theme-background: (
   status-bar: green,
-  app-bar:    rgba(map_get($ias-dark-blue, 800), 0.65),
+  app-bar:    rgba(map_get($ias-dark-blue, 800), 1),
+  // app-bar:    rgba(map_get($ias-dark-blue, 800), 0.65),
   background: map_get($ias-dark-blue, 900),
   hover:      map_get($ias-dark-blue, 600),
   card:       map_get($ias-dark-blue, 700),
-  dialog:     map_get($ias-dark-blue, 800),
+  dialog:     rgba(map_get($ias-dark-blue, 800), 1),
+  // dialog:     map_get($ias-dark-blue, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
