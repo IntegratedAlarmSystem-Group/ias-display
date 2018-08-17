@@ -1,5 +1,5 @@
 .mat-header-row {
-  padding-top: 10px;
+  padding-top: 30px;
   padding-bottom: 10px;
   min-height: 0px;
 }
@@ -29,12 +29,24 @@
   }
 }
 
+.filter-mat-form-field {
+  width: 500px;
+}
+
 
 /deep/ {
 
   // Removes
-  .mat-form-field-infix {
-    border-top-width: 2px;
+  .filter-mat-form-field {
+
+    .mat-form-field-infix {
+      border-top-width: 6px;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
   }
 
   // Size percentage by column

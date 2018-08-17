@@ -7,8 +7,8 @@
 
   <mat-card-content>
 
-    <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
-      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" fxFlex >
+    <div fxLayout="row wrap" fxLayoutAlign="none center" fxLayoutGap="20px">
+      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >
         <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
         <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
           <mat-icon>close</mat-icon>
