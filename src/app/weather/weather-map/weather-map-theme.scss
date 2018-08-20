@@ -1,0 +1,46 @@
+@mixin weather-map-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $map_stroke: mat-color($foreground, disabled-text);
+  $selected_pad: mat-color($foreground, text);
+  $map_background: mat-color($background, background);
+  $marker_stroke: mat-color($background, dialog);
+  $selected_marker_stroke: mat-color($foreground, secondary-text);
+
+  svg g.paths {
+    stroke: $map_stroke;
+  }
+
+  svg g.pads {
+    stroke: $map_stroke;
+    fill: $map_background
+  }
+
+  svg g.pad-groups {
+
+    &.selected {
+      circle {
+        stroke: $selected_pad;
+      }
+    }
+
+    circle {
+      stroke: $map_stroke;
+      fill: $map_background;
+    }
+  }
+
+  svg g.ws-primary-group {
+    stroke: $marker_stroke;
+  }
+
+  svg g.ws-primary-group:hover .ws-connector {
+    stroke: $selected_marker_stroke;
+  };
+
+}

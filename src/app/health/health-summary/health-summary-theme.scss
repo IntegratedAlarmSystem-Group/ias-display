@@ -1,0 +1,17 @@
+@mixin health-summary-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .ias.sensors{
+    background: map-get($background, dialog);;
+  }
+
+  .sensors-card{
+    border-right-color: map-get($foreground, divider);
+    color: map-get($foreground, secondary-text);
+  }
+}

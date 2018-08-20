@@ -1,16 +1,179 @@
 @import '~@angular/material/theming';
+@import '../actions/ack/ack-theme.scss';
+@import '../health/health-summary/health-summary-theme.scss';
+@import '../overview/overview-card/overview-card-theme.scss';
+@import '../tabular/tabular-view/tabular-view-theme.scss';
+@import '../weather/weather-summary/weather-summary-theme.scss';
+@import '../weather/weather-sidebar/weather-sidebar-theme.scss';
+@import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
+@import '../weather/weather-map/weather-map-theme.scss';
+@import '../weather/weather-data-map/weather-data-map-theme.scss';
+@import '../app-theme.scss';
+@import '../material-sandbox/material-sandbox-theme.scss';
 
 @include mat-core();
 
-$ias-app-primary: mat-palette($mat-grey, 50);
-$ias-app-accent: mat-palette($mat-pink, A200, A100, A400);
-$ias-app-warn: mat-palette($mat-red);
+$ias-palette: (
+    50: #4C6A89,
+   100: #4C6A89,
+   200: #3D5772,
+   300: #314963,
+   400: #2E445C,
+   500: #2c425a,
+   600: #273d54,
+   700: #22384e,
+   800: #1B3044,
+   900: #1B3044,
+  A100: #4AC8FF,
+  A400: #17BCFF,
+  A700: #005CA4,
+  contrast: (
+     50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: #212D3A,
+    A400: #212D3A,
+    A700: white,
+  )
+);
 
-$ias-app-theme: mat-dark-theme($ias-app-primary, $ias-app-accent, $ias-app-warn);
+$ias-blue: (
+  50:  #E1F6FF,
+  100: #B3E7FF,
+  200: #80D8FF,
+  300: #4AC8FF,
+  400: #17BCFF,
+  500: #00AFFF,
+  600: #00A1EF,
+  700: #008EDB,
+  800: #007CC7,
+  900: #005CA4,
+  A100: #4AC8FF,
+  A400: #17BCFF,
+  A700: #005CA4,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: #212D3A,
+    A400: #212D3A,
+    A700: white,
+  )
+);
 
-$ias-app-typography: mat-typography-config(
+// custom background and foreground palettes
+$ias-dark-theme-background: (
+  status-bar: map_get($ias-palette, 400),
+  app-bar:    map_get($ias-palette, 400),
+  background: map_get($ias-palette, 800),
+  hover:      map_get($ias-palette, 100),
+  card:       map_get($ias-palette, 200),
+  dialog:     map_get($ias-palette, 400),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($ias-palette, 400),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($ias-palette, 100),
+  selected-disabled-button: map_get($ias-palette, 400),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($ias-palette, 300),
+  disabled-list-option: black,
+);
+
+$ias-dark-theme-foreground: (
+  base:              white,
+  divider:           $white-12-opacity,
+  dividers:          $white-12-opacity,
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         map_get($ias-blue, 300),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              white,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+// instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
+@function create-ias-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: true,
+    foreground: $ias-dark-theme-foreground,
+    background: $ias-dark-theme-background,
+  );
+}
+
+// $ias-app-primary: mat-palette($mat-grey, 50);
+$ias-primary: mat-palette($ias-palette, 400, 100, 800);
+$ias-accent: mat-palette($ias-blue, 400, A100, A700);
+$ias-warn: mat-palette($mat-red);
+
+$ias-theme: create-ias-theme($ias-primary, $ias-accent, $ias-warn);
+
+$ias-typography: mat-typography-config(
   $font-family: 'Arial, Helvetica, sans-serif'
 );
 
-@include angular-material-theme($ias-app-theme);
-@include mat-core($ias-app-typography);
+@mixin ias-theme($theme) {
+  @include ack-theme($theme);
+  @include app-theme($theme);
+  @include health-summary-theme($theme);
+  @include overview-card-theme($theme);
+  @include tabular-view-theme($theme);
+  @include weather-summary-theme($theme);
+  @include weather-sidebar-theme($theme);
+  @include weather-station-sidebar-theme($theme);
+  @include weather-map-theme($theme);
+  @include weather-data-map-theme($theme);
+  @include material-sandbox-theme($theme);
+}
+
+@include angular-material-theme($ias-theme);
+@include ias-theme($ias-theme);
+@include mat-core($ias-typography);
+
+body {
+  background: map_get($ias-palette, 800);
+}
+
+button.close {
+  color: lightgray;
+  outline: none;
+
+}
+
+button.close:hover {
+  color: lightgray;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+a {
+  color: map_get($ias-blue, 300);
+}
+
+a:hover {
+  color: rgba(map_get($ias-blue, 300), 0.4);
+}

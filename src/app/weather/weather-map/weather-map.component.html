@@ -1,16 +1,10 @@
-<div> Map Sandbox </div>
 <div>
 
   <svg [attr.viewBox]="viewbox" class="ws-map">
 
     <!--  Route paths -->
     <g class="paths">
-      <path *ngFor="let path of svgPaths"
-        [attr.d]="path"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="none"
-      />
+      <path *ngFor="let path of svgPaths" [attr.d]="path"/>
     </g>
 
     <!--  Background layer with all the pads -->
@@ -20,9 +14,6 @@
         [attr.cy]="p.opt_cy"
         [attr.data]="p.name"
         r="5"
-        stroke="#636b74"
-        stroke-width="3"
-        fill="#212d3a"
       />
     </g>
 
@@ -36,9 +27,6 @@
           [attr.cy]="p.opt_cy"
           [attr.data]="p.name"
           r="5"
-          stroke="#636b74"
-          stroke-width="3"
-          fill="#212d3a"
         />
       </g>
 
@@ -50,9 +38,6 @@
     <g class="ws-primary-group" *ngFor="let p of primary_wstations" (click)="onClick(p)">
       <path class="ws-connector"
         [attr.d]="getSVGVirtualConnectorPath(p, 125, -50)"
-        stroke="#39505f"
-        stroke-width="3"
-        fill="none"
       />
       <foreignObject [attr.x]="p.opt_cx-25" [attr.y]="p.opt_cy-25" width="100" height="50">
         <xhtml:app-weather-marker-map [placemark]="p.name"></xhtml:app-weather-marker-map>

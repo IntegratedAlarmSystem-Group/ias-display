@@ -22,6 +22,7 @@ import { WeatherComponent } from './weather/weather/weather.component';
 import { AlarmComponent } from './shared/alarm/alarm.component';
 
 import { HttpModule } from '@angular/http';
+import { MaterialSandboxComponent } from './material-sandbox/material-sandbox.component';
 
 /**
 * Application routes
@@ -33,7 +34,8 @@ export const appRoutes: Routes = [
   { path: 'tabular/:filter', component: TabularViewComponent },
   { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
   { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
-  { path: 'weather', component: WeatherComponent}
+  { path: 'weather', component: WeatherComponent},
+  { path: 'sandbox', component: MaterialSandboxComponent},
 ];
 
 /**
@@ -42,6 +44,7 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    MaterialSandboxComponent,
   ],
   imports: [
     ActionsModule,

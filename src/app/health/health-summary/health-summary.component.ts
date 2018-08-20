@@ -11,7 +11,7 @@ import { Assets } from '../../settings';
 @Component({
   selector: 'app-health-summary',
   templateUrl: './health-summary.component.html',
-  styleUrls: ['./health-summary.component.css']
+  styleUrls: ['./health-summary.component.scss']
 })
 export class HealthSummaryComponent implements OnInit {
 

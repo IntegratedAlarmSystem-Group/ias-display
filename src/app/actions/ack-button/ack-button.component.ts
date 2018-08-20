@@ -68,7 +68,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Handle click on table rows, it triggers the ack modal
+  * Handle click on ack button, it triggers the ack modal
   */
   onClick(event) {
     this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm.core_id]}}]);

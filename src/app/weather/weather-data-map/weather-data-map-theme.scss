@@ -1,0 +1,20 @@
+@mixin weather-data-map-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $selected_marker_stroke: mat-color($foreground, secondary-text);
+
+  .ws-data-container {
+    background: mat-color($background, dialog, 0.95);
+    border-color: mat-color($background, dialog);
+  }
+
+  // :host-context(svg .ws-primary-group:hover) .ws-data-container {
+  //   border: 2px solid #a3bbc6;
+  // }
+
+}

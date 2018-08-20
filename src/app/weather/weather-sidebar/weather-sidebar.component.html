@@ -67,10 +67,10 @@
             </td>
           </tr>
         </table>
-        <hr class="antennas-list-line">
+        <mat-divider></mat-divider>
         <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">
           <div class="antennas-title"> Nearby Antennas </div>
-          <button mat-flat-button class="copy-antennas-button" (click)="copyAntennas(alarm.station)">
+          <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(alarm.station)">
             <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>
           </button>
         </div>

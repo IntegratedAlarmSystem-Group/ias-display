@@ -1,31 +1,36 @@
-/* Styles */
 
-mat-toolbar {
-  background: #2e445c;
-}
+#app-toolbar {
 
-mat-sidenav-container {
-  background: #212d3a;
+  padding: 0;
 
-  mat-sidenav {
+  .btn-wrapper {
+    padding: 0 16px;
   }
 
-  mat-sidenav-content {
-    background: transparent;
+  .content-wrapper {
+    padding: 0 16px;
+    width: 100%;
   }
+
+  img.ias-logo {
+    width: 35px;
+    margin-right: 10px;
+  }
+
 }
 
-button {
-    outline: 0px;
+#actions-sidenav  {
+  width: 500px;
+  padding: 24px;
+}
+
+
+#main-content  {
+  height: calc(100vh - 64px) !important;
 }
 
 #navigation-sidenav {
 
-  background: #2e445c;
-  position: absolute;
-  top: 65px;
-  bottom: 0;
-  overflow-y: unset;
   width: 220px;
 
   p {
@@ -34,23 +39,6 @@ button {
 
   /deep/ .mat-list-item-content {
     padding: 0px 12px;
-  }
-
-  .ias.ias-logo-container {
-    background: #4F81BD;
-    padding: .75rem 2.5rem;
-    border-radius: 4px;
-    text-align: center;
-    width: 80%;
-    position: absolute;
-    top: -1.75rem;
-    left: 10%;
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  img.ias.ias-logo {
-    width: 35px;
   }
 
   mat-nav-list a.mat-list-item {
@@ -65,10 +53,8 @@ button {
     }
 
     &.active-link {
-      color: #4ac8ff;
 
       /deep/ .mat-line {
-        color: white;
         font-weight: bold;
       }
 
@@ -94,40 +80,8 @@ button {
 
       padding-left: 0px;
 
-      &.active-link {
-        box-shadow: 4px 0px 0px 0px #4ac8ff inset;
-      }
-
     }
 
-  }
-  /* &.compacted */
-
-}
-
-#actions-sidenav  {
-  background: transparent;
-  width: 500px;
-  padding: 24px;
-}
-
-
-#main-content  {
-  height: calc(100vh - 64px) !important;
-  padding: 1.5rem 1.5rem 0.5rem;
-}
-
-.app-toolbar {
-
-  padding: 0;
-
-  .btn-wrapper {
-    padding: 0 16px;
-  }
-
-  .content-wrapper {
-    padding: 0 16px;
-    width: 100%;
   }
 
 }

@@ -21,4 +21,14 @@ export class WikiButtonComponent implements OnInit {
   /** Instantiates the component */
   ngOnInit() {
   }
+
+  /**
+  * Handle click on wiki button, it opens the url in another window
+  */
+  onClick(event) {
+    if (!this.url.startsWith('http://')) {
+      this.url = 'http://' + this.url;
+    }
+    window.open(this.url, '_blank');
+  }
 }
