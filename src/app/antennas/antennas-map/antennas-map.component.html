@@ -22,6 +22,16 @@
        fill="#212d3a"
      />
 
+
+     <ng-container *ngFor="let p of placemarks['pads']">
+       <svg:text
+         [attr.x]="p.opt_cx"
+         [attr.y]="p.opt_cy"
+         fill="white"
+       > {{ p.name }} </text>
+     </ng-container>
+
+
    </ng-container>
 
 </app-map>
