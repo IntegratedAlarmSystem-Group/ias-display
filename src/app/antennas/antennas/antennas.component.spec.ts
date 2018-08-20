@@ -1,10 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { AntennasComponent } from './antennas.component';
 import { AntennasMapComponent } from '../antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.component';
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { MapModule } from '../../map/map.module';
+import { AntennasService } from '../antennas.service';
+import { MapService } from '../../map/map.service';
+import { Map } from '../../map/fixtures';
+import { of } from 'rxjs';
 
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
@@ -14,6 +18,7 @@ describe('AntennasComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AntennasComponent, AntennasMapComponent, AntennasSidebarComponent ],
       imports: [ DataModule, IasMaterialModule, MapModule ],
+      providers: [ AntennasService ]
     })
     .compileComponents();
   }));
@@ -23,6 +28,12 @@ describe('AntennasComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  beforeEach(inject([AntennasService], (service) => {
+    spyOn(service, 'getMapData').and.callFake(function() {
+      return of(Map);
+    });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

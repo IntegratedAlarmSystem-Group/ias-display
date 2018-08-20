@@ -1,6 +1,8 @@
 <app-map
   [mapConfig]="this.mapConfig"
-  [mapdataAvailable]="this.mapdataAvailable"
+  [mapdataAvailable]="this.mapdataAvailable.value"
 >
+
+   <ng-container data="svg-elements"> </ng-container>
 
 </app-map>
