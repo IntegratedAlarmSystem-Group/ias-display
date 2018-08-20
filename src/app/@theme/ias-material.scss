@@ -14,7 +14,7 @@
 @include mat-core();
 
 $ias-palette: (
-    50: #E5EFFF,
+    50: #4C6A89,
    100: #4C6A89,
    200: #3D5772,
    300: #314963,
@@ -28,11 +28,11 @@ $ias-palette: (
   A400: #2E445C,
   A700: #2E445C,
   contrast: (
-    50: rgba(0, 0, 0, 0.87),
-    100: rgba(0, 0, 0, 0.87),
-    200: rgba(0, 0, 0, 0.87),
-    300: rgba(0, 0, 0, 0.87),
-    400: rgba(0, 0, 0, 0.87),
+     50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
     500: white,
     600: white,
     700: white,

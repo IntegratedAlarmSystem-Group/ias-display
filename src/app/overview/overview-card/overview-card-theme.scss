@@ -13,8 +13,7 @@
     }
 
     .content-wrapper{
-      background: rgba(map_get($ias-dark-blue, 800), 0.65);
-      // background: mat-color($background, app-bar);
+      background: map_get($primary, 600);
     }
   }
 

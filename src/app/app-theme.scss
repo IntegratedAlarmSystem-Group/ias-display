@@ -10,12 +10,12 @@
   $inactive-link: rgba($active-link, 0.65);
 
   #actions-sidenav {
-    background: mat-color($primary, default, 0.4);
+    background: mat-color($primary, 700);
   }
 
   #navigation-sidenav {
 
-    background: rgba(map_get($ias-dark-blue, 800), 0.65);
+    background: map_get($primary, 600);
 
     mat-nav-list a.mat-list-item {
 

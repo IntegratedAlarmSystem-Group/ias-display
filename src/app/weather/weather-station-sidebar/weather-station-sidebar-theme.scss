@@ -6,7 +6,7 @@
   $foreground: map-get($theme, foreground);
 
   .weather-station-sidebar {
-    background: mat-color($background, card, 0.5);
+    background: mat-color($primary, 300);
 
     &:hover {
       background: mat-color($background, hover);

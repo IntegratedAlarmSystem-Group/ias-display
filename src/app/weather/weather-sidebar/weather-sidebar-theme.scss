@@ -7,13 +7,11 @@
   $foreground: map-get($theme, foreground);
 
   .weather-sidebar-title {
-    background: rgba(map_get($ias-dark-blue, 800), 0.65);
-    // background: mat-color($background, dialog);
+    background: map_get($primary, 600);
   }
 
   .weather-sidebar-content {
-    background: rgba(map_get($ias-dark-blue, 800), 0.65);
-    // background: mat-color($background, app-bar);
+    background: map_get($primary, 600);
 
     .antennas-list-header {
 
