@@ -6,7 +6,7 @@ import { AntennasSidebarComponent } from './antennas-sidebar/antennas-sidebar.co
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-// import { MapModule } from '../map/map.module';
+import { MapModule } from '../map/map.module';
 
 @NgModule({
   imports: [
@@ -14,6 +14,7 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
     DataModule,
     SharedModule,
     IasMaterialModule,
+    MapModule,
   ],
   declarations: [AntennasComponent, AntennasMapComponent, AntennasSidebarComponent]
 })
