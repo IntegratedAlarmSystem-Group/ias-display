@@ -14,16 +14,16 @@
 @include mat-core();
 
 $ias-palette: (
-  50:  #E5EFFF,
-  100: #C5D8ED,
-  200: #A8BCD5,
-  300: #89A1BE,
-  400: #728CAC,
-  500: #5A799B,
-  600: #4C6A89,
-  700: #3D5772,
-  800: #2E445C,
-  900: #1B3044,
+    50: #E5EFFF,
+   100: #4C6A89,
+   200: #3D5772,
+   300: #314963,
+   400: #2E445C,
+   500: #2c425a,
+   600: #273d54,
+   700: #22384e,
+   800: #1B3044,
+   900: #1B3044,
   A100: #E5EFFF,
   A400: #2E445C,
   A700: #2E445C,
@@ -108,16 +108,16 @@ $ias-blue: (
 
 // custom background and foreground palettes
 $ias-dark-theme-background: (
-  status-bar: map_get($ias-dark-blue, 800),
-  app-bar:    map_get($ias-dark-blue, 800),
-  background: map_get($ias-dark-blue, 900),
-  hover:      map_get($ias-dark-blue, 600),
-  card:       map_get($ias-dark-blue, 700),
-  dialog:     map_get($ias-dark-blue, 800),
+  status-bar: map_get($ias-palette, 400),
+  app-bar:    map_get($ias-palette, 400),
+  background: map_get($ias-palette, 800),
+  hover:      map_get($ias-palette, 100),
+  card:       map_get($ias-palette, 200),
+  dialog:     map_get($ias-palette, 400),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
-  selected-button: map_get($ias-dark-blue, 600),
+  selected-button: map_get($ias-palette, 100),
   selected-disabled-button: map_get($mat-grey, 800),
   disabled-button-toggle: black,
   unselected-chip: map_get($mat-grey, 700),
@@ -154,7 +154,7 @@ $ias-dark-theme-foreground: (
 }
 
 // $ias-app-primary: mat-palette($mat-grey, 50);
-$ias-primary: mat-palette($ias-palette, 800, 100, 900);
+$ias-primary: mat-palette($ias-palette, 400, 100, 800);
 $ias-accent: mat-palette($ias-blue, 400, A100, A700);
 $ias-warn: mat-palette($mat-red);
 
@@ -183,7 +183,7 @@ $ias-typography: mat-typography-config(
 @include mat-core($ias-typography);
 
 body {
-  background: map_get($ias-dark-blue, 900);
+  background: map_get($ias-palette, 800);
 }
 
 button.close {
