@@ -8,8 +8,10 @@ import { MapModule } from '../../map/map.module';
 })
 export class AntennasMapComponent implements OnInit {
 
+  /** Map Configuration  */
   public mapConfig = {};
 
+   /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = false;
 
   constructor() { }
