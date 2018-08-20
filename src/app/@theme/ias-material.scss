@@ -84,12 +84,12 @@ $ias-dark-theme-background: (
   card:       map_get($ias-palette, 200),
   dialog:     map_get($ias-palette, 400),
   disabled-button: $white-12-opacity,
-  raised-button: map-get($mat-grey, 800),
+  raised-button: map-get($ias-palette, 400),
   focused-button: $white-6-opacity,
   selected-button: map_get($ias-palette, 100),
-  selected-disabled-button: map_get($mat-grey, 800),
+  selected-disabled-button: map_get($ias-palette, 400),
   disabled-button-toggle: black,
-  unselected-chip: map_get($mat-grey, 700),
+  unselected-chip: map_get($ias-palette, 300),
   disabled-list-option: black,
 );
 
