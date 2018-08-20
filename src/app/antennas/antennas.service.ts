@@ -65,6 +65,38 @@ export class AntennasService {
         placemark: 'S306',
         alarm: 'WS-MeteoCentral-Temperature',
       },
+      'A124': {
+        placemark: 'A124',
+        alarm: 'WS-MeteoCentral-Temperature',
+      },
+      'A130': {
+        placemark: 'A130',
+        alarm: 'Alarmdummy',
+      },
+      'W201': {
+        placemark: 'W201',
+        alarm: 'Alarmdummy',
+      },
+      'A078': {
+        placemark: 'A078',
+        alarm: 'Alarmdummy',
+      },
+      'A077': {
+        placemark: 'A077',
+        alarm: 'Alarmdummy',
+      },
+      'P413': {
+        placemark: 'P413',
+        alarm: 'Alarmdummy',
+      },
+      'S308': {
+        placemark: 'S308',
+        alarm: 'Alarmdummy',
+      },
+      'S309': {
+        placemark: 'S309',
+        alarm: 'Alarmdummy',
+      },
     };
   }
 
