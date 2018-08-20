@@ -6,7 +6,7 @@ import { HttpClientService } from '../data/http-client.service';
 
 import { DataModule } from '../data/data.module';
 
-import { Map } from '../weather/fixtures';
+import { Map } from '../map/fixtures';
 
 import { of } from 'rxjs';
 

@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { DataModule } from '../data/data.module';
 import { WeatherService } from './weather.service';
 import { HttpClientService } from '../data/http-client.service';
-import { Map } from './fixtures';
+import { Map } from '../map/fixtures';
 import { of } from 'rxjs';
 
 let subject: WeatherService;

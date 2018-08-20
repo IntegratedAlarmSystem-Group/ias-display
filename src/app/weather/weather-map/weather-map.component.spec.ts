@@ -5,7 +5,7 @@ import { WeatherMarkerMapComponent } from '../weather-marker-map/weather-marker-
 import { WeatherDataMapComponent } from '../weather-data-map/weather-data-map.component';
 import { WeatherService } from '../weather.service';
 import { DataModule } from '../../data/data.module';
-import { Map } from '../fixtures';
+import { Map } from '../../map/fixtures';
 
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
