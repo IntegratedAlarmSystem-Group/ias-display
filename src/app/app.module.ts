@@ -13,6 +13,7 @@ import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
 import { TabularModule } from './tabular/tabular.module';
 import { WeatherModule } from './weather/weather.module';
+import { MapModule } from './map/map.module';
 import { AppComponent } from './app.component';
 import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
 import { OverviewComponent } from './overview/overview/overview.component';
@@ -61,6 +62,7 @@ export const appRoutes: Routes = [
     TabularModule,
     WeatherModule,
     HttpModule,
+    MapModule,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
