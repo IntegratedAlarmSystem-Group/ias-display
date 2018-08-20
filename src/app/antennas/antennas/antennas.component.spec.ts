@@ -10,14 +10,26 @@ import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
 
+import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
+
+
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
   let fixture: ComponentFixture<AntennasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AntennasComponent, AntennasMapComponent, AntennasSidebarComponent ],
-      imports: [ DataModule, IasMaterialModule, MapModule ],
+      declarations: [
+        AntennasComponent,
+        AntennasMapComponent,
+        AntennasSidebarComponent,
+        AntennaMarkerComponent
+      ],
+      imports: [
+        DataModule,
+        IasMaterialModule,
+        MapModule
+      ],
       providers: [ AntennasService ]
     })
     .compileComponents();

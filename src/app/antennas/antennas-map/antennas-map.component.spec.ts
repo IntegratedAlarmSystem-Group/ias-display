@@ -6,6 +6,7 @@ import { AntennasService } from '../antennas.service';
 import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
+import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
 
 
 describe('AntennasMapComponent', () => {
@@ -15,7 +16,10 @@ describe('AntennasMapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AntennasMapComponent ],
+      declarations: [
+        AntennasMapComponent,
+        AntennaMarkerComponent
+      ],
       imports: [ MapModule, DataModule ],
       providers: [ AntennasService ]
     })

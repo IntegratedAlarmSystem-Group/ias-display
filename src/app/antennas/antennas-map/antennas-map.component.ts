@@ -59,9 +59,10 @@ export class AntennasMapComponent implements OnInit {
     });
   }
 
-  alarmHasLocation(placemark) {
+  existsAlarmForPlacemark(placemark) {
+    const placemark_id = placemark.name;
     const index = Object.keys(
-      this.service.mapAlarmsConfig).indexOf(placemark);
+      this.service.mapAlarmsConfig).indexOf(placemark_id);
     if (index > -1) {
       return true;
     } else {
@@ -69,15 +70,21 @@ export class AntennasMapComponent implements OnInit {
     }
   }
 
+  getAlarmForPlacemark(placemark): Alarm {
+    const alarm_id = this.getAlarmConfig(placemark).alarm;
+    return this.alarmService.get(alarm_id);
+  }
+
   getAlarmConfig(placemark) {
-    const hasLocation = this.alarmHasLocation(placemark);
+    const hasLocation = this.existsAlarmForPlacemark(placemark);
     if (hasLocation === true) {
-      return this.service.mapAlarmsConfig[placemark];
+      const placemark_id = placemark.name;
+      return this.service.mapAlarmsConfig[placemark_id];
     }
   }
 
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
+  onClick(placemark) {
+    alert(placemark.name);
   }
 
 }

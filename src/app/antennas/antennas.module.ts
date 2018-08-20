@@ -7,6 +7,7 @@ import { DataModule } from '../data/data.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { MapModule } from '../map/map.module';
 import { AntennasService } from './antennas.service';
+import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/antenna-marker.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AntennasService } from './antennas.service';
   declarations: [
     AntennasComponent,
     AntennasMapComponent,
-    AntennasSidebarComponent
+    AntennasSidebarComponent,
+    AntennaMarkerComponent
   ]
 })
 export class AntennasModule { }
