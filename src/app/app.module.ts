@@ -22,9 +22,6 @@ import { ShelveComponent } from './actions/shelve/shelve.component';
 import { WeatherComponent } from './weather/weather/weather.component';
 import { AlarmComponent } from './shared/alarm/alarm.component';
 
-import { InfomapOneComponent } from './infomap-one/infomap-one/infomap-one.component';
-import { InfomapOneModule } from './infomap-one/infomap-one.module';
-
 import { HttpModule } from '@angular/http';
 
 /**
@@ -38,7 +35,6 @@ export const appRoutes: Routes = [
   { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
   { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
   { path: 'weather', component: WeatherComponent },
-  { path: 'infomap-one', component: InfomapOneComponent },
 ];
 
 /**
@@ -64,7 +60,6 @@ export const appRoutes: Routes = [
     WeatherModule,
     HttpModule,
     MapModule,
-    InfomapOneModule,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
