@@ -53,6 +53,9 @@ export class AntennasMapComponent implements OnInit {
     this.initialize();
   }
 
+  /**
+   * Component initialization with the related map data source
+   */
   initialize() {
     this.service.getMapData().subscribe((mapdata) => {
       this.placemarks = mapdata['placemarkers'];
@@ -66,6 +69,9 @@ export class AntennasMapComponent implements OnInit {
     });
   }
 
+  /**
+   * Method to verify if there is an alarm related to the selected placemark
+   */
   existsAlarmForPlacemark(placemark) {
     const placemark_id = placemark.name;
     const index = Object.keys(
@@ -77,11 +83,17 @@ export class AntennasMapComponent implements OnInit {
     }
   }
 
+  /**
+   * Get alarm related ot a placemark
+   */
   getAlarmForPlacemark(placemark): Alarm {
     const alarm_id = this.getAlarmConfig(placemark).alarm;
     return this.alarmService.get(alarm_id);
   }
 
+  /**
+   * Get the alarm configuration from the alarm service for a selected placemark
+   */
   getAlarmConfig(placemark) {
     const hasLocation = this.existsAlarmForPlacemark(placemark);
     if (hasLocation === true) {
@@ -90,8 +102,38 @@ export class AntennasMapComponent implements OnInit {
     }
   }
 
+  /**
+   * Check if an specific antenna marker was selected
+   * through its related placemark
+   */
+  isSelected(placemark) {
+    return this.selectedAntennaMarker === placemark.name;
+  }
+
+  /**
+   * Opacity class name for each antenna marker
+   */
+  getOpacityClass(placemark) {
+    if (this.selectedAntennaMarker === '') {
+      return 'opacity-100';
+    } else {
+      if ( this.isSelected(placemark) === true ) {
+        return 'opacity-100';
+      } else {
+        return 'opacity-40';
+      }
+    }
+  }
+
+  /**
+   * On click action for antenna markers
+   */
   onClick(placemark) {
-    this.selectedAntennaMarker = placemark.name;
+    if (this.selectedAntennaMarker === placemark.name) {
+      this.selectedAntennaMarker = '';
+    } else {
+      this.selectedAntennaMarker = placemark.name;
+    }
     this.clickedAntennaMarker.emit(this.selectedAntennaMarker);
   }
 

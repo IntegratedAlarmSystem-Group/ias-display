@@ -1,4 +1,17 @@
-svg g.paths {
-  stroke-width: 3;
-  fill: none;
+.opacity-100 {
+  opacity: 1.0;
+}
+
+.opacity-40 {
+  opacity: 0.4;
+  background-color: red;
+  width: 10;
+  height: 10;
+}
+
+.disabled-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

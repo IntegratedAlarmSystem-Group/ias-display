@@ -23,19 +23,23 @@
      />
 
      <!--- for debugging - start -->
-     <ng-container *ngFor="let p of placemarks['pads']">
+     <!-- <ng-container *ngFor="let p of placemarks['pads']">
        <svg:text
+         class="disabled-selection"
          [attr.x]="p.opt_cx"
          [attr.y]="p.opt_cy"
          fill="white"
          fill-opacity="0.4"
        > {{ p.name }} </text>
-     </ng-container>
+     </ng-container> -->
      <!-- for debugging - end -->
 
      <ng-container *ngFor="let p of placemarks['pads']">
        <ng-container *ngIf="existsAlarmForPlacemark(p)">
-         <svg:g (click)="onClick(p)">
+         <svg:g
+           (click)="onClick(p)"
+           [ngClass]="getOpacityClass(p)"
+         >
            <svg:foreignObject
             [attr.x]="p.opt_cx-25"
             [attr.y]="p.opt_cy-25"
