@@ -21,9 +21,11 @@
       grid-row-gap: 6px;
 
       .grid-item {
-        border: 1px solid white;
+        height: 52px;
+        line-height: 52px;
         border-radius: 4px;
         padding: 0;
+        position: relative;
       }
 
     }

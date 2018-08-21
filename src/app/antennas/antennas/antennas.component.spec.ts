@@ -5,6 +5,7 @@ import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.c
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { MapModule } from '../../map/map.module';
+import { SharedModule } from '../../shared/shared.module';
 import { AntennasService } from '../antennas.service';
 import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
@@ -28,7 +29,8 @@ describe('AntennasComponent', () => {
       imports: [
         DataModule,
         IasMaterialModule,
-        MapModule
+        MapModule,
+        SharedModule
       ],
       providers: [ AntennasService ]
     })

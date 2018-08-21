@@ -6,6 +6,7 @@ import { AntennasSidebarComponent } from './antennas-sidebar/antennas-sidebar.co
 import { DataModule } from '../data/data.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { MapModule } from '../map/map.module';
+import { SharedModule } from '../shared/shared.module';
 import { AntennasService } from './antennas.service';
 import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/antenna-marker.component';
 
@@ -16,6 +17,7 @@ import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/an
     DataModule,
     IasMaterialModule,
     MapModule,
+    SharedModule,
   ],
   providers: [
     AntennasService
