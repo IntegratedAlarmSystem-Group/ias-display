@@ -10,6 +10,7 @@
 @import '../weather/weather-data-map/weather-data-map-theme.scss';
 @import '../app-theme.scss';
 @import '../material-sandbox/material-sandbox-theme.scss';
+@import '../antennas/antennas-sidebar/antennas-sidebar-theme.scss';
 
 @include mat-core();
 
@@ -145,6 +146,7 @@ $ias-typography: mat-typography-config(
   @include weather-map-theme($theme);
   @include weather-data-map-theme($theme);
   @include material-sandbox-theme($theme);
+  @include antennas-sidebar-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
