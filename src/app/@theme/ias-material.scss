@@ -8,6 +8,7 @@
 @import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
 @import '../weather/weather-map/weather-map-theme.scss';
 @import '../weather/weather-data-map/weather-data-map-theme.scss';
+@import '../antennas/antennas-map/antennas-map-theme.scss';
 @import '../app-theme.scss';
 @import '../material-sandbox/material-sandbox-theme.scss';
 
@@ -108,6 +109,7 @@ $ias-dark-theme-foreground: (
   slider-min:        white,
   slider-off:        rgba(white, 0.3),
   slider-off-active: rgba(white, 0.3),
+  opaque-divider:    hsl(210, 17%, 32%)
 );
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
@@ -145,6 +147,7 @@ $ias-typography: mat-typography-config(
   @include weather-map-theme($theme);
   @include weather-data-map-theme($theme);
   @include material-sandbox-theme($theme);
+  @include antennas-map-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);

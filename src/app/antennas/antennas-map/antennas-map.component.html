@@ -5,14 +5,14 @@
 
    <ng-container data="svg-elements">
 
-     <svg:path *ngFor="let path of svgPaths"
+     <svg:path class="paths" *ngFor="let path of svgPaths"
        [attr.d]="path"
        stroke="#636b74"
        stroke-width="3"
        fill="none"
      />
 
-     <svg:circle *ngFor="let p of placemarks['pads']"
+     <svg:circle class="pads" *ngFor="let p of placemarks['pads']"
        [attr.cx]="p.opt_cx"
        [attr.cy]="p.opt_cy"
        [attr.data]="p.name"

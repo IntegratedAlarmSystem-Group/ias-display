@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 @Component({
   selector: 'app-antennas-map',
   templateUrl: './antennas-map.component.html',
-  styleUrls: ['./antennas-map.component.css']
+  styleUrls: ['./antennas-map.component.scss']
 })
 export class AntennasMapComponent implements OnInit {
 
