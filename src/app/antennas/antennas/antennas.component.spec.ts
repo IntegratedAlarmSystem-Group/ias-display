@@ -13,6 +13,13 @@ import { of } from 'rxjs';
 import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
 
 
+const mockAntennasConfig =  {
+  'P000': {
+    placemark: 'P000',
+    alarm: 'alarmId',
+  }
+};
+
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
   let fixture: ComponentFixture<AntennasComponent>;
@@ -30,9 +37,17 @@ describe('AntennasComponent', () => {
         IasMaterialModule,
         MapModule
       ],
-      providers: [ AntennasService ]
+      providers: [ AntennasService, MapService ]
     })
     .compileComponents();
+  }));
+
+  beforeEach(inject([AntennasService], (service) => {
+    spyOn(service, 'initialize').and.callFake(function() {});
+    service.mapAlarmsConfig = mockAntennasConfig;
+    spyOn(service, 'getMapData').and.callFake(function() {
+      return of(Map);
+    });
   }));
 
   beforeEach(() => {
@@ -40,12 +55,6 @@ describe('AntennasComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  beforeEach(inject([AntennasService], (service) => {
-    spyOn(service, 'getMapData').and.callFake(function() {
-      return of(Map);
-    });
-  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
