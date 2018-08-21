@@ -153,10 +153,12 @@ $ias-typography: mat-typography-config(
 @include ias-theme($ias-theme);
 @include mat-core($ias-typography);
 
+// App Background:
 body {
-  background: map_get($ias-palette, 800);
+  background: map_get($ias-palette, 900);
 }
 
+// Close Button:
 button.close {
   color: lightgray;
   outline: none;
@@ -172,10 +174,16 @@ button:focus {
   outline: none;
 }
 
+// Colors for Links:
 a {
   color: map_get($ias-blue, 300);
 }
 
 a:hover {
   color: rgba(map_get($ias-blue, 300), 0.4);
+}
+
+.snackbar {
+  background: mat-color($ias-palette, 200);
+  color: mat-contrast($ias-palette, 200);
 }
