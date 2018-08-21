@@ -1,0 +1,35 @@
+.antennas-sidebar-title {
+  padding: 12px;
+}
+
+.antennas-sidebar-content {
+  padding: 12px;
+  height: calc(100vh - 112px) !important;
+
+  .antennas-group-container {
+    margin: 6px 0px;
+
+    .antennas-group-title {
+      line-height: 40px;
+      font-weight: bold;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      grid-column-gap: 10px;
+      grid-row-gap: 6px;
+
+      .grid-item {
+        height: 52px;
+        line-height: 52px;
+        border-radius: 4px;
+        padding: 0;
+        position: relative;
+      }
+
+    }
+
+  }
+
+}

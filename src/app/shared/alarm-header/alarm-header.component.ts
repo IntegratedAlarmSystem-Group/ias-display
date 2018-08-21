@@ -19,6 +19,17 @@ export class AlarmHeaderComponent implements OnInit {
    */
   @Input() showActionBadges = true;
 
+  /**
+   * Defines the max size of the displayed alarm name. This value is 20 characters by default.
+   */
+  @Input() alarmNameMaxSize = 20;
+
+  /**
+   * Defines an optional alarm name to display. By default it is null and
+   * in that case the component use the alarm core_id.
+   */
+  @Input() optionalAlarmName = null;
+
   constructor() { }
 
   ngOnInit() {
@@ -68,12 +79,17 @@ export class AlarmHeaderComponent implements OnInit {
   }
 
   getAlarmName(): string {
-    const maxSize = 20;
+    let alarmName;
     if (this.alarm) {
-      if (this.alarm.core_id.length > maxSize) {
-        return this.alarm.core_id.substring(0, maxSize) + '...';
+      if (this.optionalAlarmName) {
+        alarmName = this.optionalAlarmName;
       } else {
-        return this.alarm.core_id;
+        alarmName = this.alarm.core_id;
+      }
+      if (alarmName.length > this.alarmNameMaxSize) {
+        return alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
+      } else {
+        return alarmName;
       }
     }
   }

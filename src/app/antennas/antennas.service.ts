@@ -45,6 +45,14 @@ export class AntennasService {
   }
 
   /**
+  * Transforms the dictionary of antennas configurations into a list
+  * @returns {Object[]} a list with the antennas configurations
+  */
+  getArrayValues() {
+    return Object.values(this.mapAlarmsConfig);
+  }
+
+  /**
   * Define the IDs of the alarms that the component should listen to
   */
   loadAlarmsConfig() {

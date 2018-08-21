@@ -1,3 +1,43 @@
-<p>
-  antennas-sidebar works!
-</p>
+<div class="antennas-sidebar-title">
+  ANTENNAS
+</div>
+
+<div class="antennas-sidebar-content">
+
+  <div class="antennas-group-container">
+    <span class="antennas-group-title"> DV </span>
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let antennaConfig of this.antennasService.getArrayValues()">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
+    </div>
+  </div>
+
+  <div class="antennas-group-container">
+    <span class="antennas-group-title"> DA </span>
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let antennaConfig of this.antennasService.getArrayValues()">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
+    </div>
+  </div>
+
+  <div class="antennas-group-container">
+    <span class="antennas-group-title"> CM </span>
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let antennaConfig of this.antennasService.getArrayValues()">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
+    </div>
+  </div>
+
+  <div class="antennas-group-container">
+    <span class="antennas-group-title"> PM </span>
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let antennaConfig of this.antennasService.getArrayValues()">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
+    </div>
+  </div>
+
+</div>
