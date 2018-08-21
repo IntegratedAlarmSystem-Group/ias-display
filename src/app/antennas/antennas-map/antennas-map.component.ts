@@ -13,14 +13,12 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 })
 export class AntennasMapComponent implements OnInit {
 
-  /** Variable to manage a placemark selection from an external component */
-  @Input() outerSelectedPlacemark: string;
+  /** Variable to manage a placemark selection
+   * from the map, or from an external component */
+  @Input() selectedAntennaMarker = '';
 
   /** Variable to manage a placemark selection from the map */
-  @Output() innerSelectedPlacemark = new EventEmitter<string>();
-
-  /** Selected placemark name */
-  public selectedPlacemark: string;
+  @Output() clickedAntennaMarker = new EventEmitter<string>();
 
   /** Source data for the map and related configuration settings */
 
@@ -93,8 +91,8 @@ export class AntennasMapComponent implements OnInit {
   }
 
   onClick(placemark) {
-    this.selectedPlacemark = placemark.name;
-    this.innerSelectedPlacemark.emit(this.selectedPlacemark);
+    this.selectedAntennaMarker = placemark.name;
+    this.clickedAntennaMarker.emit(this.selectedAntennaMarker);
   }
 
 }

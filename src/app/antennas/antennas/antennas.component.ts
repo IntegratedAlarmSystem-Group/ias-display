@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AntennasComponent implements OnInit {
 
   /** Selected placemark name from the inner map or inner components */
-  selectedPlacemark = '';
+  selectedAntenna = '';
 
   /**
    * Builds an instance of the component
@@ -21,9 +21,9 @@ export class AntennasComponent implements OnInit {
   ngOnInit() {
   }
 
-  /** Update selected placemark using events emitted form internal components  */
-  updateSelectedPlacemark(selectedPlacemark: string) {
-    this.selectedPlacemark = selectedPlacemark;
+  /** Update selected placemark name using events emitted from internal components  */
+  updateSelectedAntenna(selectedAntennaMarker: string) {
+    this.selectedAntenna = selectedAntennaMarker;
   }
 
 }
