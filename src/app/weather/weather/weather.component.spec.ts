@@ -13,7 +13,7 @@ import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.comp
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
 import { WeatherService } from '../weather.service';
 import { Router } from '@angular/router';
-import { Map } from '../fixtures';
+import { Map } from '../../map/fixtures';
 
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 

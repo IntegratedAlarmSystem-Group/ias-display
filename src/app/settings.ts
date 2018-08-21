@@ -29,11 +29,19 @@ export const Locale = {
   TIMEZONE: '+0000',
 };
 
-/** Set that defines the locations of assets in the applicaiton */
+/** Set that defines the locations of assets in the application */
 export const Assets = {
   ICONS: '/assets/img/',
 };
 
+/** Url settings to get data for the related displays */
+
+/** Key for the url to get information for the weather display */
 export const WeatherSettings = {
+  mapKey: 'weather',
+};
+
+/** Key for the url to get information for the antenna display */
+export const AntennasSettings = {
   mapKey: 'weather',
 };
