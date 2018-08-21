@@ -110,33 +110,40 @@ export class WeatherService {
   */
   loadWeatherStationsConfig() {
     this.weatherStationsConfig =  {
-      'Meteo201': {
-        placemark: 'Meteo201',
-        station: 'Alarmdummy',
-        temperature: 'WS-Meteo201-Temperature',
-        windspeed: 'WS-Meteo201-WindSpeed',
-        humidity: 'WS-Meteo201-Humidity',
-      },
-      'MeteoCentral': {
+      'MeteoCentral': { // MORITA_AND_INNER
         placemark: 'MeteoCentral',
-        station: 'WS-MeteoCentral-Temperature',
-        temperature: 'WS-MeteoCentral-Temperature',
-        windspeed: 'WS-MeteoCentral-WindSpeed',
-        humidity: 'WS-MeteoCentral-Humidity',
+        station: 'WS-Inner-Temperature',
+        temperature: 'WS-Inner-Temperature',
+        windspeed: 'WS-Inner-WindSpeed',
+        humidity: 'WS-Inner-Humidity',
       },
-      'Meteo410': {
+      'ACA': { // MORITA_AND_INNER
+        placemark: 'ACA',
+        station: 'WS-ACA-Temperature',
+        temperature: 'WS-ACA-Temperature',
+        windspeed: 'WS-ACA-WindSpeed',
+        humidity: 'WS-ACA-Humidity',
+      },
+      'Meteo201': { // W ARM
+        placemark: 'Meteo201',
+        station: 'WS-W-Temperature',
+        temperature: 'WS-W-Temperature',
+        windspeed: 'WS-W-WindSpeed',
+        humidity: 'WS-W-Humidity',
+      },
+      'Meteo410': { // P ARM
         placemark: 'Meteo410',
-        station: 'WS-MeteoOSF-Temperature',
-        temperature: 'WS-MeteoOSF-Temperature',
-        windspeed: 'WS-MeteoOSF-WindSpeed',
-        humidity: 'WS-MeteoOSF-Humidity',
+        station: 'WS-P-Temperature',
+        temperature: 'WS-P-Temperature',
+        windspeed: 'WS-P-WindSpeed',
+        humidity: 'WS-P-Humidity',
       },
-      'Meteo309': {
+      'Meteo309': { // S ARM
         placemark: 'Meteo309',
-        station: 'WS-Meteo309-Temperature',
-        temperature: 'WS-Meteo309-Temperature',
-        windspeed: 'WS-Meteo309-WindSpeed',
-        humidity: 'WS-Meteo309-Humidity',
+        station: 'WS-S-Temperature',
+        temperature: 'WS-S-Temperature',
+        windspeed: 'WS-S-WindSpeed',
+        humidity: 'WS-S-Humidity',
       },
     };
   }
