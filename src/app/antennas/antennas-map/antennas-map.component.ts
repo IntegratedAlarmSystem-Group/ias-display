@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService } from '../antennas.service';
@@ -12,6 +12,15 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
   styleUrls: ['./antennas-map.component.css']
 })
 export class AntennasMapComponent implements OnInit {
+
+  /** Variable to manage a placemark selection from an external component */
+  @Input() outerSelectedPlacemark: string;
+
+  /** Variable to manage a placemark selection from the map */
+  @Output() innerSelectedPlacemark = new EventEmitter<string>();
+
+  /** Selected placemark name */
+  public selectedPlacemark: string;
 
   /** Source data for the map and related configuration settings */
 
@@ -84,7 +93,8 @@ export class AntennasMapComponent implements OnInit {
   }
 
   onClick(placemark) {
-    alert(placemark.name);
+    this.selectedPlacemark = placemark.name;
+    this.innerSelectedPlacemark.emit(this.selectedPlacemark);
   }
 
 }
