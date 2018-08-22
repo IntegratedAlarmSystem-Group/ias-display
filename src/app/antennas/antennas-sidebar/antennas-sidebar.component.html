@@ -1,8 +1,25 @@
+<!-- TITLE -->
 <div class="antennas-sidebar-title">
-  ANTENNAS
+  <div *ngIf="this.selectedAntenna == ''; then antennasTitle else returnLink"></div>
 </div>
-<div class="antennas-sidebar-content">
 
+<!-- Title when there is not a selected antenna -->
+<ng-template #antennasTitle>
+  <span> ANTENNAS </span>
+</ng-template>
+
+<!-- Title when one antenna is selected -->
+<ng-template #returnLink>
+  <span> < {{this.selectedAntenna}} </span>
+</ng-template>
+
+<!-- CONTENT -->
+<div class="antennas-sidebar-content">
+  <div *ngIf="this.selectedAntenna == ''; then antennasList else antennasDetail"> </div>
+</div>
+
+<!-- Content when there is not a selected antenna -->
+<ng-template #antennasList>
   <div class="antennas-group-container" *ngFor="let group of getAntennasGroups()">
     <span class="antennas-group-title"> {{group}} </span>
     <div class="grid-container">
@@ -11,5 +28,8 @@
       </div>
     </div>
   </div>
+</ng-template>
 
-</div>
+<!-- Content when one antenna is selected -->
+<ng-template #antennasDetail>
+</ng-template>

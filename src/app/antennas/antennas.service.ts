@@ -22,6 +22,7 @@ export class MapAlarmConfig {
 */
 export class SidebarAlarmConfig {
 
+  /** ID of the Antenna associated with the {@link Alarm} */
   public antenna: string;
 
   /** ID to map the {@link Alarm} to the location on the map */
