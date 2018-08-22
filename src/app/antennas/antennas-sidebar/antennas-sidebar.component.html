@@ -1,13 +1,12 @@
 <div class="antennas-sidebar-title">
   ANTENNAS
 </div>
-
 <div class="antennas-sidebar-content">
 
   <div class="antennas-group-container" *ngFor="let group of getAntennasGroups()">
     <span class="antennas-group-title"> {{group}} </span>
     <div class="grid-container">
-      <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)">
+      <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
         <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
       </div>
     </div>

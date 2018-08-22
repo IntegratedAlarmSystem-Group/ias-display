@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService, MapAlarmConfig, SidebarAlarmConfig } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
@@ -10,7 +10,9 @@ import { Alarm } from '../../data/alarm';
 })
 export class AntennasSidebarComponent implements OnInit {
 
-  @Input() selectedStation = '';
+  @Input() selectedAntenna = '';
+
+  @Output() antennaClicked = new EventEmitter<string>();
 
   /**
   * Builds an instance of the component
@@ -57,6 +59,27 @@ export class AntennasSidebarComponent implements OnInit {
   */
   getAntennasByGroup(groupID: string): SidebarAlarmConfig [] {
     return this.antennasService.sidebarAlarmsConfig[groupID];
+  }
+
+  /**
+  * Indicates if the antenna is selected or not
+  * @param {SidebarAlarmConfig} alarmConfig configuration of the alarm
+  * @return  {boolean} true if the alarm is selected or false if it is not
+  */
+  isSelected(alarmConfig: SidebarAlarmConfig) {
+    return this.selectedAntenna === alarmConfig.placemark;
+  }
+
+  /**
+  * Action performed when the antenna is clicked
+  */
+  onClick(alarmConfig: SidebarAlarmConfig) {
+    if ( this.selectedAntenna !== alarmConfig.placemark) {
+      this.selectedAntenna = alarmConfig.placemark;
+    } else {
+      this.selectedAntenna = '';
+    }
+    this.antennaClicked.emit(this.selectedAntenna);
   }
 
 }
