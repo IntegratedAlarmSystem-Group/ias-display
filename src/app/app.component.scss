@@ -41,6 +41,11 @@
     padding: 0px 12px;
   }
 
+  /deep/ .mat-list-text {
+    padding-left: 0;
+    width: 74%;
+  }
+
   mat-nav-list a.mat-list-item {
 
     height: 80px;

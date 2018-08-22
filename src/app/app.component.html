@@ -17,7 +17,12 @@
       <mat-nav-list>
         <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
-            <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+            <ng-container *ngIf="item.svgIcon">
+              <mat-icon svgIcon="{{ item.icon }}">{{ item.icon }}</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!item.svgIcon">
+              <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+            </ng-container>
             <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
         </div>
