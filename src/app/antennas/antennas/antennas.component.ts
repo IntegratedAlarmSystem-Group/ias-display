@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AntennaConfig } from '../antennas.service';
 
 @Component({
   selector: 'app-antennas',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AntennasComponent implements OnInit {
 
   /** Selected placemark name from the inner map or inner components */
-  selectedAntenna = '';
+  selectedAntenna = null;
 
   /**
    * Builds an instance of the component
@@ -22,8 +23,8 @@ export class AntennasComponent implements OnInit {
   }
 
   /** Update selected placemark name using events emitted from internal components  */
-  updateSelectedAntenna(selectedAntennaMarker: string) {
-    this.selectedAntenna = selectedAntennaMarker;
+  updateSelectedAntenna(selectedAntenna: AntennaConfig) {
+    this.selectedAntenna = selectedAntenna;
   }
 
 }

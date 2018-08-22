@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService } from '../antennas.service';
+import { AntennasService, AntennaConfig } from '../antennas.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 
@@ -15,10 +15,10 @@ export class AntennasMapComponent implements OnInit {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component */
-  @Input() selectedAntenna = '';
+  @Input() selectedAntenna = null;
 
   /** Variable to manage a placemark selection from the map */
-  @Output() clickedAntennaMarker = new EventEmitter<string>();
+  @Output() clickedAntennaMarker = new EventEmitter<AntennaConfig>();
 
   /** Source data for the map and related configuration settings */
 
@@ -87,14 +87,14 @@ export class AntennasMapComponent implements OnInit {
    * Get alarm related ot a placemark
    */
   getAlarmForPlacemark(placemark): Alarm {
-    const alarm_id = this.getAlarmConfig(placemark).alarm;
+    const alarm_id = this.getAntennaConfig(placemark).alarm;
     return this.alarmService.get(alarm_id);
   }
 
   /**
    * Get the alarm configuration from the alarm service for a selected placemark
    */
-  getAlarmConfig(placemark) {
+  getAntennaConfig(placemark) {
     const hasLocation = this.existsAlarmForPlacemark(placemark);
     if (hasLocation === true) {
       const placemark_id = placemark.name;
@@ -107,7 +107,7 @@ export class AntennasMapComponent implements OnInit {
    * through its related placemark
    */
   isSelected(placemark) {
-    return this.selectedAntenna === placemark.name;
+    return this.selectedAntenna === this.getAntennaConfig(placemark);
   }
 
   /**
@@ -129,10 +129,10 @@ export class AntennasMapComponent implements OnInit {
    * On click action for antenna markers
    */
   onClick(placemark) {
-    if (this.selectedAntenna === placemark.name) {
-      this.selectedAntenna = '';
+    if (this.selectedAntenna === this.getAntennaConfig(placemark)) {
+      this.selectedAntenna = null;
     } else {
-      this.selectedAntenna = placemark.name;
+      this.selectedAntenna = this.getAntennaConfig(placemark);
     }
     this.clickedAntennaMarker.emit(this.selectedAntenna);
   }

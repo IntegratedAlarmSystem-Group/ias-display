@@ -1,6 +1,6 @@
 <!-- TITLE -->
 <div class="antennas-sidebar-title">
-  <div *ngIf="this.selectedAntenna == ''; then antennasTitle else returnLink"></div>
+  <div *ngIf="this.selectedAntenna == null; then antennasTitle else returnLink"></div>
 </div>
 
 <!-- Title when there is not a selected antenna -->
@@ -10,12 +10,12 @@
 
 <!-- Title when one antenna is selected -->
 <ng-template #returnLink>
-  <span> < {{this.selectedAntenna}} </span>
+  <span> < {{getAntennaName(this.selectedAntenna)}} </span>
 </ng-template>
 
 <!-- CONTENT -->
 <div class="antennas-sidebar-content">
-  <div *ngIf="this.selectedAntenna == ''; then antennasList else antennasDetail"> </div>
+  <div *ngIf="this.selectedAntenna == null; then antennasList else antennasDetail"> </div>
 </div>
 
 <!-- Content when there is not a selected antenna -->

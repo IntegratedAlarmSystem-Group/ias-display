@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService, MapAlarmConfig, SidebarAlarmConfig } from '../antennas.service';
+import { AntennasService, AntennaConfig } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
 
 @Component({
@@ -10,9 +10,9 @@ import { Alarm } from '../../data/alarm';
 })
 export class AntennasSidebarComponent implements OnInit {
 
-  @Input() selectedAntenna = '';
+  @Input() selectedAntenna = null;
 
-  @Output() antennaClicked = new EventEmitter<string>();
+  @Output() antennaClicked = new EventEmitter<AntennaConfig>();
 
   /**
   * Builds an instance of the component
@@ -38,10 +38,10 @@ export class AntennasSidebarComponent implements OnInit {
 
   /**
    * Build the antenna name to display. It is built with the Antenna's code and the current associated pad.
-   * @param {MapAlarmConfig} antennaConfig the Antenna configuration
+   * @param {MapAntennaConfig} antennaConfig the Antenna configuration
    * @returns {string} the antenna name to display
    */
-  getAntennaName(antennaConfig: SidebarAlarmConfig ): string {
+  getAntennaName(antennaConfig: AntennaConfig ): string {
     return  antennaConfig.antenna + ' (' + antennaConfig.placemark + ')';
   }
 
@@ -55,29 +55,29 @@ export class AntennasSidebarComponent implements OnInit {
 
   /**
   * Return the list of Alarm configuration by group
-  * @returns {list} list of {@link SidebarAlarmConfig}
+  * @returns {list} list of {@link AntennaConfig}
   */
-  getAntennasByGroup(groupID: string): SidebarAlarmConfig [] {
+  getAntennasByGroup(groupID: string): AntennaConfig [] {
     return this.antennasService.sidebarAlarmsConfig[groupID];
   }
 
   /**
   * Indicates if the antenna is selected or not
-  * @param {SidebarAlarmConfig} alarmConfig configuration of the alarm
+  * @param {AntennaConfig} alarmConfig configuration of the alarm
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
-  isSelected(alarmConfig: SidebarAlarmConfig) {
-    return this.selectedAntenna === alarmConfig.placemark;
+  isSelected(alarmConfig: AntennaConfig) {
+    return this.selectedAntenna === alarmConfig;
   }
 
   /**
   * Action performed when the antenna is clicked
   */
-  onClick(alarmConfig: SidebarAlarmConfig) {
-    if ( this.selectedAntenna !== alarmConfig.placemark) {
-      this.selectedAntenna = alarmConfig.placemark;
+  onClick(alarmConfig: AntennaConfig) {
+    if ( this.selectedAntenna !== alarmConfig) {
+      this.selectedAntenna = alarmConfig;
     } else {
-      this.selectedAntenna = '';
+      this.selectedAntenna = null;
     }
     this.antennaClicked.emit(this.selectedAntenna);
   }

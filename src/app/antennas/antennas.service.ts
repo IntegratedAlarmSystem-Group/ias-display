@@ -20,7 +20,7 @@ export class MapAlarmConfig {
 /**
 * Stores the IDs of the antennas and location related to an {@link Alarm}
 */
-export class SidebarAlarmConfig {
+export class AntennaConfig {
 
   /** ID of the Antenna associated with the {@link Alarm} */
   public antenna: string;
@@ -39,10 +39,10 @@ export class SidebarAlarmConfig {
 export class AntennasService {
 
   /** Dictionary of Alarm Ids indexed by placemark **/
-  public mapAlarmsConfig: {[placemark: string]: MapAlarmConfig } = {};
+  public mapAlarmsConfig: {[placemark: string]: AntennaConfig } = {};
 
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
-  public sidebarAlarmsConfig: {[group: string]: SidebarAlarmConfig [] } = {};
+  public sidebarAlarmsConfig: {[group: string]: AntennaConfig [] } = {};
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public antennasMapName = AntennasSettings.mapKey;
@@ -77,50 +77,62 @@ export class AntennasService {
   loadAlarmsConfig() {
     this.mapAlarmsConfig = {
       'A021': {
+        antenna: 'DV01',
         placemark: 'A021',
         alarm: 'Alarmdummy',
       },
       'W210': {
+        antenna: 'DV02',
         placemark: 'W210',
         alarm: 'WS-MeteoCentral-Temperature',
       },
       'P401': {
+        antenna: 'DV03',
         placemark: 'P401',
         alarm: 'Alarmdummy',
       },
       'S306': {
+        antenna: 'DV04',
         placemark: 'S306',
         alarm: 'WS-MeteoCentral-Temperature',
       },
       'A124': {
+        antenna: 'DV05',
         placemark: 'A124',
         alarm: 'WS-MeteoCentral-Temperature',
       },
       'A130': {
+        antenna: 'DV06',
         placemark: 'A130',
         alarm: 'Alarmdummy',
       },
       'W201': {
+        antenna: 'DV07',
         placemark: 'W201',
         alarm: 'Alarmdummy',
       },
       'A078': {
+        antenna: 'DV08',
         placemark: 'A078',
         alarm: 'Alarmdummy',
       },
       'A077': {
+        antenna: 'DV09',
         placemark: 'A077',
         alarm: 'Alarmdummy',
       },
       'P413': {
+        antenna: 'DV10',
         placemark: 'P413',
         alarm: 'Alarmdummy',
       },
       'S308': {
+        antenna: 'DV11',
         placemark: 'S308',
         alarm: 'Alarmdummy',
       },
       'S309': {
+        antenna: 'DV12',
         placemark: 'S309',
         alarm: 'Alarmdummy',
       },

@@ -7,10 +7,12 @@ import { Alarm } from '../../data/alarm';
 
 const mockMapAlarmsConfig = {
   'mockAlarm-0': {
+    antenna: 'antenna-0',
     placemark: 'mockAlarm-0',
     alarm: 'mockAlarm-0'
   },
   'mockAlarm-1': {
+    antenna: 'antenna-1',
     placemark: 'mockAlarm-1',
     alarm: 'mockAlarm-1'
   },
