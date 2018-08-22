@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { OnInit, Injectable } from '@angular/core';
+import { OnInit, OnChanges, Injectable } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
@@ -43,7 +43,7 @@ export class AlarmItemFlatNode {
   templateUrl: 'ack-tree.component.html',
   styleUrls: ['ack-tree.component.scss']
 })
-export class AckTreeComponent implements OnInit {
+export class AckTreeComponent implements OnInit, OnChanges {
 
   /** The parent Alarm of the tree  */
   @Input() selectedAlarm: Alarm;
@@ -87,9 +87,18 @@ export class AckTreeComponent implements OnInit {
   }
 
   /**
-   * Creates the component and builds the tree reading the data from the alarm
+   * This function is defined by default and executed on Component startup.
+   * It is currently unused and {@link ngOnChanges} is being used instead
    */
   ngOnInit() {
+  }
+
+
+  /**
+   * This function is executed on Component startup and everytime its state changes.
+   * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
+   */
+  ngOnChanges() {
     const tree_data = this.getTreeData(this.selectedAlarm);
     this.dataSource.data = this.buildFileTree(tree_data, 0);
   }
