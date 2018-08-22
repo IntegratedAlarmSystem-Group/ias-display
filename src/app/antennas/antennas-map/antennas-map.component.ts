@@ -107,14 +107,14 @@ export class AntennasMapComponent implements OnInit {
    * through its related placemark
    */
   isSelected(placemark) {
-    return this.selectedAntenna === this.getAntennaConfig(placemark);
+    return JSON.stringify(this.selectedAntenna) === JSON.stringify(this.getAntennaConfig(placemark));
   }
 
   /**
    * Opacity class name for each antenna marker
    */
   getOpacityClass(placemark) {
-    if (this.selectedAntenna === '') {
+    if (this.selectedAntenna === null) {
       return 'opacity-100';
     } else {
       if ( this.isSelected(placemark) === true ) {
@@ -129,7 +129,7 @@ export class AntennasMapComponent implements OnInit {
    * On click action for antenna markers
    */
   onClick(placemark) {
-    if (this.selectedAntenna === this.getAntennaConfig(placemark)) {
+    if (JSON.stringify(this.selectedAntenna) === JSON.stringify(this.getAntennaConfig(placemark))) {
       this.selectedAntenna = null;
     } else {
       this.selectedAntenna = this.getAntennaConfig(placemark);

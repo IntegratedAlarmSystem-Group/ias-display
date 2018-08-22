@@ -67,17 +67,17 @@ export class AntennasSidebarComponent implements OnInit {
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
   isSelected(alarmConfig: AntennaConfig) {
-    return this.selectedAntenna === alarmConfig;
+    return JSON.stringify(this.selectedAntenna) === JSON.stringify(alarmConfig);
   }
 
   /**
   * Action performed when the antenna is clicked
   */
   onClick(alarmConfig: AntennaConfig) {
-    if ( this.selectedAntenna !== alarmConfig) {
-      this.selectedAntenna = alarmConfig;
-    } else {
+    if ( JSON.stringify(this.selectedAntenna) === JSON.stringify(alarmConfig)) {
       this.selectedAntenna = null;
+    } else {
+      this.selectedAntenna = alarmConfig;
     }
     this.antennaClicked.emit(this.selectedAntenna);
   }
