@@ -51,9 +51,6 @@ export class AckTreeComponent implements OnInit {
   /** EventEmitter used to send the selected alarms to the parent component */
   @Output() alarmsToAckFromSelection = new EventEmitter();
 
-  /** Tree data with dependencies for the selected alarm **/
-  treeData = {};
-
   /** List with ids to ack **/
   ackList: string[] = [];
 
@@ -93,7 +90,8 @@ export class AckTreeComponent implements OnInit {
    * Creates the component and builds the tree reading the data from the alarm
    */
   ngOnInit() {
-    this.dataSource.data = this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
+    const tree_data = this.getTreeData(this.selectedAlarm);
+    this.dataSource.data = this.buildFileTree(tree_data, 0);
   }
 
   /**
@@ -137,18 +135,24 @@ export class AckTreeComponent implements OnInit {
    * Tree data from selected alarm
    * @returns {dictionary}  the tree data in a JSON format
    */
-  getTreeDataFromAlarm(alarm: Alarm) {
-     // TODO: Update definition for alarms with more than one dependency level
-     const tree_data = {};
-     if (alarm.dependencies.length === 0) {
-       tree_data[alarm.core_id] = null;
-     } else {
-       tree_data[alarm.core_id] = [];
-       for (const item of alarm.dependencies) {
-         tree_data[alarm.core_id].push(item);
-       }
-     }
-     return tree_data;
+  getTreeData(alarm: Alarm) {
+    const tree_data = {};
+    if (alarm === null || alarm === undefined) {
+      return null;
+    }
+    if (alarm.dependencies.length === 0) {
+      tree_data[alarm.core_id] = null;
+    } else {
+      tree_data[alarm.core_id] = {};
+      const childTree = {};
+      for (const childId of alarm.dependencies) {
+        const childAlarm = this.alarmService.get(childId);
+        const grandChildTree = this.getTreeData(childAlarm);
+        childTree[childId] = grandChildTree;
+      }
+      tree_data[alarm.core_id] = childTree;
+    }
+    return tree_data;
   }
 
   /**
