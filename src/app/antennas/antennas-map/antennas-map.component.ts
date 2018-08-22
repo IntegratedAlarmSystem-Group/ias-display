@@ -15,7 +15,7 @@ export class AntennasMapComponent implements OnInit {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component */
-  @Input() selectedAntennaMarker = '';
+  @Input() selectedAntenna = '';
 
   /** Variable to manage a placemark selection from the map */
   @Output() clickedAntennaMarker = new EventEmitter<string>();
@@ -107,14 +107,14 @@ export class AntennasMapComponent implements OnInit {
    * through its related placemark
    */
   isSelected(placemark) {
-    return this.selectedAntennaMarker === placemark.name;
+    return this.selectedAntenna === placemark.name;
   }
 
   /**
    * Opacity class name for each antenna marker
    */
   getOpacityClass(placemark) {
-    if (this.selectedAntennaMarker === '') {
+    if (this.selectedAntenna === '') {
       return 'opacity-100';
     } else {
       if ( this.isSelected(placemark) === true ) {
@@ -129,12 +129,12 @@ export class AntennasMapComponent implements OnInit {
    * On click action for antenna markers
    */
   onClick(placemark) {
-    if (this.selectedAntennaMarker === placemark.name) {
-      this.selectedAntennaMarker = '';
+    if (this.selectedAntenna === placemark.name) {
+      this.selectedAntenna = '';
     } else {
-      this.selectedAntennaMarker = placemark.name;
+      this.selectedAntenna = placemark.name;
     }
-    this.clickedAntennaMarker.emit(this.selectedAntennaMarker);
+    this.clickedAntennaMarker.emit(this.selectedAntenna);
   }
 
 }
