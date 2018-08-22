@@ -93,7 +93,6 @@ export class AckTreeComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-
   /**
    * This function is executed on Component startup and everytime its state changes.
    * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)

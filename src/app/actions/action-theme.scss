@@ -1,4 +1,4 @@
-@mixin ack-theme($theme) {
+@mixin action-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
