@@ -1,21 +1,30 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService, MapAlarmConfig } from '../antennas.service';
+import { AntennasService, AntennaConfig } from '../antennas.service';
 import { SharedModule } from '../../shared/shared.module';
 import { Alarm } from '../../data/alarm';
 
-const mockMapAlarmsConfig = {
-  'mockAlarm-0': {
-    antenna: 'antenna-0',
-    placemark: 'mockAlarm-0',
-    alarm: 'mockAlarm-0'
-  },
-  'mockAlarm-1': {
-    antenna: 'antenna-1',
-    placemark: 'mockAlarm-1',
-    alarm: 'mockAlarm-1'
-  },
+const mockAlarmsConfig = {
+  'group-0': [
+    {
+      antenna: 'antenna-0',
+      placemark: 'mockAlarm-0',
+      alarm: 'mockAlarm-0'
+    },
+    {
+      antenna: 'antenna-1',
+      placemark: 'mockAlarm-1',
+      alarm: 'mockAlarm-1'
+    }
+  ],
+  'group-1': [
+    {
+      antenna: 'antenna-2',
+      placemark: 'mockAlarm-2',
+      alarm: 'mockAlarm-2'
+    }
+  ]
 };
 
 const mockAlarms = {
@@ -37,6 +46,20 @@ const mockAlarms = {
     'value': 0,
     'core_id': 'mockAlarm-1',
     'running_id': 'mockAlarm-1',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma2.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-2': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-2',
+    'running_id': 'mockAlarm-2',
     'mode': '0',
     'core_timestamp': 1267252440000,
     'validity': '1',
@@ -74,7 +97,7 @@ describe('AntennasSidebarComponent', () => {
     inject([AntennasService], (service) => {
       antennasService = service;
       spyOn(antennasService, 'initialize').and.callFake(function() {});
-      antennasService.mapAlarmsConfig = mockMapAlarmsConfig;
+      antennasService.sidebarAlarmsConfig = mockAlarmsConfig;
     })
   );
 
@@ -96,4 +119,24 @@ describe('AntennasSidebarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a getAlarm method', () => {
+    expect(component.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
+  });
+
+  it('should have a getAntennaName method that return the antenna (pad) name', () => {
+    const expectedName = 'antenna-0 (mockAlarm-0)';
+    expect(component.getAntennaName(mockAlarmsConfig['group-0'][0])).toEqual(expectedName);
+  });
+
+  it('should have a method getAntennasGroups method to return the list of groups', () => {
+    const expectedList = ['group-0', 'group-1'];
+    expect(component.getAntennasGroups()).toEqual(expectedList);
+  });
+
+  it('should have a method getAntennasByGroup method to return the list of antennasConfig objects by group', () => {
+    expect(component.getAntennasByGroup('group-0')).toEqual(mockAlarmsConfig['group-0']);
+    expect(component.getAntennasByGroup('group-1')).toEqual(mockAlarmsConfig['group-1']);
+  });
+
 });
