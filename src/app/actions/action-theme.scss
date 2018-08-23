@@ -8,12 +8,12 @@
   .component-action {
 
     &.component-header {
-      border-bottom: 1px solid mat-color($foreground, divider);
+      border-bottom-color: mat-color($foreground, divider);
     }
 
     &.component-body .section {
       &.missed-acks {
-        border-top: 1px solid mat-color($foreground, divider);
+        border-top-color: mat-color($foreground, divider);
       }
 
       &.alarm-info {

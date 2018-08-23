@@ -9,6 +9,8 @@
 
   &.component-header {
     padding: 12px 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 
     .component-title {
       display: inline;
@@ -55,6 +57,11 @@
           width: 100%;
         }
 
+      }
+
+      &.missed-acks {
+        border-top-width: 1px;
+        border-top-style: solid;
       }
 
     }
