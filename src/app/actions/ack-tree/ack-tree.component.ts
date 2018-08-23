@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { OnInit, Injectable } from '@angular/core';
+import { OnInit, OnChanges, Injectable } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
@@ -43,16 +43,13 @@ export class AlarmItemFlatNode {
   templateUrl: 'ack-tree.component.html',
   styleUrls: ['ack-tree.component.scss']
 })
-export class AckTreeComponent implements OnInit {
+export class AckTreeComponent implements OnInit, OnChanges {
 
   /** The parent Alarm of the tree  */
   @Input() selectedAlarm: Alarm;
 
   /** EventEmitter used to send the selected alarms to the parent component */
   @Output() alarmsToAckFromSelection = new EventEmitter();
-
-  /** Tree data with dependencies for the selected alarm **/
-  treeData = {};
 
   /** List with ids to ack **/
   ackList: string[] = [];
@@ -90,10 +87,20 @@ export class AckTreeComponent implements OnInit {
   }
 
   /**
-   * Creates the component and builds the tree reading the data from the alarm
+   * This function is defined by default and executed on Component startup.
+   * It is currently unused and {@link ngOnChanges} is being used instead
    */
   ngOnInit() {
-    this.dataSource.data = this.buildFileTree(this.getTreeDataFromAlarm(this.selectedAlarm), 0);
+  }
+
+  /**
+   * This function is executed on Component startup and everytime its state changes.
+   * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
+   */
+  ngOnChanges() {
+    const tree_data = this.getTreeData();
+    console.log('tree_data: ', tree_data);
+    this.dataSource.data = this.buildFileTree(tree_data, 0);
   }
 
   /**
@@ -137,19 +144,49 @@ export class AckTreeComponent implements OnInit {
    * Tree data from selected alarm
    * @returns {dictionary}  the tree data in a JSON format
    */
-  getTreeDataFromAlarm(alarm: Alarm) {
-     // TODO: Update definition for alarms with more than one dependency level
-     const tree_data = {};
-     if (alarm.dependencies.length === 0) {
-       tree_data[alarm.core_id] = null;
-     } else {
-       tree_data[alarm.core_id] = [];
-       for (const item of alarm.dependencies) {
-         tree_data[alarm.core_id].push(item);
-       }
-     }
-     return tree_data;
+  getTreeData() {
+    const tree_data = {};
+    tree_data[this.selectedAlarm.core_id] = this._getSubTree(this.selectedAlarm);
+    return tree_data;
   }
+
+  private _getSubTree(alarm: Alarm) {
+    if (alarm.dependencies.length === 0) {
+      return null;
+    }
+    const subTree = {};
+    for (const childId of alarm.dependencies) {
+      const childAlarm = this.alarmService.get(childId);
+      const subSubTree = this._getSubTree(childAlarm);
+      subTree[childId] = subSubTree;
+    }
+    return subTree;
+  }
+  // /**
+  //  * Tree data from selected alarm
+  //  * @returns {dictionary}  the tree data in a JSON format
+  //  */
+  // getTreeData(alarm: Alarm) {
+  //   const tree_data = {};
+  //   if (alarm === null || alarm === undefined) {
+  //     console.log('----- alarm_null -----');
+  //     return null;
+  //   }
+  //   if (alarm.dependencies.length === 0) {
+  //     tree_data[alarm.core_id] = null;
+  //     console.log('----- dependencies empty -----');
+  //   } else {
+  //     tree_data[alarm.core_id] = {};
+  //     const childTree = {};
+  //     for (const childId of alarm.dependencies) {
+  //       const childAlarm = this.alarmService.get(childId);
+  //       const grandChildTree = this.getTreeData(childAlarm);
+  //       childTree[childId] = grandChildTree;
+  //     }
+  //     tree_data[alarm.core_id] = childTree;
+  //   }
+  //   return tree_data;
+  // }
 
   /**
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
@@ -251,6 +288,7 @@ export class AckTreeComponent implements OnInit {
         this.ackList.push(flatNode.item);
       }
     });
+    console.log('Ack list: ', this.ackList);
     this.alarmsToAckFromSelection.emit(this.ackList);
   }
 

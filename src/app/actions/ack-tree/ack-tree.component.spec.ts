@@ -2,12 +2,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AckTreeComponent } from './ack-tree.component';
+import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
+import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
 describe('AckTreeComponent', () => {
   let component: AckTreeComponent;
   let fixture: ComponentFixture<AckTreeComponent>;
+  let alarmService: AlarmService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,24 +30,21 @@ describe('AckTreeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AckTreeComponent);
     component = fixture.componentInstance;
-    component.selectedAlarm = Alarm.asAlarm({
-      'value': 0,
-      'core_id': '',
-      'running_id': '',
-      'mode': '',
-      'core_timestamp': 1,
-      'state_change_timestamp': 1,
-      'description': 'Short description for mock alarm',
-      'url': 'www.alma.cl',
-      'validity': '0',
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    });
+    alarmService = fixture.debugElement.injector.get(AlarmService);
+    alarmService.readAlarmMessagesList(mockAlarmData);
+    component.selectedAlarm = alarmService.get(mockAlarmData[0]['core_id']);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Given a parent Alarm with 2 children and 3 grand children per children', () => {
+    it('The component should retrieve the tree data accordingly', () => {
+      expect(component).toBeTruthy();
+      const treeData = component.getTreeData();
+      expect(treeData).toEqual(expectedTreeData);
+    });
   });
 });
