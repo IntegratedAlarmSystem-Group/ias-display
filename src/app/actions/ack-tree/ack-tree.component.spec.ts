@@ -7,7 +7,7 @@ import { Alarm } from '../../data/alarm';
 import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
-fdescribe('AckTreeComponent', () => {
+describe('AckTreeComponent', () => {
   let component: AckTreeComponent;
   let fixture: ComponentFixture<AckTreeComponent>;
   let alarmService: AlarmService;
@@ -43,9 +43,7 @@ fdescribe('AckTreeComponent', () => {
   describe('Given a parent Alarm with 2 children and 3 grand children per children', () => {
     it('The component should retrieve the tree data accordingly', () => {
       expect(component).toBeTruthy();
-      console.log('\n*** expectedTreeData: ', expectedTreeData);
       const treeData = component.getTreeData();
-      console.log('\n*** treeData: ', treeData);
       expect(treeData).toEqual(expectedTreeData);
     });
   });
