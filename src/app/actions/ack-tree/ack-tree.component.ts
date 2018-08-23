@@ -77,8 +77,14 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
    */
   constructor(private alarmService: AlarmService) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
-      this.isExpandable, this.getChildren);
+  }
+
+  /**
+   * This function is defined by default and executed on Component startup.
+   * It is currently unused and {@link ngOnChanges} is being used instead
+   */
+  ngOnInit() {
+    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<AlarmItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.checklistSelection.onChange.subscribe(data => {
@@ -87,19 +93,11 @@ export class AckTreeComponent implements OnInit, OnChanges {
   }
 
   /**
-   * This function is defined by default and executed on Component startup.
-   * It is currently unused and {@link ngOnChanges} is being used instead
-   */
-  ngOnInit() {
-  }
-
-  /**
    * This function is executed on Component startup and everytime its state changes.
    * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
    */
   ngOnChanges() {
     const tree_data = this.getTreeData();
-    console.log('tree_data: ', tree_data);
     this.dataSource.data = this.buildFileTree(tree_data, 0);
   }
 
@@ -141,7 +139,7 @@ export class AckTreeComponent implements OnInit, OnChanges {
   hasNoContent = (_: number, _nodeData: AlarmItemFlatNode) => _nodeData.item === '';
 
   /**
-   * Tree data from selected alarm
+   * Get tree data from selected alarm
    * @returns {dictionary}  the tree data in a JSON format
    */
   getTreeData() {
@@ -150,6 +148,11 @@ export class AckTreeComponent implements OnInit, OnChanges {
     return tree_data;
   }
 
+  /**
+   * Auxiliary function used to get the tree data from a given alarm
+   * @param {Alarm} alarm the {@link Alarm}
+   * @returns {dictionary}  the tree data in a JSON format
+   */
   private _getSubTree(alarm: Alarm) {
     if (alarm.dependencies.length === 0) {
       return null;
@@ -162,31 +165,6 @@ export class AckTreeComponent implements OnInit, OnChanges {
     }
     return subTree;
   }
-  // /**
-  //  * Tree data from selected alarm
-  //  * @returns {dictionary}  the tree data in a JSON format
-  //  */
-  // getTreeData(alarm: Alarm) {
-  //   const tree_data = {};
-  //   if (alarm === null || alarm === undefined) {
-  //     console.log('----- alarm_null -----');
-  //     return null;
-  //   }
-  //   if (alarm.dependencies.length === 0) {
-  //     tree_data[alarm.core_id] = null;
-  //     console.log('----- dependencies empty -----');
-  //   } else {
-  //     tree_data[alarm.core_id] = {};
-  //     const childTree = {};
-  //     for (const childId of alarm.dependencies) {
-  //       const childAlarm = this.alarmService.get(childId);
-  //       const grandChildTree = this.getTreeData(childAlarm);
-  //       childTree[childId] = grandChildTree;
-  //     }
-  //     tree_data[alarm.core_id] = childTree;
-  //   }
-  //   return tree_data;
-  // }
 
   /**
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
@@ -288,7 +266,6 @@ export class AckTreeComponent implements OnInit, OnChanges {
         this.ackList.push(flatNode.item);
       }
     });
-    console.log('Ack list: ', this.ackList);
     this.alarmsToAckFromSelection.emit(this.ackList);
   }
 

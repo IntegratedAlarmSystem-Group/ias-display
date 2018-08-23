@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AckTreeComponent } from './ack-tree.component';
+import { AckTreeComponent, AlarmItemNode } from './ack-tree.component';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
-describe('AckTreeComponent', () => {
+fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () => {
   let component: AckTreeComponent;
   let fixture: ComponentFixture<AckTreeComponent>;
   let alarmService: AlarmService;
@@ -36,15 +36,72 @@ describe('AckTreeComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    fixture.destroy();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Given a parent Alarm with 2 children and 3 grand children per children', () => {
-    it('The component should retrieve the tree data accordingly', () => {
+  it('The component should retrieve the tree data according to the selectedAlarm and its children', () => {
+    const treeData = component.getTreeData();
+    expect(treeData).toEqual(expectedTreeData);
+  });
+
+  describe('WHEN the user selects 1 grand-child alarm', () => {
+    it('THEN the ackList should contain that (and only that) alarm', () => {
+      component.ngOnInit();
+      component.ngOnChanges();
+      fixture.detectChanges();
       expect(component).toBeTruthy();
-      const treeData = component.getTreeData();
-      expect(treeData).toEqual(expectedTreeData);
+      const node = component.dataSource.data[0]['children'][0]['children'][1]; // Get node corresponding to 'grandChild_2'
+      const flatNode = component.nestedNodeMap.get(node); // Transform to FlatNode
+      const alarmsToSelect = [flatNode.item]; // Get Alarm name from FlatNode
+      expect(alarmsToSelect).toEqual(['grandChild_12']);
+      component.alarmItemSelectionToggle(flatNode); // Select the flatNode
+      component.updateAckList();
+      fixture.detectChanges();
+      expect(component.ackList).toEqual(alarmsToSelect);
+    });
+  });
+
+  describe('WHEN the user selects 2 of its grand-children alarms', () => {
+    it('THEN the ackList should contain those (and only those) alarms', () => {
+      component.ngOnInit();
+      component.ngOnChanges();
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      const flatNode1 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
+      const flatNode2 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][2]);
+      const alarmsToSelect = [flatNode1.item, flatNode2.item];
+      expect(alarmsToSelect).toEqual(['grandChild_12', 'grandChild_13']);
+      component.alarmItemSelectionToggle(flatNode1);
+      component.alarmItemSelectionToggle(flatNode2);
+      component.updateAckList();
+      fixture.detectChanges();
+      expect(component.ackList).toEqual(alarmsToSelect);
+    });
+  });
+
+  describe('WHEN the user selects all the children of one of its children', () => {
+    it('THEN the ackList should contain those grand-children and their father', () => {
+      component.ngOnInit();
+      component.ngOnChanges();
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      const flatNode0 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][0]);
+      const flatNode1 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
+      const flatNode2 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][2]);
+      const alarmsToSelect = [flatNode0.item, flatNode1.item, flatNode2.item];
+      expect(alarmsToSelect).toEqual(['child_1', 'grandChild_11', 'grandChild_12', 'grandChild_13']);
+      component.alarmItemSelectionToggle(flatNode0);
+      component.alarmItemSelectionToggle(flatNode1);
+      component.alarmItemSelectionToggle(flatNode2);
+      component.updateAckList();
+      fixture.detectChanges();
+      console.log('component.ackList: ', component.ackList);
+      expect(component.ackList).toEqual(alarmsToSelect);
     });
   });
 });
