@@ -1,32 +1,14 @@
-.my-panel {
-  background: yellow;
+.component-action-card {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
-.my-panel-header,
-.my-panel-footer {
-    height: 100px;
-    background: red;
-}
-.my-panel-content {
-    height: 100%;
-    overflow-y: auto;
-    background: green;
-}
-
-.component-action-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .component-action {
 
   &.component-header {
-    padding: 14px 0px;
+    padding: 12px 0px;
 
     .component-title {
       display: inline;
@@ -36,6 +18,8 @@
 
   &.component-body {
     font-size: 14px;
+    height: 100%;
+    overflow-y: auto;
 
     .section {
       padding: 24px 0px 10px 0px;
@@ -83,17 +67,13 @@
   }
 
   &.component-footer {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
     width: 100%;
     font-size: 14px;
     display: table;
+    padding: 12px 0;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    // Fix this properly, in order to make the body scrollable
-    padding-bottom: 24px;
 
     button {
       margin: 0px 10px 0px 10px;
