@@ -1,5 +1,4 @@
 .component-action-card {
-  background: yellow;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -9,9 +8,7 @@
 .component-action {
 
   &.component-header {
-    padding: 14px 0px;
-    background: red;
-    // height: 100px;
+    padding: 12px 0px;
 
     .component-title {
       display: inline;
@@ -20,7 +17,6 @@
   }
 
   &.component-body {
-    background: green;
     font-size: 14px;
     height: 100%;
     overflow-y: auto;
@@ -66,16 +62,13 @@
   }
 
   &.component-footer {
-    background: red;
-    height: 90px;
     width: 100%;
     font-size: 14px;
     display: table;
+    padding: 12px 0;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    // Fix this properly, in order to make the body scrollable
-    padding-bottom: 0;
 
     button {
       margin: 0px 10px 0px 10px;
