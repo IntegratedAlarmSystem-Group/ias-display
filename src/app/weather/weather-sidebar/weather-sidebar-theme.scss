@@ -6,23 +6,27 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .weather-sidebar-title {
-    background: map_get($primary, 600);
-  }
-
-  .weather-sidebar-content {
+  .weather-sidebar-card {
     background: map_get($primary, 600);
 
-    .antennas-list-header {
+    .weather-sidebar-title {
+      border-bottom-color: mat-color($foreground, divider);
+    }
 
-      .copy-antennas-button {
-        color: mat-color($accent, 300);
+    .weather-sidebar-content {
+
+      .antennas-list-header {
+
+        .copy-antennas-button {
+          color: mat-color($accent, 300);
+        }
+      }
+
+      .antennas-list {
+        color: mat-color($foreground, secondary-text);
       }
     }
 
-    .antennas-list {
-      color: mat-color($foreground, secondary-text);
-    }
   }
 
 }
