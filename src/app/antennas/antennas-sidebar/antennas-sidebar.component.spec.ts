@@ -139,4 +139,60 @@ describe('AntennasSidebarComponent', () => {
     expect(component.getAntennasByGroup('group-1')).toEqual(mockAlarmsConfig['group-1']);
   });
 
+  describe('', () => {
+    it('should have a container for the title', () => {
+      const title = fixture.nativeElement.querySelector('.antennas-sidebar-title');
+      expect(title).toBeTruthy();
+    });
+
+    it('should have a container for the content', () => {
+      const title = fixture.nativeElement.querySelector('.antennas-sidebar-content');
+      expect(title).toBeTruthy();
+    });
+
+    // describe('and if there is a selected antenna', () => {
+    //   it('should have a link to return back', () => {
+    //     component.selectedAntenna = mockAlarmsConfig['group-0'][0];
+    //   });
+    //
+    //   it('should show antenna details component', () => {
+    //     component.selectedAntenna = mockAlarmsConfig['group-0'][0];
+    //   });
+    // });
+
+    describe('and if there is not a selected antenna', () => {
+      it('should have containers for each group of antennas', () => {
+        component.selectedAntenna = null;
+        const groups = fixture.nativeElement.querySelectorAll('.antennas-group-container');
+        expect(groups.length).toBe(2);
+      });
+
+      it('should display the list of alarm header components in each group', () => {
+        component.selectedAntenna = null;
+        const groups = fixture.nativeElement.querySelectorAll('.antennas-group-container');
+
+        const alarmsGroup0 = groups[0].querySelectorAll('app-alarm-header');
+        expect(alarmsGroup0.length).toBe(2);
+
+        const alarmGroup1 = groups[1].querySelectorAll('app-alarm-header');
+        expect(alarmGroup1.length).toBe(1);
+      });
+
+      describe('and an antenna (grid-item with an alarm-header inside) is clicked', () => {
+        it('then the correspoding antenna is selected', () => {
+          component.selectedAntenna = null;
+          const antennas = fixture.nativeElement.querySelectorAll('.grid-item');
+          antennas[0].click();
+          expect(component.selectedAntenna).toBeTruthy();
+          expect(component.selectedAntenna.placemark).toEqual('mockAlarm-0');
+          expect(component.selectedAntenna.alarm).toEqual('mockAlarm-0');
+          expect(component.selectedAntenna.antenna).toEqual('antenna-0');
+        });
+      });
+    });
+
+  });
+
+
+
 });
