@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   /** Navigation Sidenav Menu of the application (left sidenav) */
   // TODO: Use only custom svgIcons
   navigationSidenavItems = [
-    { title: 'Overview', link: 'overview', icon: 'language', svgIcon: false},
+    { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
     { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
     { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
     { title: 'Table', link: 'tabular', icon: 'list', svgIcon: false}
@@ -54,6 +54,11 @@ export class AppComponent implements OnInit {
     private domSanitizer: DomSanitizer
   ) {
     this.matIconRegistry
+      .addSvgIcon(
+        'ias_overview',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-overview.svg')
+      )
       .addSvgIcon(
         'ias_weather',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
