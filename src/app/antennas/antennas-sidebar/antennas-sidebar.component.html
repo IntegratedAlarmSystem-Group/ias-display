@@ -10,7 +10,7 @@
 
 <!-- Title when one antenna is selected -->
 <ng-template #returnLink>
-  <span> < {{getAntennaName(this.selectedAntenna)}} </span>
+    <div class="return-link" (click)="unselectAntenna()"> < {{getAntennaName(this.selectedAntenna)}} </div>
 </ng-template>
 
 <!-- CONTENT -->
@@ -32,4 +32,23 @@
 
 <!-- Content when one antenna is selected -->
 <ng-template #antennasDetail>
+  <div class="antennas-detail alarm-info">
+    <table>
+      <tr>
+        <th>Alarm ID</th>
+        <td>{{this.selectedAntenna.alarm}}</td>
+      </tr>
+      <tr>
+        <th>Antenna</th>
+        <td>{{this.selectedAntenna.antenna}}</td>
+      </tr>
+      <tr>
+        <th>Location (PAD)</th>
+        <td>{{this.selectedAntenna.placemark}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="antennas-detail footer">
+    <button id="goToTable" mat-flat-button color="primary" (click)="goToTableFilteredBy(this.selectedAntenna.alarm)">Go to Table</button>
+  </div>
 </ng-template>

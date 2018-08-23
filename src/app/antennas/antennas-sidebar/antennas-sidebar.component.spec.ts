@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../data/routing.service';
 import { AntennasService, AntennaConfig } from '../antennas.service';
 import { SharedModule } from '../../shared/shared.module';
 import { Alarm } from '../../data/alarm';
@@ -77,6 +78,7 @@ describe('AntennasSidebarComponent', () => {
   let fixture: ComponentFixture<AntennasSidebarComponent>;
   let antennasService: AntennasService;
   let alarmService: AlarmService;
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -84,6 +86,7 @@ describe('AntennasSidebarComponent', () => {
         AntennasSidebarComponent
       ],
       providers: [
+        { provide: RoutingService, useValue: spyRoutingTable },
         AntennasService
       ],
       imports: [
@@ -150,15 +153,19 @@ describe('AntennasSidebarComponent', () => {
       expect(title).toBeTruthy();
     });
 
-    // describe('and if there is a selected antenna', () => {
-    //   it('should have a link to return back', () => {
-    //     component.selectedAntenna = mockAlarmsConfig['group-0'][0];
-    //   });
-    //
+    describe('and if there is a selected antenna', () => {
+      it('should have a link to return back', () => {
+        component.selectedAntenna = mockAlarmsConfig['group-0'][0];
+        fixture.detectChanges();
+        const link = fixture.nativeElement.querySelector('.return-link');
+        expect(link).toBeTruthy();
+        link.click();
+        expect(component.selectedAntenna).toBeFalsy();
+      });
     //   it('should show antenna details component', () => {
     //     component.selectedAntenna = mockAlarmsConfig['group-0'][0];
     //   });
-    // });
+    });
 
     describe('and if there is not a selected antenna', () => {
       it('should have containers for each group of antennas', () => {

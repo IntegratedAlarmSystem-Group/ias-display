@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { RoutingService } from '../../data/routing.service';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService, AntennaConfig } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
@@ -21,7 +22,8 @@ export class AntennasSidebarComponent implements OnInit {
    */
   constructor(
     public antennasService: AntennasService,
-    public alarmService: AlarmService
+    public alarmService: AlarmService,
+    private routing: RoutingService,
   ) { }
 
   ngOnInit() {
@@ -62,6 +64,14 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
+  * If there is a selected antenna it will be unselected
+  */
+  unselectAntenna() {
+    this.selectedAntenna = null;
+    this.antennaClicked.emit(this.selectedAntenna);
+  }
+
+  /**
   * Indicates if the antenna is selected or not
   * @param {AntennaConfig} alarmConfig configuration of the alarm
   * @return  {boolean} true if the alarm is selected or false if it is not
@@ -80,6 +90,15 @@ export class AntennasSidebarComponent implements OnInit {
       this.selectedAntenna = alarmConfig;
     }
     this.antennaClicked.emit(this.selectedAntenna);
+  }
+
+  /**
+   * Redirect to table view applying the specified filter
+   * @param filter Space-separated String that contains words used to
+   * filter the alarms in the table view
+   */
+  goToTableFilteredBy(filter: string) {
+    this.routing.tableWithFilter(filter);
   }
 
 }

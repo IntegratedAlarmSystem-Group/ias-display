@@ -25,6 +25,15 @@
       }
     }
 
+    .antennas-detail {
+
+      &.alarm-info {
+        td {
+          color: mat-color($foreground, hint-text);
+        }
+      }
+    }
+
   }
 
 }
