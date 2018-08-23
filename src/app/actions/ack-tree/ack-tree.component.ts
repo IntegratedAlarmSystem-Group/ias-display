@@ -98,7 +98,8 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
    */
   ngOnChanges() {
-    const tree_data = this.getTreeData(this.selectedAlarm);
+    const tree_data = this.getTreeData();
+    console.log('tree_data: ', tree_data);
     this.dataSource.data = this.buildFileTree(tree_data, 0);
   }
 
@@ -143,25 +144,49 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * Tree data from selected alarm
    * @returns {dictionary}  the tree data in a JSON format
    */
-  getTreeData(alarm: Alarm) {
+  getTreeData() {
     const tree_data = {};
-    if (alarm === null || alarm === undefined) {
-      return null;
-    }
-    if (alarm.dependencies.length === 0) {
-      tree_data[alarm.core_id] = null;
-    } else {
-      tree_data[alarm.core_id] = {};
-      const childTree = {};
-      for (const childId of alarm.dependencies) {
-        const childAlarm = this.alarmService.get(childId);
-        const grandChildTree = this.getTreeData(childAlarm);
-        childTree[childId] = grandChildTree;
-      }
-      tree_data[alarm.core_id] = childTree;
-    }
+    tree_data[this.selectedAlarm.core_id] = this._getSubTree(this.selectedAlarm);
     return tree_data;
   }
+
+  private _getSubTree(alarm: Alarm) {
+    if (alarm.dependencies.length === 0) {
+      return null;
+    }
+    const subTree = {};
+    for (const childId of alarm.dependencies) {
+      const childAlarm = this.alarmService.get(childId);
+      const subSubTree = this._getSubTree(childAlarm);
+      subTree[childId] = subSubTree;
+    }
+    return subTree;
+  }
+  // /**
+  //  * Tree data from selected alarm
+  //  * @returns {dictionary}  the tree data in a JSON format
+  //  */
+  // getTreeData(alarm: Alarm) {
+  //   const tree_data = {};
+  //   if (alarm === null || alarm === undefined) {
+  //     console.log('----- alarm_null -----');
+  //     return null;
+  //   }
+  //   if (alarm.dependencies.length === 0) {
+  //     tree_data[alarm.core_id] = null;
+  //     console.log('----- dependencies empty -----');
+  //   } else {
+  //     tree_data[alarm.core_id] = {};
+  //     const childTree = {};
+  //     for (const childId of alarm.dependencies) {
+  //       const childAlarm = this.alarmService.get(childId);
+  //       const grandChildTree = this.getTreeData(childAlarm);
+  //       childTree[childId] = grandChildTree;
+  //     }
+  //     tree_data[alarm.core_id] = childTree;
+  //   }
+  //   return tree_data;
+  // }
 
   /**
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
@@ -263,6 +288,7 @@ export class AckTreeComponent implements OnInit, OnChanges {
         this.ackList.push(flatNode.item);
       }
     });
+    console.log('Ack list: ', this.ackList);
     this.alarmsToAckFromSelection.emit(this.ackList);
   }
 
