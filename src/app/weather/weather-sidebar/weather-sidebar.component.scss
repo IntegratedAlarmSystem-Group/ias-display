@@ -1,5 +1,9 @@
 .weather-sidebar-card {
   padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 
   .weather-sidebar-title {
     padding: 12px 0;
@@ -9,7 +13,8 @@
 
   .weather-sidebar-content {
     padding: 12px 0;
-    height: calc(100vh - 112px) !important;
+    height: 100%;
+    overflow-y: auto;
 
     .mat-expansion-panel {
       background: transparent;
