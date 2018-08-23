@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
     { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
     { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
-    { title: 'Table', link: 'tabular', icon: 'list', svgIcon: false}
+    { title: 'Table', link: 'tabular', icon: 'ias_table', svgIcon: true}
   ];
 
   /**
@@ -68,6 +68,11 @@ export class AppComponent implements OnInit {
         'ias_antenna',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           '../assets/img/ias-icon-antenna.svg')
+      )
+      .addSvgIcon(
+        'ias_table',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-table.svg')
       );
   }
 
