@@ -3,93 +3,94 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-}
 
-.component-action {
+  .component-action {
 
-  &.component-header {
-    padding: 12px 0px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    &.component-header {
+      padding: 12px 0px;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
 
-    .component-title {
-      display: inline;
-    }
-
-  }
-
-  &.component-body {
-    font-size: 14px;
-    height: 100%;
-    overflow-y: auto;
-
-    .section {
-      padding: 24px 0px 10px 0px;
-
-      .section-title {
-        font-weight: bold;
-        padding-bottom: 16px;
-      }
-
-      &.alarm-info {
-        table {
-          vertical-align: top;
-        }
-
-        th {
-          padding-right: 16px;
-          font-weight: normal;
-        }
-
-      }
-
-      &.ack-action {
-
-        textarea {
-          min-height: 150px;
-        }
-
-        .action-info {
-          font-size: 14px;
-        }
-
-        .message-form-field {
-          width: 100%;
-        }
-
-      }
-
-      &.missed-acks {
-        border-top-width: 1px;
-        border-top-style: solid;
+      .component-title {
+        display: inline;
       }
 
     }
 
-  }
+    &.component-body {
+      font-size: 14px;
+      height: 100%;
+      overflow-y: auto;
 
-  &.component-footer {
-    width: 100%;
-    font-size: 14px;
-    display: table;
-    padding-top: 12px;
-    padding-bottom: 24px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+      .section {
+        padding: 24px 0px 10px 0px;
 
-    button {
-      margin: 0px 10px 0px 10px;
+        .section-title {
+          font-weight: bold;
+          padding-bottom: 16px;
+        }
+
+        &.alarm-info {
+          table {
+            vertical-align: top;
+          }
+
+          th {
+            padding-right: 16px;
+            font-weight: normal;
+          }
+
+        }
+
+        &.ack-action {
+
+          textarea {
+            min-height: 150px;
+          }
+
+          .action-info {
+            font-size: 14px;
+          }
+
+          .message-form-field {
+            width: 100%;
+          }
+
+        }
+
+        &.missed-acks {
+          border-top-width: 1px;
+          border-top-style: solid;
+        }
+
+      }
+
     }
-  }
 
-  p {
-    margin-top: 0;
-    margin-bottom: 1.15rem;
-  }
+    &.component-footer {
+      width: 100%;
+      font-size: 14px;
+      display: table;
+      padding-top: 12px;
+      padding-bottom: 24px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
 
-  .info-message {
-    padding-top: 10px;
+      button {
+        margin: 0px 10px 0px 10px;
+      }
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.15rem;
+    }
+
+    .info-message {
+      padding-top: 10px;
+    }
+
   }
 
 }
