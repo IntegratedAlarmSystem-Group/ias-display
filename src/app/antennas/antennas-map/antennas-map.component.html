@@ -12,7 +12,7 @@
        fill="none"
      />
 
-     <svg:circle class="pads" *ngFor="let p of placemarks['pads']"
+     <svg:circle class="pads" *ngFor="let p of mapPlacemarks['pads']"
        [attr.cx]="p.opt_cx"
        [attr.cy]="p.opt_cy"
        [attr.data]="p.name"
@@ -22,42 +22,40 @@
        fill="#212d3a"
      />
 
-     <!--- for debugging - start -->
-     <!-- <ng-container *ngFor="let p of placemarks['pads']">
-       <svg:text
-         class="disabled-selection"
-         [attr.x]="p.opt_cx"
-         [attr.y]="p.opt_cy"
-         fill="white"
-         fill-opacity="0.4"
-       > {{ p.name }} </text>
-     </ng-container> -->
-     <!-- for debugging - end -->
+     <ng-container *ngFor="let antennasGroup of getAntennaGroups()">
+       <ng-container *ngFor="let antennaConfig of alarmsConfig[antennasGroup]">
+         <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">
 
-     <ng-container *ngFor="let p of placemarks['pads']">
-       <ng-container *ngIf="existsAlarmForPlacemark(p)">
-         <svg:g
-           (click)="onClick(p)"
-           [ngClass]="getOpacityClass(p)"
-         >
-           <svg:foreignObject
-            [attr.x]="p.opt_cx-25"
-            [attr.y]="p.opt_cy-25"
-            width="50"
-            height="50">
-            <xhtml:app-antenna-marker
-               [placemark]="p"
-               [alarm]="getAlarmForPlacemark(p)"
-               [viewbox]="'0 0 50 50'"
-               [cx]=25
-               [cy]=25
-               [r]=5
-            >
-            </xhtml:app-antenna-marker>
-          </svg:foreignObject>
-        </svg:g>
+           <ng-container *ngFor="let p of [getPlacemarkObject(antennaConfig.placemark)]">
+
+             <svg:g
+               (click)="onClick(antennaConfig)"
+               [ngClass]="getOpacityClass(antennaConfig)"
+             >
+               <svg:foreignObject
+                [attr.x]="p.opt_cx-25"
+                [attr.y]="p.opt_cy-25"
+                width="50"
+                height="50">
+                <xhtml:app-antenna-marker
+                   [placemark]="p"
+                   [alarm]="getAlarm(antennaConfig.alarm)"
+                   [viewbox]="'0 0 50 50'"
+                   [cx]=25
+                   [cy]=25
+                   [r]=4
+                >
+                </xhtml:app-antenna-marker>
+              </svg:foreignObject>
+            </svg:g>
+
+          </ng-container>
+
+         </ng-container>
+
        </ng-container>
      </ng-container>
+
 
 
    </ng-container>

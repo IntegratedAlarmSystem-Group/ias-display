@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 4 58 58">
+  <style>.ias-icon-table {fill:none;stroke:currentColor;stroke-width:3;stroke-miterlimit:10;} .header-line{stroke-width:7px;} </style>
+  <rect class="ias-icon-table" x="9.67" y="13.57" width="44" height="33.81" rx="4.42" ry="4.42"/>
+  <line class="ias-icon-table" x1="9.67" y1="25.8" x2="53.67" y2="25.8"/>
+  <line class="ias-icon-table" x1="9.67" y1="40.18" x2="53.67" y2="40.18"/>
+  <line class="ias-icon-table" x1="9.67" y1="33.22" x2="53.67" y2="33.22"/>
+  <line class="ias-icon-table header-line"  x1="10.5" y1="16.96" x2="52.84" y2="16.96"/>
+  <line class="ias-icon-table" x1="24.25" y1="13.57" x2="24.25" y2="47.38"/>
+  <line class="ias-icon-table" x1="39.5" y1="13.57" x2="39.5" y2="47.38"/>
+</svg>

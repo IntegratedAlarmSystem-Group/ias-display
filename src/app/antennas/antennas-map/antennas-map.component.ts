@@ -15,14 +15,18 @@ export class AntennasMapComponent implements OnInit {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component */
-  @Input() selectedAntenna = null;
+  @Input() selectedAntenna: AntennaConfig = null;
 
   /** Variable to manage a placemark selection from the map */
   @Output() clickedAntennaMarker = new EventEmitter<AntennaConfig>();
 
   /** Source data for the map and related configuration settings */
 
-  /** Placemarks to provide the name and coordinates of each identified place */
+  /** Placemarks list obtained from the webserver */
+  public mapPlacemarks = {};
+
+  /** Placemarks objects indexed by name to provide the name and coordinates
+  * of each identified place */
   public placemarks = {};
 
   /** Placemarks listed by group */
@@ -36,6 +40,9 @@ export class AntennasMapComponent implements OnInit {
 
   /** Map Configuration  */
   public mapConfig = {};
+
+  /** Alarms Configuration  */
+  public alarmsConfig = {};
 
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
@@ -58,7 +65,10 @@ export class AntennasMapComponent implements OnInit {
    */
   initialize() {
     this.service.getMapData().subscribe((mapdata) => {
-      this.placemarks = mapdata['placemarkers'];
+      this.mapPlacemarks = mapdata['placemarkers'];
+      for (const placemark of mapdata['placemarkers']['pads']) {
+        this.placemarks[placemark.name] = placemark;
+      }
       this.placemarksGroups.push(mapdata['placemarkers']['pads']);
       this.placemarksGroups.push(mapdata['placemarkers']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
@@ -67,15 +77,16 @@ export class AntennasMapComponent implements OnInit {
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });
+    this.alarmsConfig = this.service.sidebarAlarmsConfig;
   }
 
   /**
-   * Method to verify if there is an alarm related to the selected placemark
+   * Method to verify if there is data available for the placemark id
+   * from the alarm configuration
    */
-  existsAlarmForPlacemark(placemark) {
-    const placemark_id = placemark.name;
-    const index = Object.keys(
-      this.service.mapAlarmsConfig).indexOf(placemark_id);
+  existsPlacemarkData(placemark) {
+    const placemark_id = placemark;
+    const index = Object.keys(this.placemarks).indexOf(placemark_id);
     if (index > -1) {
       return true;
     } else {
@@ -84,55 +95,63 @@ export class AntennasMapComponent implements OnInit {
   }
 
   /**
-   * Get alarm related ot a placemark
+   * Get alarm from the alarms service using id
    */
-  getAlarmForPlacemark(placemark): Alarm {
-    const alarm_id = this.getAntennaConfig(placemark).alarm;
+  getAlarm(alarm_id): Alarm {
     return this.alarmService.get(alarm_id);
   }
 
   /**
-   * Get the alarm configuration from the alarm service for a selected placemark
+   * Get antenna groups from the alarms configuration
    */
-  getAntennaConfig(placemark) {
-    const hasLocation = this.existsAlarmForPlacemark(placemark);
-    if (hasLocation === true) {
-      const placemark_id = placemark.name;
-      return this.service.mapAlarmsConfig[placemark_id];
-    }
+  getAntennaGroups() {
+    return Object.keys(this.alarmsConfig);
+  }
+
+ /**
+  * Get a placemark object from an id to use position data
+  */
+  getPlacemarkObject(placemark) {
+    const placemark_id = placemark;
+    return this.placemarks[placemark_id];
   }
 
   /**
    * Check if an specific antenna marker was selected
-   * through its related placemark
+   * through its related alarm configuration
    */
-  isSelected(placemark) {
-    return JSON.stringify(this.selectedAntenna) === JSON.stringify(this.getAntennaConfig(placemark));
+  isSelected(antennaConfig) {
+    if (this.selectedAntenna === null) {
+      return false;
+    } else {
+      return this.selectedAntenna.placemark === antennaConfig.placemark;
+    }
+
   }
 
   /**
    * Opacity class name for each antenna marker
    */
-  getOpacityClass(placemark) {
+  getOpacityClass(antennaConfig) {
     if (this.selectedAntenna === null) {
       return 'opacity-100';
     } else {
-      if ( this.isSelected(placemark) === true ) {
+      if ( this.isSelected(antennaConfig) === true ) {
         return 'opacity-100';
       } else {
-        return 'opacity-40';
+        return 'opacity-25';
       }
     }
   }
 
   /**
-   * On click action for antenna markers
+   * On click action for the antenna markers
    */
-  onClick(placemark) {
-    if (JSON.stringify(this.selectedAntenna) === JSON.stringify(this.getAntennaConfig(placemark))) {
+  onClick(antennaConfig) {
+    if (this.isSelected(antennaConfig)) {
       this.selectedAntenna = null;
     } else {
-      this.selectedAntenna = this.getAntennaConfig(placemark);
+      this.selectedAntenna = antennaConfig;
     }
     this.clickedAntennaMarker.emit(this.selectedAntenna);
   }

@@ -75,68 +75,6 @@ export class AntennasService {
   * Define the IDs of the alarms that the component should listen to
   */
   loadAlarmsConfig() {
-    this.mapAlarmsConfig = {
-      'A021': {
-        antenna: 'DV01',
-        placemark: 'A021',
-        alarm: 'Alarmdummy',
-      },
-      'W210': {
-        antenna: 'DV02',
-        placemark: 'W210',
-        alarm: 'WS-MeteoCentral-Temperature',
-      },
-      'P401': {
-        antenna: 'DV03',
-        placemark: 'P401',
-        alarm: 'Alarmdummy',
-      },
-      'S306': {
-        antenna: 'DV04',
-        placemark: 'S306',
-        alarm: 'WS-MeteoCentral-Temperature',
-      },
-      'A124': {
-        antenna: 'DV05',
-        placemark: 'A124',
-        alarm: 'WS-MeteoCentral-Temperature',
-      },
-      'A130': {
-        antenna: 'DV06',
-        placemark: 'A130',
-        alarm: 'Alarmdummy',
-      },
-      'W201': {
-        antenna: 'DV07',
-        placemark: 'W201',
-        alarm: 'Alarmdummy',
-      },
-      'A078': {
-        antenna: 'DV08',
-        placemark: 'A078',
-        alarm: 'Alarmdummy',
-      },
-      'A077': {
-        antenna: 'DV09',
-        placemark: 'A077',
-        alarm: 'Alarmdummy',
-      },
-      'P413': {
-        antenna: 'DV10',
-        placemark: 'P413',
-        alarm: 'Alarmdummy',
-      },
-      'S308': {
-        antenna: 'DV11',
-        placemark: 'S308',
-        alarm: 'Alarmdummy',
-      },
-      'S309': {
-        antenna: 'DV12',
-        placemark: 'S309',
-        alarm: 'Alarmdummy',
-      },
-    };
 
     this.sidebarAlarmsConfig = {
       'DV': [
