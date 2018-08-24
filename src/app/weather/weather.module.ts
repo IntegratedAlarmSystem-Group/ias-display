@@ -5,6 +5,7 @@ import { ActionsModule } from '../actions/actions.module';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
+import { MapModule } from '../map/map.module';
 import { WeatherSummaryComponent } from './weather-summary/weather-summary.component';
 import { WeatherMapComponent } from './weather-map/weather-map.component';
 import { WeatherMarkerMapComponent } from './weather-map-markers/weather-marker-map/weather-marker-map.component';
@@ -25,6 +26,7 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar/weathe
     ActionsModule,
     DataModule,
     SharedModule,
+    MapModule,
     IasMaterialModule,
   ],
   providers: [

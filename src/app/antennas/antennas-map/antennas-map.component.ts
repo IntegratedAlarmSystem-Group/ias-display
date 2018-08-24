@@ -73,7 +73,11 @@ export class AntennasMapComponent implements OnInit {
       this.placemarksGroups.push(mapdata['placemarkers']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
-      this.mapConfig = {'fullHeight': true, 'viewbox': viewbox};
+      this.mapConfig = {
+        'fullHeight': true,
+        'viewbox':
+          [-100 + viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
+      };
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });

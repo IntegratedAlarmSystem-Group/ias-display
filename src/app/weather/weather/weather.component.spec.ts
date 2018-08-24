@@ -5,6 +5,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
+import { MapModule } from '../../map/map.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
 import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
@@ -113,6 +114,7 @@ describe('WeatherComponent', () => {
         SharedModule,
         ActionsModule,
         DataModule,
+        MapModule,
       ],
     })
     .compileComponents();

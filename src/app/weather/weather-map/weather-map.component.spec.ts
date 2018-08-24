@@ -4,6 +4,7 @@ import { WeatherMapComponent } from './weather-map.component';
 import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
 import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
 import { WeatherService } from '../weather.service';
+import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
 import { Map } from '../../map/fixtures';
 
@@ -94,7 +95,7 @@ describe('WeatherMapComponent', () => {
         WeatherDataMapComponent,
         AlarmComponent
       ],
-      imports: [ DataModule ],
+      imports: [ DataModule, MapModule ],
       providers: [ WeatherService ]
     })
     .compileComponents();

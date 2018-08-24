@@ -6,34 +6,3 @@
 .fobject {
   overflow: visible;
 }
-
-
-svg g.paths {
-  stroke-width: 3;
-  fill: none;
-}
-
-svg g.pads {
-  stroke-width: 3;
-}
-
-svg g.pad-groups {
-
-  &.selected {
-    circle {
-    }
-  }
-
-  circle {
-    stroke-width: 3;
-  }
-}
-
-svg g.ws-primary-group {
-  cursor: pointer;
-  stroke-width: 3;
-  fill: none;
-}
-
-svg g.ws-primary-group:hover .ws-connector {
-};

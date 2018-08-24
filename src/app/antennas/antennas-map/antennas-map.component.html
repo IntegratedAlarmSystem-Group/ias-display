@@ -5,19 +5,19 @@
 
    <ng-container data="svg-elements">
 
-     <svg:path class="paths" *ngFor="let path of svgPaths"
+     <svg:path class="antennas-map-paths" *ngFor="let path of svgPaths"
        [attr.d]="path"
-       stroke="#636b74"
+       stroke="currentColor"
        stroke-width="3"
        fill="none"
      />
 
-     <svg:circle class="pads" *ngFor="let p of mapPlacemarks['pads']"
+     <svg:circle class="antennas-map-pads" *ngFor="let p of mapPlacemarks['pads']"
        [attr.cx]="p.opt_cx"
        [attr.cy]="p.opt_cy"
        [attr.data]="p.name"
        r="5"
-       stroke="#636b74"
+       stroke="currentColor"
        stroke-width="3"
        fill="#212d3a"
      />

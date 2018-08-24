@@ -6,17 +6,17 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  $map_stroke: mat-color($foreground, opaque-divider);
+  $map_stroke: mat-color($foreground, map-stroke);
   $selected_pad: mat-color($foreground, text);
   $map_background: mat-color($background, background);
   $marker_stroke: mat-color($background, dialog);
   $selected_marker_stroke: mat-color($foreground, secondary-text);
 
-  svg path.paths {
+  svg path.antennas-map-paths {
     stroke: $map_stroke;
   }
 
-  svg circle.pads {
+  svg circle.antennas-map-pads {
     stroke: $map_stroke;
     fill: $map_background;
   }
