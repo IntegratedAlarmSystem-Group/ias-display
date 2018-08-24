@@ -1,3 +1,56 @@
-<p>
-  antennas-sidebar works!
-</p>
+<div class="antennas-sidebar-card">
+  <!-- TITLE -->
+  <div class="antennas-sidebar-title">
+    <div *ngIf="this.selectedAntenna == null; then antennasTitle else returnLink"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="antennas-sidebar-content">
+    <div *ngIf="this.selectedAntenna == null; then antennasList else antennasDetail"> </div>
+  </div>
+</div>
+
+<!-- Title when there is not a selected antenna -->
+<ng-template #antennasTitle>
+  <span> ANTENNAS </span>
+</ng-template>
+
+<!-- Title when one antenna is selected -->
+<ng-template #returnLink>
+    <div class="return-link" (click)="unselectAntenna()"> <i class="material-icons">chevron_left</i> <span> {{getAntennaName(this.selectedAntenna)}} </span> </div>
+</ng-template>
+
+<!-- Content when there is not a selected antenna -->
+<ng-template #antennasList>
+  <div class="antennas-group-container" *ngFor="let group of getAntennasGroups()">
+    <span class="antennas-group-title"> {{group}} </span>
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Content when one antenna is selected -->
+<ng-template #antennasDetail>
+  <div class="antennas-detail alarm-info">
+    <table>
+      <tr>
+        <th>Alarm ID</th>
+        <td>{{this.selectedAntenna.alarm}}</td>
+      </tr>
+      <tr>
+        <th>Antenna</th>
+        <td>{{this.selectedAntenna.antenna}}</td>
+      </tr>
+      <tr>
+        <th>Location (PAD)</th>
+        <td>{{this.selectedAntenna.placemark}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="antennas-detail footer">
+    <button id="goToTable" mat-flat-button color="primary" (click)="goToTableFilteredBy(this.selectedAntenna.alarm)">Go to Table</button>
+  </div>
+</ng-template>

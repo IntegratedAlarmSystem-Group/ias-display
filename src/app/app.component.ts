@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { AlarmService } from './data/alarm.service';
 import { SidenavService } from './actions/sidenav.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 /**
 * Main component of the application
@@ -29,20 +32,49 @@ export class AppComponent implements OnInit {
   isNavigationCompacted = true;
 
   /** Navigation Sidenav Menu of the application (left sidenav) */
+  // TODO: Use only custom svgIcons
   navigationSidenavItems = [
-    { title: 'Overview', link: 'overview', icon: 'language'},
-    { title: 'Weather', link: 'weather', icon: 'wb_sunny'},
-    { title: 'Table', link: 'tabular', icon: 'list'}
+    { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
+    { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
+    { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
+    { title: 'Table', link: 'tabular', icon: 'ias_table', svgIcon: true}
   ];
 
   /**
-   * Instantiates the service
+   * Instantiates the related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   * @param {SidenavService} actionsSidenavService Service for the navigation
+   * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
+   * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
    */
   constructor(
     private alarmService: AlarmService,
-    public actionsSidenavService: SidenavService
-  ) {}
+    public actionsSidenavService: SidenavService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry
+      .addSvgIcon(
+        'ias_overview',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-overview.svg')
+      )
+      .addSvgIcon(
+        'ias_weather',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-weather.svg')
+      )
+      .addSvgIcon(
+        'ias_antenna',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-antenna.svg')
+      )
+      .addSvgIcon(
+        'ias_table',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-table.svg')
+      );
+  }
 
   /**
    * Instantiates the {@link AlarmService}

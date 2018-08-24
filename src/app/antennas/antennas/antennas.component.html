@@ -1,12 +1,17 @@
 <mat-sidenav-container autosize>
 
   <mat-sidenav-content id="antennas-map" autosize>
-    <app-antennas-map></app-antennas-map>
+    <app-antennas-map
+      (clickedAntennaMarker)="updateSelectedAntenna($event)"
+      [selectedAntenna]=this.selectedAntenna>
+    </app-antennas-map>
   </mat-sidenav-content>
 
   <mat-sidenav #antennasSidenav id="antennas-sidenav" position="end" mode="side" opened="true">
-    <app-antennas-sidebar></app-antennas-sidebar>
-    <!-- <app-antennas-sidebar (panelClicked)="changeSelectedStation($event)" [selectedStation]="selectedStation"></app-antennas-sidebar> -->
+    <app-antennas-sidebar
+      (antennaClicked)="updateSelectedAntenna($event)"
+      [selectedAntenna]=this.selectedAntenna>
+    </app-antennas-sidebar>
   </mat-sidenav>
 
 </mat-sidenav-container>

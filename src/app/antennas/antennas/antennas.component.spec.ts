@@ -5,7 +5,9 @@ import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.c
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { MapModule } from '../../map/map.module';
+import { SharedModule } from '../../shared/shared.module';
 import { AntennasService } from '../antennas.service';
+import { RoutingService } from '../../data/routing.service';
 import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
@@ -23,6 +25,7 @@ const mockAntennasConfig =  {
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
   let fixture: ComponentFixture<AntennasComponent>;
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,9 +38,14 @@ describe('AntennasComponent', () => {
       imports: [
         DataModule,
         IasMaterialModule,
-        MapModule
+        MapModule,
+        SharedModule
       ],
-      providers: [ AntennasService, MapService ]
+      providers: [
+        { provide: RoutingService, useValue: spyRoutingTable },
+        AntennasService,
+        MapService
+      ]
     })
     .compileComponents();
   }));

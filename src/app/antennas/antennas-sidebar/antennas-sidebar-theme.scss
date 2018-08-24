@@ -1,0 +1,41 @@
+@mixin antennas-sidebar-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .antennas-sidebar-card {
+    background: map_get($primary, 600);
+
+    .antennas-sidebar-title {
+      border-bottom-color: mat-color($foreground, divider);
+    }
+
+    .antennas-sidebar-content {
+
+      .grid-container {
+        background-color: transparent;
+
+        .grid-item {
+          background: mat-color($primary, 300);
+
+          &:hover {
+            background: mat-color($background, hover);
+          }
+        }
+      }
+
+      .antennas-detail {
+
+        &.alarm-info {
+          td {
+            color: mat-color($foreground, hint-text);
+          }
+        }
+      }
+
+    }
+  }
+}

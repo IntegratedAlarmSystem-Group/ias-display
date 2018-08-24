@@ -1,0 +1,88 @@
+.antennas-sidebar-card {
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .antennas-sidebar-title {
+    padding: 12px 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    .return-link {
+      cursor: pointer;
+
+      i {
+        vertical-align: middle;
+        font-size: 25px;
+      }
+
+      span {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .antennas-sidebar-content {
+    padding: 12px 0px;
+    height: 100%;
+    overflow-y: auto;
+
+    .antennas-group-container {
+      margin: 6px 0px;
+
+      .antennas-group-title {
+        line-height: 40px;
+        font-weight: bold;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 6px;
+
+        .grid-item {
+          height: 50px;
+          line-height: 50px;
+          border-radius: 4px;
+          padding: 0;
+          position: relative;
+          cursor: pointer;
+        }
+
+      }
+
+    }
+
+    .antennas-detail {
+
+      &.alarm-info {
+        table {
+          vertical-align: top;
+        }
+
+        th {
+          padding-right: 16px;
+          font-weight: normal;
+        }
+      }
+
+      &.footer {
+        width: 100%;
+        font-size: 14px;
+        display: table;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 50px;
+
+        button {
+          margin: 0px 10px 0px 10px;
+        }
+      }
+    }
+
+  }
+}
