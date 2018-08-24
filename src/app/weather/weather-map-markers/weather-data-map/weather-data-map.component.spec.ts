@@ -1,12 +1,12 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
 import { WeatherDataMapComponent } from './weather-data-map.component';
-import { WeatherService } from '../weather.service';
+import { WeatherService } from '../../weather.service';
 
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmComponent } from '../../../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 
-import { DataModule } from '../../data/data.module';
+import { DataModule } from '../../../data/data.module';
 
 const mockWeatherStationsConfig = {
   'mockAlarm-0': {

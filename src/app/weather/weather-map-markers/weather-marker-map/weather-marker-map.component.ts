@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
-import { AlarmService } from '../../data/alarm.service';
-import { Alarm } from '../../data/alarm';
+import { AlarmComponent } from '../../../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
+import { AlarmService } from '../../../data/alarm.service';
+import { Alarm } from '../../../data/alarm';
 
-import { WeatherService, WeatherStationConfig } from '../weather.service';
+import { WeatherService, WeatherStationConfig } from '../../weather.service';
 
-import { Assets } from '../../settings';
+import { Assets } from '../../../settings';
 
 
 @Component({
