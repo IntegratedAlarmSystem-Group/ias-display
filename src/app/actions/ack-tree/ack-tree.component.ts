@@ -90,6 +90,7 @@ export class AckTreeComponent implements OnInit, OnChanges {
     this.checklistSelection.onChange.subscribe(data => {
       this.updateAckList();
     });
+    this.ngOnChanges();
   }
 
   /**
@@ -97,8 +98,10 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
    */
   ngOnChanges() {
-    const tree_data = this.getTreeData();
-    this.dataSource.data = this.buildFileTree(tree_data, 0);
+    if (this.dataSource) {
+      const tree_data = this.getTreeData();
+      this.dataSource.data = this.buildFileTree(tree_data, 0);
+    }
   }
 
   /**
