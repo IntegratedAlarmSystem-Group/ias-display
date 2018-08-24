@@ -21,4 +21,30 @@
     fill: $map_background;
   }
 
+  svg g.weather-map-pad-groups {
+
+    &.selected {
+
+      circle {
+        stroke: $selected_pad;
+        fill: $map_background;
+      }
+
+    }
+
+    circle {
+      stroke: $map_stroke;
+      fill: $map_background;
+    }
+
+  }
+
+  svg g.weather-map-main-ws-group  path.ws-connector {
+    stroke: mat-color($background, dialog, 0.95);
+  }
+
+  svg g.weather-map-main-ws-group:hover  path.ws-connector {
+    stroke: $selected_marker_stroke;
+  }
+
 }

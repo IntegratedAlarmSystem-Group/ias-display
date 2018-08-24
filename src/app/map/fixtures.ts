@@ -65,7 +65,7 @@ export const Map = {
             }
         }
     },
-    'placemarkers': {
+    'placemarks': {
         'wstations': [
             {
                 'description': 'description',

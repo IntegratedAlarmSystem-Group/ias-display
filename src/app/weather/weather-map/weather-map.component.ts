@@ -50,6 +50,9 @@ export class WeatherMapComponent implements OnInit {
   /** Data relations to manage the graphical elements */
   public datarelations: any;
 
+  /**
+   * Builds an instance of the component and initializes it calling the {@link initialize} method
+   */
   constructor(
     public service: WeatherService,
     public alarmService: AlarmService,
@@ -60,14 +63,20 @@ export class WeatherMapComponent implements OnInit {
     this.initialize();
   }
 
+  /**
+   * Data setup
+   */
   initialize() {
     this.service.getMapData().subscribe((mapdata) => {
-      this.mapPlacemarks = mapdata['placemarkers'];
-      for (const placemark of mapdata['placemarkers']['pads']) {
+      this.mapPlacemarks = mapdata['placemarks'];
+      let placemarks_list = [];
+      placemarks_list = placemarks_list.concat(mapdata['placemarks']['pads']);
+      placemarks_list = placemarks_list.concat(mapdata['placemarks']['wstations']);
+      for (const placemark of placemarks_list) {
         this.placemarks[placemark.name] = placemark;
       }
-      this.placemarksGroups.push(mapdata['placemarkers']['pads']);
-      this.placemarksGroups.push(mapdata['placemarkers']['wstations']);
+      this.placemarksGroups.push(mapdata['placemarks']['pads']);
+      this.placemarksGroups.push(mapdata['placemarks']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
       this.mapConfig = {
@@ -76,11 +85,15 @@ export class WeatherMapComponent implements OnInit {
           [viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
       };
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
+      this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
     this.alarmsConfig = this.service.weatherStationsConfig;
   }
 
+  /**
+   * Auxiliary method to generate the stations connector
+   */
   getSVGVirtualConnectorPath(placemark, dx, dy) {
     let pathString = '';
     const origin = [0, 0];
@@ -97,6 +110,26 @@ export class WeatherMapComponent implements OnInit {
     return pathString;
   }
 
+  /**
+   * Get the groups of pads from the webserver data source
+   */
+  getPadsGroups() {
+    if (this.mapdataAvailable.value === true) {
+      return Object.keys(this.datarelations);
+    }
+  }
+
+  /**
+   * Get a placemark object from an id to use position data
+   */
+   getPlacemarkObject(placemark) {
+     const placemark_id = placemark;
+     return this.placemarks[placemark_id];
+   }
+
+  /**
+   * Action after click on a weather station marker
+   */
   onClick(placemark) {
     const selectedGroup = this.service.weatherStationsConfig[placemark.name];
     if ( this.selectedStation !== selectedGroup.station) {
@@ -107,6 +140,9 @@ export class WeatherMapComponent implements OnInit {
     this.placemarkClicked.emit(this.selectedStation);
   }
 
+  /**
+   * Check if the placemarker related to a main weather station is selected
+   */
   isSelected(placemark: string): boolean {
     if (this.service.weatherStationsConfig[placemark]) {
       return this.service.weatherStationsConfig[placemark].station === this.selectedStation;

@@ -11,10 +11,11 @@
   .ws-data-container {
     background: mat-color($background, dialog, 0.95);
     border-color: mat-color($background, dialog);
-  }
 
-  // :host-context(svg .ws-primary-group:hover) .ws-data-container {
-  //   border: 2px solid #a3bbc6;
-  // }
+    &.selected {
+      border-color: mat-color($mat-red, 500);
+    }
+
+  }
 
 }

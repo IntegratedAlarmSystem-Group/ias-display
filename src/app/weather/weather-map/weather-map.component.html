@@ -22,6 +22,72 @@
        fill="#212d3a"
      />
 
-   </ng-container>
+     <ng-container *ngFor="let padsGroup of getPadsGroups()">
+       <ng-container *ngFor="let main_ws_name of [datarelations[padsGroup]['wstations']['primary'][0]]">
+         <!-- Note: it should be one main weather station related to a pad group -->
+         <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(main_ws_name)}" >
+           <ng-container *ngFor="let pad_name of datarelations[padsGroup]['pads']">
+             <ng-container *ngFor="let p of [getPlacemarkObject(pad_name)]">
+                 <svg:circle
+                   [attr.cx]="p.opt_cx"
+                   [attr.cy]="p.opt_cy"
+                   [attr.data]="p.name"
+                   r="5"
+                   stroke="currentColor"
+                   stroke-width="2"
+                 />
+             </ng-container>
+           </ng-container>
+           <ng-container *ngFor="let p of [getPlacemarkObject(main_ws_name)]">
+             <svg:g class="weather-map-main-ws-group" [ngClass]="{'selected': isSelected(main_ws_name)}">
+               <!-- main ws marker -->
+               <path
+                  class="ws-connector"
+                  [attr.d]="getSVGVirtualConnectorPath(p, 125, -50) "
+                  stroke=currentColor
+                  stroke-width=2
+                />
+               <foreignObject
+                    [attr.x]="p.opt_cx-25"
+                    [attr.y]="p.opt_cy-25"
+                    width="100"
+                    height="50">
+                 <xhtml:app-weather-marker-map
+                    [placemark]="p.name">
+                 </xhtml:app-weather-marker-map>
+               </foreignObject>
+               <foreignObject
+                    class="fobject"
+                    [attr.x]="(p.opt_cx-50) + 125"
+                    [attr.y]="(p.opt_cy-50) - 25"
+                    width="200"
+                    height="100">
+                 <xhtml:app-weather-data-map
+                    [placemark]="p.name">
+                 </xhtml:app-weather-data-map>
+               </foreignObject>
+              <!-- main ws marker -->
+             </svg:g>
+           </ng-container>
+           <ng-container *ngFor="let backup_ws_name of datarelations[padsGroup]['wstations']['backup']">
+              <!-- backup ws marker -->
+              <ng-container *ngFor="let p of [getPlacemarkObject(backup_ws_name)]">
+                <foreignObject
+                     [attr.x]="p.opt_cx-25"
+                     [attr.y]="p.opt_cy-25"
+                     width="100"
+                     height="50">
+                  <xhtml:app-weather-marker-map
+                     [placemark]="main_ws_name">
+                  </xhtml:app-weather-marker-map>
+                </foreignObject>
+              </ng-container>
+              <!-- backup ws marker -->
+           </ng-container>
+         </svg:g>
+      </ng-container>
+     </ng-container>
+
+  </ng-container>
 
 </app-map>

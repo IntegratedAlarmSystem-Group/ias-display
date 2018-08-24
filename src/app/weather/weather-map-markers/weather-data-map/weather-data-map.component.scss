@@ -17,7 +17,7 @@
 
 }
 
-:host-context(svg .ws-primary-group:hover) .ws-data-container {
-  // TODO: Change this by a color defined in the mixin
-  border: 2px solid #a3bbc6;
+:host-context(svg g.weather-map-ws-group:hover) .ws-data-container {
+  border: solid;
+  border-width: 10px;
 }
