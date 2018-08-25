@@ -1,9 +1,9 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { WeatherMapComponent } from './weather-map.component';
-import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
-import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
+import { WeatherDataMarkerComponent } from '../weather-map-markers/weather-data-marker/weather-data-marker.component';
 import { WeatherBackupWsMarkerComponent } from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
+import { WeatherMainWsMarkerComponent } from '../weather-map-markers/weather-main-ws-marker/weather-main-ws-marker.component';
 import { WeatherService } from '../weather.service';
 import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
@@ -82,18 +82,18 @@ for ( const item in alarm_types) {
 describe('WeatherMapComponent', () => {
   let component: WeatherMapComponent;
   let fixture: ComponentFixture<WeatherMapComponent>;
-  let componentDataMap: WeatherDataMapComponent;
-  let fixtureDataMap: ComponentFixture<WeatherDataMapComponent>;
-  let componentMarkerMap: WeatherMarkerMapComponent;
-  let fixtureMarkerMap: ComponentFixture<WeatherMarkerMapComponent>;
+  let componentDataMarker: WeatherDataMarkerComponent;
+  let fixtureDataMarker: ComponentFixture<WeatherDataMarkerComponent>;
+  let componentMarkerMap: WeatherMainWsMarkerComponent;
+  let fixtureMarkerMap: ComponentFixture<WeatherMainWsMarkerComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         WeatherMapComponent,
-        WeatherMarkerMapComponent,
-        WeatherDataMapComponent,
+        WeatherMainWsMarkerComponent,
+        WeatherDataMarkerComponent,
         WeatherBackupWsMarkerComponent,
         AlarmComponent
       ],
@@ -128,11 +128,11 @@ describe('WeatherMapComponent', () => {
     });
     component = fixture.componentInstance;
 
-    fixtureDataMap = TestBed.createComponent(WeatherDataMapComponent);
-    componentDataMap = fixtureDataMap.componentInstance;
-    componentDataMap.placemark = 'name';
+    fixtureDataMarker = TestBed.createComponent(WeatherDataMarkerComponent);
+    componentDataMarker = fixtureDataMarker.componentInstance;
+    componentDataMarker.placemark = 'name';
 
-    fixtureMarkerMap = TestBed.createComponent(WeatherMarkerMapComponent);
+    fixtureMarkerMap = TestBed.createComponent(WeatherMainWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
     componentMarkerMap.placemark = 'name';
     componentMarkerMap.iconSet = mockMarkerImagesSets['set'];

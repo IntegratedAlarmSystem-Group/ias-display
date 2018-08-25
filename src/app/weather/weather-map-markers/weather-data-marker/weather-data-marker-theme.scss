@@ -1,4 +1,4 @@
-@mixin weather-data-map-theme($theme) {
+@mixin weather-data-marker-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
@@ -11,11 +11,6 @@
   .ws-data-container {
     background: mat-color($background, dialog, 0.95);
     border-color: mat-color($background, dialog);
-
-    &.selected {
-      border-color: mat-color($mat-red, 500);
-    }
-
   }
 
 }

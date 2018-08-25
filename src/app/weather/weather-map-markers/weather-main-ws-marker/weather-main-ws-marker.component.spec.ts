@@ -1,5 +1,5 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { WeatherMarkerMapComponent } from './weather-marker-map.component';
+import { WeatherMainWsMarkerComponent } from './weather-main-ws-marker.component';
 import { WeatherService } from '../../weather.service';
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
@@ -47,38 +47,38 @@ mockImagesSets['set-unreliable'] = new AlarmImageSet({
 });
 
 
-describe('WeatherMarkerMapComponent', () => {
-  let component: WeatherMarkerMapComponent;
-  let fixture: ComponentFixture<WeatherMarkerMapComponent>;
+describe('WeatherMainWsMarkerComponent', () => {
+  let component: WeatherMainWsMarkerComponent;
+  let fixture: ComponentFixture<WeatherMainWsMarkerComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          WeatherMarkerMapComponent,
-          AlarmComponent
-        ],
-        imports: [
-          DataModule
-        ],
-        providers: [
-          WeatherService
-        ]
-      })
-      .compileComponents();
-    }));
+    TestBed.configureTestingModule({
+      declarations: [
+        WeatherMainWsMarkerComponent,
+        AlarmComponent
+      ],
+      imports: [
+        DataModule
+      ],
+      providers: [
+        WeatherService
+      ]
+    })
+    .compileComponents();
+  }));
 
-    beforeEach(
-      inject([WeatherService], (service) => {
-        weatherService = service;
-        spyOn(weatherService, 'initialize')
-          .and.callFake(function() {});
-        weatherService.weatherStationsConfig = mockWeatherStationsConfig;
-      })
-    );
+  beforeEach(
+    inject([WeatherService], (service) => {
+      weatherService = service;
+      spyOn(weatherService, 'initialize')
+        .and.callFake(function() {});
+      weatherService.weatherStationsConfig = mockWeatherStationsConfig;
+    })
+  );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherMarkerMapComponent);
+    fixture = TestBed.createComponent(WeatherMainWsMarkerComponent);
     component = fixture.componentInstance;
     component.placemark = 'mockAlarm-0';
     component.iconSet = mockImagesSets['set'];

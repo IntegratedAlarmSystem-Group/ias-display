@@ -8,8 +8,8 @@ import { DataModule } from '../../data/data.module';
 import { MapModule } from '../../map/map.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
-import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
-import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
+import { WeatherMainWsMarkerComponent } from '../weather-map-markers/weather-main-ws-marker/weather-main-ws-marker.component';
+import { WeatherDataMarkerComponent } from '../weather-map-markers/weather-data-marker/weather-data-marker.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
 import { WeatherBackupWsMarkerComponent } from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
@@ -88,10 +88,10 @@ for ( const item in alarm_types) {
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
   let fixture: ComponentFixture<WeatherComponent>;
-  let componentDataMap: WeatherDataMapComponent;
-  let fixtureDataMap: ComponentFixture<WeatherDataMapComponent>;
-  let componentMarkerMap: WeatherMarkerMapComponent;
-  let fixtureMarkerMap: ComponentFixture<WeatherMarkerMapComponent>;
+  let componentDataMarker: WeatherDataMarkerComponent;
+  let fixtureDataMarker: ComponentFixture<WeatherDataMarkerComponent>;
+  let componentMarkerMap: WeatherMainWsMarkerComponent;
+  let fixtureMarkerMap: ComponentFixture<WeatherMainWsMarkerComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
 
@@ -100,8 +100,8 @@ describe('WeatherComponent', () => {
       declarations: [
         WeatherComponent,
         WeatherMapComponent,
-        WeatherMarkerMapComponent,
-        WeatherDataMapComponent,
+        WeatherMainWsMarkerComponent,
+        WeatherDataMarkerComponent,
         WeatherBackupWsMarkerComponent,
         WeatherSidebarComponent,
         WeatherStationSidebarComponent,
@@ -145,17 +145,17 @@ describe('WeatherComponent', () => {
     });
     component = fixture.componentInstance;
 
-    fixtureDataMap = TestBed.createComponent(WeatherDataMapComponent);
-    componentDataMap = fixtureDataMap.componentInstance;
-    componentDataMap.placemark = 'name';
+    fixtureDataMarker = TestBed.createComponent(WeatherDataMarkerComponent);
+    componentDataMarker = fixtureDataMarker.componentInstance;
+    componentDataMarker.placemark = 'name';
 
-    fixtureMarkerMap = TestBed.createComponent(WeatherMarkerMapComponent);
+    fixtureMarkerMap = TestBed.createComponent(WeatherMainWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
     componentMarkerMap.placemark = 'name';
     componentMarkerMap.iconSet = mockMarkerImagesSets['set'];
     componentMarkerMap.iconUnreliableSet = mockMarkerImagesSets['set-unreliable'];
 
-    fixtureDataMap.detectChanges();
+    fixtureDataMarker.detectChanges();
   });
 
   it('should create', () => {

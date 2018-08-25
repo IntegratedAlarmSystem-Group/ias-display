@@ -1,6 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
-import { WeatherDataMapComponent } from './weather-data-map.component';
+import { WeatherDataMarkerComponent } from './weather-data-marker.component';
 import { WeatherService } from '../../weather.service';
 
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
@@ -52,15 +52,15 @@ for ( const item in alarm_types) {
   }
 }
 
-describe('WeatherDataMapComponent', () => {
-  let component: WeatherDataMapComponent;
-  let fixture: ComponentFixture<WeatherDataMapComponent>;
+describe('WeatherDataMarkerComponent', () => {
+  let component: WeatherDataMarkerComponent;
+  let fixture: ComponentFixture<WeatherDataMarkerComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        WeatherDataMapComponent,
+        WeatherDataMarkerComponent,
         AlarmComponent
       ],
       imports: [
@@ -89,7 +89,7 @@ describe('WeatherDataMapComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherDataMapComponent);
+    fixture = TestBed.createComponent(WeatherDataMarkerComponent);
     component = fixture.componentInstance;
     component.placemark = 'mockAlarm-0';
     fixture.detectChanges();
@@ -99,5 +99,4 @@ describe('WeatherDataMapComponent', () => {
     expect(component.alarmConfig.placemark).toEqual(component.placemark);
     expect(component).toBeTruthy();
   });
-
 });

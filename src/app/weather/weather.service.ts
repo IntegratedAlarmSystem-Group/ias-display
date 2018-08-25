@@ -112,7 +112,7 @@ export class WeatherService {
     this.weatherStationsConfig =  {
       'MeteoCentral': { // MORITA_AND_INNER
         placemark: 'MeteoCentral',
-        station: 'Alarmdummy',
+        station: 'WS-Inner-Temperature',
         temperature: 'WS-Inner-Temperature',
         windspeed: 'WS-Inner-WindSpeed',
         humidity: 'WS-Inner-Humidity',
