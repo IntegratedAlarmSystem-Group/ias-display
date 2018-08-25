@@ -11,6 +11,7 @@ import { WeatherMapComponent } from '../weather-map/weather-map.component';
 import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
 import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
+import { WeatherBackupWsMarkerComponent } from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
 import { WeatherService } from '../weather.service';
 import { Router } from '@angular/router';
@@ -101,6 +102,7 @@ describe('WeatherComponent', () => {
         WeatherMapComponent,
         WeatherMarkerMapComponent,
         WeatherDataMapComponent,
+        WeatherBackupWsMarkerComponent,
         WeatherSidebarComponent,
         WeatherStationSidebarComponent,
       ],

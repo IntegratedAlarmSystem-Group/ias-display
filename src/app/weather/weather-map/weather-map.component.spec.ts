@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { WeatherMapComponent } from './weather-map.component';
 import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
 import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
+import { WeatherBackupWsMarkerComponent } from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
 import { WeatherService } from '../weather.service';
 import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
@@ -93,6 +94,7 @@ describe('WeatherMapComponent', () => {
         WeatherMapComponent,
         WeatherMarkerMapComponent,
         WeatherDataMapComponent,
+        WeatherBackupWsMarkerComponent,
         AlarmComponent
       ],
       imports: [ DataModule, MapModule ],
