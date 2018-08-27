@@ -10,11 +10,11 @@ import { WeatherService, WeatherStationConfig } from '../../weather.service';
 import { Assets } from '../../../settings';
 
 @Component({
-  selector: 'app-weather-main-ws-marker',
-  templateUrl: './weather-main-ws-marker.component.html',
-  styleUrls: ['./weather-main-ws-marker.component.css']
+  selector: 'app-weather-primary-ws-marker',
+  templateUrl: './weather-primary-ws-marker.component.html',
+  styleUrls: ['./weather-primary-ws-marker.component.scss']
 })
-export class WeatherMainWsMarkerComponent implements OnInit {
+export class WeatherPrimaryWsMarkerComponent implements OnInit {
 
     /** Set of icons */
     public iconSet: AlarmImageSet;

@@ -18,6 +18,14 @@ export class WeatherDataMarkerComponent implements OnInit {
     /** Placemark name related to the data component */
     @Input() placemark;
 
+    /** Variable to manage if the marker should be highlighted
+    * for example after the selection from a parent component
+    */
+    @Input() selected = false;
+
+    /** Variable to manage if the marker should be highlighted from hover
+    */
+    @Input() onHover = false;
 
     /** Local alarm configuration */
     alarmConfig;

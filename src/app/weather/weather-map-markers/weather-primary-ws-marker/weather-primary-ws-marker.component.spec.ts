@@ -1,5 +1,5 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { WeatherMainWsMarkerComponent } from './weather-main-ws-marker.component';
+import { WeatherPrimaryWsMarkerComponent } from './weather-primary-ws-marker.component';
 import { WeatherService } from '../../weather.service';
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
@@ -47,15 +47,15 @@ mockImagesSets['set-unreliable'] = new AlarmImageSet({
 });
 
 
-describe('WeatherMainWsMarkerComponent', () => {
-  let component: WeatherMainWsMarkerComponent;
-  let fixture: ComponentFixture<WeatherMainWsMarkerComponent>;
+describe('WeatherPrimaryWsMarkerComponent', () => {
+  let component: WeatherPrimaryWsMarkerComponent;
+  let fixture: ComponentFixture<WeatherPrimaryWsMarkerComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        WeatherMainWsMarkerComponent,
+        WeatherPrimaryWsMarkerComponent,
         AlarmComponent
       ],
       imports: [
@@ -78,7 +78,7 @@ describe('WeatherMainWsMarkerComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherMainWsMarkerComponent);
+    fixture = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
     component = fixture.componentInstance;
     component.placemark = 'mockAlarm-0';
     component.iconSet = mockImagesSets['set'];

@@ -8,6 +8,7 @@
 @import '../weather/weather-station-sidebar/weather-station-sidebar-theme.scss';
 @import '../weather/weather-map/weather-map-theme.scss';
 @import '../weather/weather-map-markers/weather-data-marker/weather-data-marker-theme.scss';
+@import '../weather/weather-map-markers/weather-primary-ws-connector/weather-primary-ws-connector-theme.scss';
 @import '../antennas/antennas-map/antennas-map-theme.scss';
 @import '../app-theme.scss';
 @import '../material-sandbox/material-sandbox-theme.scss';
@@ -147,6 +148,7 @@ $ias-typography: mat-typography-config(
   @include weather-station-sidebar-theme($theme);
   @include weather-map-theme($theme);
   @include weather-data-marker-theme($theme);
+  @include weather-primary-ws-connector-theme($theme);
   @include material-sandbox-theme($theme);
   @include antennas-sidebar-theme($theme);
   @include antennas-map-theme($theme);

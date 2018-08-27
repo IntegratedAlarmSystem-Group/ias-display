@@ -13,4 +13,14 @@
     border-color: mat-color($background, dialog);
   }
 
+  .ws-data-container.selected {
+    background: mat-color($background, dialog, 0.95);
+    border-color: $selected_marker_stroke;
+  }
+
+  .ws-data-container.onhover {
+    background: mat-color($background, dialog, 0.95);
+    border-color: $selected_marker_stroke;
+  }
+
 }

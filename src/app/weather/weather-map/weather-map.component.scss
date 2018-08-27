@@ -2,6 +2,26 @@
   overflow: visible;
 }
 
-.ws-connector {
-  fill: none;
+.opacity-100 {
+  opacity: 1;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.weather-display-hide {
+  display: none;
+}
+
+.weather-display-show {
+  display: block;
+}
+
+.weather-map-primary-ws-group {
+  cursor: pointer;
 }

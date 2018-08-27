@@ -1,16 +1,26 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { WeatherMapComponent } from './weather-map.component';
-import { WeatherDataMarkerComponent } from '../weather-map-markers/weather-data-marker/weather-data-marker.component';
-import { WeatherBackupWsMarkerComponent } from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
-import { WeatherMainWsMarkerComponent } from '../weather-map-markers/weather-main-ws-marker/weather-main-ws-marker.component';
 import { WeatherService } from '../weather.service';
 import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
 import { Map } from '../../map/fixtures';
-
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
+
+import {
+  WeatherDataMarkerComponent
+} from '../weather-map-markers/weather-data-marker/weather-data-marker.component';
+import {
+  WeatherBackupWsMarkerComponent
+} from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
+import {
+  WeatherPrimaryWsMarkerComponent
+} from '../weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component';
+import {
+  WeatherPrimaryWsConnectorComponent
+} from '../weather-map-markers/weather-primary-ws-connector/weather-primary-ws-connector.component';
+
 
 const mockWeatherStationsConfig = {
   'name': {
@@ -84,15 +94,16 @@ describe('WeatherMapComponent', () => {
   let fixture: ComponentFixture<WeatherMapComponent>;
   let componentDataMarker: WeatherDataMarkerComponent;
   let fixtureDataMarker: ComponentFixture<WeatherDataMarkerComponent>;
-  let componentMarkerMap: WeatherMainWsMarkerComponent;
-  let fixtureMarkerMap: ComponentFixture<WeatherMainWsMarkerComponent>;
+  let componentMarkerMap: WeatherPrimaryWsMarkerComponent;
+  let fixtureMarkerMap: ComponentFixture<WeatherPrimaryWsMarkerComponent>;
   let weatherService: WeatherService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         WeatherMapComponent,
-        WeatherMainWsMarkerComponent,
+        WeatherPrimaryWsMarkerComponent,
+        WeatherPrimaryWsConnectorComponent,
         WeatherDataMarkerComponent,
         WeatherBackupWsMarkerComponent,
         AlarmComponent
@@ -132,7 +143,7 @@ describe('WeatherMapComponent', () => {
     componentDataMarker = fixtureDataMarker.componentInstance;
     componentDataMarker.placemark = 'name';
 
-    fixtureMarkerMap = TestBed.createComponent(WeatherMainWsMarkerComponent);
+    fixtureMarkerMap = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
     componentMarkerMap.placemark = 'name';
     componentMarkerMap.iconSet = mockMarkerImagesSets['set'];

@@ -8,13 +8,23 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { MapModule } from '../map/map.module';
 import { WeatherSummaryComponent } from './weather-summary/weather-summary.component';
 import { WeatherMapComponent } from './weather-map/weather-map.component';
-import { WeatherBackupWsMarkerComponent } from './weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
-import { WeatherMainWsMarkerComponent } from './weather-map-markers/weather-main-ws-marker/weather-main-ws-marker.component';
-import { WeatherDataMarkerComponent } from './weather-map-markers/weather-data-marker/weather-data-marker.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherSidebarComponent } from './weather-sidebar/weather-sidebar.component';
 import { WeatherService } from './weather.service';
 import { WeatherStationSidebarComponent } from './weather-station-sidebar/weather-station-sidebar.component';
+
+import {
+  WeatherBackupWsMarkerComponent
+} from './weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
+import {
+  WeatherPrimaryWsMarkerComponent
+} from './weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component';
+import {
+  WeatherPrimaryWsConnectorComponent
+} from './weather-map-markers/weather-primary-ws-connector/weather-primary-ws-connector.component';
+import {
+  WeatherDataMarkerComponent
+} from './weather-map-markers/weather-data-marker/weather-data-marker.component';
 
 /**
 * This module contains all the components related to the Weather system
@@ -39,8 +49,9 @@ import { WeatherStationSidebarComponent } from './weather-station-sidebar/weathe
     WeatherSidebarComponent,
     WeatherStationSidebarComponent,
     WeatherBackupWsMarkerComponent,
-    WeatherMainWsMarkerComponent,
     WeatherDataMarkerComponent,
+    WeatherPrimaryWsMarkerComponent,
+    WeatherPrimaryWsConnectorComponent,
   ],
   exports: [
     WeatherSummaryComponent,

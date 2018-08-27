@@ -1,0 +1,23 @@
+@mixin weather-primary-ws-connector-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $selected_marker_stroke: mat-color($foreground, secondary-text);
+
+  .ws-connector {
+    stroke: mat-color($background, dialog);
+  }
+
+  .ws-connector.selected {
+    stroke: $selected_marker_stroke;
+  }
+
+  .ws-connector.onhover {
+    stroke: $selected_marker_stroke;
+  }
+
+}
