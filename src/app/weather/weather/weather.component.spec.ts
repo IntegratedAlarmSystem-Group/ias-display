@@ -5,17 +5,29 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
+import { MapModule } from '../../map/map.module';
 import { WeatherComponent } from './weather.component';
 import { WeatherMapComponent } from '../weather-map/weather-map.component';
-import { WeatherMarkerMapComponent } from '../weather-map-markers/weather-marker-map/weather-marker-map.component';
-import { WeatherDataMapComponent } from '../weather-map-markers/weather-data-map/weather-data-map.component';
 import { WeatherSidebarComponent } from '../weather-sidebar/weather-sidebar.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
 import { WeatherService } from '../weather.service';
 import { Router } from '@angular/router';
 import { Map } from '../../map/fixtures';
-
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
+
+import {
+  WeatherBackupWsMarkerComponent
+} from '../weather-map-markers/weather-backup-ws-marker/weather-backup-ws-marker.component';
+import {
+  WeatherPrimaryWsMarkerComponent
+} from '../weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component';
+import {
+  WeatherPrimaryWsConnectorComponent
+} from '../weather-map-markers/weather-primary-ws-connector/weather-primary-ws-connector.component';
+import {
+  WeatherDataMarkerComponent
+} from '../weather-map-markers/weather-data-marker/weather-data-marker.component';
+
 
 const mockWeatherStationsConfig = {
   'name': {
@@ -86,10 +98,10 @@ for ( const item in alarm_types) {
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
   let fixture: ComponentFixture<WeatherComponent>;
-  let componentDataMap: WeatherDataMapComponent;
-  let fixtureDataMap: ComponentFixture<WeatherDataMapComponent>;
-  let componentMarkerMap: WeatherMarkerMapComponent;
-  let fixtureMarkerMap: ComponentFixture<WeatherMarkerMapComponent>;
+  let componentDataMarker: WeatherDataMarkerComponent;
+  let fixtureDataMarker: ComponentFixture<WeatherDataMarkerComponent>;
+  let componentMarkerMap: WeatherPrimaryWsMarkerComponent;
+  let fixtureMarkerMap: ComponentFixture<WeatherPrimaryWsMarkerComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
 
@@ -98,8 +110,10 @@ describe('WeatherComponent', () => {
       declarations: [
         WeatherComponent,
         WeatherMapComponent,
-        WeatherMarkerMapComponent,
-        WeatherDataMapComponent,
+        WeatherPrimaryWsMarkerComponent,
+        WeatherPrimaryWsConnectorComponent,
+        WeatherDataMarkerComponent,
+        WeatherBackupWsMarkerComponent,
         WeatherSidebarComponent,
         WeatherStationSidebarComponent,
       ],
@@ -113,6 +127,7 @@ describe('WeatherComponent', () => {
         SharedModule,
         ActionsModule,
         DataModule,
+        MapModule,
       ],
     })
     .compileComponents();
@@ -141,17 +156,17 @@ describe('WeatherComponent', () => {
     });
     component = fixture.componentInstance;
 
-    fixtureDataMap = TestBed.createComponent(WeatherDataMapComponent);
-    componentDataMap = fixtureDataMap.componentInstance;
-    componentDataMap.placemark = 'name';
+    fixtureDataMarker = TestBed.createComponent(WeatherDataMarkerComponent);
+    componentDataMarker = fixtureDataMarker.componentInstance;
+    componentDataMarker.placemark = 'name';
 
-    fixtureMarkerMap = TestBed.createComponent(WeatherMarkerMapComponent);
+    fixtureMarkerMap = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
     componentMarkerMap.placemark = 'name';
     componentMarkerMap.iconSet = mockMarkerImagesSets['set'];
     componentMarkerMap.iconUnreliableSet = mockMarkerImagesSets['set-unreliable'];
 
-    fixtureDataMap.detectChanges();
+    fixtureDataMarker.detectChanges();
   });
 
   it('should create', () => {

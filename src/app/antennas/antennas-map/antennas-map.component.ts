@@ -65,15 +65,19 @@ export class AntennasMapComponent implements OnInit {
    */
   initialize() {
     this.service.getMapData().subscribe((mapdata) => {
-      this.mapPlacemarks = mapdata['placemarkers'];
-      for (const placemark of mapdata['placemarkers']['pads']) {
+      this.mapPlacemarks = mapdata['placemarks'];
+      for (const placemark of mapdata['placemarks']['pads']) {
         this.placemarks[placemark.name] = placemark;
       }
-      this.placemarksGroups.push(mapdata['placemarkers']['pads']);
-      this.placemarksGroups.push(mapdata['placemarkers']['wstations']);
+      this.placemarksGroups.push(mapdata['placemarks']['pads']);
+      this.placemarksGroups.push(mapdata['placemarks']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
-      this.mapConfig = {'fullHeight': true, 'viewbox': viewbox};
+      this.mapConfig = {
+        'fullHeight': true,
+        'viewbox':
+          [-100 + viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
+      };
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });

@@ -1,39 +1,27 @@
-.ws-map {
-  width: 100%;
-  height: calc(100vh - 130px)
-}
-
 .fobject {
   overflow: visible;
 }
 
-
-svg g.paths {
-  stroke-width: 3;
-  fill: none;
+.opacity-100 {
+  opacity: 1;
 }
 
-svg g.pads {
-  stroke-width: 3;
+.opacity-70 {
+  opacity: 0.7;
 }
 
-svg g.pad-groups {
-
-  &.selected {
-    circle {
-    }
-  }
-
-  circle {
-    stroke-width: 3;
-  }
+.opacity-25 {
+  opacity: 0.25;
 }
 
-svg g.ws-primary-group {
+.weather-display-hide {
+  display: none;
+}
+
+.weather-display-show {
+  display: block;
+}
+
+.weather-map-primary-ws-group {
   cursor: pointer;
-  stroke-width: 3;
-  fill: none;
 }
-
-svg g.ws-primary-group:hover .ws-connector {
-};

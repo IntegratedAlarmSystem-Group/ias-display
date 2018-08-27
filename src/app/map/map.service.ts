@@ -69,7 +69,7 @@ export class MapService {
     /** Viewbox **/
     const vBoxW = 1.25 * (maxCX - minCX);
     const vBoxH = 1.1 * (maxCY - minCY);
-    const viewbox = '0 0 ' + vBoxW + ' ' + vBoxH;
+    const viewbox = [0, 0, vBoxW, vBoxH];
 
     /** Translation and correction of signs for svg coordinates **/
     const X_AXIS_TRANSLATION_FACTOR = 1.05;

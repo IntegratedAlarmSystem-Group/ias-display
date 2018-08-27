@@ -11,11 +11,11 @@ import { Assets } from '../../../settings';
 
 
 @Component({
-  selector: 'app-weather-marker-map',
-  templateUrl: './weather-marker-map.component.html',
-  styleUrls: ['./weather-marker-map.component.scss']
+  selector: 'app-weather-backup-ws-marker',
+  templateUrl: './weather-backup-ws-marker.component.html',
+  styleUrls: ['./weather-backup-ws-marker.component.scss']
 })
-export class WeatherMarkerMapComponent implements OnInit {
+export class WeatherBackupWsMarkerComponent implements OnInit {
 
   /** Set of icons */
   public iconSet: AlarmImageSet;
