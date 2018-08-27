@@ -4,6 +4,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
 import { HealthModule } from '../../health/health.module';
+import { AntennasModule } from '../../antennas/antennas.module';
 import { WeatherModule } from '../../weather/weather.module';
 import { OverviewComponent } from './overview.component';
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
@@ -22,6 +23,7 @@ describe('OverviewComponent', () => {
         IasMaterialModule,
         DataModule,
         HealthModule,
+        AntennasModule,
         SharedModule,
         WeatherModule,
       ],

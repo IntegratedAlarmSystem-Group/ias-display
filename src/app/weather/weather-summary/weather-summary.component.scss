@@ -34,6 +34,11 @@
     height: 85px;
     width: fit-content;
   }
+
+  &.no-border {
+    border: solid;
+    border-width: 0;
+  }
 }
 
 .ias.map{

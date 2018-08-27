@@ -9,6 +9,7 @@ import { MapModule } from '../map/map.module';
 import { SharedModule } from '../shared/shared.module';
 import { AntennasService } from './antennas.service';
 import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/antenna-marker.component';
+import { AntennasSummaryComponent } from './antennas-summary/antennas-summary.component';
 
 
 @NgModule({
@@ -26,7 +27,11 @@ import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/an
     AntennasComponent,
     AntennasMapComponent,
     AntennasSidebarComponent,
-    AntennaMarkerComponent
+    AntennaMarkerComponent,
+    AntennasSummaryComponent
+  ],
+  exports: [
+    AntennasSummaryComponent
   ]
 })
 export class AntennasModule { }
