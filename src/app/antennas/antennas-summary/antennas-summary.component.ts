@@ -58,8 +58,8 @@ export class AntennasSummaryComponent implements OnInit {
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-valid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-valid-critical.svg',
-      set_medium: Assets.ICONS + 'antenna-valid-critical.svg',
+      set_low: Assets.ICONS + 'antenna-valid-s_low.svg',
+      set_medium: Assets.ICONS + 'antenna-valid-s_low.svg',
       set_high: Assets.ICONS + 'antenna-valid-critical.svg',
       set_critical: Assets.ICONS + 'antenna-valid-critical.svg',
       unknown: Assets.ICONS + 'antenna-valid-unknown.svg',
