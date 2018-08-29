@@ -7,7 +7,7 @@ import { Alarm } from '../../data/alarm';
 import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
-fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () => {
+describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () => {
   let component: AckTreeComponent;
   let fixture: ComponentFixture<AckTreeComponent>;
   let alarmService: AlarmService;
@@ -75,7 +75,7 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       fixture.detectChanges();
       const selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
       expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
-      expect(component.ackList).toEqual(expectedAckList);
+      expect(component.ackList.sort()).toEqual(expectedAckList.sort());
     });
   });
 
@@ -90,7 +90,7 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       const flatNode2 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][2]);
       expect([flatNode1.item, flatNode2.item]).toEqual(['grandChild_12', 'grandChild_13']); // Check that we got the correct node
       const alarmsToSelect = ['grandChild_12', 'grandChild_13'];
-      const expectedAckList = alarmsToSelect;
+      const expectedAckList = ['grandChild_12', 'grandChild_13'];
       const expectedSelectedAlarms = ['grandChild_12', 'grandChild_13'];
       component.alarmItemSelectionToggle(flatNode1);
       component.alarmItemSelectionToggle(flatNode2);
@@ -98,7 +98,7 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       fixture.detectChanges();
       const selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
       expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
-      expect(component.ackList).toEqual(expectedAckList);
+      expect(component.ackList.sort()).toEqual(expectedAckList.sort());
     });
   });
 
@@ -123,7 +123,7 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       fixture.detectChanges();
       const selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
       expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
-      expect(component.ackList).toEqual(expectedAckList);
+      expect(component.ackList.sort()).toEqual(expectedAckList.sort());
     });
   });
 
@@ -145,7 +145,7 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       fixture.detectChanges();
       const selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
       expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
-      expect(component.ackList).toEqual(expectedAckList);
+      expect(component.ackList.sort()).toEqual(expectedAckList.sort());
     });
   });
 
@@ -172,7 +172,81 @@ fdescribe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =
       fixture.detectChanges();
       const selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
       expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
-      expect(component.ackList).toEqual(expectedAckList);
+      expect(component.ackList.sort()).toEqual(expectedAckList.sort());
+    });
+  });
+
+  describe('GIVEN the user selects 1 of the grandchildren level Alarms', () => {
+    describe('WHEN the user selects the parent of that grandchildren', () => {
+      it('THEN that children and all its children should be selected, but the ackList should contain only grandchildren', () => {
+        component.ngOnInit();
+        component.ngOnChanges();
+        component.treeControl.expandAll();
+        fixture.detectChanges();
+        expect(component).toBeTruthy();
+        const grandChildrenNode = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
+        const childrenNode = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]);
+        expect([grandChildrenNode.item, childrenNode.item]).toEqual(['grandChild_12', 'child_1']); // Check that we got the correct node
+
+        // FIRST: Select the grandchildren
+        let alarmsToSelect = ['grandChild_12'];
+        let expectedAckList = ['grandChild_12'];
+        let expectedSelectedAlarms = ['grandChild_12'];
+        component.alarmItemSelectionToggle(grandChildrenNode);
+        component.updateAckList();
+        fixture.detectChanges();
+        let selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
+        expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
+        expect(component.ackList.sort()).toEqual(expectedAckList.sort());
+
+        // SECOND: Select the children
+        alarmsToSelect = ['child_1'];
+        expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
+        expectedSelectedAlarms = ['grandChild_11', 'grandChild_12', 'grandChild_13', 'child_1'];
+        component.alarmItemSelectionToggle(childrenNode);
+        component.updateAckList();
+        fixture.detectChanges();
+        selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
+        expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
+        expect(component.ackList.sort()).toEqual(expectedAckList.sort());
+      });
+    });
+  });
+
+  describe('GIVEN the user selects 1 of its children', () => {
+    describe('WHEN the user deselects one of the children (grandchildren) of that children', () => {
+      it('THEN the children is also selected, but the ackList should contain the still selected grandchildren', () => {
+        component.ngOnInit();
+        component.ngOnChanges();
+        component.treeControl.expandAll();
+        fixture.detectChanges();
+        expect(component).toBeTruthy();
+        const grandChildrenNode = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
+        const childrenNode = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]);
+        expect([grandChildrenNode.item, childrenNode.item]).toEqual(['grandChild_12', 'child_1']); // Check that we got the correct node
+
+        // FIRST: Select the children
+        let alarmsToSelect = ['child_1'];
+        let expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
+        let expectedSelectedAlarms = ['child_1', 'grandChild_11', 'grandChild_12', 'grandChild_13'];
+        component.alarmItemSelectionToggle(childrenNode);
+        component.updateAckList();
+        fixture.detectChanges();
+        let selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
+        expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
+        expect(component.ackList.sort()).toEqual(expectedAckList.sort());
+
+        // SECOND: Deselect the grandchildren
+        alarmsToSelect = ['grandChild_12'];
+        expectedAckList = ['grandChild_11', 'grandChild_13'];
+        expectedSelectedAlarms = ['grandChild_11', 'grandChild_13'];
+        component.alarmItemSelectionToggle(grandChildrenNode);
+        component.updateAckList();
+        fixture.detectChanges();
+        selectedAlarms = getSelectedAlarms(component.checklistSelection.selected);
+        expect(selectedAlarms.sort()).toEqual(expectedSelectedAlarms.sort());
+        expect(component.ackList.sort()).toEqual(expectedAckList.sort());
+      });
     });
   });
 });
