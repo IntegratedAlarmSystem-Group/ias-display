@@ -218,6 +218,7 @@ export class AckTreeComponent implements OnInit, OnChanges {
 
   /**
   * Checks whether all the descendants of the node are selected
+  * @param {AlarmItemFlatNode} node the node
   * @returns {boolean} true if all the descendants of the node are selected, false if not
   */
   descendantsAllSelected(node: AlarmItemFlatNode): boolean {
@@ -227,37 +228,52 @@ export class AckTreeComponent implements OnInit, OnChanges {
 
   /**
   * Checks whether part of the descendants are selected
+  * @param {AlarmItemFlatNode} node the node
   * @returns {boolean} true if some of the descendents are selected, false if not
   */
   descendantsPartiallySelected(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some(child => this.checklistSelection.isSelected(child));
-    if (this.descendantsAllSelected(node)) {
-      this.checklistSelection.select(node);
+
+    let selectedDescendants = 0;
+    let unSelectedDescendants = 0;
+    for (const descendant of descendants) {
+      if (this.checklistSelection.isSelected(descendant)) {
+        selectedDescendants++;
+      } else {
+        unSelectedDescendants++;
+      }
     }
-    return result && !this.descendantsAllSelected(node);
+    if (unSelectedDescendants === 0) {
+      this.checklistSelection.select(node);
+    } else {
+      this.checklistSelection.deselect(node);
+    }
+    return selectedDescendants > 0 && unSelectedDescendants > 0;
   }
 
   /**
   * Checks wether or not the node has selected dependencies
+  * @param {AlarmItemFlatNode} node the node
   * @returns {boolean} true if the node has no selected descendents, false if not
   */
   noSelectedDescendants(node: AlarmItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
-    if (!result) {
-      this.checklistSelection.deselect(node);
-    }
     return !result;
   }
 
-  /** Toggle the alarm item selection. Select/deselect all the descendants node */
+  /**
+  * Toggle the alarm item selection. Select/deselect all the descendants node
+  * @param {AlarmItemFlatNode} node the node
+  */
   alarmItemSelectionToggle(node: AlarmItemFlatNode): void {
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
-    this.checklistSelection.isSelected(node)
-      ? this.checklistSelection.select(...descendants)
-      : this.checklistSelection.deselect(...descendants);
+    if (this.checklistSelection.isSelected(node)) {
+      this.checklistSelection.select(...descendants);
+    } else {
+      this.checklistSelection.deselect(...descendants);
+    }
   }
 
   /** Update list with ids to ack **/
