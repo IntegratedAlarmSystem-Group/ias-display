@@ -12,7 +12,7 @@ describe('AntennasSummaryComponent', () => {
   let component: AntennasSummaryComponent;
   let fixture: ComponentFixture<AntennasSummaryComponent>;
   let alarmService: AlarmService;
-  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter', 'goToAntennas']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,6 +53,14 @@ describe('AntennasSummaryComponent', () => {
       expect(spyRoutingTable.tableWithFilter.calls.count()).toBe(1, 'spy method was called once');
       expect(spyRoutingTable.tableWithFilter.calls.mostRecent().args[0]).
         toBe('mock filter', 'spy method was called with the right parameters');
+    });
+  });
+
+
+  describe('WHEN the component calls redirect', () => {
+    it('THEN the RoutingService.goToAntennas is called', () => {
+      component.redirect();
+      expect(spyRoutingTable.goToAntennas.calls.count()).toBe(1, 'spy method was called once');
     });
   });
 

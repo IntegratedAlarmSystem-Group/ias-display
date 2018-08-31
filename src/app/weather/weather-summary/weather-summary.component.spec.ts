@@ -10,11 +10,11 @@ import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 
 
-describe('WeatherSummaryComponent', () => {
+fdescribe('WeatherSummaryComponent', () => {
   let component: WeatherSummaryComponent;
   let fixture: ComponentFixture<WeatherSummaryComponent>;
   let alarmService: AlarmService;
-  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter', 'goToWeather']);
 
 
   beforeEach(async(() => {
@@ -57,6 +57,13 @@ describe('WeatherSummaryComponent', () => {
       expect(spyRoutingTable.tableWithFilter.calls.count()).toBe(1, 'spy method was called once');
       expect(spyRoutingTable.tableWithFilter.calls.mostRecent().args[0]).
         toBe('mock filter', 'spy method was called with the right parameters');
+    });
+  });
+
+  describe('WHEN the component calls redirect', () => {
+    it('THEN the RoutingService.goToWeather is called', () => {
+      component.redirect();
+      expect(spyRoutingTable.goToWeather.calls.count()).toBe(1, 'spy method was called once');
     });
   });
 });
