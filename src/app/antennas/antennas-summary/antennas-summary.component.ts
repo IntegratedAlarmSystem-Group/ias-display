@@ -88,4 +88,11 @@ export class AntennasSummaryComponent implements OnInit {
   goToTableFilteredBy(filter: string) {
     this.routing.tableWithFilter(filter);
   }
+
+  /**
+   * Redirect to the Antennas View
+   */
+  redirect() {
+    this.routing.goToAntennas();
+  }
 }

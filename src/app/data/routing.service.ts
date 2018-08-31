@@ -22,4 +22,18 @@ export class RoutingService {
     this.router.navigate(['/tabular/' + filter]);
   }
 
+  /**
+  * Go to the Antennas View
+  */
+  goToAntennas() {
+    this.router.navigate(['antennas']);
+  }
+
+  /**
+  * Go to the Weather View
+  */
+  goToWeather() {
+    this.router.navigate(['weather']);
+  }
+
 }
