@@ -68,4 +68,11 @@ export class WeatherSummaryComponent implements OnInit {
   goToTableFilteredBy(filter: string) {
     this.routing.tableWithFilter(filter);
   }
+
+  /**
+   * Redirect to the Weather View
+   */
+  redirect() {
+    this.routing.goToWeather();
+  }
 }

@@ -1,8 +1,8 @@
-<div class="ias content" (click)="goToTableFilteredBy('ws-');$event.stopPropagation()">
+<div class="ias content" (click)="redirect()">
   <div class="ias sensors">
     <div class="no-vertical-margin">
       <div class="sensors-card-wrapper">
-          <div class="sensors-card" (click)="goToTableFilteredBy('windspeed');$event.stopPropagation()">
+          <div class="sensors-card">
               <div class="title">WIND SPEED</div>
               <div class="icon">
                 <app-alarm
@@ -12,7 +12,7 @@
           </div>
       </div>
       <div class="sensors-card-wrapper">
-          <div class="sensors-card" (click)="goToTableFilteredBy('humidity');$event.stopPropagation()">
+          <div class="sensors-card">
               <div class="title">HUMIDITY</div>
               <div class="icon">
                 <app-alarm
@@ -22,7 +22,7 @@
           </div>
       </div>
       <div class="sensors-card-wrapper">
-          <div class="sensors-card no-border" (click)="goToTableFilteredBy('temperature');$event.stopPropagation()">
+          <div class="sensors-card no-border">
               <div class="title">TEMPERATURE</div>
               <div class="icon">
                 <app-alarm
