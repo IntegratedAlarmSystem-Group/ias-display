@@ -51,6 +51,30 @@ describe('GIVEN the RoutingService', () => {
     expect(location.path()).toBe('/tabular');
   }));
 
+  it('WHEN we navigate to /weather, THEN it should go to /weather', fakeAsync(() => {
+    router.navigate(['/weather']);
+    tick(1);
+    expect(location.path()).toBe('/weather');
+  }));
+
+  it('WHEN we navigate to /antennas, THEN it should go to /antennas', fakeAsync(() => {
+    router.navigate(['/antennas']);
+    tick(1);
+    expect(location.path()).toBe('/antennas');
+  }));
+
+  it('WHEN we call goToWeather, THEN it should go to /weather', fakeAsync(() => {
+    subject.goToWeather();
+    tick(1);
+    expect(location.path()).toBe('/weather');
+  }));
+
+  it('WHEN we call goToAntennas, THEN it should go to /antennas', fakeAsync(() => {
+    subject.goToAntennas();
+    tick(1);
+    expect(location.path()).toBe('/antennas');
+  }));
+
   it('WHEN we call tableWithFilter, THEN it should go to /tabular', fakeAsync(() => {
     subject.tableWithFilter('');
     tick(1);
