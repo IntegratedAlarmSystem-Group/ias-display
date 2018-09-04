@@ -26,6 +26,15 @@ export class WeatherStationConfig {
 
   /** ID of the humidity {@link Alarm} of the Weather Station */
   public humidity: string;
+
+  /**
+  * Builds a new WeatherStationConfig instance
+  * @param {Object} attributes a dictionary containing the attributes to
+  * create the object
+  */
+  constructor(attributes: Object = {}) {
+    Object.assign(this, attributes);
+  }
 }
 
 /**
@@ -56,8 +65,8 @@ export class WeatherService {
   public weatherSummaryConfig: WeatherStationConfig;
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
-  // public weatherStationsConfig: WeatherStationConfig[];
+  // public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
+  public weatherStationsConfig: WeatherStationConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -109,43 +118,43 @@ export class WeatherService {
   * Define the IDs of the alarms that the component should listen to
   */
   loadWeatherStationsConfig() {
-    this.weatherStationsConfig =  {
-      'MeteoCentral': { // MORITA_AND_INNER
+    this.weatherStationsConfig =  [
+      new WeatherStationConfig({ // MORITA_AND_INNER
         placemark: 'MeteoCentral',
         station: 'WS-Inner-Temperature',
         temperature: 'WS-Inner-Temperature',
         windspeed: 'WS-Inner-WindSpeed',
         humidity: 'WS-Inner-Humidity',
-      },
-      'ACA': { // MORITA_AND_INNER
+      }),
+      new WeatherStationConfig({ // MORITA_AND_INNER
         placemark: 'ACA',
         station: 'WS-ACA-Temperature',
         temperature: 'WS-ACA-Temperature',
         windspeed: 'WS-ACA-WindSpeed',
         humidity: 'WS-ACA-Humidity',
-      },
-      'Meteo201': { // W ARM
+      }),
+      new WeatherStationConfig({ // W ARM
         placemark: 'Meteo201',
         station: 'WS-W-Temperature',
         temperature: 'WS-W-Temperature',
         windspeed: 'WS-W-WindSpeed',
         humidity: 'WS-W-Humidity',
-      },
-      'Meteo410': { // P ARM
+      }),
+      new WeatherStationConfig({ // P ARM
         placemark: 'Meteo410',
         station: 'WS-P-Temperature',
         temperature: 'WS-P-Temperature',
         windspeed: 'WS-P-WindSpeed',
         humidity: 'WS-P-Humidity',
-      },
-      'Meteo309': { // S ARM
+      }),
+      new WeatherStationConfig({ // S ARM
         placemark: 'Meteo309',
         station: 'WS-S-Temperature',
         temperature: 'WS-S-Temperature',
         windspeed: 'WS-S-WindSpeed',
         humidity: 'WS-S-Humidity',
-      },
-    };
+      }),
+    ];
   }
 
   /**
