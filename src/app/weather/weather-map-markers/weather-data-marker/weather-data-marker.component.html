@@ -6,10 +6,10 @@
       <app-alarm [alarm]="this.getAlarm(this.alarmConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
     </div>
     <div class="icon">
-      <app-alarm [alarm]="this.getAlarm(this.alarmConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
+      <app-alarm [alarm]="this.getAlarm(this.alarmConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
     </div>
     <div class="icon">
-      <app-alarm [alarm]="this.getAlarm(this.alarmConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
+      <app-alarm [alarm]="this.getAlarm(this.alarmConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
     </div>
   </div>
 
