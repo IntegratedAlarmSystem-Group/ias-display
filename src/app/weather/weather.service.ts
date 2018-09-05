@@ -118,39 +118,11 @@ export class WeatherService {
   * Define the IDs of the alarms that the component should listen to
   */
   loadWeatherStationsConfig() {
-    // this.weatherStationsConfig =  [
-    //   new WeatherStationConfig({ // MORITA_AND_INNER
-    //     placemark: 'MeteoCentral',
-    //     station: 'WS-Inner-Temperature',
-    //     temperature: 'WS-Inner-Temperature',
-    //     windspeed: 'WS-Inner-WindSpeed',
-    //     humidity: 'WS-Inner-Humidity',
-    //   }),
-    //   new WeatherStationConfig({ // W ARM
-    //     placemark: 'Meteo201',
-    //     station: 'WS-W-Temperature',
-    //     temperature: 'WS-W-Temperature',
-    //     windspeed: 'WS-W-WindSpeed',
-    //     humidity: 'WS-W-Humidity',
-    //   }),
-    //   new WeatherStationConfig({ // P ARM
-    //     placemark: 'Meteo410',
-    //     station: 'WS-P-Temperature',
-    //     temperature: 'WS-P-Temperature',
-    //     windspeed: 'WS-P-WindSpeed',
-    //     humidity: 'WS-P-Humidity',
-    //   }),
-    //   new WeatherStationConfig({ // S ARM
-    //     placemark: 'Meteo309',
-    //     station: 'WS-S-Temperature',
-    //     temperature: 'WS-S-Temperature',
-    //     windspeed: 'WS-S-WindSpeed',
-    //     humidity: 'WS-S-Humidity',
-    //   }),
-    // ];
-    const url = BackendUrls.WEATHER_VIEW;
-    this.httpClient.get(url).subscribe((response) => {
+    this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
       this.weatherStationsConfig = response as WeatherStationConfig[];
+    });
+    this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
+      this.weatherSummaryConfig = response as WeatherStationConfig;
     });
   }
 
