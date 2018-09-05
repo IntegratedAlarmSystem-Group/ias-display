@@ -23,88 +23,90 @@
 
     <ng-container *ngFor="let padsGroup of getPadsGroups()">
       <!-- <ng-container *ngFor="let primary_ws_name of [datarelations[padsGroup]['wstations']['primary'][0]]"> -->
-      <ng-container *ngFor="let stationConfig of alarmsConfig">
-        <!-- Elements by pads group -->
-        <!-- Note: it should be one primary weather stationConfig related to a pad group -->
-        <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(stationConfig)}" >
-          <ng-container *ngFor="let pad_name of datarelations[padsGroup]['pads']">
-            <!-- pads by group -->
-            <ng-container *ngFor="let p of [getPlacemarkObject(pad_name)]">
-                <svg:circle
-                  [attr.cx]="p.opt_cx"
-                  [attr.cy]="p.opt_cy"
-                  [attr.data]="p.name"
-                  r="5"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
+      <ng-container *ngFor="let stationConfig of weatherStationsConfig">
+        <ng-container *ngIf="stationConfig.placemark === getPrimaryWeatherStationConfig(padsGroup)">
+          <!-- Elements by pads group -->
+          <!-- Note: it should be one primary weather stationConfig related to a pad group -->
+          <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(stationConfig)}" >
+            <ng-container *ngFor="let pad_name of datarelations[padsGroup]['pads']">
+              <!-- pads by group -->
+              <ng-container *ngFor="let p of [getPlacemarkObject(pad_name)]">
+                  <svg:circle
+                    [attr.cx]="p.opt_cx"
+                    [attr.cy]="p.opt_cy"
+                    [attr.data]="p.name"
+                    r="5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+              </ng-container>
+              <!-- pads by group -->
             </ng-container>
-            <!-- pads by group -->
-          </ng-container>
-          <ng-container *ngFor="let p of [getPlacemarkObject(stationConfig.placemark)]">
-            <svg:g class="weather-map-primary-ws-group"
-              [ngClass]="getPrimaryWeatherStationStyle(stationConfig)"
-              (click)="onClick(stationConfig)"
-              (mouseenter)="mouseEnterPrimaryWeatherStationGroup(stationConfig)"
-              (mouseleave)="mouseLeavePrimaryWeatherStationGroup()">
+            <ng-container *ngFor="let p of [getPlacemarkObject(stationConfig.placemark)]">
+              <svg:g class="weather-map-primary-ws-group"
+                [ngClass]="getPrimaryWeatherStationStyle(stationConfig)"
+                (click)="onClick(stationConfig)"
+                (mouseenter)="mouseEnterPrimaryWeatherStationGroup(stationConfig)"
+                (mouseleave)="mouseLeavePrimaryWeatherStationGroup()">
+                <!-- primary ws related markers -->
+                <foreignObject
+                     [attr.x]="p.opt_cx"
+                     [attr.y]="p.opt_cy-50"
+                     width="80"
+                     height="50">
+                   <xhtml:app-weather-primary-ws-connector
+                     [coords]="[[8, 36], [30, 2], [80, 2]]"
+                     [onHover]="isOnHover(stationConfig)"
+                     [selected]="isSelected(stationConfig)">
+                   </xhtml:app-weather-primary-ws-connector>
+                </foreignObject>
+                <foreignObject
+                     [attr.x]="p.opt_cx-25"
+                     [attr.y]="p.opt_cy-25"
+                     width="100"
+                     height="50">
+                  <xhtml:app-weather-primary-ws-marker
+                     [stationConfig]="stationConfig">
+                  </xhtml:app-weather-primary-ws-marker>
+                </foreignObject>
+                <foreignObject
+                     class="fobject"
+                     [attr.x]="(p.opt_cx-50) + 125"
+                     [attr.y]="(p.opt_cy-50) - 25"
+                     width="210"
+                     height="100">
+                  <xhtml:app-weather-data-marker
+                     [stationConfig]="stationConfig"
+                     [onHover]="isOnHover(stationConfig)"
+                     [selected]="isSelected(stationConfig)">
+                  </xhtml:app-weather-data-marker>
+                </foreignObject>
               <!-- primary ws related markers -->
-              <foreignObject
-                   [attr.x]="p.opt_cx"
-                   [attr.y]="p.opt_cy-50"
-                   width="80"
-                   height="50">
-                 <xhtml:app-weather-primary-ws-connector
-                   [coords]="[[8, 36], [30, 2], [80, 2]]"
-                   [onHover]="isOnHover(stationConfig)"
-                   [selected]="isSelected(stationConfig)">
-                 </xhtml:app-weather-primary-ws-connector>
-              </foreignObject>
-              <foreignObject
-                   [attr.x]="p.opt_cx-25"
-                   [attr.y]="p.opt_cy-25"
-                   width="100"
-                   height="50">
-                <xhtml:app-weather-primary-ws-marker
-                   [stationConfig]="stationConfig">
-                </xhtml:app-weather-primary-ws-marker>
-              </foreignObject>
-              <foreignObject
-                   class="fobject"
-                   [attr.x]="(p.opt_cx-50) + 125"
-                   [attr.y]="(p.opt_cy-50) - 25"
-                   width="210"
-                   height="100">
-                <xhtml:app-weather-data-marker
-                   [stationConfig]="stationConfig"
-                   [onHover]="isOnHover(stationConfig)"
-                   [selected]="isSelected(stationConfig)">
-                </xhtml:app-weather-data-marker>
-              </foreignObject>
-            <!-- primary ws related markers -->
-            </svg:g>
-
-            <!-- backup ws marker -->
-            <!-- <ng-container *ngFor="let backup_ws_name of datarelations[padsGroup]['wstations']['backup']">
-              <svg:g class="weather-map-backup-ws-group"
-               [ngClass]="getBackupWeatherStationStyle(primary_ws_name)">
-                <ng-container *ngFor="let p of [getPlacemarkObject(backup_ws_name)]">
-                  <foreignObject
-                       [attr.x]="p.opt_cx-25"
-                       [attr.y]="p.opt_cy-25"
-                       width="100"
-                       height="50">
-                    <xhtml:app-weather-backup-ws-marker
-                       [placemark]="primary_ws_name">
-                    </xhtml:app-weather-backup-ws-marker>
-                  </foreignObject>
-                </ng-container>
               </svg:g>
-            </ng-container> -->
-            <!-- backup ws marker -->
-          </ng-container>
-        </svg:g>
-        <!-- Elements by pads group -->
-     </ng-container>
+
+              <!-- backup ws marker -->
+              <!-- <ng-container *ngFor="let backup_ws_name of datarelations[padsGroup]['wstations']['backup']">
+                <svg:g class="weather-map-backup-ws-group"
+                 [ngClass]="getBackupWeatherStationStyle(primary_ws_name)">
+                  <ng-container *ngFor="let p of [getPlacemarkObject(backup_ws_name)]">
+                    <foreignObject
+                         [attr.x]="p.opt_cx-25"
+                         [attr.y]="p.opt_cy-25"
+                         width="100"
+                         height="50">
+                      <xhtml:app-weather-backup-ws-marker
+                         [placemark]="primary_ws_name">
+                      </xhtml:app-weather-backup-ws-marker>
+                    </foreignObject>
+                  </ng-container>
+                </svg:g>
+              </ng-container> -->
+              <!-- backup ws marker -->
+            </ng-container>
+          </svg:g>
+          <!-- Elements by pads group -->
+        </ng-container>
+      </ng-container>
     </ng-container>
 
   </ng-container>

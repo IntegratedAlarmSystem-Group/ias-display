@@ -42,7 +42,7 @@ export class WeatherMapComponent implements OnInit {
   public mapConfig = {};
 
   /** Alarms Configuration  */
-  public alarmsConfig: WeatherStationConfig[];
+  public weatherStationsConfig: WeatherStationConfig[];
 
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
@@ -88,8 +88,7 @@ export class WeatherMapComponent implements OnInit {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.alarmsConfig = this.service.weatherStationsConfig;
-    console.log('this.alarmsConfig = ', this.alarmsConfig);
+    this.weatherStationsConfig = this.service.weatherStationsConfig;
   }
 
   /**
@@ -108,13 +107,6 @@ export class WeatherMapComponent implements OnInit {
       const placemark_id = placemark;
       return this.placemarks[placemark_id];
     }
-  // getPlacemarkObject(stationConfig: WeatherStationConfig) {
-  //   const placemark_id = stationConfig.placemark;
-  //   console.log('stationConfig: ', stationConfig);
-  //   console.log('placemark_id: ', placemark_id);
-  //   console.log('this.placemarks[placemark_id]: ', this.placemarks[placemark_id]);
-  //   return this.placemarks[placemark_id];
-  // }
 
   /**
    * Style for the backup weather stations
@@ -130,6 +122,15 @@ export class WeatherMapComponent implements OnInit {
   //     }
   //   }
   // }
+
+  getPrimaryWeatherStationConfig(padGroup: string) {
+    if (this.datarelations[padGroup]['wstations']['primary'][0]) {
+      const placemark = this.datarelations[padGroup]['wstations']['primary'][0];
+      return placemark;
+    } else {
+      return '';
+    }
+  }
 
   /**
    * Style for the main weather station group
