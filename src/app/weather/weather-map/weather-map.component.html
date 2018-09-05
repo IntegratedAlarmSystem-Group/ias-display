@@ -23,7 +23,7 @@
 
     <ng-container *ngFor="let padsGroup of getPadsGroups()">
       <!-- <ng-container *ngFor="let primary_ws_name of [datarelations[padsGroup]['wstations']['primary'][0]]"> -->
-      <ng-container *ngFor="let stationConfig of weatherStationsConfig">
+      <ng-container *ngFor="let stationConfig of service.weatherStationsConfig">
         <ng-container *ngIf="stationConfig.placemark === getPrimaryWeatherStationConfig(padsGroup)">
           <!-- Elements by pads group -->
           <!-- Note: it should be one primary weather stationConfig related to a pad group -->

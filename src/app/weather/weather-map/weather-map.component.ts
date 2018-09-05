@@ -41,9 +41,6 @@ export class WeatherMapComponent implements OnInit {
   /** Map Configuration  */
   public mapConfig = {};
 
-  /** Alarms Configuration  */
-  public weatherStationsConfig: WeatherStationConfig[];
-
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
@@ -88,7 +85,6 @@ export class WeatherMapComponent implements OnInit {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.weatherStationsConfig = this.service.weatherStationsConfig;
   }
 
   /**
