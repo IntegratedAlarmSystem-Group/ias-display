@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
+import { WeatherStationConfig } from '../weather.service';
 
 /**
 * Component used to display Weather Alarms both in a sidebar (instantiated in a {@link WeatherSidebar}),
@@ -11,7 +12,7 @@ import { Component, Input, Output, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
 
-  selectedStation = '';
+  selectedStation: WeatherStationConfig = null;
 
   /**
    * Builds an instance of the component
@@ -25,7 +26,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeSelectedStation(selectedStation: string) {
-    // this.selectedStation = selectedStation;
+  changeSelectedStation(selectedStation: WeatherStationConfig) {
+    this.selectedStation = selectedStation;
   }
 }

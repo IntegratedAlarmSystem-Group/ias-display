@@ -195,7 +195,7 @@ export class WeatherMapComponent implements OnInit {
     } else {
       this.selectedStation = stationConfig;
     }
-    // this.placemarkClicked.emit(this.selectedStation);
+    this.placemarkClicked.emit(this.selectedStation);
   }
 
 }
