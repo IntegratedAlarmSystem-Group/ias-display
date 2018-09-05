@@ -85,9 +85,9 @@
               </svg:g>
 
               <!-- backup ws marker -->
-              <!-- <ng-container *ngFor="let backup_ws_name of datarelations[padsGroup]['wstations']['backup']">
+              <ng-container *ngFor="let backup_ws_name of datarelations[padsGroup]['wstations']['backup']">
                 <svg:g class="weather-map-backup-ws-group"
-                 [ngClass]="getBackupWeatherStationStyle(primary_ws_name)">
+                 [ngClass]="getBackupWeatherStationStyle(stationConfig)">
                   <ng-container *ngFor="let p of [getPlacemarkObject(backup_ws_name)]">
                     <foreignObject
                          [attr.x]="p.opt_cx-25"
@@ -95,12 +95,12 @@
                          width="100"
                          height="50">
                       <xhtml:app-weather-backup-ws-marker
-                         [placemark]="primary_ws_name">
+                         [stationConfig]="stationConfig">
                       </xhtml:app-weather-backup-ws-marker>
                     </foreignObject>
                   </ng-container>
                 </svg:g>
-              </ng-container> -->
+              </ng-container>
               <!-- backup ws marker -->
             </ng-container>
           </svg:g>

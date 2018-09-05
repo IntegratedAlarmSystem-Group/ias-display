@@ -111,17 +111,17 @@ export class WeatherMapComponent implements OnInit {
   /**
    * Style for the backup weather stations
    */
-  // getBackupWeatherStationStyle(placemark: string) {
-  //   if (this.selectedStation === '') {
-  //     return 'weather-display-hide';
-  //   } else {
-  //     if (this.isSelected(placemark)) {
-  //       return 'weather-display-show';
-  //     } else {
-  //       return 'weather-display-hide';
-  //     }
-  //   }
-  // }
+  getBackupWeatherStationStyle(stationConfig: WeatherStationConfig) {
+    if (this.selectedStation === null || this.selectedStation === undefined) {
+      return 'weather-display-hide';
+    } else {
+      if (this.isSelected(stationConfig)) {
+        return 'weather-display-show';
+      } else {
+        return 'weather-display-hide';
+      }
+    }
+  }
 
   getPrimaryWeatherStationConfig(padGroup: string) {
     if (this.datarelations[padGroup]['wstations']['primary'][0]) {
