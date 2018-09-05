@@ -126,13 +126,13 @@ export class WeatherService {
         windspeed: 'WS-Inner-WindSpeed',
         humidity: 'WS-Inner-Humidity',
       }),
-      new WeatherStationConfig({ // MORITA_AND_INNER
-        placemark: 'ACA',
-        station: 'WS-ACA-Temperature',
-        temperature: 'WS-ACA-Temperature',
-        windspeed: 'WS-ACA-WindSpeed',
-        humidity: 'WS-ACA-Humidity',
-      }),
+      // new WeatherStationConfig({ // MORITA_AND_INNER
+      //   placemark: 'ACA',
+      //   station: 'WS-ACA-Temperature',
+      //   temperature: 'WS-ACA-Temperature',
+      //   windspeed: 'WS-ACA-WindSpeed',
+      //   humidity: 'WS-ACA-Humidity',
+      // }),
       new WeatherStationConfig({ // W ARM
         placemark: 'Meteo201',
         station: 'WS-W-Temperature',

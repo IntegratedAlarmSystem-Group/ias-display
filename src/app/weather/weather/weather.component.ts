@@ -26,6 +26,6 @@ export class WeatherComponent implements OnInit {
   }
 
   changeSelectedStation(selectedStation: string) {
-    this.selectedStation = selectedStation;
+    // this.selectedStation = selectedStation;
   }
 }
