@@ -117,14 +117,6 @@ export class WeatherService {
   }
 
   /**
-  * Transforms the dictionary of weather stations configurations into a list
-  * @returns {Object[]} a list with the weather stations configurations
-  */
-  getArrayValues() {
-    return Object.values(this.weatherStationsConfig);
-  }
-
-  /**
   * Define the IDs of the alarms that the component should listen to
   */
   loadWeatherStationsConfig() {
