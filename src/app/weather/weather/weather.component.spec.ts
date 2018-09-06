@@ -81,6 +81,8 @@ describe('WeatherComponent', () => {
       weatherService.windsImageUnreliableSet = mockImagesSets['windspeed-unreliable'];
       weatherService.humidityImageUnreliableSet = mockImagesSets['humidity-unreliable'];
       weatherService.tempImageUnreliableSet = mockImagesSets['temperature-unreliable'];
+      weatherService.markerImageSet = mockImagesSets['marker'];
+      weatherService.markerImageUnreliableSet = mockImagesSets['marker-unreliable'];
     })
   );
 
@@ -99,8 +101,6 @@ describe('WeatherComponent', () => {
     fixtureMarkerMap = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
     componentMarkerMap.stationConfig = mockWeatherStationsConfig[0];
-    componentMarkerMap.iconSet = mockImagesSets['marker'];
-    componentMarkerMap.iconUnreliableSet = mockImagesSets['marker-unreliable'];
     weatherMap = fixture.debugElement.query(By.directive(WeatherMapComponent)).componentInstance;
     weatherSidebar = fixture.debugElement.query(By.directive(WeatherSidebarComponent)).componentInstance;
     fixtureDataMarker.detectChanges();

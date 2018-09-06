@@ -17,12 +17,6 @@ import { Assets } from '../../../settings';
 })
 export class WeatherBackupWsMarkerComponent implements OnInit {
 
-  /** Set of icons */
-  public iconSet: AlarmImageSet;
-
-  /** Set of Unreliable icons */
-  public iconUnreliableSet: AlarmImageSet;
-
   /** ID of the Alarm */
   public alarmId: string;
 
