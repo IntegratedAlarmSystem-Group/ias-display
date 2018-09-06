@@ -42,6 +42,7 @@ export class AntennasSummaryComponent implements OnInit {
    */
   ngOnInit() {
     this.defineAlarmsAndIcons();
+    this.antennasService.initialize();
   }
 
   /** Returns the instance of the {@link Alarm}

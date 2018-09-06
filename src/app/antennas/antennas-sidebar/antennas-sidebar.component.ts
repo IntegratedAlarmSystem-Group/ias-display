@@ -27,6 +27,7 @@ export class AntennasSidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.antennasService.initialize();
   }
 
   /**

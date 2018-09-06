@@ -37,21 +37,24 @@ export class AntennasService {
   /** Alarms Ids for the antennas summary **/
   public antennasSummaryConfig: string;
 
+  private _initialized = false;
+
   /**
    * Builds an instance of the service and initializes it calling the {@link initialize} method
    */
   constructor(
     private httpClient: HttpClientService
   ) {
-    this.initialize();
-    console.log(this.sidebarAlarmsConfig);
   }
 
   /**
   * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
-    this.loadAlarmsConfig();
+    if (this._initialized === false) {
+      this.loadAlarmsConfig();
+      this._initialized = true;
+    }
   }
 
   /**
@@ -69,7 +72,6 @@ export class AntennasService {
 
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {
-      console.log('response: ', response);
       for (const key in response) {
         if (key) {
           this.sidebarAlarmsConfig[key] = response[key] as AntennaConfig[];
@@ -79,7 +81,6 @@ export class AntennasService {
 
     const summary_url = BackendUrls.ANTENNAS_SUMMARY;
     this.httpClient.get(summary_url).subscribe((response) => {
-      console.log('response: ', response);
       for (const key in response) {
         if (key) {
           this.antennasSummaryConfig = response as string;

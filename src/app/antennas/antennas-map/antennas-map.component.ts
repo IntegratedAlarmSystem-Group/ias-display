@@ -62,6 +62,7 @@ export class AntennasMapComponent implements OnInit {
    * Component initialization with the related map data source
    */
   initialize() {
+    this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       for (const placemark of mapdata['placemarks']['pads']) {
