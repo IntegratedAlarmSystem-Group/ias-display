@@ -143,7 +143,7 @@ describe('WeatherStationSidebarComponent', () => {
     fixture = TestBed.createComponent(WeatherStationSidebarComponent);
     component = fixture.componentInstance;
     component.stationConfig = mockConfiguration;
-    component.selectedAlarm = '';
+    component.selectedAlarm = null;
     fixture.detectChanges();
   });
 

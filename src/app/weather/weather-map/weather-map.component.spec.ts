@@ -22,22 +22,22 @@ import {
 } from '../weather-map-markers/weather-primary-ws-connector/weather-primary-ws-connector.component';
 
 
-const mockWeatherStationsConfig = {
-  'name': {
-    placemark: 'name',
-    station: 'name-0',
-    temperature: 'name-0',
-    windspeed: 'name-0',
-    humidity: 'name-0'
+const mockWeatherStationsConfig = [
+  {
+    placemark: 'mockAlarm-0',
+    station: 'mockAlarm-0',
+    temperature: 'mockAlarm-0',
+    windspeed: 'mockAlarm-0',
+    humidity: 'mockAlarm-0'
   },
-  'mockAlarm-1': {
+  {
     placemark: 'mockAlarm-1',
     station: 'mockAlarm-1',
     temperature: 'mockAlarm-1',
     windspeed: 'mockAlarm-1',
     humidity: 'mockAlarm-1'
   },
-};
+];
 
 const mockMarkerImagesSets = {};
 mockMarkerImagesSets['set'] = new AlarmImageSet({
@@ -89,7 +89,7 @@ for ( const item in alarm_types) {
 }
 
 
-describe('WeatherMapComponent', () => {
+fdescribe('WeatherMapComponent', () => {
   let component: WeatherMapComponent;
   let fixture: ComponentFixture<WeatherMapComponent>;
   let componentDataMarker: WeatherDataMarkerComponent;
@@ -141,11 +141,11 @@ describe('WeatherMapComponent', () => {
 
     fixtureDataMarker = TestBed.createComponent(WeatherDataMarkerComponent);
     componentDataMarker = fixtureDataMarker.componentInstance;
-    componentDataMarker.placemark = 'name';
+    componentDataMarker.stationConfig = mockWeatherStationsConfig[0];
 
     fixtureMarkerMap = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
     componentMarkerMap = fixtureMarkerMap.componentInstance;
-    componentMarkerMap.placemark = 'name';
+    componentMarkerMap.stationConfig = mockWeatherStationsConfig[0];
     componentMarkerMap.iconSet = mockMarkerImagesSets['set'];
     componentMarkerMap.iconUnreliableSet = mockMarkerImagesSets['set-unreliable'];
 
