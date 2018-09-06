@@ -1,4 +1,5 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { ClipboardModule } from 'ngx-clipboard';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
@@ -38,6 +39,8 @@ describe('WeatherComponent', () => {
   let fixtureMarkerMap: ComponentFixture<WeatherPrimaryWsMarkerComponent>;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   let weatherService: WeatherService;
+  let weatherMap: WeatherMapComponent;
+  let weatherSidebar: WeatherSidebarComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -98,11 +101,17 @@ describe('WeatherComponent', () => {
     componentMarkerMap.stationConfig = mockWeatherStationsConfig[0];
     componentMarkerMap.iconSet = mockImagesSets['marker'];
     componentMarkerMap.iconUnreliableSet = mockImagesSets['marker-unreliable'];
-
+    weatherMap = fixture.debugElement.query(By.directive(WeatherMapComponent)).componentInstance;
+    weatherSidebar = fixture.debugElement.query(By.directive(WeatherSidebarComponent)).componentInstance;
     fixtureDataMarker.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a WeatherMap and a WeatherSidenav', () => {
+    expect(weatherMap).toBeTruthy();
+    expect(weatherSidebar).toBeTruthy();
   });
 });

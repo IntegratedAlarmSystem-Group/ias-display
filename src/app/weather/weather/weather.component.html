@@ -2,7 +2,6 @@
 
   <mat-sidenav-content id="weather-map" autosize>
     <app-weather-map (placemarkClicked)="changeSelectedStation($event)" [selectedStation]="selectedStation"></app-weather-map>
-    <!-- <app-weather-map></app-weather-map> -->
   </mat-sidenav-content>
 
   <mat-sidenav #weatherSidenav id="weather-sidenav" position="end" mode="side" opened="true">

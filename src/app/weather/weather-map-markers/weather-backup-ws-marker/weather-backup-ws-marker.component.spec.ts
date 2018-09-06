@@ -30,8 +30,7 @@ describe('WeatherBackupWsMarkerComponent', () => {
   beforeEach(
     inject([WeatherService], (service) => {
       weatherService = service;
-      spyOn(weatherService, 'initialize')
-        .and.callFake(function() {});
+      spyOn(weatherService, 'initialize').and.callFake(function() {});
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
     })
   );
