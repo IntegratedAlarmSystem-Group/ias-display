@@ -93,7 +93,7 @@ export class WeatherService {
   initialize() {
     if (this._initialized === false) {
       this.loadWeatherStationsConfig();
-      this.loadAlarmsAndImages();
+      this.loadImages();
       this._initialized = true;
     }
   }
@@ -131,7 +131,7 @@ export class WeatherService {
   /**
   * Define the alarms that the component should listen to and their respective icons
   */
-  loadAlarmsAndImages() {
+  loadImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',
