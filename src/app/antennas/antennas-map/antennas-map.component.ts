@@ -80,7 +80,7 @@ export class AntennasMapComponent implements OnInit {
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });
-    this.alarmsConfig = this.service.sidebarAlarmsConfig;
+    this.alarmsConfig = this.service.antennasConfig;
   }
 
   /**

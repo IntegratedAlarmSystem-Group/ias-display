@@ -53,7 +53,7 @@ export class AntennasSidebarComponent implements OnInit {
   * @returns {list} List of groups IDS
   */
   getAntennasGroups(): string [] {
-    return Object.keys(this.antennasService.sidebarAlarmsConfig);
+    return Object.keys(this.antennasService.antennasConfig);
   }
 
   /**
@@ -61,7 +61,7 @@ export class AntennasSidebarComponent implements OnInit {
   * @returns {list} list of {@link AntennaConfig}
   */
   getAntennasByGroup(groupID: string): AntennaConfig [] {
-    return this.antennasService.sidebarAlarmsConfig[groupID];
+    return this.antennasService.antennasConfig[groupID];
   }
 
   /**

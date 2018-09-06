@@ -25,11 +25,8 @@ export class AntennaConfig {
 })
 export class AntennasService {
 
-  /** Dictionary of Alarm Ids indexed by placemark **/
-  public mapAlarmsConfig: {[placemark: string]: AntennaConfig } = {};
-
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
-  public sidebarAlarmsConfig: {[group: string]: AntennaConfig [] } = {};
+  public antennasConfig: {[group: string]: AntennaConfig [] } = {};
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public antennasMapName = AntennasSettings.mapKey;
@@ -57,13 +54,13 @@ export class AntennasService {
     }
   }
 
-  /**
-  * Transforms the dictionary of antennas configurations into a list
-  * @returns {Object[]} a list with the antennas configurations
-  */
-  getArrayValues() {
-    return Object.values(this.mapAlarmsConfig);
-  }
+  // /**
+  // * Transforms the dictionary of antennas configurations into a list
+  // * @returns {Object[]} a list with the antennas configurations
+  // */
+  // getArrayValues() {
+  //   return Object.values(this.mapAlarmsConfig);
+  // }
 
   /**
   * Define the IDs of the alarms that the component should listen to
@@ -74,7 +71,7 @@ export class AntennasService {
     this.httpClient.get(url).subscribe((response) => {
       for (const key in response) {
         if (key) {
-          this.sidebarAlarmsConfig[key] = response[key] as AntennaConfig[];
+          this.antennasConfig[key] = response[key] as AntennaConfig[];
         }
       }
     });
