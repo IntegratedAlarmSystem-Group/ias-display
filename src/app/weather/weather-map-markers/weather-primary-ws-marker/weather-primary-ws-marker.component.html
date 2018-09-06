@@ -2,8 +2,8 @@
 
   <app-alarm
     [alarm]="this.getAlarm()"
-    [images]="iconSet"
-    [imagesUnreliable]="iconUnreliableSet"
+    [images]="weatherService.markerImageSet"
+    [imagesUnreliable]="weatherService.markerImageUnreliableSet"
   >
   </app-alarm>
 
