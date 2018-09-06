@@ -4,11 +4,35 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
+import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AntennasSummaryComponent } from './antennas-summary.component';
+import { AntennasService } from '../antennas.service';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService } from '../antennas.service';
-import { AntennasSummaryComponent } from './antennas-summary.component';
+
+const AlarmID = 'antenna-dummy-alarm';
+
+const mockImagesSets = new AlarmImageSet({
+  clear: 'antennaImageSet',
+  set_low: 'antennaImageSet',
+  set_medium: 'antennaImageSet',
+  set_high: 'antennaImageSet',
+  set_critical: 'antennaImageSet',
+  unknown: 'antennaImageSet',
+  maintenance: 'antennaImageSet',
+  shelved: 'antennaImageSet',
+});
+
+const mockImagesUnreliableSets = new AlarmImageSet({
+  clear: 'antennaUnreliableImageSet',
+  set_low: 'antennaUnreliableImageSet',
+  set_medium: 'antennaUnreliableImageSet',
+  set_high: 'antennaUnreliableImageSet',
+  set_critical: 'antennaUnreliableImageSet',
+  unknown: 'antennaUnreliableImageSet',
+  maintenance: 'antennaUnreliableImageSet',
+  shelved: 'antennaUnreliableImageSet',
+});
 
 describe('AntennasSummaryComponent', () => {
   let component: AntennasSummaryComponent;
@@ -45,7 +69,9 @@ describe('AntennasSummaryComponent', () => {
     fixture = TestBed.createComponent(AntennasSummaryComponent);
     antennasService = fixture.debugElement.injector.get(AntennasService);
     spyOn(antennasService, 'initialize').and.callFake(function() {});
-    antennasService.antennasSummaryConfig = 'summaryConfig';
+    antennasService.antennasSummaryConfig = AlarmID;
+    antennasService.antennaImageSet = mockImagesSets;
+    antennasService.antennaImageUnreliableSet = mockImagesUnreliableSets;
     component = fixture.componentInstance;
     debug = fixture.debugElement;
     alarmService = fixture.debugElement.injector.get(AlarmService);

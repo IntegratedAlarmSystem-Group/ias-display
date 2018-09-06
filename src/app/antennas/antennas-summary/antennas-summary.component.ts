@@ -16,15 +16,6 @@ import { Assets } from '../../settings';
 })
 export class AntennasSummaryComponent implements OnInit {
 
-  /** Set of icons */
-  public iconSet: AlarmImageSet;
-
-  /** Set of Unreliable icons */
-  public iconUnreliableSet: AlarmImageSet;
-
-  /** ID of the Alarm */
-  public alarmId: string;
-
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
@@ -41,7 +32,6 @@ export class AntennasSummaryComponent implements OnInit {
    * Subscribes to new alarms from the {@link AlarmService}
    */
   ngOnInit() {
-    this.defineAlarmsAndIcons();
     this.antennasService.initialize();
   }
 
@@ -50,37 +40,6 @@ export class AntennasSummaryComponent implements OnInit {
   */
   get alarm(): Alarm {
     return this.alarmService.get(this.antennasService.antennasSummaryConfig);
-  }
-
-  /**
-  * Define the alarm that the component should listen to and its icons
-  */
-  defineAlarmsAndIcons() {
-    this.alarmId = 'Alarmdummy';
-
-    /** Set of icons */
-    this.iconSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'antenna-valid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-valid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-valid-s_low.svg',
-      set_high: Assets.ICONS + 'antenna-valid-critical.svg',
-      set_critical: Assets.ICONS + 'antenna-valid-critical.svg',
-      unknown: Assets.ICONS + 'antenna-valid-unknown.svg',
-      maintenance: Assets.ICONS + 'antenna-valid-maintenance.svg',
-      shelved: Assets.ICONS + 'antenna-valid-clear.svg',
-    });
-
-    /** Set of Unreliable icons */
-    this.iconUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'antenna-invalid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-invalid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-invalid-s_low.svg',
-      set_high: Assets.ICONS + 'antenna-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'antenna-invalid-critical.svg',
-      unknown: Assets.ICONS + 'antenna-invalid-unknown.svg',
-      maintenance: Assets.ICONS + 'antenna-invalid-maintenance.svg',
-      shelved: Assets.ICONS + 'antenna-invalid-clear.svg',
-    });
   }
 
   /**

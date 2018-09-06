@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { Alarm } from '../data/alarm';
+import { Assets } from '../settings';
+import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, AntennasSettings } from '../settings';
 
@@ -34,6 +36,13 @@ export class AntennasService {
   /** Alarms Ids for the antennas summary **/
   public antennasSummaryConfig: string;
 
+  /** Set of antenna icons */
+  public antennaImageSet: AlarmImageSet;
+
+  /** Set of antenna Unreliable icons */
+  public antennaImageUnreliableSet: AlarmImageSet;
+
+
   private _initialized = false;
 
   /**
@@ -50,17 +59,10 @@ export class AntennasService {
   initialize() {
     if (this._initialized === false) {
       this.loadAlarmsConfig();
+      this.loadImages();
       this._initialized = true;
     }
   }
-
-  // /**
-  // * Transforms the dictionary of antennas configurations into a list
-  // * @returns {Object[]} a list with the antennas configurations
-  // */
-  // getArrayValues() {
-  //   return Object.values(this.mapAlarmsConfig);
-  // }
 
   /**
   * Define the IDs of the alarms that the component should listen to
@@ -93,6 +95,35 @@ export class AntennasService {
   getMapData(): Observable<Object> {
     const url = BackendUrls.FILES_JSON + this.antennasMapName;
     return this.httpClient.get(url);
+  }
+
+  /**
+  * Define the icons used by this module components
+  */
+  loadImages() {
+    /** Set of icons */
+    this.antennaImageSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'antenna-valid-clear.svg',
+      set_low: Assets.ICONS + 'antenna-valid-s_low.svg',
+      set_medium: Assets.ICONS + 'antenna-valid-s_low.svg',
+      set_high: Assets.ICONS + 'antenna-valid-critical.svg',
+      set_critical: Assets.ICONS + 'antenna-valid-critical.svg',
+      unknown: Assets.ICONS + 'antenna-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'antenna-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'antenna-valid-clear.svg',
+    });
+
+    /** Set of Unreliable icons */
+    this.antennaImageUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'antenna-invalid-clear.svg',
+      set_low: Assets.ICONS + 'antenna-invalid-s_low.svg',
+      set_medium: Assets.ICONS + 'antenna-invalid-s_low.svg',
+      set_high: Assets.ICONS + 'antenna-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'antenna-invalid-critical.svg',
+      unknown: Assets.ICONS + 'antenna-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'antenna-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'antenna-invalid-clear.svg',
+    });
   }
 
 }

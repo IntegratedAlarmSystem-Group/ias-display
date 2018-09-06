@@ -6,7 +6,7 @@
               <div class="title">STATUS</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="alarm" [images]="iconSet" [imagesUnreliable]="iconUnreliableSet" [size]="'lg'"
+                  [alarm]="alarm" [images]="this.antennasService.antennaImageSet" [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>
