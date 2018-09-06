@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService } from '../weather.service';
+import { WeatherService, WeatherStationConfig } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
 
@@ -17,9 +17,9 @@ import { Assets } from '../../settings';
 })
 export class WeatherSidebarComponent implements OnInit {
 
-  @Input() selectedStation = '';
+  @Input() selectedStation: WeatherStationConfig = null;
 
-  @Output() panelClicked = new EventEmitter<string>();
+  @Output() panelClicked = new EventEmitter<WeatherStationConfig>();
 
   /**
   * Builds an instance of the component
@@ -37,6 +37,7 @@ export class WeatherSidebarComponent implements OnInit {
   * Executed after the component is instantiated
   */
   ngOnInit() {
+    this.weatherService.initialize();
   }
 
   /**
@@ -76,15 +77,15 @@ export class WeatherSidebarComponent implements OnInit {
     return this.alarmService.get(alarm_id);
   }
 
-  isSelected(station: string) {
-    return this.selectedStation === station;
+  isSelected(stationConfig: WeatherStationConfig) {
+    return this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark);
   }
 
-  onClick(station: string) {
-    if ( this.selectedStation !== station) {
-      this.selectedStation = station;
+  onClick(stationConfig: WeatherStationConfig) {
+    if ( this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark) ) {
+      this.selectedStation = null;
     } else {
-      this.selectedStation = '';
+      this.selectedStation = stationConfig;
     }
     this.panelClicked.emit(this.selectedStation);
   }

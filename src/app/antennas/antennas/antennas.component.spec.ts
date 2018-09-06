@@ -16,10 +16,11 @@ import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/a
 
 
 const mockAntennasConfig =  {
-  'P000': {
+  'DV': [{
+    antenna: 'DV00',
     placemark: 'P000',
     alarm: 'alarmId',
-  }
+  }]
 };
 
 describe('AntennasComponent', () => {
@@ -52,7 +53,7 @@ describe('AntennasComponent', () => {
 
   beforeEach(inject([AntennasService], (service) => {
     spyOn(service, 'initialize').and.callFake(function() {});
-    service.mapAlarmsConfig = mockAntennasConfig;
+    service.antennasConfig = mockAntennasConfig;
     spyOn(service, 'getMapData').and.callFake(function() {
       return of(Map);
     });

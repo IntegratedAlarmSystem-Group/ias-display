@@ -26,11 +26,8 @@ export class WeatherBackupWsMarkerComponent implements OnInit {
   /** ID of the Alarm */
   public alarmId: string;
 
-  /** Placemark name related to the component */
-  @Input() placemark;
-
-  /** Local alarm configuration */
-  alarmConfig;
+  /** Station config related to the component */
+  @Input() stationConfig: WeatherStationConfig;
 
   /**
   * Builds an instance of the component
@@ -54,41 +51,15 @@ export class WeatherBackupWsMarkerComponent implements OnInit {
   * to be displayed on the weather map
   */
   initialize () {
-    this.alarmConfig = this.getAlarmConfig(this.placemark);
     this.defineAlarmsAndIcons();
   }
 
   /**
-  * Checks if there is a placemark related to the alarm
-  */
-  alarmHasLocation(placemark) {
-    const index = Object.keys(
-      this.weatherService.weatherStationsConfig).indexOf(placemark);
-    if (index > -1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-  * Retrieves the alarm configuration related to the placemark
-  */
-  getAlarmConfig(placemark) {
-    const hasLocation = this.alarmHasLocation(placemark);
-    if (hasLocation === true) {
-      return this.weatherService
-                .weatherStationsConfig[placemark];
-    }
-  }
-
-  /**
-  * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
+  * Returns the {@link Alarm} corresponding to the weather station
   * @returns {Alarm} the {@link Alarm}
   */
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
+  getAlarm(): Alarm {
+    return this.alarmService.get(this.stationConfig.station);
   }
 
   /**

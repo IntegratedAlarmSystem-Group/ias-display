@@ -6,7 +6,7 @@ import { AntennasService, AntennaConfig } from '../antennas.service';
 import { SharedModule } from '../../shared/shared.module';
 import { Alarm } from '../../data/alarm';
 
-const mockAlarmsConfig = {
+const mockAntennasConfig = {
   'group-0': [
     {
       antenna: 'antenna-0',
@@ -100,7 +100,7 @@ describe('AntennasSidebarComponent', () => {
     inject([AntennasService], (service) => {
       antennasService = service;
       spyOn(antennasService, 'initialize').and.callFake(function() {});
-      antennasService.sidebarAlarmsConfig = mockAlarmsConfig;
+      antennasService.antennasConfig = mockAntennasConfig;
     })
   );
 
@@ -129,7 +129,7 @@ describe('AntennasSidebarComponent', () => {
 
   it('should have a getAntennaName method that return the antenna (pad) name', () => {
     const expectedName = 'antenna-0 (mockAlarm-0)';
-    expect(component.getAntennaName(mockAlarmsConfig['group-0'][0])).toEqual(expectedName);
+    expect(component.getAntennaName(mockAntennasConfig['group-0'][0])).toEqual(expectedName);
   });
 
   it('should have a method getAntennasGroups method to return the list of groups', () => {
@@ -138,8 +138,8 @@ describe('AntennasSidebarComponent', () => {
   });
 
   it('should have a method getAntennasByGroup method to return the list of antennasConfig objects by group', () => {
-    expect(component.getAntennasByGroup('group-0')).toEqual(mockAlarmsConfig['group-0']);
-    expect(component.getAntennasByGroup('group-1')).toEqual(mockAlarmsConfig['group-1']);
+    expect(component.getAntennasByGroup('group-0')).toEqual(mockAntennasConfig['group-0']);
+    expect(component.getAntennasByGroup('group-1')).toEqual(mockAntennasConfig['group-1']);
   });
 
   describe('', () => {
@@ -155,7 +155,7 @@ describe('AntennasSidebarComponent', () => {
 
     describe('and if there is a selected antenna', () => {
       it('should have a link to return back', () => {
-        component.selectedAntenna = mockAlarmsConfig['group-0'][0];
+        component.selectedAntenna = mockAntennasConfig['group-0'][0];
         fixture.detectChanges();
         const link = fixture.nativeElement.querySelector('.return-link');
         expect(link).toBeTruthy();
@@ -163,7 +163,7 @@ describe('AntennasSidebarComponent', () => {
         expect(component.selectedAntenna).toBeFalsy();
       });
     //   it('should show antenna details component', () => {
-    //     component.selectedAntenna = mockAlarmsConfig['group-0'][0];
+    //     component.selectedAntenna = mockAntennasConfig['group-0'][0];
     //   });
     });
 

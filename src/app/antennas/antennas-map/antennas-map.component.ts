@@ -20,8 +20,6 @@ export class AntennasMapComponent implements OnInit {
   /** Variable to manage a placemark selection from the map */
   @Output() clickedAntennaMarker = new EventEmitter<AntennaConfig>();
 
-  /** Source data for the map and related configuration settings */
-
   /** Placemarks list obtained from the webserver */
   public mapPlacemarks = {};
 
@@ -64,6 +62,7 @@ export class AntennasMapComponent implements OnInit {
    * Component initialization with the related map data source
    */
   initialize() {
+    this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       for (const placemark of mapdata['placemarks']['pads']) {
@@ -81,7 +80,7 @@ export class AntennasMapComponent implements OnInit {
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });
-    this.alarmsConfig = this.service.sidebarAlarmsConfig;
+    this.alarmsConfig = this.service.antennasConfig;
   }
 
   /**
@@ -112,6 +111,21 @@ export class AntennasMapComponent implements OnInit {
     return Object.keys(this.alarmsConfig);
   }
 
+  /**
+   * Opacity class name for each antenna marker
+   */
+  getOpacityClass(antennaConfig) {
+    if (this.selectedAntenna === null) {
+      return 'opacity-100';
+    } else {
+      if ( this.isSelected(antennaConfig) === true ) {
+        return 'opacity-100';
+      } else {
+        return 'opacity-25';
+      }
+    }
+  }
+
  /**
   * Get a placemark object from an id to use position data
   */
@@ -131,21 +145,6 @@ export class AntennasMapComponent implements OnInit {
       return this.selectedAntenna.placemark === antennaConfig.placemark;
     }
 
-  }
-
-  /**
-   * Opacity class name for each antenna marker
-   */
-  getOpacityClass(antennaConfig) {
-    if (this.selectedAntenna === null) {
-      return 'opacity-100';
-    } else {
-      if ( this.isSelected(antennaConfig) === true ) {
-        return 'opacity-100';
-      } else {
-        return 'opacity-25';
-      }
-    }
   }
 
   /**
