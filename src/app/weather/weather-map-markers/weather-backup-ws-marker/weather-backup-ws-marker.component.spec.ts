@@ -30,8 +30,7 @@ describe('WeatherBackupWsMarkerComponent', () => {
   beforeEach(
     inject([WeatherService], (service) => {
       weatherService = service;
-      spyOn(weatherService, 'initialize')
-        .and.callFake(function() {});
+      spyOn(weatherService, 'initialize').and.callFake(function() {});
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
     })
   );
@@ -40,8 +39,8 @@ describe('WeatherBackupWsMarkerComponent', () => {
     fixture = TestBed.createComponent(WeatherBackupWsMarkerComponent);
     component = fixture.componentInstance;
     component.stationConfig = mockWeatherStationsConfig[0];
-    component.iconSet = mockImagesSets['marker'];
-    component.iconUnreliableSet = mockImagesSets['marker-unreliable'];
+    weatherService.markerImageSet = mockImagesSets['marker'];
+    weatherService.markerImageUnreliableSet = mockImagesSets['marker-unreliable'];
     fixture.detectChanges();
   });
 

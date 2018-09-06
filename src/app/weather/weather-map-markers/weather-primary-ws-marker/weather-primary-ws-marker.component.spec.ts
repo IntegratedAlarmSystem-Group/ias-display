@@ -38,8 +38,8 @@ describe('WeatherPrimaryWsMarkerComponent', () => {
     weatherService.weatherStationsConfig = mockWeatherStationsConfig;
     component = fixture.componentInstance;
     component.stationConfig = mockWeatherStationsConfig[0];
-    component.iconSet = mockImagesSets['marker'];
-    component.iconUnreliableSet = mockImagesSets['marker-unreliable'];
+    weatherService.markerImageSet = mockImagesSets['marker'];
+    weatherService.markerImageUnreliableSet = mockImagesSets['marker-unreliable'];
     fixture.detectChanges();
   });
 
