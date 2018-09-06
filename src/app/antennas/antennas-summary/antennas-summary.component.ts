@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../data/routing.service';
+import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
 
@@ -31,6 +32,7 @@ export class AntennasSummaryComponent implements OnInit {
    */
   constructor(
     private alarmService: AlarmService,
+    public antennasService: AntennasService,
     private routing: RoutingService,
   ) { }
 
@@ -46,7 +48,7 @@ export class AntennasSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.alarmId);
+    return this.alarmService.get(this.antennasService.antennasSummaryConfig);
   }
 
   /**
