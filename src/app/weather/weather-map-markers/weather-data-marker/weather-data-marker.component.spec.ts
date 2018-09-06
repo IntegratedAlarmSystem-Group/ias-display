@@ -8,22 +8,22 @@ import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 
 import { DataModule } from '../../../data/data.module';
 
-const mockWeatherStationsConfig = {
-  'mockAlarm-0': {
+const mockWeatherStationsConfig = [
+  {
     placemark: 'mockAlarm-0',
     station: 'mockAlarm-0',
     temperature: 'mockAlarm-0',
     windspeed: 'mockAlarm-0',
     humidity: 'mockAlarm-0'
   },
-  'mockAlarm-1': {
+  {
     placemark: 'mockAlarm-1',
     station: 'mockAlarm-1',
     temperature: 'mockAlarm-1',
     windspeed: 'mockAlarm-1',
     humidity: 'mockAlarm-1'
   },
-};
+];
 
 const mockImagesSets = {};
 const alarm_types = ['winds', 'hum', 'temp'];
@@ -91,12 +91,11 @@ describe('WeatherDataMarkerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherDataMarkerComponent);
     component = fixture.componentInstance;
-    component.placemark = 'mockAlarm-0';
+    component.stationConfig = mockWeatherStationsConfig[0];
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component.alarmConfig.placemark).toEqual(component.placemark);
     expect(component).toBeTruthy();
   });
 });

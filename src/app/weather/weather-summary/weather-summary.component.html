@@ -6,7 +6,7 @@
               <div class="title">WIND SPEED</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.getAlarm(windsAlarmId)" [images]="this.weatherService.windsImageSet" [imagesUnreliable]="this.weatherService.windsImageUnreliableSet" [size]="'lg'"
+                  [alarm]="this.getAlarm('windspeed')" [images]="this.weatherService.windsImageSet" [imagesUnreliable]="this.weatherService.windsImageUnreliableSet" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>
@@ -16,7 +16,7 @@
               <div class="title">HUMIDITY</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.getAlarm(humidityAlarmId)" [images]="this.weatherService.humidityImageSet" [imagesUnreliable]="this.weatherService.humidityImageUnreliableSet" [size]="'lg'"
+                  [alarm]="this.getAlarm('humidity')" [images]="this.weatherService.humidityImageSet" [imagesUnreliable]="this.weatherService.humidityImageUnreliableSet" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>
@@ -26,7 +26,7 @@
               <div class="title">TEMPERATURE</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.getAlarm(tempAlarmId)" [images]="this.weatherService.tempImageSet" [imagesUnreliable]="this.weatherService.tempImageUnreliableSet" [size]="'lg'"
+                  [alarm]="this.getAlarm('temperature')" [images]="this.weatherService.tempImageSet" [imagesUnreliable]="this.weatherService.tempImageUnreliableSet" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>

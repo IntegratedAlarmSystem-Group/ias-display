@@ -77,7 +77,7 @@ export class AntennasService {
       }
     });
 
-    const summary_url = BackendUrls.ANTENNAS_SUMMARY_VIEW;
+    const summary_url = BackendUrls.ANTENNAS_SUMMARY;
     this.httpClient.get(summary_url).subscribe((response) => {
       console.log('response: ', response);
       for (const key in response) {
