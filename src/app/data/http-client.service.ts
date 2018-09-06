@@ -30,6 +30,7 @@ export class HttpClientService {
   * @returns {Response} the response of the request
   */
   get(url) {
+    console.log('HTTP GET FROM URL: ', url);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

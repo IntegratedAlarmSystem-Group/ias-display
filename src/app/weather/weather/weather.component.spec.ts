@@ -136,8 +136,9 @@ describe('WeatherComponent', () => {
   beforeEach(
     inject([WeatherService], (service) => {
       weatherService = service;
-      spyOn(weatherService, 'initialize')
-        .and.callFake(function() {});
+      spyOn(weatherService, 'initialize').and.callFake(function() {
+        console.log('Calling fake');
+      });
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
       weatherService.windsImageSet = mockImagesSets['0'];
       weatherService.humidityImageSet = mockImagesSets['1'];

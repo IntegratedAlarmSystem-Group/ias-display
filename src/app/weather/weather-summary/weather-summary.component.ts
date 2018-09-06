@@ -16,15 +16,6 @@ import { Assets } from '../../settings';
 })
 export class WeatherSummaryComponent implements OnInit {
 
-  /** ID of the Humidity Alarm */
-  public humidityAlarmId: string;
-
-  /** ID of the Temperature Alarm */
-  public tempAlarmId: string;
-
-  /** Wind ID of the Speed Alarm */
-  public windsAlarmId: string;
-
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
