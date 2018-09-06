@@ -1,4 +1,5 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { WeatherPrimaryWsMarkerComponent } from './weather-primary-ws-marker.component';
 import { WeatherService } from '../../weather.service';
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
@@ -59,26 +60,23 @@ describe('WeatherPrimaryWsMarkerComponent', () => {
         AlarmComponent
       ],
       imports: [
+        HttpClientModule,
         DataModule
       ],
       providers: [
+        HttpClient,
         WeatherService
       ]
     })
     .compileComponents();
   }));
 
-  beforeEach(
-    inject([WeatherService], (service) => {
-      weatherService = service;
-      spyOn(weatherService, 'initialize')
-        .and.callFake(function() {});
-      weatherService.weatherStationsConfig = mockWeatherStationsConfig;
-    })
-  );
-
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherPrimaryWsMarkerComponent);
+    weatherService = fixture.debugElement.injector.get(WeatherService);
+    spyOn(weatherService, 'initialize').and.callFake(function() {
+    });
+    weatherService.weatherStationsConfig = mockWeatherStationsConfig;
     component = fixture.componentInstance;
     component.stationConfig = mockWeatherStationsConfig[0];
     component.iconSet = mockImagesSets['set'];
