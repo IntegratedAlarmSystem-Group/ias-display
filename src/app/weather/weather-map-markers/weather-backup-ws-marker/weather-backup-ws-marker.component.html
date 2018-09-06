@@ -1,8 +1,8 @@
 <div class="ws-backup-marker-container">
   <app-alarm
-    [alarm]="this.getAlarm(this.alarmConfig.station)"
-    [images]="iconSet"
-    [imagesUnreliable]="iconUnreliableSet"
+    [alarm]="this.getAlarm()"
+    [images]="weatherService.markerImageSet"
+    [imagesUnreliable]="weatherService.markerImageUnreliableSet"
     [showActionBadges]="false"
     [size]="'xs'"
   >

@@ -10,13 +10,14 @@ import { RoutingService} from '../../data/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
-
+import { mockWeatherSummaryConfig, mockImagesSets} from '../test_fixtures';
 
 describe('WeatherSummaryComponent', () => {
   let component: WeatherSummaryComponent;
   let debug: DebugElement;
   let fixture: ComponentFixture<WeatherSummaryComponent>;
   let alarmService: AlarmService;
+  let weatherService: WeatherService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter', 'goToWeather']);
 
 
@@ -45,6 +46,15 @@ describe('WeatherSummaryComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherSummaryComponent);
+    weatherService = fixture.debugElement.injector.get(WeatherService);
+    spyOn(weatherService, 'initialize').and.callFake(function() {});
+    weatherService.weatherSummaryConfig = mockWeatherSummaryConfig;
+    weatherService.windsImageSet = mockImagesSets['windspeed'];
+    weatherService.humidityImageSet = mockImagesSets['humidity'];
+    weatherService.tempImageSet = mockImagesSets['temperature'];
+    weatherService.windsImageUnreliableSet = mockImagesSets['windspeed-unreliable'];
+    weatherService.humidityImageUnreliableSet = mockImagesSets['humidity-unreliable'];
+    weatherService.tempImageUnreliableSet = mockImagesSets['temperature-unreliable'];
     component = fixture.componentInstance;
     debug = fixture.debugElement;
     alarmService = fixture.debugElement.injector.get(AlarmService);
@@ -52,6 +62,7 @@ describe('WeatherSummaryComponent', () => {
   });
 
   it('should create', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 

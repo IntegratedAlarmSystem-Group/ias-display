@@ -8,92 +8,7 @@ import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmHeaderComponent } from '../../shared/alarm-header/alarm-header.component';
 import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { Alarm } from '../../data/alarm';
-
-const mockConfiguration = {
-  placemark: 'MockStationAlarm',
-  station: 'MockStationAlarm',
-  windspeed: 'MockWindSpeedAlarm',
-  temperature: 'MockTemperatureAlarm',
-  humidity: 'MockHumidityAlarm',
-};
-
-const mockAlarms = {
-  MockStationAlarm: Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'MockStationAlarm',
-    'running_id': 'MockStationAlarm',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'state_change_timestamp': 1267252440000,
-    'validity': '1',
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  MockWindSpeedAlarm: Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'MockWindSpeedAlarm',
-    'running_id': 'MockWindSpeedAlarm',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'state_change_timestamp': 1267252440000,
-    'validity': '1',
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  MockTemperatureAlarm: Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'MockTemperatureAlarm',
-    'running_id': 'MockTemperatureAlarm',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'state_change_timestamp': 1267252440000,
-    'validity': '1',
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  MockHumidityAlarm: Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'MockHumidityAlarm',
-    'running_id': 'MockHumidityAlarm',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'state_change_timestamp': 1267252440000,
-    'validity': '1',
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  })
-};
-
-const mockImagesSets = {};
-const alarm_types = ['winds', 'hum', 'temp'];
-for ( const item in alarm_types) {
-  if (alarm_types[item] !== null ) {
-    mockImagesSets[item] = new AlarmImageSet({
-      clear: alarm_types[item] + 'ImageSet',
-      set_low: alarm_types[item] + 'ImageSet',
-      set_medium: alarm_types[item] + 'ImageSet',
-      set_high: alarm_types[item] + 'ImageSet',
-      set_critical: alarm_types[item] + 'ImageSet',
-      unknown: alarm_types[item] + 'ImageSet',
-      maintenance: alarm_types[item] + 'ImageSet',
-      shelved: alarm_types[item] + 'ImageSet',
-    });
-    mockImagesSets[item + '-unreliable'] = new AlarmImageSet({
-      clear: alarm_types[item] + 'UnreliableImageSet',
-      set_low: alarm_types[item] + 'UnreliableImageSet',
-      set_medium: alarm_types[item] + 'UnreliableImageSet',
-      set_high: alarm_types[item] + 'UnreliableImageSet',
-      set_critical: alarm_types[item] + 'UnreliableImageSet',
-      unknown: alarm_types[item] + 'UnreliableImageSet',
-      maintenance: alarm_types[item] + 'UnreliableImageSet',
-      shelved: alarm_types[item] + 'UnreliableImageSet',
-    });
-  }
-}
+import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
 
 describe('WeatherStationSidebarComponent', () => {
   let component: WeatherStationSidebarComponent;
@@ -121,12 +36,12 @@ describe('WeatherStationSidebarComponent', () => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
-      weatherService.windsImageSet = mockImagesSets['0'];
-      weatherService.humidityImageSet = mockImagesSets['1'];
-      weatherService.tempImageSet = mockImagesSets['2'];
-      weatherService.windsImageUnreliableSet = mockImagesSets['0-unreliable'];
-      weatherService.humidityImageUnreliableSet = mockImagesSets['1-unreliable'];
-      weatherService.tempImageUnreliableSet = mockImagesSets['2-unreliable'];
+      weatherService.windsImageSet = mockImagesSets['windspeed'];
+      weatherService.humidityImageSet = mockImagesSets['humidity'];
+      weatherService.tempImageSet = mockImagesSets['temperature'];
+      weatherService.windsImageUnreliableSet = mockImagesSets['windspeed-unreliable'];
+      weatherService.humidityImageUnreliableSet = mockImagesSets['humidity-unreliable'];
+      weatherService.tempImageUnreliableSet = mockImagesSets['temperature-unreliable'];
     })
   );
 
@@ -142,8 +57,8 @@ describe('WeatherStationSidebarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WeatherStationSidebarComponent);
     component = fixture.componentInstance;
-    component.stationConfig = mockConfiguration;
-    component.selectedAlarm = '';
+    component.stationConfig = mockWeatherStationsConfig[0];
+    component.selectedAlarm = null;
     fixture.detectChanges();
   });
 
@@ -152,14 +67,14 @@ describe('WeatherStationSidebarComponent', () => {
   });
 
   it('should have a getAlarm function', () => {
-    expect(component.getAlarm('MockStationAlarm')).toEqual(mockAlarms['MockStationAlarm']);
+    expect(component.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
   });
 
   it('should have a Header Alarm Component to display the station alarm', () => {
     const alarmHeaderDebugElement = fixture.debugElement.query(By.directive(AlarmHeaderComponent));
     const alarmHeader = alarmHeaderDebugElement.componentInstance;
     expect(alarmHeader).toBeTruthy();
-    expect(alarmHeader.alarm).toEqual(mockAlarms['MockStationAlarm']);
+    expect(alarmHeader.alarm).toEqual(mockAlarms['mockAlarm-0']);
   });
 
   it('should have three Alarm Components to display station dependencies alarms', () => {
@@ -168,20 +83,20 @@ describe('WeatherStationSidebarComponent', () => {
 
     const windAlarm = alarmsDebugElements[0].componentInstance;
     expect(windAlarm).toBeTruthy();
-    expect(windAlarm.alarm).toEqual(mockAlarms['MockWindSpeedAlarm']);
-    expect(windAlarm.images).toEqual(mockImagesSets['0']);
-    expect(windAlarm.imagesUnreliable).toEqual(mockImagesSets['0-unreliable']);
+    expect(windAlarm.alarm).toEqual(mockAlarms['mockAlarm-0-windspeed']);
+    expect(windAlarm.images).toEqual(mockImagesSets['windspeed']);
+    expect(windAlarm.imagesUnreliable).toEqual(mockImagesSets['windspeed-unreliable']);
 
     const humAlarm = alarmsDebugElements[1].componentInstance;
     expect(humAlarm).toBeTruthy();
-    expect(humAlarm.alarm).toEqual(mockAlarms['MockHumidityAlarm']);
-    expect(humAlarm.images).toEqual(mockImagesSets['1']);
-    expect(humAlarm.imagesUnreliable).toEqual(mockImagesSets['1-unreliable']);
+    expect(humAlarm.alarm).toEqual(mockAlarms['mockAlarm-0-humidity']);
+    expect(humAlarm.images).toEqual(mockImagesSets['humidity']);
+    expect(humAlarm.imagesUnreliable).toEqual(mockImagesSets['humidity-unreliable']);
 
     const tempAlarm = alarmsDebugElements[2].componentInstance;
     expect(tempAlarm).toBeTruthy();
-    expect(tempAlarm.alarm).toEqual(mockAlarms['MockTemperatureAlarm']);
-    expect(tempAlarm.images).toEqual(mockImagesSets['2']);
-    expect(tempAlarm.imagesUnreliable).toEqual(mockImagesSets['2-unreliable']);
+    expect(tempAlarm.alarm).toEqual(mockAlarms['mockAlarm-0-temperature']);
+    expect(tempAlarm.images).toEqual(mockImagesSets['temperature']);
+    expect(tempAlarm.imagesUnreliable).toEqual(mockImagesSets['temperature-unreliable']);
   });
 });

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService } from '../weather.service';
+import { WeatherService, WeatherStationConfig } from '../weather.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 
@@ -16,13 +16,11 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 })
 export class WeatherMapComponent implements OnInit {
 
-  @Input() selectedStation: string;
+  @Input() selectedStation: WeatherStationConfig = null;
 
-  @Output() placemarkClicked = new EventEmitter<string>();
+  @Output() placemarkClicked = new EventEmitter<WeatherStationConfig>();
 
-  onHoverStation = '';
-
-  /** Source data for the map and related configuration settings */
+  onHoverStation: WeatherStationConfig = null;
 
   /** Placemarks list obtained from the webserver */
   public mapPlacemarks = {};
@@ -42,9 +40,6 @@ export class WeatherMapComponent implements OnInit {
 
   /** Map Configuration  */
   public mapConfig = {};
-
-  /** Alarms Configuration  */
-  public alarmsConfig = {};
 
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
@@ -69,6 +64,7 @@ export class WeatherMapComponent implements OnInit {
    * Data setup
    */
   initialize() {
+    this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       let placemarks_list = [];
@@ -90,7 +86,6 @@ export class WeatherMapComponent implements OnInit {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.alarmsConfig = this.service.weatherStationsConfig;
   }
 
   /**
@@ -103,47 +98,48 @@ export class WeatherMapComponent implements OnInit {
   }
 
   /**
-   * Get a placemark object from an id to use position data
-   */
-   getPlacemarkObject(placemark) {
-     const placemark_id = placemark;
-     return this.placemarks[placemark_id];
-   }
+  * Get a placemark object from an id to use position data
+  */
+  getPlacemarkObject(placemark) {
+      const placemark_id = placemark;
+      return this.placemarks[placemark_id];
+    }
 
   /**
-   * Action after click on a weather station marker
+   * Style for the backup weather stations
    */
-  onClick(placemark) {
-    const selectedConfig = this.service.weatherStationsConfig[placemark];
-    if ( this.selectedStation !== selectedConfig.station) {
-      this.selectedStation = selectedConfig.station;
+  getBackupWeatherStationStyle(stationConfig: WeatherStationConfig) {
+    if (this.selectedStation === null || this.selectedStation === undefined) {
+      return 'weather-display-hide';
     } else {
-      this.selectedStation = '';
+      if (this.isSelected(stationConfig)) {
+        return 'weather-display-show';
+      } else {
+        return 'weather-display-hide';
+      }
     }
-    this.placemarkClicked.emit(this.selectedStation);
   }
 
-  /**
-   * Check if the placemarker related to a main weather station is selected
-   */
-  isSelected(placemark: string): boolean {
-    const selectedConfig = this.service.weatherStationsConfig[placemark];
-    if (selectedConfig) {
-      return this.service.weatherStationsConfig[placemark].station === this.selectedStation;
+  getPrimaryWeatherStationConfig(padGroup: string) {
+    if (this.datarelations[padGroup]['wstations']['primary'][0]) {
+      const placemark = this.datarelations[padGroup]['wstations']['primary'][0];
+      return placemark;
+    } else {
+      return '';
     }
   }
 
   /**
    * Style for the main weather station group
    */
-  getPrimaryWeatherStationStyle(placemark: string) {
-    if (this.selectedStation === '') {
+  getPrimaryWeatherStationStyle(stationConfig: WeatherStationConfig) {
+    if (this.selectedStation === null || this.selectedStation === undefined) {
       return 'opacity-100';
     } else {
-      if (this.isSelected(placemark)) {
+      if (this.isSelected(stationConfig)) {
         return 'opacity-100';
       } else {
-        if (this.isOnHover(placemark)) {
+        if (this.isOnHover(stationConfig)) {
           return 'opacity-70';
         } else {
           return 'opacity-25';
@@ -152,43 +148,51 @@ export class WeatherMapComponent implements OnInit {
     }
   }
 
+
   /**
-   * Style for the backup weather stations
+   * Check if the placemarker related to a main weather station is hovered
    */
-  getBackupWeatherStationStyle(placemark: string) {
-    if (this.selectedStation === '') {
-      return 'weather-display-hide';
+   isOnHover(stationConfig: WeatherStationConfig): boolean {
+    if (stationConfig) {
+      return stationConfig === this.onHoverStation;
+    }
+  }
+
+  /**
+   * Check if the placemarker related to a main weather station is selected
+   */
+  isSelected(stationConfig: WeatherStationConfig): boolean {
+    if (this.selectedStation === null) {
+      return false;
     } else {
-      if (this.isSelected(placemark)) {
-        return 'weather-display-show';
-      } else {
-        return 'weather-display-hide';
-      }
+      return this.selectedStation.placemark === stationConfig.placemark;
     }
   }
 
   /**
    * Identify primary weather station group on hover
    */
-   mouseEnterPrimaryWeatherStationGroup(placemark) {
-     const selectedConfig = this.service.weatherStationsConfig[placemark];
-     if (selectedConfig) {
-       this.onHoverStation = selectedConfig.station;
-     }
-   }
+  mouseEnterPrimaryWeatherStationGroup(stationConfig: WeatherStationConfig) {
+    if (stationConfig) {
+      this.onHoverStation = stationConfig;
+    }
+  }
 
-   /** Clear primary weather station hover variable */
-   mouseLeavePrimaryWeatherStationGroup() {
-     this.onHoverStation = '';
-   }
+  /** Clear primary weather station hover variable */
+  mouseLeavePrimaryWeatherStationGroup() {
+    this.onHoverStation = null;
+  }
 
-   /**
-    * Check if the placemarker related to a main weather station is hovered
-    */
-    isOnHover(placemark: string): boolean {
-     const selectedConfig = this.service.weatherStationsConfig[placemark];
-     if (selectedConfig) {
-       return this.service.weatherStationsConfig[placemark].station === this.onHoverStation;
-     }
-   }
+  /**
+   * Action after click on a weather station marker
+   */
+  onClick(stationConfig: WeatherStationConfig) {
+    if (this.isSelected(stationConfig)) {
+      this.selectedStation = null;
+    } else {
+      this.selectedStation = stationConfig;
+    }
+    this.placemarkClicked.emit(this.selectedStation);
+  }
+
 }

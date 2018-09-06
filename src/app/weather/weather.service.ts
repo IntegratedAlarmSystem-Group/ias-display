@@ -26,6 +26,15 @@ export class WeatherStationConfig {
 
   /** ID of the humidity {@link Alarm} of the Weather Station */
   public humidity: string;
+
+  /**
+  * Builds a new WeatherStationConfig instance
+  * @param {Object} attributes a dictionary containing the attributes to
+  * create the object
+  */
+  constructor(attributes: Object = {}) {
+    Object.assign(this, attributes);
+  }
 }
 
 /**
@@ -43,6 +52,9 @@ export class WeatherService {
   /** Set of Wind Speed icons */
   public windsImageSet: AlarmImageSet;
 
+  /** Set of Marker icons for the stations in the map */
+  public markerImageSet: AlarmImageSet;
+
   /** Set of Humidity Unreliable icons */
   public humidityImageUnreliableSet: AlarmImageSet;
 
@@ -52,15 +64,20 @@ export class WeatherService {
   /** Set of Wind Speed Unreliable icons */
   public windsImageUnreliableSet: AlarmImageSet;
 
+  /** Set of Marker Unreliable icons for the stations in the map */
+  public markerImageUnreliableSet: AlarmImageSet;
+
   /** Alarms Ids for the weather summary **/
   public weatherSummaryConfig: WeatherStationConfig;
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
-  // public weatherStationsConfig: WeatherStationConfig[];
+  // public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
+  public weatherStationsConfig: WeatherStationConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
+
+  private _initialized = false;
 
   /**
    * Builds an instance of the service and initializes it calling the {@link initialize} method
@@ -68,15 +85,17 @@ export class WeatherService {
   constructor(
     private httpClient: HttpClientService
   ) {
-    this.initialize();
   }
 
   /**
   * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
-    this.loadWeatherStationsConfig();
-    this.loadAlarmsAndImages();
+    if (this._initialized === false) {
+      this.loadWeatherStationsConfig();
+      this.loadImages();
+      this._initialized = true;
+    }
   }
 
   /**
@@ -98,60 +117,21 @@ export class WeatherService {
   }
 
   /**
-  * Transforms the dictionary of weather stations configurations into a list
-  * @returns {Object[]} a list with the weather stations configurations
-  */
-  getArrayValues() {
-    return Object.values(this.weatherStationsConfig);
-  }
-
-  /**
   * Define the IDs of the alarms that the component should listen to
   */
   loadWeatherStationsConfig() {
-    this.weatherStationsConfig =  {
-      'MeteoCentral': { // MORITA_AND_INNER
-        placemark: 'MeteoCentral',
-        station: 'WS-Inner-Temperature',
-        temperature: 'WS-Inner-Temperature',
-        windspeed: 'WS-Inner-WindSpeed',
-        humidity: 'WS-Inner-Humidity',
-      },
-      'ACA': { // MORITA_AND_INNER
-        placemark: 'ACA',
-        station: 'WS-ACA-Temperature',
-        temperature: 'WS-ACA-Temperature',
-        windspeed: 'WS-ACA-WindSpeed',
-        humidity: 'WS-ACA-Humidity',
-      },
-      'Meteo201': { // W ARM
-        placemark: 'Meteo201',
-        station: 'WS-W-Temperature',
-        temperature: 'WS-W-Temperature',
-        windspeed: 'WS-W-WindSpeed',
-        humidity: 'WS-W-Humidity',
-      },
-      'Meteo410': { // P ARM
-        placemark: 'Meteo410',
-        station: 'WS-P-Temperature',
-        temperature: 'WS-P-Temperature',
-        windspeed: 'WS-P-WindSpeed',
-        humidity: 'WS-P-Humidity',
-      },
-      'Meteo309': { // S ARM
-        placemark: 'Meteo309',
-        station: 'WS-S-Temperature',
-        temperature: 'WS-S-Temperature',
-        windspeed: 'WS-S-WindSpeed',
-        humidity: 'WS-S-Humidity',
-      },
-    };
+    this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
+      this.weatherStationsConfig = response as WeatherStationConfig[];
+    });
+    this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
+      this.weatherSummaryConfig = response as WeatherStationConfig;
+    });
   }
 
   /**
   * Define the alarms that the component should listen to and their respective icons
   */
-  loadAlarmsAndImages() {
+  loadImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'hum-valid-clear.svg',
@@ -222,6 +202,30 @@ export class WeatherService {
       unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
       maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
       shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
+    });
+
+    /** Set of Marker icons */
+    this.markerImageSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'weather_s-valid-clear.svg',
+      set_low: Assets.ICONS + 'weather_s-valid-medium.svg',
+      set_medium: Assets.ICONS + 'weather_s-valid-medium.svg',
+      set_high: Assets.ICONS + 'weather_s-valid-critical.svg',
+      set_critical: Assets.ICONS + 'weather_s-valid-critical.svg',
+      unknown: Assets.ICONS + 'weather_s-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'weather_s-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'weather_s-valid-clear.svg',
+    });
+
+    /** Set of Marker Unreliable icons */
+    this.markerImageUnreliableSet = new AlarmImageSet({
+      clear: Assets.ICONS + 'weather_s-invalid-clear.svg',
+      set_low: Assets.ICONS + 'weather_s-invalid-medium.svg',
+      set_medium: Assets.ICONS + 'weather_s-invalid-medium.svg',
+      set_high: Assets.ICONS + 'weather_s-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'weather_s-invalid-critical.svg',
+      unknown: Assets.ICONS + 'weather_s-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'weather_s-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'weather_s-invalid-clear.svg',
     });
   }
 }

@@ -16,15 +16,6 @@ import { Assets } from '../../settings';
 })
 export class WeatherSummaryComponent implements OnInit {
 
-  /** ID of the Humidity Alarm */
-  public humidityAlarmId: string;
-
-  /** ID of the Temperature Alarm */
-  public tempAlarmId: string;
-
-  /** Wind ID of the Speed Alarm */
-  public windsAlarmId: string;
-
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
@@ -38,26 +29,18 @@ export class WeatherSummaryComponent implements OnInit {
 
   /**
    * Creates the component
-   * Subscribes to new alarms from the {@link AlarmService}
    */
   ngOnInit() {
-    this.defineAlarmsAndImages();
+    this.weatherService.initialize();
   }
 
   /** Returns the instance of the {@link Alarm}
   * @returns {Alarm} the {@link Alarm}
   */
-  getAlarm(alarmID: string): Alarm {
-    return this.alarmService.get(alarmID);
-  }
-
-  /**
-  * Define the alarms that the component should listen to and their respective icons
-  */
-  defineAlarmsAndImages() {
-    this.humidityAlarmId = 'WS-Humidity';
-    this.tempAlarmId = 'WS-Temperature';
-    this.windsAlarmId = 'WS-WindSpeed';
+  getAlarm(keyword: string): Alarm {
+    if (this.weatherService.weatherSummaryConfig) {
+      return this.alarmService.get(this.weatherService.weatherSummaryConfig[keyword]);
+    }
   }
 
   /**
