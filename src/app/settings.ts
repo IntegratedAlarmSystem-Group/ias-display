@@ -11,7 +11,8 @@ export const BackendUrls = {
   UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
   FILES_JSON: '/panels-api/files/get_json/?key=',
   WEATHER_VIEW: '/panels-api/alarms-config/weather_config/',
-  ANTENNAS_VIEW: '/panels-api/alarms-config/antennas_config/'
+  ANTENNAS_VIEW: '/panels-api/alarms-config/antennas_config/',
+  ANTENNAS_SUMMARY_VIEW: '/panels-api/alarms-config/antennas_summary_config/'
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */
