@@ -64,6 +64,7 @@ export class WeatherMapComponent implements OnInit {
    * Data setup
    */
   initialize() {
+    this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       let placemarks_list = [];

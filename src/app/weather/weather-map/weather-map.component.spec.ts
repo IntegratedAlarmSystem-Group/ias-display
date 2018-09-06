@@ -1,7 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { WeatherMapComponent } from './weather-map.component';
-import { WeatherService } from '../weather.service';
+import { WeatherService, WeatherStationConfig } from '../weather.service';
 import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
 import { Map } from '../../map/fixtures';
@@ -89,7 +89,7 @@ for ( const item in alarm_types) {
 }
 
 
-fdescribe('WeatherMapComponent', () => {
+describe('WeatherMapComponent', () => {
   let component: WeatherMapComponent;
   let fixture: ComponentFixture<WeatherMapComponent>;
   let componentDataMarker: WeatherDataMarkerComponent;
@@ -119,7 +119,7 @@ fdescribe('WeatherMapComponent', () => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
-      weatherService.weatherStationsConfig = mockWeatherStationsConfig;
+      weatherService.weatherStationsConfig = mockWeatherStationsConfig as WeatherStationConfig[];
       weatherService.windsImageSet = mockImagesSets['0'];
       weatherService.humidityImageSet = mockImagesSets['1'];
       weatherService.tempImageSet = mockImagesSets['2'];

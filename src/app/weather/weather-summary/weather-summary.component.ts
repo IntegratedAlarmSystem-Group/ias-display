@@ -40,6 +40,7 @@ export class WeatherSummaryComponent implements OnInit {
    * Creates the component
    */
   ngOnInit() {
+    this.weatherService.initialize();
   }
 
   /** Returns the instance of the {@link Alarm}

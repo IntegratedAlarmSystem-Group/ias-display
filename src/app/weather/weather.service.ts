@@ -71,21 +71,25 @@ export class WeatherService {
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  private _initialized = false;
+
   /**
    * Builds an instance of the service and initializes it calling the {@link initialize} method
    */
   constructor(
     private httpClient: HttpClientService
   ) {
-    this.initialize();
   }
 
   /**
   * Initializes the Service and getting configuration from Webserver
   */
   initialize() {
-    this.loadWeatherStationsConfig();
-    this.loadAlarmsAndImages();
+    if (this._initialized === false) {
+      this.loadWeatherStationsConfig();
+      this.loadAlarmsAndImages();
+      this._initialized = true;
+    }
   }
 
   /**
