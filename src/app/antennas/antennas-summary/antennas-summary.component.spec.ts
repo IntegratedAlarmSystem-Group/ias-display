@@ -7,7 +7,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../data/routing.service';
 import { AlarmService } from '../../data/alarm.service';
-
+import { AntennasService } from '../antennas.service';
 import { AntennasSummaryComponent } from './antennas-summary.component';
 
 describe('AntennasSummaryComponent', () => {
@@ -15,6 +15,7 @@ describe('AntennasSummaryComponent', () => {
   let fixture: ComponentFixture<AntennasSummaryComponent>;
   let debug: DebugElement;
   let alarmService: AlarmService;
+  let antennasService: AntennasService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter', 'goToAntennas']);
 
   beforeEach(async(() => {
@@ -28,7 +29,8 @@ describe('AntennasSummaryComponent', () => {
         DataModule
       ],
       providers: [
-        { provide: RoutingService, useValue: spyRoutingTable }
+        { provide: RoutingService, useValue: spyRoutingTable },
+        AntennasService
       ],
     })
     .overrideModule( BrowserDynamicTestingModule , {
@@ -41,6 +43,9 @@ describe('AntennasSummaryComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AntennasSummaryComponent);
+    antennasService = fixture.debugElement.injector.get(AntennasService);
+    spyOn(antennasService, 'initialize').and.callFake(function() {});
+    antennasService.antennasSummaryConfig = 'summaryConfig';
     component = fixture.componentInstance;
     debug = fixture.debugElement;
     alarmService = fixture.debugElement.injector.get(AlarmService);
