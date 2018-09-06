@@ -15,7 +15,7 @@ import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
-import { mockWeatherStationsConfig, mockImagesSets, mockAlarms} from '../test_fixtures';
+import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
 
 const mockAntennas = {
   'mockAlarm-0': ['Antenna1', 'Antenna2', 'Antenna3'],
@@ -63,12 +63,12 @@ describe('WeatherSidebarComponent', () => {
         }
       );
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
-      weatherService.windsImageSet = mockImagesSets['0'];
-      weatherService.humidityImageSet = mockImagesSets['1'];
-      weatherService.tempImageSet = mockImagesSets['2'];
-      weatherService.windsImageUnreliableSet = mockImagesSets['0-unreliable'];
-      weatherService.humidityImageUnreliableSet = mockImagesSets['1-unreliable'];
-      weatherService.tempImageUnreliableSet = mockImagesSets['2-unreliable'];
+      weatherService.windsImageSet = mockImagesSets['windspeed'];
+      weatherService.humidityImageSet = mockImagesSets['humidity'];
+      weatherService.tempImageSet = mockImagesSets['temperature'];
+      weatherService.windsImageUnreliableSet = mockImagesSets['windspeed-unreliable'];
+      weatherService.humidityImageUnreliableSet = mockImagesSets['humidity-unreliable'];
+      weatherService.tempImageUnreliableSet = mockImagesSets['temperature-unreliable'];
     })
   );
 
@@ -145,23 +145,32 @@ describe('WeatherSidebarComponent', () => {
               if (tableRows[j] !== null ) {
                 const columns = tableRows[j].queryAll(By.css('td'));
 
-                if ( j !== '0' ) { // Because the first row show the alarm name
-                  const index = Number(j) - 1;
-                  const alarm = columns[0].query(By.directive(AlarmComponent)).componentInstance;
-                  expect(alarm).toBeTruthy();
-                  expect(alarm.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
-                  expect(alarm.images).toEqual(mockImagesSets[index]);
-                  expect(alarm.imagesUnreliable).toEqual(mockImagesSets[index + '-unreliable']);
+                const index = alarm_types[Number(j) - 1];
+                let alarmIndex;
+
+                if ( j === '0' ) {
+                  alarmIndex = 'mockAlarm-' + i;
+                } else {
+                  alarmIndex = 'mockAlarm-' + i + '-' + index;
+                }
+                const expectedAlarm = mockAlarms[alarmIndex];
+
+                if ( j !== '0' ) { // Because the first row shows the alarm name
+                  const alarmComponent = columns[0].query(By.directive(AlarmComponent)).componentInstance;
+                  expect(alarmComponent).toBeTruthy();
+                  expect(alarmComponent.alarm).toEqual(expectedAlarm);
+                  expect(alarmComponent.images).toEqual(mockImagesSets[index]);
+                  expect(alarmComponent.imagesUnreliable).toEqual(mockImagesSets[index + '-unreliable']);
                 }
 
                 const statusView = columns[1].query(By.directive(StatusViewComponent)).componentInstance;
                 expect(statusView).toBeTruthy();
-                expect(statusView.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
+                expect(statusView.alarm).toEqual(expectedAlarm);
                 expect(statusView.showActionBadges).toEqual(false);
 
                 const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
                 expect(buttons).toBeTruthy();
-                expect(buttons.alarm).toEqual(mockAlarms['mockAlarm-' + i]);
+                expect(buttons.alarm).toEqual(expectedAlarm);
               }
             }
           }
@@ -170,10 +179,9 @@ describe('WeatherSidebarComponent', () => {
 
       it('Each panel contains a list with the names of nearby antennas', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
-        const mockWeatherStationsConfigArray = Object.values(mockWeatherStationsConfig);
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            const expectedAntennas = mockAntennas[mockWeatherStationsConfigArray[i].station];
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
             const panel = panels[i];
             const list = panel.nativeElement.querySelector('.antennas-list');
             expect(list).toBeTruthy();
@@ -186,10 +194,9 @@ describe('WeatherSidebarComponent', () => {
 
       it('Each panel contains a button to copy the names of nearby antennas', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
-        const mockWeatherStationsConfigArray = Object.values(mockWeatherStationsConfig);
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            const expectedAntennas = mockAntennas[mockWeatherStationsConfigArray[i].station];
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
             const panel = panels[i];
             const button = panel.nativeElement.querySelector('.copy-antennas-button');
             expect(button).toBeTruthy();

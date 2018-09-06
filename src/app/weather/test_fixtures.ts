@@ -5,16 +5,16 @@ export const mockWeatherStationsConfig = [
   {
     placemark: 'mockAlarm-0',
     station: 'mockAlarm-0',
-    temperature: 'mockAlarm-0',
-    windspeed: 'mockAlarm-0',
-    humidity: 'mockAlarm-0'
+    temperature: 'mockAlarm-0-temperature',
+    windspeed: 'mockAlarm-0-windspeed',
+    humidity: 'mockAlarm-0-humidity'
   },
   {
     placemark: 'mockAlarm-1',
     station: 'mockAlarm-1',
-    temperature: 'mockAlarm-1',
-    windspeed: 'mockAlarm-1',
-    humidity: 'mockAlarm-1'
+    temperature: 'mockAlarm-1-temperature',
+    windspeed: 'mockAlarm-1-windspeed',
+    humidity: 'mockAlarm-1-humidity'
   },
 ];
 
@@ -27,8 +27,8 @@ export const mockWeatherSummaryConfig = {
 };
 
 export const mockImagesSets = {};
-const alarm_types = ['winds', 'hum', 'temp'];
-for ( const item in alarm_types) {
+export const alarm_types = ['windspeed', 'humidity', 'temperature', 'marker'];
+for ( const item of alarm_types) {
   if (alarm_types[item] !== null ) {
     mockImagesSets[item] = new AlarmImageSet({
       clear: alarm_types[item] + 'ImageSet',
@@ -81,5 +81,89 @@ export const mockAlarms = {
     'ack': false,
     'shelved': false,
     'dependencies': [],
-  })
+  }),
+  'mockAlarm-0-temperature': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-0-temperature',
+    'running_id': 'mockAlarm-0-temperature',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-0-windspeed': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-0-windspeed',
+    'running_id': 'mockAlarm-0-windspeed',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-0-humidity': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-0-humidity',
+    'running_id': 'mockAlarm-0-humidity',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-1-temperature': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-1-temperature',
+    'running_id': 'mockAlarm-1-temperature',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-1-windspeed': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-1-windspeed',
+    'running_id': 'mockAlarm-1-windspeed',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-1-humidity': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-1-humidity',
+    'running_id': 'mockAlarm-1-humidity',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma1.cl',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
 };
