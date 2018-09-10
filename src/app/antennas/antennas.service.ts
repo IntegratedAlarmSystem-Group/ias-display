@@ -122,7 +122,7 @@ export class AntennasService {
       set_critical: Assets.ICONS + 'antenna-invalid-critical.svg',
       unknown: Assets.ICONS + 'antenna-invalid-unknown.svg',
       maintenance: Assets.ICONS + 'antenna-invalid-maintenance.svg',
-      shelved: Assets.ICONS + 'antenna-invalid-clear.svg',
+      shelved: Assets.ICONS + 'antenna-valid-clear.svg',
     });
   }
 

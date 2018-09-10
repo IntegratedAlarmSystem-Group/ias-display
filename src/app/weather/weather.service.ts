@@ -177,7 +177,7 @@ export class WeatherService {
       set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
       unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
       maintenance: Assets.ICONS + 'hum-invalid-maint.svg',
-      shelved: Assets.ICONS + 'hum-invalid-clear.svg',
+      shelved: Assets.ICONS + 'hum-valid-clear.svg',
     });
 
     /** Set of Temperature Unreliable icons */
@@ -189,7 +189,7 @@ export class WeatherService {
       set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
       unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
       maintenance: Assets.ICONS + 'temp-invalid-maint.svg',
-      shelved: Assets.ICONS + 'temp-invalid-clear.svg',
+      shelved: Assets.ICONS + 'temp-valid-clear.svg',
     });
 
     /** Set of Wind Speed Unreliable icons */
@@ -201,7 +201,7 @@ export class WeatherService {
       set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
       unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
       maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-invalid-clear.svg',
+      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
     });
 
     /** Set of Marker icons */
@@ -225,7 +225,7 @@ export class WeatherService {
       set_critical: Assets.ICONS + 'weather_s-invalid-critical.svg',
       unknown: Assets.ICONS + 'weather_s-invalid-unknown.svg',
       maintenance: Assets.ICONS + 'weather_s-invalid-maintenance.svg',
-      shelved: Assets.ICONS + 'weather_s-invalid-clear.svg',
+      shelved: Assets.ICONS + 'weather_s-valid-clear.svg',
     });
   }
 }

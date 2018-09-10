@@ -63,7 +63,7 @@ describe('AlarmHeaderComponent', () => {
       if (component.alarm.validity) {
         expect(component.getClass()).toEqual(expected_classes['shelved']);
       } else {
-        expect(component.getClass()).toEqual(expected_classes['shelved_unreliable']);
+        expect(component.getClass()).toEqual(expected_classes['shelved']);
       }
     }
   });

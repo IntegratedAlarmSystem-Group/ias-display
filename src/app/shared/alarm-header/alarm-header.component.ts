@@ -64,7 +64,7 @@ export class AlarmHeaderComponent implements OnInit {
     } else {
       result.push('blue');
     }
-    if (this.alarm.validity === 0) {
+    if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
       result.push('unreliable');
     }
     return result;
