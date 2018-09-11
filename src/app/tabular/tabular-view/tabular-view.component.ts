@@ -74,10 +74,9 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * Instantiates the service
+   * Instantiates the component
    * @param {AlarmService} alarmService Service used to get the Alarms
-   * @param {Route} route Reference to the url that triggered the initialization
-   * of this component
+   * @param {Route} route Reference to the url that triggered the initialization of this component
    */
   constructor(
     private alarmService: AlarmService,

@@ -19,6 +19,7 @@ export class WeatherSummaryComponent implements OnInit {
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {WeatherService} weatherService Service used to retrieve and handle weather configuration data
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(
@@ -28,7 +29,7 @@ export class WeatherSummaryComponent implements OnInit {
   ) { }
 
   /**
-   * Creates the component
+   * Initiates the component, initializes the {@link WeatherService} if not already initialized
    */
   ngOnInit() {
     this.weatherService.initialize();

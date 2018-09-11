@@ -5,7 +5,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
 * Class that models the relation of image URLS and Alarm statuses, for displaying purposes
 **/
 export class AlarmImageSet {
-   /** URL of the image to use for the "clear" Alarm value  */
+  /** URL of the image to use for the "clear" Alarm value  */
   public clear: string;
 
   /** URL of the image to use for the "set_low" Alarm value  */

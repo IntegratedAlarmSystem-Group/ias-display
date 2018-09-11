@@ -1,6 +1,7 @@
 import { Alarm } from '../data/alarm';
 import { AlarmImageSet } from '../shared/alarm/alarm.component';
 
+/** Set of mock configurations for WeatherStations */
 export const mockWeatherStationsConfig = [
   {
     placemark: 'mockAlarm-0',
@@ -18,6 +19,7 @@ export const mockWeatherStationsConfig = [
   },
 ];
 
+/** Mock configuration for WeatherSummary */
 export const mockWeatherSummaryConfig = {
   placemark: '',
   station: '',
@@ -26,7 +28,10 @@ export const mockWeatherSummaryConfig = {
   humidity: 'mockGlobal-humidity'
 };
 
+/** Set of mock {@link ImageSet} */
 export const mockImagesSets = {};
+
+/** Set of mock types of alarms */
 export const alarm_types = ['windspeed', 'humidity', 'temperature', 'marker'];
 for ( const item of alarm_types) {
   if (alarm_types[item] !== null ) {
@@ -53,6 +58,7 @@ for ( const item of alarm_types) {
   }
 }
 
+/** Set of mock alarms */
 export const mockAlarms = {
   'mockAlarm-0': Alarm.asAlarm({
     'value': 0,

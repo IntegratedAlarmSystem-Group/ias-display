@@ -1,3 +1,4 @@
+/** Mock Map for testing purposes */
 export const Map = {
     'relations': {
         'antenna_groups': {
