@@ -34,7 +34,8 @@ export class WeatherSidebarComponent implements OnInit {
   ) { }
 
   /**
-  * Executed after the component is instantiated
+  * Executed after the component is instantiated. It initializes the weatherService
+  * to ensure the weather configuration is ready.
   */
   ngOnInit() {
     this.weatherService.initialize();
