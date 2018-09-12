@@ -5,7 +5,9 @@ import { AntennasService, AntennaConfig } from '../antennas.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 
-
+/**
+* Main component for the antennas map
+*/
 @Component({
   selector: 'app-antennas-map',
   templateUrl: './antennas-map.component.html',

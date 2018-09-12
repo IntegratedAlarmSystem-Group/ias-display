@@ -1,19 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmService } from '../../../data/alarm.service';
 import { Alarm } from '../../../data/alarm';
-
 import { WeatherService, WeatherStationConfig } from '../../weather.service';
 
 
+/**
+ * Marker to display the weather station summary information in a map
+ */
 @Component({
   selector: 'app-weather-data-marker',
   templateUrl: './weather-data-marker.component.html',
   styleUrls: ['./weather-data-marker.component.scss']
 })
 export class WeatherDataMarkerComponent implements OnInit {
-
 
   /** Station config related to the component */
   @Input() stationConfig: WeatherStationConfig;
@@ -37,8 +37,10 @@ export class WeatherDataMarkerComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-
-  ngOnInit() {  }
+  /**
+   * Executed after the component is instantiated.
+   */
+  ngOnInit() { }
 
   /**
   * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}

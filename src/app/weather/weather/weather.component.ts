@@ -12,6 +12,7 @@ import { WeatherStationConfig } from '../weather.service';
 })
 export class WeatherComponent implements OnInit {
 
+  /** Selected placemark name from the inner map or inner components */
   selectedStation: WeatherStationConfig = null;
 
   /**
@@ -26,7 +27,10 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeSelectedStation(selectedStation: WeatherStationConfig) {
+  /** Update selected placemark name using events emitted from internal components
+   * @param {WeatherStationConfig}
+   */
+  changeSelectedStation(selectedStation: WeatherStationConfig): void {
     this.selectedStation = selectedStation;
   }
 }

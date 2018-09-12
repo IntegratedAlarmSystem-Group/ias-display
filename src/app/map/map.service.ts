@@ -35,10 +35,11 @@ export class MapService {
   }
 
 
-  /***
+  /**
   * Scaling and calculation of max and min values
   * @param {any} placemarksGroups list of groups of placemarks
   * @param {any} pathsGroups list of group of paths
+  * @return {any} The viewbox: list of 4 numbers used to define the size of the map
   */
   mapdataProcessing(placemarksGroups, pathsGroups) {
 

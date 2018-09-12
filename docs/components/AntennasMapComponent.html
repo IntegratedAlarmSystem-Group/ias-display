@@ -1115,6 +1115,13 @@
     <code>src/app/antennas/antennas-map/antennas-map.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Main component for the antennas map</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1308,13 +1315,13 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:48</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Builds an instance of the component and initializes it calling the {@link initialize} method</p>
+                            <div class="io-description"><p>Builds an instance of the component</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -1324,6 +1331,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1338,6 +1346,10 @@
                                                             no
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Service used to get the configuration needed by the component</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alarmService</td>
@@ -1350,6 +1362,10 @@
                                                             no
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Service used to get the Alarms</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>mapService</td>
@@ -1362,6 +1378,10 @@
                                                             no
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Service used to build the interactive map</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1396,7 +1416,7 @@ from the map, or from an external component </p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:20</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1420,7 +1440,7 @@ from the map, or from an external component </p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1448,14 +1468,14 @@ from the map, or from an external component </p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>existsPlacemarkData(placemark: )</code>
+<code>existsPlacemarkData(placemark: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:90</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:103</a></div>
                             </td>
                         </tr>
 
@@ -1472,18 +1492,27 @@ from the alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>placemark</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>Id of a graphical element in the map source</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1495,7 +1524,8 @@ from the alarm configuration</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>True if there is configuration available, false if there is not</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1516,14 +1546,14 @@ from the alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getAlarm(alarm_id: )</code>
+<code>getAlarm(alarm_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:103</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:118</a></div>
                             </td>
                         </tr>
 
@@ -1539,18 +1569,27 @@ from the alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>alarm_id</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>id of the alarm</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1562,7 +1601,8 @@ from the alarm configuration</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>Alarm object retrieved from the service</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1590,7 +1630,7 @@ from the alarm configuration</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:110</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:126</a></div>
                             </td>
                         </tr>
 
@@ -1600,10 +1640,16 @@ from the alarm configuration</p>
                             <div class="io-description"><p>Get antenna groups from the alarms configuration</p>
 </div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code>string[]</code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>List with the names of the antennas groups</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1623,14 +1669,14 @@ from the alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getOpacityClass(antennaConfig: )</code>
+<code>getOpacityClass(antennaConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:117</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:135</a></div>
                             </td>
                         </tr>
 
@@ -1646,18 +1692,27 @@ from the alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>antennaConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>configuration of the alarm</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1665,11 +1720,12 @@ from the alarm configuration</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code>&quot;opacity-100&quot; | &quot;opacity-25&quot;</code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>class name that defines the opacity of the graphical element</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1690,21 +1746,21 @@ from the alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getPlacemarkObject(placemark: )</code>
+<code>getPlacemarkObject(placemark: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:132</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:152</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Get a placemark object from an id to use position data</p>
+                            <div class="io-description"><p>Get a placemark graphical object from an id</p>
 </div>
 
                             <div class="io-description">
@@ -1713,18 +1769,27 @@ from the alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>placemark</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>Id of a graphical element in the map source</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1736,7 +1801,8 @@ from the alarm configuration</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>placemark graphical element</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1764,14 +1830,15 @@ from the alarm configuration</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:75</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Component initialization with the related map data source</p>
+                            <div class="io-description"><p>Component initialization that involves the initialization of the <a href="../injectables/AntennasService.html">AntennasService</a>
+if not already initialized and the initialization of the related map data source</p>
 </div>
 
                             <div class="io-description">
@@ -1797,22 +1864,22 @@ from the alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>isSelected(antennaConfig: )</code>
+<code>isSelected(antennaConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:141</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:163</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Check if an specific antenna marker was selected
-through its related alarm configuration</p>
+                            <div class="io-description"><p>Check if an specific antenna marker was selected through its related
+alarm configuration</p>
 </div>
 
                             <div class="io-description">
@@ -1821,18 +1888,27 @@ through its related alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>antennaConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>configuration of the alarm</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1844,7 +1920,8 @@ through its related alarm configuration</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>True if the antenna alarm is selected, false if it is not</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1872,13 +1949,16 @@ through its related alarm configuration</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:67</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Executed after the component is instantiated and initializes it
+calling the {@link initialize} method</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1903,14 +1983,14 @@ through its related alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(antennaConfig: )</code>
+<code>onClick(antennaConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:153</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:176</a></div>
                             </td>
                         </tr>
 
@@ -1926,18 +2006,27 @@ through its related alarm configuration</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>antennaConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>configuration of the alarm</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1995,7 +2084,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -2036,10 +2125,15 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:59</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">Service used to get the Alarms</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -2076,7 +2170,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -2116,7 +2210,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -2162,7 +2256,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -2203,10 +2297,15 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:60</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">Service used to build the interactive map</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -2243,7 +2342,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -2289,7 +2388,7 @@ through its related alarm configuration</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -2336,7 +2435,7 @@ of each identified place </p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -2377,10 +2476,15 @@ of each identified place </p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:58</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">Service used to get the configuration needed by the component</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -2417,7 +2521,7 @@ of each identified place </p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -2443,7 +2547,9 @@ import { AntennasService, AntennaConfig } from &#x27;../antennas.service&#x27;;
 import { MapService } from &#x27;../../map/map.service&#x27;;
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from &#x27;rxjs&#x27;;
 
-
+/**
+* Main component for the antennas map
+*/
 @Component({
   selector: &#x27;app-antennas-map&#x27;,
   templateUrl: &#x27;./antennas-map.component.html&#x27;,
@@ -2484,7 +2590,11 @@ export class AntennasMapComponent implements OnInit {
   public mapdataAvailable &#x3D; new BehaviorSubject&lt;any&gt;(false);
 
   /**
-   * Builds an instance of the component and initializes it calling the {@link initialize} method
+   * Builds an instance of the component
+   * @param {AntennasService} service Service used to get the configuration needed by the component
+   * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {MapService} mapService Service used to build the interactive map
+   *
    */
   constructor(
     public service: AntennasService,
@@ -2492,12 +2602,17 @@ export class AntennasMapComponent implements OnInit {
     public mapService: MapService,
   ) { }
 
+  /**
+   * Executed after the component is instantiated and initializes it
+   * calling the {@link initialize} method
+   */
   ngOnInit() {
     this.initialize();
   }
 
   /**
-   * Component initialization with the related map data source
+   * Component initialization that involves the initialization of the {@link AntennasService}
+   * if not already initialized and the initialization of the related map data source
    */
   initialize() {
     this.service.initialize();
@@ -2524,8 +2639,10 @@ export class AntennasMapComponent implements OnInit {
   /**
    * Method to verify if there is data available for the placemark id
    * from the alarm configuration
+   * @param {string} placemark Id of a graphical element in the map source
+   * @return {boolean} True if there is configuration available, false if there is not
    */
-  existsPlacemarkData(placemark) {
+  existsPlacemarkData(placemark: string): boolean {
     const placemark_id &#x3D; placemark;
     const index &#x3D; Object.keys(this.placemarks).indexOf(placemark_id);
     if (index &gt; -1) {
@@ -2537,22 +2654,27 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * Get alarm from the alarms service using id
+   * @param {string} alarm_id id of the alarm
+   * @return {Alarm} Alarm object retrieved from the service
    */
-  getAlarm(alarm_id): Alarm {
+  getAlarm(alarm_id: string): Alarm {
     return this.alarmService.get(alarm_id);
   }
 
   /**
    * Get antenna groups from the alarms configuration
+   * @return {string[]} List with the names of the antennas groups
    */
-  getAntennaGroups() {
+  getAntennaGroups(): string[] {
     return Object.keys(this.alarmsConfig);
   }
 
   /**
    * Opacity class name for each antenna marker
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @return class name that defines the opacity of the graphical element
    */
-  getOpacityClass(antennaConfig) {
+  getOpacityClass(antennaConfig: AntennaConfig): string {
     if (this.selectedAntenna &#x3D;&#x3D;&#x3D; null) {
       return &#x27;opacity-100&#x27;;
     } else {
@@ -2565,18 +2687,22 @@ export class AntennasMapComponent implements OnInit {
   }
 
  /**
-  * Get a placemark object from an id to use position data
+  * Get a placemark graphical object from an id
+  * @param {string} placemark Id of a graphical element in the map source
+  * @return {any} placemark graphical element
   */
-  getPlacemarkObject(placemark) {
+  getPlacemarkObject(placemark: string): any {
     const placemark_id &#x3D; placemark;
     return this.placemarks[placemark_id];
   }
 
   /**
-   * Check if an specific antenna marker was selected
-   * through its related alarm configuration
+   * Check if an specific antenna marker was selected through its related
+   * alarm configuration
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @return {boolean} True if the antenna alarm is selected, false if it is not
    */
-  isSelected(antennaConfig) {
+  isSelected(antennaConfig: AntennaConfig): boolean {
     if (this.selectedAntenna &#x3D;&#x3D;&#x3D; null) {
       return false;
     } else {
@@ -2587,8 +2713,9 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * On click action for the antenna markers
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
    */
-  onClick(antennaConfig) {
+  onClick(antennaConfig: AntennaConfig) {
     if (this.isSelected(antennaConfig)) {
       this.selectedAntenna &#x3D; null;
     } else {

@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 import { AlarmService } from '../../../data/alarm.service';
 import { Alarm } from '../../../data/alarm';
-
 import { WeatherService, WeatherStationConfig } from '../../weather.service';
-
 import { Assets } from '../../../settings';
 
+/**
+ * Marker to display primary weather station in a map
+ */
 @Component({
   selector: 'app-weather-primary-ws-marker',
   templateUrl: './weather-primary-ws-marker.component.html',
@@ -32,7 +32,9 @@ export class WeatherPrimaryWsMarkerComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-
+  /**
+   * Executed after the component is instantiated.
+   */
   ngOnInit() {
   }
 

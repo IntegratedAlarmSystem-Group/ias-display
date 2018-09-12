@@ -71,21 +71,21 @@ export class WeatherService {
   public weatherSummaryConfig: WeatherStationConfig;
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  // public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } = {};
   public weatherStationsConfig: WeatherStationConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
   /**
-   * Builds an instance of the service and initializes it calling the {@link initialize} method
+   * Instantiates the service
+   * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
     private httpClient: HttpClientService
-  ) {
-  }
+  ) {}
 
   /**
   * Initializes the Service and getting configuration from Webserver

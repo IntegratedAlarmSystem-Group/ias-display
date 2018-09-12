@@ -92,7 +92,7 @@ export class AntennaMarkerComponent implements OnInit {
   ) { }
 
   /**
-   * Initiates the component.
+   * Executed after the component is instantiated.
    * Initializes the {@link AntennasService} if not already initialized
    * Defines alarms colors by calling the {@link defineAlarmColors}
    */

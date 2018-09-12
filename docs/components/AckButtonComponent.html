@@ -1256,6 +1256,8 @@
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Instantiates the component</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -1397,7 +1399,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -1443,7 +1445,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -1489,7 +1491,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -1530,7 +1532,7 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -1563,21 +1565,21 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(event: )</code>
+<code>onClick(event: MouseEvent)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:75</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on ack button, it triggers the ack modal</p>
+                            <div class="io-description"><p>Handle click on ack button, it triggers ack sidenav through the {@link Router} service</p>
 </div>
 
                             <div class="io-description">
@@ -1586,18 +1588,27 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>event</td>
+                                                        <td>
+                                                                    <code>MouseEvent</code>
+                                                        </td>
                                                     
                                                     <td>
                                                             no
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>Object that represent the click DOM event</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1650,7 +1661,7 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -1690,6 +1701,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   @Input() alarm: Alarm;
 
   /**
+   * Instantiates the component
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
    * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
@@ -1719,7 +1731,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
 
   /**
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   * @returns {boolean} true if the {@link Alarm} can be acknowledged, false if not.
+   * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
   canAcknowledge() {
     if (this.alarm !&#x3D; null) {
@@ -1738,9 +1750,10 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Handle click on ack button, it triggers the ack modal
+  * Handle click on ack button, it triggers ack sidenav through the {@link Router} service
+  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event) {
+  onClick(event: MouseEvent) {
     this.router.navigate([{outlets: {actions: [&#x27;acknowledge&#x27;, this.alarm.core_id]}}]);
   }
 
