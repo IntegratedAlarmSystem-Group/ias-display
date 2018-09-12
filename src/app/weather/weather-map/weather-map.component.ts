@@ -16,10 +16,15 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
 })
 export class WeatherMapComponent implements OnInit {
 
+  /** Variable to manage a placemark selection
+   * from the map, or from an external component
+   */
   @Input() selectedStation: WeatherStationConfig = null;
 
+  /** Variable to manage a placemark selection from the map */
   @Output() placemarkClicked = new EventEmitter<WeatherStationConfig>();
 
+  /** Variable to manage a placemark hover */
   onHoverStation: WeatherStationConfig = null;
 
   /** Placemarks list obtained from the webserver */
@@ -48,7 +53,11 @@ export class WeatherMapComponent implements OnInit {
   public datarelations: any;
 
   /**
-   * Builds an instance of the component and initializes it calling the {@link initialize} method
+   * Builds an instance of the component
+   * @param {WeatherService} service Service used to get the configuration needed by the component
+   * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {MapService} mapService Service used to build the interactive map
+   *
    */
   constructor(
     public service: WeatherService,
@@ -56,12 +65,17 @@ export class WeatherMapComponent implements OnInit {
     public mapService: MapService,
   ) { }
 
+  /**
+   * Executed after the component is instantiated and initializes it
+   * calling the {@link initialize} method
+   */
   ngOnInit() {
     this.initialize();
   }
 
   /**
-   * Data setup
+   * Component initialization that involves the initialization of the {@link WeatherService}
+   * if not already initialized and the initialization of the related map data source
    */
   initialize() {
     this.service.initialize();
@@ -91,7 +105,7 @@ export class WeatherMapComponent implements OnInit {
   /**
    * Get the groups of pads from the webserver data source
    */
-  getPadsGroups() {
+  getPadsGroups(): any {
     if (this.mapdataAvailable.value === true) {
       return Object.keys(this.datarelations);
     }

@@ -1115,6 +1115,13 @@
     <code>src/app/weather/weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Marker to display primary weather station in a map</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1358,7 +1365,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/weather/weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/weather/weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -1404,13 +1411,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/weather/weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/weather/weather-map-markers/weather-primary-ws-marker/weather-primary-ws-marker.component.ts:38</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Executed after the component is instantiated.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1555,16 +1564,16 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
-
 import { AlarmComponent } from &#x27;../../../shared/alarm/alarm.component&#x27;;
 import { AlarmImageSet } from &#x27;../../../shared/alarm/alarm.component&#x27;;
 import { AlarmService } from &#x27;../../../data/alarm.service&#x27;;
 import { Alarm } from &#x27;../../../data/alarm&#x27;;
-
 import { WeatherService, WeatherStationConfig } from &#x27;../../weather.service&#x27;;
-
 import { Assets } from &#x27;../../../settings&#x27;;
 
+/**
+ * Marker to display primary weather station in a map
+ */
 @Component({
   selector: &#x27;app-weather-primary-ws-marker&#x27;,
   templateUrl: &#x27;./weather-primary-ws-marker.component.html&#x27;,
@@ -1588,7 +1597,9 @@ export class WeatherPrimaryWsMarkerComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-
+  /**
+   * Executed after the component is instantiated.
+   */
   ngOnInit() {
   }
 

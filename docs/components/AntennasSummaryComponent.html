@@ -1277,6 +1277,8 @@
                                                     </td>
                                                     
                                                         <td>
+                                                                <code><p>Service used to get Antennas configuration</p>
+</code>
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -1335,7 +1337,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:52</a></div>
                             </td>
                         </tr>
 
@@ -1412,15 +1414,15 @@ filter the alarms in the table view</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:35</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates the component
-Subscribes to new alarms from the <a href="../injectables/AlarmService.html">AlarmService</a></p>
+                            <div class="io-description"><p>Executed after the component is instantiated.
+Initializes the <a href="../injectables/AntennasService.html">AntennasService</a> if not already initialized</p>
 </div>
 
                             <div class="io-description">
@@ -1453,7 +1455,7 @@ Subscribes to new alarms from the <a href="../injectables/AlarmService.html">Ala
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -1506,10 +1508,15 @@ Subscribes to new alarms from the <a href="../injectables/AlarmService.html">Ala
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:27</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">Service used to get Antennas configuration</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1535,7 +1542,7 @@ Subscribes to new alarms from the <a href="../injectables/AlarmService.html">Ala
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:43</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1580,6 +1587,7 @@ export class AntennasSummaryComponent implements OnInit {
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {AntennasService} antennasService Service used to get Antennas configuration
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(
@@ -1589,14 +1597,15 @@ export class AntennasSummaryComponent implements OnInit {
   ) { }
 
   /**
-   * Creates the component
-   * Subscribes to new alarms from the {@link AlarmService}
+   * Executed after the component is instantiated.
+   * Initializes the {@link AntennasService} if not already initialized
    */
   ngOnInit() {
     this.antennasService.initialize();
   }
 
-  /** Returns the instance of the {@link Alarm}
+  /**
+  * Returns the instance of the {@link Alarm}
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {

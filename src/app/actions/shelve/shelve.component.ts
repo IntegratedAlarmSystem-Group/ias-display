@@ -83,6 +83,9 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
    * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {Route} route Reference to the url that triggered the initialization of this component
+   * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
+   * @param {Router} router Angular Router used to navigate through the application
    */
   constructor(
     private formBuilder: FormBuilder,
@@ -111,7 +114,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     this.sidenavService.open();
   }
 
-  /*
+  /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
@@ -121,17 +124,17 @@ export class ShelveComponent implements OnInit, OnDestroy {
   /**
   * Cleans the component and reloads the Alarm
   */
-  reload() {
+  reload(): void {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.requestStatus = 0;
     this.message.reset();
     this.timeout.reset(this.defaultTimeout);
   }
 
-  /*
+  /**
   * Closes the sidenav
   */
-  onClose() {
+  onClose(): void {
     this.router.navigate([{outlets: {actions: null}}]);
   }
 
@@ -149,7 +152,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   /**
    * Calls the webserver to apply the shelving of the alarm
    */
-  shelve() {
+  shelve(): void {
     this.showSpinner();
     const message = this.message.value;
     const timeout = this.timeout.value;
@@ -175,7 +178,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   /**
    * Calls the webserver to apply the unshelving of the alarm
    */
-  unshelve() {
+  unshelve(): void {
     this.showSpinner();
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
@@ -201,7 +204,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
   * It also blocks closing and navigation of the the Sidebar
   */
-  private showSpinner() {
+  private showSpinner(): void {
     this.sidenavService.canClose = false;
     this.spinnerService.show();
   }
@@ -210,14 +213,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Hides the spinner after the Alarm has been shelved/unshelved
   * It also unblocks closing and navigation of the the Sidebar
   */
-  private hideSpinner() {
+  private hideSpinner(): void {
     this.spinnerService.hide();
     this.sidenavService.canClose = true;
   }
 
   /**
    * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
-   * @returns {boolean} true if the action can be sent, false if not
+   * @returns {boolean} True if shelve action can be performed and false if not
    */
   canSend(): boolean {
     return this.alarm.shelved || this.form.valid;
@@ -239,8 +242,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Returns the text to display in the action button, either "Shelve" or "Unshelve"
-   * @returns {string} the text to display in the button
+   * Returns the text to display in the action button
+   * @returns {string} the text to display in the button, either "Shelve" or "Unshelve"
    */
   getActionButtonText(): string {
     if (!this.alarm) {
@@ -253,6 +256,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Returns the text to display in the title
+   * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
+   */
   getResponseMessageTitle(): string {
     if (!this.alarm.shelved) {
       return 'Shelving results';

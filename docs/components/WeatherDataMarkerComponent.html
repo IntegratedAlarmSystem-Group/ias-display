@@ -1115,6 +1115,13 @@
     <code>src/app/weather/weather-map-markers/weather-data-marker/weather-data-marker.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Marker to display the weather station summary information in a map</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1405,7 +1412,7 @@ for example after the selection from a parent component</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/weather/weather-map-markers/weather-data-marker/weather-data-marker.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/weather/weather-map-markers/weather-data-marker/weather-data-marker.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -1482,13 +1489,15 @@ for example after the selection from a parent component</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/weather/weather-map-markers/weather-data-marker/weather-data-marker.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/weather/weather-map-markers/weather-data-marker/weather-data-marker.component.ts:43</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Executed after the component is instantiated.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1592,21 +1601,21 @@ for example after the selection from a parent component</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
-
 import { AlarmComponent } from &#x27;../../../shared/alarm/alarm.component&#x27;;
 import { AlarmService } from &#x27;../../../data/alarm.service&#x27;;
 import { Alarm } from &#x27;../../../data/alarm&#x27;;
-
 import { WeatherService, WeatherStationConfig } from &#x27;../../weather.service&#x27;;
 
 
+/**
+ * Marker to display the weather station summary information in a map
+ */
 @Component({
   selector: &#x27;app-weather-data-marker&#x27;,
   templateUrl: &#x27;./weather-data-marker.component.html&#x27;,
   styleUrls: [&#x27;./weather-data-marker.component.scss&#x27;]
 })
 export class WeatherDataMarkerComponent implements OnInit {
-
 
   /** Station config related to the component */
   @Input() stationConfig: WeatherStationConfig;
@@ -1630,8 +1639,10 @@ export class WeatherDataMarkerComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-
-  ngOnInit() {  }
+  /**
+   * Executed after the component is instantiated.
+   */
+  ngOnInit() { }
 
   /**
   * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}

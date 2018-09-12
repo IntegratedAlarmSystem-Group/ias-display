@@ -77,7 +77,7 @@ export class AckComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  /*
+  /**
   * Initiates the component, by getting the alarm_id from the url.
   */
   ngOnInit() {
@@ -93,7 +93,7 @@ export class AckComponent implements OnInit, OnDestroy {
     this.getMissingAcksInfo();
   }
 
-  /*
+  /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
@@ -103,16 +103,16 @@ export class AckComponent implements OnInit, OnDestroy {
   /**
   * Cleans the component and reloads the Alarm
   */
-  reload() {
+  reload(): void {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.requestStatus = 0;
     this.message.reset();
   }
 
-  /*
+  /**
   * Closes the sidenav
   */
-  onClose() {
+  onClose(): void {
     this.router.navigate([{outlets: {actions: null}}]);
   }
 
@@ -144,7 +144,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
   * It also blocks closing and navigation of the the Sidebar
   */
-  private showSpinner() {
+  private showSpinner(): void {
     this.sidenavService.canClose = false;
     this.spinnerService.show();
   }
@@ -153,7 +153,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Hides the spinner after the Alarm has been shelved/unshelved
   * It also unblocks closing and navigation of the the Sidebar
   */
-  private hideSpinner() {
+  private hideSpinner(): void {
     this.spinnerService.hide();
     this.sidenavService.canClose = true;
   }
@@ -168,6 +168,7 @@ export class AckComponent implements OnInit, OnDestroy {
 
   /**
   * Method to invalidate ack action
+  * @returns {boolean} True if ack action can be performed and false if not
   */
   disableAcknowledgment() {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);

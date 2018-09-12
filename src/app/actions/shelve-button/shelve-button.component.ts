@@ -15,12 +15,13 @@ import { Alarm } from '../../data/alarm';
 export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
-   * Alarm object  associated to the button
+   * Alarm object associated to the button
    */
   @Input() alarm: Alarm;
 
 
   /**
+   * Instantiates the component
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
    * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
@@ -73,8 +74,9 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
   * Handle click on shelve button, it triggers the shelve sidebar
+  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event) {
+  onClick(event: MouseEvent) {
     this.router.navigate([{outlets: {actions: ['shelve', this.alarm.core_id]}}]);
   }
 

@@ -1277,13 +1277,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/map/map.service.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/map/map.service.ts:44</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Scaling and calculation of max and min values</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -1292,6 +1294,7 @@
                                             <tr>
                                                 <td>Name</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1303,6 +1306,10 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>list of groups of placemarks</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>pathsGroups</td>
@@ -1312,6 +1319,10 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>list of group of paths</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1323,7 +1334,8 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>The viewbox: list of 4 numbers used to define the size of the map</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1373,10 +1385,11 @@ export class MapService {
   }
 
 
-  /***
+  /**
   * Scaling and calculation of max and min values
   * @param {any} placemarksGroups list of groups of placemarks
   * @param {any} pathsGroups list of group of paths
+  * @return {any} The viewbox: list of 4 numbers used to define the size of the map
   */
   mapdataProcessing(placemarksGroups, pathsGroups) {
 

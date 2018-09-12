@@ -1237,7 +1237,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Builds an instance of the service and initializes it calling the {@link initialize} method</p>
+                            <div class="io-description"><p>Instantiates the service</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -1247,6 +1247,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1261,6 +1262,10 @@
                                                             no
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Service used to perform HTTP requests</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1557,6 +1562,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Flag that indicates if the configuration was initialized or if it was not </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1833,7 +1844,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/weather/weather.service.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/weather/weather.service.ts:77</a></div>
                             </td>
                         </tr>
 
@@ -1874,7 +1885,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/weather/weather.service.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/weather/weather.service.ts:74</a></div>
                             </td>
                         </tr>
 
@@ -2089,21 +2100,21 @@ export class WeatherService {
   public weatherSummaryConfig: WeatherStationConfig;
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  // public weatherStationsConfig: {[placemark: string]: WeatherStationConfig } &#x3D; {};
   public weatherStationsConfig: WeatherStationConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName &#x3D; WeatherSettings.mapKey;
 
+  /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized &#x3D; false;
 
   /**
-   * Builds an instance of the service and initializes it calling the {@link initialize} method
+   * Instantiates the service
+   * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
     private httpClient: HttpClientService
-  ) {
-  }
+  ) {}
 
   /**
   * Initializes the Service and getting configuration from Webserver
