@@ -1248,7 +1248,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Instantiates the related services and complements</p>
+                            <div class="io-description"><p>Builds an instance of the application, with its related services and complements</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -1364,13 +1364,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/app.component.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/app.component.ts:93</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -1380,6 +1382,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1394,6 +1397,10 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>an item of the navigation sidenav</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -1405,7 +1412,8 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>The links in a dictionary</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -1433,14 +1441,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/app.component.ts:82</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/app.component.ts:83</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Instantiates the <a href="../injectables/AlarmService.html">AlarmService</a></p>
+                            <div class="io-description"><p>Method executed when the application is initiated
+Initializes the <a href="../injectables/AlarmService.html">AlarmService</a> and passes its {@link actionsSidenav} to the {@link ActionsSidenavService} for it to control it</p>
 </div>
 
                             <div class="io-description">
@@ -1473,7 +1482,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/app.component.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/app.component.ts:105</a></div>
                             </td>
                         </tr>
 
@@ -1541,6 +1550,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Reference to the Actions sidenav (right sidenav)</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -1742,7 +1757,7 @@ import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
 })
 export class AppComponent implements OnInit {
 
-  /*
+  /**
   * Reference to the Actions sidenav (right sidenav)
   */
   @ViewChild(&#x27;actionsSidenav&#x27;) public actionsSidenav: MatSidenav;
@@ -1757,8 +1772,8 @@ export class AppComponent implements OnInit {
   */
   isNavigationCompacted &#x3D; true;
 
-  /** Navigation Sidenav Menu of the application (left sidenav) */
   // TODO: Use only custom svgIcons
+  /** Navigation Sidenav Menu of the application (left sidenav) */
   navigationSidenavItems &#x3D; [
     { title: &#x27;Overview&#x27;, link: &#x27;overview&#x27;, icon: &#x27;ias_overview&#x27;, svgIcon: true},
     { title: &#x27;Weather&#x27;, link: &#x27;weather&#x27;, icon: &#x27;ias_weather&#x27;, svgIcon: true},
@@ -1767,7 +1782,7 @@ export class AppComponent implements OnInit {
   ];
 
   /**
-   * Instantiates the related services and complements
+   * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
@@ -1803,13 +1818,19 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Instantiates the {@link AlarmService}
+   * Method executed when the application is initiated
+   * Initializes the {@link AlarmService} and passes its {@link actionsSidenav} to the {@link ActionsSidenavService} for it to control it
    */
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
   }
 
+  /**
+  * Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not
+  * @param {any} item an item of the navigation sidenav
+  * @returns {Object} The links in a dictionary
+  */
   getActionsLink(item: any) {
     if (this.actionsSidenavService.canClose) {
       return {outlets: { primary: item.link, actions: null }};

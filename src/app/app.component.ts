@@ -16,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  /*
+  /**
   * Reference to the Actions sidenav (right sidenav)
   */
   @ViewChild('actionsSidenav') public actionsSidenav: MatSidenav;
@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
   */
   isNavigationCompacted = true;
 
-  /** Navigation Sidenav Menu of the application (left sidenav) */
   // TODO: Use only custom svgIcons
+  /** Navigation Sidenav Menu of the application (left sidenav) */
   navigationSidenavItems = [
     { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
     { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   ];
 
   /**
-   * Instantiates the related services and complements
+   * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
@@ -77,13 +77,19 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Instantiates the {@link AlarmService}
+   * Method executed when the application is initiated
+   * Initializes the {@link AlarmService} and passes its {@link actionsSidenav} to the {@link ActionsSidenavService} for it to control it
    */
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
   }
 
+  /**
+  * Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not
+  * @param {any} item an item of the navigation sidenav
+  * @returns {Object} The links in a dictionary
+  */
   getActionsLink(item: any) {
     if (this.actionsSidenavService.canClose) {
       return {outlets: { primary: item.link, actions: null }};
