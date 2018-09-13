@@ -1115,6 +1115,14 @@
     <code>src/app/actions/buttons/buttons.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Set of buttons used to trigger actions over AlarmService
+Contains the following subcomponents: AckButtonComponent, ShelveButtonComponent, WikButtonComponent</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1215,10 +1223,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:18</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Builds an instance of the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -1233,7 +1247,7 @@
                         <code>alarm</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>Alarm object  associated to the buttons</p>
+                        <div><p>Alarm object associated to the buttons</p>
 </div>
                             <p>
                             <em>Type:</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
@@ -1243,7 +1257,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:18</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1279,13 +1293,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/actions/buttons/buttons.component.ts:28</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Method executed when the component is initiated</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1305,6 +1321,10 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
 
+/**
+ * Set of buttons used to trigger actions over AlarmService
+ * Contains the following subcomponents: AckButtonComponent, ShelveButtonComponent, WikButtonComponent
+ */
 @Component({
   selector: &#x27;app-buttons&#x27;,
   templateUrl: &#x27;./buttons.component.html&#x27;,
@@ -1313,12 +1333,18 @@ import { Alarm } from &#x27;../../data/alarm&#x27;;
 export class ButtonsComponent implements OnInit {
 
   /**
-   * Alarm object  associated to the buttons
+   * Alarm object associated to the buttons
    */
   @Input() alarm: Alarm;
 
+  /**
+   * Builds an instance of the component
+   */
   constructor() { }
 
+  /**
+   * Method executed when the component is initiated
+   */
   ngOnInit() {
   }
 }

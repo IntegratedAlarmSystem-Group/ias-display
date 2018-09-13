@@ -1115,6 +1115,13 @@
     <code>src/app/shared/alarm-header/alarm-header.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component used to display alarms as headers in a table or list</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1236,10 +1243,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:33</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Builds an instance of the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -1264,7 +1277,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:17</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1286,7 +1299,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:28</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1299,8 +1312,7 @@
                         <code>optionalAlarmName</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>Defines an optional alarm name to display. By default it is null and
-in that case the component use the alarm core_id.</p>
+                        <div><p>Defines an optional alarm name to display. By default it is null and in that case the component use the alarm core_id.</p>
 </div>
                         <p>
                             <em>Default value: </em><code>null</code>
@@ -1309,7 +1321,7 @@ in that case the component use the alarm core_id.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:33</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1332,7 +1344,7 @@ This value is &quot;true&quot; by default</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1368,18 +1380,29 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:81</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:105</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Returns the name of the alarm that should be displayed in the header.
+If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
+If not, the alarm ID is displayed
+In any case, the name is shortened to a maximum length defined by the {@link alarmNameMaxSize}</p>
+</div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>name to display</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1406,20 +1429,26 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:50</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Returns the URL of the current image to use depending on the Alarm status</p>
+                            <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
 </div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code>string[]</code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>array with names of the classes to use</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1446,13 +1475,15 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:43</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Method executed when the component is initiated</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1484,18 +1515,26 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:86</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Defines wether or not the component should indicate that the alarm has a pending acknowledgement</p>
+</div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>true if the alarm has pending acknowledgement, false if not</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1522,18 +1561,26 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:77</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:94</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Defines wether or not the component should indicate that the alarm is shelved</p>
+</div>
 
+                            <div>
+                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                             </div>
+                                <div class="io-description">
+                                    <p>true if the alarm is shelved, false if not</p>
+
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1548,6 +1595,9 @@ This value is &quot;true&quot; by default</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
 import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
 
+/**
+ * Component used to display alarms as headers in a table or list
+ */
 @Component({
   selector: &#x27;app-alarm-header&#x27;,
   templateUrl: &#x27;./alarm-header.component.html&#x27;,
@@ -1572,18 +1622,24 @@ export class AlarmHeaderComponent implements OnInit {
   @Input() alarmNameMaxSize &#x3D; 20;
 
   /**
-   * Defines an optional alarm name to display. By default it is null and
-   * in that case the component use the alarm core_id.
+   * Defines an optional alarm name to display. By default it is null and in that case the component use the alarm core_id.
    */
   @Input() optionalAlarmName &#x3D; null;
 
+  /**
+   * Builds an instance of the component
+   */
   constructor() { }
 
+  /**
+   * Method executed when the component is initiated
+   */
   ngOnInit() {
   }
 
   /**
-  * Returns the URL of the current image to use depending on the Alarm status
+  * Defines the CSS classes to use depending on the Alarm status
+  * @returns {string[]} array with names of the classes to use
   */
   getClass(): string[] {
     const result &#x3D; [];
@@ -1617,14 +1673,29 @@ export class AlarmHeaderComponent implements OnInit {
     return result;
   }
 
+  /**
+  * Defines wether or not the component should indicate that the alarm has a pending acknowledgement
+  * @returns {boolean} true if the alarm has pending acknowledgement, false if not
+  */
   showAsPendingAck(): boolean {
     return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack;
   }
 
+  /**
+  * Defines wether or not the component should indicate that the alarm is shelved
+  * @returns {boolean} true if the alarm is shelved, false if not
+  */
   showAsShelved(): boolean {
     return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
   }
 
+  /**
+  * Returns the name of the alarm that should be displayed in the header.
+  * If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
+  * If not, the alarm ID is displayed
+  * In any case, the name is shortened to a maximum length defined by the {@link alarmNameMaxSize}
+  * @returns {string} name to display
+  */
   getAlarmName(): string {
     let alarmName;
     if (this.alarm) {

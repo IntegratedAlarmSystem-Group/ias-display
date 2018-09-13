@@ -1,5 +1,6 @@
 import { Alarm } from '../../data/alarm';
 
+/** Data expected to be contained by the tree in tests */
 export const expectedTreeData = {
   'parent': {
     'child_1': {
@@ -15,6 +16,7 @@ export const expectedTreeData = {
   }
 };
 
+/** Mock alarms data to be used in tests */
 export const mockAlarmData = [
   {
     'value': 0,

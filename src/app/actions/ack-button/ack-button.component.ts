@@ -20,7 +20,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   @Input() alarm: Alarm;
 
   /**
-   * Instantiates the component
+   * Builds an instance of the component
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
    * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
