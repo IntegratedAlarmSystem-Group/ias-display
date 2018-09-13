@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
 
+/**
+* Service used to handle the maps
+*/
 @Injectable()
 export class MapService {
 
+  /**
+  * Builds an instance of the service
+  */
   constructor() { }
 
+  /**
+  * Transforms a group of paths into svgPaths
+  * @param {any} pathsGroup group of paths
+  * @returns {any} svgPaths
+  */
   getSVGPaths(pathsGroup) {
     const svgPaths = [];
     for (let i = 0; i < pathsGroup.length; i++) {
@@ -24,11 +35,13 @@ export class MapService {
   }
 
 
+  /**
+  * Scaling and calculation of max and min values
+  * @param {any} placemarksGroups list of groups of placemarks
+  * @param {any} pathsGroups list of group of paths
+  * @return {any} The viewbox: list of 4 numbers used to define the size of the map
+  */
   mapdataProcessing(placemarksGroups, pathsGroups) {
-
-    /***
-    * Scaling and calculation of max and min values
-    */
 
     const X_AXIS_SCALING_FACTOR = 1.1;
 

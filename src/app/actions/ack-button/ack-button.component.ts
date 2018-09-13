@@ -20,6 +20,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   @Input() alarm: Alarm;
 
   /**
+   * Builds an instance of the component
    * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
    * @param {Router} router system Router to handle navigation
    * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
@@ -49,7 +50,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
 
   /**
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   * @returns {boolean} true if the {@link Alarm} can be acknowledged, false if not.
+   * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
   canAcknowledge() {
     if (this.alarm != null) {
@@ -68,9 +69,10 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-  * Handle click on ack button, it triggers the ack modal
+  * Handle click on ack button, it triggers ack sidenav through the {@link Router} service
+  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event) {
+  onClick(event: MouseEvent) {
     this.router.navigate([{outlets: {actions: ['acknowledge', this.alarm.core_id]}}]);
   }
 

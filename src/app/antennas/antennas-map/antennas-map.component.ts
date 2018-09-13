@@ -5,7 +5,9 @@ import { AntennasService, AntennaConfig } from '../antennas.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 
-
+/**
+* Main component for the antennas map
+*/
 @Component({
   selector: 'app-antennas-map',
   templateUrl: './antennas-map.component.html',
@@ -46,7 +48,11 @@ export class AntennasMapComponent implements OnInit {
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
   /**
-   * Builds an instance of the component and initializes it calling the {@link initialize} method
+   * Builds an instance of the component
+   * @param {AntennasService} service Service used to get the configuration needed by the component
+   * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {MapService} mapService Service used to build the interactive map
+   *
    */
   constructor(
     public service: AntennasService,
@@ -54,12 +60,17 @@ export class AntennasMapComponent implements OnInit {
     public mapService: MapService,
   ) { }
 
+  /**
+   * Executed after the component is instantiated and initializes it
+   * calling the {@link initialize} method
+   */
   ngOnInit() {
     this.initialize();
   }
 
   /**
-   * Component initialization with the related map data source
+   * Component initialization that involves the initialization of the {@link AntennasService}
+   * if not already initialized and the initialization of the related map data source
    */
   initialize() {
     this.service.initialize();
@@ -86,8 +97,10 @@ export class AntennasMapComponent implements OnInit {
   /**
    * Method to verify if there is data available for the placemark id
    * from the alarm configuration
+   * @param {string} placemark Id of a graphical element in the map source
+   * @return {boolean} True if there is configuration available, false if there is not
    */
-  existsPlacemarkData(placemark) {
+  existsPlacemarkData(placemark: string): boolean {
     const placemark_id = placemark;
     const index = Object.keys(this.placemarks).indexOf(placemark_id);
     if (index > -1) {
@@ -99,22 +112,27 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * Get alarm from the alarms service using id
+   * @param {string} alarm_id id of the alarm
+   * @return {Alarm} Alarm object retrieved from the service
    */
-  getAlarm(alarm_id): Alarm {
+  getAlarm(alarm_id: string): Alarm {
     return this.alarmService.get(alarm_id);
   }
 
   /**
    * Get antenna groups from the alarms configuration
+   * @return {string[]} List with the names of the antennas groups
    */
-  getAntennaGroups() {
+  getAntennaGroups(): string[] {
     return Object.keys(this.alarmsConfig);
   }
 
   /**
    * Opacity class name for each antenna marker
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @return class name that defines the opacity of the graphical element
    */
-  getOpacityClass(antennaConfig) {
+  getOpacityClass(antennaConfig: AntennaConfig): string {
     if (this.selectedAntenna === null) {
       return 'opacity-100';
     } else {
@@ -127,18 +145,22 @@ export class AntennasMapComponent implements OnInit {
   }
 
  /**
-  * Get a placemark object from an id to use position data
+  * Get a placemark graphical object from an id
+  * @param {string} placemark Id of a graphical element in the map source
+  * @return {any} placemark graphical element
   */
-  getPlacemarkObject(placemark) {
+  getPlacemarkObject(placemark: string): any {
     const placemark_id = placemark;
     return this.placemarks[placemark_id];
   }
 
   /**
-   * Check if an specific antenna marker was selected
-   * through its related alarm configuration
+   * Check if an specific antenna marker was selected through its related
+   * alarm configuration
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @return {boolean} True if the antenna alarm is selected, false if it is not
    */
-  isSelected(antennaConfig) {
+  isSelected(antennaConfig: AntennaConfig): boolean {
     if (this.selectedAntenna === null) {
       return false;
     } else {
@@ -149,8 +171,9 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * On click action for the antenna markers
+   * @param {AntennaConfig} antennaConfig configuration of the alarm
    */
-  onClick(antennaConfig) {
+  onClick(antennaConfig: AntennaConfig) {
     if (this.isSelected(antennaConfig)) {
       this.selectedAntenna = null;
     } else {

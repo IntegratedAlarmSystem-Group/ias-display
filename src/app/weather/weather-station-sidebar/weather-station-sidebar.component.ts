@@ -5,6 +5,9 @@ import { WeatherService, WeatherStationConfig } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
 
+/**
+ * Component to display an item containing a weather station summary in the interactive Sidebar
+ */
 @Component({
   selector: 'app-weather-station-sidebar',
   templateUrl: './weather-station-sidebar.component.html',
@@ -12,9 +15,10 @@ import { Assets } from '../../settings';
 })
 export class WeatherStationSidebarComponent implements OnInit {
 
-  /* Alarms Ids of the weather station */
+  /** Weather station config object */
   @Input() stationConfig: WeatherStationConfig;
 
+  /** Selected weather station config object, null if it is nothing selected */
   @Input() selectedAlarm: WeatherStationConfig = null;
 
   /**
@@ -27,8 +31,10 @@ export class WeatherStationSidebarComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-  ngOnInit() {
-  }
+  /**
+  * Executed after the component is instantiated.
+  */
+  ngOnInit() { }
 
   /**
   * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}

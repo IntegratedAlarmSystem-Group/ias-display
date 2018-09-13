@@ -4,6 +4,9 @@ import { AlarmService } from '../../data/alarm.service';
 import { AntennasService, AntennaConfig } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
 
+/**
+ * Display used to show the list of antennas' alarms
+ */
 @Component({
   selector: 'app-antennas-sidebar',
   templateUrl: './antennas-sidebar.component.html',
@@ -11,14 +14,17 @@ import { Alarm } from '../../data/alarm';
 })
 export class AntennasSidebarComponent implements OnInit {
 
+  /** Selected antenna object, null if it is nothing selected */
   @Input() selectedAntenna = null;
 
+  /** Event emitted to notify when an antenna is selected */
   @Output() antennaClicked = new EventEmitter<AntennaConfig>();
 
   /**
   * Builds an instance of the component
   * @param {AntennasService} antennasService Service used to get the configuration needed by the component
   * @param {AlarmService} alarmService Service used to get the Alarms
+  * @param {RoutingService} routing Service used to redirect to other views
    */
   constructor(
     public antennasService: AntennasService,
@@ -26,6 +32,10 @@ export class AntennasSidebarComponent implements OnInit {
     private routing: RoutingService,
   ) { }
 
+  /**
+   * Executed after the component is instantiated.
+   * Initializes the {@link AntennasService} if not already initialized
+   */
   ngOnInit() {
     this.antennasService.initialize();
   }
@@ -83,6 +93,7 @@ export class AntennasSidebarComponent implements OnInit {
 
   /**
   * Action performed when the antenna is clicked
+  * @param {AntennaConfig} alarmConfig configuration of the clicked antenna
   */
   onClick(alarmConfig: AntennaConfig) {
     if ( this.selectedAntenna && (this.selectedAntenna.placemark === alarmConfig.placemark) ) {

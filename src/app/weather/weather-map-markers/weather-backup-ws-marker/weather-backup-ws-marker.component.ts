@@ -1,15 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 import { AlarmService } from '../../../data/alarm.service';
 import { Alarm } from '../../../data/alarm';
-
 import { WeatherService, WeatherStationConfig } from '../../weather.service';
-
 import { Assets } from '../../../settings';
 
-
+/**
+ * Marker to display backups weather station in a map
+ */
 @Component({
   selector: 'app-weather-backup-ws-marker',
   templateUrl: './weather-backup-ws-marker.component.html',
@@ -33,7 +32,9 @@ export class WeatherBackupWsMarkerComponent implements OnInit {
     public alarmService: AlarmService,
   ) { }
 
-
+  /**
+   * Executed after the component is instantiated.
+   */
   ngOnInit() {
   }
 

@@ -19,6 +19,7 @@ export class AntennasSummaryComponent implements OnInit {
   /**
    * Builds an instance of the component
    * @param {AlarmService} alarmService Service used to get the Alarms
+   * @param {AntennasService} antennasService Service used to get Antennas configuration
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(
@@ -28,14 +29,15 @@ export class AntennasSummaryComponent implements OnInit {
   ) { }
 
   /**
-   * Creates the component
-   * Subscribes to new alarms from the {@link AlarmService}
+   * Executed after the component is instantiated.
+   * Initializes the {@link AntennasService} if not already initialized
    */
   ngOnInit() {
     this.antennasService.initialize();
   }
 
-  /** Returns the instance of the {@link Alarm}
+  /**
+  * Returns the instance of the {@link Alarm}
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {

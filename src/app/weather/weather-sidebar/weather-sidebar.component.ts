@@ -17,14 +17,18 @@ import { Assets } from '../../settings';
 })
 export class WeatherSidebarComponent implements OnInit {
 
+  /** Selected weather station config object, null if it is nothing selected */
   @Input() selectedStation: WeatherStationConfig = null;
 
+  /** Event emitted to notify when an weather station is selected */
   @Output() panelClicked = new EventEmitter<WeatherStationConfig>();
 
   /**
   * Builds an instance of the component
   * @param {WeatherService} weatherService Service used to get the configuration needed by the component
   * @param {AlarmService} alarmService Service used to get the Alarms
+  * @param {ClipboardService} clipboardService Service used to copy text to clipboard
+  * @param {MatSnackBar} snackBar Service used to notify user actions
    */
   constructor(
     public weatherService: WeatherService,
@@ -34,7 +38,8 @@ export class WeatherSidebarComponent implements OnInit {
   ) { }
 
   /**
-  * Executed after the component is instantiated
+  * Executed after the component is instantiated.
+  * Initializes the {@link WeatherService} if not already initialized
   */
   ngOnInit() {
     this.weatherService.initialize();
@@ -77,10 +82,19 @@ export class WeatherSidebarComponent implements OnInit {
     return this.alarmService.get(alarm_id);
   }
 
+  /**
+  * Indicates if the weather station is selected or not
+  * @param {WeatherStationConfig} stationConfig configuration of the weather station
+  * @return  {boolean} true if the alarm is selected or false if it is not
+  */
   isSelected(stationConfig: WeatherStationConfig) {
     return this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark);
   }
 
+  /**
+  * Action performed when the weather station is clicked
+  * @param {WeatherStationConfig} stationConfig configuration of the clicked weather station
+  */
   onClick(stationConfig: WeatherStationConfig) {
     if ( this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark) ) {
       this.selectedStation = null;
@@ -90,6 +104,11 @@ export class WeatherSidebarComponent implements OnInit {
     this.panelClicked.emit(this.selectedStation);
   }
 
+  /**
+   * Triggers the snackBar during 20 seconds and show the information specified
+   * @param {string} message Message to show in the snackbar
+   * @param {string} action Message to show in the button of the snackbar
+   */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 20000,

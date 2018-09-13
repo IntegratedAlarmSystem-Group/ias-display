@@ -22,6 +22,9 @@ export class AntennaConfig {
 
 }
 
+/**
+ * Service that stores and handles all configuration needed by the components of the {@link AntennasModule}
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -42,11 +45,12 @@ export class AntennasService {
   /** Set of antenna Unreliable icons */
   public antennaImageUnreliableSet: AlarmImageSet;
 
-
+  /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
   /**
    * Builds an instance of the service and initializes it calling the {@link initialize} method
+   * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
     private httpClient: HttpClientService
@@ -56,7 +60,7 @@ export class AntennasService {
   /**
   * Initializes the Service and getting configuration from Webserver
   */
-  initialize() {
+  initialize(): void {
     if (this._initialized === false) {
       this.loadAlarmsConfig();
       this.loadImages();
@@ -67,7 +71,7 @@ export class AntennasService {
   /**
   * Define the IDs of the alarms that the component should listen to
   */
-  loadAlarmsConfig() {
+  loadAlarmsConfig(): void {
 
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {
@@ -100,7 +104,7 @@ export class AntennasService {
   /**
   * Define the icons used by this module components
   */
-  loadImages() {
+  loadImages(): void {
     /** Set of icons */
     this.antennaImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-valid-clear.svg',

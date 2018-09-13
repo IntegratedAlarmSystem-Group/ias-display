@@ -5,7 +5,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
 * Class that models the relation of image URLS and Alarm statuses, for displaying purposes
 **/
 export class AlarmImageSet {
-   /** URL of the image to use for the "clear" Alarm value  */
+  /** URL of the image to use for the "clear" Alarm value  */
   public clear: string;
 
   /** URL of the image to use for the "set_low" Alarm value  */
@@ -76,6 +76,9 @@ export class AlarmComponent implements OnInit {
    */
   @Input() size = 'md';
 
+  /**
+   * Available sizes for the alarm componet
+   */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
 
   /**
@@ -94,6 +97,7 @@ export class AlarmComponent implements OnInit {
 
   /**
   * Returns the URL of the current image to use depending on the Alarm status
+  * @return {string} url of the image
   */
   getImage(): string {
     if (!this.alarm) {
@@ -124,14 +128,27 @@ export class AlarmComponent implements OnInit {
     }
   }
 
+  /**
+   * Check if the alarm must be displayed with the pending ack badge activated
+   * @return {boolean} True if the pending ack must be activated, false if it must not
+   */
   showAsPendingAck(): boolean {
     return this.showActionBadges && this.alarm != null && !this.alarm.ack;
   }
 
+  /**
+   * Check if the alarm must be displayed with the shelve badge activated
+   * @return {boolean} True if the alarm is shelved, false if it is not
+   */
   showAsShelved(): boolean {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
 
+  /**
+   * Returns the style class name based on the optional input size. By default
+   * the class is medium size.
+   * @return {string} style class name
+   */
   getClass(): string {
     return 'alarm-component-' + this.size;
   }

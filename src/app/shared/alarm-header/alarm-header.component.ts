@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
+/**
+ * Component used to display alarms as headers in a table or list
+ */
 @Component({
   selector: 'app-alarm-header',
   templateUrl: './alarm-header.component.html',
@@ -25,18 +28,24 @@ export class AlarmHeaderComponent implements OnInit {
   @Input() alarmNameMaxSize = 20;
 
   /**
-   * Defines an optional alarm name to display. By default it is null and
-   * in that case the component use the alarm core_id.
+   * Defines an optional alarm name to display. By default it is null and in that case the component use the alarm core_id.
    */
   @Input() optionalAlarmName = null;
 
+  /**
+   * Builds an instance of the component
+   */
   constructor() { }
 
+  /**
+   * Method executed when the component is initiated
+   */
   ngOnInit() {
   }
 
   /**
-  * Returns the URL of the current image to use depending on the Alarm status
+  * Defines the CSS classes to use depending on the Alarm status
+  * @returns {string[]} array with names of the classes to use
   */
   getClass(): string[] {
     const result = [];
@@ -70,14 +79,29 @@ export class AlarmHeaderComponent implements OnInit {
     return result;
   }
 
+  /**
+  * Defines wether or not the component should indicate that the alarm has a pending acknowledgement
+  * @returns {boolean} true if the alarm has pending acknowledgement, false if not
+  */
   showAsPendingAck(): boolean {
     return this.showActionBadges && this.alarm != null && !this.alarm.ack;
   }
 
+  /**
+  * Defines wether or not the component should indicate that the alarm is shelved
+  * @returns {boolean} true if the alarm is shelved, false if not
+  */
   showAsShelved(): boolean {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
 
+  /**
+  * Returns the name of the alarm that should be displayed in the header.
+  * If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
+  * If not, the alarm ID is displayed
+  * In any case, the name is shortened to a maximum length defined by the {@link alarmNameMaxSize}
+  * @returns {string} name to display
+  */
   getAlarmName(): string {
     let alarmName;
     if (this.alarm) {

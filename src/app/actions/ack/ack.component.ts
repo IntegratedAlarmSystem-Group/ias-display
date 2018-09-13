@@ -6,6 +6,9 @@ import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 
+/**
+* Component used to perform acknowledgement of an Alarm
+*/
 @Component({
   selector: 'app-ack',
   templateUrl: './ack.component.html',
@@ -60,7 +63,10 @@ export class AckComponent implements OnInit, OnDestroy {
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
+   * @param {Route} route Reference to the url that triggered the initialization of this component
+   * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
    * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {Router} router Angular Router used to navigate through the application
    */
   constructor(
     private formBuilder: FormBuilder,
@@ -71,6 +77,9 @@ export class AckComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
+  /**
+  * Initiates the component, by getting the alarm_id from the url.
+  */
   ngOnInit() {
     this.message = new FormControl('', [Validators.required]);
     this.form = this.formBuilder.group({
@@ -84,7 +93,7 @@ export class AckComponent implements OnInit, OnDestroy {
     this.getMissingAcksInfo();
   }
 
-  /*
+  /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
@@ -94,16 +103,16 @@ export class AckComponent implements OnInit, OnDestroy {
   /**
   * Cleans the component and reloads the Alarm
   */
-  reload() {
+  reload(): void {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.requestStatus = 0;
     this.message.reset();
   }
 
-  /*
+  /**
   * Closes the sidenav
   */
-  onClose() {
+  onClose(): void {
     this.router.navigate([{outlets: {actions: null}}]);
   }
 
@@ -135,7 +144,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
   * It also blocks closing and navigation of the the Sidebar
   */
-  private showSpinner() {
+  private showSpinner(): void {
     this.sidenavService.canClose = false;
     this.spinnerService.show();
   }
@@ -144,13 +153,14 @@ export class AckComponent implements OnInit, OnDestroy {
   * Hides the spinner after the Alarm has been shelved/unshelved
   * It also unblocks closing and navigation of the the Sidebar
   */
-  private hideSpinner() {
+  private hideSpinner(): void {
     this.spinnerService.hide();
     this.sidenavService.canClose = true;
   }
 
   /**
    * Update the list of alarms to ack from the selection on the child component
+   * @param {Event} event event triggered by the inner {@link AckTree}, containing the IDs fo the alarms to acknowledge
    */
   updateAlarmsToAck(event): void {
     this.alarmsToAck = event;
@@ -158,6 +168,7 @@ export class AckComponent implements OnInit, OnDestroy {
 
   /**
   * Method to invalidate ack action
+  * @returns {boolean} True if ack action can be performed and false if not
   */
   disableAcknowledgment() {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
