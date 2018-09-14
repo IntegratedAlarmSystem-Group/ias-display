@@ -139,7 +139,7 @@ export class AntennasMapComponent implements OnInit {
       if ( this.isSelected(antennaConfig) === true ) {
         return 'opacity-100';
       } else {
-        return 'opacity-25';
+        return 'opacity-35';
       }
     }
   }

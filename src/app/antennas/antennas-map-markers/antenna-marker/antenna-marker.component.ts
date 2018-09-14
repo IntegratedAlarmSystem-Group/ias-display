@@ -183,7 +183,7 @@ export class AntennaMarkerComponent implements OnInit {
       set_medium: 'yellow',
       set_high: 'red',
       set_critical: 'red',
-      unknown: 'lightblue',
+      unknown: '#4ac8ff',
       maintenance: 'gray',
       shelved: 'DarkCyan'
     });
