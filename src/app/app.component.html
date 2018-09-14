@@ -1,37 +1,41 @@
 <div class="main-layout">
 
-  <mat-toolbar class="app-toolbar">
+  <mat-toolbar id="app-toolbar">
     <div class="btn-wrapper">
       <button mat-icon-button (click)="toggleSidenav()">
         <mat-icon mat-list-icon>menu</mat-icon>
       </button>
     </div>
     <div class="content-wrapper">
+      <img class="ias-logo" src="/assets/img/logo-ias_white.svg">
       <span class='app-title'> Integrated Alarm System </span>
     </div>
   </mat-toolbar>
 
   <mat-sidenav-container autosize>
-    <mat-sidenav id="main-sidenav" [class.compacted]="isCompacted" mode="side" opened="true">
-      <mat-list>
-        <mat-list-item>
-          <div class="ias ias-logo-container">
-            <img class="ias ias-logo" src="/assets/img/logo-ias_white.svg">
-          </div>
-        </mat-list-item>
-      </mat-list>
+    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true">
       <mat-nav-list>
-        <div *ngFor="let item of sidenavItems">
-          <a mat-list-item routerLink="{{ item.link }}" routerLinkActive="active-link">
-            <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
-            <p matLine *ngIf="!isCompacted">{{ item.title }} </p>
+        <div *ngFor="let item of navigationSidenavItems">
+          <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
+            <ng-container *ngIf="item.svgIcon">
+              <mat-icon svgIcon="{{ item.icon }}">{{ item.icon }}</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!item.svgIcon">
+              <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+            </ng-container>
+            <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
         </div>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content id="main-sidenav-content">
+
+    <mat-sidenav-content id="main-content" autosize>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
+    <mat-sidenav #actionsSidenav id="actions-sidenav" position="end" mode="side" opened="false">
+        <router-outlet name="actions"></router-outlet>
+    </mat-sidenav>
   </mat-sidenav-container>
 
 </div>

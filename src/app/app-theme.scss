@@ -1,0 +1,44 @@
+@mixin app-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $active-link: mat-color($accent, default);
+  $inactive-link: rgba($active-link, 0.65);
+
+  #actions-sidenav {
+    background: mat-color($primary, 700);
+  }
+
+  #navigation-sidenav {
+
+    background: map_get($primary, 600);
+
+    mat-nav-list a.mat-list-item {
+
+      color: $inactive-link;
+
+      &.active-link {
+        color: $active-link;
+      }
+
+    }
+
+    &.compacted {
+
+      mat-nav-list a.mat-list-item {
+
+        &.active-link {
+          box-shadow: 4px 0px 0px 0px $active-link inset;
+        }
+
+      }
+
+    }
+
+  }
+
+}

@@ -1,34 +1,31 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IasMaterialModule } from './ias-material/ias-material.module';
-import { RoutingService} from './routing.service';
-import { HttpClientService } from './http-client.service';
-import { AlarmService } from './alarm.service';
-import { CdbService } from './cdb.service';
+import { DataModule } from './data/data.module';
+import { ActionsModule } from './actions/actions.module';
+import { HealthModule } from './health/health.module';
+import { OverviewModule } from './overview/overview.module';
+import { SharedModule } from './shared/shared.module';
+import { TabularModule } from './tabular/tabular.module';
+import { WeatherModule } from './weather/weather.module';
+import { MapModule } from './map/map.module';
+import { AntennasModule } from './antennas/antennas.module';
 import { AppComponent } from './app.component';
-import { StatusViewComponent } from './status-view/status-view.component';
-import { TabularViewComponent } from './tabular-view/tabular-view.component';
-import { AckModalComponent } from './ack-modal/ack-modal.component';
-import { AckTreeComponent } from './ack-tree/ack-tree.component';
-import { OverviewComponent } from './overview/overview.component';
-import { OverviewCardComponent } from './overview-card/overview-card.component';
-import { OverviewWeatherCardContentComponent } from './overview-weather-card-content/overview-weather-card-content.component';
-import { AckButtonComponent } from './ack-button/ack-button.component';
-import { WikiButtonComponent } from './wiki-button/wiki-button.component';
-import { LegendComponent } from './legend/legend.component';
-import { ShelveModalComponent } from './shelve-modal/shelve-modal.component';
-import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
-import { AlarmComponent } from './alarm/alarm.component';
-import { IasHealthOverviewComponent } from './ias-health-overview/ias-health-overview.component';
+import { TabularViewComponent } from './tabular/tabular-view/tabular-view.component';
+import { OverviewComponent } from './overview/overview/overview.component';
+import { AckComponent } from './actions/ack/ack.component';
+import { ShelveComponent } from './actions/shelve/shelve.component';
+import { WeatherComponent } from './weather/weather/weather.component';
+import { AlarmComponent } from './shared/alarm/alarm.component';
+import { AntennasComponent } from './antennas/antennas/antennas.component';
 
+import { HttpModule } from '@angular/http';
+import { MaterialSandboxComponent } from './material-sandbox/material-sandbox.component';
 
 /**
 * Application routes
@@ -38,7 +35,11 @@ export const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'tabular', component: TabularViewComponent },
   { path: 'tabular/:filter', component: TabularViewComponent },
-  { path: 'modal', component: AckModalComponent }
+  { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
+  { path: 'weather', component: WeatherComponent},
+  { path: 'sandbox', component: MaterialSandboxComponent},
+  { path: 'antennas', component: AntennasComponent},
 ];
 
 /**
@@ -47,47 +48,30 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    StatusViewComponent,
-    AckModalComponent,
-    TabularViewComponent,
-    OverviewComponent,
-    OverviewCardComponent,
-    OverviewWeatherCardContentComponent,
-    AckButtonComponent,
-    AckTreeComponent,
-    WikiButtonComponent,
-    LegendComponent,
-    ShelveModalComponent,
-    ShelveButtonComponent,
-    AlarmComponent,
-    IasHealthOverviewComponent
+    MaterialSandboxComponent,
   ],
   imports: [
+    ActionsModule,
+    AntennasModule,
     BrowserModule,
-    HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
     IasMaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DataModule,
+    HealthModule,
+    OverviewModule,
+    SharedModule,
+    TabularModule,
+    WeatherModule,
+    HttpModule,
+    MapModule,
   ],
   providers: [
-    HttpClientService,
-    HttpClient,
-    AlarmService,
-    CdbService,
-    RoutingService,
     { provide: APP_BASE_HREF, useValue: '/' },
     DatePipe,
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    StatusViewComponent,
-    AckModalComponent,
-    ShelveModalComponent,
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

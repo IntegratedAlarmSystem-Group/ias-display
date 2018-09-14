@@ -1,0 +1,66 @@
+.alarm-header-color {
+  height: 100%;
+  width: 10px;
+  border-radius: 4px 0px 0px 4px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.alarm-header-name {
+  padding-right: 4px;
+}
+
+.alarm-header-badges {
+  position: relative;
+  margin: 12px 0 12px 0px;
+}
+
+.badges{
+
+  .badge-icon{
+    position: absolute;
+    height: 35%;
+    left: 106%;
+  }
+
+  .ack-icon{
+    top: 2%;
+  }
+
+  .shelve-icon{
+    bottom: 2%;
+  }
+
+  .badge-off{
+    opacity: 0.08;
+  }
+}
+
+.green {
+  border: 1px solid #54c073;
+  background: #54c073;
+}
+
+.yellow {
+  border: 1px solid #dcb33d;
+  background: #dcb33d;
+}
+
+.red {
+  border: 1px solid #b63f36;
+  background: #b63f36;
+}
+
+.gray {
+  border: 1px solid #abb4b4;
+  background: #abb4b4;
+}
+
+.blue {
+  border: 1px solid #4ac8ff;
+  background: #4ac8ff;
+}
+
+.unreliable {
+  background: transparent;
+}

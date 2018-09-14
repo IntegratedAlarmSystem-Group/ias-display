@@ -1,0 +1,91 @@
+.weather-sidebar-card {
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .weather-sidebar-title {
+    padding: 12px 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+  .weather-sidebar-content {
+    padding: 12px 0;
+    height: 100%;
+    overflow-y: auto;
+
+    .mat-expansion-panel {
+      background: transparent;
+      margin: 10px 0px;
+      border-radius: 4px;
+      box-shadow: none;
+
+        td {
+          padding: 5px;
+          height: 40px;
+
+          &.station {
+            padding-left: 0;
+            font-weight: bold;
+          }
+        }
+        .icon {
+          padding-left: 20px;
+          height: 30px;
+          width: fit-content;
+          align: right;
+        }
+        .status {
+          padding-left: 20px;
+        }
+        .buttons {
+          width: 100%;
+        }
+    }
+
+    app-weather-station-sidebar {
+      width: 100%;
+    }
+
+    .weather-sidebar-header {
+      padding-left: 0px;
+      position: relative;
+
+      &.mat-expanded {
+      }
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .antennas-list-line {
+      margin-bottom: 0.2rem;
+    }
+
+    .antennas-list-header {
+      height: 37.27px;
+      vertical-align: middle;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .antennas-title {
+        line-height: 40px;
+        font-weight: bold;
+      }
+
+      .copy-antennas-button {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    .antennas-list {
+      margin-top: 10px;
+    }
+
+  }
+
+}

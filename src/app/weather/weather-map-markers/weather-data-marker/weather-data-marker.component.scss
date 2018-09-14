@@ -1,0 +1,18 @@
+.ws-data-container {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  min-width: fit-content;
+
+  .weather-icons {
+  }
+
+  .icon {
+    padding: 0px 10px;
+    width: fit-content;
+  }
+
+}

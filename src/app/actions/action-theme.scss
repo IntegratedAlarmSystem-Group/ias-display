@@ -1,0 +1,28 @@
+@mixin action-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .component-action {
+
+    &.component-header {
+      border-bottom-color: mat-color($foreground, divider);
+    }
+
+    &.component-body .section {
+      &.missed-acks {
+        border-top-color: mat-color($foreground, divider);
+      }
+
+      &.alarm-info {
+        td {
+          color: mat-color($foreground, hint-text);
+        }
+      }
+    }
+
+  }
+
+}

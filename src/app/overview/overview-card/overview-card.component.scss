@@ -1,0 +1,55 @@
+.ias.overview-card {
+  position: relative;
+  display: block;
+  z-index: 100;
+
+  .marker-wrapper{
+    float: left;
+    position: absolute;
+    top: 10px;
+    left: -40px;
+    width: 40px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+    .marker {
+      height: 100%;
+      position: relative;
+      top:-2px;
+      left:-4px;
+      width: 50px;
+    }
+  }
+
+  .label{
+    position: absolute;
+    top: -1.45em;
+    right: 0;
+    height: 1em;
+    width: 100%;
+    text-align: right;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 14px;
+    z-index: 1;
+  }
+
+  .content-wrapper{
+    position: relative;
+    top: 0;
+    left: 0;
+    min-height: 150px;
+    min-width: 200px;
+    width: 100%;
+    margin-bottom: 40px;
+
+    .content{
+      padding: 0px;
+    }
+  }
+}

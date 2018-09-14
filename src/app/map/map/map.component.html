@@ -1,0 +1,18 @@
+<div *ngIf="mapdataAvailable">
+
+  <svg class="ws-map"
+    [attr.viewBox]="mapConfig.viewbox"
+    [ngClass]="{'full-height': mapConfig.fullHeight === true}"
+  >
+
+    <ng-content select="[data=svg-elements]"></ng-content>
+
+  </svg>
+
+</div>
+
+<div *ngIf="!mapdataAvailable">
+
+  <!-- Loading gif -->
+
+</div>

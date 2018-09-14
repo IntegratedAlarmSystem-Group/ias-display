@@ -1,0 +1,80 @@
+<div class="component-action-card">
+  <div class="component-action component-header">
+    <div class="component-title"> {{ getTitleText() }} </div>
+    <button type="button" class="close" aria-label="Close" (click)="onClose()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="component-action component-body">
+    <form class="form-group" [formGroup]="form">
+      <div class="section alarm-info">
+        <table>
+          <tr>
+            <th>Alarm ID</th>
+            <td>{{alarm?.core_id}}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ alarm?.description }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
+
+      <ng-template #responseMessage>
+        <div class="section shelve-action" >
+          <div class="section-title"> {{ getResponseMessageTitle() }} </div>
+          <div> {{ getResponseMessageText() }} </div>
+        </div>
+      </ng-template>
+
+      <ng-template #actionProcess>
+        <div class="section shelve-action" >
+          <div *ngIf="!alarm.shelved; then shelveForm"></div>
+
+          <ng-template #shelveForm>
+            <div class="section-title"> Information required to shelve the Alarm </div>
+
+            <mat-form-field color="accent" class="message-form-field" appearance="fill">
+              <mat-label> Reason for shelving </mat-label>
+              <textarea matInput name="message" formControlName="message"></textarea>
+              <mat-error *ngIf="message.invalid"> You must write a message in order to Shelve </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent" class="timeout-form-field" appearance="fill">
+              <mat-label> Time in shelf </mat-label>
+              <mat-select formControlName="timeout">
+                <mat-option *ngFor="let timeout of timeouts" [value]="timeout.value">
+                  {{timeout.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="timeout.invalid"> You must select a duration in order to Shelve </mat-error>
+            </mat-form-field>
+          </ng-template>
+
+        </div>
+      </ng-template>
+    </form>
+  </div>
+
+  <div class="component-action component-footer">
+    <div *ngIf="requestStatus !== 0; then responseButtons else actionButtons"> </div>
+    <ng-template #responseButtons>
+      <button id="close" mat-flat-button color="primary" (click)="onClose()">Close</button>
+    </ng-template>
+
+    <ng-template #actionButtons>
+      <button id="cancel" mat-flat-button color="primary" (click)="onClose()">Cancel</button>
+      <button id="send" mat-flat-button color="accent" (click)="toggleShelveUnshelve();" [disabled]="!canSend()">{{ getActionButtonText() }}</button>
+    </ng-template>
+  </div>
+</div>
+
+<ngx-spinner
+  bdColor = "rgba(51, 51, 51, 0)"
+  size = "large"
+  color = "#fff"
+  type = "ball-clip-rotate"
+></ngx-spinner>

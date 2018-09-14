@@ -1,0 +1,84 @@
+<mat-card>
+
+  <mat-card-header>
+    <app-legend></app-legend>
+  </mat-card-header>
+
+
+  <mat-card-content>
+
+    <div fxLayout="row wrap" fxLayoutAlign="none center" fxLayoutGap="20px">
+      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >
+        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
+        <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
+        Show only set alarms
+      </mat-slide-toggle>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> STATUS </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm">
+          <div class="status-icon">
+            <app-status-view [alarm]="alarm" [value]="alarm.status" ></app-status-view>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Monitoring Point Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> ALARM NAME </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Mode Column -->
+      <ng-container matColumnDef="mode">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> MODE </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.operationalMode}} </mat-cell>
+      </ng-container>
+
+      <!-- Timestamp Column -->
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> LAST CHANGE TIME </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> DESCRIPTION </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> ACTIONS </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm">
+          <app-buttons [alarm]="alarm"></app-buttons>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+
+</mat-card>

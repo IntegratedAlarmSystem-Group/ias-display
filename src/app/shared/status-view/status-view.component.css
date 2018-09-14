@@ -1,0 +1,38 @@
+.status-view {
+  height: 100%;
+  width: 100%;
+}
+
+.alarm-icon {
+  height: 100%;
+  width: 33%;
+}
+
+.priority-icon {
+  height: 100%;
+  width: 55%;
+}
+
+/* .blink {
+  -webkit-animation: BLINK 1s infinite;
+  -moz-animation:    BLINK 1s infinite;
+  -o-animation:      BLINK 1s infinite;
+  animation:         BLINK 1s infinite;
+}
+
+@-webkit-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes BLINK {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+} */

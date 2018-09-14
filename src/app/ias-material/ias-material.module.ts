@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -12,7 +13,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 /**
@@ -20,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 */
 @NgModule({
   imports: [
+    BrowserAnimationsModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
@@ -33,9 +40,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatTreeModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    FlexLayoutModule
   ],
   exports: [
+    BrowserAnimationsModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
@@ -49,7 +62,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatTreeModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    FlexLayoutModule
   ],
   declarations: []
 })

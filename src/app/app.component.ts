@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AlarmService } from './alarm.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
+import { AlarmService } from './data/alarm.service';
+import { SidenavService } from './actions/sidenav.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 /**
 * Main component of the application
@@ -12,6 +17,11 @@ import { AlarmService } from './alarm.service';
 export class AppComponent implements OnInit {
 
   /**
+  * Reference to the Actions sidenav (right sidenav)
+  */
+  @ViewChild('actionsSidenav') public actionsSidenav: MatSidenav;
+
+  /**
   * Title of the application
   */
   title = 'Integrated Alarm System';
@@ -19,35 +29,81 @@ export class AppComponent implements OnInit {
   /**
   * State of the main sidenav
   */
-  isCompacted = true;
+  isNavigationCompacted = true;
 
-  /** Sidebar Menu of the application */
-  sidenavItems = [
-    { title: 'Overview', link: '/overview', icon: 'language'},
-    { title: 'Table', link: '/tabular', icon: 'list'}
+  // TODO: Use only custom svgIcons
+  /** Navigation Sidenav Menu of the application (left sidenav) */
+  navigationSidenavItems = [
+    { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
+    { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
+    { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
+    { title: 'Table', link: 'tabular', icon: 'ias_table', svgIcon: true}
   ];
 
   /**
-   * Instantiates the service
+   * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   * @param {SidenavService} actionsSidenavService Service for the navigation
+   * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
+   * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
    */
   constructor(
-    private alarmService: AlarmService
-  ) {}
+    private alarmService: AlarmService,
+    public actionsSidenavService: SidenavService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry
+      .addSvgIcon(
+        'ias_overview',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-overview.svg')
+      )
+      .addSvgIcon(
+        'ias_weather',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-weather.svg')
+      )
+      .addSvgIcon(
+        'ias_antenna',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-antenna.svg')
+      )
+      .addSvgIcon(
+        'ias_table',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/img/ias-icon-table.svg')
+      );
+  }
 
   /**
-   * Instantiates the {@link AlarmService}
+   * Method executed when the application is initiated
+   * Initializes the {@link AlarmService} and passes its {@link actionsSidenav} to the {@link ActionsSidenavService} for it to control it
    */
   ngOnInit() {
     this.alarmService.initialize();
+    this.actionsSidenavService.setSidenav(this.actionsSidenav);
+  }
+
+  /**
+  * Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not
+  * @param {any} item an item of the navigation sidenav
+  * @returns {Object} The links in a dictionary
+  */
+  getActionsLink(item: any) {
+    if (this.actionsSidenavService.canClose) {
+      return {outlets: { primary: item.link, actions: null }};
+    } else {
+      return {outlets: { primary: item.link }};
+    }
   }
 
   /**
    * Toggles expanding-contracting the sidebar
-   * @returns {boolean} Value of the main sidenav isCompacted variable
+   * @returns {boolean} Value of the main sidenav isNavigationCompacted variable
    */
   toggleSidenav(): boolean {
-    this.isCompacted=!this.isCompacted
-    return this.isCompacted;
+    this.isNavigationCompacted = !this.isNavigationCompacted;
+    return this.isNavigationCompacted;
   }
 }
