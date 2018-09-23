@@ -178,14 +178,14 @@ export class AntennaMarkerComponent implements OnInit {
   defineAlarmColors() {
 
     this.fillColors = new AlarmColorsSet({
-      clear: 'green',
-      set_low: 'yellow',
-      set_medium: 'yellow',
-      set_high: 'red',
-      set_critical: 'red',
-      unknown: '#4ac8ff',
-      maintenance: 'gray',
-      shelved: 'DarkCyan'
+      clear: '#54c073',
+      set_low: '#f0c13e',
+      set_medium: '#f0c13e',
+      set_high: '#ef3c26',
+      set_critical: '#ef3c26',
+      unknown: '#2fd0fe',
+      maintenance: '#cecece',
+      shelved: '#54c073'
     });
 
     this.fillColorsUnreliable = new AlarmColorsSet({
