@@ -199,8 +199,18 @@ export class AntennaMarkerComponent implements OnInit {
       shelved: 'transparent',
     });
 
-    this.borderColors = this.fillColors;
-    this.borderColorsUnreliable = this.fillColors;
+    this.borderColors = new AlarmColorsSet({
+      clear: '#95fe96',
+      set_low: '#fbd575',
+      set_medium: '#fbd575',
+      set_high: '#fe6b65',
+      set_critical: '#fe6b65',
+      unknown: '#6be0fb',
+      maintenance: '#e0e2e2',
+      shelved: '#95fe96'
+    });
+
+    this.borderColorsUnreliable = this.borderColors;
 
   }
 
