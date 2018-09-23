@@ -50,7 +50,75 @@
       </tr>
     </table>
   </div>
-  <div class="antennas-detail footer">
-    <button id="goToTable" mat-flat-button color="primary" (click)="goToTableFilteredBy(this.selectedAntenna.alarm)">Go to Table</button>
+
+  <div class="antennas-detail devices-alarms">
+    <table>
+      <tr>
+        <td class="antenna">Antenna</td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.alarm)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">Fire</td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">Fire Malfunction</td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire-malfunction)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire-malfunction)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">UPS Failure</td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.ups)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.ups)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">HVAC Failure </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.hvac)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">Power Cut</td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.power)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.power)"></app-buttons>
+        </td>
+      </tr>
+    </table>
   </div>
 </ng-template>

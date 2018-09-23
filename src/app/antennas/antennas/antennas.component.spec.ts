@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { AntennasComponent } from './antennas.component';
 import { AntennasMapComponent } from '../antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.component';
+import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { MapModule } from '../../map/map.module';
@@ -40,7 +41,8 @@ describe('AntennasComponent', () => {
         DataModule,
         IasMaterialModule,
         MapModule,
-        SharedModule
+        SharedModule,
+        ActionsModule
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
