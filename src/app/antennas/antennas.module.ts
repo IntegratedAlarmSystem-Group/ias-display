@@ -4,6 +4,7 @@ import { AntennasComponent } from './antennas/antennas.component';
 import { AntennasMapComponent } from './antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from './antennas-sidebar/antennas-sidebar.component';
 import { DataModule } from '../data/data.module';
+import { ActionsModule } from '../actions/actions.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { MapModule } from '../map/map.module';
 import { SharedModule } from '../shared/shared.module';
@@ -16,6 +17,7 @@ import { AntennasSummaryComponent } from './antennas-summary/antennas-summary.co
   imports: [
     CommonModule,
     DataModule,
+    ActionsModule,
     IasMaterialModule,
     MapModule,
     SharedModule,
