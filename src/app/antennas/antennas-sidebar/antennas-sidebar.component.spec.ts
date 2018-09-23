@@ -17,7 +17,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-0',
       'alarm': 'mockAlarm-0',
       'fire': 'mockAlarm-0-device',
-      'fire-malfunction': 'mockAlarm-0-device',
+      'fire_malfunction': 'mockAlarm-0-device',
       'ups': 'mockAlarm-0-device',
       'hvac': 'mockAlarm-0-device',
       'power': 'mockAlarm-0-device'
@@ -27,7 +27,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-1',
       'alarm': 'mockAlarm-1',
       'fire': '',
-      'fire-malfunction': '',
+      'fire_malfunction': '',
       'ups': '',
       'hvac': '',
       'power': ''
@@ -39,7 +39,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-2',
       'alarm': 'mockAlarm-2',
       'fire': '',
-      'fire-malfunction': '',
+      'fire_malfunction': '',
       'ups': '',
       'hvac': '',
       'power': ''
