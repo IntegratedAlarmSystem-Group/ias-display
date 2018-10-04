@@ -58,7 +58,7 @@ export class AlarmHeaderComponent implements OnInit {
       result.push('green');
     } else if (this.alarm.mode === OperationalMode.unknown) {
       result.push('blue');
-    } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
+    } else if (this.alarm.showAsMaintenance()) {
       result.push('gray');
     } else if (this.alarm.value === Value.cleared) {
       result.push('green');

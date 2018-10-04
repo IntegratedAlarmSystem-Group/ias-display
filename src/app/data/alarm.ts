@@ -10,6 +10,7 @@ export enum OperationalMode {
   operational = 5,
   degraded = 6,
   unknown = 7,
+  malfunctioning = 8,
 }
 
 /**
@@ -177,6 +178,24 @@ export class Alarm {
     const ts = this.state_change_timestamp;
     const date: Date = new Date(ts);
     return date;
+  }
+
+  /**
+  * Returns wether or not an {@link Alarm} should be displayed as in "maintenance" or "grayed out mode"
+  * Currently this is true for alarms with {@link OperationalMode} of either:
+  * - {@link OperationalMode.maintenance}
+  * - {@link OperationalMode.shuttedown}
+  * - {@link OperationalMode.malfunctioning}
+  * @returns {boolean} true if the alarm should be displayed as in maintenance or false if not
+  */
+  showAsMaintenance(): boolean {
+    if (this.mode === OperationalMode.maintenance ||
+        this.mode === OperationalMode.shuttedown ||
+        this.mode === OperationalMode.malfunctioning) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

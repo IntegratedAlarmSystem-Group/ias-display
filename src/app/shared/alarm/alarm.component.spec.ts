@@ -38,9 +38,17 @@ describe('AlarmComponent', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
       if (validity) {
-        expect(component.getImage()).toEqual(value + '_' + validity);
+        if (component.alarm.showAsMaintenance()) {
+          expect(component.getImage()).toEqual('maintenance_' + validity);
+        } else {
+          expect(component.getImage()).toEqual(value + '_' + validity);
+        }
       } else {
-        expect(component.getImage()).toEqual(value);
+        if (component.alarm.showAsMaintenance()) {
+          expect(component.getImage()).toEqual('maintenance');
+        } else {
+          expect(component.getImage()).toEqual(value);
+        }
       }
     }
   });

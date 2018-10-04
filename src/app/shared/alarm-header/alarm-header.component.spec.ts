@@ -12,6 +12,8 @@ const expected_classes = {
   'clear': ['green'],
   'unknown': ['blue'],
   'maintenance': ['gray'],
+  'shutteddown': ['gray'],
+  'malfunctioning': ['gray'],
   'critical_unreliable': ['red', 'unreliable'],
   'high_unreliable': ['red', 'unreliable'],
   'medium_unreliable': ['yellow', 'unreliable'],
@@ -19,6 +21,8 @@ const expected_classes = {
   'clear_unreliable': ['green', 'unreliable'],
   'unknown_unreliable': ['blue', 'unreliable'],
   'maintenance_unreliable': ['gray', 'unreliable'],
+  'shutteddown_unreliable': ['gray', 'unreliable'],
+  'malfunctioning_unreliable': ['gray', 'unreliable'],
   'shelved': ['green'],
   'shelved_unreliable': ['green', 'unreliable'],
 };

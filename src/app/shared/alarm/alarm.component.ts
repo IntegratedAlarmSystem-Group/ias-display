@@ -111,7 +111,7 @@ export class AlarmComponent implements OnInit {
       return imagesToUse.shelved;
     } else if (this.alarm.mode === OperationalMode.unknown) {
       return imagesToUse.unknown;
-    } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
+    } else if (this.alarm.showAsMaintenance()) {
       return imagesToUse.maintenance;
     } else if (this.alarm.value === Value.cleared) {
       return imagesToUse.clear;
