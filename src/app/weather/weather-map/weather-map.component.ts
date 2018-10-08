@@ -45,6 +45,12 @@ export class WeatherMapComponent implements OnInit {
   /** Map Configuration  */
   public mapConfig = {};
 
+  /** Auxiliary viewbox list to locate complementary elements for the map */
+  public viewbox = [];
+
+  /** Compass rose location */
+  public compassLocation = [0, 0];
+
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
@@ -90,11 +96,13 @@ export class WeatherMapComponent implements OnInit {
       this.placemarksGroups.push(mapdata['placemarks']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
+      this.viewbox = [viewbox[0], viewbox[1], viewbox[2], viewbox[3]];
       this.mapConfig = {
         'fullHeight': true,
         'viewbox':
-          [viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
+          this.viewbox.join(' ')
       };
+      this.compassLocation = [this.viewbox[0] + 10, this.viewbox[1] + 50];
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);

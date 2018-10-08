@@ -5,6 +5,18 @@
 
    <ng-container data="svg-elements">
 
+     <svg:g>
+       <foreignObject
+            [attr.x]="this.compassLocation[0]"
+            [attr.y]="this.compassLocation[1]"
+            width="100"
+            height="100">
+            <xhtml:div class="antennas-map-compass-rose">
+             <img src="/assets/img/compass_rose.svg"/>
+            </xhtml:div>
+       </foreignObject>
+     </svg:g>
+
      <svg:path class="antennas-map-paths" *ngFor="let path of svgPaths"
        [attr.d]="path"
        stroke="currentColor"

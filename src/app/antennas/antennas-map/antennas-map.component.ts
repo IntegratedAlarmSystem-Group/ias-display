@@ -44,6 +44,12 @@ export class AntennasMapComponent implements OnInit {
   /** Alarms Configuration  */
   public alarmsConfig = {};
 
+  /** Auxiliary viewbox list to locate complementary elements for the map */
+  public viewbox = [];
+
+  /** Compass rose location */
+  public compassLocation = [0, 0];
+
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
@@ -83,11 +89,13 @@ export class AntennasMapComponent implements OnInit {
       this.placemarksGroups.push(mapdata['placemarks']['wstations']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
+      this.viewbox = [-30 + viewbox[0], viewbox[1], viewbox[2] - 180, viewbox[3]];
       this.mapConfig = {
         'fullHeight': true,
         'viewbox':
-          [-100 + viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
+          this.viewbox.join(' ')
       };
+      this.compassLocation = [this.viewbox[0] + 30, this.viewbox[1] + 20];
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });
