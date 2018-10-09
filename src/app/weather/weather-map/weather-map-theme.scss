@@ -7,7 +7,6 @@
   $foreground: map-get($theme, foreground);
 
   $map_stroke: mat-color($foreground, map-stroke);
-  $map_reference_building: mat-color($foreground, map-reference-building);
   $selected_pad: mat-color($foreground, text);
   $map_background: mat-color($background, background);
   $marker_stroke: mat-color($background, dialog);
