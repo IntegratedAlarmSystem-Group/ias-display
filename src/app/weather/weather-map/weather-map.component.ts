@@ -94,6 +94,7 @@ export class WeatherMapComponent implements OnInit {
       }
       this.placemarksGroups.push(mapdata['placemarks']['pads']);
       this.placemarksGroups.push(mapdata['placemarks']['wstations']);
+      this.placemarksGroups.push(mapdata['placemarks']['buildings']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
       this.viewbox = [viewbox[0], viewbox[1], viewbox[2], viewbox[3]];
