@@ -146,11 +146,10 @@ describe('AlarmService', () => {
       *
       */
       const mockIasConfiguration = {
-          id: 1,
-          log_level: 'INFO',
-          refresh_rate: 2,
-          broadcast_factor: 3,
-          tolerance: 1,
+          logLevel: 'INFO',
+          refreshRate: '2',
+          broadcastFactor: '3',
+          tolerance: '1',
           properties: []
       };
       spyOn(cdbSubject, 'initialize')
@@ -357,7 +356,8 @@ describe('AlarmService', () => {
     // Arrange
     const now = (new Date).getTime();
     const pars = cdbSubject.getRefreshRateParameters();
-    const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + 1;
+    const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
+    console.log('maxSecondsWithoutMessagesmaxSecondsWithoutMessages: ', maxSecondsWithoutMessages);
     const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000 + 1);
 
     subject.connectionStatusStream.next(true);
