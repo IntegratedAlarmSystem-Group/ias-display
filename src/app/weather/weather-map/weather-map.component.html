@@ -4,18 +4,6 @@
 >
   <ng-container data="svg-elements">
 
-    <svg:g>
-      <foreignObject
-           [attr.x]="this.compassLocation[0]"
-           [attr.y]="this.compassLocation[1]"
-           width="100"
-           height="100">
-           <xhtml:div class="weather-map-compass-rose">
-            <img src="/assets/img/compass_rose.svg"/>
-           </xhtml:div>
-      </foreignObject>
-    </svg:g>
-
     <svg:path class="weather-map-paths" *ngFor="let path of svgPaths"
       [attr.d]="path"
       stroke="currentColor"
@@ -35,12 +23,12 @@
 
     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
         <svg:foreignObject *ngIf="p.name === 'AOS'"
-             [attr.x]="p.opt_cx-18"
+             [attr.x]="p.opt_cx-15"
              [attr.y]="p.opt_cy-14"
              width="100"
              height="100">
-             <xhtml:div class="weather-map-aos-marker-container">
-                <img src="/assets/img/aos.svg"/>
+             <xhtml:div>
+                <img class="weather-map-aos-marker" title="AOS" src="/assets/img/aos.svg"/>
              </xhtml:div>
         </svg:foreignObject>
     </ng-container>

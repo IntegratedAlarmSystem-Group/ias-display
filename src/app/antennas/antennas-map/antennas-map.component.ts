@@ -96,7 +96,6 @@ export class AntennasMapComponent implements OnInit {
         'viewbox':
           this.viewbox.join(' ')
       };
-      this.compassLocation = [this.viewbox[0] + 30, this.viewbox[1] + 20];
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.mapdataAvailable.next(true);
     });

@@ -103,7 +103,6 @@ export class WeatherMapComponent implements OnInit {
         'viewbox':
           this.viewbox.join(' ')
       };
-      this.compassLocation = [this.viewbox[0] + 10, this.viewbox[1] + 50];
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
