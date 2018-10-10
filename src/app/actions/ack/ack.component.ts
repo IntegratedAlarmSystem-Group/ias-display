@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
@@ -66,15 +66,13 @@ export class AckComponent implements OnInit, OnDestroy {
    * @param {Route} route Reference to the url that triggered the initialization of this component
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
    * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
-   * @param {Router} router Angular Router used to navigate through the application
    */
   constructor(
     private formBuilder: FormBuilder,
     private alarmService: AlarmService,
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
-    private spinnerService: NgxSpinnerService,
-    private router: Router
+    private spinnerService: NgxSpinnerService
   ) { }
 
   /**
@@ -113,7 +111,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Closes the sidenav
   */
   onClose(): void {
-    this.router.navigate([{outlets: {actions: null}}]);
+    this.sidenavService.close();
   }
 
   /**

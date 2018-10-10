@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { RoutingService } from '../data/routing.service';
 
 /**
 * Service used to handle the sidenv where the actions panels (Acknowledge and Shelve) are displayed
@@ -12,7 +13,9 @@ export class SidenavService {
   /**
    * Builds an instance of the service
    */
-  constructor() { }
+  constructor(
+    private routingService: RoutingService
+  ) { }
 
   /** Reference to the sidenav */
   private sidenav: MatSidenav;
@@ -39,6 +42,7 @@ export class SidenavService {
   * Closes the sidenav
   */
   public close() {
+    this.routingService.cleanActionOutlet();
     return this.sidenav.close();
   }
 
