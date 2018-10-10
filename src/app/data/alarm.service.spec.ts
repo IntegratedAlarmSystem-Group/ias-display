@@ -357,7 +357,6 @@ describe('AlarmService', () => {
     const now = (new Date).getTime();
     const pars = cdbSubject.getRefreshRateParameters();
     const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
-    console.log('maxSecondsWithoutMessagesmaxSecondsWithoutMessages: ', maxSecondsWithoutMessages);
     const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000 + 1);
 
     subject.connectionStatusStream.next(true);

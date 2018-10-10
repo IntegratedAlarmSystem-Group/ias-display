@@ -1,12 +1,13 @@
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../data/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveComponent } from './shelve.component';
 import { Alarm } from '../../data/alarm';
@@ -19,7 +20,7 @@ describe('ShelveComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
-  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
   const mockAlarm = Alarm.asAlarm({
       'value': 0,
       'core_id': 'coreid$1',
@@ -50,7 +51,7 @@ describe('ShelveComponent', () => {
         HttpClient,
         NgxSpinnerService,
         SidenavService,
-        { provide: Router, useValue: spyRoutingTable },
+        { provide: RoutingService, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
           useValue: {
