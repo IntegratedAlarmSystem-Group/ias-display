@@ -29,23 +29,18 @@
     height: 100%;
     overflow-y: auto;
 
-    .antennas-group-container {
+    .antennas-container {
       margin: 6px 0px;
-
-      .antennas-group-title {
-        line-height: 40px;
-        font-weight: bold;
-      }
 
       .grid-container {
         display: grid;
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
         grid-column-gap: 10px;
-        grid-row-gap: 6px;
+        grid-row-gap: 10px;
 
         .grid-item {
-          height: 50px;
-          line-height: 50px;
+          height: 60px;
+          line-height: 62px;
           border-radius: 4px;
           padding: 0;
           position: relative;

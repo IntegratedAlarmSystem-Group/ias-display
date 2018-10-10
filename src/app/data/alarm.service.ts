@@ -299,7 +299,7 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + 1;
+    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
 
     const now = (new Date).getTime();
     let millisecondsDelta;

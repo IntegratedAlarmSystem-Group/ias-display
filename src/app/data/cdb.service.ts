@@ -41,8 +41,7 @@ export class CdbService {
   */
   initialize() {
     return this.getConfigurationData().subscribe((res) => {
-      const iasConfigurationData = res[0];
-      this.iasConfiguration = iasConfigurationData;
+      this.iasConfiguration = res;
       this.iasDataAvailable.next(true);
     });
   }
@@ -62,8 +61,9 @@ export class CdbService {
   */
   getRefreshRateParameters() {
     return {
-      'refreshRate': this.iasConfiguration['refresh_rate'],
-      'broadcastFactor': this.iasConfiguration['broadcast_factor']
+      'refreshRate': Number(this.iasConfiguration['refreshRate']),
+      'tolerance': Number(this.iasConfiguration['tolerance']),
+      'broadcastFactor': Number(this.iasConfiguration['broadcastFactor'])
     };
   }
 }

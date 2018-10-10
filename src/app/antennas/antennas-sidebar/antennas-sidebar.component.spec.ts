@@ -17,7 +17,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-0',
       'alarm': 'mockAlarm-0',
       'fire': 'mockAlarm-0-device',
-      'fire-malfunction': 'mockAlarm-0-device',
+      'fire_malfunction': 'mockAlarm-0-device',
       'ups': 'mockAlarm-0-device',
       'hvac': 'mockAlarm-0-device',
       'power': 'mockAlarm-0-device'
@@ -27,7 +27,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-1',
       'alarm': 'mockAlarm-1',
       'fire': '',
-      'fire-malfunction': '',
+      'fire_malfunction': '',
       'ups': '',
       'hvac': '',
       'power': ''
@@ -39,7 +39,7 @@ const mockAntennasConfig = {
       'placemark': 'mockAlarm-2',
       'alarm': 'mockAlarm-2',
       'fire': '',
-      'fire-malfunction': '',
+      'fire_malfunction': '',
       'ups': '',
       'hvac': '',
       'power': ''
@@ -162,8 +162,8 @@ describe('AntennasSidebarComponent', () => {
     expect(component.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
   });
 
-  it('should have a getAntennaName method that return the antenna (pad) name', () => {
-    const expectedName = 'antenna-0 (mockAlarm-0)';
+  it('should have a getAntennaName method that return the antenna name', () => {
+    const expectedName = 'antenna-0';
     expect(component.getAntennaName(mockAntennasConfig['group-0'][0])).toEqual(expectedName);
   });
 
@@ -203,23 +203,6 @@ describe('AntennasSidebarComponent', () => {
     // });
 
     describe('and if there is not a selected antenna', () => {
-      it('should have containers for each group of antennas', () => {
-        component.selectedAntenna = null;
-        const groups = fixture.nativeElement.querySelectorAll('.antennas-group-container');
-        expect(groups.length).toBe(2);
-      });
-
-      it('should display the list of alarm header components in each group', () => {
-        component.selectedAntenna = null;
-        const groups = fixture.nativeElement.querySelectorAll('.antennas-group-container');
-
-        const alarmsGroup0 = groups[0].querySelectorAll('app-alarm-header');
-        expect(alarmsGroup0.length).toBe(2);
-
-        const alarmGroup1 = groups[1].querySelectorAll('app-alarm-header');
-        expect(alarmGroup1.length).toBe(1);
-      });
-
       describe('and an antenna (grid-item with an alarm-header inside) is clicked', () => {
         it('then the correspoding antenna is selected', () => {
           component.selectedAntenna = null;

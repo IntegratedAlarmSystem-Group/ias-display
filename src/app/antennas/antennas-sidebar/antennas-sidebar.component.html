@@ -22,12 +22,13 @@
 
 <!-- Content when there is not a selected antenna -->
 <ng-template #antennasList>
-  <div class="antennas-group-container" *ngFor="let group of getAntennasGroups()">
-    <span class="antennas-group-title"> {{group}} </span>
+  <div class="antennas-container">
     <div class="grid-container">
-      <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
-        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
-      </div>
+      <ng-container *ngFor="let group of getAntennasGroups()">
+        <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
+          <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+        </div>
+      </ng-container>
     </div>
   </div>
 </ng-template>
@@ -79,11 +80,11 @@
         <td class="device">Fire Malfunction</td>
         <td>
           <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire-malfunction)" [showActionBadges]="false"></app-status-view>
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [showActionBadges]="false"></app-status-view>
           </div>
         </td>
         <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire-malfunction)"></app-buttons>
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)"></app-buttons>
         </td>
       </tr>
       <tr>

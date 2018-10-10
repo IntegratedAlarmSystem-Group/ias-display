@@ -82,6 +82,14 @@ export const Map = {
                 'opt_cy': 0.0,
                 'opt_cx': 0.0
             }
+        ],
+        'buildings': [
+            {
+                'description': 'description',
+                'name': 'name',
+                'opt_cy': 0.0,
+                'opt_cx': 0.0
+            }
         ]
     },
     'paths': [

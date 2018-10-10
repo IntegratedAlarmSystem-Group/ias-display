@@ -21,6 +21,18 @@
       fill="#212d3a"
     />
 
+    <ng-container *ngFor="let p of mapPlacemarks['buildings']">
+        <svg:foreignObject *ngIf="p.name === 'AOS'"
+             [attr.x]="p.opt_cx-15"
+             [attr.y]="p.opt_cy-14"
+             width="100"
+             height="100">
+             <xhtml:div>
+                <img class="weather-map-aos-marker" title="AOS" src="/assets/img/aos.svg"/>
+             </xhtml:div>
+        </svg:foreignObject>
+    </ng-container>
+
     <ng-container *ngFor="let padsGroup of getPadsGroups()">
       <!-- <ng-container *ngFor="let primary_ws_name of [datarelations[padsGroup]['wstations']['primary'][0]]"> -->
       <ng-container *ngFor="let stationConfig of service.weatherStationsConfig">

@@ -111,7 +111,7 @@ $ias-dark-theme-foreground: (
   slider-min:        white,
   slider-off:        rgba(white, 0.3),
   slider-off-active: rgba(white, 0.3),
-  map-stroke:        hsl(210, 17%, 42%)
+  map-stroke:        hsl(210, 17%, 42%),
 );
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.

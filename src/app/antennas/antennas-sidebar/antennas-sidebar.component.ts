@@ -56,7 +56,7 @@ export class AntennasSidebarComponent implements OnInit {
    * @returns {string} the antenna name to display
    */
   getAntennaName(antennaConfig: AntennaConfig ): string {
-    return  antennaConfig.antenna + ' (' + antennaConfig.placemark + ')';
+    return antennaConfig.antenna;
   }
 
   /**
