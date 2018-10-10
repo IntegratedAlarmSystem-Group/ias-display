@@ -22,6 +22,18 @@
        fill="#212d3a"
      />
 
+     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
+         <svg:foreignObject *ngIf="p.name === 'AOS'"
+              [attr.x]="p.opt_cx-15"
+              [attr.y]="p.opt_cy-14"
+              width="100"
+              height="100">
+              <xhtml:div>
+                 <img class="antennas-map-aos-marker" title="AOS" src="/assets/img/aos.svg"/>
+              </xhtml:div>
+         </svg:foreignObject>
+     </ng-container>
+
      <ng-container *ngFor="let antennasGroup of getAntennaGroups()">
        <ng-container *ngFor="let antennaConfig of alarmsConfig[antennasGroup]">
          <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">
