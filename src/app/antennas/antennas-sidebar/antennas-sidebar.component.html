@@ -22,12 +22,13 @@
 
 <!-- Content when there is not a selected antenna -->
 <ng-template #antennasList>
-  <div class="antennas-group-container" *ngFor="let group of getAntennasGroups()">
-    <span class="antennas-group-title"> {{group}} </span>
+  <div class="antennas-container">
     <div class="grid-container">
-      <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
-        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="11" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
-      </div>
+      <ng-container *ngFor="let group of getAntennasGroups()">
+        <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
+          <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+        </div>
+      </ng-container>
     </div>
   </div>
 </ng-template>
