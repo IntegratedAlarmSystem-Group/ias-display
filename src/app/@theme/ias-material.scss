@@ -14,6 +14,7 @@
 @import '../app-theme.scss';
 @import '../material-sandbox/material-sandbox-theme.scss';
 @import '../antennas/antennas-sidebar/antennas-sidebar-theme.scss';
+@import '../antennas/antennas-map-markers/antenna-marker/antenna-marker-theme.scss';
 
 @include mat-core();
 
@@ -175,6 +176,7 @@ $ias-typography: mat-typography-config(
   @include antennas-sidebar-theme($theme);
   @include antennas-map-theme($theme);
   @include alarm-header-theme($theme);
+  @include antenna-marker-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
