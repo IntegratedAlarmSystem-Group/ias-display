@@ -172,6 +172,10 @@ export class AntennaMarkerComponent implements OnInit {
     }
   }
 
+  getNgClass() {
+    return ['green'];
+  }
+
   /**
    * Defines colors to be used to display the antennas
    */
