@@ -5,6 +5,7 @@ import { AlarmImageSet } from '../shared/alarm/alarm.component';
 export const mockWeatherStationsConfig = [
   {
     placemark: 'mockAlarm-0',
+    group: 'group1',
     station: 'mockAlarm-0',
     temperature: 'mockAlarm-0-temperature',
     windspeed: 'mockAlarm-0-windspeed',
@@ -12,6 +13,7 @@ export const mockWeatherStationsConfig = [
   },
   {
     placemark: 'mockAlarm-1',
+    group: 'group2',
     station: 'mockAlarm-1',
     temperature: 'mockAlarm-1-temperature',
     windspeed: 'mockAlarm-1-windspeed',
@@ -22,6 +24,7 @@ export const mockWeatherStationsConfig = [
 /** Mock configuration for WeatherSummary */
 export const mockWeatherSummaryConfig = {
   placemark: '',
+  group: '',
   station: '',
   temperature: 'mockGlobal-temperature',
   windspeed: 'mockGlobal-windspeed',

@@ -15,6 +15,9 @@ export class WeatherStationConfig {
   /** ID to map the {@link Alarm} to the location on the map */
   public placemark: string;
 
+  /** Group of placemarks who the alarm belongs */
+  public group: string;
+
   /** ID of the main {@link Alarm} of the Weather Station */
   public station: string;
 

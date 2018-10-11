@@ -18,8 +18,19 @@ import { Alarm } from '../../data/alarm';
 import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
 
 const mockAntennas = {
-  'mockAlarm-0': ['Antenna1', 'Antenna2', 'Antenna3'],
-  'mockAlarm-1': ['Antenna4', 'Antenna5', 'Antenna6'],
+  'group1': ['ANT1', 'ANT2'],
+  'group2': ['ANT4']
+};
+
+const mockPadsStatus = {
+  'group1': {
+    'PAD1': 'ANT1',
+    'PAD2': 'ANT2',
+    'PAD3': null
+  },
+  'group2': {
+    'PAD4': 'ANT4'
+  }
 };
 
 describe('WeatherSidebarComponent', () => {
@@ -57,15 +68,7 @@ describe('WeatherSidebarComponent', () => {
     inject([WeatherService], (service) => {
       weatherService = service;
       spyOn(weatherService, 'initialize').and.callFake(function() {});
-      // spyOn(weatherService, 'getAntennas').and.callFake(
-      //   function(station: string) {
-      //     return mockAntennas[station];
-      //   }
-      // );
-      weatherService.padsStatus = {
-        'members': {'PAD1': 'ANT1', 'PAD2': 'ANT2', 'PAD3': null},
-        'not_members': {'PAD4': 'ANT4'}
-      };
+      weatherService.padsStatus = mockPadsStatus;
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
       weatherService.windsImageSet = mockImagesSets['windspeed'];
       weatherService.humidityImageSet = mockImagesSets['humidity'];
@@ -185,8 +188,7 @@ describe('WeatherSidebarComponent', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            // const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
-            const expectedAntennas = ['ANT1', 'ANT2'];
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].group];
             const panel = panels[i];
             const list = panel.nativeElement.querySelector('.antennas-list');
             expect(list).toBeTruthy();
@@ -201,8 +203,7 @@ describe('WeatherSidebarComponent', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            // const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
-            const expectedAntennas = ['ANT1', 'ANT2'];
+            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].group];
             const panel = panels[i];
             const button = panel.nativeElement.querySelector('.copy-antennas-button');
             expect(button).toBeTruthy();

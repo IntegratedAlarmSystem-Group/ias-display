@@ -50,8 +50,8 @@ export class WeatherSidebarComponent implements OnInit {
   * @param {string} station the ID of the weather station
   * @returns {boolean} true if the data was copied to the clipboard, false if not
   */
-  copyAntennas(station: string): boolean {
-    const antennas = this.getAntennas(station);
+  copyAntennas(stationConfig: WeatherStationConfig): boolean {
+    const antennas = this.getAntennas(stationConfig);
     const result = antennas.join(',');
     const status = this.clipboardService.copyFromContent(result);
     let message = '';
@@ -69,12 +69,14 @@ export class WeatherSidebarComponent implements OnInit {
   * @param {string} station the ID of the weather station
   * @returns {string[]} a list with the name of nearby antennas
   */
-  getAntennas(station: string): string[] {
+  getAntennas(stationConfig: WeatherStationConfig): string[] {
     const response = [];
-    const members = this.weatherService.padsStatus['members'];
-    for (const pad in members) {
-        if (members[pad]) {
-            response.push(members[pad]);
+    if ( this.weatherService.padsStatus && stationConfig.group !== '' ) {
+        const pads = this.weatherService.padsStatus[stationConfig.group];
+        for (const pad_name in pads) {
+            if (pads[pad_name]) {
+                response.push(pads[pad_name]);
+            }
         }
     }
     return response;
