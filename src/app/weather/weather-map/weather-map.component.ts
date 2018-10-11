@@ -57,7 +57,7 @@ export class WeatherMapComponent implements OnInit {
   /** Data relations to manage the graphical elements */
   public datarelations: any;
 
-  /** TODO: Remove - Dictionary to manage the status of each pad, if free or in use, to locate an antenna */
+  /** Dictionary to manage the display status of each pad, if free or in use, to locate an antenna */
   public padsFreeStatus = {};
 
   /**
@@ -113,6 +113,12 @@ export class WeatherMapComponent implements OnInit {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
+    this.service.padsStatusAvailable.subscribe(
+      (value) => {
+        if (value) {
+          this.updateAntennaPadStatus();
+        }
+    });
   }
 
   /**
@@ -139,16 +145,16 @@ export class WeatherMapComponent implements OnInit {
    * Update the status of the pads from webserver data
    */
   updateAntennaPadStatus() {
-    const pads = Object.keys(this.padsFreeStatus);
+    const pads = Object.keys(this.service.padsStatus['members']);
     for (let i = 0; i < pads.length; i++) {
-      const id = Math.floor(Math.random() * (pads.length));
-      let status = true;
-      if (Math.random() > 0.5) {
-        status = true;
-      } else {
-        status = false;
+      const padStatus = this.service.padsStatus['members'][pads[i]];
+      let freeStatus = false;
+      if (padStatus === null) {
+        freeStatus = true;
       }
-      this.padsFreeStatus[pads[id]] = status;
+      console.log(freeStatus);
+      console.log(padStatus);
+      this.padsFreeStatus[pads[i]] = freeStatus;
     }
   }
 
