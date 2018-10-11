@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Router } from '@angular/router';
 import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
 
