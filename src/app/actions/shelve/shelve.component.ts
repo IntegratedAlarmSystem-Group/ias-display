@@ -169,9 +169,9 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   getResponseMessageTitle(): string {
     if (!this.alarm.shelved) {
-      return 'Shelving results';
+      return 'Shelving';
     } else {
-      return 'Unshelving results';
+      return 'Unshelving';
     }
   }
 

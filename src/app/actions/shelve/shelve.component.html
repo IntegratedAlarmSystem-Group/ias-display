@@ -21,14 +21,7 @@
         </table>
       </div>
 
-      <div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
-
-      <ng-template #responseMessage>
-        <div class="section shelve-action" >
-          <div class="section-title"> {{ getResponseMessageTitle() }} </div>
-          <div> {{ getResponseMessageText() }} </div>
-        </div>
-      </ng-template>
+      <div *ngIf="requestStatus === 0; then actionProcess else responseMessage"> </div>
 
       <ng-template #actionProcess>
         <div class="section shelve-action" >
@@ -56,6 +49,26 @@
 
         </div>
       </ng-template>
+
+
+      <ng-template #responseMessage>
+        <div *ngIf="requestStatus === 1; then successMessage else errorMessage"> </div>
+
+        <ng-template #successMessage>
+          <div class="section shelve-action" >
+            <div class="section-title"> {{ getResponseMessageTitle() }} results </div>
+            <div> {{ getResponseMessageText() }} </div>
+          </div>
+        </ng-template>
+
+        <ng-template #errorMessage>
+          <div class="section shelve-action action-error" >
+            <div class="section-title">Error {{ getResponseMessageTitle() }} </div>
+            <div> {{ getResponseMessageText() }} </div>
+          </div>
+        </ng-template>
+      </ng-template>
+
     </form>
   </div>
 

@@ -63,6 +63,12 @@
           border-top-style: solid;
         }
 
+        &.action-error {
+          padding: 20px 20px 30px 20px;
+          border-radius: 4px;
+          margin-top: 40px;
+        }
+
       }
 
     }
