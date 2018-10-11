@@ -163,6 +163,9 @@ export class AckTreeComponent implements OnInit, OnChanges {
     const subTree = {};
     for (const childId of alarm.dependencies) {
       const childAlarm = this.alarmService.get(childId);
+      if (childAlarm.ack) {
+        continue;
+      }
       const subSubTree = this._getSubTree(childAlarm);
       subTree[childId] = subSubTree;
     }
