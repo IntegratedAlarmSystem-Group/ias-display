@@ -21,6 +21,10 @@
           color: mat-color($foreground, hint-text);
         }
       }
+
+      &.action-error {
+        background: mat-color($warn, A700);;
+      }
     }
 
   }
