@@ -1,26 +1,49 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { DataModule } from '../data/data.module';
 import { WeatherService } from './weather.service';
+import { TestRequest } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientService } from '../data/http-client.service';
 import { Map } from '../map/fixtures';
 import { of } from 'rxjs';
 import { mockWeatherStationsConfig, mockWeatherSummaryConfig, mockImagesSets} from './test_fixtures';
+import { environment } from '../../environments/environment';
+import { BackendUrls } from '../settings';
 
 
 describe('WeatherService', () => {
   let subject: WeatherService;
   let httpClient: HttpClientService;
+  let testController: HttpTestingController;
+
+  const padsStatusUrl = environment.httpUrl + BackendUrls.PADS_STATUS;
+
+  const mockPadsStatusResponse = {
+      'members': {
+        'PAD1': 'A1',
+        'PAD2': null,
+      },
+      'not_members': {
+        'PAD3': null,
+        'PAD4': 'A2',
+      }
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [WeatherService],
-      imports: [DataModule],
+      imports: [DataModule, HttpClientTestingModule],
     });
   });
 
-  beforeEach(inject([WeatherService, HttpClientService], (weatherService, httpClientService) => {
+  beforeEach(
+    inject(
+      [HttpTestingController, WeatherService, HttpClientService],
+      (httpTestingController, weatherService, httpClientService) => {
     subject = weatherService;
     httpClient = httpClientService;
+    testController = httpTestingController;
   }));
 
   it('should be created', () => {
@@ -78,6 +101,21 @@ describe('WeatherService', () => {
     subject.getMapData().subscribe((mapdata) => {
       expect(mapdata).toEqual(Map);
     });
+  });
+
+  it('should have a method to load the pad status in the service', () => {
+    const group = 'S';
+    subject.loadPadsStatus(group);
+    const calls = testController.match(
+      (request) => request.method === 'GET'
+    );
+    expect(calls.length).toEqual(1);
+    const padsStatusCall = calls[0];
+    expect(padsStatusCall.request.url).toEqual(
+      padsStatusUrl + group);
+    padsStatusCall.flush(mockPadsStatusResponse);
+    testController.verify();
+    expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
   });
 
   it('should have a method to get the antennas associated to a weather station', () => {

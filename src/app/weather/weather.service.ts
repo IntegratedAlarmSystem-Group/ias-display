@@ -110,6 +110,26 @@ export class WeatherService {
   }
 
   /**
+  * Requests data for the pads status, to know if each one is in use
+  * to locate, or not, an antenna
+  * @returns {Observable<Object>} observable of the data in a JSON
+  */
+  getPadsStatus(group: string): Observable<Object> {
+    const url = BackendUrls.PADS_STATUS + group;
+    return this.httpClient.get(url);
+  }
+
+  /**
+  * Loads the pads status in the related variable of this service
+  */
+  loadPadsStatus(group: string) {
+    this.getPadsStatus(group).subscribe(
+      (response) => {
+        this.padsStatus = response;
+    });
+  }
+
+  /**
   * Return list of antennas associated to the given weather station
   * @param {string} station the ID of the weather station
   * @returns {string[]} a list with the name of nearby antennas

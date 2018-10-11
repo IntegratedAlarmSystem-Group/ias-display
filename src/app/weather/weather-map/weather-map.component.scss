@@ -29,3 +29,17 @@
 .weather-map-aos-marker {
   width: 30px;
 }
+
+.antennas-pad {
+  fill: purple;
+  &.in-use {
+    fill: fuchsia;
+  }
+}
+
+.antennas-pad-text {
+  fill: purple;
+  &.in-use {
+    fill: yellow;
+  }
+}
