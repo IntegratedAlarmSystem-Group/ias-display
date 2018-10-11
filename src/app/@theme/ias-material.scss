@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import '../actions/action-theme.scss';
+@import '../shared/alarm-header/alarm-header-theme.scss';
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
 @import '../tabular/tabular-view/tabular-view-theme.scss';
@@ -13,6 +14,7 @@
 @import '../app-theme.scss';
 @import '../material-sandbox/material-sandbox-theme.scss';
 @import '../antennas/antennas-sidebar/antennas-sidebar-theme.scss';
+@import '../antennas/antennas-map-markers/antenna-marker/antenna-marker-theme.scss';
 
 @include mat-core();
 
@@ -114,6 +116,26 @@ $ias-dark-theme-foreground: (
   map-stroke:        hsl(210, 17%, 42%),
 );
 
+$ias-alarms-colors: (
+  clear: #54c073,
+  set-low: #dcb33d,
+  set-medium: #dcb33d,
+  set-high: #b63f36,
+  set-critical: #b63f36,
+  unknown: #4ac8ff,
+  maintenance: #abb4b4,
+  shelved: #54c073,
+  border-clear: #95fe96,
+  border-set-low: #fbd575,
+  border-set-medium: #fbd575,
+  border-set-high: #fe6b65,
+  border-set-critical: #fe6b65,
+  border-unknown: #6be0fb,
+  border-maintenance: #e0e2e2,
+  border-shelved: #95fe96
+
+);
+
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
 @function create-ias-theme($primary, $accent, $warn: mat-palette($mat-red)) {
   @return (
@@ -123,6 +145,7 @@ $ias-dark-theme-foreground: (
     is-dark: true,
     foreground: $ias-dark-theme-foreground,
     background: $ias-dark-theme-background,
+    alarms: $ias-alarms-colors
   );
 }
 
@@ -152,6 +175,8 @@ $ias-typography: mat-typography-config(
   @include material-sandbox-theme($theme);
   @include antennas-sidebar-theme($theme);
   @include antennas-map-theme($theme);
+  @include alarm-header-theme($theme);
+  @include antenna-marker-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
