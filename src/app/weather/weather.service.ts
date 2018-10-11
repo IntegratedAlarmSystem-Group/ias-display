@@ -79,6 +79,9 @@ export class WeatherService {
   /** Dictionary to manage the status of each pad to check if each one is in use for some antenna*/
   public padsStatus = {};
 
+  /** Variable to check if pads status is available */
+  public padsStatusAvailable = new BehaviorSubject<any>(false);
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
@@ -97,6 +100,7 @@ export class WeatherService {
     if (this._initialized === false) {
       this.loadWeatherStationsConfig();
       this.loadImages();
+      this.loadPadsStatus('');
       this._initialized = true;
     }
   }
@@ -124,9 +128,12 @@ export class WeatherService {
   * Loads the pads status in the related variable of this service
   */
   loadPadsStatus(group: string) {
+
     this.getPadsStatus(group).subscribe(
       (response) => {
+        this.padsStatusAvailable.next(false);
         this.padsStatus = response;
+        this.padsStatusAvailable.next(true);
     });
   }
 
