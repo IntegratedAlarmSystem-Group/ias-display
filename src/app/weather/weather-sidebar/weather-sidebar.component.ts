@@ -70,7 +70,14 @@ export class WeatherSidebarComponent implements OnInit {
   * @returns {string[]} a list with the name of nearby antennas
   */
   getAntennas(station: string): string[] {
-    return this.weatherService.getAntennas(station);
+    const response = [];
+    const members = this.weatherService.padsStatus['members'];
+    for (const pad in members) {
+        if (members[pad]) {
+            response.push(members[pad]);
+        }
+    }
+    return response;
   }
 
   /**

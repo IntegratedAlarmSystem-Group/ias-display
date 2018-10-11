@@ -57,11 +57,15 @@ describe('WeatherSidebarComponent', () => {
     inject([WeatherService], (service) => {
       weatherService = service;
       spyOn(weatherService, 'initialize').and.callFake(function() {});
-      spyOn(weatherService, 'getAntennas').and.callFake(
-        function(station: string) {
-          return mockAntennas[station];
-        }
-      );
+      // spyOn(weatherService, 'getAntennas').and.callFake(
+      //   function(station: string) {
+      //     return mockAntennas[station];
+      //   }
+      // );
+      weatherService.padsStatus = {
+        'members': {'PAD1': 'ANT1', 'PAD2': 'ANT2', 'PAD3': null},
+        'not_members': {'PAD4': 'ANT4'}
+      };
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;
       weatherService.windsImageSet = mockImagesSets['windspeed'];
       weatherService.humidityImageSet = mockImagesSets['humidity'];
@@ -181,7 +185,8 @@ describe('WeatherSidebarComponent', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
+            // const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
+            const expectedAntennas = ['ANT1', 'ANT2'];
             const panel = panels[i];
             const list = panel.nativeElement.querySelector('.antennas-list');
             expect(list).toBeTruthy();
@@ -196,7 +201,8 @@ describe('WeatherSidebarComponent', () => {
         const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
         for (const i in panels) {
           if ( panels[i] !== null ) {
-            const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
+            // const expectedAntennas = mockAntennas[mockWeatherStationsConfig[i].station];
+            const expectedAntennas = ['ANT1', 'ANT2'];
             const panel = panels[i];
             const button = panel.nativeElement.querySelector('.copy-antennas-button');
             expect(button).toBeTruthy();

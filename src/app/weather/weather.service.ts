@@ -76,6 +76,8 @@ export class WeatherService {
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  public padsStatus = null;
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
