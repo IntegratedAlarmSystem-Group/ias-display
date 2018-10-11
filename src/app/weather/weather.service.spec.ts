@@ -119,9 +119,4 @@ describe('WeatherService', () => {
     expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
   });
 
-  it('should have a method to get the antennas associated to a weather station', () => {
-    const antennas = subject.getAntennas('station');
-    expect(antennas).toEqual(['A001', 'A002', 'A003']);
-  });
-
 });
