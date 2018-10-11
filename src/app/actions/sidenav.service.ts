@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { BehaviorSubject } from 'rxjs';
 import { RoutingService } from '../data/routing.service';
 
 /**
@@ -9,6 +10,12 @@ import { RoutingService } from '../data/routing.service';
   providedIn: 'root'
 })
 export class SidenavService {
+
+  /**
+  * Stream of notifications of changes in
+  * the status of the service connection
+  */
+  public shouldReload = new BehaviorSubject<any>(false);
 
   /**
    * Builds an instance of the service
@@ -51,5 +58,14 @@ export class SidenavService {
   */
   public toggle(): void {
     this.sidenav.toggle();
+  }
+
+  public goToShelve(alarm_id: string) {
+    this.shouldReload.next(true);
+    this.routingService.goToShelve(alarm_id);
+  }
+
+  public goToAcknowledge(alarm_id: string) {
+    this.routingService.goToAcknowledge(alarm_id);
   }
 }

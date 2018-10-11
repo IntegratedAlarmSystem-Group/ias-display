@@ -107,8 +107,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
     });
+    this.sidenavService.shouldReload.subscribe(
+      value => {
+        if (value === true) {
+          this.reload();
+        }
+      }
+    );
     this.sidenavService.open();
   }
 
