@@ -76,6 +76,9 @@ export class WeatherService {
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  /** Dictionary to manage the status of each pad to check if each one is in use for some antenna*/
+  public padsStatus = {};
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
@@ -105,6 +108,26 @@ export class WeatherService {
   getMapData(): Observable<Object> {
     const url = BackendUrls.FILES_JSON + this.weatherMapName;
     return this.httpClient.get(url);
+  }
+
+  /**
+  * Requests data for the pads status, to know if each one is in use
+  * to locate, or not, an antenna
+  * @returns {Observable<Object>} observable of the data in a JSON
+  */
+  getPadsStatus(group: string): Observable<Object> {
+    const url = BackendUrls.PADS_STATUS + group;
+    return this.httpClient.get(url);
+  }
+
+  /**
+  * Loads the pads status in the related variable of this service
+  */
+  loadPadsStatus(group: string) {
+    this.getPadsStatus(group).subscribe(
+      (response) => {
+        this.padsStatus = response;
+    });
   }
 
   /**

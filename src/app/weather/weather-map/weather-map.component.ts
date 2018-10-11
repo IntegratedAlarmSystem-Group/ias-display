@@ -57,6 +57,9 @@ export class WeatherMapComponent implements OnInit {
   /** Data relations to manage the graphical elements */
   public datarelations: any;
 
+  /** TODO: Remove - Dictionary to manage the status of each pad, if free or in use, to locate an antenna */
+  public padsFreeStatus = {};
+
   /**
    * Builds an instance of the component
    * @param {WeatherService} service Service used to get the configuration needed by the component
@@ -86,6 +89,9 @@ export class WeatherMapComponent implements OnInit {
     this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
+      for (const placemark of mapdata['placemarks']['pads']) {
+        this.padsFreeStatus[placemark.name] = true;
+      }
       let placemarks_list = [];
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['pads']);
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['wstations']);
@@ -128,6 +134,23 @@ export class WeatherMapComponent implements OnInit {
       const placemark_id = placemark;
       return this.placemarks[placemark_id];
     }
+
+  /**
+   * Update the status of the pads from webserver data
+   */
+  updateAntennaPadStatus() {
+    const pads = Object.keys(this.padsFreeStatus);
+    for (let i = 0; i < pads.length; i++) {
+      const id = Math.floor(Math.random() * (pads.length));
+      let status = true;
+      if (Math.random() > 0.5) {
+        status = true;
+      } else {
+        status = false;
+      }
+      this.padsFreeStatus[pads[id]] = status;
+    }
+  }
 
   /**
    * Style for the backup weather stations

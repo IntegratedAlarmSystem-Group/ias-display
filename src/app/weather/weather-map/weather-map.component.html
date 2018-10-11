@@ -1,3 +1,4 @@
+<button type="button" (click)="updateAntennaPadStatus()">Antenna Pads!</button>
 <app-map
   [mapConfig]="this.mapConfig"
   [mapdataAvailable]="this.mapdataAvailable.value"
@@ -11,7 +12,7 @@
       fill="none"
     />
 
-    <svg:circle class="weather-map-pads" *ngFor="let p of mapPlacemarks['pads']"
+    <!-- <svg:circle class="weather-map-pads" *ngFor="let p of mapPlacemarks['pads']"
       [attr.cx]="p.opt_cx"
       [attr.cy]="p.opt_cy"
       [attr.data]="p.name"
@@ -19,7 +20,7 @@
       stroke="currentColor"
       stroke-width="3"
       fill="#212d3a"
-    />
+    /> -->
 
     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
         <svg:foreignObject *ngIf="p.name === 'AOS'"
@@ -119,6 +120,28 @@
           <!-- Elements by pads group -->
         </ng-container>
       </ng-container>
+    </ng-container>
+
+    <ng-container *ngFor="let p of mapPlacemarks['pads']">
+      <svg:circle
+        class="antennas-pad"
+        [ngClass]="{'in-use': !padsFreeStatus[p.name]}"
+        [attr.cx]="p.opt_cx"
+        [attr.cy]="p.opt_cy"
+        [attr.data]="p.name"
+        stroke="currentColor"
+        stroke-width="3"
+        r="5"
+        fill="none"
+      />
+      <svg:text
+        class="antennas-pad-text"
+        [attr.x]="p.opt_cx"
+        [attr.y]="p.opt_cy"
+        [ngClass]="{'in-use': !padsFreeStatus[p.name]}"
+      >
+       Free? {{ padsFreeStatus[p.name] }} // {{ p.name }}
+      </svg:text>
     </ng-container>
 
   </ng-container>
