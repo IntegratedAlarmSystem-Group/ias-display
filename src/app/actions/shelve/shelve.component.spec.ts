@@ -20,7 +20,9 @@ describe('ShelveComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
-  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
+  const spyRoutingTable = jasmine.createSpyObj(
+    'RoutingService', ['goToShelve', 'cleanActionOutlet', 'goToAcknowledge']
+  );
   const mockAlarm = Alarm.asAlarm({
       'value': 0,
       'core_id': 'coreid$1',
@@ -82,6 +84,7 @@ describe('ShelveComponent', () => {
     component = fixture.componentInstance;
     component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
+    component.reload();
     componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');

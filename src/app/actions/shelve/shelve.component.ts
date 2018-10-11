@@ -107,8 +107,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
     });
+    this.sidenavService.shouldReload.subscribe(
+      value => {
+        if (value === true) {
+          this.reload();
+        }
+      }
+    );
     this.sidenavService.open();
   }
 
@@ -120,6 +126,91 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
+   * @returns {boolean} True if shelve action can be performed and false if not
+   */
+  canSend(): boolean {
+    return this.alarm.shelved || this.form.valid;
+  }
+
+  /**
+   * Returns the text to display in the action button
+   * @returns {string} the text to display in the button, either "Shelve" or "Unshelve"
+   */
+  getActionButtonText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'Unshelve';
+    } else {
+      return 'Shelve';
+    }
+  }
+
+  /**
+   * Returns the text to display in the title, depeding if the alarm is "Shelved" or "Unshelved"
+   * @returns {string} the text to display in the title
+   */
+  getTitleText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'ALARM UNSHELVING';
+    } else {
+      return 'ALARM SHELVING';
+    }
+  }
+
+  /**
+   * Returns the text to display in the title
+   * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
+   */
+  getResponseMessageTitle(): string {
+    if (!this.alarm.shelved) {
+      return 'Shelving results';
+    } else {
+      return 'Unshelving results';
+    }
+  }
+
+  /**
+   * Returns the text to display when the shelve or unshelve action is performed
+   * @returns {string} the text to display
+   */
+  getResponseMessageText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.requestStatus === 1) {
+      if (!this.alarm.shelved) {
+        return 'The alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
+        this.timeouts.find(t => t.value === this.timeout.value).viewValue + '.';
+      } else {
+        return 'The alarm ' + this.alarm.core_id + ' was unshelved succesfully.';
+      }
+    } else if (this.requestStatus === -1) {
+      let response = '';
+      if (!this.alarm.shelved) {
+        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been shelved.';
+      } else {
+        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
+      }
+      response += ' Please try again. If the problem persists, contact the system administrator.';
+      return response;
+    }
+  }
+
+
+  /**
+  * Closes the sidenav
+  */
+  onClose(): void {
+    this.sidenavService.close();
+  }
+
+  /**
   * Cleans the component and reloads the Alarm
   */
   reload(): void {
@@ -127,13 +218,6 @@ export class ShelveComponent implements OnInit, OnDestroy {
     this.requestStatus = 0;
     this.message.reset();
     this.timeout.reset(this.defaultTimeout);
-  }
-
-  /**
-  * Closes the sidenav
-  */
-  onClose(): void {
-    this.sidenavService.close();
   }
 
   /**
@@ -199,15 +283,6 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
-  * It also blocks closing and navigation of the the Sidebar
-  */
-  private showSpinner(): void {
-    this.sidenavService.canClose = false;
-    this.spinnerService.show();
-  }
-
-  /**
   * Hides the spinner after the Alarm has been shelved/unshelved
   * It also unblocks closing and navigation of the the Sidebar
   */
@@ -217,80 +292,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
-   * @returns {boolean} True if shelve action can be performed and false if not
-   */
-  canSend(): boolean {
-    return this.alarm.shelved || this.form.valid;
-  }
-
-  /**
-   * Returns the text to display in the title, depeding if the alarm is "Shelved" or "Unshelved"
-   * @returns {string} the text to display in the title
-   */
-  getTitleText(): string {
-    if (!this.alarm) {
-      return null;
-    }
-    if (this.alarm.shelved) {
-      return 'ALARM UNSHELVING';
-    } else {
-      return 'ALARM SHELVING';
-    }
-  }
-
-  /**
-   * Returns the text to display in the action button
-   * @returns {string} the text to display in the button, either "Shelve" or "Unshelve"
-   */
-  getActionButtonText(): string {
-    if (!this.alarm) {
-      return null;
-    }
-    if (this.alarm.shelved) {
-      return 'Unshelve';
-    } else {
-      return 'Shelve';
-    }
-  }
-
-  /**
-   * Returns the text to display in the title
-   * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
-   */
-  getResponseMessageTitle(): string {
-    if (!this.alarm.shelved) {
-      return 'Shelving results';
-    } else {
-      return 'Unshelving results';
-    }
-  }
-
-  /**
-   * Returns the text to display when the shelve or unshelve action is performed
-   * @returns {string} the text to display
-   */
-  getResponseMessageText(): string {
-    if (!this.alarm) {
-      return null;
-    }
-    if (this.requestStatus === 1) {
-      if (!this.alarm.shelved) {
-        return 'The alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
-        this.timeouts.find(t => t.value === this.timeout.value).viewValue + '.';
-      } else {
-        return 'The alarm ' + this.alarm.core_id + ' was unshelved succesfully.';
-      }
-    } else if (this.requestStatus === -1) {
-      let response = '';
-      if (!this.alarm.shelved) {
-        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been shelved.';
-      } else {
-        response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
-      }
-      response += ' Please try again. If the problem persists, contact the system administrator.';
-      return response;
-    }
+  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
+  * It also blocks closing and navigation of the the Sidebar
+  */
+  private showSpinner(): void {
+    this.sidenavService.canClose = false;
+    this.spinnerService.show();
   }
 
 }
