@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { RoutingService } from '../data/routing.service';
 import { SidenavService } from './sidenav.service';
 
-describe('SidenavService', () => {
+fdescribe('SidenavService', () => {
   const spyRoutingService = jasmine.createSpyObj('RoutingService', ['cleanActionOutlet']);
 
   beforeEach(() => {
