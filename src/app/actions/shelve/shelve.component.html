@@ -52,7 +52,6 @@
 
 
       <ng-template #responseMessage>
-
         <div *ngIf="requestStatus === 1; then successMessage else errorMessage"> </div>
 
         <ng-template #successMessage>
@@ -68,7 +67,6 @@
             <div> {{ getResponseMessageText() }} </div>
           </div>
         </ng-template>
-
       </ng-template>
 
     </form>
