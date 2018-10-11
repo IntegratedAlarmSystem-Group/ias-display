@@ -10,7 +10,6 @@ export const expectedTreeData = {
     },
     'child_2': {
       'grandChild_21': null,
-      'grandChild_22': null,
       'grandChild_23': null,
     },
   }
@@ -137,7 +136,7 @@ export const mockAlarmData = [
     'description': 'Short description for mock alarm',
     'url': 'www.alma.cl',
     'validity': '0',
-    'ack': false,
+    'ack': true,
     'shelved': false,
     'dependencies': [],
   },
