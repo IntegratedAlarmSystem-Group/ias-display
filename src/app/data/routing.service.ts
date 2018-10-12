@@ -38,6 +38,7 @@ export class RoutingService {
 
   /**
   * Go to Acknowledge View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Acknowledge
   */
   goToAcknowledge(alarm_id: string) {
     this.router.navigate([{outlets: {actions: ['acknowledge', alarm_id]}}]);
@@ -45,6 +46,7 @@ export class RoutingService {
 
   /**
   * Go to Shelve View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Shleve/Unshelve
   */
   goToShelve(alarm_id: string) {
     this.router.navigate([{outlets: {actions: ['shelve', alarm_id]}}]);
