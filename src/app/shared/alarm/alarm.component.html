@@ -1,9 +1,19 @@
 <div [ngClass]="this.getClass()" fxLayout="row">
-  <div class="icon">
-    <img class="alarm-icon" src="{{ getImage() }}"/>
-  </div>
-  <div class="badges" [ngClass]="{'hidden': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">
+  <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
 
+  <ng-template #textAlarm>
+    <div [ngClass]="this.getTextClass()">
+      {{this.text}}
+    </div>
+  </ng-template>
+
+  <ng-template #iconAlarm>
+    <div class="icon">
+      <img class="alarm-icon" src="{{ getImage() }}"/>
+    </div>
+  </ng-template>
+
+  <div class="badges" [ngClass]="{'hidden': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">
     <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
     <ng-template #ackOn>
       <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
@@ -20,4 +30,5 @@
       <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>
     </ng-template>
   </div>
+
 </div>

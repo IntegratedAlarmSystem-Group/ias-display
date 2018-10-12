@@ -17,6 +17,13 @@ $status-cem: 1*$cem;
     }
   }
 
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    padding-right: 6%
+  }
+
   .badges{
     display: inline-block;
     vertical-align: middle;
@@ -47,6 +54,7 @@ $status-cem: 1*$cem;
 .alarm-component-xs {
   @extend .alarm-component;
   height: 19*$xs-cem;
+  line-height: 19*$xs-cem;
 
   .badges{
     @extend .badges;
@@ -57,6 +65,7 @@ $status-cem: 1*$cem;
 .alarm-component-sm {
   @extend .alarm-component;
   height: 19*$sm-cem;
+  line-height: 19*$sm-cem;
 
   .badges{
     @extend .badges;
@@ -67,6 +76,7 @@ $status-cem: 1*$cem;
 .alarm-component-md {
   @extend .alarm-component;
   height: 19*$md-cem;
+  line-height: 19*$md-cem;
 
   .badges{
     @extend .badges;
@@ -77,6 +87,7 @@ $status-cem: 1*$cem;
 .alarm-component-lg {
   @extend .alarm-component;
   height: 19*$lg-cem;
+  line-height: 19*$lg-cem;
 
   .badges{
     @extend .badges;
@@ -87,6 +98,7 @@ $status-cem: 1*$cem;
 .alarm-component-status {
   @extend .alarm-component;
   height: 19*$status-cem;
+  line-height: 19*$status-cem;
 
   .badges{
     @extend .badges;

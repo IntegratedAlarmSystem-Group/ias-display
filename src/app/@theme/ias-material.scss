@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import '../actions/action-theme.scss';
+@import '../shared/alarm/alarm-theme.scss';
 @import '../shared/alarm-header/alarm-header-theme.scss';
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
@@ -175,8 +176,9 @@ $ias-typography: mat-typography-config(
   @include material-sandbox-theme($theme);
   @include antennas-sidebar-theme($theme);
   @include antennas-map-theme($theme);
-  @include alarm-header-theme($theme);
   @include antenna-marker-theme($theme);
+  @include alarm-theme($theme);
+  @include alarm-header-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
