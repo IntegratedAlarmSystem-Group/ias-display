@@ -167,9 +167,25 @@ export class AlarmService {
   }
 
   /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
+   * Gets the open {@link ShelveRegistry} for an {@link Alarm}
+   * @param {string} alarm_id id of the target alarm
+   * @param {int} status id of the target alarm
+   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   */
+  getShelveRegistries(alarm_id, status) {
+    const url = BackendUrls.SHELVE_REGS_FILTER + '?alarm_id=' + alarm_id + '&status=' + status;
+    return this.httpClientService.get(url).pipe(
+    map(
+      (response) => {
+        return response;
+      }
+    ));
+  }
+
+  /**
+   * Shelves and {@link Alarm} with a message
+   * @param {string} alarm_id id of the alarm to shelve
+   * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
   shelveAlarm(alarm_id, message, timeout) {
@@ -191,9 +207,9 @@ export class AlarmService {
   }
 
   /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
+   * Shelves and {@link Alarm} with a message
+   * @param {string} alarms_ids id of the alarm to shelve
+   * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
   unshelveAlarms(alarms_ids, message) {
@@ -229,8 +245,8 @@ export class AlarmService {
   /**
    * Reads an alarm message from the Core and modify the service alarms list
    * depending on the action value.
-   * @param action create, update or delete
-   * @param alarm dictionary with values for alarm fields (as generic object)
+   * @param {string} action create, update or delete
+   * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
   readAlarmMessage(action, obj) {
     const alarm = Alarm.asAlarm(obj);
@@ -248,7 +264,7 @@ export class AlarmService {
   /**
    * Reads a list of alarm messages form the Core and add them to the
    * service alarms list
-   * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
    */
   readAlarmMessagesList(alarmsList) {
     for (const obj of alarmsList) {

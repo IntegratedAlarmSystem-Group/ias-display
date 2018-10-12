@@ -32,11 +32,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Timeout options for shelving alarms
   */
   timeouts: TimeoutOption[] = [
-    {value: '0:15:00', viewValue: '15 minutes'},
-    {value: '0:30:00', viewValue: '30 minutes'},
-    {value: '1:00:00', viewValue: '1 hour'},
-    {value: '2:00:00', viewValue: '2 hours'},
-    {value: '6:00:00', viewValue: '6 hours'},
+    {value: '00:15:00', viewValue: '15 minutes'},
+    {value: '00:30:00', viewValue: '30 minutes'},
+    {value: '01:00:00', viewValue: '1 hour'},
+    {value: '02:00:00', viewValue: '2 hours'},
+    {value: '06:00:00', viewValue: '6 hours'},
     {value: '12:00:00', viewValue: '12 hours'},
   ];
 
@@ -78,6 +78,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   requestStatus = 0;
 
+  shelvedAtMessage = '';
+
   /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
@@ -101,12 +103,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.message = new FormControl('', [Validators.required]);
     this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);
+    this.shelvedAtMessage = '';
     this.form = this.formBuilder.group({
       message: this.message,
       timeout: this.timeout
     });
     this.route.paramMap.subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
+      this.reload();
     });
     this.sidenavService.shouldReload.subscribe(
       value => {
@@ -214,7 +218,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Cleans the component and reloads the Alarm
   */
   reload(): void {
+    this.shelvedAtMessage = '';
     this.alarm = this.alarmService.get(this.alarm_id);
+    if (this.alarm.shelved) {
+      this.requestShelveInfo();
+    }
     this.requestStatus = 0;
     this.message.reset();
     this.timeout.reset(this.defaultTimeout);
@@ -229,6 +237,20 @@ export class ShelveComponent implements OnInit, OnDestroy {
     } else {
       this.shelve();
     }
+  }
+
+  requestShelveInfo(): void {
+    this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
+        (response) => {
+          const registry = response[0];
+          this.shelvedAtMessage = 'This Alarm was shelved at ' + registry['shelved_at'] +
+          ' with a duration of ' + this.timeouts.find(t => t.value === registry['timeout']).viewValue;
+        },
+        (error) => {
+          console.log('Error: ', error);
+          return error;
+        }
+      );
   }
 
   /**

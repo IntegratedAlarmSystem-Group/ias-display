@@ -25,7 +25,7 @@
 
       <ng-template #actionProcess>
         <div class="section shelve-action" >
-          <div *ngIf="!alarm.shelved; then shelveForm"></div>
+          <div *ngIf="!alarm.shelved; then shelveForm; else unshelveForm"></div>
 
           <ng-template #shelveForm>
             <div class="section-title"> Information required to shelve the Alarm </div>
@@ -45,6 +45,13 @@
               </mat-select>
               <mat-error *ngIf="timeout.invalid"> You must select a duration in order to Shelve </mat-error>
             </mat-form-field>
+          </ng-template>
+
+          <ng-template #unshelveForm>
+            <div class="section shelve-action" >
+              <div class="section-title"> Shelve status </div>
+              <div> {{ shelvedAtMessage }} </div>
+            </div>
           </ng-template>
 
         </div>

@@ -18,6 +18,11 @@ export class SidenavService {
   public shouldReload = new BehaviorSubject<any>(false);
 
   /**
+  * Id of the last {@link Alarm}
+  */
+  lastAlarmId = '';
+
+  /**
    * Builds an instance of the service
    */
   constructor(
@@ -60,12 +65,24 @@ export class SidenavService {
     this.sidenav.toggle();
   }
 
-  public goToShelve(alarm_id: string) {
-    this.shouldReload.next(true);
-    this.routingService.goToShelve(alarm_id);
-  }
-
+  /**
+  * Go to Acknowledge View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Acknowledge
+  */
   public goToAcknowledge(alarm_id: string) {
     this.routingService.goToAcknowledge(alarm_id);
+  }
+
+  /**
+  * Go to Shelve View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Shleve/Unshelve
+  */
+  public goToShelve(alarm_id: string) {
+    if (alarm_id === this.lastAlarmId) {
+      this.shouldReload.next(true);
+    } else {
+      this.lastAlarmId = alarm_id;
+    }
+    this.routingService.goToShelve(alarm_id);
   }
 }
