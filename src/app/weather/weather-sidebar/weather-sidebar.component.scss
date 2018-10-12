@@ -29,10 +29,20 @@
           &.station {
             padding-left: 0;
             font-weight: bold;
+            height: 30px;
+            width: fit-content;
+            align: right;
           }
         }
         .icon {
           padding-left: 20px;
+          font-weight: bold;
+          height: 30px;
+          width: fit-content;
+          align: right;
+        }
+        .text {
+          padding-left: 0;
           height: 30px;
           width: fit-content;
           align: right;

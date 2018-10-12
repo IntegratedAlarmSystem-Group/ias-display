@@ -12,7 +12,12 @@
           </mat-expansion-panel-header>
           <table>
             <tr>
-              <td class="station">Station</td>
+              <!-- <td class="station">Station</td> -->
+              <td>
+                <div class="text">
+                  <app-alarm [alarm]="this.getAlarm(stationConfig.station)" [text]="'Station'"></app-alarm>
+                </div>
+              </td>
               <td>
                 <div class="status">
                   <app-status-view [alarm]="this.getAlarm(stationConfig.station)" [showActionBadges]="false"></app-status-view>

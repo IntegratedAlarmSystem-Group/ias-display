@@ -1,0 +1,50 @@
+@mixin alarm-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .clear {
+    color: mat-color($alarms, clear);
+  }
+
+  .set-low {
+    color: mat-color($alarms, set-low);
+  }
+
+  .set-medium {
+    color: mat-color($alarms, set-medium);
+  }
+
+  .set-high {
+    color: mat-color($alarms, set-high);
+  }
+
+  .set-critical {
+    color: mat-color($alarms, set-critical);
+  }
+
+  .unknown {
+    color: mat-color($alarms, unknown);
+  }
+
+  .maintenance {
+    color: mat-color($alarms, maintenance);
+  }
+
+  .shelved {
+    color: mat-color($alarms, shelved);
+  }
+
+  .unreliable {
+    font-weight: normal;
+  }
+
+  .reliable {
+    font-weight: bold;
+  }
+
+}

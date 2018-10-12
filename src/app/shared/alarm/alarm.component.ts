@@ -56,6 +56,11 @@ export class AlarmComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /**
+   * Alarm object associated to the component
+   */
+  @Input() text = '';
+
+  /**
    * Set of names for the images to use
    */
   @Input() images: AlarmImageSet;
@@ -96,6 +101,15 @@ export class AlarmComponent implements OnInit {
   }
 
   /**
+   * Returns the style class name based on the optional input size. By default
+   * the class is medium size.
+   * @return {string} style class name
+   */
+  getClass(): string {
+    return 'alarm-component-' + this.size;
+  }
+
+  /**
   * Returns the URL of the current image to use depending on the Alarm status
   * @return {string} url of the image
   */
@@ -129,6 +143,53 @@ export class AlarmComponent implements OnInit {
   }
 
   /**
+  * Returns the class to be used to display the text
+  * @return {string[]} list of css classes
+  */
+  getTextClass(): string[] {
+    const textClass = ['text'];
+    if (!this.alarm) {
+      textClass.push('unreliable');
+      textClass.push('unknown');
+      return textClass;
+    }
+    if (this.alarm.validity === 0) {
+      textClass.push('unreliable');
+    } else {
+      textClass.push('reliable');
+    }
+    if (this.alarm.shelved === true) {
+      textClass.push('shelved');
+    } else if (this.alarm.mode === OperationalMode.unknown) {
+      textClass.push('unknown');
+    } else if (this.alarm.showAsMaintenance()) {
+      textClass.push('maintenance');
+    } else if (this.alarm.value === Value.cleared) {
+      textClass.push('clear');
+    } else if (this.alarm.value === Value.set_low) {
+      textClass.push('set-low');
+    } else if (this.alarm.value === Value.set_medium) {
+      textClass.push('set-medium');
+    } else if (this.alarm.value === Value.set_high) {
+      textClass.push('set-high');
+    } else if (this.alarm.value === Value.set_critical) {
+      textClass.push('set-critical');
+    } else {
+      textClass.push('unreliable');
+      textClass.push('unknown');
+    }
+    return textClass;
+  }
+
+  /**
+   * Check if the alarm must be displayed as a text alarm or as an icon alarm
+   * @return {boolean} True if the {@link text}  {@link Input} is defined, false if not
+   */
+  isTextAlarm(): boolean {
+    return this.text !== '';
+  }
+
+  /**
    * Check if the alarm must be displayed with the pending ack badge activated
    * @return {boolean} True if the pending ack must be activated, false if it must not
    */
@@ -142,14 +203,5 @@ export class AlarmComponent implements OnInit {
    */
   showAsShelved(): boolean {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
-  }
-
-  /**
-   * Returns the style class name based on the optional input size. By default
-   * the class is medium size.
-   * @return {string} style class name
-   */
-  getClass(): string {
-    return 'alarm-component-' + this.size;
   }
 }
