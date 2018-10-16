@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService, WeatherStationConfig } from '../weather.service';
@@ -13,7 +13,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
   templateUrl: './weather-map.component.html',
   styleUrls: ['./weather-map.component.scss']
 })
-export class WeatherMapComponent implements OnInit {
+export class WeatherMapComponent implements OnInit, OnChanges {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component
@@ -54,11 +54,17 @@ export class WeatherMapComponent implements OnInit {
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
+  /** Variable to manage map updates  */
+  public updatedMap = new BehaviorSubject<any>(false);
+
   /** Data relations to manage the graphical elements */
   public datarelations: any;
 
   /** Dictionary to manage the display status of each pad, if free or in use, to locate an antenna */
-  public padsFreeStatus = {};
+  public padsDisplayStatus = {};
+
+  /** List to manage the pads in use */
+  public padsStatusGroupNames = [];
 
   /**
    * Builds an instance of the component
@@ -82,6 +88,13 @@ export class WeatherMapComponent implements OnInit {
   }
 
   /**
+   * Executed after any change in the component input
+   */
+  ngOnChanges() {
+    this.updateMap();
+  }
+
+  /**
    * Component initialization that involves the initialization of the {@link WeatherService}
    * if not already initialized and the initialization of the related map data source
    */
@@ -89,9 +102,9 @@ export class WeatherMapComponent implements OnInit {
     this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
-      for (const placemark of mapdata['placemarks']['pads']) {
-        this.padsFreeStatus[placemark.name] = true;
-      }
+      // for (const placemark of mapdata['placemarks']['pads']) {
+      //   this.padsFreeStatus[placemark.name] = true;
+      // }
       let placemarks_list = [];
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['pads']);
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['wstations']);
@@ -114,10 +127,22 @@ export class WeatherMapComponent implements OnInit {
       this.mapdataAvailable.next(true);
     });
     this.service.padsStatusAvailable.subscribe(
-      (value) => {
-        if (value) {
-          this.updateAntennaPadStatus();
-        }
+      (padsStatusFlag) => {
+        console.log('received pad status');
+        this.mapdataAvailable.subscribe( (mapStatusFlag) => {
+          console.log('map status');
+          this.updatedMap.subscribe(
+            (mapUpToDate) => {
+              console.log('updated map');
+              if (padsStatusFlag) {
+                if (mapStatusFlag) {
+                  if (!mapUpToDate) {
+                    this.updateAntennaPadDisplayStatus();
+                  }
+                }
+              }
+            });
+        });
     });
   }
 
@@ -144,19 +169,40 @@ export class WeatherMapComponent implements OnInit {
   /**
    * Update the status of the pads from webserver data
    */
-  updateAntennaPadStatus() {
-    const pads = Object.keys(this.service.padsStatus['members']);
-    for (let i = 0; i < pads.length; i++) {
-      const padStatus = this.service.padsStatus['members'][pads[i]];
-      let freeStatus = false;
-      if (padStatus === null) {
-        freeStatus = true;
+  updateAntennaPadDisplayStatus() {
+    this.padsStatusGroupNames = Object.keys(this.service.padsStatus);
+    const padGroups = Object.keys(this.service.padsStatus);
+    for (let i = 0; i < padGroups.length; i++) {
+      const group = padGroups[i];
+      let groupStatus = 'not-selected';
+      if (this.selectedStation !== null) {
+        if (group === this.selectedStation['group']) {
+          groupStatus = 'selected';
+        }
       }
-      console.log(freeStatus);
-      console.log(padStatus);
-      this.padsFreeStatus[pads[i]] = freeStatus;
+      if ( !( group in Object.keys(this.padsDisplayStatus) ) ) {
+        this.padsDisplayStatus[group] = {};
+      }
+      const pads = Object.keys(this.service.padsStatus[group]);
+      for (let j = 0; j < pads.length; j++) {
+        const padStatus = this.service.padsStatus[group][pads[j]];
+        let freeStatus = 'in-use';
+        if (padStatus === null) {
+          freeStatus = 'free';
+        }
+        this.padsDisplayStatus[group][pads[j]] = [groupStatus, freeStatus];
+      }
     }
+    this.updatedMap.next(true);
   }
+
+  /**
+   * Method to manage the display of the antenna pad status
+   */
+   updateMap() {
+     this.updatedMap.next(false);
+   }
+
 
   /**
    * Style for the backup weather stations

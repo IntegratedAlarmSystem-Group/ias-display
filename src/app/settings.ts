@@ -14,7 +14,7 @@ export const BackendUrls = {
   ANTENNAS_VIEW: '/panels-api/alarms-config/antennas_config/',
   WEATHER_SUMMARY: '/panels-api/alarms-config/weather_summary_config/',
   ANTENNAS_SUMMARY: '/panels-api/alarms-config/antennas_summary_config/',
-  PADS_STATUS: '/panels-api/placemark/pads_by_group/?group=',
+  PADS_STATUS: '/panels-api/placemark/pads_by_group/',
 };
 
 /** Set of websocket streams from where the applications to receives data from the Backend */
