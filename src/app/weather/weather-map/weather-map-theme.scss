@@ -8,6 +8,7 @@
 
   $map_stroke: mat-color($foreground, map-stroke);
   $selected_pad: mat-color($foreground, text);
+  $map_selected_pad: mat-color($foreground, map-selected-pad);
   $map_background: mat-color($background, background);
   $marker_stroke: mat-color($background, dialog);
   $selected_marker_stroke: mat-color($foreground, secondary-text);
@@ -35,6 +36,33 @@
     circle {
       stroke: $map_stroke;
       fill: $map_background;
+    }
+
+  }
+
+  svg g.antennas-pads {
+
+    circle.antennas-pad-status {
+      &.in-use {
+        &.selected {
+          stroke: $map_selected_pad;
+          fill: $map_selected_pad;
+        }
+        &.not-selected {
+          stroke: $map_stroke;
+          fill: $map_stroke;
+        }
+      }
+      &.free {
+        &.selected {
+          stroke: $map_selected_pad;
+          fill: none;
+        }
+        &.not-selected {
+          stroke: $map_stroke;
+          fill: none;
+        }
+      }
     }
 
   }

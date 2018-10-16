@@ -20,15 +20,14 @@ describe('WeatherService', () => {
   const padsStatusUrl = environment.httpUrl + BackendUrls.PADS_STATUS;
 
   const mockPadsStatusResponse = {
-      'group': 'S',
-      'members': {
+      'S': {
         'PAD1': 'A1',
         'PAD2': null,
       },
-      'not_members': {
+      'W': {
         'PAD3': null,
         'PAD4': 'A2',
-      }
+      },
   };
 
   beforeEach(() => {
