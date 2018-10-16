@@ -128,12 +128,9 @@ export class WeatherMapComponent implements OnInit, OnChanges {
     });
     this.service.padsStatusAvailable.subscribe(
       (padsStatusFlag) => {
-        console.log('received pad status');
         this.mapdataAvailable.subscribe( (mapStatusFlag) => {
-          console.log('map status');
           this.updatedMap.subscribe(
             (mapUpToDate) => {
-              console.log('updated map');
               if (padsStatusFlag) {
                 if (mapStatusFlag) {
                   if (!mapUpToDate) {
