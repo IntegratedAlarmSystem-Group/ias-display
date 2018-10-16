@@ -24,6 +24,7 @@
 
       .antennas-list {
         color: mat-color($foreground, secondary-text);
+        border-color: mat-color($foreground, divider);
       }
     }
 

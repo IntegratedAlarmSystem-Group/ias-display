@@ -15,6 +15,9 @@ export class WeatherStationConfig {
   /** ID to map the {@link Alarm} to the location on the map */
   public placemark: string;
 
+  /** Group of placemarks who the alarm belongs */
+  public group: string;
+
   /** ID of the main {@link Alarm} of the Weather Station */
   public station: string;
 
@@ -76,6 +79,11 @@ export class WeatherService {
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  public padsStatus = null;
+
+  /** Variable to check if pads status is available */
+  public padsStatusAvailable = new BehaviorSubject<any>(false);
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
@@ -94,6 +102,7 @@ export class WeatherService {
     if (this._initialized === false) {
       this.loadWeatherStationsConfig();
       this.loadImages();
+      this.loadPadsStatus('');
       this._initialized = true;
     }
   }
@@ -108,12 +117,26 @@ export class WeatherService {
   }
 
   /**
-  * Return list of antennas associated to the given weather station
-  * @param {string} station the ID of the weather station
-  * @returns {string[]} a list with the name of nearby antennas
+  * Requests data for the pads status, to know if each one is in use
+  * to locate, or not, an antenna
+  * @returns {Observable<Object>} observable of the data in a JSON
   */
-  getAntennas(station: string): string[] {
-    return ['A001', 'A002', 'A003'];
+  getPadsStatus(group: string): Observable<Object> {
+    const url = BackendUrls.PADS_STATUS + group;
+    return this.httpClient.get(url);
+  }
+
+  /**
+  * Loads the pads status in the related variable of this service
+  */
+  loadPadsStatus(group: string) {
+
+    this.getPadsStatus(group).subscribe(
+      (response) => {
+        this.padsStatusAvailable.next(false);
+        this.padsStatus = response;
+        this.padsStatusAvailable.next(true);
+    });
   }
 
   /**

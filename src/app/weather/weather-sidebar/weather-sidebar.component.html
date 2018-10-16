@@ -76,13 +76,13 @@
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">
             <div class="antennas-title"> Nearby Antennas </div>
-            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig.station)">
+            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">
               <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>
             </button>
           </div>
           <div class="antennas-list">
             <ul>
-              <li *ngFor="let antenna of this.getAntennas(stationConfig.station)"> {{antenna}} </li>
+              <li *ngFor="let antenna of this.getAntennas(stationConfig)"> {{antenna}} </li>
             </ul>
           </div>
         </mat-expansion-panel>

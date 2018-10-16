@@ -11,16 +11,6 @@
       fill="none"
     />
 
-    <svg:circle class="weather-map-pads" *ngFor="let p of mapPlacemarks['pads']"
-      [attr.cx]="p.opt_cx"
-      [attr.cy]="p.opt_cy"
-      [attr.data]="p.name"
-      r="5"
-      stroke="currentColor"
-      stroke-width="3"
-      fill="#212d3a"
-    />
-
     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
         <svg:foreignObject *ngIf="p.name === 'AOS'"
              [attr.x]="p.opt_cx-15"
@@ -33,27 +23,39 @@
         </svg:foreignObject>
     </ng-container>
 
+    <svg:g class="antennas-pads">
+
+      <ng-container *ngFor="let group of padsStatusGroupNames">
+
+        <ng-container *ngFor="let pads_item of padsDisplayStatus[group] | keyvalue">
+
+          <ng-container *ngFor="let p of [getPlacemarkObject(pads_item.key)]">
+
+            <svg:circle
+              class="antennas-pad-status"
+              [attr.cx]="p.opt_cx"
+              [attr.cy]="p.opt_cy"
+              [ngClass]="pads_item.value"
+              stroke="currentColor"
+              stroke-width="2"
+              r="5"
+            />
+
+          </ng-container>
+
+        </ng-container>
+
+      </ng-container>
+
+    </svg:g>
+
     <ng-container *ngFor="let padsGroup of getPadsGroups()">
-      <!-- <ng-container *ngFor="let primary_ws_name of [datarelations[padsGroup]['wstations']['primary'][0]]"> -->
+
       <ng-container *ngFor="let stationConfig of service.weatherStationsConfig">
         <ng-container *ngIf="stationConfig.placemark === getPrimaryWeatherStationConfig(padsGroup)">
           <!-- Elements by pads group -->
           <!-- Note: it should be one primary weather stationConfig related to a pad group -->
           <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(stationConfig)}" >
-            <ng-container *ngFor="let pad_name of datarelations[padsGroup]['pads']">
-              <!-- pads by group -->
-              <ng-container *ngFor="let p of [getPlacemarkObject(pad_name)]">
-                  <svg:circle
-                    [attr.cx]="p.opt_cx"
-                    [attr.cy]="p.opt_cy"
-                    [attr.data]="p.name"
-                    r="5"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-              </ng-container>
-              <!-- pads by group -->
-            </ng-container>
             <ng-container *ngFor="let p of [getPlacemarkObject(stationConfig.placemark)]">
               <svg:g class="weather-map-primary-ws-group"
                 [ngClass]="getPrimaryWeatherStationStyle(stationConfig)"
