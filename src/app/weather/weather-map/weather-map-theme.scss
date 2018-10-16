@@ -56,11 +56,11 @@
       &.free {
         &.selected {
           stroke: $map_selected_pad;
-          fill: none;
+          fill: $map_background;
         }
         &.not-selected {
           stroke: $map_stroke;
-          fill: none;
+          fill: $map_background;
         }
       }
     }
