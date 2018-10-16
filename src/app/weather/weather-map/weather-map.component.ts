@@ -194,7 +194,7 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Method to manage the display of the antenna pad status
+   * Method to trigger the update of the map according to the pads' status
    */
    updateMap() {
      this.updatedMap.next(false);
