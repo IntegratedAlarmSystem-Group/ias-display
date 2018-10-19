@@ -79,7 +79,7 @@ export class WeatherSidebarComponent implements OnInit {
             }
         }
     }
-    return response;
+    return response.sort();
   }
 
   /**
