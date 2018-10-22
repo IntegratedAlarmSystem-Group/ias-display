@@ -2,7 +2,7 @@ $cem: 1px;
 $xs-cem: 1*$cem;
 $sm-cem: 1.2*$cem;
 $md-cem: 1.6*$cem;
-$lg-cem: 2.2*$cem;
+$lg-cem: 3.0*$cem;
 $status-cem: 1*$cem;
 
 .alarm-component{
@@ -15,6 +15,7 @@ $status-cem: 1*$cem;
     .alarm-icon{
       height: 100%;
     }
+
   }
 
   .text {
@@ -49,6 +50,7 @@ $status-cem: 1*$cem;
       visibility: hidden;
     }
   }
+
 }
 
 .alarm-component-xs {
@@ -92,6 +94,7 @@ $status-cem: 1*$cem;
   .badges{
     @extend .badges;
     width: 8*$lg-cem;
+    margin-left: 10px;
   }
 }
 

@@ -37,7 +37,7 @@ html, body {
 
 #navigation-sidenav {
 
-  width: 220px;
+  min-width: 70px;
 
   p {
     padding-right: 50px;
@@ -54,13 +54,12 @@ html, body {
 
   mat-nav-list a.mat-list-item {
 
-    height: 80px;
-    padding-left: 10px;
+    height: 86px;
 
     mat-icon {
-      font-size: 40px;
-      height: 40px;
-      width: 40px;
+      font-size: 44px;
+      height: 44px;
+      width: 44px;
     }
 
     &.active-link {
