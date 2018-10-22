@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
 
   <mat-card-header>
     <app-legend></app-legend>
@@ -78,6 +78,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <mat-paginator [pageSizeOptions]="[15, 20, 25]" showFirstLastButtons></mat-paginator>
+
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 

@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable ,  BehaviorSubject ,  SubscriptionLike as ISubscription } from 'rxjs';
-import { MatTableDataSource, MatSort, MatSortable, MatTable } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../../data/alarm';
@@ -22,6 +22,9 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<Alarm>;
+
+  /** Reference to the MatPaginator, the component that defines the paginator of the table*/
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   /** Reference to the MatSort, the component that defines the sorting of the table */
   @ViewChild(MatSort) sort: MatSort;
@@ -56,6 +59,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
+
+  resultsLength = 0;
 
   /**
   * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values
@@ -111,6 +116,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /** Applies the table's default sorting after its initialization */
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   /**
