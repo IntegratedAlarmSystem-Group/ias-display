@@ -5,10 +5,30 @@ import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
-import { BackendUrls, Streams } from '../settings';
+import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
 
+
+export class AlarmSounds {
+    static none = '';
+    static type1 = 'Siren_Noise.mp3';
+    static type2 = 'Siren_Noise.mp3';
+    static type3 = 'Siren_Noise.mp3';
+    static type4 = 'Siren_Noise.mp3';
+
+  static getSoundsource(sound: string) {
+    if (sound === 'TYPE1') {
+      return Assets.SOUNDS + AlarmSounds.type1;
+    } else if (sound === 'TYPE2') {
+      return Assets.SOUNDS + AlarmSounds.type2;
+    } else if (sound === 'TYPE3') {
+      return Assets.SOUNDS + AlarmSounds.type3;
+    } else if (sound === 'TYPE4') {
+      return Assets.SOUNDS + AlarmSounds.type4;
+    }
+  }
+}
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -51,6 +71,12 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
+  * Defines wether or not the display should emit sounds when alarms are triggered.
+  * It is used to avoid sounds when the page is refreshed, and only allow them after that
+  */
+  private canSound: boolean;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
@@ -85,6 +111,7 @@ export class AlarmService {
   */
   initialize() {
     const alarmId = 1;
+    this.canSound = false;
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -95,12 +122,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      // console.log('notify ', payload);
+      console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
-      // console.log('request', payload);
+      console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessagesList(payload.data);
     });
@@ -267,13 +294,14 @@ export class AlarmService {
       this.add_or_update_alarm(alarm);
     }
     this.changeAlarms('all');
+    this.canSound = true;
   }
 
   /**
    * Adds or updates an {@link Alarm} to the AlarmService
    * @param {Alarm} alarm the {@link Alarm} to add or update
    */
-  private add_or_update_alarm(alarm) {
+  add_or_update_alarm(alarm) {
     let old_alarm_value = Value.cleared;
     if (alarm.core_id in this.alarmsIndexes) {
       old_alarm_value = this.alarmsArray[this.alarmsIndexes[alarm.core_id]].value;
@@ -283,7 +311,19 @@ export class AlarmService {
       this.alarmsIndexes[alarm.core_id] = newLength - 1;
     }
     if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
-      console.log('Play sound!!! alarm: ', alarm);
+      if (alarm.sound !== 'NONE') {
+        console.log('alarm: ', alarm);
+        this.emitSound(alarm.sound);
+      }
+    }
+  }
+
+  emitSound(sound: string) {
+    if (this.canSound) {
+      const audio = new Audio();
+      audio.src = AlarmSounds.getSoundsource(sound);
+      audio.load();
+      audio.play();
     }
   }
 
