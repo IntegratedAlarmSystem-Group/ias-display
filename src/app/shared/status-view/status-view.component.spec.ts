@@ -14,6 +14,9 @@ describe('StatusViewComponent', () => {
     'mode': '5',
     'core_timestamp': 1267252440000,
     'validity': '1',
+    'description': 'bla bla',
+    'url': 'http://alma.cl',
+    'sound': 'NONE',
     'ack': false,
     'dependencies': [],
   });
