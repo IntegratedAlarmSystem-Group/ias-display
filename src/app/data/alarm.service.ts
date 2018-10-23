@@ -4,7 +4,7 @@ import { Observable ,  BehaviorSubject } from 'rxjs';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
-import { Alarm, OperationalMode, Validity } from '../data/alarm';
+import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
 import { BackendUrls, Streams } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
@@ -249,16 +249,11 @@ export class AlarmService {
    * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
   readAlarmMessage(action, obj) {
-    const alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      const alarm = Alarm.asAlarm(obj);
+      this.add_or_update_alarm(alarm);
+      this.changeAlarms(alarm.core_id);
     }
-    this.changeAlarms(alarm.core_id);
   }
 
   /**
@@ -269,14 +264,27 @@ export class AlarmService {
   readAlarmMessagesList(alarmsList) {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      this.add_or_update_alarm(alarm);
     }
     this.changeAlarms('all');
+  }
+
+  /**
+   * Adds or updates an {@link Alarm} to the AlarmService
+   * @param {Alarm} alarm the {@link Alarm} to add or update
+   */
+  private add_or_update_alarm(alarm) {
+    let old_alarm_value = Value.cleared;
+    if (alarm.core_id in this.alarmsIndexes) {
+      old_alarm_value = this.alarmsArray[this.alarmsIndexes[alarm.core_id]].value;
+      this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
+    } else {
+      const newLength = this.alarmsArray.push(alarm);
+      this.alarmsIndexes[alarm.core_id] = newLength - 1;
+    }
+    if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
+      console.log('Play sound!!! alarm: ', alarm);
+    }
   }
 
   /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
