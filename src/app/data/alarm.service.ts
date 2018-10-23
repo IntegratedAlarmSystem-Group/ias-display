@@ -12,10 +12,10 @@ import { HttpClientService } from './http-client.service';
 
 export class AlarmSounds {
     static none = '';
-    static type1 = 'Siren_Noise.mp3';
-    static type2 = 'Siren_Noise.mp3';
-    static type3 = 'Siren_Noise.mp3';
-    static type4 = 'Siren_Noise.mp3';
+    static type1 = 'Alarm_Sound_1.mp3';
+    static type2 = 'Alarm_Sound_2.mp3';
+    static type3 = 'Alarm_Sound_3.mp3';
+    static type4 = 'Alarm_Sound_4.mp3';
 
   static getSoundsource(sound: string) {
     if (sound === 'TYPE1') {
