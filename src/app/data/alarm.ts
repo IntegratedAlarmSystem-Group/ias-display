@@ -185,13 +185,13 @@ export class Alarm {
   }
 
   /**
-  * Returns a Date representation according to the selected UTC offset in the app settings
+  * Returns a string representation according to the selected UTC offset in the app settings
   * for the {@link Alarm.state_change_timestamp} attribute
-  * @returns {Date} a date format representation of the Alarm state_change_timestamp
+  * @returns {string} a date format representation of the Alarm state_change_timestamp
   */
-  get timestampOffset(): Date {
+  get formattedTimestamp(): string {
     const ts = this.state_change_timestamp;
-    return moment(ts).utcOffset(Locale.TIMEZONE).toDate();
+    return moment(ts).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
   }
 
 

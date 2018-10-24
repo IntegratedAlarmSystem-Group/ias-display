@@ -216,15 +216,12 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   alarmToStringForFiltering(alarm: Alarm): string {
 
     const ackKey = alarm.ack ? '"ack"' : '"unack"';
-    const shelveKey = alarm.ack ? '"shelved"' : '"unshelved"';
+    const shelveKey = alarm.shelved ? '"shelved"' : '"unshelved"';
     const modeKey = `"${alarm.operationalMode}"`;
     const valueKey = `"${alarm.alarmValue}"`;
     const validityKey = `"${alarm.alarmValidity}"`;
 
-    const formattedTimestamp = this.datePipe.transform(
-      alarm.timestampOffset,
-      this.dateFormat
-    );
+    const formattedTimestamp = alarm.formattedTimestamp;
 
     return [
       alarm.description,

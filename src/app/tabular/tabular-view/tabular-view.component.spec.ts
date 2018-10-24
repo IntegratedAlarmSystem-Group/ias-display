@@ -155,21 +155,21 @@ describe('TabularViewComponent', () => {
       'value': 0,
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',
-      'mode': '0',
       'core_timestamp': 1267252440000,
-      'validity': '1',
       'state_change_timestamp': 1267252440000,
       'description': 'Description',
       'url': 'https://www.alma.cl',
       'ack': false,
       'shelved': false,
+      'mode': '0',
+      'validity': '1',
       'dependencies': [],
     });
 
-    it('it should be a method to create a string for the table filters', () => {
+    it('should be a method to create a string for the table filters', () => {
 
+      const tsString = alarm.formattedTimestamp;
       const alarmString = component.alarmToStringForFiltering(alarm);
-      const tsString = datePipe.transform(alarm.timestampOffset, Locale.DATE_FORMAT);
 
       expect(alarmString.includes(alarm.description)).toBeTruthy();
       expect(alarmString.includes(alarm.name)).toBeTruthy();
@@ -181,6 +181,7 @@ describe('TabularViewComponent', () => {
       expect(alarmString.includes('"reliable"')).toBeTruthy();
 
     });
+
   });
 
 });
