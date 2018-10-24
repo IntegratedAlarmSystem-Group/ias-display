@@ -317,7 +317,28 @@ export class AlarmService {
     }
     if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
       if (alarm.sound !== 'NONE') {
-        this.emitSound(alarm.sound, alarm.value === Value.set_critical);
+        this.playAlarmSound(alarm);
+      }
+    }
+  }
+
+  /**
+   * Reproduces the sound of a given {@link Alarm}
+   * @param {Alarm} alarm the {@link Alarm}
+   */
+  playAlarmSound(alarm: Alarm) {
+    if (!this.canSound) {
+      return;
+    }
+    const repeat = alarm.value === Value.set_critical;
+    if (this.audio === null) {
+      this.emitSound(alarm.sound, repeat);
+    } else {
+      if (this.audio.paused) {
+        this.emitSound(alarm.sound, repeat);
+      } else if (repeat) {
+        this.audio.stop();
+        this.emitSound(alarm.sound, repeat);
       }
     }
   }
@@ -328,12 +349,10 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    if (this.canSound && (this.audio === null || this.audio.paused)) {
-      this.audio = new Audio();
-      this.audio.src = AlarmSounds.getSoundsource(sound);
-      this.audio.load();
-      this.audio.play();
-    }
+    this.audio = new Audio();
+    this.audio.src = AlarmSounds.getSoundsource(sound);
+    this.audio.load();
+    this.audio.play();
   }
 
   /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
