@@ -84,7 +84,7 @@ export class AlarmService {
   /**
   * Id of the currenlty sounding Alarm
   */
-  private soundingAlarm: string;
+  public soundingAlarm: string;
 
   /**
    * Builds an instance of the service
@@ -359,6 +359,7 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
+    console.log('calling emit with: ', sound);
     this.audio = new Audio();
     this.audio.src = AlarmSounds.getSoundsource(sound);
     if (repeat) {

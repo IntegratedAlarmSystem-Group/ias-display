@@ -79,6 +79,69 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'dependencies': [],
     }
   }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$2',
+      'running_id': 'coreid$2',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE4',
+      'ack': false,
+      'shelved': false,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$2',
+      'running_id': 'coreid$2',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE4',
+      'ack': true,
+      'shelved': false,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE3',
+      'ack': true,
+      'shelved': false,
+      'dependencies': [],
+    }
+  }
 }
 ];
 
@@ -141,7 +204,7 @@ const fixtureAlarmsList = {
   }
 };
 
-fdescribe('AlarmService', () => {
+describe('AlarmService', () => {
 
 
   beforeEach(() => {
@@ -202,7 +265,7 @@ fdescribe('AlarmService', () => {
 
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
-    const fixtureAlarms = alarmsFromWebServer;
+    const fixtureAlarms = [alarmsFromWebServer[0], alarmsFromWebServer[1]];
     mockStream = new Server(environment.websocketPath);  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
@@ -244,6 +307,108 @@ fdescribe('AlarmService', () => {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
         expect(spyEmitSound).toHaveBeenCalledWith('TYPE1', false);
+        expect(subject.soundingAlarm).toBeUndefined();
+      }
+
+      stage += 1;
+    });
+
+    subject.initialize();
+
+  }));
+
+  it('should update the alarms dictionary on new alarm messages and play sounds repeatedly for critical alarms', async(() => {
+
+    // To use a 2-steps test for alarms messages
+
+    // It is used just one alarm with the following stages:
+    // creation (stage 1) and update (stage 2) actions
+    // from the web Server
+
+    // Arrange:
+    let stage = 0;  // initial state index with no messages from server
+    const fixtureAlarms = [
+      alarmsFromWebServer[0], alarmsFromWebServer[2], alarmsFromWebServer[3], alarmsFromWebServer[4],  alarmsFromWebServer[5]
+    ];
+    mockStream = new Server(environment.websocketPath);  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarms from server
+      for (const alarm of fixtureAlarms) {
+        mockStream.send(JSON.stringify(alarm));
+      }
+      mockStream.stop();
+    });
+
+    // Act and assert:
+
+    subject.alarmChangeStream.subscribe(notification => {
+      subject.canSound = true;
+      subject.audio = new Audio();
+      const notified_alarms = subject.alarmsArray;
+      if (stage === 0) {  // no messages
+        expect(notified_alarms).toEqual([]);
+        expect(Object.keys(notified_alarms).length).toEqual(0);
+      }
+
+      if (stage === 1) {  // create
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+      }
+
+      if (stage === 2) {  // update with crtical alarm
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(spyEmitSound).toHaveBeenCalledWith('TYPE3', true);
+        expect(subject.soundingAlarm).toEqual('coreid$1');
+      }
+
+      if (stage === 3) {  // update with another critical alarm
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(2);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
+        const fixtureAlarmMsg = fixtureAlarms[2]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(spyEmitSound).toHaveBeenCalledWith('TYPE4', true);
+        expect(subject.soundingAlarm).toEqual('coreid$2');
+      }
+
+      if (stage === 4) {  // acknowledge the second critical alarm
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(2);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
+        const fixtureAlarmMsg = fixtureAlarms[3]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(subject.soundingAlarm).toEqual('coreid$1');
+      }
+
+      if (stage === 5) {  // acknowledge the first critical alarm
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(2);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[4]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(subject.soundingAlarm).toEqual(null);
       }
 
       stage += 1;
