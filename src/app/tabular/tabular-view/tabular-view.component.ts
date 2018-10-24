@@ -35,8 +35,10 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * When the user writes either "set", " set" or "set " this field becomes true
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
+  * Analogous for the unack filter, with the key '"unack"' instead.
   */
   public _setFilterActivated = false;
+  public _unackFilterActivated = false;
 
   /** String that stores the test input in the filter textfield */
   public filterString = '';
@@ -54,6 +56,9 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** String to define the keyword to filter SET {@link Alarm} */
   private filterValueForSetAlarms = 'set';
+
+  /** String to define the keyword to filter UNACK {@link Alarm} */
+  private filterValueForUnackAlarms = '"unack"';
 
   /** DataSource of the Table */
   public dataSource: MatTableDataSource<Alarm>;
@@ -164,6 +169,13 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     } else { // If "set" NOT in the field, then it is deactivated
       this._setFilterActivated = false;
     }
+    // If '"unack"' IS in the array, then it is activated
+    if (arrayOfFilters.indexOf(this.filterValueForUnackAlarms) >= 0 ) {
+      this._unackFilterActivated = true;
+
+    } else { // If '"unack"' NOT in the field, then it is deactivated
+      this._unackFilterActivated = false;
+    }
     filter = filter.trim();
     filter = filter.toLowerCase();
     this.dataSource.filter = filter;
@@ -194,6 +206,30 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
+  * Toggle the filtering for only unack {@link Alarm} objects ON/OFF
+  */
+  toggleFilterOnlyUnackAlarm() {
+    if (this.filterString == null) {
+      this.filterString = '';
+    }
+    const arrayOfFilters = this.filterString.split(' ');
+    const indexOfUnack = arrayOfFilters.indexOf(this.filterValueForUnackAlarms);
+
+    // If activated then should deactivate:
+    if (this._unackFilterActivated) {
+      if ( indexOfUnack >= 0 ) {
+        arrayOfFilters.splice(indexOfUnack, 1);
+      }
+    } else { // If deactivated then should activate:
+      if ( indexOfUnack < 0 ) {
+        arrayOfFilters.push(this.filterValueForUnackAlarms);
+      }
+    }
+    this.filterString = arrayOfFilters.join(' ');
+    this.applyFilter(this.filterString);
+  }
+
+  /**
   * Returns the filters applied to the Table
   * @returns {string} filters applied
   */
@@ -206,7 +242,10 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * @returns {object} with filters applied by key
   */
   get filtersToggleStatus(): object {
-    return {'setFilter': this._setFilterActivated};
+    return {
+      'setFilter': this._setFilterActivated,
+      'unackFilter': this._unackFilterActivated
+    };
   }
 
   /**

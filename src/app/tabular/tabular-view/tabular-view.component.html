@@ -15,7 +15,10 @@
         </button>
       </mat-form-field>
       <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterOnlySetAlarm()">
-        Show only set alarms
+        Show set alarms
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterOnlyUnackAlarm()">
+        Show unack alarms
       </mat-slide-toggle>
     </div>
 

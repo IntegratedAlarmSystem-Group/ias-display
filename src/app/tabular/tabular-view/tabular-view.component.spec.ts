@@ -20,7 +20,7 @@ import { DatePipe } from '@angular/common';
 import { Locale } from '../../settings';
 
 
-fdescribe('TabularViewComponent', () => {
+describe('TabularViewComponent', () => {
   let datePipe: DatePipe;
   let component: TabularViewComponent;
   let fixture: ComponentFixture<TabularViewComponent>;
@@ -140,6 +140,57 @@ fdescribe('TabularViewComponent', () => {
       expect(component.dataSource.filter).toEqual('temperature');
       filtersToggle = component.filtersToggleStatus;
       expect(filtersToggle['setFilter']).toEqual(false);
+    });
+  });
+
+  describe('GIVEN the user clicks on the toggle for not ack Alarms only', () => {
+    it(`WHEN previously the filter was "temperature",
+        THEN the filter should be "temperature "unack"",
+        and the toggle should be true`, () => {
+      component.applyFilter('temperature');
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(false);
+      component.toggleFilterOnlyUnackAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature "unack"');
+      expect(component.dataSource.filter).toEqual('temperature "unack"');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(true);
+    });
+
+    it(`WHEN previously the filter was "temperature "unack"",
+        THEN the filter should be "temperature",
+        and the toggle should be false`, () => {
+      component.applyFilter('temperature "unack"');
+      expect(component.filters).toEqual('temperature "unack"');
+      expect(component.dataSource.filter).toEqual('temperature "unack"');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(true);
+      component.toggleFilterOnlyUnackAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(false);
+    });
+
+    it(`WHEN previously the filter was "set temperature",
+        THEN the filter should be "temperature",
+        and the toggle should be false
+      `, () => {
+      component.applyFilter('"unack" temperature');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(true);
+      expect(component.filters).toEqual('"unack" temperature');
+      expect(component.dataSource.filter).toEqual('"unack" temperature');
+      component.toggleFilterOnlyUnackAlarm();
+      fixture.detectChanges();
+      expect(component.filters).toEqual('temperature');
+      expect(component.dataSource.filter).toEqual('temperature');
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['unackFilter']).toEqual(false);
     });
   });
 
