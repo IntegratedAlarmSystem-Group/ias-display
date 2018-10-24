@@ -74,12 +74,12 @@ export class AlarmService {
   * Defines wether or not the display should emit sounds when alarms are triggered.
   * It is used to avoid sounds when the page is refreshed, and only allow them after that
   */
-  private canSound: boolean;
+  public canSound: boolean;
 
   /**
   * Reference to the audio object used to play the sounds
   */
-  private audio = new Audio();
+  public audio = new Audio();
 
   /**
   * Id of the currenlty sounding Alarm
