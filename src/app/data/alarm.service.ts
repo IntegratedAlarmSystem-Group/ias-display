@@ -337,7 +337,7 @@ export class AlarmService {
       if (this.audio.paused) {
         this.emitSound(alarm.sound, repeat);
       } else if (repeat) {
-        this.audio.stop();
+        this.audio.pause();
         this.emitSound(alarm.sound, repeat);
       }
     }
