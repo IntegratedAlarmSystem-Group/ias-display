@@ -82,6 +82,11 @@ export class AlarmService {
   private audio = new Audio();
 
   /**
+  * Id of the currenlty sounding Alarm
+  */
+  private soundingAlarm: string;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
@@ -115,7 +120,6 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    const alarmId = 1;
     this.canSound = false;
     this.audio = new Audio();
     this.connect();
@@ -309,8 +313,11 @@ export class AlarmService {
    */
   add_or_update_alarm(alarm) {
     let old_alarm_value = Value.cleared;
+    let old_alarm_ack = true;
     if (alarm.core_id in this.alarmsIndexes) {
-      old_alarm_value = this.alarmsArray[this.alarmsIndexes[alarm.core_id]].value;
+      const old_alarm = this.alarmsArray[this.alarmsIndexes[alarm.core_id]];
+      old_alarm_value = old_alarm.value;
+      old_alarm_ack = old_alarm.ack;
       this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
     } else {
       const newLength = this.alarmsArray.push(alarm);
@@ -319,6 +326,11 @@ export class AlarmService {
     if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
       if (alarm.sound !== 'NONE') {
         this.playAlarmSound(alarm);
+      }
+    }
+    if (!old_alarm_ack && alarm.ack) {
+      if (alarm.sound !== 'NONE') {
+        this.clearSoundsIfAck(alarm);
       }
     }
   }
@@ -331,11 +343,12 @@ export class AlarmService {
     if (!this.canSound) {
       return;
     }
-    const repeat = alarm.value === Value.set_critical;
-    if (this.audio.paused) {
-      this.emitSound(alarm.sound, repeat);
-    } else if (repeat) {
+    const repeat = alarm.shouldRepeat();
+    if (repeat) {
+      this.soundingAlarm = alarm.core_id;
       this.audio.pause();
+      this.emitSound(alarm.sound, repeat);
+    } else if (this.audio.paused) {
       this.emitSound(alarm.sound, repeat);
     }
   }
@@ -348,8 +361,31 @@ export class AlarmService {
   emitSound(sound: string, repeat: boolean) {
     this.audio = new Audio();
     this.audio.src = AlarmSounds.getSoundsource(sound);
+    if (repeat) {
+      this.audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+    }
     this.audio.load();
     this.audio.play();
+  }
+
+  clearSoundsIfAck(alarm: Alarm) {
+    if (!alarm.shouldRepeat()) {
+      return;
+    }
+    if (this.soundingAlarm === alarm.core_id) {
+      this.audio.pause();
+      this.soundingAlarm = null;
+      for (alarm of this.alarmsArray) {
+        if (!alarm.ack && alarm.sound !== 'NONE' && alarm.shouldRepeat()) {
+          this.soundingAlarm = alarm.core_id;
+          this.playAlarmSound(alarm);
+          return;
+        }
+      }
+    }
   }
 
   /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/

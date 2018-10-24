@@ -204,6 +204,15 @@ export class Alarm {
   }
 
   /**
+  * Returns wether or not an {@link Alarm} sound should be repeated
+  * Currently this is true for critical alarms ({@link Value.set_critical})
+  * @returns {boolean} true if the alarm sound should be repeated or false if not
+  */
+  shouldRepeat(): boolean {
+    return this.value === Value.set_critical;
+  }
+
+  /**
   * Acknowledges the {@link Alarm} and returns the acknowledge status
   * @param {message} string string message of the acknowledgement
   * @returns {boolean} a the acknowledgement status
