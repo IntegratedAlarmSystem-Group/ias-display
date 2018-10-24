@@ -77,6 +77,11 @@ export class AlarmService {
   private canSound: boolean;
 
   /**
+  * Reference to the audio object used to play the sounds
+  */
+  private audio = null;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
@@ -122,12 +127,12 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessage(payload.action, payload.data);
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
-      console.log('request', payload);
+      // console.log('request', payload);
       this.updateLastReceivedMessageTimestamp();
       this.readAlarmMessagesList(payload.data);
     });
@@ -312,18 +317,22 @@ export class AlarmService {
     }
     if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
       if (alarm.sound !== 'NONE') {
-        console.log('alarm: ', alarm);
-        this.emitSound(alarm.sound);
+        this.emitSound(alarm.sound, alarm.value === Value.set_critical);
       }
     }
   }
 
-  emitSound(sound: string) {
-    if (this.canSound) {
-      const audio = new Audio();
-      audio.src = AlarmSounds.getSoundsource(sound);
-      audio.load();
-      audio.play();
+  /**
+   * Reproduces a sound
+   * @param {string} sound the type of sound to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not
+   */
+  emitSound(sound: string, repeat: boolean) {
+    if (this.canSound && (this.audio === null || this.audio.paused)) {
+      this.audio = new Audio();
+      this.audio.src = AlarmSounds.getSoundsource(sound);
+      this.audio.load();
+      this.audio.play();
     }
   }
 
