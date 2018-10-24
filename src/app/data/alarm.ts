@@ -70,6 +70,9 @@ export class Alarm {
   /** Documentation url of the {@link Alarm} */
   url: string;
 
+  /** Sound name to play when an {@link Alarm} changes to set */
+  sound: string;
+
   /** Acknowledgement status */
   ack: boolean;
 
@@ -101,6 +104,7 @@ export class Alarm {
       json.hasOwnProperty('validity') &&
       json.hasOwnProperty('description') &&
       json.hasOwnProperty('url') &&
+      json.hasOwnProperty('sound') &&
       json.hasOwnProperty('ack') &&
       json.hasOwnProperty('shelved') &&
       json.hasOwnProperty('dependencies')
@@ -126,11 +130,12 @@ export class Alarm {
     const validity = <number>json['validity'];
     const description = <string>json['description'];
     const url = <string>json['url'];
+    const sound = <string>json['sound'];
     const ack = <boolean>json['ack'];
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, description, url, ack, shelved, dependencies });
+      state_change_timestamp, validity, description, url, sound, ack, shelved, dependencies });
   }
 
   /**
@@ -196,6 +201,15 @@ export class Alarm {
     } else {
       return false;
     }
+  }
+
+  /**
+  * Returns wether or not an {@link Alarm} sound should be repeated
+  * Currently this is true for critical alarms ({@link Value.set_critical})
+  * @returns {boolean} true if the alarm sound should be repeated or false if not
+  */
+  shouldRepeat(): boolean {
+    return this.value === Value.set_critical;
   }
 
   /**

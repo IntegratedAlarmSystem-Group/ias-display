@@ -28,6 +28,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
+    'sound': 'NONE',
     'ack': false,
     'shelved': false,
     'dependencies': [],

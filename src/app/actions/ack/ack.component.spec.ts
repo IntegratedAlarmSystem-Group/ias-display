@@ -33,6 +33,7 @@ describe('AckComponent', () => {
     'state_change_timestamp': 1267252440000,
     'description': 'Short description for mock alarm',
     'url': 'https://www.alma.cl',
+    'sound': 'NONE',
     'ack': false,
     'shelved': false,
     'dependencies': [],

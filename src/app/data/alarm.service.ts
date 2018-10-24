@@ -4,11 +4,31 @@ import { Observable ,  BehaviorSubject } from 'rxjs';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
-import { Alarm, OperationalMode, Validity } from '../data/alarm';
-import { BackendUrls, Streams } from '../settings';
+import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
+import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
 
+
+export class AlarmSounds {
+    static none = '';
+    static type1 = 'Alarm_Sound_1.mp3';
+    static type2 = 'Alarm_Sound_2.mp3';
+    static type3 = 'Alarm_Sound_3.mp3';
+    static type4 = 'Alarm_Sound_4.mp3';
+
+  static getSoundsource(sound: string) {
+    if (sound === 'TYPE1') {
+      return Assets.SOUNDS + AlarmSounds.type1;
+    } else if (sound === 'TYPE2') {
+      return Assets.SOUNDS + AlarmSounds.type2;
+    } else if (sound === 'TYPE3') {
+      return Assets.SOUNDS + AlarmSounds.type3;
+    } else if (sound === 'TYPE4') {
+      return Assets.SOUNDS + AlarmSounds.type4;
+    }
+  }
+}
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -51,6 +71,22 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
+  * Defines wether or not the display should emit sounds when alarms are triggered.
+  * It is used to avoid sounds when the page is refreshed, and only allow them after that
+  */
+  public canSound: boolean;
+
+  /**
+  * Reference to the audio object used to play the sounds
+  */
+  public audio = new Audio();
+
+  /**
+  * Id of the currenlty sounding Alarm
+  */
+  public soundingAlarm: string;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
@@ -84,7 +120,8 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    const alarmId = 1;
+    this.canSound = false;
+    this.audio = new Audio();
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -249,16 +286,11 @@ export class AlarmService {
    * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
   readAlarmMessage(action, obj) {
-    const alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      const alarm = Alarm.asAlarm(obj);
+      this.add_or_update_alarm(alarm);
+      this.changeAlarms(alarm.core_id);
     }
-    this.changeAlarms(alarm.core_id);
   }
 
   /**
@@ -269,14 +301,92 @@ export class AlarmService {
   readAlarmMessagesList(alarmsList) {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      this.add_or_update_alarm(alarm);
     }
     this.changeAlarms('all');
+    this.canSound = true;
+  }
+
+  /**
+   * Adds or updates an {@link Alarm} to the AlarmService
+   * @param {Alarm} alarm the {@link Alarm} to add or update
+   */
+  add_or_update_alarm(alarm) {
+    let old_alarm_value = Value.cleared;
+    let old_alarm_ack = true;
+    if (alarm.core_id in this.alarmsIndexes) {
+      const old_alarm = this.alarmsArray[this.alarmsIndexes[alarm.core_id]];
+      old_alarm_value = old_alarm.value;
+      old_alarm_ack = old_alarm.ack;
+      this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
+    } else {
+      const newLength = this.alarmsArray.push(alarm);
+      this.alarmsIndexes[alarm.core_id] = newLength - 1;
+    }
+    if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
+      if (alarm.sound !== 'NONE') {
+        this.playAlarmSound(alarm);
+      }
+    }
+    if (!old_alarm_ack && alarm.ack) {
+      if (alarm.sound !== 'NONE') {
+        this.clearSoundsIfAck(alarm);
+      }
+    }
+  }
+
+  /**
+   * Reproduces the sound of a given {@link Alarm}
+   * @param {Alarm} alarm the {@link Alarm}
+   */
+  playAlarmSound(alarm: Alarm) {
+    if (!this.canSound) {
+      return;
+    }
+    const repeat = alarm.shouldRepeat();
+    if (repeat) {
+      this.soundingAlarm = alarm.core_id;
+      this.audio.pause();
+      this.emitSound(alarm.sound, repeat);
+    } else if (this.audio.paused) {
+      this.emitSound(alarm.sound, repeat);
+    }
+  }
+
+  /**
+   * Reproduces a sound
+   * @param {string} sound the type of sound to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not
+   */
+  emitSound(sound: string, repeat: boolean) {
+    console.log('calling emit with: ', sound);
+    this.audio = new Audio();
+    this.audio.src = AlarmSounds.getSoundsource(sound);
+    if (repeat) {
+      this.audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+    }
+    this.audio.load();
+    this.audio.play();
+  }
+
+  clearSoundsIfAck(alarm: Alarm) {
+    if (!alarm.shouldRepeat()) {
+      return;
+    }
+    if (this.soundingAlarm === alarm.core_id) {
+      this.audio.pause();
+      this.soundingAlarm = null;
+      for (alarm of this.alarmsArray) {
+        if (!alarm.ack && alarm.sound !== 'NONE' && alarm.shouldRepeat()) {
+          this.soundingAlarm = alarm.core_id;
+          this.playAlarmSound(alarm);
+          return;
+        }
+      }
+    }
   }
 
   /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
