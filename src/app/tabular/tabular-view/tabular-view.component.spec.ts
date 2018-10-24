@@ -16,9 +16,12 @@ import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm } from '../../data/alarm';
 import { Iasio } from '../../data/iasio';
+import { DatePipe } from '@angular/common';
+import { Locale } from '../../settings';
 
 
 describe('TabularViewComponent', () => {
+  let datePipe: DatePipe;
   let component: TabularViewComponent;
   let fixture: ComponentFixture<TabularViewComponent>;
   let debug: DebugElement;
@@ -57,10 +60,18 @@ describe('TabularViewComponent', () => {
           },
         },
         { provide: Router, useValue: spyRoutingTable },
+        DatePipe
       ]
     })
     .compileComponents();
   }));
+
+  beforeEach(inject(
+    [ DatePipe ],
+    ( dp: DatePipe ) => {
+      datePipe = dp;
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TabularViewComponent);
@@ -136,4 +147,40 @@ describe('TabularViewComponent', () => {
       expect(filteredSortedData).toEqual(ExpectedFilteredTableRows);
     });
   });
+
+  // TEST ALARMS STRING FOR FILTERS
+  describe('GIVEN an alarm', () => {
+
+    const alarm = Alarm.asAlarm({
+      'value': 0,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': '0',
+      'core_timestamp': 1267252440000,
+      'validity': '1',
+      'state_change_timestamp': 1267252440000,
+      'description': 'Description',
+      'url': 'https://www.alma.cl',
+      'ack': false,
+      'shelved': false,
+      'dependencies': [],
+    });
+
+    it('it should be a method to create a string for the table filters', () => {
+
+      const alarmString = component.alarmToStringForFiltering(alarm);
+      const tsString = datePipe.transform(alarm.timestampOffset, Locale.DATE_FORMAT);
+
+      expect(alarmString.includes(alarm.description)).toBeTruthy();
+      expect(alarmString.includes(alarm.name)).toBeTruthy();
+      expect(alarmString.includes(tsString)).toBeTruthy();
+      expect(alarmString.includes('"unack"')).toBeTruthy();
+      expect(alarmString.includes('"unshelved"')).toBeTruthy();
+      expect(alarmString.includes('"startup"')).toBeTruthy();
+      expect(alarmString.includes('"cleared"')).toBeTruthy();
+      expect(alarmString.includes('"reliable"')).toBeTruthy();
+
+    });
+  });
+
 });

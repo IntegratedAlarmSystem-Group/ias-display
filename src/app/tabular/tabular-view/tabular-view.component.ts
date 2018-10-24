@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { Locale } from '../../settings';
+import { DatePipe } from '@angular/common';
 
 /**
 * Component that dispays all the Alarms in a table
@@ -68,7 +69,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   public filterPredicate: (
     (data: Alarm, filterString: string) => boolean) = (data: Alarm, filterString: string): boolean => {
-    const dataStr = data.toStringForFiltering().toLowerCase();
+    const dataStr = this.alarmToStringForFiltering(data).toLowerCase();
     const filters = filterString.toLowerCase().split(' ');
     for (const filter of filters) {
       if (dataStr.indexOf(filter) === -1) {
@@ -85,7 +86,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   constructor(
     private alarmService: AlarmService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {}
 
   /**
@@ -205,5 +207,34 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   get toggleStatus(): boolean {
     return this._setFilterActivated;
+  }
+
+  /**
+  * Returns a string representation of the {@link Alarm} for filtering purposes
+  * @returns {string} info of the {@link Alarm} for filtering purposes, joined by " "
+  */
+  alarmToStringForFiltering(alarm: Alarm): string {
+
+    const ackKey = alarm.ack ? '"ack"' : '"unack"';
+    const shelveKey = alarm.ack ? '"shelved"' : '"unshelved"';
+    const modeKey = `"${alarm.operationalMode}"`;
+    const valueKey = `"${alarm.alarmValue}"`;
+    const validityKey = `"${alarm.alarmValidity}"`;
+
+    const formattedTimestamp = this.datePipe.transform(
+      alarm.timestampOffset,
+      this.dateFormat
+    );
+
+    return [
+      alarm.description,
+      alarm.name,
+      formattedTimestamp,
+      ackKey,
+      shelveKey,
+      modeKey,
+      valueKey,
+      validityKey
+    ].join(' ');
   }
 }
