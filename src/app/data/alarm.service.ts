@@ -79,7 +79,7 @@ export class AlarmService {
   /**
   * Reference to the audio object used to play the sounds
   */
-  private audio = null;
+  private audio = new Audio();
 
   /**
    * Builds an instance of the service
@@ -117,6 +117,7 @@ export class AlarmService {
   initialize() {
     const alarmId = 1;
     this.canSound = false;
+    this.audio = new Audio();
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -331,15 +332,11 @@ export class AlarmService {
       return;
     }
     const repeat = alarm.value === Value.set_critical;
-    if (this.audio === null) {
+    if (this.audio.paused) {
       this.emitSound(alarm.sound, repeat);
-    } else {
-      if (this.audio.paused) {
-        this.emitSound(alarm.sound, repeat);
-      } else if (repeat) {
-        this.audio.pause();
-        this.emitSound(alarm.sound, repeat);
-      }
+    } else if (repeat) {
+      this.audio.pause();
+      this.emitSound(alarm.sound, repeat);
     }
   }
 
