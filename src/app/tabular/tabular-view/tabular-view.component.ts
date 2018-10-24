@@ -35,10 +35,21 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * When the user writes either "set", " set" or "set " this field becomes true
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
-  * Analogous for the unack filter, with the key '"unack"' instead.
+  * Analogous for the unack and shelved filter,
+  * with the keys '"unack"' and '"shelved"' instead.
   */
   public _setFilterActivated = false;
   public _unackFilterActivated = false;
+  public _shelvedFilterActivated = false;
+
+  /** String to define the keyword to filter SET {@link Alarm} */
+  private filterValueForSetAlarms = 'set';
+
+  /** String to define the keyword to filter UNACK {@link Alarm} */
+  private filterValueForUnackAlarms = '"unack"';
+
+  /** String to define the keyword to filter SHELVED {@link Alarm} */
+  private filterValueForShelvedAlarms = '"shelved"';
 
   /** String that stores the test input in the filter textfield */
   public filterString = '';
@@ -53,12 +64,6 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** String to store the timezone to display dates, read from the settings */
   private timezone: string;
-
-  /** String to define the keyword to filter SET {@link Alarm} */
-  private filterValueForSetAlarms = 'set';
-
-  /** String to define the keyword to filter UNACK {@link Alarm} */
-  private filterValueForUnackAlarms = '"unack"';
 
   /** DataSource of the Table */
   public dataSource: MatTableDataSource<Alarm>;
@@ -165,16 +170,20 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     // If "set" IS in the array, then it is activated
     if (arrayOfFilters.indexOf(this.filterValueForSetAlarms) >= 0 ) {
       this._setFilterActivated = true;
-
     } else { // If "set" NOT in the field, then it is deactivated
       this._setFilterActivated = false;
     }
     // If '"unack"' IS in the array, then it is activated
     if (arrayOfFilters.indexOf(this.filterValueForUnackAlarms) >= 0 ) {
       this._unackFilterActivated = true;
-
     } else { // If '"unack"' NOT in the field, then it is deactivated
       this._unackFilterActivated = false;
+    }
+    // If '"shelved"' IS in the array, then it is activated
+    if (arrayOfFilters.indexOf(this.filterValueForShelvedAlarms) >= 0 ) {
+      this._shelvedFilterActivated = true;
+    } else { // If '"shelved"' NOT in the field, then it is deactivated
+      this._shelvedFilterActivated = false;
     }
     filter = filter.trim();
     filter = filter.toLowerCase();
@@ -206,27 +215,56 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-  * Toggle the filtering for only unack {@link Alarm} objects ON/OFF
+  * Toggle the filtering based on selected filter value
   */
-  toggleFilterOnlyUnackAlarm() {
+  _toggleFilter(filterStatus, filterValue) {
+
     if (this.filterString == null) {
       this.filterString = '';
     }
     const arrayOfFilters = this.filterString.split(' ');
-    const indexOfUnack = arrayOfFilters.indexOf(this.filterValueForUnackAlarms);
+    const indexOfValue = arrayOfFilters.indexOf(filterValue);
 
     // If activated then should deactivate:
-    if (this._unackFilterActivated) {
-      if ( indexOfUnack >= 0 ) {
-        arrayOfFilters.splice(indexOfUnack, 1);
+    if ( filterStatus ) {
+      if ( indexOfValue >= 0 ) {
+        arrayOfFilters.splice(indexOfValue, 1);
       }
     } else { // If deactivated then should activate:
-      if ( indexOfUnack < 0 ) {
-        arrayOfFilters.push(this.filterValueForUnackAlarms);
+      if ( indexOfValue < 0 ) {
+        arrayOfFilters.push(filterValue);
       }
     }
     this.filterString = arrayOfFilters.join(' ');
     this.applyFilter(this.filterString);
+
+  }
+
+  /**
+  * Toggle the filtering for only set {@link Alarm} objects ON/OFF
+  */
+  toggleFilterSetAlarm() {
+    const filterStatus = this._setFilterActivated;
+    const filterValue = this.filterValueForSetAlarms;
+    this._toggleFilter(filterStatus, filterValue);
+  }
+
+  /**
+  * Toggle the filtering for only unack {@link Alarm} objects ON/OFF
+  */
+  toggleFilterUnackAlarm() {
+    const filterStatus = this._unackFilterActivated;
+    const filterValue = this.filterValueForUnackAlarms;
+    this._toggleFilter(filterStatus, filterValue);
+  }
+
+  /**
+  * Toggle the filtering for only shelved {@link Alarm} objects ON/OFF
+  */
+  toggleFilterShelvedAlarm() {
+    const filterStatus = this._shelvedFilterActivated;
+    const filterValue = this.filterValueForShelvedAlarms;
+    this._toggleFilter(filterStatus, filterValue);
   }
 
   /**
@@ -244,7 +282,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   get filtersToggleStatus(): object {
     return {
       'setFilter': this._setFilterActivated,
-      'unackFilter': this._unackFilterActivated
+      'unackFilter': this._unackFilterActivated,
+      'shelvedFilter': this._shelvedFilterActivated
     };
   }
 
