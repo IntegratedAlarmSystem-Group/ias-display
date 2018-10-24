@@ -27,12 +27,31 @@
     border-bottom-left-radius: 0.375em;
     border-bottom-right-radius: 0.375em;
   }
+
 }
 
 .filter-mat-form-field {
   width: 500px;
 }
 
+.table-filters {
+
+  .row {
+    .text-container {
+      display: flex;
+    }
+    .toggles-container {
+      height: 100%;
+      .row {
+        height: 100%;
+        mat-slide-toggle {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+}
 
 /deep/ {
 
