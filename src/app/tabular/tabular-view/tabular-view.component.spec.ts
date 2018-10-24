@@ -20,12 +20,13 @@ import { DatePipe } from '@angular/common';
 import { Locale } from '../../settings';
 
 
-describe('TabularViewComponent', () => {
+fdescribe('TabularViewComponent', () => {
   let datePipe: DatePipe;
   let component: TabularViewComponent;
   let fixture: ComponentFixture<TabularViewComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
+  let filtersToggle: object;
   const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
@@ -103,36 +104,42 @@ describe('TabularViewComponent', () => {
       component.applyFilter('temperature');
       expect(component.filters).toEqual('temperature');
       expect(component.dataSource.filter).toEqual('temperature');
-      expect(component.toggleStatus).toEqual(false);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(false);
       component.toggleFilterOnlySetAlarm();
       fixture.detectChanges();
       expect(component.filters).toEqual('temperature set');
       expect(component.dataSource.filter).toEqual('temperature set');
-      expect(component.toggleStatus).toEqual(true);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(true);
     });
 
     it('WHEN previously the filter was "temperature set", THEN the filter should be "temperature", and the toggle should be false', () => {
       component.applyFilter('temperature set');
       expect(component.filters).toEqual('temperature set');
       expect(component.dataSource.filter).toEqual('temperature set');
-      expect(component.toggleStatus).toEqual(true);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(true);
       component.toggleFilterOnlySetAlarm();
       fixture.detectChanges();
       expect(component.filters).toEqual('temperature');
       expect(component.dataSource.filter).toEqual('temperature');
-      expect(component.toggleStatus).toEqual(false);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(false);
     });
 
     it('WHEN previously the filter was "set temperature", THEN the filter should be "temperature", and the toggle should be false', () => {
       component.applyFilter('set temperature');
-      expect(component.toggleStatus).toEqual(true);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(true);
       expect(component.filters).toEqual('set temperature');
       expect(component.dataSource.filter).toEqual('set temperature');
       component.toggleFilterOnlySetAlarm();
       fixture.detectChanges();
       expect(component.filters).toEqual('temperature');
       expect(component.dataSource.filter).toEqual('temperature');
-      expect(component.toggleStatus).toEqual(false);
+      filtersToggle = component.filtersToggleStatus;
+      expect(filtersToggle['setFilter']).toEqual(false);
     });
   });
 

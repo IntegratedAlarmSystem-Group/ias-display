@@ -202,11 +202,11 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-  * Returns the status of the Toggle for the filtering of set Alarms
-  * @returns {boolean} filters applied
+  * Returns the status of the Toggle for the filters
+  * @returns {object} with filters applied by key
   */
-  get toggleStatus(): boolean {
-    return this._setFilterActivated;
+  get filtersToggleStatus(): object {
+    return {'setFilter': this._setFilterActivated};
   }
 
   /**
