@@ -1,3 +1,7 @@
+import { Locale } from '../settings';
+import * as moment from 'moment';
+
+
 /**
 * List of the possible Operational Modes
 */
@@ -181,6 +185,17 @@ export class Alarm {
   }
 
   /**
+  * Returns a string representation according to the selected UTC offset in the app settings
+  * for the {@link Alarm.state_change_timestamp} attribute
+  * @returns {string} a date format representation of the Alarm state_change_timestamp
+  */
+  get formattedTimestamp(): string {
+    const ts = this.state_change_timestamp;
+    return moment(ts).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
+  }
+
+
+  /**
   * Returns wether or not an {@link Alarm} should be displayed as in "maintenance" or "grayed out mode"
   * Currently this is true for alarms with {@link OperationalMode} of either:
   * - {@link OperationalMode.maintenance}
@@ -225,16 +240,6 @@ export class Alarm {
   unshelve(): boolean {
     this.shelved = false;
     return this.shelved;
-  }
-
-  /**
-  * Returns a string representation of the {@link Alarm} for filtering purposes
-  * @returns {string} info of the {@link Alarm} for filtering purposes, joined by " "
-  */
-  toStringForFiltering(): string {
-    return [
-      this.status, this.description, this.name, this.operationalMode, this.timestamp
-    ].join(' ');
   }
 
   /**

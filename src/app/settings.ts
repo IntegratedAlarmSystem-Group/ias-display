@@ -29,9 +29,15 @@ export const StorageItems = {
   TOKEN: 'token',
 };
 
-/** Set of properties to set the formatting of dates */
+/**
+* Set of properties to set the formatting of dates
+*
+* The formats related to dates should follow the same standard
+*
+*/
 export const Locale = {
-  DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',
+  DATE_FORMAT: 'yyyy-MM-ddTHH:mm:ss',  // date format for templates
+  MOMENT_DATE_FORMAT: 'YYYY-MM-DDTHH:mm:ss',
   TIMEZONE: '+0000',
 };
 

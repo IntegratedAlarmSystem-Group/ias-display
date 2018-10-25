@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Alarm, OperationalMode, Validity } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { Locale } from '../../settings';
+import { DatePipe } from '@angular/common';
 
 /**
 * Component that dispays all the Alarms in a table
@@ -34,8 +35,21 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * When the user writes either "set", " set" or "set " this field becomes true
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
+  * Analogous for the unack and shelved filter,
+  * with the keys '"unack"' and '"shelved"' instead.
   */
   public _setFilterActivated = false;
+  public _unackFilterActivated = false;
+  public _shelvedFilterActivated = false;
+
+  /** String to define the keyword to filter SET {@link Alarm} */
+  private filterValueForSetAlarms = 'set';
+
+  /** String to define the keyword to filter UNACK {@link Alarm} */
+  private filterValueForUnackAlarms = '"unack"';
+
+  /** String to define the keyword to filter SHELVED {@link Alarm} */
+  private filterValueForShelvedAlarms = '"shelved"';
 
   /** String that stores the test input in the filter textfield */
   public filterString = '';
@@ -51,9 +65,6 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /** String to store the timezone to display dates, read from the settings */
   private timezone: string;
 
-  /** String to define the keyword to filter SET {@link Alarm} */
-  private filterValueForSetAlarms = 'set';
-
   /** DataSource of the Table */
   public dataSource: MatTableDataSource<Alarm>;
 
@@ -68,7 +79,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   public filterPredicate: (
     (data: Alarm, filterString: string) => boolean) = (data: Alarm, filterString: string): boolean => {
-    const dataStr = data.toStringForFiltering().toLowerCase();
+    const dataStr = this.alarmToStringForFiltering(data).toLowerCase();
     const filters = filterString.toLowerCase().split(' ');
     for (const filter of filters) {
       if (dataStr.indexOf(filter) === -1) {
@@ -85,7 +96,8 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   constructor(
     private alarmService: AlarmService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {}
 
   /**
@@ -158,9 +170,20 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     // If "set" IS in the array, then it is activated
     if (arrayOfFilters.indexOf(this.filterValueForSetAlarms) >= 0 ) {
       this._setFilterActivated = true;
-
     } else { // If "set" NOT in the field, then it is deactivated
       this._setFilterActivated = false;
+    }
+    // If '"unack"' IS in the array, then it is activated
+    if (arrayOfFilters.indexOf(this.filterValueForUnackAlarms) >= 0 ) {
+      this._unackFilterActivated = true;
+    } else { // If '"unack"' NOT in the field, then it is deactivated
+      this._unackFilterActivated = false;
+    }
+    // If '"shelved"' IS in the array, then it is activated
+    if (arrayOfFilters.indexOf(this.filterValueForShelvedAlarms) >= 0 ) {
+      this._shelvedFilterActivated = true;
+    } else { // If '"shelved"' NOT in the field, then it is deactivated
+      this._shelvedFilterActivated = false;
     }
     filter = filter.trim();
     filter = filter.toLowerCase();
@@ -192,6 +215,59 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
+  * Toggle the filtering based on selected filter value
+  */
+  _toggleFilter(filterStatus, filterValue) {
+
+    if (this.filterString == null) {
+      this.filterString = '';
+    }
+    const arrayOfFilters = this.filterString.split(' ');
+    const indexOfValue = arrayOfFilters.indexOf(filterValue);
+
+    // If activated then should deactivate:
+    if ( filterStatus ) {
+      if ( indexOfValue >= 0 ) {
+        arrayOfFilters.splice(indexOfValue, 1);
+      }
+    } else { // If deactivated then should activate:
+      if ( indexOfValue < 0 ) {
+        arrayOfFilters.push(filterValue);
+      }
+    }
+    this.filterString = arrayOfFilters.join(' ');
+    this.applyFilter(this.filterString);
+
+  }
+
+  /**
+  * Toggle the filtering for only set {@link Alarm} objects ON/OFF
+  */
+  toggleFilterSetAlarm() {
+    const filterStatus = this._setFilterActivated;
+    const filterValue = this.filterValueForSetAlarms;
+    this._toggleFilter(filterStatus, filterValue);
+  }
+
+  /**
+  * Toggle the filtering for only unack {@link Alarm} objects ON/OFF
+  */
+  toggleFilterUnackAlarm() {
+    const filterStatus = this._unackFilterActivated;
+    const filterValue = this.filterValueForUnackAlarms;
+    this._toggleFilter(filterStatus, filterValue);
+  }
+
+  /**
+  * Toggle the filtering for only shelved {@link Alarm} objects ON/OFF
+  */
+  toggleFilterShelvedAlarm() {
+    const filterStatus = this._shelvedFilterActivated;
+    const filterValue = this.filterValueForShelvedAlarms;
+    this._toggleFilter(filterStatus, filterValue);
+  }
+
+  /**
   * Returns the filters applied to the Table
   * @returns {string} filters applied
   */
@@ -200,10 +276,40 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-  * Returns the status of the Toggle for the filtering of set Alarms
-  * @returns {boolean} filters applied
+  * Returns the status of the Toggle for the filters
+  * @returns {object} with filters applied by key
   */
-  get toggleStatus(): boolean {
-    return this._setFilterActivated;
+  get filtersToggleStatus(): object {
+    return {
+      'setFilter': this._setFilterActivated,
+      'unackFilter': this._unackFilterActivated,
+      'shelvedFilter': this._shelvedFilterActivated
+    };
+  }
+
+  /**
+  * Returns a string representation of the {@link Alarm} for filtering purposes
+  * @returns {string} info of the {@link Alarm} for filtering purposes, joined by " "
+  */
+  alarmToStringForFiltering(alarm: Alarm): string {
+
+    const ackKey = alarm.ack ? '"ack"' : '"unack"';
+    const shelveKey = alarm.shelved ? '"shelved"' : '"unshelved"';
+    const modeKey = `"${alarm.operationalMode}"`;
+    const valueKey = `"${alarm.alarmValue}"`;
+    const validityKey = `"${alarm.alarmValidity}"`;
+
+    const formattedTimestamp = alarm.formattedTimestamp;
+
+    return [
+      alarm.description,
+      alarm.name,
+      formattedTimestamp,
+      ackKey,
+      shelveKey,
+      modeKey,
+      valueKey,
+      validityKey
+    ].join(' ');
   }
 }
