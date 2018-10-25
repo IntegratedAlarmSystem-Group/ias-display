@@ -24,6 +24,7 @@ describe('ButtonsComponent', () => {
     'description': 'my description',
     'url': 'https://www.alma.cl',
     'sound': 'NONE',
+    'can_shelve': true,
     'ack': false,
     'shelved': false,
     'dependencies': [],

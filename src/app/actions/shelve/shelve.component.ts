@@ -78,6 +78,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   requestStatus = 0;
 
+  errorMessage = '';
+
   shelvedAtMessage = '';
 
   /**
@@ -201,7 +203,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
       } else {
         response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
       }
-      response += ' Please try again. If the problem persists, contact the system administrator.';
+      response += ' The server responded the following: ' +  this.errorMessage;
+      // response += ' Please try again. If the problem persists, contact the system administrator.';
       return response;
     }
   }
@@ -265,11 +268,13 @@ export class ShelveComponent implements OnInit, OnDestroy {
           (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
+            this.errorMessage = '';
           },
           (error) => {
             console.log('Error: ', error);
             this.requestStatus = -1;
             this.hideSpinner();
+            this.errorMessage = error['error'];
             return error;
           }
         );
@@ -290,11 +295,13 @@ export class ShelveComponent implements OnInit, OnDestroy {
           (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
+            this.errorMessage = '';
           },
           (error) => {
             console.log('Error: ', error);
             this.requestStatus = -1;
             this.hideSpinner();
+            this.errorMessage = error['error'];
             return error;
           }
         );

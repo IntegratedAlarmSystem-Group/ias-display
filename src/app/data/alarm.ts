@@ -77,6 +77,9 @@ export class Alarm {
   /** Sound name to play when an {@link Alarm} changes to set */
   sound: string;
 
+  /** Defines wether or not the {@link Alarm} can be shelved */
+  can_shelve: boolean;
+
   /** Acknowledgement status */
   ack: boolean;
 
@@ -109,6 +112,7 @@ export class Alarm {
       json.hasOwnProperty('description') &&
       json.hasOwnProperty('url') &&
       json.hasOwnProperty('sound') &&
+      json.hasOwnProperty('can_shelve') &&
       json.hasOwnProperty('ack') &&
       json.hasOwnProperty('shelved') &&
       json.hasOwnProperty('dependencies')
@@ -135,11 +139,12 @@ export class Alarm {
     const description = <string>json['description'];
     const url = <string>json['url'];
     const sound = <string>json['sound'];
+    const can_shelve = <boolean>json['can_shelve'];
     const ack = <boolean>json['ack'];
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, description, url, sound, ack, shelved, dependencies });
+      state_change_timestamp, validity, description, url, sound, can_shelve, ack, shelved, dependencies });
   }
 
   /**
