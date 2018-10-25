@@ -7,7 +7,7 @@
     </app-antennas-map>
   </mat-sidenav-content>
 
-  <mat-sidenav #antennasSidenav id="antennas-sidenav" position="end" mode="side" opened="true">
+  <mat-sidenav #antennasSidenav id="antennas-sidenav" position="end" mode="side" opened="true" [disableClose]="true">
     <app-antennas-sidebar
       (antennaClicked)="updateSelectedAntenna($event)"
       [selectedAntenna]=this.selectedAntenna>
