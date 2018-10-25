@@ -14,13 +14,13 @@ import { AlarmService } from '../../data/alarm.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
-import { Alarm } from '../../data/alarm';
+import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
 import { Iasio } from '../../data/iasio';
 import { DatePipe } from '@angular/common';
 import { Locale } from '../../settings';
 
 
-fdescribe('TabularViewComponent', () => {
+describe('TabularViewComponent', () => {
   let datePipe: DatePipe;
   let component: TabularViewComponent;
   let fixture: ComponentFixture<TabularViewComponent>;
@@ -264,34 +264,87 @@ fdescribe('TabularViewComponent', () => {
   // TEST ALARMS STRING FOR FILTERS
   describe('GIVEN an alarm', () => {
 
-    const alarm = Alarm.asAlarm({
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'core_timestamp': 1267252440000,
-      'state_change_timestamp': 1267252440000,
-      'description': 'Description',
-      'url': 'https://www.alma.cl',
-      'ack': false,
-      'shelved': false,
-      'mode': '0',
-      'validity': '1',
-      'dependencies': [],
-    });
+    function ackKeyFromValue(value) {
+      return value ? '"ack"' : '"unack"';
+    }
+
+    function shelvedKeyFromValue(value) {
+      return value ? '"shelved"' : '"unshelved"';
+    }
+
+    function checkFilterString(alarmString: string, alarm: Alarm) {
+      expect(alarmString.includes(alarm.description)).toBeTruthy();
+      expect(alarmString.includes(alarm.name)).toBeTruthy();
+      expect(alarmString.includes(alarm.formattedTimestamp)).toBeTruthy();
+      expect(alarmString.includes(ackKeyFromValue(alarm.ack))).toBeTruthy();
+      expect(alarmString.includes(shelvedKeyFromValue(alarm.shelved))).toBeTruthy();
+      expect(alarmString.includes(OperationalMode[alarm.mode])).toBeTruthy();
+      expect(alarmString.includes(Value[alarm.value])).toBeTruthy();
+      expect(alarmString.includes(Validity[alarm.validity])).toBeTruthy();
+    }
 
     it('should be a method to create a string for the table filters', () => {
 
-      const tsString = alarm.formattedTimestamp;
-      const alarmString = component.alarmToStringForFiltering(alarm);
+      let alarm;
+      let alarmString;
 
-      expect(alarmString.includes(alarm.description)).toBeTruthy();
-      expect(alarmString.includes(alarm.name)).toBeTruthy();
-      expect(alarmString.includes(tsString)).toBeTruthy();
-      expect(alarmString.includes('"unack"')).toBeTruthy();
-      expect(alarmString.includes('"unshelved"')).toBeTruthy();
-      expect(alarmString.includes('"startup"')).toBeTruthy();
-      expect(alarmString.includes('"cleared"')).toBeTruthy();
-      expect(alarmString.includes('"reliable"')).toBeTruthy();
+      alarm = Alarm.asAlarm({
+        'value': 0,
+        'core_id': 'coreid$1',
+        'running_id': 'coreid$1',
+        'core_timestamp': 1267252440000,
+        'state_change_timestamp': 1267252440000,
+        'description': 'Description',
+        'url': 'https://www.alma.cl',
+        'ack': false,
+        'shelved': false,
+        'mode': '0',
+        'validity': '1',
+        'dependencies': [],
+      });
+
+      // check general properties
+      alarmString = component.alarmToStringForFiltering(alarm);
+      checkFilterString(alarmString, alarm);
+
+      // check scenarios
+      const ackOptions = [true, false];
+      const shelvedOptions = [true, false];
+      const modeNames = Object.keys(OperationalMode).filter(k => typeof OperationalMode[k as any] === 'number');
+      const modeOptions = modeNames.map(k => OperationalMode[k as any]);
+      const valueNames = Object.keys(Value).filter(k => typeof Value[k as any] === 'number');
+      const valueOptions = valueNames.map(k => Value[k as any]);
+      const validityNames = Object.keys(Validity).filter(k => typeof Validity[k as any] === 'number');
+      const validityOptions = validityNames.map(k => Validity[k as any]);
+
+      for (const property of [
+        {'attr': 'ack', 'options': ackOptions},
+        {'attr': 'shelved', 'options': shelvedOptions}]) {
+        const attrName: string = property['attr'];
+        const values = property['options'];
+        for (const alarmValue of values) {
+          alarm[attrName] = alarmValue;
+          alarmString = component.alarmToStringForFiltering(alarm);
+          checkFilterString(alarmString, alarm);
+        }
+      }
+
+      for (const property of [
+        {'attr': 'mode', 'options': modeOptions},
+        {'attr': 'validity', 'options': validityOptions},
+        {'attr': 'value', 'options': valueOptions}]) {
+          const attrName = property['attr'];
+          const values = property['options'];
+          for (const value of values) {
+            let alarmValue;
+            if (attrName === 'mode') { alarmValue = OperationalMode[value]; }
+            if (attrName === 'validity') { alarmValue = Validity[value]; }
+            if (attrName === 'value') { alarmValue = Value[value]; }
+            alarm[attrName] = alarmValue;
+            alarmString = component.alarmToStringForFiltering(alarm);
+            checkFilterString(alarmString, alarm);
+          }
+      }
 
     });
 
