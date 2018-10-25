@@ -17,6 +17,7 @@ describe('StatusViewComponent', () => {
     'description': 'bla bla',
     'url': 'http://alma.cl',
     'sound': 'NONE',
+    'can_shelve': true,
     'ack': false,
     'dependencies': [],
   });

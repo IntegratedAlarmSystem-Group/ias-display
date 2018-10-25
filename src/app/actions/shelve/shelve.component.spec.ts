@@ -34,6 +34,7 @@ describe('ShelveComponent', () => {
       'description': 'Short description for mock alarm',
       'url': 'https://www.alma.cl',
       'sound': 'NONE',
+      'can_shelve': true,
       'ack': false,
       'shelved': false,
       'dependencies': [],

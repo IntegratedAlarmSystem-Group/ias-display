@@ -122,7 +122,6 @@ export class ShelveComponent implements OnInit, OnDestroy {
       }
     );
     this.sidenavService.open();
-    console.log('alarm: ', this.alarm);
   }
 
   /**

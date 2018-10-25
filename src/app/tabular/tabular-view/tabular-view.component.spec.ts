@@ -293,6 +293,7 @@ describe('TabularViewComponent', () => {
       'description': 'Description',
       'url': 'https://www.alma.cl',
       'sound': 'NONE',
+      'can_shelve': true,
       'ack': false,
       'shelved': false,
       'mode': '0',
