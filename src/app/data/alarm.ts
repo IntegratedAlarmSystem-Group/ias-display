@@ -281,17 +281,7 @@ export class Alarm {
     const tags = [];
     tags.push(order);
     tags.push(this.operationalMode);
-    tags.push(value);
-    if (priority !== undefined) {
-      tags.push(priority);
-    }
-    tags.push(validity);
-    if (this.ack) {
-      tags.push('ack');
-    }
-    if (this.shelved) {
-      tags.push('shelved');
-    }
+    tags.push(this.name);
     return tags.join('-');
   }
 

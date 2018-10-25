@@ -548,6 +548,21 @@ export const MockAlarms = [
     'shelved': false,
     'dependencies': [],
   },
+  {
+    'value': 4,
+    'core_id': 'coreid$50',
+    'running_id': 'coreid$50',
+    'mode': 7,
+    'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'validity': 1,
+    'description': 'Alarm 50 description',
+    'url': 'https://www.alma.cl',
+    'sound': 'NONE',
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  },
 ];
 
 
@@ -558,6 +573,7 @@ export const ExpectedTableRows = [
   Alarm.asAlarm(MockAlarms[0]),
   Alarm.asAlarm(MockAlarms[20]),
   Alarm.asAlarm(MockAlarms[22]),
+  Alarm.asAlarm(MockAlarms[23]),
   Alarm.asAlarm(MockAlarms[1]),
   Alarm.asAlarm(MockAlarms[2]),
   Alarm.asAlarm(MockAlarms[3]),
@@ -589,10 +605,10 @@ export const ExpectedTableRows = [
 
 /** Set of the rows the that the test expects on the Table after the filter */
 export const ExpectedFilteredTableRows = [
-  ExpectedTableRows[4],
-  ExpectedTableRows[11],
+  ExpectedTableRows[5],
   ExpectedTableRows[12],
   ExpectedTableRows[13],
   ExpectedTableRows[14],
-  ExpectedTableRows[21],
+  ExpectedTableRows[15],
+  ExpectedTableRows[22],
 ];
