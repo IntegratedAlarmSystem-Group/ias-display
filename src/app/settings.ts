@@ -44,6 +44,7 @@ export const Locale = {
 /** Set that defines the locations of assets in the application */
 export const Assets = {
   ICONS: '/assets/img/',
+  SOUNDS: '/assets/sounds/'
 };
 
 /** Url settings to get data for the related displays */
