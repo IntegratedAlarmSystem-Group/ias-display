@@ -262,7 +262,16 @@ describe('TabularViewComponent', () => {
   });
 
   // TEST ALARMS STRING FOR FILTERS
-  describe('GIVEN an alarm', () => {
+  describe('GIVEN an alarm, the string generated for the text filter should comply with the following conditions', () => {
+
+    const ackOptions = [true, false];
+    const shelvedOptions = [true, false];
+    const modeNames = Object.keys(OperationalMode).filter(k => typeof OperationalMode[k as any] === 'number');
+    const modeOptions = modeNames.map(k => OperationalMode[k as any]);
+    const valueNames = Object.keys(Value).filter(k => typeof Value[k as any] === 'number');
+    const valueOptions = valueNames.map(k => Value[k as any]);
+    const validityNames = Object.keys(Validity).filter(k => typeof Validity[k as any] === 'number');
+    const validityOptions = validityNames.map(k => Validity[k as any]);
 
     function ackKeyFromValue(value) {
       return value ? '"ack"' : '"unack"';
@@ -272,80 +281,119 @@ describe('TabularViewComponent', () => {
       return value ? '"shelved"' : '"unshelved"';
     }
 
-    function checkFilterString(alarmString: string, alarm: Alarm) {
-      expect(alarmString.includes(alarm.description)).toBeTruthy();
-      expect(alarmString.includes(alarm.name)).toBeTruthy();
-      expect(alarmString.includes(alarm.formattedTimestamp)).toBeTruthy();
-      expect(alarmString.includes(ackKeyFromValue(alarm.ack))).toBeTruthy();
-      expect(alarmString.includes(shelvedKeyFromValue(alarm.shelved))).toBeTruthy();
-      expect(alarmString.includes(OperationalMode[alarm.mode])).toBeTruthy();
-      expect(alarmString.includes(Value[alarm.value])).toBeTruthy();
-      expect(alarmString.includes(Validity[alarm.validity])).toBeTruthy();
-    }
+    let mockAlarm: Alarm;
+    let alarmString = '';
 
-    it('should be a method to create a string for the table filters', () => {
+    mockAlarm = Alarm.asAlarm({
+      'value': 0,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'core_timestamp': 1267252440000,
+      'state_change_timestamp': 1267252440000,
+      'description': 'Description',
+      'url': 'https://www.alma.cl',
+      'sound': 'NONE',
+      'ack': false,
+      'shelved': false,
+      'mode': '0',
+      'validity': '1',
+      'dependencies': [],
+    });
 
-      let alarm;
-      let alarmString;
-
-      alarm = Alarm.asAlarm({
-        'value': 0,
-        'core_id': 'coreid$1',
-        'running_id': 'coreid$1',
-        'core_timestamp': 1267252440000,
-        'state_change_timestamp': 1267252440000,
-        'description': 'Description',
-        'url': 'https://www.alma.cl',
-        'ack': false,
-        'shelved': false,
-        'mode': '0',
-        'validity': '1',
-        'dependencies': [],
-      });
-
-      // check general properties
+    it('should contain the description of the alarm', () => {
+      const alarm = mockAlarm;
       alarmString = component.alarmToStringForFiltering(alarm);
-      checkFilterString(alarmString, alarm);
+      expect(alarmString.includes(alarm.description)).toBeTruthy();
+    });
 
-      // check scenarios
-      const ackOptions = [true, false];
-      const shelvedOptions = [true, false];
-      const modeNames = Object.keys(OperationalMode).filter(k => typeof OperationalMode[k as any] === 'number');
-      const modeOptions = modeNames.map(k => OperationalMode[k as any]);
-      const valueNames = Object.keys(Value).filter(k => typeof Value[k as any] === 'number');
-      const valueOptions = valueNames.map(k => Value[k as any]);
-      const validityNames = Object.keys(Validity).filter(k => typeof Validity[k as any] === 'number');
-      const validityOptions = validityNames.map(k => Validity[k as any]);
+    it('should contain the name of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
+      expect(alarmString.includes(alarm.name)).toBeTruthy();
+    });
 
+    it('should contain the formatted timestamp of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
+      expect(alarmString.includes(alarm.formattedTimestamp)).toBeTruthy();
+    });
+
+    it('should contain the ack state of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
       for (const property of [
-        {'attr': 'ack', 'options': ackOptions},
-        {'attr': 'shelved', 'options': shelvedOptions}]) {
-        const attrName: string = property['attr'];
-        const values = property['options'];
-        for (const alarmValue of values) {
-          alarm[attrName] = alarmValue;
-          alarmString = component.alarmToStringForFiltering(alarm);
-          checkFilterString(alarmString, alarm);
-        }
+         {'attr': 'ack', 'options': ackOptions}]) {
+         const attrName: string = property['attr'];
+         const values = property['options'];
+         for (const alarmValue of values) {
+           alarm[attrName] = alarmValue;
+           alarmString = component.alarmToStringForFiltering(alarm);
+           expect(alarmString.includes(ackKeyFromValue(alarm.ack))).toBeTruthy();
+         }
+       }
+    });
+
+    it('should contain the shelved state of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
+      for (const property of [
+         {'attr': 'shelved', 'options': shelvedOptions}]) {
+         const attrName: string = property['attr'];
+         const values = property['options'];
+         for (const alarmValue of values) {
+           alarm[attrName] = alarmValue;
+           alarmString = component.alarmToStringForFiltering(alarm);
+           expect(alarmString.includes(shelvedKeyFromValue(alarm.shelved))).toBeTruthy();
+         }
+       }
+    });
+
+    it('should contain the mode of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
+      for (const property of [
+        {'attr': 'mode', 'options': modeOptions}]) {
+          const attrName = property['attr'];
+          const values = property['options'];
+          for (const value of values) {
+            const alarmValue = OperationalMode[value];
+            alarm[attrName] = alarmValue;
+            alarmString = component.alarmToStringForFiltering(alarm);
+            expect(alarmString.includes(OperationalMode[alarm.mode])).toBeTruthy();
+          }
       }
+    });
 
+    it('should contain the validity of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
       for (const property of [
-        {'attr': 'mode', 'options': modeOptions},
-        {'attr': 'validity', 'options': validityOptions},
+        {'attr': 'validity', 'options': validityOptions}]) {
+          const attrName = property['attr'];
+          const values = property['options'];
+          for (const value of values) {
+            const alarmValue = Validity[value];
+            alarm[attrName] = alarmValue;
+            alarmString = component.alarmToStringForFiltering(alarm);
+            expect(alarmString.includes(Validity[alarm.validity])).toBeTruthy();
+          }
+      }
+    });
+
+    it('should contain the value of the alarm', () => {
+      const alarm = mockAlarm;
+      alarmString = component.alarmToStringForFiltering(alarm);
+      for (const property of [
         {'attr': 'value', 'options': valueOptions}]) {
           const attrName = property['attr'];
           const values = property['options'];
           for (const value of values) {
-            let alarmValue;
-            if (attrName === 'mode') { alarmValue = OperationalMode[value]; }
-            if (attrName === 'validity') { alarmValue = Validity[value]; }
-            if (attrName === 'value') { alarmValue = Value[value]; }
+            const alarmValue = Value[value];
             alarm[attrName] = alarmValue;
             alarmString = component.alarmToStringForFiltering(alarm);
-            checkFilterString(alarmString, alarm);
+            expect(alarmString.includes(Value[alarm.value])).toBeTruthy();
           }
       }
-
     });
 
   });
