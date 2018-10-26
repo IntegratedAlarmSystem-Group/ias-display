@@ -22,18 +22,7 @@
         </table>
       </div>
 
-      <div *ngIf="requestStatus !== 0; then responseMessage else actionProcess"> </div>
-      <ng-template #responseMessage>
-        <div class="section ack-action">
-          <div class="section-title"> Acknowledgement results </div>
-          <div> {{ getResponseMessageText() }} </div>
-          <ul>
-            <li *ngFor="let alarm of acknowledgedAlarms">
-              {{ alarm }}
-            </li>
-          </ul>
-        </div>
-      </ng-template>
+      <div *ngIf="requestStatus === 0; then actionProcess else responseMessage"> </div>
 
       <ng-template #actionProcess>
         <div class="section ack-action">
@@ -59,6 +48,42 @@
           </ul>
         </div>
       </ng-template>
+
+      <ng-template #responseMessage>
+        <div *ngIf="requestStatus === 1; then successMessage else errorMessage"> </div>
+
+        <ng-template #successMessage>
+          <div class="section ack-action" >
+            <div class="section-title"> Acknowledgement results </div>
+            <div> {{ getResponseMessageText() }} </div>
+            <ul>
+              <li *ngFor="let alarm of acknowledgedAlarms">
+                {{ alarm }}
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+
+        <ng-template #errorMessage>
+          <div class="section ack-action action-error" >
+            <div class="section-title"> Error Acknowledging </div>
+            <div> {{ getResponseMessageText() }} </div>
+          </div>
+        </ng-template>
+      </ng-template>
+
+      <!-- <ng-template #responseMessage>
+        <div class="section ack-action">
+          <div class="section-title"> Acknowledgement results </div>
+          <div> {{ getResponseMessageText() }} </div>
+          <ul>
+            <li *ngFor="let alarm of acknowledgedAlarms">
+              {{ alarm }}
+            </li>
+          </ul>
+        </div>
+      </ng-template> -->
+
     </form>
   </div>
 

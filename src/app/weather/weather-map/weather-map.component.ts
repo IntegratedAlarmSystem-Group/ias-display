@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService, WeatherStationConfig } from '../weather.service';
@@ -13,7 +13,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
   templateUrl: './weather-map.component.html',
   styleUrls: ['./weather-map.component.scss']
 })
-export class WeatherMapComponent implements OnInit {
+export class WeatherMapComponent implements OnInit, OnChanges {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component
@@ -45,11 +45,26 @@ export class WeatherMapComponent implements OnInit {
   /** Map Configuration  */
   public mapConfig = {};
 
+  /** Auxiliary viewbox list to locate complementary elements for the map */
+  public viewbox = [];
+
+  /** Compass rose location */
+  public compassLocation = [0, 0];
+
    /** Variable to check if the data from the webserver is available  */
   public mapdataAvailable = new BehaviorSubject<any>(false);
 
+  /** Variable to manage map updates  */
+  public updatedMap = new BehaviorSubject<any>(false);
+
   /** Data relations to manage the graphical elements */
   public datarelations: any;
+
+  /** Dictionary to manage the display status of each pad, if free or in use, to locate an antenna */
+  public padsDisplayStatus = {};
+
+  /** List to manage the pads in use */
+  public padsStatusGroupNames = [];
 
   /**
    * Builds an instance of the component
@@ -73,6 +88,13 @@ export class WeatherMapComponent implements OnInit {
   }
 
   /**
+   * Executed after any change in the component input
+   */
+  ngOnChanges() {
+    this.updateMap();
+  }
+
+  /**
    * Component initialization that involves the initialization of the {@link WeatherService}
    * if not already initialized and the initialization of the related map data source
    */
@@ -80,6 +102,9 @@ export class WeatherMapComponent implements OnInit {
     this.service.initialize();
     this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
+      // for (const placemark of mapdata['placemarks']['pads']) {
+      //   this.padsFreeStatus[placemark.name] = true;
+      // }
       let placemarks_list = [];
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['pads']);
       placemarks_list = placemarks_list.concat(mapdata['placemarks']['wstations']);
@@ -88,16 +113,33 @@ export class WeatherMapComponent implements OnInit {
       }
       this.placemarksGroups.push(mapdata['placemarks']['pads']);
       this.placemarksGroups.push(mapdata['placemarks']['wstations']);
+      this.placemarksGroups.push(mapdata['placemarks']['buildings']);
       this.pathsGroups.push(mapdata['paths']);
       const viewbox = this.mapService.mapdataProcessing(this.placemarksGroups, this.pathsGroups);
+      this.viewbox = [viewbox[0], viewbox[1], viewbox[2], viewbox[3]];
       this.mapConfig = {
         'fullHeight': true,
         'viewbox':
-          [viewbox[0], viewbox[1], viewbox[2], viewbox[3]].join(' ')
+          this.viewbox.join(' ')
       };
       this.svgPaths = this.mapService.getSVGPaths(mapdata['paths']);
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
+    });
+    this.service.padsStatusAvailable.subscribe(
+      (padsStatusFlag) => {
+        this.mapdataAvailable.subscribe( (mapStatusFlag) => {
+          this.updatedMap.subscribe(
+            (mapUpToDate) => {
+              if (padsStatusFlag) {
+                if (mapStatusFlag) {
+                  if (!mapUpToDate) {
+                    this.updateAntennaPadDisplayStatus();
+                  }
+                }
+              }
+            });
+        });
     });
   }
 
@@ -120,6 +162,44 @@ export class WeatherMapComponent implements OnInit {
       const placemark_id = placemark;
       return this.placemarks[placemark_id];
     }
+
+  /**
+   * Update the status of the pads from webserver data
+   */
+  updateAntennaPadDisplayStatus() {
+    this.padsStatusGroupNames = Object.keys(this.service.padsStatus);
+    const padGroups = Object.keys(this.service.padsStatus);
+    for (let i = 0; i < padGroups.length; i++) {
+      const group = padGroups[i];
+      let groupStatus = 'not-selected';
+      if (this.selectedStation !== null) {
+        if (group === this.selectedStation['group']) {
+          groupStatus = 'selected';
+        }
+      }
+      if ( !( group in Object.keys(this.padsDisplayStatus) ) ) {
+        this.padsDisplayStatus[group] = {};
+      }
+      const pads = Object.keys(this.service.padsStatus[group]);
+      for (let j = 0; j < pads.length; j++) {
+        const padStatus = this.service.padsStatus[group][pads[j]];
+        let freeStatus = 'in-use';
+        if (padStatus === null) {
+          freeStatus = 'free';
+        }
+        this.padsDisplayStatus[group][pads[j]] = [groupStatus, freeStatus];
+      }
+    }
+    this.updatedMap.next(true);
+  }
+
+  /**
+   * Method to trigger the update of the map according to the pads' status
+   */
+   updateMap() {
+     this.updatedMap.next(false);
+   }
+
 
   /**
    * Style for the backup weather stations

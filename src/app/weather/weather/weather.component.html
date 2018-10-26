@@ -4,7 +4,7 @@
     <app-weather-map (placemarkClicked)="changeSelectedStation($event)" [selectedStation]="selectedStation"></app-weather-map>
   </mat-sidenav-content>
 
-  <mat-sidenav #weatherSidenav id="weather-sidenav" position="end" mode="side" opened="true">
+  <mat-sidenav #weatherSidenav id="weather-sidenav" position="end" mode="side" opened="true" [disableClose]="true">
     <app-weather-sidebar (panelClicked)="changeSelectedStation($event)" [selectedStation]="selectedStation"></app-weather-sidebar>
   </mat-sidenav>
 

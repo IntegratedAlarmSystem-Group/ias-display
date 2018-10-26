@@ -15,25 +15,15 @@ describe('CdbService', () => {
   let subject: CdbService;
   let testController: HttpTestingController;
 
-  const mockIasConfigurationResponse = [{
-      id: 1,
-      log_level: 'INFO',
-      refresh_rate: 2,
-      broadcast_factor: 3,
-      tolerance: 1,
+  const mockIasConfigurationResponse = {
+      logLevel: 'INFO',
+      refreshRate: '2',
+      broadcastFactor: '3',
+      tolerance: '1',
       properties: []
-  }];
-
-  const mockIasAlarmsIasiosResponse = [{
-      io_id: 'WS-MeteoTB1-Temperature',
-      short_desc: 'Temperature reported by the weather station MeteoTB1 out of range',
-      ias_type: 'ALARM',
-      doc_url: 'https://www.alma.cl/'
-  }];
+  };
 
   const iasCdbUrl = environment.httpUrl + BackendUrls.CDB_IAS;
-  const iasioCdbUrl = environment.httpUrl + BackendUrls.CDB_IASIO;
-  const iasioCdbAlarmsUrl = iasioCdbUrl + 'filtered_by_alarm';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -54,7 +44,7 @@ describe('CdbService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get the ias data configuration from the cdb and alarms iasios from api at initialization', () => {
+  it('should get the ias data configuration from the cdb api at initialization', () => {
     /* Act */
     subject.initialize();
     const calls = testController.match(
@@ -66,8 +56,7 @@ describe('CdbService', () => {
     iasCall.flush(mockIasConfigurationResponse);
     testController.verify();
     /* Final assert */
-    const expectedIasConfiguration = mockIasConfigurationResponse[0];
-    expect(subject.iasConfiguration).toEqual(expectedIasConfiguration);
+    expect(subject.iasConfiguration).toEqual(mockIasConfigurationResponse);
   });
 
   it('should be able to get the refresh rate after retrieve the configuration data', () => {

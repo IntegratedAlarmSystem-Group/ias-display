@@ -38,9 +38,41 @@ describe('AlarmComponent', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
       if (validity) {
-        expect(component.getImage()).toEqual(value + '_' + validity);
+        if (component.alarm.showAsMaintenance()) {
+          expect(component.getImage()).toEqual('maintenance_' + validity);
+        } else {
+          expect(component.getImage()).toEqual(value + '_' + validity);
+        }
       } else {
-        expect(component.getImage()).toEqual(value);
+        if (component.alarm.showAsMaintenance()) {
+          expect(component.getImage()).toEqual('maintenance');
+        } else {
+          expect(component.getImage()).toEqual(value);
+        }
+      }
+    }
+  });
+
+  it('should display the text according to the alarm properties ', () => {
+    for (const alarm of MockAlarms) {
+      component.alarm = Alarm.asAlarm(alarm);
+      component.images = MockImageSet;
+      component.imagesUnreliable = MockImageUnreliableSet;
+      const value_validity = alarm.core_id.split('_');
+      let value = value_validity[0];
+      if (value === 'low' || value === 'medium' || value === 'high' || value === 'critical') {
+        value = 'set-' + value;
+      }
+      let validity = value_validity[1];
+      if (validity === undefined) {
+        validity = 'reliable';
+      }
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      if (component.alarm.showAsMaintenance()) {
+        expect(component.getTextClass()).toEqual(['text', validity, 'maintenance']);
+      } else {
+        expect(component.getTextClass()).toEqual(['text', validity, value]);
       }
     }
   });

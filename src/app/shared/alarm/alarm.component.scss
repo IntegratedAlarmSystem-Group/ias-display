@@ -2,7 +2,7 @@ $cem: 1px;
 $xs-cem: 1*$cem;
 $sm-cem: 1.2*$cem;
 $md-cem: 1.6*$cem;
-$lg-cem: 2.2*$cem;
+$lg-cem: 3.0*$cem;
 $status-cem: 1*$cem;
 
 .alarm-component{
@@ -15,6 +15,14 @@ $status-cem: 1*$cem;
     .alarm-icon{
       height: 100%;
     }
+
+  }
+
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    padding-right: 6%
   }
 
   .badges{
@@ -42,11 +50,13 @@ $status-cem: 1*$cem;
       visibility: hidden;
     }
   }
+
 }
 
 .alarm-component-xs {
   @extend .alarm-component;
   height: 19*$xs-cem;
+  line-height: 19*$xs-cem;
 
   .badges{
     @extend .badges;
@@ -57,6 +67,7 @@ $status-cem: 1*$cem;
 .alarm-component-sm {
   @extend .alarm-component;
   height: 19*$sm-cem;
+  line-height: 19*$sm-cem;
 
   .badges{
     @extend .badges;
@@ -67,6 +78,7 @@ $status-cem: 1*$cem;
 .alarm-component-md {
   @extend .alarm-component;
   height: 19*$md-cem;
+  line-height: 19*$md-cem;
 
   .badges{
     @extend .badges;
@@ -77,16 +89,19 @@ $status-cem: 1*$cem;
 .alarm-component-lg {
   @extend .alarm-component;
   height: 19*$lg-cem;
+  line-height: 19*$lg-cem;
 
   .badges{
     @extend .badges;
     width: 8*$lg-cem;
+    margin-left: 10px;
   }
 }
 
 .alarm-component-status {
   @extend .alarm-component;
   height: 19*$status-cem;
+  line-height: 19*$status-cem;
 
   .badges{
     @extend .badges;

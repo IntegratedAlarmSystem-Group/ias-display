@@ -29,10 +29,20 @@
           &.station {
             padding-left: 0;
             font-weight: bold;
+            height: 30px;
+            width: fit-content;
+            align: right;
           }
         }
         .icon {
           padding-left: 20px;
+          font-weight: bold;
+          height: 30px;
+          width: fit-content;
+          align: right;
+        }
+        .text {
+          padding-left: 0;
           height: 30px;
           width: fit-content;
           align: right;
@@ -83,7 +93,12 @@
     }
 
     .antennas-list {
+      max-height: 200px;
       margin-top: 10px;
+      overflow-y: auto;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
     }
 
   }

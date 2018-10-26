@@ -1,3 +1,7 @@
+import { Locale } from '../settings';
+import * as moment from 'moment';
+
+
 /**
 * List of the possible Operational Modes
 */
@@ -10,6 +14,7 @@ export enum OperationalMode {
   operational = 5,
   degraded = 6,
   unknown = 7,
+  malfunctioning = 8,
 }
 
 /**
@@ -69,6 +74,12 @@ export class Alarm {
   /** Documentation url of the {@link Alarm} */
   url: string;
 
+  /** Sound name to play when an {@link Alarm} changes to set */
+  sound: string;
+
+  /** Defines wether or not the {@link Alarm} can be shelved */
+  can_shelve: boolean;
+
   /** Acknowledgement status */
   ack: boolean;
 
@@ -100,6 +111,8 @@ export class Alarm {
       json.hasOwnProperty('validity') &&
       json.hasOwnProperty('description') &&
       json.hasOwnProperty('url') &&
+      json.hasOwnProperty('sound') &&
+      json.hasOwnProperty('can_shelve') &&
       json.hasOwnProperty('ack') &&
       json.hasOwnProperty('shelved') &&
       json.hasOwnProperty('dependencies')
@@ -125,11 +138,13 @@ export class Alarm {
     const validity = <number>json['validity'];
     const description = <string>json['description'];
     const url = <string>json['url'];
+    const sound = <string>json['sound'];
+    const can_shelve = <boolean>json['can_shelve'];
     const ack = <boolean>json['ack'];
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, description, url, ack, shelved, dependencies });
+      state_change_timestamp, validity, description, url, sound, can_shelve, ack, shelved, dependencies });
   }
 
   /**
@@ -180,6 +195,44 @@ export class Alarm {
   }
 
   /**
+  * Returns a string representation according to the selected UTC offset in the app settings
+  * for the {@link Alarm.state_change_timestamp} attribute
+  * @returns {string} a date format representation of the Alarm state_change_timestamp
+  */
+  get formattedTimestamp(): string {
+    const ts = this.state_change_timestamp;
+    return moment(ts).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
+  }
+
+
+  /**
+  * Returns wether or not an {@link Alarm} should be displayed as in "maintenance" or "grayed out mode"
+  * Currently this is true for alarms with {@link OperationalMode} of either:
+  * - {@link OperationalMode.maintenance}
+  * - {@link OperationalMode.shuttedown}
+  * - {@link OperationalMode.malfunctioning}
+  * @returns {boolean} true if the alarm should be displayed as in maintenance or false if not
+  */
+  showAsMaintenance(): boolean {
+    if (this.mode === OperationalMode.maintenance ||
+        this.mode === OperationalMode.shuttedown ||
+        this.mode === OperationalMode.malfunctioning) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+  * Returns wether or not an {@link Alarm} sound should be repeated
+  * Currently this is true for critical alarms ({@link Value.set_critical})
+  * @returns {boolean} true if the alarm sound should be repeated or false if not
+  */
+  shouldRepeat(): boolean {
+    return this.value === Value.set_critical;
+  }
+
+  /**
   * Acknowledges the {@link Alarm} and returns the acknowledge status
   * @param {message} string string message of the acknowledgement
   * @returns {boolean} a the acknowledgement status
@@ -209,16 +262,6 @@ export class Alarm {
   }
 
   /**
-  * Returns a string representation of the {@link Alarm} for filtering purposes
-  * @returns {string} info of the {@link Alarm} for filtering purposes, joined by " "
-  */
-  toStringForFiltering(): string {
-    return [
-      this.status, this.description, this.name, this.operationalMode, this.timestamp
-    ].join(' ');
-  }
-
-  /**
   * Returns the {@link Alarm} status tags, needed for the displaying of status
   * through instances of {@link StatusViewComponent}
   * @returns {string} tags of the {@link Alarm} joined by "-"
@@ -243,17 +286,7 @@ export class Alarm {
     const tags = [];
     tags.push(order);
     tags.push(this.operationalMode);
-    tags.push(value);
-    if (priority !== undefined) {
-      tags.push(priority);
-    }
-    tags.push(validity);
-    if (this.ack) {
-      tags.push('ack');
-    }
-    if (this.shelved) {
-      tags.push('shelved');
-    }
+    tags.push(this.name);
     return tags.join('-');
   }
 

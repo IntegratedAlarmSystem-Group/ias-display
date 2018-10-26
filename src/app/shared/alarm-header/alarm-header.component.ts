@@ -58,7 +58,7 @@ export class AlarmHeaderComponent implements OnInit {
       result.push('green');
     } else if (this.alarm.mode === OperationalMode.unknown) {
       result.push('blue');
-    } else if (this.alarm.mode === OperationalMode.maintenance || this.alarm.mode === OperationalMode.shuttedown) {
+    } else if (this.alarm.showAsMaintenance()) {
       result.push('gray');
     } else if (this.alarm.value === Value.cleared) {
       result.push('green');
@@ -103,19 +103,16 @@ export class AlarmHeaderComponent implements OnInit {
   * @returns {string} name to display
   */
   getAlarmName(): string {
-    let alarmName;
-    if (this.alarm) {
-      if (this.optionalAlarmName) {
-        alarmName = this.optionalAlarmName;
-      } else {
+    let alarmName = '';
+    if (this.optionalAlarmName) {
+      alarmName = this.optionalAlarmName;
+    } else if (this.alarm && !this.optionalAlarmName) {
         alarmName = this.alarm.core_id;
-      }
-      if (alarmName.length > this.alarmNameMaxSize) {
-        return alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
-      } else {
-        return alarmName;
-      }
     }
+    if (alarmName.length > this.alarmNameMaxSize) {
+      alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
+    }
+    return alarmName;
   }
 
 }

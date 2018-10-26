@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Router } from '@angular/router';
 import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
 
@@ -22,14 +21,12 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
    * Instantiates the component
-   * @param {SidenavService} sidenavService Service to manage the Acknowledge and Shelve sidenav
-   * @param {Router} router system Router to handle navigation
+   * @param {SidenavService} sidenavService service to manage the Acknowledge and Shelve sidenav
    * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
    * @param {ElementRef} elementRef reference to this component in the DOM
    */
   constructor(
     public sidenavService: SidenavService,
-    private router: Router,
     private focusMonitor: FocusMonitor,
     private elementRef: ElementRef
   ) { }
@@ -77,7 +74,7 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
   * @param {MouseEvent} event Object that represent the click DOM event
   */
   onClick(event: MouseEvent) {
-    this.router.navigate([{outlets: {actions: ['shelve', this.alarm.core_id]}}]);
+    this.sidenavService.goToShelve(this.alarm.core_id);
   }
 
 }

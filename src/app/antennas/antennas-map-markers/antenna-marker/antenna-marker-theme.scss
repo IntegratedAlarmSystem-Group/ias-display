@@ -1,0 +1,39 @@
+@mixin antenna-marker-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .green {
+    stroke: mat-color($alarms, border-clear);
+    fill: mat-color($alarms, clear);
+  }
+
+  .yellow {
+    stroke: mat-color($alarms, border-set-low);
+    fill: mat-color($alarms, set-low);
+  }
+
+  .red {
+    stroke: mat-color($alarms, border-set-critical);
+    fill: mat-color($alarms, set-critical);
+  }
+
+  .gray {
+    stroke: mat-color($alarms, border-maintenance);
+    fill: mat-color($alarms, maintenance);
+  }
+
+  .blue {
+    stroke: mat-color($alarms, border-unknown);
+    fill: mat-color($alarms, unknown);
+  }
+
+  .unreliable {
+    fill: transparent;
+  }
+
+}

@@ -4,11 +4,31 @@ import { Observable ,  BehaviorSubject } from 'rxjs';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
-import { Alarm, OperationalMode, Validity } from '../data/alarm';
-import { BackendUrls, Streams } from '../settings';
+import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
+import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
 
+
+export class AlarmSounds {
+    static none = '';
+    static type1 = 'Alarm_Sound_1.mp3';
+    static type2 = 'Alarm_Sound_2.mp3';
+    static type3 = 'Alarm_Sound_3.mp3';
+    static type4 = 'Alarm_Sound_4.mp3';
+
+  static getSoundsource(sound: string) {
+    if (sound === 'TYPE1') {
+      return Assets.SOUNDS + AlarmSounds.type1;
+    } else if (sound === 'TYPE2') {
+      return Assets.SOUNDS + AlarmSounds.type2;
+    } else if (sound === 'TYPE3') {
+      return Assets.SOUNDS + AlarmSounds.type3;
+    } else if (sound === 'TYPE4') {
+      return Assets.SOUNDS + AlarmSounds.type4;
+    }
+  }
+}
 
 /**
 * Service that connects and receives {@link Alarm} messages from the
@@ -51,6 +71,22 @@ export class AlarmService {
   private webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
+  * Defines wether or not the display should emit sounds when alarms are triggered.
+  * It is used to avoid sounds when the page is refreshed, and only allow them after that
+  */
+  public canSound: boolean;
+
+  /**
+  * Reference to the audio object used to play the sounds
+  */
+  public audio = new Audio();
+
+  /**
+  * Id of the currenlty sounding Alarm
+  */
+  public soundingAlarm: string;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
@@ -84,7 +120,8 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    const alarmId = 1;
+    this.canSound = false;
+    this.audio = new Audio();
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
@@ -167,9 +204,25 @@ export class AlarmService {
   }
 
   /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
+   * Gets the open {@link ShelveRegistry} for an {@link Alarm}
+   * @param {string} alarm_id id of the target alarm
+   * @param {int} status id of the target alarm
+   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   */
+  getShelveRegistries(alarm_id, status) {
+    const url = BackendUrls.SHELVE_REGS_FILTER + '?alarm_id=' + alarm_id + '&status=' + status;
+    return this.httpClientService.get(url).pipe(
+    map(
+      (response) => {
+        return response;
+      }
+    ));
+  }
+
+  /**
+   * Shelves and {@link Alarm} with a message
+   * @param {string} alarm_id id of the alarm to shelve
+   * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
   shelveAlarm(alarm_id, message, timeout) {
@@ -191,9 +244,9 @@ export class AlarmService {
   }
 
   /**
-   * Shelves and Alarm with a message
-   * @param alarms id of the alarm to shelve
-   * @param message message of the shelving
+   * Shelves and {@link Alarm} with a message
+   * @param {string} alarms_ids id of the alarm to shelve
+   * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
   unshelveAlarms(alarms_ids, message) {
@@ -229,38 +282,111 @@ export class AlarmService {
   /**
    * Reads an alarm message from the Core and modify the service alarms list
    * depending on the action value.
-   * @param action create, update or delete
-   * @param alarm dictionary with values for alarm fields (as generic object)
+   * @param {string} action create, update or delete
+   * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
   readAlarmMessage(action, obj) {
-    const alarm = Alarm.asAlarm(obj);
     if ( action === 'create' || action === 'update' ) {
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      const alarm = Alarm.asAlarm(obj);
+      this.add_or_update_alarm(alarm);
+      this.changeAlarms(alarm.core_id);
     }
-    this.changeAlarms(alarm.core_id);
   }
 
   /**
    * Reads a list of alarm messages form the Core and add them to the
    * service alarms list
-   * @param alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
    */
   readAlarmMessagesList(alarmsList) {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
-      if (alarm.core_id in this.alarmsIndexes) {
-        this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
-      } else {
-        const newLength = this.alarmsArray.push(alarm);
-        this.alarmsIndexes[alarm.core_id] = newLength - 1;
-      }
+      this.add_or_update_alarm(alarm);
     }
     this.changeAlarms('all');
+    this.canSound = true;
+  }
+
+  /**
+   * Adds or updates an {@link Alarm} to the AlarmService
+   * @param {Alarm} alarm the {@link Alarm} to add or update
+   */
+  add_or_update_alarm(alarm) {
+    let old_alarm_value = Value.cleared;
+    let old_alarm_ack = true;
+    if (alarm.core_id in this.alarmsIndexes) {
+      const old_alarm = this.alarmsArray[this.alarmsIndexes[alarm.core_id]];
+      old_alarm_value = old_alarm.value;
+      old_alarm_ack = old_alarm.ack;
+      this.alarmsArray[this.alarmsIndexes[alarm.core_id]] = alarm;
+    } else {
+      const newLength = this.alarmsArray.push(alarm);
+      this.alarmsIndexes[alarm.core_id] = newLength - 1;
+    }
+    if (old_alarm_value === Value.cleared && alarm.value !== Value.cleared) {
+      if (alarm.sound !== 'NONE') {
+        this.playAlarmSound(alarm);
+      }
+    }
+    if (!old_alarm_ack && alarm.ack) {
+      if (alarm.sound !== 'NONE') {
+        this.clearSoundsIfAck(alarm);
+      }
+    }
+  }
+
+  /**
+   * Reproduces the sound of a given {@link Alarm}
+   * @param {Alarm} alarm the {@link Alarm}
+   */
+  playAlarmSound(alarm: Alarm) {
+    if (!this.canSound) {
+      return;
+    }
+    const repeat = alarm.shouldRepeat();
+    if (repeat) {
+      this.soundingAlarm = alarm.core_id;
+      this.audio.pause();
+      this.emitSound(alarm.sound, repeat);
+    } else if (this.audio.paused) {
+      this.emitSound(alarm.sound, repeat);
+    }
+  }
+
+  /**
+   * Reproduces a sound
+   * @param {string} sound the type of sound to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not
+   */
+  emitSound(sound: string, repeat: boolean) {
+    console.log('calling emit with: ', sound);
+    this.audio = new Audio();
+    this.audio.src = AlarmSounds.getSoundsource(sound);
+    if (repeat) {
+      this.audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+    }
+    this.audio.load();
+    this.audio.play();
+  }
+
+  clearSoundsIfAck(alarm: Alarm) {
+    if (!alarm.shouldRepeat()) {
+      return;
+    }
+    if (this.soundingAlarm === alarm.core_id) {
+      this.audio.pause();
+      this.soundingAlarm = null;
+      for (alarm of this.alarmsArray) {
+        if (!alarm.ack && alarm.sound !== 'NONE' && alarm.shouldRepeat()) {
+          this.soundingAlarm = alarm.core_id;
+          this.playAlarmSound(alarm);
+          return;
+        }
+      }
+    }
   }
 
   /******* PERIODIC CHECK OF VALIDITY OF ALARMS *******/
@@ -299,7 +425,7 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + 1;
+    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
 
     const now = (new Date).getTime();
     let millisecondsDelta;

@@ -12,7 +12,12 @@
           </mat-expansion-panel-header>
           <table>
             <tr>
-              <td class="station">Station</td>
+              <!-- <td class="station">Station</td> -->
+              <td>
+                <div class="text">
+                  <app-alarm [alarm]="this.getAlarm(stationConfig.station)" [text]="'Station'"></app-alarm>
+                </div>
+              </td>
               <td>
                 <div class="status">
                   <app-status-view [alarm]="this.getAlarm(stationConfig.station)" [showActionBadges]="false"></app-status-view>
@@ -71,13 +76,13 @@
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">
             <div class="antennas-title"> Nearby Antennas </div>
-            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig.station)">
+            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">
               <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>
             </button>
           </div>
           <div class="antennas-list">
             <ul>
-              <li *ngFor="let antenna of this.getAntennas(stationConfig.station)"> {{antenna}} </li>
+              <li *ngFor="let antenna of this.getAntennas(stationConfig)"> {{antenna}} </li>
             </ul>
           </div>
         </mat-expansion-panel>

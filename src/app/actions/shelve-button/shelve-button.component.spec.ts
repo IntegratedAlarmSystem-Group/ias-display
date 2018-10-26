@@ -3,10 +3,10 @@ import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { Router } from '@angular/router';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AppModule, appRoutes } from '../../app.module';
+import { RoutingService } from '../../data/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
@@ -17,7 +17,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
   let fixture: ComponentFixture<ShelveButtonComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
-  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
   const mockAlarm = Alarm.asAlarm({
     'value': 4,
     'core_id': 'coreid$1',
@@ -28,6 +28,8 @@ describe('GIVEN a ShelveButtonComponent', () => {
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
+    'sound': 'NONE',
+    'can_shelve': true,
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -44,7 +46,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
       ],
       providers: [
         SidenavService,
-        { provide: Router, useValue: spyRoutingTable },
+        { provide: RoutingService, useValue: spyRoutingTable },
       ],
     })
     .compileComponents();
@@ -95,9 +97,9 @@ describe('GIVEN a ShelveButtonComponent', () => {
         }
       };
       component.onClick(null);
-      const expectedargs = [{outlets: {actions: ['shelve', component.alarm.core_id]}}];
-      expect(spyRoutingTable.navigate.calls.count()).toBe(1, 'spy method was called once');
-      expect(spyRoutingTable.navigate.calls.mostRecent().args[0]).
+      const expectedargs = component.alarm.core_id;
+      expect(spyRoutingTable.goToShelve.calls.count()).toBe(1, 'spy method was called once');
+      expect(spyRoutingTable.goToShelve.calls.mostRecent().args[0]).
         toEqual(expectedargs, 'spy method was called with the right parameters');
     });
   });

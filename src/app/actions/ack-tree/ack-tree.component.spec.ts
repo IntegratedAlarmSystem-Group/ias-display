@@ -161,9 +161,9 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       expect([flatNode0.item, flatNode1.item]).toEqual(['child_1', 'child_2']);
       const alarmsToSelect = ['child_1', 'child_2'];
       const expectedAckList =
-        ['grandChild_11', 'grandChild_12', 'grandChild_13', 'grandChild_21', 'grandChild_22', 'grandChild_23'];
+        ['grandChild_11', 'grandChild_12', 'grandChild_13', 'grandChild_21', 'grandChild_23'];
       const expectedSelectedAlarms = [
-        'grandChild_11', 'grandChild_12', 'grandChild_13', 'grandChild_21', 'grandChild_22', 'grandChild_23',
+        'grandChild_11', 'grandChild_12', 'grandChild_13', 'grandChild_21', 'grandChild_23',
         'child_1', 'child_2', 'parent'
       ];
       component.alarmItemSelectionToggle(flatNode0);

@@ -1,0 +1,39 @@
+@mixin alarm-header-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .green {
+    border-color: mat-color($alarms, clear);
+    background: mat-color($alarms, clear);
+  }
+
+  .yellow {
+    border-color: mat-color($alarms, set-low);
+    background: mat-color($alarms, set-low);
+  }
+
+  .red {
+    border-color: mat-color($alarms, set-critical);
+    background: mat-color($alarms, set-critical);
+  }
+
+  .gray {
+    border-color: mat-color($alarms, maintenance);
+    background: mat-color($alarms, maintenance);
+  }
+
+  .blue {
+    border-color: mat-color($alarms, unknown);
+    background: mat-color($alarms, unknown);
+  }
+
+  .unreliable {
+    background: transparent;
+  }
+
+}

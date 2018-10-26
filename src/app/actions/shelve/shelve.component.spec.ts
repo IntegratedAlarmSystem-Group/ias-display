@@ -1,12 +1,13 @@
 import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { of } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../data/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveComponent } from './shelve.component';
 import { Alarm } from '../../data/alarm';
@@ -19,7 +20,9 @@ describe('ShelveComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
-  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  const spyRoutingTable = jasmine.createSpyObj(
+    'RoutingService', ['goToShelve', 'cleanActionOutlet', 'goToAcknowledge']
+  );
   const mockAlarm = Alarm.asAlarm({
       'value': 0,
       'core_id': 'coreid$1',
@@ -30,6 +33,8 @@ describe('ShelveComponent', () => {
       'validity': '1',
       'description': 'Short description for mock alarm',
       'url': 'https://www.alma.cl',
+      'sound': 'NONE',
+      'can_shelve': true,
       'ack': false,
       'shelved': false,
       'dependencies': [],
@@ -50,7 +55,7 @@ describe('ShelveComponent', () => {
         HttpClient,
         NgxSpinnerService,
         SidenavService,
-        { provide: Router, useValue: spyRoutingTable },
+        { provide: RoutingService, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -79,8 +84,10 @@ describe('ShelveComponent', () => {
     spyOn(sidenavService, 'close');
     spyOn(sidenavService, 'toggle');
     component = fixture.componentInstance;
+    spyOn(component, 'onClose');
     component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
+    component.reload();
     componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
@@ -106,6 +113,7 @@ describe('ShelveComponent', () => {
     expect(componentBody.textContent).toContain(expected);
   });
 
+  // Shelve Panel
   // Form
   describe('should have a form', () => {
     it('with an input field and a select', () => {
@@ -122,13 +130,6 @@ describe('ShelveComponent', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    // describe('such that when the user enters a message but does not select a timeout', () => {
-    //   it('the form should be invalid', () => {
-    //     expect(component.form.valid).toBeFalsy();
-    //     component.form.controls['message'].setValue('Any Message');
-    //     expect(component.form.valid).toBeFalsy();
-    //   });
-    // });
     describe('such that when the user selects a timeout but does not enter a message ', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
@@ -143,6 +144,26 @@ describe('ShelveComponent', () => {
         component.form.controls['timeout'].setValue(component.timeouts[0]);
         expect(component.form.valid).toBeTruthy();
       });
+    });
+  });
+  // Cancel button
+  describe('it should have a Cancel button', () => {
+    it('in the modal footer', () => {
+      // component.alarm.shelve();
+      fixture.detectChanges();
+      const sendButton = componentFooter.querySelector('#cancel');
+      expect(sendButton).toBeTruthy();
+      expect(sendButton.innerText).toEqual('Cancel');
+    });
+    describe('and when the user clicks on it,', () => {
+      it('it should call the component onClose method', async(() => {
+        // component.alarm.shelve();
+        fixture.detectChanges();
+        componentFooter.querySelector('#cancel').click();
+        fixture.whenStable().then(() => {
+          expect(component.onClose).toHaveBeenCalled();
+        });
+      }));
     });
   });
 
@@ -178,25 +199,87 @@ describe('ShelveComponent', () => {
     });
   });
 
-  // Unshelve button
-  describe('WHEN the Alarm is shelved, it should have an Unshelve button', () => {
-    it('in the modal footer', () => {
+  // Unshelve Panel
+  describe('WHEN the Alarm is shelved,', () => {
+    // No form
+    it('it should not have a form', () => {
       component.alarm.shelve();
       fixture.detectChanges();
-      const sendButton = componentFooter.querySelector('#send');
-      expect(sendButton).toBeTruthy();
-      expect(sendButton.innerText).toEqual('Unshelve');
+      expect(componentBody.querySelector('textarea')).toBeFalsy();
+      expect(componentBody.querySelector('mat-select')).toBeFalsy();
     });
-    describe('and when the user clicks on it,', () => {
-      it('it should call the component unshelve method', async(() => {
+    // Unshelve button
+    describe('it should have an Unshelve button', () => {
+      it('in the modal footer', () => {
         component.alarm.shelve();
         fixture.detectChanges();
-        componentFooter.querySelector('#send').click();
-        fixture.whenStable().then(() => {
-          expect(alarmService.unshelveAlarms).toHaveBeenCalled();
-          expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
-        });
-      }));
+        const sendButton = componentFooter.querySelector('#send');
+        expect(sendButton).toBeTruthy();
+        expect(sendButton.innerText).toEqual('Unshelve');
+      });
+      describe('and when the user clicks on it,', () => {
+        it('it should call the component unshelve method', async(() => {
+          component.alarm.shelve();
+          fixture.detectChanges();
+          componentFooter.querySelector('#send').click();
+          fixture.whenStable().then(() => {
+            expect(alarmService.unshelveAlarms).toHaveBeenCalled();
+            expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
+          });
+        }));
+      });
+    });
+    // Cancel button
+    describe('it should have a Cancel button', () => {
+      it('in the modal footer', () => {
+        component.alarm.shelve();
+        fixture.detectChanges();
+        const sendButton = componentFooter.querySelector('#cancel');
+        expect(sendButton).toBeTruthy();
+        expect(sendButton.innerText).toEqual('Cancel');
+      });
+      describe('and when the user clicks on it,', () => {
+        it('it should call the component onClose method', async(() => {
+          component.alarm.shelve();
+          fixture.detectChanges();
+          componentFooter.querySelector('#cancel').click();
+          fixture.whenStable().then(() => {
+            expect(component.onClose).toHaveBeenCalled();
+          });
+        }));
+      });
+    });
+  });
+
+  // Non-shelvable alarm
+  describe('WHEN the Alarm is non-shelvable,', () => {
+    // No form
+    it('it should not have a form nor a Shelve/Unshleve button', () => {
+      component.alarm.can_shelve = false;
+      fixture.detectChanges();
+      expect(componentBody.querySelector('textarea')).toBeFalsy();
+      expect(componentBody.querySelector('mat-select')).toBeFalsy();
+      expect(componentFooter.querySelector('#send')).toBeFalsy();
+    });
+    // Close button
+    describe('it should have a Close button', () => {
+      it('in the modal footer', () => {
+        component.alarm.can_shelve = false;
+        fixture.detectChanges();
+        const sendButton = componentFooter.querySelector('#close');
+        expect(sendButton).toBeTruthy();
+        expect(sendButton.innerText).toEqual('Close');
+      });
+      describe('and when the user clicks on it,', () => {
+        it('it should call the component onClose method', async(() => {
+          component.alarm.can_shelve = false;
+          fixture.detectChanges();
+          componentFooter.querySelector('#close').click();
+          fixture.whenStable().then(() => {
+            expect(component.onClose).toHaveBeenCalled();
+          });
+        }));
+      });
     });
   });
 });

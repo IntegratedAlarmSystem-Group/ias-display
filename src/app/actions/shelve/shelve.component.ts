@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
@@ -32,11 +32,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Timeout options for shelving alarms
   */
   timeouts: TimeoutOption[] = [
-    {value: '0:15:00', viewValue: '15 minutes'},
-    {value: '0:30:00', viewValue: '30 minutes'},
-    {value: '1:00:00', viewValue: '1 hour'},
-    {value: '2:00:00', viewValue: '2 hours'},
-    {value: '6:00:00', viewValue: '6 hours'},
+    {value: '00:15:00', viewValue: '15 minutes'},
+    {value: '00:30:00', viewValue: '30 minutes'},
+    {value: '01:00:00', viewValue: '1 hour'},
+    {value: '02:00:00', viewValue: '2 hours'},
+    {value: '06:00:00', viewValue: '6 hours'},
     {value: '12:00:00', viewValue: '12 hours'},
   ];
 
@@ -78,6 +78,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   requestStatus = 0;
 
+  errorMessage = '';
+
+  shelvedAtMessage = '';
+
   /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
@@ -85,15 +89,13 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
    * @param {Route} route Reference to the url that triggered the initialization of this component
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
-   * @param {Router} router Angular Router used to navigate through the application
    */
   constructor(
     private formBuilder: FormBuilder,
     private alarmService: AlarmService,
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
-    private spinnerService: NgxSpinnerService,
-    private router: Router
+    private spinnerService: NgxSpinnerService
   ) {
   }
 
@@ -103,6 +105,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.message = new FormControl('', [Validators.required]);
     this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);
+    this.shelvedAtMessage = '';
     this.form = this.formBuilder.group({
       message: this.message,
       timeout: this.timeout
@@ -111,6 +114,13 @@ export class ShelveComponent implements OnInit, OnDestroy {
       this.alarm_id = paramMap.get('alarmID');
       this.reload();
     });
+    this.sidenavService.shouldReload.subscribe(
+      value => {
+        if (value === true) {
+          this.reload();
+        }
+      }
+    );
     this.sidenavService.open();
   }
 
@@ -122,123 +132,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Cleans the component and reloads the Alarm
-  */
-  reload(): void {
-    this.alarm = this.alarmService.get(this.alarm_id);
-    this.requestStatus = 0;
-    this.message.reset();
-    this.timeout.reset(this.defaultTimeout);
-  }
-
-  /**
-  * Closes the sidenav
-  */
-  onClose(): void {
-    this.router.navigate([{outlets: {actions: null}}]);
-  }
-
-  /**
-   * Send the shelve/unshelve request through the method provided by the {@link AlarmService} and handle the response.
-   */
-  toggleShelveUnshelve(): void {
-    if (this.alarm.shelved) {
-      this.unshelve();
-    } else {
-      this.shelve();
-    }
-  }
-
-  /**
-   * Calls the webserver to apply the shelving of the alarm
-   */
-  shelve(): void {
-    this.showSpinner();
-    const message = this.message.value;
-    const timeout = this.timeout.value;
-    if (this.canSend()) {
-      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
-          (response) => {
-            this.requestStatus = 1;
-            this.hideSpinner();
-          },
-          (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
-            this.hideSpinner();
-            return error;
-          }
-        );
-    } else {
-      this.hideSpinner();
-      /* TODO: Show a message, add a red asterisc, etc. */
-    }
-  }
-
-  /**
-   * Calls the webserver to apply the unshelving of the alarm
-   */
-  unshelve(): void {
-    this.showSpinner();
-    if (this.canSend()) {
-      this.alarmService.unshelveAlarms(
-        [this.alarm.core_id], this.form.get('message').value).subscribe(
-          (response) => {
-            this.requestStatus = 1;
-            this.hideSpinner();
-          },
-          (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
-            this.hideSpinner();
-            return error;
-          }
-        );
-    } else {
-      this.hideSpinner();
-      /* TODO: Show a message, add a red asterisc, etc. */
-    }
-  }
-
-  /**
-  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
-  * It also blocks closing and navigation of the the Sidebar
-  */
-  private showSpinner(): void {
-    this.sidenavService.canClose = false;
-    this.spinnerService.show();
-  }
-
-  /**
-  * Hides the spinner after the Alarm has been shelved/unshelved
-  * It also unblocks closing and navigation of the the Sidebar
-  */
-  private hideSpinner(): void {
-    this.spinnerService.hide();
-    this.sidenavService.canClose = true;
-  }
-
-  /**
    * Defines wether the Shelve/unshelve action can be done or not, based on the status of the Alarm and the validity of the form
    * @returns {boolean} True if shelve action can be performed and false if not
    */
   canSend(): boolean {
     return this.alarm.shelved || this.form.valid;
-  }
-
-  /**
-   * Returns the text to display in the title, depeding if the alarm is "Shelved" or "Unshelved"
-   * @returns {string} the text to display in the title
-   */
-  getTitleText(): string {
-    if (!this.alarm) {
-      return null;
-    }
-    if (this.alarm.shelved) {
-      return 'ALARM UNSHELVING';
-    } else {
-      return 'ALARM SHELVING';
-    }
   }
 
   /**
@@ -257,14 +155,29 @@ export class ShelveComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Returns the text to display in the title, depeding if the alarm is "Shelved" or "Unshelved"
+   * @returns {string} the text to display in the title
+   */
+  getTitleText(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    if (this.alarm.shelved) {
+      return 'ALARM UNSHELVING';
+    } else {
+      return 'ALARM SHELVING';
+    }
+  }
+
+  /**
    * Returns the text to display in the title
    * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
    */
   getResponseMessageTitle(): string {
     if (!this.alarm.shelved) {
-      return 'Shelving results';
+      return 'Shelving';
     } else {
-      return 'Unshelving results';
+      return 'Unshelving';
     }
   }
 
@@ -290,9 +203,130 @@ export class ShelveComponent implements OnInit, OnDestroy {
       } else {
         response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
       }
-      response += ' Please try again. If the problem persists, contact the system administrator.';
+      response += ' The server responded the following: ' +  this.errorMessage;
+      // response += ' Please try again. If the problem persists, contact the system administrator.';
       return response;
     }
+  }
+
+
+  /**
+  * Closes the sidenav
+  */
+  onClose(): void {
+    this.sidenavService.close();
+  }
+
+  /**
+  * Cleans the component and reloads the Alarm
+  */
+  reload(): void {
+    this.shelvedAtMessage = '';
+    this.alarm = this.alarmService.get(this.alarm_id);
+    if (this.alarm.shelved) {
+      this.requestShelveInfo();
+    }
+    this.requestStatus = 0;
+    this.message.reset();
+    this.timeout.reset(this.defaultTimeout);
+  }
+
+  /**
+   * Send the shelve/unshelve request through the method provided by the {@link AlarmService} and handle the response.
+   */
+  toggleShelveUnshelve(): void {
+    if (this.alarm.shelved) {
+      this.unshelve();
+    } else {
+      this.shelve();
+    }
+  }
+
+  requestShelveInfo(): void {
+    this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
+        (response) => {
+          const registry = response[0];
+          this.shelvedAtMessage = 'This Alarm was shelved at ' + registry['shelved_at'] +
+          ' with a duration of ' + this.timeouts.find(t => t.value === registry['timeout']).viewValue;
+        },
+        (error) => {
+          console.log('Error: ', error);
+          return error;
+        }
+      );
+  }
+
+  /**
+   * Calls the webserver to apply the shelving of the alarm
+   */
+  shelve(): void {
+    this.showSpinner();
+    const message = this.message.value;
+    const timeout = this.timeout.value;
+    if (this.canSend()) {
+      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
+          (response) => {
+            this.requestStatus = 1;
+            this.hideSpinner();
+            this.errorMessage = '';
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.requestStatus = -1;
+            this.hideSpinner();
+            this.errorMessage = error['error'];
+            return error;
+          }
+        );
+    } else {
+      this.hideSpinner();
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  /**
+   * Calls the webserver to apply the unshelving of the alarm
+   */
+  unshelve(): void {
+    this.showSpinner();
+    if (this.canSend()) {
+      this.alarmService.unshelveAlarms(
+        [this.alarm.core_id], this.form.get('message').value).subscribe(
+          (response) => {
+            this.requestStatus = 1;
+            this.hideSpinner();
+            this.errorMessage = '';
+          },
+          (error) => {
+            console.log('Error: ', error);
+            this.requestStatus = -1;
+            this.hideSpinner();
+            this.errorMessage = error['error'];
+            return error;
+          }
+        );
+    } else {
+      this.hideSpinner();
+      /* TODO: Show a message, add a red asterisc, etc. */
+    }
+  }
+
+  /**
+  * Hides the spinner after the Alarm has been shelved/unshelved
+  * It also unblocks closing and navigation of the the Sidebar
+  */
+  private hideSpinner(): void {
+    this.spinnerService.hide();
+    this.sidenavService.canClose = true;
+  }
+
+  /**
+  * Shows a spinner used to indicate the user that the Alarm is being shelved/unshelved
+  * It also blocks closing and navigation of the the Sidebar
+  */
+  private showSpinner(): void {
+    this.sidenavService.canClose = false;
+    this.spinnerService.show();
   }
 
 }

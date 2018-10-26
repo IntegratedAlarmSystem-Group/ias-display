@@ -4,6 +4,7 @@ import { ButtonsComponent } from './buttons.component';
 import { AckButtonComponent } from '../ack-button/ack-button.component';
 import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
 import { WikiButtonComponent } from '../wiki-button/wiki-button.component';
+import { RoutingService } from '../../data/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
@@ -11,7 +12,7 @@ import { Alarm } from '../../data/alarm';
 describe('ButtonsComponent', () => {
   let component: ButtonsComponent;
   let fixture: ComponentFixture<ButtonsComponent>;
-  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  const spyRoutingService = jasmine.createSpyObj('RoutingService', ['goToAcknowledge', 'goToShelve']);
   const mockAlarm = Alarm.asAlarm({
     'value': 4,
     'core_id': 'coreid$1',
@@ -22,6 +23,8 @@ describe('ButtonsComponent', () => {
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
+    'sound': 'NONE',
+    'can_shelve': true,
     'ack': false,
     'shelved': false,
     'dependencies': [],
@@ -38,7 +41,7 @@ describe('ButtonsComponent', () => {
       ],
       providers: [
         SidenavService,
-        { provide: Router, useValue: spyRoutingTable },
+        { provide: RoutingService, useValue: spyRoutingService },
       ],
     })
     .compileComponents();

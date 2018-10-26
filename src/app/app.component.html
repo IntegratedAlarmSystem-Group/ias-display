@@ -13,7 +13,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container autosize>
-    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true">
+    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true" [disableClose]="true">
       <mat-nav-list>
         <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
@@ -33,7 +33,7 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav #actionsSidenav id="actions-sidenav" position="end" mode="side" opened="false">
+    <mat-sidenav #actionsSidenav id="actions-sidenav" position="end" mode="side" opened="false" [disableClose]="true">
         <router-outlet name="actions"></router-outlet>
     </mat-sidenav>
   </mat-sidenav-container>

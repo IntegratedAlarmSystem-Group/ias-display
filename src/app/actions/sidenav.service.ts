@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { BehaviorSubject } from 'rxjs';
+import { RoutingService } from '../data/routing.service';
 
 /**
 * Service used to handle the sidenv where the actions panels (Acknowledge and Shelve) are displayed
@@ -10,9 +12,22 @@ import { MatSidenav } from '@angular/material';
 export class SidenavService {
 
   /**
+  * Stream of notifications of changes in
+  * the status of the service connection
+  */
+  public shouldReload = new BehaviorSubject<any>(false);
+
+  /**
+  * Id of the last {@link Alarm}
+  */
+  lastAlarmId = '';
+
+  /**
    * Builds an instance of the service
    */
-  constructor() { }
+  constructor(
+    private routingService: RoutingService
+  ) { }
 
   /** Reference to the sidenav */
   private sidenav: MatSidenav;
@@ -39,6 +54,7 @@ export class SidenavService {
   * Closes the sidenav
   */
   public close() {
+    this.routingService.cleanActionOutlet();
     return this.sidenav.close();
   }
 
@@ -47,5 +63,26 @@ export class SidenavService {
   */
   public toggle(): void {
     this.sidenav.toggle();
+  }
+
+  /**
+  * Go to Acknowledge View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Acknowledge
+  */
+  public goToAcknowledge(alarm_id: string) {
+    this.routingService.goToAcknowledge(alarm_id);
+  }
+
+  /**
+  * Go to Shelve View in the action outlet
+  * @param {string} alarm_id Id of the alarm to Shleve/Unshelve
+  */
+  public goToShelve(alarm_id: string) {
+    if (alarm_id === this.lastAlarmId) {
+      this.shouldReload.next(true);
+    } else {
+      this.lastAlarmId = alarm_id;
+    }
+    this.routingService.goToShelve(alarm_id);
   }
 }
