@@ -435,13 +435,15 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/antennas/antennas-map-markers/antenna-marker/antenna-marker.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/antennas/antennas-map-markers/antenna-marker/antenna-marker.component.ts:53</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Returns the CSS class that should be used to draw the marker</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code>{}</code>
@@ -633,6 +635,9 @@ export class AntennaMarkerComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Returns the CSS class that should be used to draw the marker
+   */
   getNgClass() {
     let colorClass &#x3D; &#x27;green&#x27;;
     if (this.alarm.shelved &#x3D;&#x3D;&#x3D; true) {

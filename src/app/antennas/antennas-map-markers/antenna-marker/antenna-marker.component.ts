@@ -47,6 +47,9 @@ export class AntennaMarkerComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Returns the CSS class that should be used to draw the marker
+   */
   getNgClass() {
     let colorClass = 'green';
     if (this.alarm.shelved === true) {
