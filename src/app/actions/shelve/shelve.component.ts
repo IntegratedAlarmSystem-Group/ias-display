@@ -78,8 +78,14 @@ export class ShelveComponent implements OnInit, OnDestroy {
   */
   requestStatus = 0;
 
+  /**
+  * Stores the error message returned by the Webserver if a shelve or unshelve request fails
+  */
   errorMessage = '';
 
+  /**
+  * Stores the message with the information of when the alarm has been shelved and for how long
+  */
   shelvedAtMessage = '';
 
   /**
@@ -242,6 +248,9 @@ export class ShelveComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Requests the alarm shelving info to the Webserver
+   */
   requestShelveInfo(): void {
     this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
         (response) => {

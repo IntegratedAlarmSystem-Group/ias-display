@@ -79,6 +79,7 @@ export class WeatherService {
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
 
+  /** Stores the response of the pads status request to the websver */
   public padsStatus = null;
 
   /** Variable to check if pads status is available */
@@ -117,8 +118,8 @@ export class WeatherService {
   }
 
   /**
-  * Requests data for the pads status, to know if each one is in use
-  * to locate, or not, an antenna
+  * Requests data for the pads status, to know if each one is in use or not, in order to to locate an antenna
+  * @param {string} group the group
   * @returns {Observable<Object>} observable of the data in a JSON
   */
   getPadsStatus(group: string): Observable<Object> {
@@ -128,9 +129,9 @@ export class WeatherService {
 
   /**
   * Loads the pads status in the related variable of this service
+  * @param {string} group the group
   */
   loadPadsStatus(group: string) {
-
     this.getPadsStatus(group).subscribe(
       (response) => {
         this.padsStatusAvailable.next(false);

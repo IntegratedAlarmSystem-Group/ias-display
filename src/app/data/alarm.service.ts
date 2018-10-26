@@ -10,14 +10,32 @@ import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
 
 
+/**
+* Class used to model the different sound options and their corresponding audio files
+*/
 export class AlarmSounds {
-    static none = '';
-    static type1 = 'Alarm_Sound_1.mp3';
-    static type2 = 'Alarm_Sound_2.mp3';
-    static type3 = 'Alarm_Sound_3.mp3';
-    static type4 = 'Alarm_Sound_4.mp3';
 
-  static getSoundsource(sound: string) {
+  /** This is the type for alarms with no sound */
+  static none = '';
+
+  /** The name of the audio file associated to the sound TYPE1 */
+  static type1 = 'Alarm_Sound_1.mp3';
+
+  /** The name of the audio file associated to the sound TYPE2 */
+  static type2 = 'Alarm_Sound_2.mp3';
+
+  /** The name of the audio file associated to the sound TYPE3 */
+  static type3 = 'Alarm_Sound_3.mp3';
+
+  /** The name of the audio file associated to the sound TYPE4 */
+  static type4 = 'Alarm_Sound_4.mp3';
+
+  /**
+  * Given a sound type, retruns the associated audiofile
+  * @param {string} sound The sound type, e.g. TYPE1, TYPE2, etc.
+  * @returns {string} the filepath of the corresponding audio file
+  */
+  static getSoundsource(sound: string): string {
     if (sound === 'TYPE1') {
       return Assets.SOUNDS + AlarmSounds.type1;
     } else if (sound === 'TYPE2') {
@@ -223,6 +241,7 @@ export class AlarmService {
    * Shelves and {@link Alarm} with a message
    * @param {string} alarm_id id of the alarm to shelve
    * @param {string} message message of the shelving
+   * @param {string} timeout the timeout for the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
   shelveAlarm(alarm_id, message, timeout) {
@@ -372,6 +391,13 @@ export class AlarmService {
     this.audio.play();
   }
 
+  /**
+   * Stops the sound of a given {@link Alarm}, only if the sound is being repeated
+   * It is intended to be used when critical alarms (repeated) are acknowledged.
+   * Once the sound stops, it check there is another non-acknowledged alarm and plays its sound repeatedly,
+   * by calling {@link AlarmService.html#playAlarmSound}
+   * @param {Alarm} alarm the {@link Alarm}
+   */
   clearSoundsIfAck(alarm: Alarm) {
     if (!alarm.shouldRepeat()) {
       return;

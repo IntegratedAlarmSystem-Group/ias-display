@@ -31,7 +31,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   /**
-  * Defines wether the filter for only SET {@link Alarm} is activated or not.
+  * Defines whether the filter for SET {@link Alarm} is activated or not.
   * When the user writes either "set", " set" or "set " this field becomes true
   * If the user deletes "set" from the input field then this field becomes false
   * This attribute is binded to the state of the toggle slide switch
@@ -39,7 +39,15 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   * with the keys '"unack"' and '"shelved"' instead.
   */
   public _setFilterActivated = false;
+
+  /**
+  * Defines whether the filter for UNACK {@link Alarm} is activated or not.
+  */
   public _unackFilterActivated = false;
+
+  /**
+  * Defines whether the filter for SHELVED {@link Alarm} is activated or not.
+  */
   public _shelvedFilterActivated = false;
 
   /** String to define the keyword to filter SET {@link Alarm} */
@@ -71,7 +79,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
 
-  resultsLength = 0;
+
 
   /**
   * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values
