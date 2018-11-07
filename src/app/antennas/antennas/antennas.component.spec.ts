@@ -8,7 +8,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { MapModule } from '../../map/map.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AntennasService } from '../antennas.service';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';

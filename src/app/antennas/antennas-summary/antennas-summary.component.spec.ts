@@ -7,7 +7,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AntennasSummaryComponent } from './antennas-summary.component';
 import { AntennasService } from '../antennas.service';
-import { RoutingService} from '../../data/routing.service';
+import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmService } from '../../data/alarm.service';
 
 const AlarmID = 'antenna-dummy-alarm';

@@ -6,7 +6,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
 import { WeatherSummaryComponent } from './weather-summary.component';
-import { RoutingService} from '../../data/routing.service';
+import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';

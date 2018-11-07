@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
-import { RoutingService } from '../data/routing.service';
+import { RoutingService } from '../app-routing/routing.service';
 
 /**
 * Service used to handle the sidenv where the actions panels (Acknowledge and Shelve) are displayed
