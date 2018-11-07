@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { HealthModule } from './health/health.module';
 import { MapModule } from './map/map.module';
-import { MaterialSandboxComponent } from './material-sandbox/material-sandbox.component';
 import { OverviewModule } from './overview/overview.module';
 import { SharedModule } from './shared/shared.module';
 import { TabularModule } from './tabular/tabular.module';
@@ -23,8 +22,7 @@ import { AppComponent } from './app.component';
 */
 @NgModule({
   declarations: [
-    AppComponent,
-    MaterialSandboxComponent
+    AppComponent
   ],
   imports: [
     ActionsModule,

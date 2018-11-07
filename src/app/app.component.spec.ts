@@ -3,6 +3,7 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { DataModule } from './data/data.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
@@ -20,7 +21,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       imports: [
-        RouterModule.forRoot(appRoutes),
+        AppRoutingModule,
         IasMaterialModule,
         DataModule,
       ],
