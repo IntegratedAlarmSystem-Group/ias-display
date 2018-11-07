@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RoutingService } from './routing.service';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
-import { OverviewModule } from '../overview/overview.module';
-import { TabularModule } from '../tabular/tabular.module';
 import { AckComponent } from '../actions/ack/ack.component';
 import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { AntennasComponent } from '../antennas/antennas/antennas.component';
@@ -33,8 +31,6 @@ export const appRoutes: Routes = [
   imports: [
     CommonModule,
     IasMaterialModule,
-    OverviewModule,
-    TabularModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- true for debugging purposes only
