@@ -4,7 +4,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AlarmService } from './alarm.service';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from './http-client.service';
-import { RoutingService } from './routing.service';
 
 
 /**
@@ -21,7 +20,6 @@ import { RoutingService } from './routing.service';
     CdbService,
     HttpClient,
     HttpClientService,
-    RoutingService,
   ],
   exports: [
     HttpClientModule
