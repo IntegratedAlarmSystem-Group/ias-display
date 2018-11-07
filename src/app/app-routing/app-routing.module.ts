@@ -9,6 +9,7 @@ import { OverviewComponent } from '../overview/overview/overview.component';
 import { ShelveComponent } from '../actions/shelve/shelve.component';
 import { TabularViewComponent } from '../tabular/tabular-view/tabular-view.component';
 import { WeatherComponent } from '../weather/weather/weather.component';
+import { RoutingService } from './routing.service';
 
 /**
 * Application routes
@@ -27,9 +28,16 @@ export const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false } // <-- true for debugging purposes only
+    )
   ],
   declarations: [],
+  providers: [
+    RoutingService
+  ],
   exports: [
     RouterModule
   ]
