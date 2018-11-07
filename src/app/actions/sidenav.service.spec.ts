@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { RoutingService } from '../data/routing.service';
+import { RoutingService } from '../app-routing/routing.service';
 import { SidenavService } from './sidenav.service';
 
 describe('SidenavService', () => {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-// import { RoutingService } from '../../data/routing.service';
+// import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService, AntennaConfig } from '../antennas.service';

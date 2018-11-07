@@ -4,7 +4,7 @@ import { ButtonsComponent } from './buttons.component';
 import { AckButtonComponent } from '../ack-button/ack-button.component';
 import { ShelveButtonComponent } from '../shelve-button/shelve-button.component';
 import { WikiButtonComponent } from '../wiki-button/wiki-button.component';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';

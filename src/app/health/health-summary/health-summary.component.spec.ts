@@ -4,7 +4,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { HealthSummaryComponent } from './health-summary.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { RoutingService} from '../../data/routing.service';
+import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmService } from '../../data/alarm.service';
 
 describe('HealthSummaryComponent', () => {

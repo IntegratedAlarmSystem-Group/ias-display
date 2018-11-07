@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AlarmService } from '../../data/alarm.service';
-// import { RoutingService } from '../../data/routing.service';
+// import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
 import { AntennasService, AntennaConfig } from '../antennas.service';
 import { SharedModule } from '../../shared/shared.module';

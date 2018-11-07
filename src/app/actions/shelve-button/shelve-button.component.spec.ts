@@ -7,7 +7,7 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AppModule } from '../../app.module';
 import { appRoutes } from '../../app-routing/app-routing.module';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
