@@ -6,13 +6,12 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { AppRoutingModule } from '../../app-routing/app-routing.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { ActionsModule } from '../../actions/actions.module';
-import { OverviewModule } from '../../overview/overview.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
@@ -47,13 +46,12 @@ describe('TabularViewComponent', () => {
         MatTableModule,
         MatSortModule,
         ActionsModule,
-        AppRoutingModule,
         IasMaterialModule,
-        OverviewModule,
         DataModule,
         SharedModule,
       ],
       providers: [
+        RoutingService,
         {
           provide: ActivatedRoute,
           useValue: {

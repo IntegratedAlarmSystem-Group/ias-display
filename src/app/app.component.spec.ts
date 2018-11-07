@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' }
 ];
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
 
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
