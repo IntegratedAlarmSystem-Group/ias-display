@@ -11,17 +11,9 @@ export class AuthService {
 
   isLoggedIn = false;
 
-  // store the URL so we can redirect after logging in
-  redirectUrl: string;
-
-  login(): Observable<boolean> {
-    return of(true).pipe(
-      delay(1000),
-      tap(val => this.isLoggedIn = true)
-    );
+  hasValidToken(): Observable<boolean> {
+    console.log('Executing AuthService.hasValidToken()');
+    return of(true);
   }
 
-  logout(): void {
-    this.isLoggedIn = false;
-  }
 }
