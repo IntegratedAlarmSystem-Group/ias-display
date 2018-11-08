@@ -11,20 +11,21 @@ import { OverviewComponent } from '../overview/overview/overview.component';
 import { ShelveComponent } from '../actions/shelve/shelve.component';
 import { TabularViewComponent } from '../tabular/tabular-view/tabular-view.component';
 import { WeatherComponent } from '../weather/weather/weather.component';
+import { AuthLoginGuard } from '../auth/auth-login.guard';
 
 /**
 * Application routes
 */
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path: 'overview', component: OverviewComponent },
-  { path: 'tabular', component: TabularViewComponent },
-  { path: 'tabular/:filter', component: TabularViewComponent },
-  { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions'},
-  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions'},
-  { path: 'weather', component: WeatherComponent},
-  { path: 'sandbox', component: MaterialSandboxComponent},
-  { path: 'antennas', component: AntennasComponent},
+  { path: 'overview', component: OverviewComponent , canActivate: [AuthLoginGuard]},
+  { path: 'tabular', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
+  { path: 'tabular/:filter', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
+  { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions', canActivate: [AuthLoginGuard]},
+  { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions', canActivate: [AuthLoginGuard]},
+  { path: 'weather', component: WeatherComponent, canActivate: [AuthLoginGuard]},
+  { path: 'sandbox', component: MaterialSandboxComponent, canActivate: [AuthLoginGuard]},
+  { path: 'antennas', component: AntennasComponent, canActivate: [AuthLoginGuard]},
 ];
 
 @NgModule({
