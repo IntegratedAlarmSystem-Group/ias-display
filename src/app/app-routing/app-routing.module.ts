@@ -19,7 +19,7 @@ import { LoginComponent } from '../auth/login/login.component';
 */
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent , canActivate: [AuthLoginGuard]},
+  { path: 'login', component: LoginComponent},
   { path: 'overview', component: OverviewComponent , canActivate: [AuthLoginGuard]},
   { path: 'tabular', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
   { path: 'tabular/:filter', component: TabularViewComponent , canActivate: [AuthLoginGuard]},

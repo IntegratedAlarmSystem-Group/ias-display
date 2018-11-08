@@ -24,17 +24,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.message = 'Trying to log in ...';
 
-    // this.authService.login().subscribe(() => {
-    //   this.setMessage();
-    //   if (this.authService.isLoggedIn) {
-    //     // Get the redirect URL from our auth service
-    //     // If no redirect has been set, use the default
-    //     let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/admin';
-    //
-    //     // Redirect the user
-    //     this.router.navigate([redirect]);
-    //   }
-    // });
+    this.authService.login().subscribe(() => {
+      this.setMessage();
+      if (this.authService.isLoggedIn) {
+        // Get the redirect URL from our auth service
+        // If no redirect has been set, use the default
+        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/admin';
+        // Redirect the user
+        this.router.navigate([redirect]);
+      }
+    });
   }
 
   logout() {
