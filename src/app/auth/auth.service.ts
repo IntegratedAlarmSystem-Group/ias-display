@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor() { }
 
-  isLoggedIn = false;
+  private _isLoggedIn = false;
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -19,15 +19,19 @@ export class AuthService {
     return of(false);
   }
 
+  isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+
   login(): Observable<boolean> {
     return of(true).pipe(
       delay(1000),
-      tap(val => this.isLoggedIn = true)
+      tap(val => this._isLoggedIn = true)
     );
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    this._isLoggedIn = false;
   }
 
 }

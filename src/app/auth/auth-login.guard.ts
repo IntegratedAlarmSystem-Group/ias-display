@@ -18,7 +18,7 @@ export class AuthLoginGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn) {
+    if (this.authService.isLoggedIn()) {
       return true;
     }
 

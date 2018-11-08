@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+    this.message = 'Logged ' + (this.authService.isLoggedIn() ? 'in' : 'out');
   }
 
   login() {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login().subscribe(() => {
       this.setMessage();
-      if (this.authService.isLoggedIn) {
+      if (this.authService.isLoggedIn()) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/admin';
