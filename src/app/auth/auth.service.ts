@@ -13,7 +13,7 @@ export class AuthService {
 
   hasValidToken(): Observable<boolean> {
     console.log('Executing AuthService.hasValidToken()');
-    return of(true);
+    return of(false);
   }
 
 }

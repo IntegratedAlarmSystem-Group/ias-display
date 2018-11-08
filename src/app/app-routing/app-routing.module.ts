@@ -12,12 +12,14 @@ import { ShelveComponent } from '../actions/shelve/shelve.component';
 import { TabularViewComponent } from '../tabular/tabular-view/tabular-view.component';
 import { WeatherComponent } from '../weather/weather/weather.component';
 import { AuthLoginGuard } from '../auth/auth-login.guard';
+import { LoginComponent } from '../auth/login/login.component';
 
 /**
 * Application routes
 */
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent , canActivate: [AuthLoginGuard]},
   { path: 'overview', component: OverviewComponent , canActivate: [AuthLoginGuard]},
   { path: 'tabular', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
   { path: 'tabular/:filter', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
