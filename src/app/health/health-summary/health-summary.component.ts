@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
+import { HttpClientService } from '../../data/http-client.service';
+import { BackendUrls } from '../../settings';
 import { Alarm } from '../../data/alarm';
 import { Assets } from '../../settings';
 
@@ -32,6 +34,7 @@ export class HealthSummaryComponent implements OnInit {
   constructor(
     private alarmService: AlarmService,
     private routing: RoutingService,
+    private httpClient: HttpClientService
   ) { }
 
   /**
@@ -39,6 +42,7 @@ export class HealthSummaryComponent implements OnInit {
    * Subscribes to new alarms from the {@link AlarmService}
    */
   ngOnInit() {
+    this.loadAlarmsConfig();
     this.defineAlarmsAndIcons();
   }
 
@@ -50,10 +54,24 @@ export class HealthSummaryComponent implements OnInit {
   }
 
   /**
+  * Define the IDs of the alarms that the component should listen to
+  */
+  loadAlarmsConfig(): void {
+
+    const summary_url = BackendUrls.ANTENNAS_SUMMARY;
+    this.httpClient.get(summary_url).subscribe((response) => {
+      for (const key in response) {
+        if (key) {
+          this.alarmId = response as string;
+        }
+      }
+    });
+  }
+
+  /**
   * Define the alarm that the component should listen to and its icons
   */
   defineAlarmsAndIcons() {
-    this.alarmId = 'IAS-Health-Global';
 
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
