@@ -4,7 +4,6 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
-import { environment } from '../../environments/environment';
 import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from '../data/http-client.service';
@@ -24,7 +23,6 @@ describe('CdbService', () => {
       properties: []
   };
 
-  // const iasCdbUrl = environment.httpUrl + BackendUrls.CDB_IAS;
   const iasCdbUrl = BackendUrls.CDB_IAS;
 
   beforeEach(() => {
