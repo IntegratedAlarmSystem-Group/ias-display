@@ -17,7 +17,7 @@ describe('WeatherService', () => {
   let httpClient: HttpClientService;
   let testController: HttpTestingController;
 
-  const padsStatusUrl = environment.httpUrl + BackendUrls.PADS_STATUS;
+  const padsStatusUrl = BackendUrls.PADS_STATUS;
 
   const mockPadsStatusResponse = {
       'S': {
@@ -105,16 +105,12 @@ describe('WeatherService', () => {
 
   it('should have a method to load the pad status in the service', () => {
     const group = 'S';
+    spyOn(httpClient, 'get').and.callFake(function() {
+      return of(mockPadsStatusResponse);
+    });
     subject.loadPadsStatus(group);
-    const calls = testController.match(
-      (request) => request.method === 'GET'
-    );
-    expect(calls.length).toEqual(1);
-    const padsStatusCall = calls[0];
-    expect(padsStatusCall.request.url).toEqual(
-      padsStatusUrl + group);
-    padsStatusCall.flush(mockPadsStatusResponse);
-    testController.verify();
+    expect(httpClient.get).toHaveBeenCalled();
+    expect(httpClient.get).toHaveBeenCalledWith(padsStatusUrl + group);
     expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
   });
 
