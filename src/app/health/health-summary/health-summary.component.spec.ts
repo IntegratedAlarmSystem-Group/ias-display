@@ -9,7 +9,7 @@ import { RoutingService} from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
 import { AlarmService } from '../../data/alarm.service';
 
-fdescribe('HealthSummaryComponent', () => {
+describe('HealthSummaryComponent', () => {
   let component: HealthSummaryComponent;
   let fixture: ComponentFixture<HealthSummaryComponent>;
   let alarmService: AlarmService;
