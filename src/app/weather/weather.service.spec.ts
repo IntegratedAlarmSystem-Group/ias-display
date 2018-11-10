@@ -1,23 +1,20 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
 import { WeatherService } from './weather.service';
 import { TestRequest } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientService } from '../data/http-client.service';
 import { Map } from '../map/fixtures';
-import { of } from 'rxjs';
 import { mockWeatherStationsConfig, mockWeatherSummaryConfig, mockImagesSets} from './test_fixtures';
-import { environment } from '../../environments/environment';
 import { BackendUrls } from '../settings';
 
 
 describe('WeatherService', () => {
   let subject: WeatherService;
   let httpClient: HttpClientService;
-  let testController: HttpTestingController;
 
-  const padsStatusUrl = environment.httpUrl + BackendUrls.PADS_STATUS;
+  const padsStatusUrl = BackendUrls.PADS_STATUS;
 
   const mockPadsStatusResponse = {
       'S': {
@@ -33,17 +30,16 @@ describe('WeatherService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [WeatherService],
-      imports: [DataModule, HttpClientTestingModule],
+      imports: [DataModule],
     });
   });
 
   beforeEach(
     inject(
-      [HttpTestingController, WeatherService, HttpClientService],
-      (httpTestingController, weatherService, httpClientService) => {
+      [ WeatherService, HttpClientService],
+      (weatherService, httpClientService) => {
     subject = weatherService;
     httpClient = httpClientService;
-    testController = httpTestingController;
   }));
 
   it('should be created', () => {
@@ -105,16 +101,12 @@ describe('WeatherService', () => {
 
   it('should have a method to load the pad status in the service', () => {
     const group = 'S';
+    spyOn(httpClient, 'get').and.callFake(function() {
+      return of(mockPadsStatusResponse);
+    });
     subject.loadPadsStatus(group);
-    const calls = testController.match(
-      (request) => request.method === 'GET'
-    );
-    expect(calls.length).toEqual(1);
-    const padsStatusCall = calls[0];
-    expect(padsStatusCall.request.url).toEqual(
-      padsStatusUrl + group);
-    padsStatusCall.flush(mockPadsStatusResponse);
-    testController.verify();
+    expect(httpClient.get).toHaveBeenCalled();
+    expect(httpClient.get).toHaveBeenCalledWith(padsStatusUrl + group);
     expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
   });
 
