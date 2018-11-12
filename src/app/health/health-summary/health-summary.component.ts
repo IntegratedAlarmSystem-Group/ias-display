@@ -58,7 +58,7 @@ export class HealthSummaryComponent implements OnInit {
   */
   loadAlarmsConfig(): void {
 
-    const summary_url = BackendUrls.ANTENNAS_SUMMARY;
+    const summary_url = BackendUrls.HEALTH_SUMMARY;
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {
