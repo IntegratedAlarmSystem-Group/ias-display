@@ -1,6 +1,6 @@
 /** Set of URLs used to request data from the Backend */
 export const BackendUrls = {
-  TOKEN: '/get-token/',
+  TOKEN: '/users/api-token-auth/',
   CDB: '/cdb-api/',
   CDB_IAS: '/cdb-api/ias/',
   CDB_IASIO: '/cdb-api/iasio/',
