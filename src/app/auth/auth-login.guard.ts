@@ -9,7 +9,10 @@ import { AuthService } from './auth.service';
 })
 export class AuthLoginGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     console.log('Executing AuthLoginGuard.canActivate()');

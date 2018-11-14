@@ -5,12 +5,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppModule } from '../app.module';
 import { appRoutes } from '../app-routing/app-routing.module';
 import { RoutingService } from './routing.service';
+import { AuthLoginGuard } from '../auth/auth-login.guard';
 
 
 describe('GIVEN the RoutingService', () => {
   let location: Location;
   let router: Router;
   let subject;
+  const spyGuard = jasmine.createSpyObj('AuthLoginGuard', {'canActivate': true});
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,6 +22,7 @@ describe('GIVEN the RoutingService', () => {
       ],
       providers: [
         RoutingService,
+        { provide: AuthLoginGuard, useValue: spyGuard },
       ]
     });
     router = TestBed.get(Router);
@@ -33,6 +36,12 @@ describe('GIVEN the RoutingService', () => {
   it('THEN, it should be created', () => {
     expect(subject).toBeTruthy();
   });
+
+  it('WHEN we navigate to "login", THEN it should redirect to /login', fakeAsync(() => {
+    router.navigate(['/login']);
+    tick(1);
+    expect(location.path()).toBe('/login');
+  }));
 
   it('WHEN we navigate to "", THEN it should redirect to /overview', fakeAsync(() => {
     router.navigate(['']);
