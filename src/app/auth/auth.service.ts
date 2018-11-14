@@ -10,8 +10,6 @@ import { BackendUrls } from '../settings';
 })
 export class AuthService {
 
-  private _isLoggedIn = false;
-
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
@@ -26,7 +24,11 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this._isLoggedIn;
+    if (this.getToken()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -37,23 +39,15 @@ export class AuthService {
       const token = response['token'];
       if (token) {
         this.storeToken(token);
-        this._isLoggedIn = true;
+        return true;
       } else {
-        this._isLoggedIn = false;
+        return false;
       }
-      return this._isLoggedIn;
     }));
   }
 
-  // login(): Observable<boolean> {
-  //   return of(true).pipe(
-  //     delay(1000),
-  //     tap(val => this._isLoggedIn = true)
-  //   );
-  // }
-
   logout(): void {
-    this._isLoggedIn = false;
+    this.removeToken();
   }
 
   getToken(): string | undefined {
