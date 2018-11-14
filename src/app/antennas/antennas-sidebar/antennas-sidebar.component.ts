@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-// import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService, AntennaConfig } from '../antennas.service';
@@ -29,8 +28,7 @@ export class AntennasSidebarComponent implements OnInit {
    */
   constructor(
     public antennasService: AntennasService,
-    public alarmService: AlarmService,
-    // private routing: RoutingService,
+    public alarmService: AlarmService
   ) { }
 
   /**
@@ -104,14 +102,5 @@ export class AntennasSidebarComponent implements OnInit {
     }
     this.antennaClicked.emit(this.selectedAntenna);
   }
-
-  // /**
-  //  * Redirect to table view applying the specified filter
-  //  * @param filter Space-separated String that contains words used to
-  //  * filter the alarms in the table view
-  //  */
-  // goToTableFilteredBy(filter: string) {
-  //   this.routing.tableWithFilter(filter);
-  // }
 
 }

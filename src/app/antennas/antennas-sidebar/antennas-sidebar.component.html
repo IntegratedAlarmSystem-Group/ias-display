@@ -55,7 +55,11 @@
   <div class="antennas-detail devices-alarms">
     <table>
       <tr>
-        <td class="antenna">Antenna</td>
+        <td class="antenna">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [text]="'Antenna'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [showActionBadges]="false"></app-status-view>
@@ -66,7 +70,11 @@
         </td>
       </tr>
       <tr>
-        <td class="device">Fire</td>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire)" [text]="'Fire'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire)" [showActionBadges]="false"></app-status-view>
@@ -77,7 +85,11 @@
         </td>
       </tr>
       <tr>
-        <td class="device">Fire Malfunction</td>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [text]="'Fire Malfunction'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [showActionBadges]="false"></app-status-view>
@@ -88,7 +100,11 @@
         </td>
       </tr>
       <tr>
-        <td class="device">UPS Failure</td>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.ups)" [text]="'UPS Failure'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.ups)" [showActionBadges]="false"></app-status-view>
@@ -99,7 +115,11 @@
         </td>
       </tr>
       <tr>
-        <td class="device">HVAC Failure </td>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [text]="'HVAC Failure'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [showActionBadges]="false"></app-status-view>
@@ -110,7 +130,11 @@
         </td>
       </tr>
       <tr>
-        <td class="device">Power Cut</td>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.power)" [text]="'Power Cut'"></app-alarm>
+          </div>
+        </td>
         <td>
           <div class="status">
             <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.power)" [showActionBadges]="false"></app-status-view>

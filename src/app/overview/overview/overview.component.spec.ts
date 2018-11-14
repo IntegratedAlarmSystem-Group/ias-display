@@ -22,14 +22,14 @@ describe('OverviewComponent', () => {
       imports: [
         IasMaterialModule,
         DataModule,
-        HealthModule,
         SharedModule,
       ],
       declarations: [
         OverviewComponent,
         OverviewCardComponent,
         MockComponent({ selector: 'app-weather-summary'}),
-        MockComponent({ selector: 'app-antennas-summary'})
+        MockComponent({ selector: 'app-antennas-summary'}),
+        MockComponent({ selector: 'app-health-summary'})
       ],
       providers: [
           { provide: RoutingService, useValue: spyRoutingTable },
