@@ -4,3 +4,18 @@
   <button (click)="login()"  *ngIf="!authService.isLoggedIn()">Login</button>
   <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
 </p>
+
+
+<div class="card-block py-4">
+    <form class="form-group" (ngSubmit)="login()" [formGroup]="formGroup">
+        <div class="form-group px-3">
+            <label>User</label>
+            <input type="text" class="form-control" id="user" placeholder="Enter your username" formControlName="user">
+        </div>
+        <div class="form-group px-3">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password" placeholder="******" formControlName="password">
+        </div>
+        <div class="text-center "> <button type="submit" id="submit" class="btn btn-primary estilobtn py-3 px-4">Login</button> </div>
+    </form>
+</div>

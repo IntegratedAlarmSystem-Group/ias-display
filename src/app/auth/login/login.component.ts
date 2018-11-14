@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -11,11 +12,30 @@ export class LoginComponent implements OnInit {
 
   message: string;
 
-  constructor(public authService: AuthService, public router: Router) {
+  user: FormControl;
+
+  password: FormControl;
+
+  /**
+   * Object used to manage the form and check the validity of the form input fields
+   */
+  formGroup: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public authService: AuthService, public router: Router
+  ) {
     this.setMessage();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = new FormControl('', [Validators.required]);
+    this.password = new FormControl('', [Validators.required]);
+    this.formGroup = this.formBuilder.group({
+      user: this.user,
+      password: this.password,
+    });
+  }
 
   setMessage() {
     this.message = 'Logged ' + (this.authService.isLoggedIn() ? 'in' : 'out');
