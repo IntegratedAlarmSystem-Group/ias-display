@@ -2,9 +2,10 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { IasMaterialModule } from './ias-material/ias-material.module';
+import { AuthModule } from './auth/auth.module';
+import { DataModule } from './data/data.module';
 import { OverviewModule } from './overview/overview.module';
 import { TabularModule } from './tabular/tabular.module';
-import { DataModule } from './data/data.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -24,6 +25,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         AppRoutingModule,
+        AuthModule,
         IasMaterialModule,
         OverviewModule,
         TabularModule,

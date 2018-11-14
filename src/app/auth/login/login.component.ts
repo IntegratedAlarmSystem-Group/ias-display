@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public authService: AuthService, public router: Router
+    public authService: AuthService,
+    public router: Router
   ) {
     this.setMessage();
   }
