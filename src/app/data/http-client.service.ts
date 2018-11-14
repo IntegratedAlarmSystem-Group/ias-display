@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 
 
@@ -13,7 +14,16 @@ import { environment } from '../../environments/environment';
 export class HttpClientService {
 
   /** The "constructor" */
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
+  }
+
+  createAuthorizationHeader(headers: HttpHeaders) {
+    if (this.authService.getToken()) {
+      headers.append('Authorization', 'Token ' + this.authService.getToken());
+    }
   }
 
   /**
@@ -30,10 +40,10 @@ export class HttpClientService {
   * @returns {Response} the response of the request
   */
   get(url) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.createAuthorizationHeader(headers);
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: headers
     };
     return this.http.get(this.read_url(url), httpOptions);
   }

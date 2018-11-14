@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
-import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls } from '../settings';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,11 @@ export class AuthService {
   redirectUrl: string;
 
   constructor(
-    private httpClientService: HttpClientService,
+    private http: HttpClient,
   ) { }
 
 
   hasValidToken(): Observable<boolean> {
-    console.log('Executing AuthService.hasValidToken()');
     return of(false);
   }
 
@@ -32,7 +32,8 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.httpClientService.post(BackendUrls.TOKEN, {
+    const url = `${environment.httpUrl}${BackendUrls.TOKEN}`;
+    return this.http.post(url, {
       username: username,
       password: password
     }).pipe(map((response: any) => {
@@ -66,7 +67,6 @@ export class AuthService {
   storeToken(token: string) {
     localStorage.removeItem('token');
     localStorage.setItem('token', JSON.stringify(token));
-    console.log('Token stored: ', this.getToken());
   }
 
 
