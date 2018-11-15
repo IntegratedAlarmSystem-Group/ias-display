@@ -5,6 +5,7 @@ import { SidenavService } from './actions/sidenav.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 
 /**
@@ -48,13 +49,15 @@ export class AppComponent implements OnInit {
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
    * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
+   * @param {Router} router instance of an Angular {@link Router} to handle routing
    */
   constructor(
     private alarmService: AlarmService,
     private authService: AuthService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    public router: Router,
   ) {
     this.matIconRegistry
       .addSvgIcon(
@@ -116,6 +119,8 @@ export class AppComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+    // TODO: Check the call from the router on this method
+    this.router.navigate(['/login']);
   }
 
 }
