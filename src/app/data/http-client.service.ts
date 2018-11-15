@@ -20,9 +20,16 @@ export class HttpClientService {
   ) {
   }
 
-  createAuthorizationHeader(headers: HttpHeaders) {
+  getHttpHeaders() {
     if (this.authService.getToken()) {
-      headers.append('Authorization', 'Token ' + this.authService.getToken());
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.authService.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
     }
   }
 
@@ -40,11 +47,10 @@ export class HttpClientService {
   * @returns {Response} the response of the request
   */
   get(url) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.createAuthorizationHeader(headers);
     const httpOptions = {
-      headers: headers
+      headers: this.getHttpHeaders()
     };
+    console.log('httpOptions: ', httpOptions);
     return this.http.get(this.read_url(url), httpOptions);
   }
 
@@ -56,9 +62,7 @@ export class HttpClientService {
   */
   post(url, data) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.post(this.read_url(url), data, httpOptions);
   }
@@ -71,9 +75,7 @@ export class HttpClientService {
   */
   put(url, data) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.put(this.read_url(url), data, httpOptions);
   }
@@ -85,9 +87,7 @@ export class HttpClientService {
   */
   delete(url) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.delete(this.read_url(url), httpOptions);
   }
