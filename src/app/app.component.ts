@@ -4,6 +4,7 @@ import { AlarmService } from './data/alarm.service';
 import { SidenavService } from './actions/sidenav.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from './auth/auth.service';
 
 
 /**
@@ -43,12 +44,14 @@ export class AppComponent implements OnInit {
   /**
    * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   * @param {AuthService} authService Service used for authentication
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
    * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
    */
   constructor(
     private alarmService: AlarmService,
+    private authService: AuthService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
@@ -106,4 +109,13 @@ export class AppComponent implements OnInit {
     this.isNavigationCompacted = !this.isNavigationCompacted;
     return this.isNavigationCompacted;
   }
+
+  /**
+   * Method to logout an authenticated user
+   " Uses the logout method defined on the {@link AuthService}
+   */
+  logout() {
+    this.authService.logout();
+  }
+
 }
