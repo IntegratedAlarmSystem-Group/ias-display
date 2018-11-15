@@ -123,4 +123,14 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  /**
+   * Method to check if a user is logged in
+   " Uses the isLoggedIn method defined on the {@link AuthService}
+   * @returns {boolean} True if the user is logged in
+   */
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+
 }

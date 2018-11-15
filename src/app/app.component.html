@@ -23,7 +23,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container autosize>
-    <mat-sidenav id="navigation-sidenav" [class.compacted]="isNavigationCompacted" mode="side" opened="true" [disableClose]="true">
+    <mat-sidenav id="navigation-sidenav" *ngIf="isLoggedIn()" [class.compacted]="isNavigationCompacted" mode="side" opened="true" [disableClose]="true">
       <mat-nav-list>
         <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
