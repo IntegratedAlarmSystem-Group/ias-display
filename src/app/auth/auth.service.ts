@@ -6,6 +6,10 @@ import { tap, delay } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
 
+
+/**
+* Service used to request and handle tokens and authorization
+*/
 @Injectable({
   providedIn: 'root'
 })
@@ -19,15 +23,20 @@ export class AuthService {
   */
   public loginStatusStream = new BehaviorSubject<boolean>(false);
 
+  /**
+   * Builds an instance of the service
+   * @param {CdbService} cdbService Service used to get complementary alarm information
+   * @param {HttpClient} http Angular HttpClient used to request the token for authentication
+   */
   constructor(
     private http: HttpClient
   ) { }
 
 
-  hasValidToken(): Observable<boolean> {
-    return of(false);
-  }
-
+  /**
+   * Checks wether or not the user is logged-in, which is true if there is a valid token
+   * @returns {boolean} true if there is a valid token, false if not
+   */
   isLoggedIn(): boolean {
     if (this.getToken()) {
       return true;
@@ -36,6 +45,13 @@ export class AuthService {
     }
   }
 
+  /**
+   * Requests a token from the server, sending user and password information.
+   * Saves the token in the local storage
+   * @param {string} username the name of the user
+   * @param {string} password the password of the user
+   * @returns {Observable<boolean>} observable of true if the login is successful, observable of false if not
+   */
   login(username: string, password: string): Observable<boolean> {
     const url = `${environment.httpUrl}${BackendUrls.TOKEN}`;
     return this.http.post(url, {
@@ -54,11 +70,18 @@ export class AuthService {
     }));
   }
 
+  /**
+   * Logs out of the server by deleting the token from the local storage
+   */
   logout(): void {
     this.loginStatusStream.next(false);
     this.removeToken();
   }
 
+  /**
+  * Returns the token stored in the local storage
+  * @returns {string | undefined} the token as a string, or undefined if there is no token
+  */
   getToken(): string | undefined {
     const token = localStorage.getItem('token');
     if (token === null) {
@@ -68,10 +91,17 @@ export class AuthService {
     }
   }
 
+  /**
+  * Deletes the token from the local storage
+  */
   removeToken() {
     localStorage.removeItem('token');
   }
 
+  /**
+  * Stores a given the token in the local storage, replacing the previous token, if any
+  * @param {string} token the token to be stored
+  */
   storeToken(token: string) {
     localStorage.removeItem('token');
     localStorage.setItem('token', JSON.stringify(token));

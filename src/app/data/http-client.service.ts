@@ -13,14 +13,22 @@ import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class HttpClientService {
 
-  /** The "constructor" */
+  /**
+  * Builds an instance of the service
+  * @param {HttpClient} http Angular HTTP Service used to perform HTTP requests
+  * @param {AuthService} authService service used to check and handle authorization
+  */
   constructor(
     private http: HttpClient,
     private authService: AuthService,
   ) {
   }
 
-  getHttpHeaders() {
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
     if (this.authService.getToken()) {
       return new HttpHeaders({
         'Content-Type': 'application/json',

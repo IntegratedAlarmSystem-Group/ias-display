@@ -3,6 +3,9 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
+/**
+ * Component that defines the login form
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,17 +13,32 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  /**
+   * Message with the current login status, to be displayed in the component
+   */
   message: string;
-
-  user: FormControl;
-
-  password: FormControl;
 
   /**
    * Object used to manage the form and check the validity of the form input fields
    */
   formGroup: FormGroup;
 
+  /**
+   * Form control used to retrieve the username from the form
+   */
+  user: FormControl;
+
+  /**
+   * Form control used to retrieve the password from the form
+   */
+  password: FormControl;
+
+  /**
+   * Builds an instance of the component
+   * @param {FormBuilder} formBuilder Angular FormBuilder used to build forms
+   * @param {AuthService} authService service used to check and handle authorization
+   * @param {Router} router Angular router used to navigate the application
+   */
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthService,
@@ -29,6 +47,9 @@ export class LoginComponent implements OnInit {
     this.setMessage();
   }
 
+  /**
+   * Initializes the component and defines its form
+   */
   ngOnInit() {
     this.user = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
@@ -38,13 +59,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Sets the {@link message} to be displayed
+   */
   setMessage() {
     this.message = 'Logged ' + (this.authService.isLoggedIn() ? 'in' : 'out');
   }
 
+  /**
+   * Performs the login, by calling the login() function of {@link AuthService} passing the user and password retrieved from the form
+   */
   login() {
     this.message = 'Trying to log in ...';
-
     this.authService.login(
       this.formGroup.controls.user.value,
       this.formGroup.controls.password.value,
@@ -60,6 +86,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Performs the logout, by calling the logout() function of {@link AuthService}
+   */
   logout() {
     this.authService.logout();
     this.setMessage();
