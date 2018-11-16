@@ -1,0 +1,36 @@
+.login-mat-card {
+  max-width: 580px;
+  margin: auto;
+}
+
+.login-header {
+  text-align: center;
+  width: 100%;
+
+  .title {
+    display: block;
+    font-size: 34px;
+  }
+
+  .message {
+    display: block;
+    font-size: 12px;
+  }
+
+}
+
+.login-form-container {
+  padding: 40px;
+
+  .btn-login-container {
+    text-align: center;
+
+    .btn-login {
+      text-transform: uppercase;
+      font-weight: bold;
+      width: 100%;
+    }
+
+  }
+
+}
