@@ -215,7 +215,7 @@ const fixtureAlarmsList = {
   }
 };
 
-fdescribe('AlarmService', () => {
+describe('AlarmService', () => {
 
 
   beforeEach(() => {
