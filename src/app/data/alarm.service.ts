@@ -8,6 +8,8 @@ import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
 import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
+import { AuthService } from '../auth/auth.service';
+import { AuthLoginGuard } from '../auth/auth-login.guard';
 
 
 /**
@@ -104,6 +106,8 @@ export class AlarmService {
   */
   public soundingAlarm: string;
 
+  public isInitialized = false;
+
   /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
@@ -112,11 +116,20 @@ export class AlarmService {
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
+    private authService: AuthService,
+    private authLoginGuard: AuthLoginGuard,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
         if (value === false) {
           this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+    this.authLoginGuard.loginStatusStream.subscribe(
+      value => {
+        if (value === true) {
+          this.initialize();
         }
       }
     );
@@ -138,6 +151,12 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
+    console.log('Starting AlarmService.initialize()');
+    if (this.isInitialized || !this.authService.isLoggedIn()) {
+      return;
+    }
+    console.log('Continue AlarmService.initialize()');
+    this.isInitialized = true;
     this.canSound = false;
     this.audio = new Audio();
     this.connect();

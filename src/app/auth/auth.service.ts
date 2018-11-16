@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
@@ -14,8 +14,13 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
+  /**
+  * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
+  */
+  public loginStatusStream = new BehaviorSubject<boolean>(false);
+
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
 
@@ -40,14 +45,17 @@ export class AuthService {
       const token = response['token'];
       if (token) {
         this.storeToken(token);
+        this.loginStatusStream.next(true);
         return true;
       } else {
+        this.loginStatusStream.next(false);
         return false;
       }
     }));
   }
 
   logout(): void {
+    this.loginStatusStream.next(false);
     this.removeToken();
   }
 

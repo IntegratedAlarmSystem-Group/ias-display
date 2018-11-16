@@ -50,7 +50,6 @@ export class HttpClientService {
     const httpOptions = {
       headers: this.getHttpHeaders()
     };
-    console.log('httpOptions: ', httpOptions);
     return this.http.get(this.read_url(url), httpOptions);
   }
 
