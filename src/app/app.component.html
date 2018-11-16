@@ -10,7 +10,7 @@
       <img class="ias-logo" src="/assets/img/logo-ias_white.svg">
       <span class='app-title'> Integrated Alarm System </span>
     </div>
-    <div class="user-wrapper">
+    <div *ngIf="isLoggedIn()" class="user-wrapper">
       <button mat-button [matMenuTriggerFor]="usermenu">
         <mat-icon>account_circle</mat-icon>
       </button>
