@@ -9,10 +9,12 @@ import { CdbService } from '../data/cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';
+import { AuthService } from '../auth/auth.service';
 
 let subject: AlarmService;
 let cdbSubject: CdbService;
 let httpSubject: HttpClientService;
+let authSubject: AuthService;
 let mockStream: Server;
 let spyEmitSound;
 
@@ -213,7 +215,7 @@ const fixtureAlarmsList = {
   }
 };
 
-describe('AlarmService', () => {
+fdescribe('AlarmService', () => {
 
 
   beforeEach(() => {
@@ -223,12 +225,13 @@ describe('AlarmService', () => {
     });
   });
 
-  beforeEach(inject([AlarmService, CdbService], (alarmService, cdbService) => {
+  beforeEach(inject([AlarmService, CdbService, AuthService], (alarmService, cdbService, authService) => {
       /**
       * Services
       */
       subject = alarmService;
       cdbSubject = cdbService;
+      authSubject = authService;
 
       /**
       * Redefinition of periodic calls in the alarm service for testing
@@ -251,8 +254,8 @@ describe('AlarmService', () => {
           tolerance: '1',
           properties: []
       };
-      spyOn(cdbSubject, 'initialize')
-        .and.callFake(function() {});
+      spyOn(cdbSubject, 'initialize').and.callFake(function() {});
+      spyOn(authSubject, 'isLoggedIn').and.returnValue(true);
       cdbSubject.iasConfiguration = mockIasConfiguration;
       subject.canSound = true;
       subject.audio = new Audio();
