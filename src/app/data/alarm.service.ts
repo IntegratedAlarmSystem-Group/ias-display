@@ -9,7 +9,6 @@ import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
 import { AuthService } from '../auth/auth.service';
-import { AuthLoginGuard } from '../auth/auth-login.guard';
 
 
 /**
@@ -106,6 +105,9 @@ export class AlarmService {
   */
   public soundingAlarm: string;
 
+  /**
+  * Defines wether or not the service is initialized
+  */
   public isInitialized = false;
 
   /**
@@ -117,7 +119,6 @@ export class AlarmService {
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
     private authService: AuthService,
-    private authLoginGuard: AuthLoginGuard,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
@@ -126,10 +127,12 @@ export class AlarmService {
         }
       }
     );
-    this.authLoginGuard.loginStatusStream.subscribe(
+    this.authService.loginStatusStream.subscribe(
       value => {
         if (value === true) {
           this.initialize();
+        } else {
+          this.destroy();
         }
       }
     );
@@ -151,11 +154,9 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    console.log('Starting AlarmService.initialize()');
     if (this.isInitialized || !this.authService.isLoggedIn()) {
       return;
     }
-    console.log('Continue AlarmService.initialize()');
     this.isInitialized = true;
     this.canSound = false;
     this.audio = new Audio();
@@ -170,25 +171,38 @@ export class AlarmService {
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessage(payload.action, payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.updateLastReceivedMessageTimestamp();
+        this.readAlarmMessage(payload.action, payload.data);
+      }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessagesList(payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.updateLastReceivedMessageTimestamp();
+        this.readAlarmMessagesList(payload.data);
+      }
     });
     this.startLastReceivedMessageTimestampCheck();
   }
 
-   /**
-   *  Start connection to the backend through websockets
-   */
+  /**
+  *  Start connection to the backend through websockets
+  */
   connect() {
     const connectionPath = environment.websocketPath;
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
     console.log('Connected to webserver at: ' + connectionPath);
+  }
+
+  /**
+  *  Disconnect from the backend
+  */
+  destroy() {
+    console.log('Trying to disconnect');
+    this.isInitialized = false;
+    // TODO: disconnect!!
   }
 
   /******* ALARM HANDLING *******/
