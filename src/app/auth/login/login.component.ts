@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
    */
   password: FormControl;
 
+  loggingIn = false;
+
   /**
    * Builds an instance of the component
    * @param {FormBuilder} formBuilder Angular FormBuilder used to build forms
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
    * Initializes the component and defines its form
    */
   ngOnInit() {
+    this.loggingIn = false;
     this.user = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
     this.formGroup = this.formBuilder.group({
@@ -70,20 +73,28 @@ export class LoginComponent implements OnInit {
    * Performs the login, by calling the login() function of {@link AuthService} passing the user and password retrieved from the form
    */
   login() {
-    this.message = 'Trying to log in ...';
+    this.message = 'Logging in ...';
+    this.loggingIn = true;
     this.authService.login(
       this.formGroup.controls.user.value,
       this.formGroup.controls.password.value,
-    ).subscribe(() => {
-      this.setMessage();
-      if (this.authService.isLoggedIn()) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '';
-        // Redirect the user
-        this.router.navigate([redirect]);
+    ).subscribe(
+      () => {
+        // this.loggingIn = false;
+        this.setMessage();
+        if (this.authService.isLoggedIn()) {
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '';
+          // Redirect the user
+          this.router.navigate([redirect]);
+        }
+      },
+      (error) => {
+        // this.loggingIn = false;
+        this.setMessage();
       }
-    });
+    );
   }
 
   /**

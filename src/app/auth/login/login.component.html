@@ -17,7 +17,16 @@
                 <input matInput name="password" formControlName="password" type="password" placeholder="******" >
             </mat-form-field>
             <div class="btn-login-container">
-              <button type="submit" id="submit" class="btn btn-primary btn-login">Login</button>
+              <button type="submit" id="submit" mat-flat-button color="accent" class="btn-login" flexLayout="row">
+                <div flexLayout="row">
+                  <span class="hspace">
+                  </span>
+                  <span fxFlex>
+                    Login
+                  </span>
+                  <mat-spinner [diameter]="30" [class.hidden]="!loggingIn"></mat-spinner>
+                </div>
+              </button>
             </div>
         </form>
     </div>

@@ -9,6 +9,7 @@
     .login-header {
       text-align: center;
       width: 100%;
+      margin-right: 16px;
 
       .title {
         display: block;
@@ -45,6 +46,19 @@
       text-transform: uppercase;
       font-weight: bold;
       width: 100%;
+      display: inline-block;
+
+      .hspace {
+        width: 30px;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+
+      .visible {
+
+      }
     }
 
   }
