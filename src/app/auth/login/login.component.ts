@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
    */
   password: FormControl;
 
-  loggingIn = false;
 
   /**
    * Builds an instance of the component
@@ -53,7 +52,6 @@ export class LoginComponent implements OnInit {
    * Initializes the component and defines its form
    */
   ngOnInit() {
-    this.loggingIn = false;
     this.user = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
     this.formGroup = this.formBuilder.group({
@@ -74,13 +72,11 @@ export class LoginComponent implements OnInit {
    */
   login() {
     this.message = 'Logging in ...';
-    this.loggingIn = true;
     this.authService.login(
       this.formGroup.controls.user.value,
       this.formGroup.controls.password.value,
     ).subscribe(
       () => {
-        // this.loggingIn = false;
         this.setMessage();
         if (this.authService.isLoggedIn()) {
           // Get the redirect URL from our auth service
@@ -91,7 +87,6 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        // this.loggingIn = false;
         this.setMessage();
       }
     );
