@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../auth.service';
 
 /**
@@ -39,13 +40,14 @@ export class LoginComponent implements OnInit {
    * @param {FormBuilder} formBuilder Angular FormBuilder used to build forms
    * @param {AuthService} authService service used to check and handle authorization
    * @param {Router} router Angular router used to navigate the application
+   * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
    */
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    private spinnerService: NgxSpinnerService
   ) {
-    this.setMessage();
   }
 
   /**
@@ -61,23 +63,15 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Sets the {@link message} to be displayed
-   */
-  setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn() ? 'in' : 'out');
-  }
-
-  /**
    * Performs the login, by calling the login() function of {@link AuthService} passing the user and password retrieved from the form
    */
   login() {
-    this.message = 'Logging in ...';
+    this.spinnerService.show();
     this.authService.login(
       this.formGroup.controls.user.value,
       this.formGroup.controls.password.value,
     ).subscribe(
       () => {
-        this.setMessage();
         if (this.authService.isLoggedIn()) {
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
@@ -85,9 +79,10 @@ export class LoginComponent implements OnInit {
           // Redirect the user
           this.router.navigate([redirect]);
         }
+        this.spinnerService.hide();
       },
       (error) => {
-        this.setMessage();
+        this.spinnerService.hide();
       }
     );
   }
@@ -97,7 +92,6 @@ export class LoginComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
-    this.setMessage();
   }
 
 }
