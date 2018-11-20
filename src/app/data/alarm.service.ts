@@ -114,6 +114,7 @@ export class AlarmService {
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
+   * @param {AuthService} authService Service used for authentication
    */
   constructor(
     private cdbService: CdbService,
@@ -190,10 +191,17 @@ export class AlarmService {
   *  Start connection to the backend through websockets
   */
   connect() {
-    const connectionPath = environment.websocketPath;
+    const connectionPath = this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at: ' + connectionPath);
+    console.log('Connected to webserver at: ' + environment.websocketPath);
+  }
+
+  /**
+  *  Connection path using authentication data
+  */
+  getConnectionPath() {
+    return environment.websocketPath + '?token=' + this.authService.getToken();
   }
 
   /**

@@ -234,6 +234,13 @@ describe('AlarmService', () => {
       authSubject = authService;
 
       /**
+      * Redefinition of connection path with authentication token
+      */
+      spyOn(subject, 'getConnectionPath').and.returnValue(
+        environment.websocketPath + '?token=tokenFromServer'
+      );
+
+      /**
       * Redefinition of periodic calls in the alarm service for testing
       */
       // TODO: Evaluation to check periodic calls
@@ -278,7 +285,7 @@ describe('AlarmService', () => {
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
     const fixtureAlarms = [alarmsFromWebServer[0], alarmsFromWebServer[1]];
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
@@ -342,7 +349,7 @@ describe('AlarmService', () => {
     const fixtureAlarms = [
       alarmsFromWebServer[0], alarmsFromWebServer[2], alarmsFromWebServer[3], alarmsFromWebServer[4],  alarmsFromWebServer[5]
     ];
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
@@ -435,7 +442,7 @@ describe('AlarmService', () => {
     // Arrange
     let stage = 0;  // initial state index with no messages from server
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     // Act
     mockStream.on('connection', server => {  // send mock alarms list from server
@@ -478,7 +485,7 @@ describe('AlarmService', () => {
 
     expect(subject.connectionStatusStream.value).toBe(false);
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {
       expect(subject.connectionStatusStream.value).toBe(true);
@@ -518,7 +525,7 @@ describe('AlarmService', () => {
     let millisecondsDelta: number;
     let getListExpectedTimestamp: number;
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms list from server
       // Act:
@@ -542,7 +549,7 @@ describe('AlarmService', () => {
     let millisecondsDelta: number;
     let webserverMsgExpectedTimestamp: number;
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarm from server
       // Act:
