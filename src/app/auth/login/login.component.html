@@ -8,14 +8,14 @@
   <mat-card-content>
     <div class="login-form-container">
         <form class="form-group" (ngSubmit)="login()" [formGroup]="formGroup">
-            <div class="form-group">
-                <label>User</label>
-                <input type="text" class="form-control" id="user" placeholder="Enter your username" formControlName="user">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" id="password" placeholder="******" formControlName="password">
-            </div>
+            <mat-form-field color="accent" class="form-field" appearance="fill">
+                <mat-label>User</mat-label>
+                <input matInput name="user" formControlName="user" type="text" placeholder="Enter your username" >
+            </mat-form-field>
+            <mat-form-field color="accent" class="form-field" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput name="password" formControlName="password" type="password" placeholder="******" >
+            </mat-form-field>
             <div class="btn-login-container">
               <button type="submit" id="submit" class="btn btn-primary btn-login">Login</button>
             </div>

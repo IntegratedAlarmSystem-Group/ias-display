@@ -1,26 +1,42 @@
-.login-mat-card {
+.mat-card {
   max-width: 580px;
   margin: auto;
-}
 
-.login-header {
-  text-align: center;
-  width: 100%;
+  .mat-card-header {
+    border-top-left-radius: 0.375em;
+    border-top-right-radius: 0.375em;
 
-  .title {
-    display: block;
-    font-size: 34px;
+    .login-header {
+      text-align: center;
+      width: 100%;
+
+      .title {
+        display: block;
+        font-size: 34px;
+      }
+
+      .message {
+        display: block;
+        font-size: 12px;
+      }
+    }
   }
 
-  .message {
-    display: block;
-    font-size: 12px;
+  .mat-card-content {
+    border-bottom-left-radius: 0.375em;
+    border-bottom-right-radius: 0.375em;
   }
-
 }
 
 .login-form-container {
   padding: 40px;
+
+  .form-group {
+
+    .form-field {
+      width: 100%;
+    }
+  }
 
   .btn-login-container {
     text-align: center;
