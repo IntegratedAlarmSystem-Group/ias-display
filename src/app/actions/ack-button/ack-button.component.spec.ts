@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { AckButtonComponent } from './ack-button.component';
 import { Alarm } from '../../data/alarm';

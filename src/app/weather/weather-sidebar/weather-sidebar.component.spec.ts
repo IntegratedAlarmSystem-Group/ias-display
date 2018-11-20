@@ -13,6 +13,7 @@ import { StatusViewComponent } from '../../shared/status-view/status-view.compon
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
@@ -51,6 +52,7 @@ describe('WeatherSidebarComponent', () => {
       ],
       providers: [
         WeatherService,
+        RoutingService,
         { provide: Router, useValue: spyRoutingTable },
       ],
       imports: [

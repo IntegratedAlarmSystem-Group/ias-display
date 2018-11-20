@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
-import { RoutingService } from '../../data/routing.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveComponent } from './shelve.component';
 import { Alarm } from '../../data/alarm';

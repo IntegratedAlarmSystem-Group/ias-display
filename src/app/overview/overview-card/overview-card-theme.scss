@@ -8,6 +8,10 @@
 
   .ias.overview-card {
 
+    .label{
+      color: mat-color($accent, default);
+    }
+
     .marker-wrapper{
       background: mat-color($accent, default);
     }

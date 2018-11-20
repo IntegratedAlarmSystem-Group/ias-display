@@ -15,6 +15,7 @@ export const BackendUrls = {
   ANTENNAS_VIEW: '/panels-api/alarms-config/antennas_config/',
   WEATHER_SUMMARY: '/panels-api/alarms-config/weather_summary_config/',
   ANTENNAS_SUMMARY: '/panels-api/alarms-config/antennas_summary_config/',
+  HEALTH_SUMMARY: '/panels-api/alarms-config/ias_health_summary_config/',
   PADS_STATUS: '/panels-api/placemark/pads_by_group/',
 };
 

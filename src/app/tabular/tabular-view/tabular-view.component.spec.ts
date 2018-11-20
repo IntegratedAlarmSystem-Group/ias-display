@@ -11,6 +11,7 @@ import { DataModule } from '../../data/data.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
@@ -44,12 +45,13 @@ describe('TabularViewComponent', () => {
       imports: [
         MatTableModule,
         MatSortModule,
+        ActionsModule,
         IasMaterialModule,
         DataModule,
         SharedModule,
-        ActionsModule,
       ],
       providers: [
+        RoutingService,
         {
           provide: ActivatedRoute,
           useValue: {

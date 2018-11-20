@@ -9,7 +9,7 @@ import { HealthModule } from '../../health/health.module';
 import { AntennasModule } from '../../antennas/antennas.module';
 import { OverviewComponent } from './overview.component';
 import { OverviewCardComponent } from '../overview-card/overview-card.component';
-import { RoutingService} from '../../data/routing.service';
+import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 
 describe('OverviewComponent', () => {
@@ -22,14 +22,14 @@ describe('OverviewComponent', () => {
       imports: [
         IasMaterialModule,
         DataModule,
-        HealthModule,
         SharedModule,
       ],
       declarations: [
         OverviewComponent,
         OverviewCardComponent,
         MockComponent({ selector: 'app-weather-summary'}),
-        MockComponent({ selector: 'app-antennas-summary'})
+        MockComponent({ selector: 'app-antennas-summary'}),
+        MockComponent({ selector: 'app-health-summary'})
       ],
       providers: [
           { provide: RoutingService, useValue: spyRoutingTable },
