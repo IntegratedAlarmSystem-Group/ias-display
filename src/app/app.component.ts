@@ -114,13 +114,12 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Method to logout an authenticated user
-   " Uses the logout method defined on the {@link AuthService}
+   * Method to get the username
+   " Uses the getUser method defined on the {@link AuthService}
+   * @returns {string} the username
    */
-  logout() {
-    this.authService.logout();
-    // TODO: Check the call from the router on this method
-    this.router.navigate(['/login']);
+  getUser() {
+    return this.authService.getUser();
   }
 
   /**
@@ -132,5 +131,14 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
+  /**
+   * Method to logout an authenticated user
+   " Uses the logout method defined on the {@link AuthService}
+   */
+  logout() {
+    this.authService.logout();
+    // TODO: Check the call from the router on this method
+    this.router.navigate(['/login']);
+  }
 
 }

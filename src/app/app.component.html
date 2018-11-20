@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="isLoggedIn()" class="user-wrapper">
       <button mat-button [matMenuTriggerFor]="usermenu">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon>account_circle</mat-icon> {{ this.getUser() }}
       </button>
       <mat-menu xPosition="before" #usermenu="matMenu" [overlapTrigger]="false">
         <button (click)="logout()" mat-menu-item>

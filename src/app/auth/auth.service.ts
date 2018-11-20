@@ -61,6 +61,7 @@ export class AuthService {
       const token = response['token'];
       if (token) {
         this.storeToken(token);
+        this.storeUser(username);
         this.loginStatusStream.next(true);
         return true;
       } else {
@@ -76,6 +77,7 @@ export class AuthService {
   logout(): void {
     this.loginStatusStream.next(false);
     this.removeToken();
+    this.removeUser();
   }
 
   /**
@@ -92,10 +94,30 @@ export class AuthService {
   }
 
   /**
+  * Returns the user stored in the local storage
+  * @returns {string | undefined} the user name as a string, or undefined if there is no user
+  */
+  getUser(): string | undefined {
+    const user = localStorage.getItem('user');
+    if (user === null) {
+      return undefined;
+    } else {
+      return JSON.parse(user);
+    }
+  }
+
+  /**
   * Deletes the token from the local storage
   */
   removeToken() {
     localStorage.removeItem('token');
+  }
+
+  /**
+  * Deletes the user from the local storage
+  */
+  removeUser() {
+    localStorage.removeItem('user');
   }
 
   /**
@@ -105,6 +127,15 @@ export class AuthService {
   storeToken(token: string) {
     localStorage.removeItem('token');
     localStorage.setItem('token', JSON.stringify(token));
+  }
+
+  /**
+  * Stores a given the user in the local storage, replacing the previous user, if any
+  * @param {string} user the user to be stored
+  */
+  storeUser(user: string) {
+    localStorage.removeItem('user');
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
 

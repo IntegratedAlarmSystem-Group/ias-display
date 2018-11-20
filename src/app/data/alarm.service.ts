@@ -200,7 +200,7 @@ export class AlarmService {
   *  Disconnect from the backend
   */
   destroy() {
-    console.log('Trying to disconnect');
+    console.log('Disconnecting from webserver');
     this.isInitialized = false;
     // TODO: disconnect!!
   }

@@ -29,7 +29,6 @@ export class AuthLoginGuard implements CanActivate {
   * @returns {boolean} true if navigation is permitted, false if not
   */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('Executing AuthLoginGuard.canActivate()');
     const url: string = state.url;
     return this.checkLogin(url);
   }
