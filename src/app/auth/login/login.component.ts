@@ -36,6 +36,12 @@ export class LoginComponent implements OnInit {
 
 
   /**
+   * Error message to be displayed if the ogin is not successful
+   */
+  errorMessage = undefined;
+
+
+  /**
    * Builds an instance of the component
    * @param {FormBuilder} formBuilder Angular FormBuilder used to build forms
    * @param {AuthService} authService service used to check and handle authorization
@@ -54,6 +60,7 @@ export class LoginComponent implements OnInit {
    * Initializes the component and defines its form
    */
   ngOnInit() {
+    this.errorMessage = undefined;
     this.user = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
     this.formGroup = this.formBuilder.group({
@@ -66,6 +73,7 @@ export class LoginComponent implements OnInit {
    * Performs the login, by calling the login() function of {@link AuthService} passing the user and password retrieved from the form
    */
   login() {
+    this.errorMessage = undefined;
     this.spinnerService.show();
     this.authService.login(
       this.formGroup.controls.user.value,
@@ -83,6 +91,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.spinnerService.hide();
+        this.setErrorMessage(error);
       }
     );
   }
@@ -92,6 +101,23 @@ export class LoginComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+  }
+
+  /**
+   * Sets the {@link errorMessage} to display, based on the status code of the error returned by the request.
+   * If the status code is 400, it shows that the credentials are not valid
+   * If the status code is not 400, it shows that there was a problem communicating with the server.
+   * @param {Error} error the error returned by the request
+   */
+  setErrorMessage(error) {
+    if (error.status === 400) {
+      this.errorMessage = 'The credentials provided are not valid';
+    } else {
+      this.errorMessage = 'There was an error communicating with the Server';
+      console.error('Error communicating with Server: ', error);
+    }
+    this.user.setErrors({'incorrect': true});
+    this.password.setErrors({'incorrect': true});
   }
 
 }
