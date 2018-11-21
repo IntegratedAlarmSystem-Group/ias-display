@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataModule } from '../../data/data.module';
 import { LoginComponent } from './login.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 
 
@@ -15,6 +16,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [
+        NgxSpinnerModule,
         IasMaterialModule,
         ReactiveFormsModule,
         DataModule
