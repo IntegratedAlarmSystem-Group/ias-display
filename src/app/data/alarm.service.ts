@@ -232,12 +232,14 @@ export class AlarmService {
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement
+   * @param user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message) {
+  acknowledgeAlarms(alarms_ids, message, user) {
     const data = {
       'alarms_ids': alarms_ids,
       'message': message,
+      'user': user
     };
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
     map(
