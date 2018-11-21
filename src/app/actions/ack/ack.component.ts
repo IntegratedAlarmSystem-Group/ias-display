@@ -94,7 +94,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**
@@ -110,7 +110,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Closes the sidenav
   */
   onClose(): void {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**

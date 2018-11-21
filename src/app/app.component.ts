@@ -138,7 +138,8 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.logout();
     // TODO: Check the call from the router on this method
-    this.router.navigate(['/login']);
+    this.actionsSidenavService.close();
+    this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
   }
 
 }

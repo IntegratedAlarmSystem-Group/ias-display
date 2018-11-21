@@ -81,7 +81,7 @@ describe('ShelveComponent', () => {
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
-    spyOn(sidenavService, 'close');
+    spyOn(sidenavService, 'closeAndClean');
     spyOn(sidenavService, 'toggle');
     component = fixture.componentInstance;
     spyOn(component, 'onClose');

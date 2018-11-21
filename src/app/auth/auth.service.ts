@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
+import { SidenavService } from '../actions/sidenav.service';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
 
@@ -25,11 +26,11 @@ export class AuthService {
 
   /**
    * Builds an instance of the service
-   * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClient} http Angular HttpClient used to request the token for authentication
    */
   constructor(
     private http: HttpClient
+    // private sidenavService: SidenavService
   ) { }
 
 
@@ -75,6 +76,7 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
+    // this.sidenavService.close();
     this.loginStatusStream.next(false);
     this.removeToken();
     this.removeUser();
