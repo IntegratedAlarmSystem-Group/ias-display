@@ -94,6 +94,7 @@ export class AppComponent implements OnInit {
         if (value === false) {
           this.actionsSidenavService.close();
           this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+          this.alarmService.destroy();
         }
       }
     );
