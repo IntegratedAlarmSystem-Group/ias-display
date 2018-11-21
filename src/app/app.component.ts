@@ -5,6 +5,7 @@ import { SidenavService } from './actions/sidenav.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from './auth/auth.service';
+import { UserService } from './data/user.service';
 import { Router } from '@angular/router';
 
 
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
   constructor(
     private alarmService: AlarmService,
     private authService: AuthService,
+    private userService: UserService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -88,6 +90,7 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.alarmService.initialize();
+    this.userService.requestUsersList();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
   }
 
