@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
-import { SidenavService } from '../actions/sidenav.service';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
 
@@ -22,7 +21,7 @@ export class AuthService {
   /**
   * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
   */
-  public loginStatusStream = new BehaviorSubject<boolean>(false);
+  public loginStatusStream = new BehaviorSubject<boolean>(null);
 
   /**
    * Builds an instance of the service
@@ -30,7 +29,6 @@ export class AuthService {
    */
   constructor(
     private http: HttpClient
-    // private sidenavService: SidenavService
   ) { }
 
 
@@ -76,7 +74,6 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
-    // this.sidenavService.close();
     this.loginStatusStream.next(false);
     this.removeToken();
     this.removeUser();
