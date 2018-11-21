@@ -89,6 +89,14 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    this.authService.loginStatusStream.subscribe(
+      value => {
+        if (value === false) {
+          this.actionsSidenavService.close();
+          this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+        }
+      }
+    );
   }
 
   /**
@@ -137,9 +145,6 @@ export class AppComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
-    // TODO: Check the call from the router on this method
-    this.actionsSidenavService.close();
-    this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
   }
 
 }
