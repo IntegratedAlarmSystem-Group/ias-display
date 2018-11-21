@@ -208,9 +208,14 @@ export class AlarmService {
   *  Disconnect from the backend
   */
   destroy() {
-    console.log('Disconnecting from webserver');
+    // Close connection
+    if (this.isInitialized) {
+      console.log('Disconnecting from webserver');
+      this.webSocketBridge.stream(Streams.UPDATES).send({
+        'action': 'close'
+      });
+    }
     this.isInitialized = false;
-    // TODO: disconnect!!
   }
 
   /******* ALARM HANDLING *******/

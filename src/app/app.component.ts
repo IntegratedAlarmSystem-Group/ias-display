@@ -137,6 +137,7 @@ export class AppComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+    this.alarmService.destroy();
     // TODO: Check the call from the router on this method
     this.router.navigate(['/login']);
   }
