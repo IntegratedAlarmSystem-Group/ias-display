@@ -90,14 +90,18 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.alarmService.initialize();
-    this.userService.requestUsersList();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    if (this.authService.isLoggedIn()) {
+      this.userService.requestUsersList();
+    }
     this.authService.loginStatusStream.subscribe(
       value => {
         if (value === false) {
           this.actionsSidenavService.close();
           this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
           this.alarmService.destroy();
+        } else if (value === true) {
+          this.userService.requestUsersList();
         }
       }
     );
