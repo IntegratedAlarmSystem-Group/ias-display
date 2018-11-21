@@ -85,7 +85,7 @@ describe('AckComponent', () => {
     spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
     spyOn(sidenavService, 'open');
-    spyOn(sidenavService, 'close');
+    spyOn(sidenavService, 'closeAndClean');
     spyOn(sidenavService, 'toggle');
     component = fixture.componentInstance;
     component.alarm_id = mockAlarm['core_id'];

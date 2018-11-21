@@ -59,4 +59,11 @@ export class RoutingService {
     this.router.navigate([{outlets: {actions: null}}]);
   }
 
+  /**
+  * Go to login and clean action outlet
+  */
+  goToLogin() {
+    this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+  }
+
 }
