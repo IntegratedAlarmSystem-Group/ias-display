@@ -134,7 +134,6 @@ export class AckComponent implements OnInit, OnDestroy {
   acknowledge(): void {
     this.showSpinner();
     if (this.form.valid) {
-      console.log('user: ', this.user_selected);
       this.alarmService.acknowledgeAlarms(
         this.alarmsToAck, this.form.get('message').value, this.user_selected).subscribe(
           (response) => {

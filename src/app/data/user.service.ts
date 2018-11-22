@@ -24,10 +24,7 @@ export class UserService {
   /**
   * List of authorized users
   **/
-  public users: User[] = [
-    { username: 'Juanito', email: 'admin@admin.cl' },
-    { username: 'Pedrita', email: 'admin@admin.cl' }
-  ];
+  public users: User[];
 
   /**
    * Builds an instance of the service
@@ -41,11 +38,9 @@ export class UserService {
   * Get the list of users in the operators group
   */
   requestUsersList() {
-    console.log('Getting users in group operator');
     return this.httpClientService.get(BackendUrls.USERS_LIST)
     .subscribe (
         (response) => {
-            console.log('response: ', response);
             this.users = <User[]> response;
         },
         (error) => {
