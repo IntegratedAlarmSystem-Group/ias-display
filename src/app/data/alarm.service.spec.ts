@@ -629,7 +629,8 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
   it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
     const ackMessage = 'This is the message';
-    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
+    const username = 'username';
+    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage, username).subscribe(
       (response) => {
         expect(response).toEqual(alarmsToAck);
         expect(httpSpy).toHaveBeenCalled();
