@@ -76,6 +76,8 @@ export class AckComponent implements OnInit, OnDestroy {
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
    * @param {Route} route Reference to the url that triggered the initialization of this component
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
+   * @param {NgxSpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {UserService} userService Service to handle request to the users api
    */
   constructor(
     private formBuilder: FormBuilder,

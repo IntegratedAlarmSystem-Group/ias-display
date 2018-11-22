@@ -291,11 +291,12 @@ export class AlarmService {
    * @param {string} timeout the timeout for the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout) {
+  shelveAlarm(alarm_id, message, timeout, user) {
     const data = {
       'alarm_id': alarm_id,
       'message': message,
       'timeout': timeout,
+      'user': user
     };
     return this.httpClientService.post(BackendUrls.SHELVE_API, data).pipe(
     map(
