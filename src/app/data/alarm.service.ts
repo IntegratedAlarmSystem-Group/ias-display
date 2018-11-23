@@ -8,6 +8,7 @@ import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
 import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
+import { AuthService } from '../auth/auth.service';
 
 
 /**
@@ -105,18 +106,34 @@ export class AlarmService {
   public soundingAlarm: string;
 
   /**
+  * Defines wether or not the service is initialized
+  */
+  public isInitialized = false;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
+   * @param {AuthService} authService Service used for authentication
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
+    private authService: AuthService,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
         if (value === false) {
           this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+    this.authService.loginStatusStream.subscribe(
+      value => {
+        if (value === true) {
+          this.initialize();
+        } else {
+          this.destroy();
         }
       }
     );
@@ -138,6 +155,10 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
+    if (this.isInitialized || !this.authService.isLoggedIn()) {
+      return;
+    }
+    this.isInitialized = true;
     this.canSound = false;
     this.audio = new Audio();
     this.connect();
@@ -151,25 +172,49 @@ export class AlarmService {
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessage(payload.action, payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.updateLastReceivedMessageTimestamp();
+        this.readAlarmMessage(payload.action, payload.data);
+      }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessagesList(payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.updateLastReceivedMessageTimestamp();
+        this.readAlarmMessagesList(payload.data);
+      }
     });
     this.startLastReceivedMessageTimestampCheck();
   }
 
-   /**
-   *  Start connection to the backend through websockets
-   */
+  /**
+  *  Start connection to the backend through websockets
+  */
   connect() {
-    const connectionPath = environment.websocketPath;
+    const connectionPath = this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at: ' + connectionPath);
+    console.log('Connected to webserver at: ' + environment.websocketPath);
+  }
+
+  /**
+  *  Connection path using authentication data
+  */
+  getConnectionPath() {
+    return environment.websocketPath + '?token=' + this.authService.getToken();
+  }
+
+  /**
+  *  Disconnect from the backend
+  */
+  destroy() {
+    // Close connection
+    if (this.isInitialized) {
+      this.webSocketBridge.stream(Streams.UPDATES).send({
+        'action': 'close'
+      });
+    }
+    this.isInitialized = false;
   }
 
   /******* ALARM HANDLING *******/
@@ -187,12 +232,14 @@ export class AlarmService {
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement
+   * @param user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message) {
+  acknowledgeAlarms(alarms_ids, message, user) {
     const data = {
       'alarms_ids': alarms_ids,
       'message': message,
+      'user': user
     };
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
     map(
@@ -244,11 +291,12 @@ export class AlarmService {
    * @param {string} timeout the timeout for the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout) {
+  shelveAlarm(alarm_id, message, timeout, user) {
     const data = {
       'alarm_id': alarm_id,
       'message': message,
       'timeout': timeout,
+      'user': user
     };
     return this.httpClientService.post(BackendUrls.SHELVE_API, data).pipe(
     map(

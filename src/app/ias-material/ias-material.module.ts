@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -32,6 +33,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
+    MatMenuModule,
     MatSlideToggleModule,
     MatButtonModule,
     MatIconModule,
@@ -54,6 +56,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
+    MatMenuModule,
     MatSlideToggleModule,
     MatButtonModule,
     MatIconModule,

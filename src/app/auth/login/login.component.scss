@@ -1,0 +1,55 @@
+.mat-card {
+  max-width: 580px;
+  margin: auto;
+
+  .mat-card-header {
+    border-top-left-radius: 0.375em;
+    border-top-right-radius: 0.375em;
+
+    .login-header {
+      text-align: center;
+      width: 100%;
+      margin-right: 16px;
+
+      .title {
+        display: block;
+        font-size: 34px;
+      }
+
+      .message {
+        display: block;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .mat-card-content {
+    border-bottom-left-radius: 0.375em;
+    border-bottom-right-radius: 0.375em;
+  }
+}
+
+.login-form-container {
+  padding: 40px;
+
+  .form-group {
+
+    .form-field {
+      width: 100%;
+    }
+  }
+
+  .btn-login-container {
+    padding: 10px 0;
+    text-align: center;
+
+    .btn-login {
+      text-transform: uppercase;
+      font-weight: bold;
+      width: 100%;
+      display: inline-block;
+    }
+
+  }
+
+}

@@ -4,6 +4,9 @@ import { AlarmService } from './data/alarm.service';
 import { SidenavService } from './actions/sidenav.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from './auth/auth.service';
+import { UserService } from './data/user.service';
+import { Router } from '@angular/router';
 
 
 /**
@@ -43,15 +46,20 @@ export class AppComponent implements OnInit {
   /**
    * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   * @param {AuthService} authService Service used for authentication
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
    * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
+   * @param {Router} router instance of an Angular {@link Router} to handle routing
    */
   constructor(
     private alarmService: AlarmService,
+    private authService: AuthService,
+    private userService: UserService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    public router: Router,
   ) {
     this.matIconRegistry
       .addSvgIcon(
@@ -83,6 +91,20 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    if (this.authService.isLoggedIn()) {
+      this.userService.requestUsersList();
+    }
+    this.authService.loginStatusStream.subscribe(
+      value => {
+        if (value === false) {
+          this.actionsSidenavService.close();
+          this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+          this.alarmService.destroy();
+        } else if (value === true) {
+          this.userService.requestUsersList();
+        }
+      }
+    );
   }
 
   /**
@@ -106,4 +128,31 @@ export class AppComponent implements OnInit {
     this.isNavigationCompacted = !this.isNavigationCompacted;
     return this.isNavigationCompacted;
   }
+
+  /**
+   * Method to get the username
+   " Uses the getUser method defined on the {@link AuthService}
+   * @returns {string} the username
+   */
+  getUser() {
+    return this.authService.getUser();
+  }
+
+  /**
+   * Method to check if a user is logged in
+   " Uses the isLoggedIn method defined on the {@link AuthService}
+   * @returns {boolean} True if the user is logged in
+   */
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  /**
+   * Method to logout an authenticated user
+   " Uses the logout method defined on the {@link AuthService}
+   */
+  logout() {
+    this.authService.logout();
+  }
+
 }

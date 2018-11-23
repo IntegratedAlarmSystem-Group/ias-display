@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 
 
@@ -12,8 +13,32 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class HttpClientService {
 
-  /** The "constructor" */
-  constructor(private http: HttpClient) {
+  /**
+  * Builds an instance of the service
+  * @param {HttpClient} http Angular HTTP Service used to perform HTTP requests
+  * @param {AuthService} authService service used to check and handle authorization
+  */
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
+  }
+
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
+    if (this.authService.getToken()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.authService.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+    }
   }
 
   /**
@@ -31,9 +56,7 @@ export class HttpClientService {
   */
   get(url) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.get(this.read_url(url), httpOptions);
   }
@@ -46,9 +69,7 @@ export class HttpClientService {
   */
   post(url, data) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.post(this.read_url(url), data, httpOptions);
   }
@@ -61,9 +82,7 @@ export class HttpClientService {
   */
   put(url, data) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.put(this.read_url(url), data, httpOptions);
   }
@@ -75,9 +94,7 @@ export class HttpClientService {
   */
   delete(url) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
+      headers: this.getHttpHeaders()
     };
     return this.http.delete(this.read_url(url), httpOptions);
   }
