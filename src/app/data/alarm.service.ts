@@ -213,6 +213,8 @@ export class AlarmService {
       this.webSocketBridge.stream(Streams.UPDATES).send({
         'action': 'close'
       });
+      this.webSocketBridge.socket.close(
+        1000, 'User logout', {keepClosed: true});
     }
     this.isInitialized = false;
   }
