@@ -58,7 +58,11 @@
       </ng-template>
 
       <ng-template #responseMessage>
-        <div [ngClass]="{'section ack-action': true, 'action-error': requestStatus === -1 }">
+        <div [ngClass]="{
+          'section ack-action': true,
+          'action-error': requestStatus === -1,
+          'action-warning': requestStatus === -2
+        }">
           <div class="section-title"> {{ getResponseMessageTitle() }} </div>
           <div> {{ getResponseMessageText() }} </div>
 

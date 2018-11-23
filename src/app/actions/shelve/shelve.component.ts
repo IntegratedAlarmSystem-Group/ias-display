@@ -235,7 +235,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
       } else {
         response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
       }
-      response += ' The server responded the following: ' +  this.errorMessage;
+      response += ' Please try again. If the problem persists, contact the system administrator.';
     } else if (this.requestStatus === -2 ) {
       response = 'The logged in user (' + this.authService.getUser();
       if (!this.alarm.shelved) {
