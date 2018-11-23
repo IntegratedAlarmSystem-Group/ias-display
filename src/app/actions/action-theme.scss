@@ -25,6 +25,12 @@
       &.action-error {
         background: mat-color($warn, A700);
       }
+
+      &.action-warning {
+        background: mat-color($background, warning);
+        color: map_get($primary, 600);
+      }
+
     }
 
   }

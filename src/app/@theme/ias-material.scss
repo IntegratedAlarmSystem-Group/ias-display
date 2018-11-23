@@ -97,6 +97,7 @@ $ias-dark-theme-background: (
   disabled-button-toggle: black,
   unselected-chip: map_get($ias-palette, 300),
   disabled-list-option: black,
+  warning:  map_get($mat-yellow, 700),
 );
 
 $ias-dark-theme-foreground: (
