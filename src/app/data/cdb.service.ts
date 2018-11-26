@@ -66,4 +66,12 @@ export class CdbService {
       'broadcastFactor': Number(this.iasConfiguration['broadcastFactor'])
     };
   }
+
+  /**
+  * Get refresh broadcast threshold from IAS configuration data
+  * @returns {number} contains the 'broadcastThreshold' in seconds
+  */
+  getBroadcastThreshold() {
+    return Number(this.iasConfiguration['broadcastThreshold']);
+  }
 }

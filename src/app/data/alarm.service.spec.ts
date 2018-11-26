@@ -257,7 +257,8 @@ describe('AlarmService', () => {
       const mockIasConfiguration = {
           logLevel: 'INFO',
           refreshRate: '2',
-          broadcastFactor: '3',
+          broadcastRate: '10',
+          broadcastThreshold: '11',
           tolerance: '1',
           properties: []
       };
@@ -571,9 +572,8 @@ describe('AlarmService', () => {
 
     // Arrange
     const now = (new Date).getTime();
-    const pars = cdbSubject.getRefreshRateParameters();
-    const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
-    const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000 + 1);
+    const maxSecondsWithoutMessages = 11;
+    const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000);
 
     subject.connectionStatusStream.next(true);
     subject.lastReceivedMessageTimestamp = delayedTimestamp;

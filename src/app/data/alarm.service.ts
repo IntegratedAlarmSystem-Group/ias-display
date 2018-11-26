@@ -499,7 +499,12 @@ export class AlarmService {
       pars = {'refreshRate': 5, 'broadcastFactor': 1};
     }
 
-    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
+    let MAX_SECONDS_WITHOUT_MESSAGES;
+    try {
+      MAX_SECONDS_WITHOUT_MESSAGES = this.cdbService.getBroadcastThreshold();
+    } catch (e) {
+      MAX_SECONDS_WITHOUT_MESSAGES = 11;
+    }
 
     const now = (new Date).getTime();
     let millisecondsDelta;
