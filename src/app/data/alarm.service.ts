@@ -172,14 +172,14 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      console.log('notify ', payload);
+      // console.log('notify ', payload);
       if (this.authService.isLoggedIn()) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
       }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
-      console.log('request', payload);
+      // console.log('request', payload);
       if (this.authService.isLoggedIn()) {
         this.resetTimer();
         this.readAlarmMessagesList(payload.data);

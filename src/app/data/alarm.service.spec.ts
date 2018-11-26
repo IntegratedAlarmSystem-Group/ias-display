@@ -244,7 +244,7 @@ describe('AlarmService', () => {
       * Redefinition of periodic calls in the alarm service for testing
       */
       // TODO: Evaluation to check periodic calls
-      spyOn(subject, 'startLastReceivedMessageTimestampCheck')
+      spyOn(subject, 'resetTimer')
         .and.callFake(function() {});
 
       /**
@@ -521,10 +521,7 @@ describe('AlarmService', () => {
 
   });
 
-  it('should store a timestamp after message from "requests" stream', async(() => {
-
-    let millisecondsDelta: number;
-    let getListExpectedTimestamp: number;
+  it('should call resetTimer after message from "requests" stream', async(() => {
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
@@ -534,10 +531,7 @@ describe('AlarmService', () => {
       mockStream.send(JSON.stringify(fixtureAlarmsList));
 
       // Assert:
-      getListExpectedTimestamp = (new Date()).getTime();
-      millisecondsDelta = Math.abs(
-        subject.lastReceivedMessageTimestamp - getListExpectedTimestamp);
-      expect(millisecondsDelta).toBeLessThan(5);
+      expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
     });
 
@@ -545,10 +539,8 @@ describe('AlarmService', () => {
 
   }));
 
-  it('should store a timestamp after message from "alarms" stream', async(() => {
+  it('should call resetTimer after message from "alarms" stream', async(() => {
 
-    let millisecondsDelta: number;
-    let webserverMsgExpectedTimestamp: number;
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
@@ -557,10 +549,7 @@ describe('AlarmService', () => {
       // mock alarm message from webserver
       mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
       // Assert:
-      webserverMsgExpectedTimestamp = (new Date()).getTime();
-      millisecondsDelta = Math.abs(
-        subject.lastReceivedMessageTimestamp - webserverMsgExpectedTimestamp);
-      expect(millisecondsDelta).toBeLessThan(5);
+      expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
     });
 
@@ -571,19 +560,22 @@ describe('AlarmService', () => {
   it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
-    const now = (new Date).getTime();
-    const maxSecondsWithoutMessages = 11;
-    const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000);
-
+    subject.alarmsArray = [Alarm.asAlarm(alarms[1]), Alarm.asAlarm(alarms[2])];
     subject.connectionStatusStream.next(true);
-    subject.lastReceivedMessageTimestamp = delayedTimestamp;
+    spyOn(subject, 'triggerAlarmsNonValidConnectionState').and.callThrough();
+    for (const alarm of subject.alarmsArray) {
+      expect(alarm.validity).toEqual(Validity.reliable);
+    }
 
     // Act
-    subject.compareCurrentAndLastReceivedMessageTimestamp();
+    subject.connectionStatusStream.next(false);
 
     // Assert
-    expect(subject.connectionStatusStream.value).toBe(false);
-
+    expect(subject.triggerAlarmsNonValidConnectionState).toHaveBeenCalled();
+    for (const alarm of subject.alarmsArray) {
+      expect(alarm.validity).toEqual(Validity.unreliable);
+    }
+    expect(subject.alarmChangeStream.value).toEqual('all');
   });
 });
 
