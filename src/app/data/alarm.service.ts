@@ -490,17 +490,6 @@ export class AlarmService {
    * TODO: Review the life cycle of the connection status.
    */
   compareCurrentAndLastReceivedMessageTimestamp() {
-
-    /* Refresh rate parameters */
-    let pars;
-
-    /* TODO: Evaluate try exception. Here for debug options. */
-    try {
-      pars = this.cdbService.getRefreshRateParameters();
-    } catch (e) {
-      pars = {'refreshRate': 5, 'broadcastFactor': 1};
-    }
-
     let MAX_SECONDS_WITHOUT_MESSAGES;
     try {
       MAX_SECONDS_WITHOUT_MESSAGES = this.cdbService.getBroadcastThreshold();
@@ -522,7 +511,13 @@ export class AlarmService {
    * @returns {InternalObservable} for notifications to check the last received message
    */
   startLastReceivedMessageTimestampCheck() {
-    return IntervalObservable.create(1000 * 10)
+    let MAX_SECONDS_WITHOUT_MESSAGES;
+    try {
+      MAX_SECONDS_WITHOUT_MESSAGES = this.cdbService.getBroadcastThreshold();
+    } catch (e) {
+      MAX_SECONDS_WITHOUT_MESSAGES = 11;
+    }
+    return IntervalObservable.create(1000 * MAX_SECONDS_WITHOUT_MESSAGES)
       .subscribe(() => {
       this.compareCurrentAndLastReceivedMessageTimestamp();
     });
