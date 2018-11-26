@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
+import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -78,6 +79,7 @@ export class AckComponent implements OnInit, OnDestroy {
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
    * @param {NgxSpinnerService} spinnerService Service to provide the loading spinner functionality
    * @param {UserService} userService Service to handle request to the users api
+   * @param {AuthService} authService Service to ask for the logged in user
    */
   constructor(
     private formBuilder: FormBuilder,
@@ -85,7 +87,8 @@ export class AckComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   /**
@@ -144,8 +147,11 @@ export class AckComponent implements OnInit, OnDestroy {
             this.hideSpinner();
           },
           (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
+            if (error.status === 403) {
+              this.requestStatus = -2;
+            } else {
+              this.requestStatus = -1;
+            }
             this.hideSpinner();
             return error;
           }
@@ -227,6 +233,29 @@ export class AckComponent implements OnInit, OnDestroy {
     } else if (this.requestStatus === -1) {
       response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been acknowledged.';
       response += ' Please try again. If the problem persists, contact the system administrator.';
+    } else if (this.requestStatus === -2) {
+      response = 'The logged in user (' + this.authService.getUser();
+      response += ') does not have permissions to perform the acknowledgement. ';
+    }
+    return response;
+  }
+
+  /**
+   * Returns the title to display when the shelve or unshelve action is performed
+   * @returns {string} the title to display
+   */
+  getResponseMessageTitle(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    let response = '';
+    if (this.requestStatus === 1) {
+      response = 'Acknowledgement results';
+
+    } else if (this.requestStatus === -1) {
+      response = 'Error acknowledging';
+    } else if (this.requestStatus === -2) {
+      response = 'Action not allowed';
     }
     return response;
   }

@@ -262,6 +262,10 @@
     background: mat-color($background, disabled-list-option);
   }
 
+  #warning {
+    background: mat-color($background, warning);
+  }
+
   // Foreground
   #base {
     color: mat-color($foreground, base);
