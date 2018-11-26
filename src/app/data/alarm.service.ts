@@ -110,6 +110,8 @@ export class AlarmService {
   */
   public isInitialized = false;
 
+  public connectionStatusTimer;
+
   /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
@@ -158,6 +160,7 @@ export class AlarmService {
     if (this.isInitialized || !this.authService.isLoggedIn()) {
       return;
     }
+    this.cdbService.initialize();
     this.isInitialized = true;
     this.canSound = false;
     this.audio = new Audio();
@@ -165,26 +168,23 @@ export class AlarmService {
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
         this.connectionStatusStream.next(true);
-        /* TODO: Evaluate function for webserver requests */
         this.getAlarmList();
-        this.cdbService.initialize();
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
-      // console.log('notify ', payload);
+      console.log('notify ', payload);
       if (this.authService.isLoggedIn()) {
-        this.updateLastReceivedMessageTimestamp();
+        this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
       }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
-      // console.log('request', payload);
+      console.log('request', payload);
       if (this.authService.isLoggedIn()) {
-        this.updateLastReceivedMessageTimestamp();
+        this.resetTimer();
         this.readAlarmMessagesList(payload.data);
       }
     });
-    this.startLastReceivedMessageTimestampCheck();
   }
 
   /**
@@ -478,48 +478,17 @@ export class AlarmService {
   }
 
   /**
-   * Method to update the last received message timestamp
+   * Resets the status connection check timer
+   * The timer's period is equal to the broadcastThreshold obtained by {@link CdbService.html#getBroadcastRate}
    */
-  updateLastReceivedMessageTimestamp() {
-    this.lastReceivedMessageTimestamp = (new Date()).getTime();
-  }
-
-  /**
-   * Method to check the last received message timestamp
-   * Note: If non-valid, the connection state is non-valid
-   * TODO: Review the life cycle of the connection status.
-   */
-  compareCurrentAndLastReceivedMessageTimestamp() {
-    let MAX_SECONDS_WITHOUT_MESSAGES;
-    try {
-      MAX_SECONDS_WITHOUT_MESSAGES = this.cdbService.getBroadcastThreshold();
-    } catch (e) {
-      MAX_SECONDS_WITHOUT_MESSAGES = 11;
+  resetTimer() {
+    if (this.connectionStatusTimer) {
+      this.connectionStatusTimer.unsubscribe();
+      this.connectionStatusStream.next(true);
     }
-
-    const now = (new Date).getTime();
-    let millisecondsDelta;
-
-    millisecondsDelta = now - this.lastReceivedMessageTimestamp;
-    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ) {
+    const broadcastThreshold = this.cdbService.getBroadcastThreshold();
+    this.connectionStatusTimer = IntervalObservable.create(1000 * broadcastThreshold).subscribe(x => {
       this.connectionStatusStream.next(false);
-    }
-  }
-
-  /**
-   * Method to update the last received message timestamp
-   * @returns {InternalObservable} for notifications to check the last received message
-   */
-  startLastReceivedMessageTimestampCheck() {
-    let MAX_SECONDS_WITHOUT_MESSAGES;
-    try {
-      MAX_SECONDS_WITHOUT_MESSAGES = this.cdbService.getBroadcastThreshold();
-    } catch (e) {
-      MAX_SECONDS_WITHOUT_MESSAGES = 11;
-    }
-    return IntervalObservable.create(1000 * MAX_SECONDS_WITHOUT_MESSAGES)
-      .subscribe(() => {
-      this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
 }
