@@ -1,12 +1,15 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { DataModule } from '../data/data.module';
 import { AuthLoginGuard } from './auth-login.guard';
 import { AuthService } from './auth.service';
 
 describe('AuthLoginGuard', () => {
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
+  let guard: AuthLoginGuard;
+  let authService: AuthService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,7 +25,36 @@ describe('AuthLoginGuard', () => {
     });
   });
 
-  it('should ...', inject([AuthLoginGuard], (guard: AuthLoginGuard) => {
-    expect(guard).toBeTruthy();
+  beforeEach(inject([AuthLoginGuard, AuthService, Router], (authGuard, authenticationService, angularRouter) => {
+      guard = authGuard;
+      authService = authenticationService;
+      router = angularRouter;
   }));
+
+  it('should create', () => {
+    expect(guard).toBeTruthy();
+  });
+
+  describe('should have a checkLogin method that checks if the navigation can be activated', () => {
+    it('and when it can be activated, it returns true', () => {
+      // Arrange:
+      spyOn(authService, 'isLoggedIn').and.returnValue(true);
+      // Act:
+      const returnValue = guard.checkLogin('attemptedUrl');
+      // Assert:
+      expect(returnValue).toBe(true);
+      expect(authService.redirectUrl).toBeFalsy();
+    });
+
+    it('and when it cannot be activated, it returns false, stores the url and navigates to login', () => {
+      // Arrange:
+      spyOn(authService, 'isLoggedIn').and.returnValue(false);
+      // Act:
+      const returnValue = guard.checkLogin('attemptedUrl');
+      // Assert:
+      expect(returnValue).toBe(false);
+      expect(authService.redirectUrl).toBe('attemptedUrl');
+      expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    });
+  });
 });
