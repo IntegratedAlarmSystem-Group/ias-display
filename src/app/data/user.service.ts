@@ -4,7 +4,7 @@ import { HttpClientService } from './http-client.service';
 import { BackendUrls } from '../settings';
 
 /**
-* Class that models the User
+* Class that models a User
 **/
 export interface User {
   /** Unique username */
@@ -36,6 +36,7 @@ export class UserService {
 
   /**
   * Get the list of users in the operators group
+  * @return {User[]} the list of users
   */
   requestUsersList() {
     return this.httpClientService.get(BackendUrls.USERS_LIST)
