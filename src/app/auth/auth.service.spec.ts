@@ -48,10 +48,8 @@ describe('AuthService', () => {
         service.login(username, password).subscribe((response) => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
-          const retrievedToken = localStorage.getItem('token');
-          expect(retrievedToken).toEqual(JSON.stringify(token));
-          const retrievedUser = localStorage.getItem('user');
-          expect(retrievedUser).toEqual(JSON.stringify(username));
+          expect(localStorage.getItem('token')).toEqual(JSON.stringify(token));
+          expect(localStorage.getItem('user')).toEqual(JSON.stringify(username));
           expect(service.isLoggedIn()).toBe(true);
         });
       }));
@@ -66,13 +64,28 @@ describe('AuthService', () => {
         service.login(username, password).subscribe((response) => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
-          const retrievedToken = localStorage.getItem('token');
-          expect(retrievedToken).toBeFalsy();
-          const retrievedUser = localStorage.getItem('user');
-          expect(retrievedUser).toBeFalsy();
+          expect(localStorage.getItem('token')).toBeFalsy();
+          expect(localStorage.getItem('user')).toBeFalsy();
           expect(service.isLoggedIn()).toBe(false);
         });
       }));
+    });
+  });
+
+  describe('should have a logout method,', () => {
+    it('that removes the token and the user from the local storage and sends a false in the loginStatusStream,', () => {
+      // Arrange:
+      service.storeUser(username);
+      service.storeToken(token);
+      expect(localStorage.getItem('user')).toBe(JSON.stringify(username));
+      expect(localStorage.getItem('token')).toBe(JSON.stringify(token));
+      expect(service.isLoggedIn()).toBe(true);
+      // Act:
+      service.logout();
+      // Assert:
+      expect(localStorage.getItem('token')).toBeFalsy();
+      expect(localStorage.getItem('user')).toBeFalsy();
+      expect(service.isLoggedIn()).toBe(false);
     });
   });
 });
