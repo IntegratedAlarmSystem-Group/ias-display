@@ -12,9 +12,9 @@ import { Server } from 'mock-socket';
 import { AuthService } from '../auth/auth.service';
 
 let subject: AlarmService;
-let cdbSubject: CdbService;
+let cdbService: CdbService;
 let httpSubject: HttpClientService;
-let authSubject: AuthService;
+let authService: AuthService;
 let mockStream: Server;
 let spyEmitSound;
 
@@ -217,7 +217,6 @@ const fixtureAlarmsList = {
 
 describe('AlarmService', () => {
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
@@ -225,13 +224,13 @@ describe('AlarmService', () => {
     });
   });
 
-  beforeEach(inject([AlarmService, CdbService, AuthService], (alarmService, cdbService, authService) => {
+  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
       /**
       * Services
       */
-      subject = alarmService;
-      cdbSubject = cdbService;
-      authSubject = authService;
+      subject = _alarmService;
+      cdbService = _cdbService;
+      authService = _authService;
 
       /**
       * Redefinition of connection path with authentication token
@@ -262,9 +261,9 @@ describe('AlarmService', () => {
           tolerance: '1',
           properties: []
       };
-      spyOn(cdbSubject, 'initialize').and.callFake(function() {});
-      spyOn(authSubject, 'isLoggedIn').and.returnValue(true);
-      cdbSubject.iasConfiguration = mockIasConfiguration;
+      spyOn(cdbService, 'initialize').and.callFake(function() {});
+      spyOn(authService, 'isLoggedIn').and.returnValue(true);
+      cdbService.iasConfiguration = mockIasConfiguration;
       subject.canSound = true;
       subject.audio = new Audio();
       spyEmitSound = spyOn(subject, 'emitSound');
@@ -594,9 +593,9 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
   beforeEach(
     inject([AlarmService, CdbService, HttpClientService],
-      (alarmService, cdbService, httpClientService) => {
+      (_alarmService, _cdbService, httpClientService) => {
 
-      subject = alarmService;
+      subject = _alarmService;
       httpSubject = httpClientService;
       const alarmsArray = [];
       const alarmsIndexes = {};
@@ -634,5 +633,77 @@ describe('GIVEN the AlarmService contains Alarms', () => {
         }
       }
     );
+  });
+});
+
+describe('AlarmService', () => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [AlarmService, CdbService, HttpClient, HttpClientService]
+    });
+  });
+
+  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
+      /**
+      * Services
+      */
+      subject = _alarmService;
+      cdbService = _cdbService;
+      authService = _authService;
+
+      /**
+      * Redefinition of connection path with authentication token
+      */
+      spyOn(subject, 'getConnectionPath').and.returnValue(
+        environment.websocketPath + '?token=tokenFromServer'
+      );
+
+      /**
+      * Redefinition of periodic calls in the alarm service for testing
+      */
+      // TODO: Evaluation to check periodic calls
+      spyOn(subject, 'resetTimer')
+        .and.callFake(function() {});
+
+      /**
+      * Redefinition of the cdb information for the testing environment
+      *
+      * This is required to set the alarm service validation delay according to
+      * the cdb configuration
+      *
+      */
+      const mockIasConfiguration = {
+          logLevel: 'INFO',
+          refreshRate: '2',
+          broadcastRate: '10',
+          broadcastThreshold: '11',
+          tolerance: '1',
+          properties: []
+      };
+      spyOn(cdbService, 'initialize').and.callFake(function() {});
+      spyOn(subject, 'destroy');
+      spyOn(subject.webSocketBridge, 'connect');
+      spyOn(subject.webSocketBridge, 'listen');
+      cdbService.iasConfiguration = mockIasConfiguration;
+      subject.canSound = true;
+      subject.audio = new Audio();
+      spyEmitSound = spyOn(subject, 'emitSound');
+
+  }));
+
+  it('should not be initialized if the user is not logged in', () => {
+    spyOn(authService, 'isLoggedIn').and.returnValue(false);
+    expect(subject).toBeTruthy();
+    subject.initialize();
+    expect(subject.webSocketBridge.connect).not.toHaveBeenCalled();
+    expect(subject.webSocketBridge.listen).not.toHaveBeenCalled();
+  });
+
+  it('should call the destroy function if the user logs out', () => {
+    expect(subject).toBeTruthy();
+    authService.loginStatusStream.next(false);
+    expect(subject.destroy).toHaveBeenCalled();
   });
 });

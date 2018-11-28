@@ -87,7 +87,7 @@ export class AlarmService {
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
-  private webSocketBridge: WebSocketBridge = new WebSocketBridge();
+  public webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
   * Defines wether or not the display should emit sounds when alarms are triggered.
