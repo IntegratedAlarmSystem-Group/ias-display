@@ -98,3 +98,20 @@ html, body {
   }
 
 }
+
+
+.ias-nav-button-container {
+
+  .ias-notification-signal {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    // color: red;
+    font-size: 20px;
+  }
+
+  .ias-icon {
+    display: none;// inline-block;
+  }
+
+}
