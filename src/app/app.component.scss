@@ -102,16 +102,32 @@ html, body {
 
 .ias-nav-button-container {
 
-  .ias-notification-signal {
+  .ias-count-mark {
     position: absolute;
     top: 9px;
     right: 7px;
-    // color: red;
     font-size: 20px;
+
+    .hide-count-mark {
+      display: none;
+    }
+
+    .nonzero-count-mark {
+      color: red;
+    }
+
+    .zero-count-mark {
+      display: none;
+    }
+
+    .unknown-count-mark {
+      color: #17bcff;
+    }
+
   }
 
   .ias-icon {
-    display: none;// inline-block;
+    display: inline-block;
   }
 
 }

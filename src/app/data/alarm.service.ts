@@ -110,6 +110,14 @@ export class AlarmService {
   */
   public isInitialized = false;
 
+  /**
+  * Information about the count of alarms per view
+  */
+  public countPerView = {};
+
+  /**
+  * Connection status timer
+  */
   public connectionStatusTimer;
 
   /**
@@ -183,6 +191,12 @@ export class AlarmService {
       if (this.authService.isLoggedIn()) {
         this.resetTimer();
         this.readAlarmMessagesList(payload.data);
+      }
+    });
+    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) => {
+      // console.log('counter ', payload);
+      if (this.authService.isLoggedIn()) {
+        this.readCountPerViewMessage(payload.data);
       }
     });
   }
@@ -374,6 +388,14 @@ export class AlarmService {
     }
     this.changeAlarms('all');
     this.canSound = true;
+  }
+
+  /**
+   * Reads the count per view object received from the webserver
+   * @param {Object} countPerView
+   */
+  readCountPerViewMessage(countPerView) {
+    this.countPerView = countPerView;
   }
 
   /**

@@ -37,10 +37,34 @@ export class AppComponent implements OnInit {
   // TODO: Use only custom svgIcons
   /** Navigation Sidenav Menu of the application (left sidenav) */
   navigationSidenavItems = [
-    { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
-    { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
-    { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
-    { title: 'Table', link: 'tabular', icon: 'ias_table', svgIcon: true}
+    {
+      title: 'Overview',
+      link: 'overview',
+      icon: 'ias_overview',
+      svgIcon: true,
+      counter: ''
+    },
+    {
+      title: 'Weather',
+      link: 'weather',
+      icon: 'ias_weather',
+      svgIcon: true,
+      counter: ''
+    },
+    {
+      title: 'Antennas',
+      link: 'antennas',
+      icon: 'ias_antenna',
+      svgIcon: true,
+      counter: ''
+    },
+    {
+      title: 'Table',
+      link: 'tabular',
+      icon: 'ias_table',
+      svgIcon: true,
+      counter: ''
+    }
   ];
 
   /**
@@ -154,5 +178,33 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  /**
+   * Method to get the class related to the mark of the nav items
+   * to highlight or not the presence of unack alarms per view
+   " It is expected to use the counterPerView
+   * defined on the {@link AlarmService}
+   * and the configuration defined in the navigationSidenavItems
+   * variable
+   * @returns {string} the classname for the nav item mark
+   */
+   getNavItemMarkClass(navItem, countPerView) {
+     const navItemCounter = navItem.counter;
+     const availableCounters = Object.keys(countPerView);
+     if (navItemCounter === '') {
+       return 'hide-count-mark';
+     } else {
+       if (availableCounters.indexOf(navItemCounter) > -1) {
+         if (countPerView[navItemCounter] > 0) {
+           return 'nonzero-count-mark';
+         } else {
+           return 'zero-count-mark';
+         }
+       } else {
+         return 'unknown-count-mark';
+       }
+
+     }
+   }
 
 }
