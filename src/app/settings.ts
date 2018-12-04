@@ -24,6 +24,7 @@ export const BackendUrls = {
 export const Streams = {
   ALARMS: 'alarms',
   UPDATES: 'requests',
+  COUNTER: 'counter',
 };
 
 /** Set of items to store in the browser cache */

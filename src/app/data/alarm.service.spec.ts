@@ -576,6 +576,33 @@ describe('AlarmService', () => {
     }
     expect(subject.alarmChangeStream.value).toEqual('all');
   });
+
+  it(`should update a local counter after receiving the count per view
+  from the 'counter' stream`, async(() => {
+
+      const mockCountPerView = {
+        'stream': 'counter',
+        'payload': {
+          'data': {
+            'weather': 2,
+            'antenna': 1,
+          }
+        }
+      };
+
+      mockStream = new Server(subject.getConnectionPath());  // mock server
+
+      mockStream.on('connection', server => {  // send mock count from server
+        mockStream.send(JSON.stringify(mockCountPerView));
+        expect(subject.countPerView).toEqual(mockCountPerView.payload.data);
+        mockStream.stop();
+      });
+
+      subject.initialize();
+
+  }));
+
+
 });
 
 
@@ -706,4 +733,5 @@ describe('AlarmService', () => {
     authService.loginStatusStream.next(false);
     expect(subject.destroy).toHaveBeenCalled();
   });
+
 });

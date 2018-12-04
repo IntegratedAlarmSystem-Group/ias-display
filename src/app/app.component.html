@@ -27,12 +27,21 @@
       <mat-nav-list>
         <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
-            <ng-container *ngIf="item.svgIcon">
-              <mat-icon svgIcon="{{ item.icon }}">{{ item.icon }}</mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!item.svgIcon">
-              <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
-            </ng-container>
+            <span class="ias-nav-button-container">
+              <span class="ias-count-mark">
+                <span [ngClass]="getNavItemMarkClass(item, alarmService.countPerView)">
+                  &#9679;
+                </span>
+              </span>
+              <span class="ias-icon">
+                <ng-container *ngIf="item.svgIcon">
+                  <mat-icon svgIcon="{{ item.icon }}">{{ item.icon }}</mat-icon>
+                </ng-container>
+                <ng-container *ngIf="!item.svgIcon">
+                  <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
+                </ng-container>
+              </span>
+            </span>
             <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>
           </a>
         </div>
