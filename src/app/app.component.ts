@@ -42,21 +42,21 @@ export class AppComponent implements OnInit {
       link: 'overview',
       icon: 'ias_overview',
       svgIcon: true,
-      counter: ''
+      counter: 'summary'
     },
     {
       title: 'Weather',
       link: 'weather',
       icon: 'ias_weather',
       svgIcon: true,
-      counter: ''
+      counter: 'weather'
     },
     {
       title: 'Antennas',
       link: 'antennas',
       icon: 'ias_antenna',
       svgIcon: true,
-      counter: ''
+      counter: 'antennas'
     },
     {
       title: 'Table',
