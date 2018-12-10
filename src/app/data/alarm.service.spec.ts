@@ -580,7 +580,7 @@ describe('AlarmService', () => {
   it(`should update a local counter after receiving the count per view
   from the 'counter' stream`, async(() => {
 
-      const mockCountPerView = {
+      const mockCountByView = {
         'stream': 'counter',
         'payload': {
           'data': {
@@ -593,8 +593,8 @@ describe('AlarmService', () => {
       mockStream = new Server(subject.getConnectionPath());  // mock server
 
       mockStream.on('connection', server => {  // send mock count from server
-        mockStream.send(JSON.stringify(mockCountPerView));
-        expect(subject.countPerView).toEqual(mockCountPerView.payload.data);
+        mockStream.send(JSON.stringify(mockCountByView));
+        expect(subject.countByView).toEqual(mockCountByView.payload.data);
         mockStream.stop();
       });
 

@@ -132,7 +132,8 @@ export class AppComponent implements OnInit {
   }
 
   /**
-  * Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not
+  * Returns the links for the router outlets to navigate the different views,
+  * considering of the actionsSidenav can be closed or not
   * @param {any} item an item of the navigation sidenav
   * @returns {Object} The links in a dictionary
   */
@@ -180,31 +181,65 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Method to get the class related to the mark of the nav items
-   * to highlight or not the presence of unack alarms per view
-   " It is expected to use the counterPerView
+   * Method to get the class related to the count of the nav items
+   * to highlight or not the presence of unack alarms by view
+   " It is expected to use the countByView
    * defined on the {@link AlarmService}
    * and the configuration defined in the navigationSidenavItems
    * variable
    * @returns {string} the classname for the nav item mark
    */
-   getNavItemMarkClass(navItem, countPerView) {
+   getNavItemCountClass(navItem, countByView) {
      const navItemCounter = navItem.counter;
-     const availableCounters = Object.keys(countPerView);
+     const availableCounters = Object.keys(countByView);
      if (navItemCounter === '') {
-       return 'hide-count-mark';
+       return 'hide-count';
      } else {
        if (availableCounters.indexOf(navItemCounter) > -1) {
-         if (countPerView[navItemCounter] > 0) {
-           return 'nonzero-count-mark';
-         } else {
-           return 'zero-count-mark';
+         if (countByView[navItemCounter] > 0) {
+           return 'nonzero-count';
+         }
+         if (countByView[navItemCounter] === 0) {
+           return 'zero-count';
          }
        } else {
-         return 'unknown-count-mark';
+         return 'unknown-count';
        }
 
      }
    }
+
+   /**
+    * Method to get the text related to the mark of the nav items
+    * to highlight or not the presence of unack alarms by view
+    " It is expected to use the counterByView
+    * defined on the {@link AlarmService}
+    * and the configuration defined in the navigationSidenavItems
+    * variable
+    * @returns {string} the text related to the count for the nav item
+    */
+    getNavItemCountText(navItem, countByView) {
+      const navItemCounter = navItem.counter;
+      const availableCounters = Object.keys(countByView);
+      if (navItemCounter === '') {
+        return '';
+      } else {
+        if (availableCounters.indexOf(navItemCounter) > -1) {
+          const count = countByView[navItemCounter];
+          if (count >= 0) {
+            if (count <= 100) {
+              return String(count);
+            } else {
+              return String('>100');
+            }
+          } else {
+            return String(count);  // this case should not happen
+          }
+        } else {
+          return '?';
+        }
+
+      }
+    }
 
 }

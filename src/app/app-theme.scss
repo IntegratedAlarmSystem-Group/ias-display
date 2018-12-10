@@ -41,4 +41,25 @@
 
   }
 
+  .ias-nav-button-container {
+
+    .ias-count-label {
+
+      &.nonzero-count {
+        background: mat-color($warn, A700);
+        color: white;
+        border-color: mat-color($warn, A700);
+      }
+
+      &.unknown-count {
+        background: none;
+        color: $inactive-link;
+        border-color: $inactive-link;
+      }
+
+
+    }
+
+  }
+
 }
