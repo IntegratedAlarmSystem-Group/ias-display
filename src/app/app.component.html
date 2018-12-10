@@ -28,10 +28,8 @@
         <div *ngFor="let item of navigationSidenavItems">
           <a mat-list-item [routerLink]='[getActionsLink(item)]' routerLinkActive="active-link">
             <span class="ias-nav-button-container">
-              <span class="ias-count-mark">
-                <span [ngClass]="getNavItemMarkClass(item, alarmService.countPerView)">
-                  &#9679;
-                </span>
+              <span [ngClass]="['ias-count-label', getNavItemCountClass(item, alarmService.countByView)]">
+                {{ getNavItemCountText(item, alarmService.countByView) }}
               </span>
               <span class="ias-icon">
                 <ng-container *ngIf="item.svgIcon">

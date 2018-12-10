@@ -111,9 +111,9 @@ export class AlarmService {
   public isInitialized = false;
 
   /**
-  * Information about the count of alarms per view
+  * Information about the count of alarms by view
   */
-  public countPerView = {};
+  public countByView = {};
 
   /**
   * Connection status timer
@@ -179,6 +179,11 @@ export class AlarmService {
         this.getAlarmList();
       }
     );
+    this.webSocketBridge.socket.addEventListener(
+      'close', () => {
+        this.resetCountByView();
+      }
+    );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
       if (this.authService.isLoggedIn()) {
@@ -196,7 +201,7 @@ export class AlarmService {
     this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) => {
       // console.log('counter ', payload);
       if (this.authService.isLoggedIn()) {
-        this.readCountPerViewMessage(payload.data);
+        this.readCountByViewMessage(payload.data);
       }
     });
   }
@@ -229,6 +234,7 @@ export class AlarmService {
       });
       this.webSocketBridge.socket.close(
         1000, 'User logout', {keepClosed: true});
+      this.resetCountByView();
     }
     this.isInitialized = false;
   }
@@ -391,11 +397,18 @@ export class AlarmService {
   }
 
   /**
-   * Reads the count per view object received from the webserver
-   * @param {Object} countPerView
+   * Reads the count by view object received from the webserver
+   * @param {Object} countByView
    */
-  readCountPerViewMessage(countPerView) {
-    this.countPerView = countPerView;
+  readCountByViewMessage(countByView) {
+    this.countByView = countByView;
+  }
+
+  /**
+   * Method to clear the count by view if there is the ws connection is closed
+   */
+  resetCountByView() {
+    this.countByView = {};
   }
 
   /**
