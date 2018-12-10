@@ -31,7 +31,7 @@ export class AntennaConfig {
 export class AntennasService {
 
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
-  public antennasConfig: {[group: string]: AntennaConfig [] } = {};
+  public antennasConfig: AntennaConfig [] = [];
 
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
   public devicesConfig: AntennaConfig [] = [];
@@ -76,19 +76,10 @@ export class AntennasService {
   */
   loadAlarmsConfig(): void {
 
-    this.devicesConfig = [
-      {'antenna': 'Laser-Locked', 'alarm': 'Array-Laser-Locked', 'placemark': ''},
-      {'antenna': 'CLO', 'alarm': 'Array-CLO', 'placemark': ''},
-      {'antenna': 'Correlator', 'alarm': 'Array-Correlator', 'placemark': ''},
-    ] as AntennaConfig[];
-
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {
-      for (const key in response) {
-        if (key) {
-          this.antennasConfig[key] = response[key] as AntennaConfig[];
-        }
-      }
+      this.antennasConfig = response['antennas'] as AntennaConfig[];
+      this.devicesConfig = response['devices'] as AntennaConfig[];
     });
 
     const summary_url = BackendUrls.ANTENNAS_SUMMARY;
