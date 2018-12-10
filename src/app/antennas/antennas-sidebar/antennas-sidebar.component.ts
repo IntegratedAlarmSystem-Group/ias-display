@@ -74,6 +74,18 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
+  * Return the list of antennas Alarm configuration
+  * @returns {list} list of {@link AntennaConfig}
+  */
+  getAntennas(): AntennaConfig [] {
+    let antennas = [];
+    for (const group of this.getAntennasGroups()) {
+      antennas = antennas.concat(this.antennasService.antennasConfig[group]);
+    }
+    return antennas;
+  }
+
+  /**
   * Return the list of Alarm configuration for global devices
   * @returns {list} list of {@link AntennaConfig}
   */
