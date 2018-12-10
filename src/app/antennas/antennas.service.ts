@@ -33,6 +33,9 @@ export class AntennasService {
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
   public antennasConfig: {[group: string]: AntennaConfig [] } = {};
 
+  /** Dictionary of Alarm configuration indexed by antennas group ID **/
+  public devicesConfig: AntennaConfig [] = [];
+
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public antennasMapName = AntennasSettings.mapKey;
 
@@ -72,6 +75,12 @@ export class AntennasService {
   * Define the IDs of the alarms that the component should listen to
   */
   loadAlarmsConfig(): void {
+
+    this.devicesConfig = [
+      {'antenna': 'Laser-Locked', 'alarm': 'Array-Laser-Locked', 'placemark': ''},
+      {'antenna': 'CLO', 'alarm': 'Array-CLO', 'placemark': ''},
+      {'antenna': 'Correlator', 'alarm': 'Array-Correlator', 'placemark': ''},
+    ] as AntennaConfig[];
 
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {

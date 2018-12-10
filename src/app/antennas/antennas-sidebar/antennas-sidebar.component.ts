@@ -74,6 +74,14 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
+  * Return the list of Alarm configuration for global devices
+  * @returns {list} list of {@link AntennaConfig}
+  */
+  getDevices(): AntennaConfig [] {
+    return this.antennasService.devicesConfig;
+  }
+
+  /**
   * If there is a selected antenna it will be unselected
   */
   unselectAntenna() {

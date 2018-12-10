@@ -31,6 +31,28 @@
       </ng-container>
     </div>
   </div>
+  <mat-divider></mat-divider>
+  <div class="antennas-detail devices-alarms">
+    <table>
+      <ng-container *ngFor="let device of getDevices()">
+        <tr>
+          <td class="antenna">
+            <div class="text">
+              <app-alarm [alarm]="this.getAlarm(device.alarm)" [text]="device.antenna"></app-alarm>
+            </div>
+          </td>
+          <td>
+            <div class="status">
+              <app-status-view [alarm]="this.getAlarm(device.alarm)" [showActionBadges]="false"></app-status-view>
+            </div>
+          </td>
+          <td class="buttons" align="right">
+            <app-buttons [alarm]="this.getAlarm(device.alarm)"></app-buttons>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 </ng-template>
 
 <!-- Content when one antenna is selected -->
