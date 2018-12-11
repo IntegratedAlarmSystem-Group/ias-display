@@ -34,42 +34,38 @@
          </svg:foreignObject>
      </ng-container>
 
-     <!-- <ng-container *ngFor="let antennasGroup of getAntennaGroups()"> -->
-       <ng-container *ngFor="let antennaConfig of alarmsConfig">
-         <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">
+    <ng-container *ngFor="let antennaConfig of alarmsConfig">
+      <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">
 
-           <ng-container *ngFor="let p of [getPlacemarkObject(antennaConfig.placemark)]">
+        <ng-container *ngFor="let p of [getPlacemarkObject(antennaConfig.placemark)]">
 
-             <svg:g
-               (click)="onClick(antennaConfig)"
-               [ngClass]="getOpacityClass(antennaConfig)"
-             >
-               <svg:foreignObject
-                class="no-line-height"
-                [attr.x]="p.opt_cx-10"
-                [attr.y]="p.opt_cy-10"
-                width="20"
-                height="20">
-                <xhtml:app-antenna-marker
-                   [placemark]="p"
-                   [alarm]="getAlarm(antennaConfig.alarm)"
-                   [viewbox]="'0 0 20 20'"
-                   [cx]=10
-                   [cy]=10
-                   [r]=5
-                >
-                </xhtml:app-antenna-marker>
-              </svg:foreignObject>
-            </svg:g>
+          <svg:g
+            (click)="onClick(antennaConfig)"
+            [ngClass]="getOpacityClass(antennaConfig)"
+          >
+            <svg:foreignObject
+              class="no-line-height"
+              [attr.x]="p.opt_cx-10"
+              [attr.y]="p.opt_cy-10"
+              width="20"
+              height="20">
+              <xhtml:app-antenna-marker
+                [placemark]="p"
+                [alarm]="getAlarm(antennaConfig.alarm)"
+                [viewbox]="'0 0 20 20'"
+                [cx]=10
+                [cy]=10
+                [r]=5
+              >
+              </xhtml:app-antenna-marker>
+            </svg:foreignObject>
+          </svg:g>
 
-          </ng-container>
+        </ng-container>
 
-         </ng-container>
+      </ng-container>
 
-       </ng-container>
-     <!-- </ng-container> -->
-
-
+    </ng-container>
 
    </ng-container>
 
