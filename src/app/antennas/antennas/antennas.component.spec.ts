@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { AntennasComponent } from './antennas.component';
 import { AntennasMapComponent } from '../antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.component';
@@ -24,10 +25,11 @@ const mockAntennasConfig =  {
   }]
 };
 
-describe('AntennasComponent', () => {
+fdescribe('AntennasComponent', () => {
   let component: AntennasComponent;
   let fixture: ComponentFixture<AntennasComponent>;
-  const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
+  // const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
+  const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,16 +40,18 @@ describe('AntennasComponent', () => {
         AntennaMarkerComponent
       ],
       imports: [
+        ActionsModule,
         DataModule,
         IasMaterialModule,
         MapModule,
         SharedModule,
-        ActionsModule
       ],
       providers: [
-        { provide: RoutingService, useValue: spyRoutingTable },
         AntennasService,
-        MapService
+        MapService,
+        RoutingService,
+        { provide: Router, useValue: spyRoutingTable },
+        // { provide: RoutingService, useValue: spyRoutingTable },
       ]
     })
     .compileComponents();

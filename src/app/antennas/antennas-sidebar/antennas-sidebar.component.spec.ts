@@ -1,15 +1,17 @@
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { AntennasSidebarComponent } from './antennas-sidebar.component';
-import { AlarmService } from '../../data/alarm.service';
 import { Router } from '@angular/router';
+import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AntennasService, AntennaConfig } from '../antennas.service';
-import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
+import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { SharedModule } from '../../shared/shared.module';
+import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { Alarm } from '../../data/alarm';
-import { DebugElement } from '@angular/core';
 
 const mockAntennasConfig =  [
     {
@@ -151,13 +153,15 @@ describe('AntennasSidebarComponent', () => {
         AntennasSidebarComponent
       ],
       providers: [
+        AntennasService,
+        RoutingService,
         { provide: Router, useValue: spyRoutingTable },
-        AntennasService
       ],
       imports: [
-        SharedModule,
         ActionsModule,
+        DataModule,
         IasMaterialModule,
+        SharedModule,
       ]
     })
     .compileComponents();
@@ -202,19 +206,27 @@ describe('AntennasSidebarComponent', () => {
       expect(title).toBeTruthy();
     });
 
-    // describe('and if there is a selected antenna', () => {
-    //   it('should have a link to return back', () => {
-    //     component.selectedAntenna = mockAntennasConfig['antennas'][0];
-    //     fixture.detectChanges();
-    //     const link = fixture.nativeElement.querySelector('.return-link');
-    //     expect(link).toBeTruthy();
-    //     link.click();
-    //     expect(component.selectedAntenna).toBeFalsy();
-    //   });
-    // //   it('should show antenna details component', () => {
-    // //     component.selectedAntenna = mockAntennasConfig['antennas'][0];
-    // //   });
-    // });
+    describe('and if there is a selected antenna', () => {
+      it('should have a link to return back', () => {
+        component.selectedAntenna = mockAntennasConfig[0];
+        fixture.detectChanges();
+        const link = fixture.nativeElement.querySelector('.return-link');
+        expect(link).toBeTruthy();
+        link.click();
+        expect(component.selectedAntenna).toBeFalsy();
+      });
+      it('should show antenna details component', () => {
+        component.selectedAntenna = mockAntennasConfig[0];
+        fixture.detectChanges();
+        const alarmInfo = fixture.nativeElement.querySelector('.alarm-info');
+        const devicesAlarms = fixture.nativeElement.querySelector('.devices-alarms');
+        expect(alarmInfo).toBeTruthy('The alarm-info div does not exist');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm, 'The alarmInfo does not contain the alarm');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].antenna, 'The alarmInfo does not contain the antenna');
+        expect(devicesAlarms).toBeTruthy('The devices-alarms div does not contain the alarm');
+      });
+    });
 
     describe('and if there is not a selected antenna', () => {
       describe('and an antenna (grid-item with an alarm-header inside) is clicked', () => {
