@@ -24,12 +24,32 @@
 <ng-template #antennasList>
   <div class="antennas-container">
     <div class="grid-container">
-      <ng-container *ngFor="let group of getAntennasGroups()">
-        <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
-          <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
-        </div>
-      </ng-container>
+      <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
     </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="antennas-detail devices-alarms">
+    <table>
+      <ng-container *ngFor="let device of getDevices()">
+        <tr>
+          <td class="antenna">
+            <div class="text">
+              <app-alarm [alarm]="this.getAlarm(device.alarm)" [text]="device.antenna"></app-alarm>
+            </div>
+          </td>
+          <td>
+            <div class="status">
+              <app-status-view [alarm]="this.getAlarm(device.alarm)" [showActionBadges]="false"></app-status-view>
+            </div>
+          </td>
+          <td class="buttons" align="right">
+            <app-buttons [alarm]="this.getAlarm(device.alarm)"></app-buttons>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
   </div>
 </ng-template>
 

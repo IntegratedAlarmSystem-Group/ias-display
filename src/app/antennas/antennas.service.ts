@@ -31,7 +31,10 @@ export class AntennaConfig {
 export class AntennasService {
 
   /** Dictionary of Alarm configuration indexed by antennas group ID **/
-  public antennasConfig: {[group: string]: AntennaConfig [] } = {};
+  public antennasConfig: AntennaConfig [] = [];
+
+  /** Dictionary of Alarm configuration indexed by antennas group ID **/
+  public devicesConfig: AntennaConfig [] = [];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public antennasMapName = AntennasSettings.mapKey;
@@ -75,11 +78,8 @@ export class AntennasService {
 
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {
-      for (const key in response) {
-        if (key) {
-          this.antennasConfig[key] = response[key] as AntennaConfig[];
-        }
-      }
+      this.antennasConfig = response['antennas'] as AntennaConfig[];
+      this.devicesConfig = response['devices'] as AntennaConfig[];
     });
 
     const summary_url = BackendUrls.ANTENNAS_SUMMARY;

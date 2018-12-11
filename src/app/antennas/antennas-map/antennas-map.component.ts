@@ -128,14 +128,6 @@ export class AntennasMapComponent implements OnInit {
   }
 
   /**
-   * Get antenna groups from the alarms configuration
-   * @return {string[]} List with the names of the antennas groups
-   */
-  getAntennaGroups(): string[] {
-    return Object.keys(this.alarmsConfig);
-  }
-
-  /**
    * Opacity class name for each antenna marker
    * @param {AntennaConfig} antennaConfig configuration of the alarm
    * @return class name that defines the opacity of the graphical element

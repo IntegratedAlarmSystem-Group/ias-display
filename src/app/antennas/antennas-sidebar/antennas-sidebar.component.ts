@@ -58,19 +58,19 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
-  * Return the list of antennas groups Ids defined in the configuration
-  * @returns {list} List of groups IDS
+  * Return the list of antennas Alarm configuration
+  * @returns {list} list of {@link AntennaConfig}
   */
-  getAntennasGroups(): string [] {
-    return Object.keys(this.antennasService.antennasConfig);
+  getAntennas(): AntennaConfig [] {
+    return this.antennasService.antennasConfig;
   }
 
   /**
-  * Return the list of Alarm configuration by group
+  * Return the list of Alarm configuration for global devices
   * @returns {list} list of {@link AntennaConfig}
   */
-  getAntennasByGroup(groupID: string): AntennaConfig [] {
-    return this.antennasService.antennasConfig[groupID];
+  getDevices(): AntennaConfig [] {
+    return this.antennasService.devicesConfig;
   }
 
   /**

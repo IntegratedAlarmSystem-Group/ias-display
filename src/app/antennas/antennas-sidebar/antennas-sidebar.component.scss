@@ -30,11 +30,32 @@
     overflow-y: auto;
 
     .antennas-container {
-      margin: 6px 0px;
+      margin: 6px 0px 20px 0px;
 
       .grid-container {
         display: grid;
         grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+
+        .grid-item {
+          height: 60px;
+          line-height: 62px;
+          border-radius: 4px;
+          padding: 0;
+          position: relative;
+          cursor: pointer;
+        }
+
+      }
+    }
+
+    .global-devices-container {
+      margin: 20px 0px 6px 0px;
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
 
