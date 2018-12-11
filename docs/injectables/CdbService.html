@@ -107,10 +107,13 @@ IAS Webserver through HTTP Requests</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getConfigurationData">getConfigurationData</a>
+                                <a href="#getBroadcastRate">getBroadcastRate</a>
                             </li>
                             <li>
-                                <a href="#getRefreshRateParameters">getRefreshRateParameters</a>
+                                <a href="#getBroadcastThreshold">getBroadcastThreshold</a>
+                            </li>
+                            <li>
+                                <a href="#getConfigurationData">getConfigurationData</a>
                             </li>
                             <li>
                                 <a href="#initialize">initialize</a>
@@ -192,6 +195,98 @@ IAS Webserver through HTTP Requests</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getBroadcastRate"></a>
+                        <span class="name">
+                            <b>
+                            getBroadcastRate
+                            </b>
+                            <a href="#getBroadcastRate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getBroadcastRate()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/cdb.service.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get refresh broadcast rate from IAS configuration data</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>contains the &#39;broadcastRate&#39; in seconds</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getBroadcastThreshold"></a>
+                        <span class="name">
+                            <b>
+                            getBroadcastThreshold
+                            </b>
+                            <a href="#getBroadcastThreshold"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getBroadcastThreshold()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/cdb.service.ts:75</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get refresh broadcast threshold from IAS configuration data</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>contains the &#39;broadcastThreshold&#39; in seconds</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getConfigurationData"></a>
                         <span class="name">
                             <b>
@@ -228,53 +323,6 @@ IAS Webserver through HTTP Requests</p>
                             </div>
                                 <div class="io-description">
                                     <p>IAS configuration</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getRefreshRateParameters"></a>
-                        <span class="name">
-                            <b>
-                            getRefreshRateParameters
-                            </b>
-                            <a href="#getRefreshRateParameters"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>getRefreshRateParameters()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/cdb.service.ts:62</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Get refresh rate parameters from IAS configuration data
-These are refresh rate value and related multiplier factor</p>
-</div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>{ &#x27;refreshRate&#x27;: any; &#x27;tolerance&#x27;: any; &#x27;broadcastFactor&#x27;: any; }</code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>contains the &#39;refreshRate&#39; and &#39;broadcastFactor&#39; for the refresh rate</p>
 
                                 </div>
                     </td>
@@ -505,16 +553,31 @@ export class CdbService {
   }
 
   /**
-  * Get refresh rate parameters from IAS configuration data
-  * These are refresh rate value and related multiplier factor
-  * @returns {json} contains the &#x27;refreshRate&#x27; and &#x27;broadcastFactor&#x27; for the refresh rate
+  * Get refresh broadcast rate from IAS configuration data
+  * @returns {number} contains the &#x27;broadcastRate&#x27; in seconds
   */
-  getRefreshRateParameters() {
-    return {
-      &#x27;refreshRate&#x27;: Number(this.iasConfiguration[&#x27;refreshRate&#x27;]),
-      &#x27;tolerance&#x27;: Number(this.iasConfiguration[&#x27;tolerance&#x27;]),
-      &#x27;broadcastFactor&#x27;: Number(this.iasConfiguration[&#x27;broadcastFactor&#x27;])
-    };
+  getBroadcastRate(): number {
+    let value;
+    try {
+      value &#x3D; Number(this.iasConfiguration[&#x27;broadcastRate&#x27;]);
+    } catch (e) {
+      value &#x3D; 10;
+    }
+    return value;
+  }
+
+  /**
+  * Get refresh broadcast threshold from IAS configuration data
+  * @returns {number} contains the &#x27;broadcastThreshold&#x27; in seconds
+  */
+  getBroadcastThreshold(): number {
+    let value;
+    try {
+      value &#x3D; Number(this.iasConfiguration[&#x27;broadcastThreshold&#x27;]);
+    } catch (e) {
+      value &#x3D; 11;
+    }
+    return value;
   }
 }
 </code></pre>

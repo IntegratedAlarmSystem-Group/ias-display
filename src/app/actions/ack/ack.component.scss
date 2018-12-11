@@ -56,6 +56,11 @@
             width: 100%;
           }
 
+          .user-form-field {
+            width: 100%;
+            margin-bottom: 14px;
+          }
+
         }
 
         &.missed-acks {
@@ -64,6 +69,12 @@
         }
 
         &.action-error {
+          padding: 20px 20px 30px 20px;
+          border-radius: 4px;
+          margin-top: 40px;
+        }
+
+        &.action-warning {
           padding: 20px 20px 30px 20px;
           border-radius: 4px;
           margin-top: 40px;

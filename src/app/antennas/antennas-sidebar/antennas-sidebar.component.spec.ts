@@ -1,17 +1,19 @@
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { AntennasSidebarComponent } from './antennas-sidebar.component';
-import { AlarmService } from '../../data/alarm.service';
-// import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
+import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AntennasService, AntennaConfig } from '../antennas.service';
-import { SharedModule } from '../../shared/shared.module';
 import { ActionsModule } from '../../actions/actions.module';
+import { DataModule } from '../../data/data.module';
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
+import { SharedModule } from '../../shared/shared.module';
+import { AlarmService } from '../../data/alarm.service';
+import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { Alarm } from '../../data/alarm';
 
-const mockAntennasConfig = {
-  'group-0': [
+const mockAntennasConfig =  [
     {
       'antenna': 'antenna-0',
       'placemark': 'mockAlarm-0',
@@ -31,9 +33,7 @@ const mockAntennasConfig = {
       'ups': '',
       'hvac': '',
       'power': ''
-    }
-  ],
-  'group-1': [
+    },
     {
       'antenna': 'antenna-2',
       'placemark': 'mockAlarm-2',
@@ -44,8 +44,15 @@ const mockAntennasConfig = {
       'hvac': '',
       'power': ''
     }
-  ]
-};
+  ];
+
+const mockDevicesConfig = [
+    {
+      'antenna': 'device-1',
+      'placemark': 'mockAlarm-3',
+      'alarm': 'mockAlarm-3'
+    }
+  ];
 
 const mockAlarms = {
   'mockAlarm-0': Alarm.asAlarm({
@@ -112,13 +119,31 @@ const mockAlarms = {
     'shelved': false,
     'dependencies': [],
   }),
+  'mockAlarm-3': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-3',
+    'running_id': 'mockAlarm-3',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm',
+    'url': 'https://www.alma2.cl',
+    'sound': 'NONE',
+    'can_shelve': true,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  })
 };
 
 describe('AntennasSidebarComponent', () => {
   let component: AntennasSidebarComponent;
   let fixture: ComponentFixture<AntennasSidebarComponent>;
+  let debug: DebugElement;
   let antennasService: AntennasService;
   let alarmService: AlarmService;
+
   // const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
 
@@ -128,37 +153,32 @@ describe('AntennasSidebarComponent', () => {
         AntennasSidebarComponent
       ],
       providers: [
+        AntennasService,
+        RoutingService,
         { provide: Router, useValue: spyRoutingTable },
-        AntennasService
       ],
       imports: [
+        ActionsModule,
+        DataModule,
+        IasMaterialModule,
         SharedModule,
-        ActionsModule
       ]
     })
     .compileComponents();
   }));
 
-  beforeEach(
-    inject([AntennasService], (service) => {
-      antennasService = service;
-      spyOn(antennasService, 'initialize').and.callFake(function() {});
-      antennasService.antennasConfig = mockAntennasConfig;
-    })
-  );
-
-  beforeEach(
-    inject([AlarmService], (service) => {
-      alarmService = service;
-      spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
-        return mockAlarms[alarm_id];
-      });
-    })
-  );
-
   beforeEach(() => {
     fixture = TestBed.createComponent(AntennasSidebarComponent);
+    antennasService = fixture.debugElement.injector.get(AntennasService);
+    spyOn(antennasService, 'initialize').and.callFake(function() {});
+    antennasService.antennasConfig = mockAntennasConfig;
+    antennasService.devicesConfig = mockDevicesConfig;
     component = fixture.componentInstance;
+    debug = fixture.debugElement;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
+    spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+      return mockAlarms[alarm_id];
+    });
     fixture.detectChanges();
   });
 
@@ -172,17 +192,7 @@ describe('AntennasSidebarComponent', () => {
 
   it('should have a getAntennaName method that return the antenna name', () => {
     const expectedName = 'antenna-0';
-    expect(component.getAntennaName(mockAntennasConfig['group-0'][0])).toEqual(expectedName);
-  });
-
-  it('should have a method getAntennasGroups method to return the list of groups', () => {
-    const expectedList = ['group-0', 'group-1'];
-    expect(component.getAntennasGroups()).toEqual(expectedList);
-  });
-
-  it('should have a method getAntennasByGroup method to return the list of antennasConfig objects by group', () => {
-    expect(component.getAntennasByGroup('group-0')).toEqual(mockAntennasConfig['group-0']);
-    expect(component.getAntennasByGroup('group-1')).toEqual(mockAntennasConfig['group-1']);
+    expect(component.getAntennaName(mockAntennasConfig[0])).toEqual(expectedName);
   });
 
   describe('', () => {
@@ -196,19 +206,27 @@ describe('AntennasSidebarComponent', () => {
       expect(title).toBeTruthy();
     });
 
-    // describe('and if there is a selected antenna', () => {
-    //   it('should have a link to return back', () => {
-    //     component.selectedAntenna = mockAntennasConfig['group-0'][0];
-    //     fixture.detectChanges();
-    //     const link = fixture.nativeElement.querySelector('.return-link');
-    //     expect(link).toBeTruthy();
-    //     link.click();
-    //     expect(component.selectedAntenna).toBeFalsy();
-    //   });
-    // //   it('should show antenna details component', () => {
-    // //     component.selectedAntenna = mockAntennasConfig['group-0'][0];
-    // //   });
-    // });
+    describe('and if there is a selected antenna', () => {
+      it('should have a link to return back', () => {
+        component.selectedAntenna = mockAntennasConfig[0];
+        fixture.detectChanges();
+        const link = fixture.nativeElement.querySelector('.return-link');
+        expect(link).toBeTruthy();
+        link.click();
+        expect(component.selectedAntenna).toBeFalsy();
+      });
+      it('should show antenna details component', () => {
+        component.selectedAntenna = mockAntennasConfig[0];
+        fixture.detectChanges();
+        const alarmInfo = fixture.nativeElement.querySelector('.alarm-info');
+        const devicesAlarms = fixture.nativeElement.querySelector('.devices-alarms');
+        expect(alarmInfo).toBeTruthy('The alarm-info div does not exist');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm, 'The alarmInfo does not contain the alarm');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].antenna, 'The alarmInfo does not contain the antenna');
+        expect(devicesAlarms).toBeTruthy('The devices-alarms div does not contain the alarm');
+      });
+    });
 
     describe('and if there is not a selected antenna', () => {
       describe('and an antenna (grid-item with an alarm-header inside) is clicked', () => {

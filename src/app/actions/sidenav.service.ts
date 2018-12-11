@@ -54,8 +54,15 @@ export class SidenavService {
   * Closes the sidenav
   */
   public close() {
-    this.routingService.cleanActionOutlet();
     return this.sidenav.close();
+  }
+
+  /**
+  * Closes the sidenav and cleans the actions outlet
+  */
+  public closeAndClean() {
+    this.routingService.cleanActionOutlet();
+    return this.close();
   }
 
   /**

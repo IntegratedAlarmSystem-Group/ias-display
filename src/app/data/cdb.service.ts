@@ -55,15 +55,30 @@ export class CdbService {
   }
 
   /**
-  * Get refresh rate parameters from IAS configuration data
-  * These are refresh rate value and related multiplier factor
-  * @returns {json} contains the 'refreshRate' and 'broadcastFactor' for the refresh rate
+  * Get refresh broadcast rate from IAS configuration data
+  * @returns {number} contains the 'broadcastRate' in seconds
   */
-  getRefreshRateParameters() {
-    return {
-      'refreshRate': Number(this.iasConfiguration['refreshRate']),
-      'tolerance': Number(this.iasConfiguration['tolerance']),
-      'broadcastFactor': Number(this.iasConfiguration['broadcastFactor'])
-    };
+  getBroadcastRate(): number {
+    let value;
+    try {
+      value = Number(this.iasConfiguration['broadcastRate']);
+    } catch (e) {
+      value = 10;
+    }
+    return value;
+  }
+
+  /**
+  * Get refresh broadcast threshold from IAS configuration data
+  * @returns {number} contains the 'broadcastThreshold' in seconds
+  */
+  getBroadcastThreshold(): number {
+    let value;
+    try {
+      value = Number(this.iasConfiguration['broadcastThreshold']);
+    } catch (e) {
+      value = 11;
+    }
+    return value;
   }
 }

@@ -9,13 +9,12 @@ import { of } from 'rxjs';
 import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
 
 
-const mockAntennasConfig =  {
-  'DV': [{
+const mockAntennasConfig =  [{
     antenna: 'DV00',
     placemark: 'P000',
     alarm: 'alarmId',
-  }]
-};
+  }
+];
 
 describe('AntennasMapComponent', () => {
   let component: AntennasMapComponent;

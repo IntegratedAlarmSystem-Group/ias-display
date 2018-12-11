@@ -18,7 +18,8 @@ describe('CdbService', () => {
   const mockIasConfigurationResponse = {
       logLevel: 'INFO',
       refreshRate: '2',
-      broadcastFactor: '3',
+      broadcastRate: '10',
+      broadcastThreshold: '11',
       tolerance: '1',
       properties: []
   };
@@ -62,8 +63,7 @@ describe('CdbService', () => {
     expect(httpClient.get).toHaveBeenCalled();
     expect(httpClient.get).toHaveBeenCalledWith(iasCdbUrl);
     /* Act and assert */
-    const pars = subject.getRefreshRateParameters();
-    expect(pars['refreshRate']).toEqual(2);
-    expect(pars['broadcastFactor']).toEqual(3);
+    const pars = subject.getBroadcastThreshold();
+    expect(pars).toEqual(11);
   });
 });

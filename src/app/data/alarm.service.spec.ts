@@ -9,10 +9,12 @@ import { CdbService } from '../data/cdb.service';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';
+import { AuthService } from '../auth/auth.service';
 
 let subject: AlarmService;
-let cdbSubject: CdbService;
+let cdbService: CdbService;
 let httpSubject: HttpClientService;
+let authService: AuthService;
 let mockStream: Server;
 let spyEmitSound;
 
@@ -215,7 +217,6 @@ const fixtureAlarmsList = {
 
 describe('AlarmService', () => {
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
@@ -223,18 +224,26 @@ describe('AlarmService', () => {
     });
   });
 
-  beforeEach(inject([AlarmService, CdbService], (alarmService, cdbService) => {
+  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
       /**
       * Services
       */
-      subject = alarmService;
-      cdbSubject = cdbService;
+      subject = _alarmService;
+      cdbService = _cdbService;
+      authService = _authService;
+
+      /**
+      * Redefinition of connection path with authentication token
+      */
+      spyOn(subject, 'getConnectionPath').and.returnValue(
+        environment.websocketPath + '?token=tokenFromServer'
+      );
 
       /**
       * Redefinition of periodic calls in the alarm service for testing
       */
       // TODO: Evaluation to check periodic calls
-      spyOn(subject, 'startLastReceivedMessageTimestampCheck')
+      spyOn(subject, 'resetTimer')
         .and.callFake(function() {});
 
       /**
@@ -247,13 +256,14 @@ describe('AlarmService', () => {
       const mockIasConfiguration = {
           logLevel: 'INFO',
           refreshRate: '2',
-          broadcastFactor: '3',
+          broadcastRate: '10',
+          broadcastThreshold: '11',
           tolerance: '1',
           properties: []
       };
-      spyOn(cdbSubject, 'initialize')
-        .and.callFake(function() {});
-      cdbSubject.iasConfiguration = mockIasConfiguration;
+      spyOn(cdbService, 'initialize').and.callFake(function() {});
+      spyOn(authService, 'isLoggedIn').and.returnValue(true);
+      cdbService.iasConfiguration = mockIasConfiguration;
       subject.canSound = true;
       subject.audio = new Audio();
       spyEmitSound = spyOn(subject, 'emitSound');
@@ -275,7 +285,7 @@ describe('AlarmService', () => {
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
     const fixtureAlarms = [alarmsFromWebServer[0], alarmsFromWebServer[1]];
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
@@ -339,7 +349,7 @@ describe('AlarmService', () => {
     const fixtureAlarms = [
       alarmsFromWebServer[0], alarmsFromWebServer[2], alarmsFromWebServer[3], alarmsFromWebServer[4],  alarmsFromWebServer[5]
     ];
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
@@ -432,7 +442,7 @@ describe('AlarmService', () => {
     // Arrange
     let stage = 0;  // initial state index with no messages from server
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     // Act
     mockStream.on('connection', server => {  // send mock alarms list from server
@@ -475,7 +485,7 @@ describe('AlarmService', () => {
 
     expect(subject.connectionStatusStream.value).toBe(false);
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {
       expect(subject.connectionStatusStream.value).toBe(true);
@@ -510,12 +520,9 @@ describe('AlarmService', () => {
 
   });
 
-  it('should store a timestamp after message from "requests" stream', async(() => {
+  it('should call resetTimer after message from "requests" stream', async(() => {
 
-    let millisecondsDelta: number;
-    let getListExpectedTimestamp: number;
-
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarms list from server
       // Act:
@@ -523,10 +530,7 @@ describe('AlarmService', () => {
       mockStream.send(JSON.stringify(fixtureAlarmsList));
 
       // Assert:
-      getListExpectedTimestamp = (new Date()).getTime();
-      millisecondsDelta = Math.abs(
-        subject.lastReceivedMessageTimestamp - getListExpectedTimestamp);
-      expect(millisecondsDelta).toBeLessThan(5);
+      expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
     });
 
@@ -534,22 +538,17 @@ describe('AlarmService', () => {
 
   }));
 
-  it('should store a timestamp after message from "alarms" stream', async(() => {
+  it('should call resetTimer after message from "alarms" stream', async(() => {
 
-    let millisecondsDelta: number;
-    let webserverMsgExpectedTimestamp: number;
 
-    mockStream = new Server(environment.websocketPath);  // mock server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', server => {  // send mock alarm from server
       // Act:
       // mock alarm message from webserver
       mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
       // Assert:
-      webserverMsgExpectedTimestamp = (new Date()).getTime();
-      millisecondsDelta = Math.abs(
-        subject.lastReceivedMessageTimestamp - webserverMsgExpectedTimestamp);
-      expect(millisecondsDelta).toBeLessThan(5);
+      expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
     });
 
@@ -560,21 +559,50 @@ describe('AlarmService', () => {
   it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
-    const now = (new Date).getTime();
-    const pars = cdbSubject.getRefreshRateParameters();
-    const maxSecondsWithoutMessages = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
-    const delayedTimestamp = now - (maxSecondsWithoutMessages * 1000 + 1);
-
+    subject.alarmsArray = [Alarm.asAlarm(alarms[1]), Alarm.asAlarm(alarms[2])];
     subject.connectionStatusStream.next(true);
-    subject.lastReceivedMessageTimestamp = delayedTimestamp;
+    spyOn(subject, 'triggerAlarmsNonValidConnectionState').and.callThrough();
+    for (const alarm of subject.alarmsArray) {
+      expect(alarm.validity).toEqual(Validity.reliable);
+    }
 
     // Act
-    subject.compareCurrentAndLastReceivedMessageTimestamp();
+    subject.connectionStatusStream.next(false);
 
     // Assert
-    expect(subject.connectionStatusStream.value).toBe(false);
-
+    expect(subject.triggerAlarmsNonValidConnectionState).toHaveBeenCalled();
+    for (const alarm of subject.alarmsArray) {
+      expect(alarm.validity).toEqual(Validity.unreliable);
+    }
+    expect(subject.alarmChangeStream.value).toEqual('all');
   });
+
+  it(`should update a local counter after receiving the count per view
+  from the 'counter' stream`, async(() => {
+
+      const mockCountByView = {
+        'stream': 'counter',
+        'payload': {
+          'data': {
+            'weather': 2,
+            'antenna': 1,
+          }
+        }
+      };
+
+      mockStream = new Server(subject.getConnectionPath());  // mock server
+
+      mockStream.on('connection', server => {  // send mock count from server
+        mockStream.send(JSON.stringify(mockCountByView));
+        expect(subject.countByView).toEqual(mockCountByView.payload.data);
+        mockStream.stop();
+      });
+
+      subject.initialize();
+
+  }));
+
+
 });
 
 
@@ -592,9 +620,9 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
   beforeEach(
     inject([AlarmService, CdbService, HttpClientService],
-      (alarmService, cdbService, httpClientService) => {
+      (_alarmService, _cdbService, httpClientService) => {
 
-      subject = alarmService;
+      subject = _alarmService;
       httpSubject = httpClientService;
       const alarmsArray = [];
       const alarmsIndexes = {};
@@ -619,7 +647,8 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
   it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
     const ackMessage = 'This is the message';
-    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage).subscribe(
+    const username = 'username';
+    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage, username).subscribe(
       (response) => {
         expect(response).toEqual(alarmsToAck);
         expect(httpSpy).toHaveBeenCalled();
@@ -632,4 +661,77 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       }
     );
   });
+});
+
+describe('AlarmService', () => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [AlarmService, CdbService, HttpClient, HttpClientService]
+    });
+  });
+
+  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
+      /**
+      * Services
+      */
+      subject = _alarmService;
+      cdbService = _cdbService;
+      authService = _authService;
+
+      /**
+      * Redefinition of connection path with authentication token
+      */
+      spyOn(subject, 'getConnectionPath').and.returnValue(
+        environment.websocketPath + '?token=tokenFromServer'
+      );
+
+      /**
+      * Redefinition of periodic calls in the alarm service for testing
+      */
+      // TODO: Evaluation to check periodic calls
+      spyOn(subject, 'resetTimer')
+        .and.callFake(function() {});
+
+      /**
+      * Redefinition of the cdb information for the testing environment
+      *
+      * This is required to set the alarm service validation delay according to
+      * the cdb configuration
+      *
+      */
+      const mockIasConfiguration = {
+          logLevel: 'INFO',
+          refreshRate: '2',
+          broadcastRate: '10',
+          broadcastThreshold: '11',
+          tolerance: '1',
+          properties: []
+      };
+      spyOn(cdbService, 'initialize').and.callFake(function() {});
+      spyOn(subject, 'destroy');
+      spyOn(subject.webSocketBridge, 'connect');
+      spyOn(subject.webSocketBridge, 'listen');
+      cdbService.iasConfiguration = mockIasConfiguration;
+      subject.canSound = true;
+      subject.audio = new Audio();
+      spyEmitSound = spyOn(subject, 'emitSound');
+
+  }));
+
+  it('should not be initialized if the user is not logged in', () => {
+    spyOn(authService, 'isLoggedIn').and.returnValue(false);
+    expect(subject).toBeTruthy();
+    subject.initialize();
+    expect(subject.webSocketBridge.connect).not.toHaveBeenCalled();
+    expect(subject.webSocketBridge.listen).not.toHaveBeenCalled();
+  });
+
+  it('should call the destroy function if the user logs out', () => {
+    expect(subject).toBeTruthy();
+    authService.loginStatusStream.next(false);
+    expect(subject.destroy).toHaveBeenCalled();
+  });
+
 });

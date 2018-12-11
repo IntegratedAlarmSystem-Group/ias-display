@@ -1,6 +1,7 @@
 /** Set of URLs used to request data from the Backend */
 export const BackendUrls = {
-  TOKEN: '/get-token/',
+  TOKEN: '/users/api-token-auth/',
+  USERS_LIST: '/users/users/filter/?group=operators',
   CDB: '/cdb-api/',
   CDB_IAS: '/cdb-api/ias/',
   CDB_IASIO: '/cdb-api/iasio/',
@@ -23,6 +24,7 @@ export const BackendUrls = {
 export const Streams = {
   ALARMS: 'alarms',
   UPDATES: 'requests',
+  COUNTER: 'counter',
 };
 
 /** Set of items to store in the browser cache */

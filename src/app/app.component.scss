@@ -17,6 +17,10 @@ html, body {
     width: 100%;
   }
 
+  .user-wrapper {
+    padding: 0 24px;
+  }
+
   img.ias-logo {
     width: 35px;
     margin-right: 10px;
@@ -91,6 +95,48 @@ html, body {
 
     }
 
+  }
+
+}
+
+
+.ias-nav-button-container {
+
+  .ias-count-label {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    text-align: center;
+    font-weight: 700;
+
+    &.hide-count {
+      display: none;
+    }
+
+    &.nonzero-count {
+      font-size: 10px;
+      border-radius: .25em;
+      padding: 2.75px 5px;
+      border-width: 0px;
+      border-style: hidden;
+    }
+
+    &.zero-count {
+      display: none;
+    }
+
+    &.unknown-count {
+      font-size: 11px;
+      border-radius: .25em;
+      border-width: 2px;
+      border-style: solid;
+      padding: 0px 2px;
+    }
+
+  }
+
+  .ias-icon {
+    display: inline-block;
   }
 
 }

@@ -27,6 +27,14 @@
       <ng-template #actionProcess>
         <div class="section ack-action">
           <div class="section-title">Information required to acknowledge the Alarm</div>
+          <mat-form-field class="user-form-field">
+            <mat-select [(value)]="user_selected" formControlName="user" placeholder="Select a User">
+              <mat-option *ngFor="let user of userService.users" [value]="user.username">
+                {{user.username}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="user.invalid"> You must specify an user in order to Acknowledge </mat-error>
+          </mat-form-field>
           <mat-form-field color="accent" class="message-form-field" appearance="fill">
             <mat-label> Action to be taken </mat-label>
             <textarea matInput name="message" formControlName="message" placeholder="Please write here the action to be taken"></textarea>
@@ -50,39 +58,24 @@
       </ng-template>
 
       <ng-template #responseMessage>
-        <div *ngIf="requestStatus === 1; then successMessage else errorMessage"> </div>
-
-        <ng-template #successMessage>
-          <div class="section ack-action" >
-            <div class="section-title"> Acknowledgement results </div>
-            <div> {{ getResponseMessageText() }} </div>
-            <ul>
-              <li *ngFor="let alarm of acknowledgedAlarms">
-                {{ alarm }}
-              </li>
-            </ul>
-          </div>
-        </ng-template>
-
-        <ng-template #errorMessage>
-          <div class="section ack-action action-error" >
-            <div class="section-title"> Error Acknowledging </div>
-            <div> {{ getResponseMessageText() }} </div>
-          </div>
-        </ng-template>
-      </ng-template>
-
-      <!-- <ng-template #responseMessage>
-        <div class="section ack-action">
-          <div class="section-title"> Acknowledgement results </div>
+        <div [ngClass]="{
+          'section ack-action': true,
+          'action-error': requestStatus === -1,
+          'action-warning': requestStatus === -2
+        }">
+          <div class="section-title"> {{ getResponseMessageTitle() }} </div>
           <div> {{ getResponseMessageText() }} </div>
-          <ul>
-            <li *ngFor="let alarm of acknowledgedAlarms">
-              {{ alarm }}
-            </li>
-          </ul>
-        </div>
-      </ng-template> -->
+
+          <div *ngIf="requestStatus === 1; then AckAlarmsList"> </div>
+            <ng-template #AckAlarmsList>
+              <ul>
+                <li *ngFor="let alarm of acknowledgedAlarms">
+                  {{ alarm }}
+                </li>
+              </ul>
+            </ng-template>
+          </div>
+      </ng-template>
 
     </form>
   </div>

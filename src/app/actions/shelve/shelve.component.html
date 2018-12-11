@@ -32,6 +32,15 @@
             <ng-template #shelveForm>
               <div class="section-title"> Information required to shelve the Alarm </div>
 
+              <mat-form-field class="user-form-field">
+                <mat-select [(value)]="user_selected" formControlName="user" placeholder="Select a User">
+                  <mat-option *ngFor="let user of userService.users" [value]="user.username">
+                    {{user.username}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="user.invalid"> You must specify an user in order to Acknowledge </mat-error>
+              </mat-form-field>
+
               <mat-form-field color="accent" class="message-form-field" appearance="fill">
                 <mat-label> Reason for shelving </mat-label>
                 <textarea matInput name="message" formControlName="message"></textarea>
@@ -66,21 +75,14 @@
 
 
       <ng-template #responseMessage>
-        <div *ngIf="requestStatus === 1; then successMessage else errorMessage"> </div>
-
-        <ng-template #successMessage>
-          <div class="section shelve-action" >
-            <div class="section-title"> {{ getResponseMessageTitle() }} results </div>
-            <div> {{ getResponseMessageText() }} </div>
-          </div>
-        </ng-template>
-
-        <ng-template #errorMessage>
-          <div class="section shelve-action action-error" >
-            <div class="section-title">Error {{ getResponseMessageTitle() }} </div>
-            <div> {{ getResponseMessageText() }} </div>
-          </div>
-        </ng-template>
+        <div [ngClass]="{
+          'section shelve-action': true,
+          'action-error': requestStatus === -1,
+          'action-warning': requestStatus === -2
+        }">
+          <div class="section-title"> {{ getResponseMessageTitle() }} </div>
+          <div> {{ getResponseMessageText() }} </div>
+        </div>
       </ng-template>
 
     </form>

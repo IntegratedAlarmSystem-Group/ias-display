@@ -12,21 +12,29 @@ import { RoutingService } from '../../app-routing/routing.service';
 import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
-
 import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
 
 
-const mockAntennasConfig =  {
-  'DV': [{
+const mockAntennasConfig =  [
+  {
     antenna: 'DV00',
     placemark: 'P000',
     alarm: 'alarmId',
-  }]
-};
+  }
+];
+
+const mockDevicesConfig =  [
+  {
+    antenna: 'Correlator',
+    placemark: 'Correlator',
+    alarm: 'alarm-Correlator',
+  }
+];
 
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
   let fixture: ComponentFixture<AntennasComponent>;
+  let antennasService: AntennasService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
   beforeEach(async(() => {
@@ -38,31 +46,30 @@ describe('AntennasComponent', () => {
         AntennaMarkerComponent
       ],
       imports: [
+        ActionsModule,
         DataModule,
         IasMaterialModule,
         MapModule,
         SharedModule,
-        ActionsModule
       ],
       providers: [
-        { provide: RoutingService, useValue: spyRoutingTable },
         AntennasService,
-        MapService
+        MapService,
+        { provide: RoutingService, useValue: spyRoutingTable },
       ]
     })
     .compileComponents();
   }));
 
-  beforeEach(inject([AntennasService], (service) => {
-    spyOn(service, 'initialize').and.callFake(function() {});
-    service.antennasConfig = mockAntennasConfig;
-    spyOn(service, 'getMapData').and.callFake(function() {
-      return of(Map);
-    });
-  }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(AntennasComponent);
+    antennasService = fixture.debugElement.injector.get(AntennasService);
+    spyOn(antennasService, 'initialize').and.callFake(function() {});
+    antennasService.antennasConfig = mockAntennasConfig;
+    antennasService.devicesConfig = mockDevicesConfig;
+    spyOn(antennasService, 'getMapData').and.callFake(function() {
+      return of(Map);
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

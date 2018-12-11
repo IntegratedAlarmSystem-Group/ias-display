@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
+import { UserService } from '../../data/user.service';
+import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -71,6 +73,16 @@ export class ShelveComponent implements OnInit, OnDestroy {
   timeout: FormControl;
 
   /**
+  * FormControl for the user who performs the action
+  */
+  user: FormControl;
+
+  /**
+   * Selected user
+   */
+  user_selected: string;
+
+  /**
   * Stores wether or not the action has been executed requestStatusly
   * If requestStatus = 0, the request has not been sent yet
   * If requestStatus = 1, the request was successfully
@@ -92,16 +104,20 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
-   * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {NgxSpinnerService} spinnerService Service to provide the loading spinner functionality
    * @param {Route} route Reference to the url that triggered the initialization of this component
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
+   * @param {UserService} userService Service to handle request to the users api
+   * @param {AuthService} authService Service to ask for the logged in user
    */
   constructor(
     private formBuilder: FormBuilder,
     private alarmService: AlarmService,
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private userService: UserService,
+    private authService: AuthService
   ) {
   }
 
@@ -109,10 +125,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Get the alarmID from the url, create the form and open the sidenav
    */
   ngOnInit() {
+    this.user = new FormControl('', [Validators.required]);
     this.message = new FormControl('', [Validators.required]);
     this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);
     this.shelvedAtMessage = '';
     this.form = this.formBuilder.group({
+      user: this.user,
       message: this.message,
       timeout: this.timeout
     });
@@ -134,7 +152,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**
@@ -180,10 +198,18 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
    */
   getResponseMessageTitle(): string {
+    let action;
     if (!this.alarm.shelved) {
-      return 'Shelving';
+      action = 'Shelving';
     } else {
-      return 'Unshelving';
+      action = 'Unshelving';
+    }
+    if (this.requestStatus === 1) {
+      return action + ' results';
+    } else if (this.requestStatus === -1 ) {
+      return 'Error ' + action;
+    } else if (this.requestStatus === -2) {
+      return 'Action not allowed';
     }
   }
 
@@ -195,24 +221,30 @@ export class ShelveComponent implements OnInit, OnDestroy {
     if (!this.alarm) {
       return null;
     }
+    let response = '';
     if (this.requestStatus === 1) {
       if (!this.alarm.shelved) {
-        return 'The alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
+        response = 'The alarm ' + this.alarm.core_id + ' was shelved succesfully for ' +
         this.timeouts.find(t => t.value === this.timeout.value).viewValue + '.';
       } else {
-        return 'The alarm ' + this.alarm.core_id + ' was unshelved succesfully.';
+        response = 'The alarm ' + this.alarm.core_id + ' was unshelved succesfully.';
       }
     } else if (this.requestStatus === -1) {
-      let response = '';
       if (!this.alarm.shelved) {
         response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been shelved.';
       } else {
         response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been unshelved.';
       }
-      response += ' The server responded the following: ' +  this.errorMessage;
-      // response += ' Please try again. If the problem persists, contact the system administrator.';
-      return response;
+      response += ' Please try again. If the problem persists, contact the system administrator.';
+    } else if (this.requestStatus === -2 ) {
+      response = 'The logged in user (' + this.authService.getUser();
+      if (!this.alarm.shelved) {
+        response += ') does not have permissions to perform the shelve.';
+      } else {
+        response += ') does not have permissions to perform the unshelve.';
+      }
     }
+    return response;
   }
 
 
@@ -220,7 +252,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Closes the sidenav
   */
   onClose(): void {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**
@@ -273,15 +305,20 @@ export class ShelveComponent implements OnInit, OnDestroy {
     const message = this.message.value;
     const timeout = this.timeout.value;
     if (this.canSend()) {
-      this.alarmService.shelveAlarm(this.alarm.core_id, message, timeout).subscribe(
+      this.alarmService.shelveAlarm(
+        this.alarm.core_id, message, timeout, this.user_selected
+      ).subscribe(
           (response) => {
             this.requestStatus = 1;
             this.hideSpinner();
             this.errorMessage = '';
           },
           (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
+            if (error.status === 403) {
+              this.requestStatus = -2;
+            } else {
+              this.requestStatus = -1;
+            }
             this.hideSpinner();
             this.errorMessage = error['error'];
             return error;

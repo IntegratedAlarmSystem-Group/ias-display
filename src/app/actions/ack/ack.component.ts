@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
+import { UserService } from '../../data/user.service';
+import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
 
 /**
@@ -37,6 +39,16 @@ export class AckComponent implements OnInit, OnDestroy {
   message: FormControl;
 
   /**
+  * FormControl for the user who performs the action
+  */
+  user: FormControl;
+
+  /**
+   * Selected user
+   */
+  user_selected: string;
+
+  /**
   * List of alarms to ack according to selection from child component
   */
   alarmsToAck: string[] = [];
@@ -65,22 +77,28 @@ export class AckComponent implements OnInit, OnDestroy {
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
    * @param {Route} route Reference to the url that triggered the initialization of this component
    * @param {SidenavService} sidenavService Service to handle the sidenav where the component is opened
-   * @param {SpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {NgxSpinnerService} spinnerService Service to provide the loading spinner functionality
+   * @param {UserService} userService Service to handle request to the users api
+   * @param {AuthService} authService Service to ask for the logged in user
    */
   constructor(
     private formBuilder: FormBuilder,
     private alarmService: AlarmService,
     private route: ActivatedRoute,
     public sidenavService: SidenavService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   /**
   * Initiates the component, by getting the alarm_id from the url.
   */
   ngOnInit() {
+    this.user = new FormControl('', [Validators.required]);
     this.message = new FormControl('', [Validators.required]);
     this.form = this.formBuilder.group({
+      user: this.user,
       message: this.message,
     });
     this.route.paramMap.subscribe( paramMap => {
@@ -95,7 +113,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**
@@ -111,7 +129,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Closes the sidenav
   */
   onClose(): void {
-    this.sidenavService.close();
+    this.sidenavService.closeAndClean();
   }
 
   /**
@@ -122,15 +140,18 @@ export class AckComponent implements OnInit, OnDestroy {
     this.showSpinner();
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
-        this.alarmsToAck, this.form.get('message').value).subscribe(
+        this.alarmsToAck, this.form.get('message').value, this.user_selected).subscribe(
           (response) => {
             this.acknowledgedAlarms = <string[]> response;
             this.requestStatus = 1;
             this.hideSpinner();
           },
           (error) => {
-            console.log('Error: ', error);
-            this.requestStatus = -1;
+            if (error.status === 403) {
+              this.requestStatus = -2;
+            } else {
+              this.requestStatus = -1;
+            }
             this.hideSpinner();
             return error;
           }
@@ -212,6 +233,29 @@ export class AckComponent implements OnInit, OnDestroy {
     } else if (this.requestStatus === -1) {
       response = 'The request has failed, the alarm ' + this.alarm.core_id + ' has not been acknowledged.';
       response += ' Please try again. If the problem persists, contact the system administrator.';
+    } else if (this.requestStatus === -2) {
+      response = 'The logged in user (' + this.authService.getUser();
+      response += ') does not have permissions to perform the acknowledgement. ';
+    }
+    return response;
+  }
+
+  /**
+   * Returns the title to display when the shelve or unshelve action is performed
+   * @returns {string} the title to display
+   */
+  getResponseMessageTitle(): string {
+    if (!this.alarm) {
+      return null;
+    }
+    let response = '';
+    if (this.requestStatus === 1) {
+      response = 'Acknowledgement results';
+
+    } else if (this.requestStatus === -1) {
+      response = 'Error acknowledging';
+    } else if (this.requestStatus === -2) {
+      response = 'Action not allowed';
     }
     return response;
   }

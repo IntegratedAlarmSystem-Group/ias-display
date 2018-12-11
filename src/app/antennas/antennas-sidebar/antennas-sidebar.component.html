@@ -24,12 +24,32 @@
 <ng-template #antennasList>
   <div class="antennas-container">
     <div class="grid-container">
-      <ng-container *ngFor="let group of getAntennasGroups()">
-        <div class="grid-item" *ngFor="let antennaConfig of getAntennasByGroup(group)" (click)="onClick(antennaConfig)">
-          <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
-        </div>
-      </ng-container>
+      <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">
+        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+      </div>
     </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="antennas-detail devices-alarms">
+    <table>
+      <ng-container *ngFor="let device of getDevices()">
+        <tr>
+          <td class="antenna">
+            <div class="text">
+              <app-alarm [alarm]="this.getAlarm(device.alarm)" [text]="device.antenna"></app-alarm>
+            </div>
+          </td>
+          <td>
+            <div class="status">
+              <app-status-view [alarm]="this.getAlarm(device.alarm)" [showActionBadges]="false"></app-status-view>
+            </div>
+          </td>
+          <td class="buttons" align="right">
+            <app-buttons [alarm]="this.getAlarm(device.alarm)"></app-buttons>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
   </div>
 </ng-template>
 
@@ -142,6 +162,96 @@
         </td>
         <td class="buttons" align="right">
           <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.power)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [text]="'Cryo temperature sensor 0'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [text]="'Cryo temperature sensor 5'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [text]="'Cryo temperature sensor 9'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [text]="'Cryo pressure sensor 0'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [text]="'Cryo pressure sensor 1'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)"></app-buttons>
+        </td>
+      </tr>
+      <tr>
+        <td class="device">
+          <div class="text">
+            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [text]="'Compressor Drive OFF'"></app-alarm>
+          </div>
+        </td>
+        <td>
+          <div class="status">
+            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [showActionBadges]="false"></app-status-view>
+          </div>
+        </td>
+        <td class="buttons" align="right">
+          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)"></app-buttons>
         </td>
       </tr>
     </table>

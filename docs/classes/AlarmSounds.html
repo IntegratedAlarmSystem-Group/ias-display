@@ -176,7 +176,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/data/alarm.service.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/alarm.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -222,7 +222,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/data/alarm.service.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/data/alarm.service.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -268,7 +268,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/data/alarm.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/data/alarm.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -314,7 +314,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/data/alarm.service.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/data/alarm.service.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -360,7 +360,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/data/alarm.service.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/alarm.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -404,7 +404,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/data/alarm.service.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/data/alarm.service.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -480,6 +480,7 @@ import { Alarm, OperationalMode, Validity, Value } from &#x27;../data/alarm&#x27
 import { BackendUrls, Streams, Assets } from &#x27;../settings&#x27;;
 import { CdbService } from &#x27;../data/cdb.service&#x27;;
 import { HttpClientService } from &#x27;./http-client.service&#x27;;
+import { AuthService } from &#x27;../auth/auth.service&#x27;;
 
 
 /**
@@ -558,7 +559,7 @@ export class AlarmService {
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
-  private webSocketBridge: WebSocketBridge &#x3D; new WebSocketBridge();
+  public webSocketBridge: WebSocketBridge &#x3D; new WebSocketBridge();
 
   /**
   * Defines wether or not the display should emit sounds when alarms are triggered.
@@ -577,18 +578,44 @@ export class AlarmService {
   public soundingAlarm: string;
 
   /**
+  * Defines wether or not the service is initialized
+  */
+  public isInitialized &#x3D; false;
+
+  /**
+  * Information about the count of alarms by view
+  */
+  public countByView &#x3D; {};
+
+  /**
+  * Connection status timer
+  */
+  public connectionStatusTimer;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
+   * @param {AuthService} authService Service used for authentication
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
+    private authService: AuthService,
   ) {
     this.connectionStatusStream.subscribe(
       value &#x3D;&gt; {
         if (value &#x3D;&#x3D;&#x3D; false) {
           this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+    this.authService.loginStatusStream.subscribe(
+      value &#x3D;&gt; {
+        if (value &#x3D;&#x3D;&#x3D; true) {
+          this.initialize();
+        } else {
+          this.destroy();
         }
       }
     );
@@ -610,38 +637,78 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
+    if (this.isInitialized || !this.authService.isLoggedIn()) {
+      return;
+    }
+    this.cdbService.initialize();
+    this.isInitialized &#x3D; true;
     this.canSound &#x3D; false;
     this.audio &#x3D; new Audio();
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       &#x27;open&#x27;, () &#x3D;&gt; {
         this.connectionStatusStream.next(true);
-        /* TODO: Evaluate function for webserver requests */
         this.getAlarmList();
-        this.cdbService.initialize();
+      }
+    );
+    this.webSocketBridge.socket.addEventListener(
+      &#x27;close&#x27;, () &#x3D;&gt; {
+        this.resetCountByView();
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) &#x3D;&gt; {
       // console.log(&#x27;notify &#x27;, payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessage(payload.action, payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.resetTimer();
+        this.readAlarmMessage(payload.action, payload.data);
+      }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) &#x3D;&gt; {
       // console.log(&#x27;request&#x27;, payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessagesList(payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.resetTimer();
+        this.readAlarmMessagesList(payload.data);
+      }
     });
-    this.startLastReceivedMessageTimestampCheck();
+    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) &#x3D;&gt; {
+      // console.log(&#x27;counter &#x27;, payload);
+      if (this.authService.isLoggedIn()) {
+        this.readCountByViewMessage(payload.data);
+      }
+    });
   }
 
-   /**
-   *  Start connection to the backend through websockets
-   */
+  /**
+  *  Start connection to the backend through websockets
+  */
   connect() {
-    const connectionPath &#x3D; environment.websocketPath;
+    const connectionPath &#x3D; this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log(&#x27;Connected to webserver at: &#x27; + connectionPath);
+    console.log(&#x27;Connected to webserver at: &#x27; + environment.websocketPath);
+  }
+
+  /**
+  *  Connection path using authentication data
+  */
+  getConnectionPath() {
+    return environment.websocketPath + &#x27;?token&#x3D;&#x27; + this.authService.getToken();
+  }
+
+  /**
+  *  Disconnect from the backend
+  */
+  destroy() {
+    // Close connection
+    if (this.isInitialized) {
+      this.webSocketBridge.stream(Streams.UPDATES).send({
+        &#x27;action&#x27;: &#x27;close&#x27;
+      });
+      this.webSocketBridge.socket.close(
+        1000, &#x27;User logout&#x27;, {keepClosed: true});
+      this.resetCountByView();
+    }
+    this.isInitialized &#x3D; false;
   }
 
   /******* ALARM HANDLING *******/
@@ -659,12 +726,14 @@ export class AlarmService {
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement
+   * @param user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message) {
+  acknowledgeAlarms(alarms_ids, message, user) {
     const data &#x3D; {
       &#x27;alarms_ids&#x27;: alarms_ids,
       &#x27;message&#x27;: message,
+      &#x27;user&#x27;: user
     };
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
     map(
@@ -716,11 +785,12 @@ export class AlarmService {
    * @param {string} timeout the timeout for the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout) {
+  shelveAlarm(alarm_id, message, timeout, user) {
     const data &#x3D; {
       &#x27;alarm_id&#x27;: alarm_id,
       &#x27;message&#x27;: message,
       &#x27;timeout&#x27;: timeout,
+      &#x27;user&#x27;: user
     };
     return this.httpClientService.post(BackendUrls.SHELVE_API, data).pipe(
     map(
@@ -796,6 +866,21 @@ export class AlarmService {
     }
     this.changeAlarms(&#x27;all&#x27;);
     this.canSound &#x3D; true;
+  }
+
+  /**
+   * Reads the count by view object received from the webserver
+   * @param {Object} countByView
+   */
+  readCountByViewMessage(countByView) {
+    this.countByView &#x3D; countByView;
+  }
+
+  /**
+   * Method to clear the count by view if there is the ws connection is closed
+   */
+  resetCountByView() {
+    this.countByView &#x3D; {};
   }
 
   /**
@@ -900,48 +985,17 @@ export class AlarmService {
   }
 
   /**
-   * Method to update the last received message timestamp
+   * Resets the status connection check timer
+   * The timer&#x27;s period is equal to the broadcastThreshold obtained by {@link CdbService.html#getBroadcastRate}
    */
-  updateLastReceivedMessageTimestamp() {
-    this.lastReceivedMessageTimestamp &#x3D; (new Date()).getTime();
-  }
-
-  /**
-   * Method to check the last received message timestamp
-   * Note: If non-valid, the connection state is non-valid
-   * TODO: Review the life cycle of the connection status.
-   */
-  compareCurrentAndLastReceivedMessageTimestamp() {
-
-    /* Refresh rate parameters */
-    let pars;
-
-    /* TODO: Evaluate try exception. Here for debug options. */
-    try {
-      pars &#x3D; this.cdbService.getRefreshRateParameters();
-    } catch (e) {
-      pars &#x3D; {&#x27;refreshRate&#x27;: 5, &#x27;broadcastFactor&#x27;: 1};
+  resetTimer() {
+    if (this.connectionStatusTimer) {
+      this.connectionStatusTimer.unsubscribe();
+      this.connectionStatusStream.next(true);
     }
-
-    const MAX_SECONDS_WITHOUT_MESSAGES &#x3D; pars[&#x27;refreshRate&#x27;] * pars[&#x27;broadcastFactor&#x27;] + pars[&#x27;tolerance&#x27;];
-
-    const now &#x3D; (new Date).getTime();
-    let millisecondsDelta;
-
-    millisecondsDelta &#x3D; now - this.lastReceivedMessageTimestamp;
-    if (millisecondsDelta &gt;&#x3D; 1000 * MAX_SECONDS_WITHOUT_MESSAGES ) {
+    const broadcastThreshold &#x3D; this.cdbService.getBroadcastThreshold();
+    this.connectionStatusTimer &#x3D; IntervalObservable.create(1000 * broadcastThreshold).subscribe(x &#x3D;&gt; {
       this.connectionStatusStream.next(false);
-    }
-  }
-
-  /**
-   * Method to update the last received message timestamp
-   * @returns {InternalObservable} for notifications to check the last received message
-   */
-  startLastReceivedMessageTimestampCheck() {
-    return IntervalObservable.create(1000 * 10)
-      .subscribe(() &#x3D;&gt; {
-      this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
 }

@@ -81,7 +81,7 @@ describe('ShelveComponent', () => {
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
-    spyOn(sidenavService, 'close');
+    spyOn(sidenavService, 'closeAndClean');
     spyOn(sidenavService, 'toggle');
     component = fixture.componentInstance;
     spyOn(component, 'onClose');
@@ -125,11 +125,6 @@ describe('ShelveComponent', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when it is empty', () => {
-      it('the form should be invalid', () => {
-        expect(component.form.valid).toBeFalsy();
-      });
-    });
     describe('such that when the user selects a timeout but does not enter a message ', () => {
       it('the form should be invalid', () => {
         expect(component.form.valid).toBeFalsy();
@@ -137,11 +132,20 @@ describe('ShelveComponent', () => {
         expect(component.form.valid).toBeFalsy();
       });
     });
-    describe('such that when the user enters a message and selects a timeout ', () => {
+    describe('such that when the user completes other fields but does not enter a user ', () => {
+      it('the form should be inalid', () => {
+        expect(component.form.valid).toBeFalsy();
+        component.form.controls['message'].setValue('Any Message');
+        component.form.controls['timeout'].setValue(component.timeouts[0]);
+        expect(component.form.valid).toBeFalsy();
+      });
+    });
+    describe('such that when the user enters a message and selects a timeout and a user ', () => {
       it('the form should be valid', () => {
         expect(component.form.valid).toBeFalsy();
         component.form.controls['message'].setValue('Any Message');
         component.form.controls['timeout'].setValue(component.timeouts[0]);
+        component.form.controls['user'].setValue('any_user');
         expect(component.form.valid).toBeTruthy();
       });
     });
@@ -175,7 +179,7 @@ describe('ShelveComponent', () => {
       expect(sendButton.innerText).toEqual('Shelve');
     });
     describe('and when the user clicks on it,', () => {
-      describe('and the user has not entered a message and selected a timeout', () => {
+      describe('and the user has not completed the form fields', () => {
         it('it should not call the component shelve method', async(() => {
           componentFooter.querySelector('#send').click();
           fixture.whenStable().then(() => {
@@ -183,9 +187,23 @@ describe('ShelveComponent', () => {
           });
         }));
       });
-      describe('and the user has entered a message and selected a timeout', () => {
+      describe('and the user complete the message and timeout fields but not the user field', () => {
+        it('it should not call the component shelve method', async(() => {
+          component.form.controls['message'].setValue('Any message');
+          component.form.controls['timeout'].setValue(component.timeouts[0]);
+          expect(component.form.valid).toBeFalsy();
+          fixture.detectChanges();
+          componentFooter.querySelector('#send').click();
+          fixture.whenStable().then(() => {
+            expect(alarmService.shelveAlarm).not.toHaveBeenCalled();
+            expect(alarmService.unshelveAlarms).not.toHaveBeenCalled();
+          });
+        }));
+      });
+      describe('and the user complete all the fields', () => {
         it('it should call the component shelve method', async(() => {
           component.form.controls['message'].setValue('Any message');
+          component.form.controls['user'].setValue('any_user');
           component.form.controls['timeout'].setValue(component.timeouts[0]);
           expect(component.form.valid).toBeTruthy();
           fixture.detectChanges();

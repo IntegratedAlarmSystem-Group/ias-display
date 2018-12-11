@@ -8,6 +8,7 @@ import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
 import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
+import { AuthService } from '../auth/auth.service';
 
 
 /**
@@ -86,7 +87,7 @@ export class AlarmService {
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
-  private webSocketBridge: WebSocketBridge = new WebSocketBridge();
+  public webSocketBridge: WebSocketBridge = new WebSocketBridge();
 
   /**
   * Defines wether or not the display should emit sounds when alarms are triggered.
@@ -105,18 +106,44 @@ export class AlarmService {
   public soundingAlarm: string;
 
   /**
+  * Defines wether or not the service is initialized
+  */
+  public isInitialized = false;
+
+  /**
+  * Information about the count of alarms by view
+  */
+  public countByView = {};
+
+  /**
+  * Connection status timer
+  */
+  public connectionStatusTimer;
+
+  /**
    * Builds an instance of the service
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
+   * @param {AuthService} authService Service used for authentication
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
+    private authService: AuthService,
   ) {
     this.connectionStatusStream.subscribe(
       value => {
         if (value === false) {
           this.triggerAlarmsNonValidConnectionState();
+        }
+      }
+    );
+    this.authService.loginStatusStream.subscribe(
+      value => {
+        if (value === true) {
+          this.initialize();
+        } else {
+          this.destroy();
         }
       }
     );
@@ -138,38 +165,78 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
+    if (this.isInitialized || !this.authService.isLoggedIn()) {
+      return;
+    }
+    this.cdbService.initialize();
+    this.isInitialized = true;
     this.canSound = false;
     this.audio = new Audio();
     this.connect();
     this.webSocketBridge.socket.addEventListener(
       'open', () => {
         this.connectionStatusStream.next(true);
-        /* TODO: Evaluate function for webserver requests */
         this.getAlarmList();
-        this.cdbService.initialize();
+      }
+    );
+    this.webSocketBridge.socket.addEventListener(
+      'close', () => {
+        this.resetCountByView();
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessage(payload.action, payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.resetTimer();
+        this.readAlarmMessage(payload.action, payload.data);
+      }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
-      this.updateLastReceivedMessageTimestamp();
-      this.readAlarmMessagesList(payload.data);
+      if (this.authService.isLoggedIn()) {
+        this.resetTimer();
+        this.readAlarmMessagesList(payload.data);
+      }
     });
-    this.startLastReceivedMessageTimestampCheck();
+    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) => {
+      // console.log('counter ', payload);
+      if (this.authService.isLoggedIn()) {
+        this.readCountByViewMessage(payload.data);
+      }
+    });
   }
 
-   /**
-   *  Start connection to the backend through websockets
-   */
+  /**
+  *  Start connection to the backend through websockets
+  */
   connect() {
-    const connectionPath = environment.websocketPath;
+    const connectionPath = this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at: ' + connectionPath);
+    console.log('Connected to webserver at: ' + environment.websocketPath);
+  }
+
+  /**
+  *  Connection path using authentication data
+  */
+  getConnectionPath() {
+    return environment.websocketPath + '?token=' + this.authService.getToken();
+  }
+
+  /**
+  *  Disconnect from the backend
+  */
+  destroy() {
+    // Close connection
+    if (this.isInitialized) {
+      this.webSocketBridge.stream(Streams.UPDATES).send({
+        'action': 'close'
+      });
+      this.webSocketBridge.socket.close(
+        1000, 'User logout', {keepClosed: true});
+      this.resetCountByView();
+    }
+    this.isInitialized = false;
   }
 
   /******* ALARM HANDLING *******/
@@ -187,12 +254,14 @@ export class AlarmService {
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement
+   * @param user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message) {
+  acknowledgeAlarms(alarms_ids, message, user) {
     const data = {
       'alarms_ids': alarms_ids,
       'message': message,
+      'user': user
     };
     return this.httpClientService.put(BackendUrls.TICKETS_MULTIPLE_ACK, data).pipe(
     map(
@@ -244,11 +313,12 @@ export class AlarmService {
    * @param {string} timeout the timeout for the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout) {
+  shelveAlarm(alarm_id, message, timeout, user) {
     const data = {
       'alarm_id': alarm_id,
       'message': message,
       'timeout': timeout,
+      'user': user
     };
     return this.httpClientService.post(BackendUrls.SHELVE_API, data).pipe(
     map(
@@ -324,6 +394,21 @@ export class AlarmService {
     }
     this.changeAlarms('all');
     this.canSound = true;
+  }
+
+  /**
+   * Reads the count by view object received from the webserver
+   * @param {Object} countByView
+   */
+  readCountByViewMessage(countByView) {
+    this.countByView = countByView;
+  }
+
+  /**
+   * Method to clear the count by view if there is the ws connection is closed
+   */
+  resetCountByView() {
+    this.countByView = {};
   }
 
   /**
@@ -428,48 +513,17 @@ export class AlarmService {
   }
 
   /**
-   * Method to update the last received message timestamp
+   * Resets the status connection check timer
+   * The timer's period is equal to the broadcastThreshold obtained by {@link CdbService.html#getBroadcastRate}
    */
-  updateLastReceivedMessageTimestamp() {
-    this.lastReceivedMessageTimestamp = (new Date()).getTime();
-  }
-
-  /**
-   * Method to check the last received message timestamp
-   * Note: If non-valid, the connection state is non-valid
-   * TODO: Review the life cycle of the connection status.
-   */
-  compareCurrentAndLastReceivedMessageTimestamp() {
-
-    /* Refresh rate parameters */
-    let pars;
-
-    /* TODO: Evaluate try exception. Here for debug options. */
-    try {
-      pars = this.cdbService.getRefreshRateParameters();
-    } catch (e) {
-      pars = {'refreshRate': 5, 'broadcastFactor': 1};
+  resetTimer() {
+    if (this.connectionStatusTimer) {
+      this.connectionStatusTimer.unsubscribe();
+      this.connectionStatusStream.next(true);
     }
-
-    const MAX_SECONDS_WITHOUT_MESSAGES = pars['refreshRate'] * pars['broadcastFactor'] + pars['tolerance'];
-
-    const now = (new Date).getTime();
-    let millisecondsDelta;
-
-    millisecondsDelta = now - this.lastReceivedMessageTimestamp;
-    if (millisecondsDelta >= 1000 * MAX_SECONDS_WITHOUT_MESSAGES ) {
+    const broadcastThreshold = this.cdbService.getBroadcastThreshold();
+    this.connectionStatusTimer = IntervalObservable.create(1000 * broadcastThreshold).subscribe(x => {
       this.connectionStatusStream.next(false);
-    }
-  }
-
-  /**
-   * Method to update the last received message timestamp
-   * @returns {InternalObservable} for notifications to check the last received message
-   */
-  startLastReceivedMessageTimestampCheck() {
-    return IntervalObservable.create(1000 * 10)
-      .subscribe(() => {
-      this.compareCurrentAndLastReceivedMessageTimestamp();
     });
   }
 }

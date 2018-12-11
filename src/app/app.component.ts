@@ -4,6 +4,9 @@ import { AlarmService } from './data/alarm.service';
 import { SidenavService } from './actions/sidenav.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from './auth/auth.service';
+import { UserService } from './data/user.service';
+import { Router } from '@angular/router';
 
 
 /**
@@ -34,24 +37,53 @@ export class AppComponent implements OnInit {
   // TODO: Use only custom svgIcons
   /** Navigation Sidenav Menu of the application (left sidenav) */
   navigationSidenavItems = [
-    { title: 'Overview', link: 'overview', icon: 'ias_overview', svgIcon: true},
-    { title: 'Weather', link: 'weather', icon: 'ias_weather', svgIcon: true},
-    { title: 'Antennas', link: 'antennas', icon: 'ias_antenna', svgIcon: true},
-    { title: 'Table', link: 'tabular', icon: 'ias_table', svgIcon: true}
+    {
+      title: 'Overview',
+      link: 'overview',
+      icon: 'ias_overview',
+      svgIcon: true,
+      counter: 'summary'
+    },
+    {
+      title: 'Weather',
+      link: 'weather',
+      icon: 'ias_weather',
+      svgIcon: true,
+      counter: 'weather'
+    },
+    {
+      title: 'Antennas',
+      link: 'antennas',
+      icon: 'ias_antenna',
+      svgIcon: true,
+      counter: 'antennas'
+    },
+    {
+      title: 'Table',
+      link: 'tabular',
+      icon: 'ias_table',
+      svgIcon: true,
+      counter: ''
+    }
   ];
 
   /**
    * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
+   * @param {AuthService} authService Service used for authentication
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
    * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
+   * @param {Router} router instance of an Angular {@link Router} to handle routing
    */
   constructor(
     private alarmService: AlarmService,
+    private authService: AuthService,
+    private userService: UserService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    public router: Router,
   ) {
     this.matIconRegistry
       .addSvgIcon(
@@ -83,10 +115,25 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    if (this.authService.isLoggedIn()) {
+      this.userService.requestUsersList();
+    }
+    this.authService.loginStatusStream.subscribe(
+      value => {
+        if (value === false) {
+          this.actionsSidenavService.close();
+          this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+          this.alarmService.destroy();
+        } else if (value === true) {
+          this.userService.requestUsersList();
+        }
+      }
+    );
   }
 
   /**
-  * Returns the links for the router outlets to navigate the different views, considering of the actionsSidenav can be closed or not
+  * Returns the links for the router outlets to navigate the different views,
+  * considering of the actionsSidenav can be closed or not
   * @param {any} item an item of the navigation sidenav
   * @returns {Object} The links in a dictionary
   */
@@ -106,4 +153,93 @@ export class AppComponent implements OnInit {
     this.isNavigationCompacted = !this.isNavigationCompacted;
     return this.isNavigationCompacted;
   }
+
+  /**
+   * Method to get the username
+   " Uses the getUser method defined on the {@link AuthService}
+   * @returns {string} the username
+   */
+  getUser() {
+    return this.authService.getUser();
+  }
+
+  /**
+   * Method to check if a user is logged in
+   " Uses the isLoggedIn method defined on the {@link AuthService}
+   * @returns {boolean} True if the user is logged in
+   */
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  /**
+   * Method to logout an authenticated user
+   " Uses the logout method defined on the {@link AuthService}
+   */
+  logout() {
+    this.authService.logout();
+  }
+
+  /**
+   * Method to get the class related to the count of the nav items
+   * to highlight or not the presence of unack alarms by view
+   " It is expected to use the countByView
+   * defined on the {@link AlarmService}
+   * and the configuration defined in the navigationSidenavItems
+   * variable
+   * @returns {string} the classname for the nav item mark
+   */
+   getNavItemCountClass(navItem, countByView) {
+     const navItemCounter = navItem.counter;
+     const availableCounters = Object.keys(countByView);
+     if (navItemCounter === '') {
+       return 'hide-count';
+     } else {
+       if (availableCounters.indexOf(navItemCounter) > -1) {
+         if (countByView[navItemCounter] > 0) {
+           return 'nonzero-count';
+         }
+         if (countByView[navItemCounter] === 0) {
+           return 'zero-count';
+         }
+       } else {
+         return 'unknown-count';
+       }
+
+     }
+   }
+
+   /**
+    * Method to get the text related to the mark of the nav items
+    * to highlight or not the presence of unack alarms by view
+    " It is expected to use the counterByView
+    * defined on the {@link AlarmService}
+    * and the configuration defined in the navigationSidenavItems
+    * variable
+    * @returns {string} the text related to the count for the nav item
+    */
+    getNavItemCountText(navItem, countByView) {
+      const navItemCounter = navItem.counter;
+      const availableCounters = Object.keys(countByView);
+      if (navItemCounter === '') {
+        return '';
+      } else {
+        if (availableCounters.indexOf(navItemCounter) > -1) {
+          const count = countByView[navItemCounter];
+          if (count >= 0) {
+            if (count <= 100) {
+              return String(count);
+            } else {
+              return String('>100');
+            }
+          } else {
+            return String(count);  // this case should not happen
+          }
+        } else {
+          return '?';
+        }
+
+      }
+    }
+
 }

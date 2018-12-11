@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AlarmService } from './alarm.service';
+import { UserService } from './user.service';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from './http-client.service';
 
@@ -20,6 +21,7 @@ import { HttpClientService } from './http-client.service';
     CdbService,
     HttpClient,
     HttpClientService,
+    UserService
   ],
   exports: [
     HttpClientModule

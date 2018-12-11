@@ -8,6 +8,7 @@ import { DataModule } from './data/data.module';
 import { ActionsModule } from './actions/actions.module';
 import { AntennasModule } from './antennas/antennas.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AuthModule } from './auth/auth.module';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { HealthModule } from './health/health.module';
 import { MapModule } from './map/map.module';
@@ -28,6 +29,7 @@ import { AppComponent } from './app.component';
     ActionsModule,
     AntennasModule,
     AppRoutingModule,
+    AuthModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
