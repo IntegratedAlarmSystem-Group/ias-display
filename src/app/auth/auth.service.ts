@@ -15,7 +15,9 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
 
-  // store the URL so we can redirect after logging in
+  /**
+  * Store the URL so we can redirect after logging in
+  */
   redirectUrl: string;
 
   /**

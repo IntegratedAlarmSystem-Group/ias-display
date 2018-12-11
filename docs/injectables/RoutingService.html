@@ -59,7 +59,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/data/routing.service.ts</code>
+            <code>src/app/app-routing/routing.service.ts</code>
         </p>
 
             <p class="comment">
@@ -94,6 +94,9 @@
                                 <a href="#goToAntennas">goToAntennas</a>
                             </li>
                             <li>
+                                <a href="#goToLogin">goToLogin</a>
+                            </li>
+                            <li>
                                 <a href="#goToShelve">goToShelve</a>
                             </li>
                             <li>
@@ -125,7 +128,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/data/routing.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/app-routing/routing.service.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -197,7 +200,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/routing.service.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/app-routing/routing.service.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -237,7 +240,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/routing.service.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/app-routing/routing.service.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -313,7 +316,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/data/routing.service.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/app-routing/routing.service.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -321,6 +324,46 @@
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Go to the Antennas View</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToLogin"></a>
+                        <span class="name">
+                            <b>
+                            goToLogin
+                            </b>
+                            <a href="#goToLogin"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>goToLogin()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/app-routing/routing.service.ts:65</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Go to login and clean action outlet</p>
 </div>
 
                             <div class="io-description">
@@ -353,7 +396,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/routing.service.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/app-routing/routing.service.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -429,7 +472,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/data/routing.service.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/app-routing/routing.service.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -469,7 +512,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/routing.service.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app-routing/routing.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -589,6 +632,13 @@ export class RoutingService {
   */
   cleanActionOutlet() {
     this.router.navigate([{outlets: {actions: null}}]);
+  }
+
+  /**
+  * Go to login and clean action outlet
+  */
+  goToLogin() {
+    this.router.navigate([{outlets: {primary: &#x27;login&#x27;, actions: null}}]);
   }
 
 }
