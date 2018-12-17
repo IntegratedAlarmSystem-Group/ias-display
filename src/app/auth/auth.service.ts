@@ -20,6 +20,12 @@ export class AuthService {
   */
   redirectUrl: string;
 
+
+  /**
+  * Store if the user is logged in or not
+  */
+  loginStatus = false;
+
   /**
   * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
   */
@@ -33,17 +39,29 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Changes the {@link loginStatus} and sneds the corresponding update in the {@link loginStatusStream}
+   * @param {boolean} status the new login status
+   */
+  changeLoginStatus(status: boolean) {
+    this.loginStatus = status;
+    this.loginStatusStream.next(status);
+  }
+
 
   /**
    * Checks wether or not the user is logged-in, which is true if there is a valid token
-   * @returns {boolean} true if there is a valid token, false if not
+   * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
-  isLoggedIn(): boolean {
+  hasValidToken(): Observable<boolean> {
+    let status = false;
     if (this.getToken()) {
-      return true;
+      status = true;
     } else {
-      return false;
+      status = false;
     }
+    this.changeLoginStatus(status);
+    return of(status);
   }
 
   /**
@@ -63,10 +81,10 @@ export class AuthService {
       if (token) {
         this.storeToken(token);
         this.storeUser(username);
-        this.loginStatusStream.next(true);
+        this.changeLoginStatus(true);
         return true;
       } else {
-        this.loginStatusStream.next(false);
+        this.changeLoginStatus(false);
         return false;
       }
     }));
@@ -76,7 +94,7 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
-    this.loginStatusStream.next(false);
+    this.changeLoginStatus(false);
     this.removeToken();
     this.removeUser();
   }
@@ -138,6 +156,5 @@ export class AuthService {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(user));
   }
-
 
 }

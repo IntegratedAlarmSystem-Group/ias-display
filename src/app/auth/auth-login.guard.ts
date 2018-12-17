@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -26,9 +26,9 @@ export class AuthLoginGuard implements CanActivate {
   * Checks wether or not the navigation should be blocked or not, depending if a user is logged in the application
   * @param {ActivatedRouteSnapshot} next the next activated route
   * @param {RouterStateSnapshot} state the next state of router navigation, used to retrieve the url that is going to be navigated
-  * @returns {boolean} true if navigation is permitted, false if not
+  * @returns {Observable<boolean>} true if navigation is permitted, false if not
   */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const url: string = state.url;
     return this.checkLogin(url);
   }
@@ -39,16 +39,19 @@ export class AuthLoginGuard implements CanActivate {
   * @param {string} url the nexturl to be navigated
   * @returns {boolean} true if navigation is permitted, false if not
   */
-  checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    }
+  checkLogin(url: string): Observable<boolean> {
+    return this.authService.hasValidToken().pipe(map((response: any) => {
+      if (response === true) {
+        return true;
+      } else {
+        // Store the attempted URL for redirecting
+        this.authService.redirectUrl = url;
 
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
+        // Navigate to the login page with extras
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }));
 
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
-    return false;
   }
 }
