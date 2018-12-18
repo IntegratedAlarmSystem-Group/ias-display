@@ -1,6 +1,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
 import { AuthLoginGuard } from './auth-login.guard';
 import { AuthService } from './auth.service';
@@ -38,23 +39,29 @@ describe('AuthLoginGuard', () => {
   describe('should have a checkLogin method that checks if the navigation can be activated', () => {
     it('and when it can be activated, it returns true', () => {
       // Arrange:
-      spyOn(authService, 'isLoggedIn').and.returnValue(true);
+      spyOn(authService, 'hasValidToken').and.returnValue(of(true));
       // Act:
-      const returnValue = guard.checkLogin('attemptedUrl');
-      // Assert:
-      expect(returnValue).toBe(true);
-      expect(authService.redirectUrl).toBeFalsy();
+      guard.checkLogin('attemptedUrl').subscribe(
+        (returnValue) => {
+          // Assert:
+          expect(returnValue).toBe(true);
+          expect(authService.redirectUrl).toBeFalsy();
+        }
+      );
     });
 
     it('and when it cannot be activated, it returns false, stores the url and navigates to login', () => {
       // Arrange:
-      spyOn(authService, 'isLoggedIn').and.returnValue(false);
+      spyOn(authService, 'hasValidToken').and.returnValue(of(false));
       // Act:
-      const returnValue = guard.checkLogin('attemptedUrl');
-      // Assert:
-      expect(returnValue).toBe(false);
-      expect(authService.redirectUrl).toBe('attemptedUrl');
-      expect(router.navigate).toHaveBeenCalledWith(['/login']);
+      guard.checkLogin('attemptedUrl').subscribe(
+        (returnValue) => {
+          // Assert:
+          expect(returnValue).toBe(false);
+          expect(authService.redirectUrl).toBe('attemptedUrl');
+          expect(router.navigate).toHaveBeenCalledWith(['/login']);
+        }
+      );
     });
   });
 });

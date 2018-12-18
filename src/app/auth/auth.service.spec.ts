@@ -50,7 +50,7 @@ describe('AuthService', () => {
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
           expect(localStorage.getItem('token')).toEqual(JSON.stringify(token));
           expect(localStorage.getItem('user')).toEqual(JSON.stringify(username));
-          expect(service.hasValidToken()).toBe(true);
+          expect(service.loginStatus).toEqual(true);
         });
       }));
     });
@@ -66,7 +66,7 @@ describe('AuthService', () => {
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
           expect(localStorage.getItem('token')).toBeFalsy();
           expect(localStorage.getItem('user')).toBeFalsy();
-          expect(service.hasValidToken()).toBe(false);
+          expect(service.loginStatus).toEqual(false);
         });
       }));
     });
@@ -79,13 +79,12 @@ describe('AuthService', () => {
       service.storeToken(token);
       expect(localStorage.getItem('user')).toBe(JSON.stringify(username));
       expect(localStorage.getItem('token')).toBe(JSON.stringify(token));
-      expect(service.hasValidToken()).toBe(true);
       // Act:
       service.logout();
       // Assert:
       expect(localStorage.getItem('token')).toBeFalsy();
       expect(localStorage.getItem('user')).toBeFalsy();
-      expect(service.hasValidToken()).toBe(false);
+      expect(service.loginStatus).toEqual(false);
     });
   });
 });
