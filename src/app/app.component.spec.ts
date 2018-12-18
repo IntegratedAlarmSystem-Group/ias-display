@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' }
 ];
 
-describe('AppComponent', () => {
+xdescribe('AppComponent', () => {
 
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -48,7 +48,7 @@ describe('AppComponent', () => {
   }));
 });
 
-describe(`The component should be able to use count labels on the navigation items
+xdescribe(`The component should be able to use count labels on the navigation items
 if there are, or are not, alarms not acknowledged in the related view`, () => {
 
   let component: AppComponent;
@@ -186,7 +186,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
 
 });
 
-describe(`The component should be able to show or not a text
+xdescribe(`The component should be able to show or not a text
 related to the count by view, on the navigation items,
 if there are, or are not, alarms not acknowledged in the related view`, () => {
 

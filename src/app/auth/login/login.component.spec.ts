@@ -56,7 +56,7 @@ describe('LoginComponent', () => {
         component.password.setValue(password);
         authService.redirectUrl = redirectUrl;
         spyOn(authService, 'login').and.returnValue(of(true));
-        spyOn(authService, 'isLoggedIn').and.returnValue(true);
+        spyOn(authService, 'hasValidToken').and.returnValue(of(true));
         spyRoutingTable.navigate.calls.reset();
         // Act:
         component.login();
@@ -73,7 +73,7 @@ describe('LoginComponent', () => {
         component.password.setValue(password);
         authService.redirectUrl = redirectUrl;
         spyOn(authService, 'login').and.returnValue(of(false));
-        spyOn(authService, 'isLoggedIn').and.returnValue(false);
+        spyOn(authService, 'hasValidToken').and.returnValue(of(false));
         spyRoutingTable.navigate.calls.reset();
         // Act:
         component.login();
