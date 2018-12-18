@@ -30,10 +30,10 @@ export class AntennaConfig {
 })
 export class AntennasService {
 
-  /** Dictionary of Alarm configuration indexed by antennas group ID **/
+  /** List of Alarm configuration for each antenna **/
   public antennasConfig: AntennaConfig [] = [];
 
-  /** Dictionary of Alarm configuration indexed by antennas group ID **/
+  /** List of Alarm configuration for other devices related with the array **/
   public devicesConfig: AntennaConfig [] = [];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */

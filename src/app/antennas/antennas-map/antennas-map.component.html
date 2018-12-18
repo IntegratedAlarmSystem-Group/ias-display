@@ -34,7 +34,7 @@
          </svg:foreignObject>
      </ng-container>
 
-    <ng-container *ngFor="let antennaConfig of alarmsConfig">
+    <ng-container *ngFor="let antennaConfig of this.service.antennasConfig">
       <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">
 
         <ng-container *ngFor="let p of [getPlacemarkObject(antennaConfig.placemark)]">
