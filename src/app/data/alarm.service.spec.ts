@@ -215,7 +215,7 @@ const fixtureAlarmsList = {
   }
 };
 
-xdescribe('AlarmService', () => {
+describe('AlarmService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -606,7 +606,7 @@ xdescribe('AlarmService', () => {
 });
 
 
-xdescribe('GIVEN the AlarmService contains Alarms', () => {
+describe('GIVEN the AlarmService contains Alarms', () => {
 
   let httpSpy;
   const alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
@@ -663,7 +663,7 @@ xdescribe('GIVEN the AlarmService contains Alarms', () => {
   });
 });
 
-xdescribe('AlarmService', () => {
+describe('AlarmService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({

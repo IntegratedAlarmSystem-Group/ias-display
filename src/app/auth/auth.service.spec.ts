@@ -12,7 +12,7 @@ const username = 'myUsername';
 const password = 'myPassword';
 const token = 'thisIsAFakeToken';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -79,11 +79,6 @@ fdescribe('AuthService', () => {
       service.storeToken(token);
       expect(localStorage.getItem('user')).toBe(JSON.stringify(username));
       expect(localStorage.getItem('token')).toBe(JSON.stringify(token));
-      service.hasValidToken().subscribe(
-        (returnValue) => {
-          expect(returnValue).toBe(true);
-        }
-      );
       // Act:
       service.logout();
       // Assert:
