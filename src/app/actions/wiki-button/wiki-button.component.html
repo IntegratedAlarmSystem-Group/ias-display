@@ -1,3 +1,3 @@
-<button mat-icon-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick($event)">
+<button mat-icon-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick($event)" [disabled]="!url">
   <i class="ion-md-open wiki-button-icon"></i>
 </button>
