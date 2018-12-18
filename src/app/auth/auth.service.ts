@@ -70,7 +70,6 @@ export class AuthService {
    * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
   hasValidToken(): Observable<boolean> {
-    console.log('Checking valid token');
     if (!this.getToken()) {
       this.changeLoginStatus(false);
       return of(false);
@@ -82,12 +81,10 @@ export class AuthService {
           const allowed_actions = response['allowed_actions'];
           this.storeUser(user_data['username']);
           this.changeLoginStatus(true);
-          console.log('valid token checked');
           return true;
         }),
         catchError(error => {
           this.logout();
-          console.log('valid token checked');
           return of(false);
         }
       ));
