@@ -78,9 +78,9 @@ export class AppComponent implements OnInit {
    * @param {Router} router instance of an Angular {@link Router} to handle routing
    */
   constructor(
-    private alarmService: AlarmService,
-    private authService: AuthService,
-    private userService: UserService,
+    public alarmService: AlarmService,
+    public authService: AuthService,
+    public userService: UserService,
     public actionsSidenavService: SidenavService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
