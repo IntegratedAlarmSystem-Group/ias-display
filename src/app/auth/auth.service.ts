@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
@@ -48,20 +48,50 @@ export class AuthService {
     this.loginStatusStream.next(status);
   }
 
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
+    if (this.getToken()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+    }
+  }
 
   /**
    * Checks wether or not the user is logged-in, which is true if there is a valid token
    * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
   hasValidToken(): Observable<boolean> {
-    let status = false;
-    if (this.getToken()) {
-      status = true;
+    console.log('Checking valid token');
+    if (!this.getToken()) {
+      this.changeLoginStatus(false);
+      return of(false);
     } else {
-      status = false;
+      const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
+      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+        map((response: any) => {
+          const user_data = response['user_data'];
+          const allowed_actions = response['allowed_actions'];
+          this.storeUser(user_data['username']);
+          this.changeLoginStatus(true);
+          console.log('valid token checked');
+          return true;
+        }),
+        catchError(error => {
+          this.logout();
+          console.log('valid token checked');
+          return of(false);
+        }
+      ));
     }
-    this.changeLoginStatus(status);
-    return of(status);
   }
 
   /**
