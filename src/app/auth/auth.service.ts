@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
@@ -20,6 +20,12 @@ export class AuthService {
   */
   redirectUrl: string;
 
+
+  /**
+  * Store if the user is logged in or not
+  */
+  loginStatus = false;
+
   /**
   * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
   */
@@ -33,16 +39,58 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Changes the {@link loginStatus} and sneds the corresponding update in the {@link loginStatusStream}
+   * @param {boolean} status the new login status
+   */
+  changeLoginStatus(status: boolean) {
+    this.loginStatus = status;
+    this.loginStatusStream.next(status);
+  }
+
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
+    if (this.getToken()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+    }
+  }
 
   /**
    * Checks wether or not the user is logged-in, which is true if there is a valid token
-   * @returns {boolean} true if there is a valid token, false if not
+   * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
-  isLoggedIn(): boolean {
-    if (this.getToken()) {
-      return true;
+  hasValidToken(): Observable<boolean> {
+    console.log('Checking valid token');
+    if (!this.getToken()) {
+      this.changeLoginStatus(false);
+      return of(false);
     } else {
-      return false;
+      const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
+      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+        map((response: any) => {
+          const user_data = response['user_data'];
+          const allowed_actions = response['allowed_actions'];
+          this.storeUser(user_data['username']);
+          this.changeLoginStatus(true);
+          console.log('valid token checked');
+          return true;
+        }),
+        catchError(error => {
+          this.logout();
+          console.log('valid token checked');
+          return of(false);
+        }
+      ));
     }
   }
 
@@ -63,10 +111,10 @@ export class AuthService {
       if (token) {
         this.storeToken(token);
         this.storeUser(username);
-        this.loginStatusStream.next(true);
+        this.changeLoginStatus(true);
         return true;
       } else {
-        this.loginStatusStream.next(false);
+        this.changeLoginStatus(false);
         return false;
       }
     }));
@@ -76,7 +124,7 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
-    this.loginStatusStream.next(false);
+    this.changeLoginStatus(false);
     this.removeToken();
     this.removeUser();
   }
@@ -138,6 +186,5 @@ export class AuthService {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(user));
   }
-
 
 }

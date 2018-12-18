@@ -67,6 +67,7 @@ export class AppComponent implements OnInit {
     }
   ];
 
+
   /**
    * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
@@ -115,15 +116,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
-    if (this.authService.isLoggedIn()) {
-      this.userService.requestUsersList();
-    }
     this.authService.loginStatusStream.subscribe(
       value => {
         if (value === false) {
           this.actionsSidenavService.close();
           this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
-          this.alarmService.destroy();
         } else if (value === true) {
           this.userService.requestUsersList();
         }
@@ -161,15 +158,6 @@ export class AppComponent implements OnInit {
    */
   getUser() {
     return this.authService.getUser();
-  }
-
-  /**
-   * Method to check if a user is logged in
-   " Uses the isLoggedIn method defined on the {@link AuthService}
-   * @returns {boolean} True if the user is logged in
-   */
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
   }
 
   /**
