@@ -9,6 +9,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
+import { AuthService } from '../../auth/auth.service';
 import { AckComponent } from './ack.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
@@ -22,6 +23,7 @@ describe('AckComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
+  let authService: AuthService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
   const mockAlarm = Alarm.asAlarm({
     'value': 0,
@@ -59,6 +61,7 @@ describe('AckComponent', () => {
         HttpClient,
         NgxSpinnerService,
         SidenavService,
+        AuthService,
         { provide: RoutingService, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
@@ -81,12 +84,14 @@ describe('AckComponent', () => {
     fixture = TestBed.createComponent(AckComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
     sidenavService = fixture.debugElement.injector.get(SidenavService);
+    authService = fixture.debugElement.injector.get(AuthService);
     spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
     spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
     spyOn(sidenavService, 'open');
     spyOn(sidenavService, 'closeAndClean');
     spyOn(sidenavService, 'toggle');
+    spyOn(authService, 'getAllowedActions').and.returnValue({'can_ack': true});
     component = fixture.componentInstance;
     component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
