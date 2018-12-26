@@ -80,6 +80,7 @@ export class AuthService {
           const user_data = response['user_data'];
           const allowed_actions = response['allowed_actions'];
           this.storeUser(user_data['username']);
+          this.storeAllowedActions(allowed_actions);
           this.changeLoginStatus(true);
           return true;
         }),
@@ -153,6 +154,19 @@ export class AuthService {
   }
 
   /**
+  * Returns the user permission over the specified action stored in the local storage
+  * @returns {boolean | undefined} the permission as a boolean
+  */
+  getAllowedActions(): boolean {
+    const allowed_actions = localStorage.getItem('allowed_actions');
+    if (allowed_actions === null) {
+      return undefined;
+    } else {
+      return JSON.parse(allowed_actions);
+    }
+  }
+
+  /**
   * Deletes the token from the local storage
   */
   removeToken() {
@@ -164,6 +178,13 @@ export class AuthService {
   */
   removeUser() {
     localStorage.removeItem('user');
+  }
+
+  /**
+  * Deletes the allowed_actions from the local storage
+  */
+  removeAllowedActions() {
+    localStorage.removeItem('allowed_actions');
   }
 
   /**
@@ -182,6 +203,16 @@ export class AuthService {
   storeUser(user: string) {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  /**
+  * Stores the user allowed_actions in the local storage, replacing the previous allowed_actions, if any
+  * @param {string} permission the user allowed_actions to be stored
+  */
+  storeAllowedActions(allowed_actions: Object) {
+    this.removeAllowedActions();
+    console.log( JSON.stringify(allowed_actions) );
+    localStorage.setItem('allowed_actions', JSON.stringify(allowed_actions));
   }
 
 }

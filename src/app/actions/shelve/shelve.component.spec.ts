@@ -10,6 +10,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveComponent } from './shelve.component';
+import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
 
 describe('ShelveComponent', () => {
@@ -20,6 +21,7 @@ describe('ShelveComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
+  let authService: AuthService;
   const spyRoutingTable = jasmine.createSpyObj(
     'RoutingService', ['goToShelve', 'cleanActionOutlet', 'goToAcknowledge']
   );
@@ -55,6 +57,7 @@ describe('ShelveComponent', () => {
         HttpClient,
         NgxSpinnerService,
         SidenavService,
+        AuthService,
         { provide: RoutingService, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
@@ -77,12 +80,16 @@ describe('ShelveComponent', () => {
     fixture = TestBed.createComponent(ShelveComponent);
     alarmService = fixture.debugElement.injector.get(AlarmService);
     sidenavService = fixture.debugElement.injector.get(SidenavService);
+    authService = fixture.debugElement.injector.get(AuthService);
     spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
     spyOn(sidenavService, 'closeAndClean');
     spyOn(sidenavService, 'toggle');
+    spyOn(authService, 'getAllowedActions').and.returnValue(
+      {'can_shelve': true, 'can_unshelve': true}
+    );
     component = fixture.componentInstance;
     spyOn(component, 'onClose');
     component.alarm_id = mockAlarm['core_id'];
