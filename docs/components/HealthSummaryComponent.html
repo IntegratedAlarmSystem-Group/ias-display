@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>health-summary.component.scss</code></td>
+                <td class="col-md-9"><code>./health-summary.component.scss</code></td>
             </tr>
 
 
@@ -112,6 +112,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./health-summary.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -774,7 +780,7 @@ export class HealthSummaryComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ias content&quot; (click)&#x3D;&quot;goToTableFilteredBy(&#x27;ias-&#x27;);$event.stopPropagation()&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ias content&quot; (click)&#x3D;&quot;goToTableFilteredBy(&#x27;IASMON-&#x27;);$event.stopPropagation()&quot;&gt;
   &lt;div class&#x3D;&quot;ias sensors&quot;&gt;
     &lt;div class&#x3D;&quot;row no-vertical-margin&quot;&gt;
       &lt;div class&#x3D;&quot;sensors-card-wrapper&quot;&gt;
@@ -790,6 +796,59 @@ export class HealthSummaryComponent implements OnInit {
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./health-summary.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.ias.content{
+    cursor: pointer;
+}
+
+.ias.sensors{
+    display: inline-block;
+    width: 100%;
+}
+
+.sensors-card-wrapper{
+    display: inline-block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.sensors-card{
+    display: inline-block;
+    text-align: center;
+    padding: 0px 20px;
+    float: left;
+    max-height: 130px;
+    min-width: 100px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    cursor: pointer;
+
+    .global-health-status {
+      min-width: 165px;
+    }
+
+    .title{
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    .icon{
+        padding: 20px;
+        height: 85px;
+        width: fit-content;
+    }
+
+    &amp;.no-border {
+      border: solid;
+      border-width: 0;
+    }
+}
 </code></pre>
     </div>
 
@@ -818,7 +877,7 @@ export class HealthSummaryComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="ias content" (click)="goToTableFilteredBy(\'ias-\');$event.stopPropagation()">  <div class="ias sensors">    <div class="row no-vertical-margin">      <div class="sensors-card-wrapper">          <div class="sensors-card global-health-status no-border">              <div class="title">IAS HEALTH</div>              <div class="icon">                <app-alarm                  [alarm]="alarm" [images]="iconSet" [imagesUnreliable]="iconUnreliableSet" [size]="\'lg\'"                ></app-alarm>              </div>          </div>      </div>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="ias content" (click)="goToTableFilteredBy(\'IASMON-\');$event.stopPropagation()">  <div class="ias sensors">    <div class="row no-vertical-margin">      <div class="sensors-card-wrapper">          <div class="sensors-card global-health-status no-border">              <div class="title">IAS HEALTH</div>              <div class="icon">                <app-alarm                  [alarm]="alarm" [images]="iconSet" [imagesUnreliable]="iconUnreliableSet" [size]="\'lg\'"                ></app-alarm>              </div>          </div>      </div>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HealthSummaryComponent'};
@@ -860,7 +919,9 @@ export class HealthSummaryComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

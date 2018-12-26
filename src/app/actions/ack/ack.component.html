@@ -22,10 +22,21 @@
         </table>
       </div>
 
-      <div *ngIf="requestStatus === 0; then actionProcess else responseMessage"> </div>
+      <div *ngIf="!this.authService.getAllowedActions()['can_ack']; then notAllowedMessage"> </div>
+      <ng-template #notAllowedMessage>
+        <div [ngClass]="{
+          'section ack-action': true,
+          'action-warning': true
+        }">
+        <div class="section-title"> Action Not Allowed </div>
+        <div> The logged in user is not allowed to perform this action. The action button will remain disabled. </div>
+        </div>
+      </ng-template>
 
+      <div *ngIf="requestStatus === 0; then actionProcess else responseMessage"> </div>
       <ng-template #actionProcess>
         <div class="section ack-action">
+
           <div class="section-title">Information required to acknowledge the Alarm</div>
           <mat-form-field class="user-form-field">
             <mat-select [(value)]="user_selected" formControlName="user" placeholder="Select a User">

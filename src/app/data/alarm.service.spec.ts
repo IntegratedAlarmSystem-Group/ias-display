@@ -262,7 +262,7 @@ describe('AlarmService', () => {
           properties: []
       };
       spyOn(cdbService, 'initialize').and.callFake(function() {});
-      spyOn(authService, 'isLoggedIn').and.returnValue(true);
+      authService.loginStatus = true;
       cdbService.iasConfiguration = mockIasConfiguration;
       subject.canSound = true;
       subject.audio = new Audio();
@@ -721,7 +721,7 @@ describe('AlarmService', () => {
   }));
 
   it('should not be initialized if the user is not logged in', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
+    spyOn(authService, 'hasValidToken').and.returnValue(of(false));
     expect(subject).toBeTruthy();
     subject.initialize();
     expect(subject.webSocketBridge.connect).not.toHaveBeenCalled();

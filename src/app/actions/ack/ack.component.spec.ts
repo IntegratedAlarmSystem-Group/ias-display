@@ -9,6 +9,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
+import { AuthService } from '../../auth/auth.service';
 import { AckComponent } from './ack.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
@@ -22,6 +23,7 @@ describe('AckComponent', () => {
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
+  let authService: AuthService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
   const mockAlarm = Alarm.asAlarm({
     'value': 0,
@@ -59,6 +61,7 @@ describe('AckComponent', () => {
         HttpClient,
         NgxSpinnerService,
         SidenavService,
+        AuthService,
         { provide: RoutingService, useValue: spyRoutingTable },
         {
           provide: ActivatedRoute,
@@ -77,117 +80,126 @@ describe('AckComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AckComponent);
-    alarmService = fixture.debugElement.injector.get(AlarmService);
-    sidenavService = fixture.debugElement.injector.get(SidenavService);
-    spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
-    spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
-    spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
-    spyOn(sidenavService, 'open');
-    spyOn(sidenavService, 'closeAndClean');
-    spyOn(sidenavService, 'toggle');
-    component = fixture.componentInstance;
-    component.alarm_id = mockAlarm['core_id'];
-    component.ngOnInit();
-    spyOn(component, 'updateAlarmsToAck');
-    componentHeader = fixture.nativeElement.querySelector('.component-header');
-    componentBody = fixture.nativeElement.querySelector('.component-body');
-    componentFooter = fixture.nativeElement.querySelector('.component-footer');
-    fixture.detectChanges();
-  });
-
-  afterEach(() => {
-    fixture.destroy();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  // Information
-  it('should display the Alarm ID', () => {
-    expect(componentBody).toBeTruthy();
-    expect(componentBody.textContent).toContain(component.alarm_id);
-  });
-
-  it('should display the alarm short description', () => {
-    const expected = mockAlarm.description;
-    expect(componentBody.textContent).toContain(expected);
-  });
-
-  // Form
-  describe('should have a form', () => {
-    it('with an input field and an ack-tree component', () => {
-      expect(componentBody.querySelector('textarea')).toBeTruthy();
-      expect(componentBody.querySelector('app-ack-tree')).toBeTruthy();
+  describe('', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(AckComponent);
+      alarmService = fixture.debugElement.injector.get(AlarmService);
+      sidenavService = fixture.debugElement.injector.get(SidenavService);
+      authService = fixture.debugElement.injector.get(AuthService);
+      spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
+      spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
+      spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
+      spyOn(sidenavService, 'open');
+      spyOn(sidenavService, 'closeAndClean');
+      spyOn(sidenavService, 'toggle');
+      spyOn(authService, 'getAllowedActions').and.returnValue({'can_ack': true});
+      component = fixture.componentInstance;
+      component.alarm_id = mockAlarm['core_id'];
+      component.ngOnInit();
+      spyOn(component, 'updateAlarmsToAck');
+      componentHeader = fixture.nativeElement.querySelector('.component-header');
+      componentBody = fixture.nativeElement.querySelector('.component-body');
+      componentFooter = fixture.nativeElement.querySelector('.component-footer');
+      fixture.detectChanges();
     });
-    describe('such that when it is empty', () => {
-      it('the form should be invalid', () => {
-        expect(component.form.valid).toBeFalsy();
+
+    afterEach(() => {
+      fixture.destroy();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    describe('and the user has ack permissions', () => {
+
+      it('should create', () => {
+        expect(component).toBeTruthy();
       });
-    });
-    describe('such that when the user enters a message but not a user', () => {
-      it('the form should be invalid', () => {
-        expect(component.form.valid).toBeFalsy();
-        component.form.controls['message'].setValue('Any Message');
-        expect(component.form.valid).toBeFalsy();
-      });
-    });
-    describe('such that when the user enters a message and selects a user', () => {
-      it('the form should be valid', () => {
-        expect(component.form.valid).toBeFalsy();
-        component.form.controls['message'].setValue('Any Message');
-        component.form.controls['user'].setValue('any_user');
-        expect(component.form.valid).toBeTruthy();
-      });
-    });
 
-  });
+      // Information
+      it('should display the Alarm ID', () => {
+        expect(componentBody).toBeTruthy();
+        expect(componentBody.textContent).toContain(component.alarm_id);
+      });
 
-  // Acknowledge button
-  describe('should have an Acknowledge button', () => {
-    it('in the component footer', () => {
-      expect(componentFooter.querySelector('#acknowledge')).toBeTruthy();
-    });
-    describe('and when the user clicks on it,', () => {
-      describe('and the user has not entered a message', () => {
-        it('it should not call the component acknowledge method', async(() => {
-          componentFooter.querySelector('#acknowledge').click();
-          fixture.whenStable().then(() => {
-            expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
+      it('should display the alarm short description', () => {
+        const expected = mockAlarm.description;
+        expect(componentBody.textContent).toContain(expected);
+      });
+
+      // Form
+      describe('should have a form', () => {
+        it('with an input field and an ack-tree component', () => {
+          expect(componentBody.querySelector('textarea')).toBeTruthy();
+          expect(componentBody.querySelector('app-ack-tree')).toBeTruthy();
+        });
+        describe('such that when it is empty', () => {
+          it('the form should be invalid', () => {
+            expect(component.form.valid).toBeFalsy();
           });
-        }));
-      });
-      describe('and the user has entered a message but not a user', () => {
-        it('it should not call the component acknowledge method', async(() => {
-          component.alarmsToAck = [mockAlarm.core_id];
-          component.form.controls['message'].setValue('Any message');
-          expect(component.form.valid).toBeFalsy();
-          fixture.detectChanges();
-
-          componentFooter.querySelector('#acknowledge').click();
-          fixture.whenStable().then(() => {
-            expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
+        });
+        describe('such that when the user enters a message but not a user', () => {
+          it('the form should be invalid', () => {
+            expect(component.form.valid).toBeFalsy();
+            component.form.controls['message'].setValue('Any Message');
+            expect(component.form.valid).toBeFalsy();
           });
-        }));
-      });
-      describe('and the user has entered a message and selected a user', () => {
-        it('it should call the component acknowledge method', async(() => {
-          component.alarmsToAck = [mockAlarm.core_id];
-          component.form.controls['message'].setValue('Any message');
-          component.form.controls['user'].setValue('any_user');
-          expect(component.form.valid).toBeTruthy();
-          fixture.detectChanges();
-
-          componentFooter.querySelector('#acknowledge').click();
-          fixture.whenStable().then(() => {
-            expect(alarmService.acknowledgeAlarms).toHaveBeenCalled();
+        });
+        describe('such that when the user enters a message and selects a user', () => {
+          it('the form should be valid', () => {
+            expect(component.form.valid).toBeFalsy();
+            component.form.controls['message'].setValue('Any Message');
+            component.form.controls['user'].setValue('any_user');
+            expect(component.form.valid).toBeTruthy();
           });
-        }));
+        });
+      });
+
+      // Acknowledge button
+      describe('should have an Acknowledge button', () => {
+        it('in the component footer', () => {
+          expect(componentFooter.querySelector('#acknowledge')).toBeTruthy();
+        });
+        describe('and when the user clicks on it,', () => {
+          describe('and the user has not entered a message', () => {
+            it('it should not call the component acknowledge method', async(() => {
+              componentFooter.querySelector('#acknowledge').click();
+              fixture.whenStable().then(() => {
+                expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
+              });
+            }));
+          });
+          describe('and the user has entered a message but not a user', () => {
+            it('it should not call the component acknowledge method', async(() => {
+              component.alarmsToAck = [mockAlarm.core_id];
+              component.form.controls['message'].setValue('Any message');
+              expect(component.form.valid).toBeFalsy();
+              fixture.detectChanges();
+
+              componentFooter.querySelector('#acknowledge').click();
+              fixture.whenStable().then(() => {
+                expect(alarmService.acknowledgeAlarms).not.toHaveBeenCalled();
+              });
+            }));
+          });
+          describe('and the user has entered a message and selected a user', () => {
+            it('it should call the component acknowledge method', async(() => {
+              component.alarmsToAck = [mockAlarm.core_id];
+              component.form.controls['message'].setValue('Any message');
+              component.form.controls['user'].setValue('any_user');
+              expect(component.form.valid).toBeTruthy();
+              fixture.detectChanges();
+
+              componentFooter.querySelector('#acknowledge').click();
+              fixture.whenStable().then(() => {
+                expect(alarmService.acknowledgeAlarms).toHaveBeenCalled();
+              });
+            }));
+          });
+        });
       });
     });
   });
-
 
 });

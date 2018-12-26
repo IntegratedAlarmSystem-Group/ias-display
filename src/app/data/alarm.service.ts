@@ -165,7 +165,7 @@ export class AlarmService {
   * Start connection to the backend through websockets
   */
   initialize() {
-    if (this.isInitialized || !this.authService.isLoggedIn()) {
+    if (this.isInitialized || !this.authService.loginStatus) {
       return;
     }
     this.cdbService.initialize();
@@ -186,21 +186,21 @@ export class AlarmService {
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
       // console.log('notify ', payload);
-      if (this.authService.isLoggedIn()) {
+      if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
       }
     });
     this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
       // console.log('request', payload);
-      if (this.authService.isLoggedIn()) {
+      if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessagesList(payload.data);
       }
     });
     this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) => {
       // console.log('counter ', payload);
-      if (this.authService.isLoggedIn()) {
+      if (this.authService.loginStatus) {
         this.readCountByViewMessage(payload.data);
       }
     });
@@ -237,6 +237,7 @@ export class AlarmService {
       this.resetCountByView();
     }
     this.isInitialized = false;
+    console.log('Connection to webserver closed');
   }
 
   /******* ALARM HANDLING *******/

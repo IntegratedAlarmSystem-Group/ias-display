@@ -88,7 +88,7 @@ export class AckComponent implements OnInit, OnDestroy {
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
     private userService: UserService,
-    private authService: AuthService
+    public authService: AuthService
   ) { }
 
   /**
@@ -192,7 +192,8 @@ export class AckComponent implements OnInit, OnDestroy {
   disableAcknowledgment() {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
     const validForm = this.form.valid;
-    return (noAlarmsToAck || !validForm);
+    const isAllowed = this.authService.getAllowedActions()['can_ack'];
+    return (noAlarmsToAck || !validForm || !isAllowed);
   }
 
   /**

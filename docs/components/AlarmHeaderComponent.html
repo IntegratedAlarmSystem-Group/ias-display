@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>alarm-header.component.scss</code></td>
+                <td class="col-md-9"><code>./alarm-header.component.scss</code></td>
             </tr>
 
 
@@ -112,6 +112,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./alarm-header.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -691,6 +697,79 @@ export class AlarmHeaderComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./alarm-header.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.alarm-header-color {
+  height: 100%;
+  width: 10px;
+  border-radius: 4px 0px 0px 4px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.alarm-header-name {
+  padding-right: 4px;
+}
+
+.alarm-header-badges {
+  position: relative;
+  margin: 12px 0 12px 0px;
+}
+
+.badges{
+
+  .badge-icon{
+    position: absolute;
+    height: 35%;
+    left: 106%;
+  }
+
+  .ack-icon{
+    top: 2%;
+  }
+
+  .shelve-icon{
+    bottom: 2%;
+  }
+
+  .badge-off{
+    opacity: 0.08;
+  }
+}
+
+.green {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.yellow {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.red {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.gray {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.blue {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.unreliable {
+  background: transparent;
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -758,7 +837,9 @@ export class AlarmHeaderComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

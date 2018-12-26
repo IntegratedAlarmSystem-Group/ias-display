@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { tap, delay } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
@@ -16,9 +16,30 @@ import { environment } from '../../environments/environment';
 export class AuthService {
 
   /**
+  * Name for the browser to use in order to save the token in the local storage
+  */
+  TOKEN_STORAGE_NAME = 'IAS-TOKEN';
+
+  /**
+  * Name for the browser to use in order to save the user in the local storage
+  */
+  USER_STORAGE_NAME = 'IAS-USER';
+
+  /**
+  * Name for the browser to use in order to save the allowed actions in the local storage
+  */
+  ACTIONS_STORAGE_NAME = 'IAS-ACTIONS';
+
+  /**
   * Store the URL so we can redirect after logging in
   */
   redirectUrl: string;
+
+
+  /**
+  * Store if the user is logged in or not
+  */
+  loginStatus = false;
 
   /**
   * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
@@ -33,16 +54,56 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Changes the {@link loginStatus} and sneds the corresponding update in the {@link loginStatusStream}
+   * @param {boolean} status the new login status
+   */
+  changeLoginStatus(status: boolean) {
+    this.loginStatus = status;
+    this.loginStatusStream.next(status);
+  }
+
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
+    if (this.getToken()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+    }
+  }
 
   /**
    * Checks wether or not the user is logged-in, which is true if there is a valid token
-   * @returns {boolean} true if there is a valid token, false if not
+   * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
-  isLoggedIn(): boolean {
-    if (this.getToken()) {
-      return true;
+  hasValidToken(): Observable<boolean> {
+    if (!this.getToken()) {
+      this.changeLoginStatus(false);
+      return of(false);
     } else {
-      return false;
+      const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
+      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+        map((response: any) => {
+          const user_data = response['user_data'];
+          const allowed_actions = response['allowed_actions'];
+          this.storeUser(user_data['username']);
+          this.storeAllowedActions(allowed_actions);
+          this.changeLoginStatus(true);
+          return true;
+        }),
+        catchError(error => {
+          this.logout();
+          return of(false);
+        }
+      ));
     }
   }
 
@@ -63,10 +124,10 @@ export class AuthService {
       if (token) {
         this.storeToken(token);
         this.storeUser(username);
-        this.loginStatusStream.next(true);
+        this.changeLoginStatus(true);
         return true;
       } else {
-        this.loginStatusStream.next(false);
+        this.changeLoginStatus(false);
         return false;
       }
     }));
@@ -76,7 +137,7 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
-    this.loginStatusStream.next(false);
+    this.changeLoginStatus(false);
     this.removeToken();
     this.removeUser();
   }
@@ -86,7 +147,7 @@ export class AuthService {
   * @returns {string | undefined} the token as a string, or undefined if there is no token
   */
   getToken(): string | undefined {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(this.TOKEN_STORAGE_NAME);
     if (token === null) {
       return undefined;
     } else {
@@ -99,7 +160,7 @@ export class AuthService {
   * @returns {string | undefined} the user name as a string, or undefined if there is no user
   */
   getUser(): string | undefined {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem(this.USER_STORAGE_NAME);
     if (user === null) {
       return undefined;
     } else {
@@ -108,17 +169,37 @@ export class AuthService {
   }
 
   /**
+  * Returns the user permission over the specified action stored in the local storage
+  * @returns {boolean | undefined} the permission as a boolean
+  */
+  getAllowedActions(): boolean {
+    const allowed_actions = localStorage.getItem(this.ACTIONS_STORAGE_NAME);
+    if (allowed_actions === null) {
+      return undefined;
+    } else {
+      return JSON.parse(allowed_actions);
+    }
+  }
+
+  /**
   * Deletes the token from the local storage
   */
   removeToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_STORAGE_NAME);
   }
 
   /**
   * Deletes the user from the local storage
   */
   removeUser() {
-    localStorage.removeItem('user');
+    localStorage.removeItem(this.USER_STORAGE_NAME);
+  }
+
+  /**
+  * Deletes the allowed_actions from the local storage
+  */
+  removeAllowedActions() {
+    localStorage.removeItem(this.ACTIONS_STORAGE_NAME);
   }
 
   /**
@@ -126,8 +207,8 @@ export class AuthService {
   * @param {string} token the token to be stored
   */
   storeToken(token: string) {
-    localStorage.removeItem('token');
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.removeItem(this.TOKEN_STORAGE_NAME);
+    localStorage.setItem(this.TOKEN_STORAGE_NAME, JSON.stringify(token));
   }
 
   /**
@@ -135,9 +216,17 @@ export class AuthService {
   * @param {string} user the user to be stored
   */
   storeUser(user: string) {
-    localStorage.removeItem('user');
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.removeItem(this.USER_STORAGE_NAME);
+    localStorage.setItem(this.USER_STORAGE_NAME, JSON.stringify(user));
   }
 
+  /**
+  * Stores the user allowed_actions in the local storage, replacing the previous allowed_actions, if any
+  * @param {string} permission the user allowed_actions to be stored
+  */
+  storeAllowedActions(allowed_actions: Object) {
+    this.removeAllowedActions();
+    localStorage.setItem(this.ACTIONS_STORAGE_NAME, JSON.stringify(allowed_actions));
+  }
 
 }

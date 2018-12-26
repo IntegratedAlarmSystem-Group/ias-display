@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -299,7 +296,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
     private userService: UserService,
-    private authService: AuthService
+    public authService: AuthService
   ) {
   }
 
@@ -342,7 +339,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {boolean} True if shelve action can be performed and false if not
    */
   canSend(): boolean {
-    return this.alarm.shelved || this.form.valid;
+    const allowedShelve &#x3D; this.authService.getAllowedActions()[&#x27;can_shelve&#x27;];
+    const allowedUnshelve &#x3D; this.authService.getAllowedActions()[&#x27;can_unshelve&#x27;];
+    const isAllowed &#x3D; allowedShelve &amp;&amp; allowedUnshelve;
+    return (this.alarm.shelved || this.form.valid) &amp;&amp; isAllowed;
   }
 
   /**
@@ -589,7 +589,9 @@ export class ShelveComponent implements OnInit, OnDestroy {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

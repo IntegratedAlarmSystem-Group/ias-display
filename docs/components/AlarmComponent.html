@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>alarm.component.scss</code></td>
+                <td class="col-md-9"><code>./alarm.component.scss</code></td>
             </tr>
 
 
@@ -112,6 +112,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./alarm.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -1004,6 +1010,138 @@ export class AlarmComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./alarm.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">$cem: 1px;
+$xs-cem: 1*$cem;
+$sm-cem: 1.2*$cem;
+$md-cem: 1.6*$cem;
+$lg-cem: 3.0*$cem;
+$status-cem: 1*$cem;
+
+.alarm-component{
+
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+
+    .alarm-icon{
+      height: 100%;
+    }
+
+  }
+
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    padding-right: 6%;
+    width: 100%;
+  }
+
+  .badges{
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+
+    .badge-icon{
+      width: 100%;
+
+      &amp;.ack-icon{
+        margin-top: 6%;
+      }
+
+      &amp;.shelve-icon{
+        margin-bottom: 6%;
+      }
+
+      &amp;.badge-off{
+        opacity: 0.08;
+      }
+    }
+
+    &amp;.hidden {
+      visibility: hidden;
+    }
+  }
+
+}
+
+.alarm-component-xs {
+  @extend .alarm-component;
+  height: 19*$xs-cem;
+  line-height: 19*$xs-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$xs-cem;
+  }
+}
+
+.alarm-component-sm {
+  @extend .alarm-component;
+  height: 19*$sm-cem;
+  line-height: 19*$sm-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$sm-cem;
+  }
+}
+
+.alarm-component-md {
+  @extend .alarm-component;
+  height: 19*$md-cem;
+  line-height: 19*$md-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$md-cem;
+  }
+}
+
+.alarm-component-lg {
+  @extend .alarm-component;
+  height: 19*$lg-cem;
+  line-height: 19*$lg-cem;
+
+  .badges{
+    @extend .badges;
+    width: 8*$lg-cem;
+    margin-left: 10px;
+  }
+}
+
+.alarm-component-status {
+  @extend .alarm-component;
+  height: 19*$status-cem;
+  line-height: 19*$status-cem;
+
+  .badges{
+    @extend .badges;
+    width: 11*$status-cem;
+
+    .badge-icon{
+      @extend .badge-icon;
+
+      &amp;.ack-icon{
+        @extend .ack-icon;
+        margin-top: 0;
+      }
+
+      &amp;.shelve-icon{
+        @extend .shelve-icon;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -1071,7 +1209,9 @@ export class AlarmComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

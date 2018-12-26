@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -108,13 +105,13 @@
                             <a href="#mockAlarms" title="src/app/weather/test_fixtures.ts"><b>mockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../test_fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#MockAlarms" title="src/app/shared/alarm-header/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                            <a href="#MockAlarms" title="src/app/shared/alarm/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#MockAlarms" title="src/app/tabular/tabular-view/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#MockAlarms" title="src/app/shared/alarm/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                            <a href="#MockAlarms" title="src/app/shared/alarm-header/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#MockIasios" title="src/app/tabular/tabular-view/fixtures.ts"><b>MockIasios</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
@@ -1470,6 +1467,7 @@
                         <td class="col-md-4">
                             <i>Default value : </i><code>{
   TOKEN: &#x27;/users/api-token-auth/&#x27;,
+  VALIDATE_TOKEN: &#x27;/users/users/validate_token/&#x27;,
   USERS_LIST: &#x27;/users/users/filter/?group&#x3D;operators&#x27;,
   CDB: &#x27;/cdb-api/&#x27;,
   CDB_IAS: &#x27;/cdb-api/ias/&#x27;,
@@ -2240,338 +2238,6 @@
             </tbody>
         </table>
 </section>
-    <h3>src/app/shared/alarm-header/fixtures.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="MockAlarms"></a>
-                        <span class="name">
-                            <b>
-                            MockAlarms
-                            </b>
-                            <a href="#MockAlarms"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>MockAlarms:     <code>[]</code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[
-  {
-    &#x27;value&#x27;: 4,
-    &#x27;core_id&#x27;: &#x27;critical&#x27;,
-    &#x27;running_id&#x27;: &#x27;critical&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 3,
-    &#x27;core_id&#x27;: &#x27;high&#x27;,
-    &#x27;running_id&#x27;: &#x27;high&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 2,
-    &#x27;core_id&#x27;: &#x27;medium&#x27;,
-    &#x27;running_id&#x27;: &#x27;medium&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 1,
-    &#x27;core_id&#x27;: &#x27;low&#x27;,
-    &#x27;running_id&#x27;: &#x27;low&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;clear&#x27;,
-    &#x27;running_id&#x27;: &#x27;clear&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;unknown&#x27;,
-    &#x27;running_id&#x27;: &#x27;unknown&#x27;,
-    &#x27;mode&#x27;: 7,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;maintenance&#x27;,
-    &#x27;running_id&#x27;: &#x27;maintenance&#x27;,
-    &#x27;mode&#x27;: 4,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;shutteddown&#x27;,
-    &#x27;running_id&#x27;: &#x27;shutteddown&#x27;,
-    &#x27;mode&#x27;: 3,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;malfunctioning&#x27;,
-    &#x27;running_id&#x27;: &#x27;malfunctioning&#x27;,
-    &#x27;mode&#x27;: 8,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 1,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 4,
-    &#x27;core_id&#x27;: &#x27;critical_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;critical_unreliable&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 3,
-    &#x27;core_id&#x27;: &#x27;high_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;high_unreliable&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 2,
-    &#x27;core_id&#x27;: &#x27;medium_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;medium_unreliable&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 1,
-    &#x27;core_id&#x27;: &#x27;low_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;low_unreliable&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;clear_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;clear_unreliable&#x27;,
-    &#x27;mode&#x27;: 5,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;unknown_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;unknown_unreliable&#x27;,
-    &#x27;mode&#x27;: 7,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;maintenance_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;maintenance_unreliable&#x27;,
-    &#x27;mode&#x27;: 4,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;shutteddown_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;shutteddown_unreliable&#x27;,
-    &#x27;mode&#x27;: 3,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  },
-  {
-    &#x27;value&#x27;: 0,
-    &#x27;core_id&#x27;: &#x27;malfunctioning_unreliable&#x27;,
-    &#x27;running_id&#x27;: &#x27;malfunctioning_unreliable&#x27;,
-    &#x27;mode&#x27;: 8,
-    &#x27;core_timestamp&#x27;: 1267252440000,
-    &#x27;state_change_timestamp&#x27;: 1267252440000,
-    &#x27;validity&#x27;: 0,
-    &#x27;description&#x27;: &#x27;my description&#x27;,
-    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
-    &#x27;sound&#x27;: &#x27;sound1&#x27;,
-    &#x27;can_shelve&#x27;: true,
-    &#x27;ack&#x27;: false,
-    &#x27;shelved&#x27;: false,
-    &#x27;dependencies&#x27;: [],
-  }
-]</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Set of mock Alarms for the tests </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
     <h3>src/app/shared/alarm/fixtures.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -2990,6 +2656,338 @@
             </tbody>
         </table>
 </section>
+    <h3>src/app/shared/alarm-header/fixtures.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="MockAlarms"></a>
+                        <span class="name">
+                            <b>
+                            MockAlarms
+                            </b>
+                            <a href="#MockAlarms"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>MockAlarms:     <code>[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+  {
+    &#x27;value&#x27;: 4,
+    &#x27;core_id&#x27;: &#x27;critical&#x27;,
+    &#x27;running_id&#x27;: &#x27;critical&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 3,
+    &#x27;core_id&#x27;: &#x27;high&#x27;,
+    &#x27;running_id&#x27;: &#x27;high&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 2,
+    &#x27;core_id&#x27;: &#x27;medium&#x27;,
+    &#x27;running_id&#x27;: &#x27;medium&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 1,
+    &#x27;core_id&#x27;: &#x27;low&#x27;,
+    &#x27;running_id&#x27;: &#x27;low&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;clear&#x27;,
+    &#x27;running_id&#x27;: &#x27;clear&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;unknown&#x27;,
+    &#x27;running_id&#x27;: &#x27;unknown&#x27;,
+    &#x27;mode&#x27;: 7,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;maintenance&#x27;,
+    &#x27;running_id&#x27;: &#x27;maintenance&#x27;,
+    &#x27;mode&#x27;: 4,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;shutteddown&#x27;,
+    &#x27;running_id&#x27;: &#x27;shutteddown&#x27;,
+    &#x27;mode&#x27;: 3,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;malfunctioning&#x27;,
+    &#x27;running_id&#x27;: &#x27;malfunctioning&#x27;,
+    &#x27;mode&#x27;: 8,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 4,
+    &#x27;core_id&#x27;: &#x27;critical_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;critical_unreliable&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 3,
+    &#x27;core_id&#x27;: &#x27;high_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;high_unreliable&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 2,
+    &#x27;core_id&#x27;: &#x27;medium_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;medium_unreliable&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 1,
+    &#x27;core_id&#x27;: &#x27;low_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;low_unreliable&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;clear_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;clear_unreliable&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;unknown_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;unknown_unreliable&#x27;,
+    &#x27;mode&#x27;: 7,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;maintenance_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;maintenance_unreliable&#x27;,
+    &#x27;mode&#x27;: 4,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;shutteddown_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;shutteddown_unreliable&#x27;,
+    &#x27;mode&#x27;: 3,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  },
+  {
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;malfunctioning_unreliable&#x27;,
+    &#x27;running_id&#x27;: &#x27;malfunctioning_unreliable&#x27;,
+    &#x27;mode&#x27;: 8,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: 0,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }
+]</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Set of mock Alarms for the tests </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -3015,7 +3013,9 @@
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -66,8 +63,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service that connects and receives <a href="../classes/Alarm.html">Alarm</a> messages from the
-IAS Webserver through Websockets</p>
+                <p>Service to manage information about user accounts</p>
 
             </p>
 
@@ -126,7 +122,7 @@ IAS Webserver through Websockets</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/data/user.service.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/data/user.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -198,7 +194,7 @@ IAS Webserver through Websockets</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/data/user.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/data/user.service.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -257,7 +253,7 @@ IAS Webserver through Websockets</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/data/user.service.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/data/user.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -293,8 +289,7 @@ export interface User {
 }
 
 /**
-* Service that connects and receives {@link Alarm} messages from the
-* IAS Webserver through Websockets
+* Service to manage information about user accounts
 */
 @Injectable()
 export class UserService {
@@ -365,7 +360,9 @@ export class UserService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

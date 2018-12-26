@@ -35,4 +35,8 @@
 
   }
 
+  .mat-icon-button.mat-accent[disabled] {
+    color: mat-color($background, background);
+  }
+
 }

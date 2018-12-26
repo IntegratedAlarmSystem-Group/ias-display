@@ -48,9 +48,9 @@ describe('AuthService', () => {
         service.login(username, password).subscribe((response) => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
-          expect(localStorage.getItem('token')).toEqual(JSON.stringify(token));
-          expect(localStorage.getItem('user')).toEqual(JSON.stringify(username));
-          expect(service.isLoggedIn()).toBe(true);
+          expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toEqual(JSON.stringify(token));
+          expect(localStorage.getItem(service.USER_STORAGE_NAME)).toEqual(JSON.stringify(username));
+          expect(service.loginStatus).toEqual(true);
         });
       }));
     });
@@ -64,9 +64,9 @@ describe('AuthService', () => {
         service.login(username, password).subscribe((response) => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
-          expect(localStorage.getItem('token')).toBeFalsy();
-          expect(localStorage.getItem('user')).toBeFalsy();
-          expect(service.isLoggedIn()).toBe(false);
+          expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toBeFalsy();
+          expect(localStorage.getItem(service.USER_STORAGE_NAME)).toBeFalsy();
+          expect(service.loginStatus).toEqual(false);
         });
       }));
     });
@@ -77,15 +77,14 @@ describe('AuthService', () => {
       // Arrange:
       service.storeUser(username);
       service.storeToken(token);
-      expect(localStorage.getItem('user')).toBe(JSON.stringify(username));
-      expect(localStorage.getItem('token')).toBe(JSON.stringify(token));
-      expect(service.isLoggedIn()).toBe(true);
+      expect(localStorage.getItem(service.USER_STORAGE_NAME)).toBe(JSON.stringify(username));
+      expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toBe(JSON.stringify(token));
       // Act:
       service.logout();
       // Assert:
-      expect(localStorage.getItem('token')).toBeFalsy();
-      expect(localStorage.getItem('user')).toBeFalsy();
-      expect(service.isLoggedIn()).toBe(false);
+      expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toBeFalsy();
+      expect(localStorage.getItem(service.USER_STORAGE_NAME)).toBeFalsy();
+      expect(service.loginStatus).toEqual(false);
     });
   });
 });

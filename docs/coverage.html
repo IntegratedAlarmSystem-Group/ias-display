@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -175,7 +172,7 @@
             </td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(25/25)</span>
+                <span class="coverage-count">(26/26)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -223,7 +220,7 @@
             </td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(30/30)</span>
+                <span class="coverage-count">(31/31)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -415,7 +412,7 @@
             </td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(16/16)</span>
+                <span class="coverage-count">(18/18)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -431,7 +428,7 @@
             </td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(13/13)</span>
+                <span class="coverage-count">(22/22)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -1393,7 +1390,9 @@
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <script src="./js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
