@@ -72,6 +72,7 @@ export class AppComponent implements OnInit {
    * Builds an instance of the application, with its related services and complements
    * @param {AlarmService} alarmService Service used to get the Alarms of this component
    * @param {AuthService} authService Service used for authentication
+   * @param {UserService} userService Service used to manage information about user accounts
    * @param {SidenavService} actionsSidenavService Service for the navigation
    * @param {MatIconRegistry} matIconRegistry Angular material registry for custom icons
    * @param {DomSanitizer} matIconRegistry Angular material DOM sanitizer for custom icons
