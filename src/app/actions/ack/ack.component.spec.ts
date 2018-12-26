@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AckTreeComponent } from '../ack-tree/ack-tree.component';
 import { Alarm } from '../../data/alarm';
 
-fdescribe('AckComponent', () => {
+describe('AckComponent', () => {
   let component: AckComponent;
   let fixture: ComponentFixture<AckComponent>;
   let componentBody: any;
