@@ -869,8 +869,8 @@ export class LoginComponent implements OnInit {
       this.formGroup.controls.user.value,
       this.formGroup.controls.password.value,
     ).subscribe(
-      () &#x3D;&gt; {
-        if (this.authService.isLoggedIn()) {
+      (response) &#x3D;&gt; {
+        if (response &#x3D;&#x3D;&#x3D; true) {
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
           const redirect &#x3D; this.authService.redirectUrl ? this.authService.redirectUrl : &#x27;&#x27;;

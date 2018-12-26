@@ -84,6 +84,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#loginStatus">loginStatus</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#loginStatusStream">loginStatusStream</a>
                             </li>
@@ -103,13 +106,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#changeLoginStatus">changeLoginStatus</a>
+                            </li>
+                            <li>
+                                <a href="#getAllowedActions">getAllowedActions</a>
+                            </li>
+                            <li>
+                                <a href="#getHttpHeaders">getHttpHeaders</a>
+                            </li>
+                            <li>
                                 <a href="#getToken">getToken</a>
                             </li>
                             <li>
                                 <a href="#getUser">getUser</a>
                             </li>
                             <li>
-                                <a href="#isLoggedIn">isLoggedIn</a>
+                                <a href="#hasValidToken">hasValidToken</a>
                             </li>
                             <li>
                                 <a href="#login">login</a>
@@ -118,10 +130,16 @@
                                 <a href="#logout">logout</a>
                             </li>
                             <li>
+                                <a href="#removeAllowedActions">removeAllowedActions</a>
+                            </li>
+                            <li>
                                 <a href="#removeToken">removeToken</a>
                             </li>
                             <li>
                                 <a href="#removeUser">removeUser</a>
+                            </li>
+                            <li>
+                                <a href="#storeAllowedActions">storeAllowedActions</a>
                             </li>
                             <li>
                                 <a href="#storeToken">storeToken</a>
@@ -152,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/auth/auth.service.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/auth/auth.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -206,6 +224,174 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="changeLoginStatus"></a>
+                        <span class="name">
+                            <b>
+                            changeLoginStatus
+                            </b>
+                            <a href="#changeLoginStatus"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>changeLoginStatus(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/auth/auth.service.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Changes the <a href="loginStatus">loginStatus</a> and sneds the corresponding update in the <a href="loginStatusStream">loginStatusStream</a></p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>status</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>the new login status</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAllowedActions"></a>
+                        <span class="name">
+                            <b>
+                            getAllowedActions
+                            </b>
+                            <a href="#getAllowedActions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAllowedActions()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/auth/auth.service.ts:160</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the user permission over the specified action stored in the local storage</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the permission as a boolean</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getHttpHeaders"></a>
+                        <span class="name">
+                            <b>
+                            getHttpHeaders
+                            </b>
+                            <a href="#getHttpHeaders"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getHttpHeaders()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/auth/auth.service.ts:55</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Builds and returns HttpHeaders for the requests, including the token for requests</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://angular.io/api/common/http/HttpHeaders" target="_blank" >HttpHeaders</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>http headers</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getToken"></a>
                         <span class="name">
                             <b>
@@ -224,7 +410,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/auth/auth.service.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/auth/auth.service.ts:134</a></div>
                             </td>
                         </tr>
 
@@ -270,7 +456,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/auth/auth.service.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/auth/auth.service.ts:147</a></div>
                             </td>
                         </tr>
 
@@ -298,25 +484,25 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isLoggedIn"></a>
+                        <a name="hasValidToken"></a>
                         <span class="name">
                             <b>
-                            isLoggedIn
+                            hasValidToken
                             </b>
-                            <a href="#isLoggedIn"><span class="icon ion-ios-link"></span></a>
+                            <a href="#hasValidToken"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>isLoggedIn()</code>
+<code>hasValidToken()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/auth/auth.service.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/auth/auth.service.ts:72</a></div>
                             </td>
                         </tr>
 
@@ -329,7 +515,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                             </div>
                                 <div class="io-description">
@@ -362,7 +548,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/auth/auth.service.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/auth/auth.service.ts:102</a></div>
                             </td>
                         </tr>
 
@@ -456,7 +642,7 @@ Saves the token in the local storage</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/auth/auth.service.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/auth/auth.service.ts:124</a></div>
                             </td>
                         </tr>
 
@@ -464,6 +650,46 @@ Saves the token in the local storage</p>
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Logs out of the server by deleting the token from the local storage</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeAllowedActions"></a>
+                        <span class="name">
+                            <b>
+                            removeAllowedActions
+                            </b>
+                            <a href="#removeAllowedActions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>removeAllowedActions()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/auth/auth.service.ts:186</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Deletes the allowed_actions from the local storage</p>
 </div>
 
                             <div class="io-description">
@@ -496,7 +722,7 @@ Saves the token in the local storage</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/auth/auth.service.ts:113</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/auth/auth.service.ts:172</a></div>
                             </td>
                         </tr>
 
@@ -536,7 +762,7 @@ Saves the token in the local storage</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/auth/auth.service.ts:120</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/auth/auth.service.ts:179</a></div>
                             </td>
                         </tr>
 
@@ -550,6 +776,77 @@ Saves the token in the local storage</p>
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storeAllowedActions"></a>
+                        <span class="name">
+                            <b>
+                            storeAllowedActions
+                            </b>
+                            <a href="#storeAllowedActions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>storeAllowedActions(allowed_actions: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/auth/auth.service.ts:212</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Stores the user allowed_actions in the local storage, replacing the previous allowed_actions, if any</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>allowed_actions</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -576,7 +873,7 @@ Saves the token in the local storage</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/auth/auth.service.ts:128</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/auth/auth.service.ts:194</a></div>
                             </td>
                         </tr>
 
@@ -652,7 +949,7 @@ Saves the token in the local storage</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/auth/auth.service.ts:137</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/auth/auth.service.ts:203</a></div>
                             </td>
                         </tr>
 
@@ -717,6 +1014,45 @@ Saves the token in the local storage</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="loginStatus"></a>
+                        <span class="name">
+                            <b>
+                            loginStatus
+                            </b>
+                            <a href="#loginStatus"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>loginStatus:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/auth/auth.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Store if the user is logged in or not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="loginStatusStream"></a>
                         <span class="name">
                             <b>
@@ -740,7 +1076,7 @@ Saves the token in the local storage</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/auth/auth.service.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/auth/auth.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -800,9 +1136,9 @@ Saves the token in the local storage</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 import { Observable, of, BehaviorSubject } from &#x27;rxjs&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+import { catchError, map } from &#x27;rxjs/operators&#x27;;
 import { tap, delay } from &#x27;rxjs/operators&#x27;;
 import { BackendUrls } from &#x27;../settings&#x27;;
 import { environment } from &#x27;../../environments/environment&#x27;;
@@ -821,6 +1157,12 @@ export class AuthService {
   */
   redirectUrl: string;
 
+
+  /**
+  * Store if the user is logged in or not
+  */
+  loginStatus &#x3D; false;
+
   /**
   * Stream of notifications when the user logs in. Sends true, if the user is logged in, and false if not
   */
@@ -834,16 +1176,56 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Changes the {@link loginStatus} and sneds the corresponding update in the {@link loginStatusStream}
+   * @param {boolean} status the new login status
+   */
+  changeLoginStatus(status: boolean) {
+    this.loginStatus &#x3D; status;
+    this.loginStatusStream.next(status);
+  }
+
+  /**
+  * Builds and returns HttpHeaders for the requests, including the token for requests
+  * @returns {HttpHeaders} http headers
+  */
+  getHttpHeaders(): HttpHeaders {
+    if (this.getToken()) {
+      return new HttpHeaders({
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+        &#x27;Authorization&#x27;: &#x27;Token &#x27; + this.getToken()
+      });
+    } else {
+      return new HttpHeaders({
+        &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+      });
+    }
+  }
 
   /**
    * Checks wether or not the user is logged-in, which is true if there is a valid token
-   * @returns {boolean} true if there is a valid token, false if not
+   * @returns { Observable&lt;boolean&gt;} true if there is a valid token, false if not
    */
-  isLoggedIn(): boolean {
-    if (this.getToken()) {
-      return true;
+  hasValidToken(): Observable&lt;boolean&gt; {
+    if (!this.getToken()) {
+      this.changeLoginStatus(false);
+      return of(false);
     } else {
-      return false;
+      const url &#x3D; &#x60;${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}&#x60;;
+      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+        map((response: any) &#x3D;&gt; {
+          const user_data &#x3D; response[&#x27;user_data&#x27;];
+          const allowed_actions &#x3D; response[&#x27;allowed_actions&#x27;];
+          this.storeUser(user_data[&#x27;username&#x27;]);
+          this.storeAllowedActions(allowed_actions);
+          this.changeLoginStatus(true);
+          return true;
+        }),
+        catchError(error &#x3D;&gt; {
+          this.logout();
+          return of(false);
+        }
+      ));
     }
   }
 
@@ -864,10 +1246,10 @@ export class AuthService {
       if (token) {
         this.storeToken(token);
         this.storeUser(username);
-        this.loginStatusStream.next(true);
+        this.changeLoginStatus(true);
         return true;
       } else {
-        this.loginStatusStream.next(false);
+        this.changeLoginStatus(false);
         return false;
       }
     }));
@@ -877,7 +1259,7 @@ export class AuthService {
    * Logs out of the server by deleting the token from the local storage
    */
   logout(): void {
-    this.loginStatusStream.next(false);
+    this.changeLoginStatus(false);
     this.removeToken();
     this.removeUser();
   }
@@ -909,6 +1291,19 @@ export class AuthService {
   }
 
   /**
+  * Returns the user permission over the specified action stored in the local storage
+  * @returns {boolean | undefined} the permission as a boolean
+  */
+  getAllowedActions(): boolean {
+    const allowed_actions &#x3D; localStorage.getItem(&#x27;allowed_actions&#x27;);
+    if (allowed_actions &#x3D;&#x3D;&#x3D; null) {
+      return undefined;
+    } else {
+      return JSON.parse(allowed_actions);
+    }
+  }
+
+  /**
   * Deletes the token from the local storage
   */
   removeToken() {
@@ -920,6 +1315,13 @@ export class AuthService {
   */
   removeUser() {
     localStorage.removeItem(&#x27;user&#x27;);
+  }
+
+  /**
+  * Deletes the allowed_actions from the local storage
+  */
+  removeAllowedActions() {
+    localStorage.removeItem(&#x27;allowed_actions&#x27;);
   }
 
   /**
@@ -940,6 +1342,14 @@ export class AuthService {
     localStorage.setItem(&#x27;user&#x27;, JSON.stringify(user));
   }
 
+  /**
+  * Stores the user allowed_actions in the local storage, replacing the previous allowed_actions, if any
+  * @param {string} permission the user allowed_actions to be stored
+  */
+  storeAllowedActions(allowed_actions: Object) {
+    this.removeAllowedActions();
+    localStorage.setItem(&#x27;allowed_actions&#x27;, JSON.stringify(allowed_actions));
+  }
 
 }
 </code></pre>

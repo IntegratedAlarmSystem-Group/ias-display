@@ -342,7 +342,10 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {boolean} True if shelve action can be performed and false if not
    */
   canSend(): boolean {
-    return this.alarm.shelved || this.form.valid;
+    const allowedShelve &#x3D; this.authService.getAllowedActions()[&#x27;can_shelve&#x27;];
+    const allowedUnshelve &#x3D; this.authService.getAllowedActions()[&#x27;can_unshelve&#x27;];
+    const isAllowed &#x3D; allowedShelve &amp;&amp; allowedUnshelve;
+    return (this.alarm.shelved || this.form.valid) &amp;&amp; isAllowed;
   }
 
   /**
