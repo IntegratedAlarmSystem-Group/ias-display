@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -107,7 +107,7 @@ by typing in an input field</p>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>tabular-view.component.scss</code></td>
+                <td class="col-md-9"><code>./tabular-view.component.scss</code></td>
             </tr>
 
 
@@ -116,6 +116,12 @@ by typing in an input field</p>
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./tabular-view.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -382,7 +388,7 @@ by typing in an input field</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>_toggleFilter(filterStatus: , filterValue: )</code>
+<code>_toggleFilter(filterStatus, filterValue)</code>
                     </td>
                 </tr>
 
@@ -764,7 +770,7 @@ Retrieves filter values passed by the URL and applies them to the table</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onKeyUp(event: )</code>
+<code>onKeyUp(event)</code>
                     </td>
                 </tr>
 
@@ -1543,7 +1549,11 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Decorators : </i><code>ViewChild</code>
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatPaginator)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
@@ -1588,7 +1598,11 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Decorators : </i><code>ViewChild</code>
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatSort)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
@@ -1633,7 +1647,11 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Decorators : </i><code>ViewChild</code>
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatTable)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
@@ -2212,6 +2230,111 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./tabular-view.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.mat-header-row {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  min-height: 0px;
+}
+
+.mat-header-cell {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.mat-row {
+  border-bottom-style: hidden;
+}
+
+.mat-card {
+
+  .mat-card-header {
+    display: block;
+    padding: 20px;
+    border-top-left-radius: 0.375em;
+    border-top-right-radius: 0.375em;
+  }
+
+  .mat-card-content {
+    padding: 20px;
+    border-bottom-left-radius: 0.375em;
+    border-bottom-right-radius: 0.375em;
+  }
+
+}
+
+.filter-mat-form-field {
+  width: 500px;
+}
+
+.table-filters {
+
+  .row {
+    .text-container {
+      display: flex;
+    }
+    .toggles-container {
+      height: 100%;
+      .row {
+        height: 100%;
+        mat-slide-toggle {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+}
+
+/deep/ {
+
+  // Removes
+  .filter-mat-form-field {
+
+    .mat-form-field-infix {
+      border-top-width: 6px;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+  }
+
+  // Size percentage by column
+  .mat-column-status {
+    flex: 0 0 10% !important;
+  }
+
+  .mat-column-name {
+    flex: 0 0 20% !important;
+  }
+
+  .mat-column-mode {
+    flex: 0 0 10% !important;
+  }
+
+  .mat-column-timestamp {
+    flex: 0 0 10% !important;
+  }
+
+  .mat-column-description {
+    // flex: 0 0 25% !important;
+  }
+
+  .mat-column-actions {
+    flex: 0 0 10% !important;
+    text-align: left !important;
+  }
+
+
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -2279,7 +2402,9 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

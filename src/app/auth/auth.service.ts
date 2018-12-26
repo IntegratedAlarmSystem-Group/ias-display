@@ -16,6 +16,21 @@ import { environment } from '../../environments/environment';
 export class AuthService {
 
   /**
+  * Name for the browser to use in order to save the token in the local storage
+  */
+  TOKEN_STORAGE_NAME = 'IAS-TOKEN';
+
+  /**
+  * Name for the browser to use in order to save the user in the local storage
+  */
+  USER_STORAGE_NAME = 'IAS-USER';
+
+  /**
+  * Name for the browser to use in order to save the allowed actions in the local storage
+  */
+  ACTIONS_STORAGE_NAME = 'IAS-ACTIONS';
+
+  /**
   * Store the URL so we can redirect after logging in
   */
   redirectUrl: string;
@@ -132,7 +147,7 @@ export class AuthService {
   * @returns {string | undefined} the token as a string, or undefined if there is no token
   */
   getToken(): string | undefined {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(this.TOKEN_STORAGE_NAME);
     if (token === null) {
       return undefined;
     } else {
@@ -145,7 +160,7 @@ export class AuthService {
   * @returns {string | undefined} the user name as a string, or undefined if there is no user
   */
   getUser(): string | undefined {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem(this.USER_STORAGE_NAME);
     if (user === null) {
       return undefined;
     } else {
@@ -158,7 +173,7 @@ export class AuthService {
   * @returns {boolean | undefined} the permission as a boolean
   */
   getAllowedActions(): boolean {
-    const allowed_actions = localStorage.getItem('allowed_actions');
+    const allowed_actions = localStorage.getItem(this.ACTIONS_STORAGE_NAME);
     if (allowed_actions === null) {
       return undefined;
     } else {
@@ -170,21 +185,21 @@ export class AuthService {
   * Deletes the token from the local storage
   */
   removeToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_STORAGE_NAME);
   }
 
   /**
   * Deletes the user from the local storage
   */
   removeUser() {
-    localStorage.removeItem('user');
+    localStorage.removeItem(this.USER_STORAGE_NAME);
   }
 
   /**
   * Deletes the allowed_actions from the local storage
   */
   removeAllowedActions() {
-    localStorage.removeItem('allowed_actions');
+    localStorage.removeItem(this.ACTIONS_STORAGE_NAME);
   }
 
   /**
@@ -192,8 +207,8 @@ export class AuthService {
   * @param {string} token the token to be stored
   */
   storeToken(token: string) {
-    localStorage.removeItem('token');
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.removeItem(this.TOKEN_STORAGE_NAME);
+    localStorage.setItem(this.TOKEN_STORAGE_NAME, JSON.stringify(token));
   }
 
   /**
@@ -201,8 +216,8 @@ export class AuthService {
   * @param {string} user the user to be stored
   */
   storeUser(user: string) {
-    localStorage.removeItem('user');
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.removeItem(this.USER_STORAGE_NAME);
+    localStorage.setItem(this.USER_STORAGE_NAME, JSON.stringify(user));
   }
 
   /**
@@ -211,7 +226,7 @@ export class AuthService {
   */
   storeAllowedActions(allowed_actions: Object) {
     this.removeAllowedActions();
-    localStorage.setItem('allowed_actions', JSON.stringify(allowed_actions));
+    localStorage.setItem(this.ACTIONS_STORAGE_NAME, JSON.stringify(allowed_actions));
   }
 
 }

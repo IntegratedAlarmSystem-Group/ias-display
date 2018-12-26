@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>antennas-sidebar.component.scss</code></td>
+                <td class="col-md-9"><code>./antennas-sidebar.component.scss</code></td>
             </tr>
 
 
@@ -112,6 +112,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./antennas-sidebar.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -1287,6 +1293,169 @@ export class AntennasSidebarComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./antennas-sidebar.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.antennas-sidebar-card {
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .antennas-sidebar-title {
+    padding: 12px 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    .return-link {
+      cursor: pointer;
+
+      i {
+        vertical-align: middle;
+        font-size: 25px;
+      }
+
+      span {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .antennas-sidebar-content {
+    padding: 12px 0px;
+    height: 100%;
+    overflow-y: auto;
+
+    .antennas-container {
+      margin: 6px 0px 20px 0px;
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+
+        .grid-item {
+          height: 60px;
+          line-height: 62px;
+          border-radius: 4px;
+          padding: 0;
+          position: relative;
+          cursor: pointer;
+        }
+
+      }
+    }
+
+    .global-devices-container {
+      margin: 20px 0px 6px 0px;
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+
+        .grid-item {
+          height: 60px;
+          line-height: 62px;
+          border-radius: 4px;
+          padding: 0;
+          position: relative;
+          cursor: pointer;
+        }
+
+      }
+
+    }
+
+    .antennas-detail {
+
+      margin-left: 28px;
+      margin-right: 28px;
+
+      &amp;.alarm-info {
+        padding-bottom: 10px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+
+        table {
+          vertical-align: top;
+        }
+
+        th {
+          padding-right: 16px;
+          font-weight: normal;
+        }
+      }
+
+      &amp;.devices-alarms {
+
+        padding-top: 20px;
+
+        table {
+            width: 100%;
+        }
+
+        td {
+          padding: 5px;
+          height: 40px;
+
+          &amp;.antenna {
+            padding-left: 0px;
+            font-weight: bold;
+            width: 25%;
+          }
+
+          &amp;.device {
+            padding-left: 20px;
+            font-weight: bold;
+            width: 40%;
+          }
+        }
+        .icon {
+          padding-left: 20px;
+          height: 30px;
+          width: fit-content;
+          align: right;
+        }
+        .text {
+          padding-left: 0;
+          height: 30px;
+          width: 75%;
+          align: right;
+        }
+        .status {
+          padding-left: 20px;
+        }
+        .buttons {
+          width: 60%;
+        }
+      }
+
+      &amp;.footer {
+        width: 100%;
+        font-size: 14px;
+        display: table;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 50px;
+
+        button {
+          margin: 0px 10px 0px 10px;
+        }
+      }
+    }
+
+  }
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -1354,7 +1523,9 @@ export class AntennasSidebarComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

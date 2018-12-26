@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -104,7 +104,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>shelve.component.scss</code></td>
+                <td class="col-md-9"><code>./shelve.component.scss</code></td>
             </tr>
 
 
@@ -113,6 +113,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./shelve.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -2152,6 +2158,127 @@ export class ShelveComponent implements OnInit, OnDestroy {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./shelve.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.component-action-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .component-action {
+
+    &amp;.component-header {
+      padding: 12px 0px;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+
+      .component-title {
+        display: inline;
+      }
+
+    }
+
+    &amp;.component-body {
+      font-size: 14px;
+      height: 100%;
+      overflow-y: auto;
+
+      .section {
+        padding: 24px 0px 10px 0px;
+
+        .section-title {
+          font-weight: bold;
+          padding-bottom: 16px;
+        }
+
+        &amp;.alarm-info {
+          table {
+            vertical-align: top;
+          }
+
+          th {
+            padding-right: 16px;
+            font-weight: normal;
+          }
+
+        }
+
+        &amp;.shelve-action {
+
+          textarea {
+            min-height: 150px;
+          }
+
+          .action-info {
+            font-size: 14px;
+          }
+
+          .message-form-field {
+            width: 100%;
+          }
+
+          .timeout-form-field {
+            width: 100%;
+            margin-top: 14px;
+          }
+
+          .user-form-field {
+            width: 100%;
+            margin-bottom: 14px;
+          }
+
+        }
+
+        &amp;.action-error {
+          padding: 20px 20px 30px 20px;
+          border-radius: 4px;
+          margin-top: 40px;
+        }
+
+        &amp;.action-warning {
+          padding: 20px 20px 30px 20px;
+          border-radius: 4px;
+          margin-top: 40px;
+        }
+
+      }
+
+    }
+
+    &amp;.component-footer {
+      width: 100%;
+      font-size: 14px;
+      display: table;
+      padding-top: 12px;
+      padding-bottom: 24px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      button {
+        margin: 0px 10px 0px 10px;
+      }
+
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.15rem;
+    }
+
+    .info-message {
+      padding-top: 10px;
+    }
+
+  }
+
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -2219,7 +2346,9 @@ export class ShelveComponent implements OnInit, OnDestroy {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

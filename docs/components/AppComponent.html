@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>app.component.scss</code></td>
+                <td class="col-md-9"><code>./app.component.scss</code></td>
             </tr>
 
 
@@ -112,6 +112,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./app.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -460,7 +466,7 @@ considering of the actionsSidenav can be closed or not</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getNavItemCountClass(navItem: , countByView: )</code>
+<code>getNavItemCountClass(navItem, countByView)</code>
                     </td>
                 </tr>
 
@@ -542,7 +548,7 @@ variable</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getNavItemCountText(navItem: , countByView: )</code>
+<code>getNavItemCountText(navItem, countByView)</code>
                     </td>
                 </tr>
 
@@ -819,7 +825,11 @@ Initializes the <a href="../injectables/AlarmService.html">AlarmService</a> and 
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Decorators : </i><code>ViewChild</code>
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;actionsSidenav&#x27;)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
@@ -1500,6 +1510,155 @@ export class AppComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./app.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">html, body {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+}
+
+#app-toolbar {
+
+  padding: 0;
+
+  .btn-wrapper {
+    padding: 0 16px;
+  }
+
+  .content-wrapper {
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .user-wrapper {
+    padding: 0 24px;
+  }
+
+  img.ias-logo {
+    width: 35px;
+    margin-right: 10px;
+  }
+
+}
+
+#actions-sidenav  {
+  width: 500px;
+  padding: 0 24px;
+  min-height: 100%;
+}
+
+
+#main-content  {
+  height: calc(100vh - 64px) !important;
+}
+
+#navigation-sidenav {
+
+  min-width: 70px;
+
+  p {
+    padding-right: 50px;
+  }
+
+  /deep/ .mat-list-item-content {
+    padding: 0px 12px;
+  }
+
+  /deep/ .mat-list-text {
+    padding-left: 0;
+    width: 74%;
+  }
+
+  mat-nav-list a.mat-list-item {
+
+    height: 86px;
+
+    mat-icon {
+      height: 44px;
+      width: 44px;
+    }
+
+    &amp;.active-link {
+
+      /deep/ .mat-line {
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
+  &amp;.compacted {
+
+    width: unset;
+
+    .ias.ias-logo-container {
+      padding: .725rem 0;
+      width: 60%;
+      left: 20%;
+    }
+
+    img.ias.ias-logo {
+      width: 30px;
+    }
+
+    mat-nav-list a.mat-list-item {
+
+      padding-left: 0px;
+
+    }
+
+  }
+
+}
+
+
+.ias-nav-button-container {
+
+  .ias-count-label {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    text-align: center;
+    font-weight: 700;
+
+    &amp;.hide-count {
+      display: none;
+    }
+
+    &amp;.nonzero-count {
+      font-size: 10px;
+      border-radius: .25em;
+      padding: 2.75px 5px;
+      border-width: 0px;
+      border-style: hidden;
+    }
+
+    &amp;.zero-count {
+      display: none;
+    }
+
+    &amp;.unknown-count {
+      font-size: 11px;
+      border-radius: .25em;
+      border-width: 2px;
+      border-style: solid;
+      padding: 0px 2px;
+    }
+
+  }
+
+  .ias-icon {
+    display: inline-block;
+  }
+
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -1567,7 +1726,9 @@ export class AppComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

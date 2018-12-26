@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -104,7 +104,7 @@ the overview</p>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>overview-card.component.scss</code></td>
+                <td class="col-md-9"><code>./overview-card.component.scss</code></td>
             </tr>
 
 
@@ -113,6 +113,12 @@ the overview</p>
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./overview-card.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -271,6 +277,70 @@ export class OverviewCardComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./overview-card.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.ias.overview-card {
+  position: relative;
+  display: block;
+  z-index: 100;
+  width: fit-content;
+  margin: 40px 70px;
+
+  .marker-wrapper{
+    float: left;
+    position: absolute;
+    top: 10px;
+    left: -46px;
+    width: 46px;
+    height: 56px;
+    line-height: 56px;
+    z-index: 0;
+    text-align: left;
+    vertical-align: middle;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+
+    .marker {
+      margin: 0px 0px;
+      height: 100%;
+      position: absolute;
+      top:-2px;
+      left:-4px;
+      width: 56px;
+    }
+  }
+
+  .label{
+    position: absolute;
+    top: -1.45em;
+    right: 0;
+    height: 1em;
+    text-align: right;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 16px;
+    z-index: 1;
+  }
+
+  .content-wrapper{
+    position: relative;
+    top: 0;
+    left: 0;
+    min-height: 150px;
+    width: fit-content;
+    min-width: 170px;
+    margin-bottom: 40px;
+
+    .content{
+      padding: 0px;
+    }
+  }
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -338,7 +408,9 @@ export class OverviewCardComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -330,7 +327,7 @@ IAS Webserver through Websockets</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>acknowledgeAlarms(alarms_ids: , message: , user: )</code>
+<code>acknowledgeAlarms(alarms_ids, message, user)</code>
                     </td>
                 </tr>
 
@@ -427,7 +424,7 @@ IAS Webserver through Websockets</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>add_or_update_alarm(alarm: )</code>
+<code>add_or_update_alarm(alarm)</code>
                     </td>
                 </tr>
 
@@ -499,7 +496,7 @@ IAS Webserver through Websockets</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>changeAlarms(any: )</code>
+<code>changeAlarms(any)</code>
                     </td>
                 </tr>
 
@@ -974,7 +971,7 @@ by calling <a href="AlarmService.html#playAlarmSound">AlarmService.html#playAlar
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getMissingAcks(alarm_id: )</code>
+<code>getMissingAcks(alarm_id)</code>
                     </td>
                 </tr>
 
@@ -1047,7 +1044,7 @@ by calling <a href="AlarmService.html#playAlarmSound">AlarmService.html#playAlar
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getShelveRegistries(alarm_id: , status: )</code>
+<code>getShelveRegistries(alarm_id, status)</code>
                     </td>
                 </tr>
 
@@ -1249,7 +1246,7 @@ by calling <a href="AlarmService.html#playAlarmSound">AlarmService.html#playAlar
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>readAlarmMessage(action: , obj: )</code>
+<code>readAlarmMessage(action, obj)</code>
                     </td>
                 </tr>
 
@@ -1335,7 +1332,7 @@ depending on the action value.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>readAlarmMessagesList(alarmsList: )</code>
+<code>readAlarmMessagesList(alarmsList)</code>
                     </td>
                 </tr>
 
@@ -1408,7 +1405,7 @@ service alarms list</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>readCountByViewMessage(countByView: )</code>
+<code>readCountByViewMessage(countByView)</code>
                     </td>
                 </tr>
 
@@ -1556,7 +1553,7 @@ The timer&#39;s period is equal to the broadcastThreshold obtained by <a href="C
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>shelveAlarm(alarm_id: , message: , timeout: , user: )</code>
+<code>shelveAlarm(alarm_id, message, timeout, user)</code>
                     </td>
                 </tr>
 
@@ -1706,7 +1703,7 @@ The timer&#39;s period is equal to the broadcastThreshold obtained by <a href="C
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>unshelveAlarms(alarms_ids: , message: )</code>
+<code>unshelveAlarms(alarms_ids, message)</code>
                     </td>
                 </tr>
 
@@ -2868,7 +2865,9 @@ export class AlarmService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
