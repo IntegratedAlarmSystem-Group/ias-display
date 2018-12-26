@@ -211,7 +211,6 @@ export class AuthService {
   */
   storeAllowedActions(allowed_actions: Object) {
     this.removeAllowedActions();
-    console.log( JSON.stringify(allowed_actions) );
     localStorage.setItem('allowed_actions', JSON.stringify(allowed_actions));
   }
 
