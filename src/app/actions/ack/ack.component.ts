@@ -88,7 +88,7 @@ export class AckComponent implements OnInit, OnDestroy {
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
     private userService: UserService,
-    private authService: AuthService
+    public authService: AuthService
   ) { }
 
   /**
