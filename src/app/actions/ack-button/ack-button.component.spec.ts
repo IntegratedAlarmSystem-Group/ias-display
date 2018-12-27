@@ -18,6 +18,7 @@ describe('GIVEN an AckButtonComponent', () => {
   let fixture: ComponentFixture<AckButtonComponent>;
   let debug: DebugElement;
   let html: HTMLElement;
+  let button: any;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
   const mockAlarm = Alarm.asAlarm({
     'value': 4,
@@ -55,6 +56,7 @@ describe('GIVEN an AckButtonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AckButtonComponent);
+    button = fixture.nativeElement.querySelector('.ack-button');
     component = fixture.componentInstance;
     component.alarm = mockAlarm;
     debug = fixture.debugElement;
@@ -65,6 +67,36 @@ describe('GIVEN an AckButtonComponent', () => {
   it('THEN it should be created with the given Alarm', () => {
     expect(component).toBeTruthy();
     expect(component.alarm.core_id).toBe('coreid$1');
+  });
+
+  describe('AND IF the alarm is not-acknowledged', () => {
+    it('THEN button should be enabled', () => {
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 1267252440000;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeFalsy();
+    });
+  });
+
+  describe('AND IF the alarm is acknowledged', () => {
+    it('THEN button should be disabled', () => {
+      component.alarm.ack = true;
+      component.alarm.state_change_timestamp = 1267252440000;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeTruthy();
+    });
+  });
+
+  describe('AND IF the alarm is not-acknowledged, but the state_change_timestamp is 0', () => {
+    it('THEN button should be disabled', () => {
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 0;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeTruthy();
+    });
   });
 
   describe('AND WHEN the user clicks on it', () => {

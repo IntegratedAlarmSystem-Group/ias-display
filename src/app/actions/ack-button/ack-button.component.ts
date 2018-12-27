@@ -50,7 +50,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
   canAcknowledge() {
-    if (this.alarm != null) {
+    if (this.alarm != null && this.alarm.state_change_timestamp > 0) {
       return !this.alarm.ack;
     } else {
       return false;

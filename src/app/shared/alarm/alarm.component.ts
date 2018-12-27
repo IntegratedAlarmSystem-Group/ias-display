@@ -194,7 +194,7 @@ export class AlarmComponent implements OnInit {
    * @return {boolean} True if the pending ack must be activated, false if it must not
    */
   showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack;
+    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
   }
 
   /**
