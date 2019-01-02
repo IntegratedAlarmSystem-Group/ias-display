@@ -252,6 +252,17 @@ export class AlarmService {
   }
 
   /**
+   * Returns a boolean to check if there is information available about an alarm
+   * @param core_id core_id of the Alarm
+   * @returns {boolean} true if there is information about the alarm
+   */
+  isAlarmAvailable(core_id: string): boolean {
+    return (
+      typeof this.alarmsArray[this.alarmsIndexes[core_id]] !== 'undefined'
+    );
+  }
+
+  /**
    * Acknowledges a list of Alarms with a message
    * @param alarms list of ids of the alarms to acknowledge
    * @param message message of the acknowledgement

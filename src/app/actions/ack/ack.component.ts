@@ -7,6 +7,8 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
+import { combineLatest, Observable } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 /**
 * Component used to perform acknowledgement of an Alarm
@@ -64,12 +66,37 @@ export class AckComponent implements OnInit, OnDestroy {
   public missedAcks: string[] = [];
 
   /**
+  * Variable to check if data about the alarm is available
+  */
+  alarmDataAvailable = false;
+
+  /**
+  * Variable to check if there was an initial load of the action data
+  */
+  initialLoad = false;
+
+  /**
   * Stores wether or not the action has been executed requestStatusly
   * If requestStatus = 0, the request has not been sent yet
   * If requestStatus = 1, the request was successfully
   * If requestStatus = -1, the request has failed
   */
   requestStatus = 0;
+
+  /**
+   * Id of the requested Alarm object to be acknowledge/unacknowledge
+   */
+  requested_alarm_id: string;
+
+  /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
 
   /**
    * Instantiates the component
@@ -101,19 +128,50 @@ export class AckComponent implements OnInit, OnDestroy {
       user: this.user,
       message: this.message,
     });
-    this.route.paramMap.subscribe( paramMap => {
-      this.alarm_id = paramMap.get('alarmID');
-      this.reload();
+    this.paramMapSubscription = this.route.paramMap
+    .subscribe( paramMap => {
+      this.requested_alarm_id = paramMap.get('alarmID');
+      this.update();
+    });
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream
+    .subscribe( value => {
+      this.update();
     });
     this.sidenavService.open();
-    this.getMissingAcksInfo();
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
+  }
+
+
+  /**
+  * Method to manage the information of the component
+  */
+  update(): void {
+    const initial_alarm_id = this.alarm_id;
+    this.alarm_id = this.requested_alarm_id;
+    this.alarmDataAvailable = this.alarmService.isAlarmAvailable(
+      this.alarm_id
+    );
+    if (this.alarmDataAvailable === true) {
+      if (this.initialLoad === false) {
+        this.reload();
+        this.initialLoad = true;
+      }
+      if (this.alarm_id !== initial_alarm_id) {
+        this.reload();
+      }
+    }
   }
 
   /**
@@ -123,6 +181,7 @@ export class AckComponent implements OnInit, OnDestroy {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.requestStatus = 0;
     this.message.reset();
+    this.getMissingAcksInfo();
   }
 
   /**
@@ -193,7 +252,11 @@ export class AckComponent implements OnInit, OnDestroy {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
     const validForm = this.form.valid;
     const isAllowed = this.authService.getAllowedActions()['can_ack'];
-    return (noAlarmsToAck || !validForm || !isAllowed);
+    let isAck = false;
+    if (this.alarm) {
+      isAck = this.alarm.ack;
+    }
+    return (noAlarmsToAck || !validForm || !isAllowed || isAck);
   }
 
   /**

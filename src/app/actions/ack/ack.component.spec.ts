@@ -87,6 +87,7 @@ describe('AckComponent', () => {
       sidenavService = fixture.debugElement.injector.get(SidenavService);
       authService = fixture.debugElement.injector.get(AuthService);
       spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
+      spyOn(alarmService, 'isAlarmAvailable').and.callFake(function() { return true; });
       spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
       spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
       spyOn(sidenavService, 'open');
@@ -94,13 +95,12 @@ describe('AckComponent', () => {
       spyOn(sidenavService, 'toggle');
       spyOn(authService, 'getAllowedActions').and.returnValue({'can_ack': true});
       component = fixture.componentInstance;
-      component.alarm_id = mockAlarm['core_id'];
       component.ngOnInit();
       spyOn(component, 'updateAlarmsToAck');
+      fixture.detectChanges();
       componentHeader = fixture.nativeElement.querySelector('.component-header');
       componentBody = fixture.nativeElement.querySelector('.component-body');
       componentFooter = fixture.nativeElement.querySelector('.component-footer');
-      fixture.detectChanges();
     });
 
     afterEach(() => {
