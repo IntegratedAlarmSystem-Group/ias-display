@@ -82,6 +82,7 @@ describe('ShelveComponent', () => {
     sidenavService = fixture.debugElement.injector.get(SidenavService);
     authService = fixture.debugElement.injector.get(AuthService);
     spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
+    spyOn(alarmService, 'isAlarmAvailable').and.callFake(function() { return true; });
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
@@ -93,7 +94,6 @@ describe('ShelveComponent', () => {
     component = fixture.componentInstance;
     spyOn(component, 'onClose');
     component.ngOnInit();
-    component.reload();
     fixture.detectChanges();
     componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
