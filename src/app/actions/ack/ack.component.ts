@@ -66,27 +66,12 @@ export class AckComponent implements OnInit, OnDestroy {
   public missedAcks: string[] = [];
 
   /**
-  * Variable to check if data about the alarm is available
-  */
-  alarmDataAvailable = false;
-
-  /**
-  * Variable to check if there was an initial load of the action data
-  */
-  initialLoad = false;
-
-  /**
   * Stores wether or not the action has been executed requestStatusly
   * If requestStatus = 0, the request has not been sent yet
   * If requestStatus = 1, the request was successfully
   * If requestStatus = -1, the request has failed
   */
   requestStatus = 0;
-
-  /**
-   * Id of the requested Alarm object to be acknowledge/unacknowledge
-   */
-  requested_alarm_id: string;
 
   /**
    * Route param map subscription
@@ -130,12 +115,12 @@ export class AckComponent implements OnInit, OnDestroy {
     });
     this.paramMapSubscription = this.route.paramMap
     .subscribe( paramMap => {
-      this.requested_alarm_id = paramMap.get('alarmID');
-      this.update();
+      this.alarm_id = paramMap.get('alarmID');
+      this.check_request_and_reload();
     });
     this.alarmChangeSubscription = this.alarmService.alarmChangeStream
     .subscribe( value => {
-      this.update();
+      this.check_request_and_reload();
     });
     this.sidenavService.open();
   }
@@ -157,18 +142,16 @@ export class AckComponent implements OnInit, OnDestroy {
   /**
   * Method to manage the information of the component
   */
-  update(): void {
-    const initial_alarm_id = this.alarm_id;
-    this.alarm_id = this.requested_alarm_id;
-    this.alarmDataAvailable = this.alarmService.isAlarmAvailable(
+  check_request_and_reload(): void {
+    const alarmDataAvailable = this.alarmService.isAlarmAvailable(
       this.alarm_id
     );
-    if (this.alarmDataAvailable === true) {
-      if (this.initialLoad === false) {
-        this.reload();
-        this.initialLoad = true;
-      }
-      if (this.alarm_id !== initial_alarm_id) {
+    if (alarmDataAvailable === true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !== this.alarm_id) {
+          this.reload();
+        }
+      } else {
         this.reload();
       }
     }

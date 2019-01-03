@@ -69,7 +69,7 @@ describe('AckComponent', () => {
             paramMap: {
               subscribe: (fn: (value: Params) => void) => fn(
                 convertToParamMap({
-                  alarmID: ''
+                  alarmID: mockAlarm.core_id
                 })
               )
             }
@@ -95,8 +95,8 @@ describe('AckComponent', () => {
       spyOn(sidenavService, 'toggle');
       spyOn(authService, 'getAllowedActions').and.returnValue({'can_ack': true});
       component = fixture.componentInstance;
-      component.ngOnInit();
       spyOn(component, 'updateAlarmsToAck');
+      component.ngOnInit();
       fixture.detectChanges();
       componentHeader = fixture.nativeElement.querySelector('.component-header');
       componentBody = fixture.nativeElement.querySelector('.component-body');
@@ -119,6 +119,7 @@ describe('AckComponent', () => {
 
       // Information
       it('should display the Alarm ID', () => {
+        expect(component.alarm_id).toEqual(mockAlarm['core_id']);
         expect(componentBody).toBeTruthy();
         expect(componentBody.textContent).toContain(component.alarm_id);
       });
