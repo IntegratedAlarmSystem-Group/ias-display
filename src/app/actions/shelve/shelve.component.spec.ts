@@ -65,7 +65,7 @@ describe('ShelveComponent', () => {
             paramMap: {
               subscribe: (fn: (value: Params) => void) => fn(
                 convertToParamMap({
-                  alarmID: ''
+                  alarmID: mockAlarm['core_id']
                 })
               )
             }
@@ -92,13 +92,12 @@ describe('ShelveComponent', () => {
     );
     component = fixture.componentInstance;
     spyOn(component, 'onClose');
-    component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
     component.reload();
+    fixture.detectChanges();
     componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -111,6 +110,7 @@ describe('ShelveComponent', () => {
 
   // Information
   it('should display the Alarm ID', () => {
+    expect(component.alarm_id).toEqual(mockAlarm['core_id']);
     expect(componentBody).toBeTruthy();
     expect(componentBody.textContent).toContain(component.alarm_id);
   });
