@@ -175,7 +175,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
   * Method to manage the information of the component
   */
   check_request_and_reload(): void {
-    const alarmDataAvailable = this.alarmService.isAlarmAvailable(
+    const alarmDataAvailable = this.alarmService.isAlarmIndexAvailable(
       this.alarm_id
     );
     if (alarmDataAvailable === true) {

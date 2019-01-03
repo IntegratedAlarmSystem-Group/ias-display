@@ -256,10 +256,8 @@ export class AlarmService {
    * @param core_id core_id of the Alarm
    * @returns {boolean} true if there is information about the alarm
    */
-  isAlarmAvailable(core_id: string): boolean {
-    return (
-      typeof this.alarmsArray[this.alarmsIndexes[core_id]] !== 'undefined'
-    );
+  isAlarmIndexAvailable(core_id: string): boolean {
+    return (core_id in this.alarmsIndexes);
   }
 
   /**

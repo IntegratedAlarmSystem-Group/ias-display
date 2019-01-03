@@ -87,7 +87,7 @@ describe('AckComponent', () => {
       sidenavService = fixture.debugElement.injector.get(SidenavService);
       authService = fixture.debugElement.injector.get(AuthService);
       spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
-      spyOn(alarmService, 'isAlarmAvailable').and.callFake(function() { return true; });
+      spyOn(alarmService, 'isAlarmIndexAvailable').and.callFake(function() { return true; });
       spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
       spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
       spyOn(sidenavService, 'open');
@@ -119,7 +119,7 @@ describe('AckComponent', () => {
 
       // Information
       it('should display the Alarm ID', () => {
-        expect(component.alarm_id).toEqual(mockAlarm['core_id']);
+        expect(component.alarm_id).toEqual(mockAlarm.core_id);
         expect(componentBody).toBeTruthy();
         expect(componentBody.textContent).toContain(component.alarm_id);
       });
