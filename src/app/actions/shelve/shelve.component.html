@@ -1,4 +1,4 @@
-<div class="component-action-card">
+<div *ngIf="alarm" class="component-action-card">
   <div class="component-action component-header">
     <div class="component-title"> {{ getTitleText() }} </div>
     <button type="button" class="close" aria-label="Close" (click)="onClose()">

@@ -7,6 +7,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
+import { ISubscription } from 'rxjs/Subscription';
 
 /**
 * Definition of a timeout option for shelving an alarm
@@ -101,6 +102,22 @@ export class ShelveComponent implements OnInit, OnDestroy {
   shelvedAtMessage = '';
 
   /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
+
+  /**
+   * Sidenav service subscription
+   */
+ sidenavReloadSubscription: ISubscription;
+
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -134,24 +151,57 @@ export class ShelveComponent implements OnInit, OnDestroy {
       message: this.message,
       timeout: this.timeout
     });
-    this.route.paramMap.subscribe( paramMap => {
+    this.paramMapSubscription = this.route.paramMap
+    .subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
+      this.check_request_and_reload();
     });
-    this.sidenavService.shouldReload.subscribe(
+    this.sidenavReloadSubscription = this.sidenavService.shouldReload
+    .subscribe(
       value => {
         if (value === true) {
-          this.reload();
+          this.check_request_and_reload();
         }
       }
     );
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream
+    .subscribe( value => {
+      this.check_request_and_reload();
+    });
     this.sidenavService.open();
+  }
+
+  /**
+  * Method to manage the information of the component
+  */
+  check_request_and_reload(): void {
+    const alarmDataAvailable = this.alarmService.isAlarmIndexAvailable(
+      this.alarm_id
+    );
+    if (alarmDataAvailable === true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !== this.alarm_id) {
+          this.reload();
+        }
+      } else {
+        this.reload();
+      }
+    }
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.sidenavReloadSubscription) {
+      this.sidenavReloadSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
   }
 

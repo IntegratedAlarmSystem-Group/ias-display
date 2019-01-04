@@ -7,6 +7,8 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
+import { combineLatest, Observable } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 /**
 * Component used to perform acknowledgement of an Alarm
@@ -72,6 +74,16 @@ export class AckComponent implements OnInit, OnDestroy {
   requestStatus = 0;
 
   /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -101,19 +113,48 @@ export class AckComponent implements OnInit, OnDestroy {
       user: this.user,
       message: this.message,
     });
-    this.route.paramMap.subscribe( paramMap => {
+    this.paramMapSubscription = this.route.paramMap
+    .subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
+      this.check_request_and_reload();
+    });
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream
+    .subscribe( value => {
+      this.check_request_and_reload();
     });
     this.sidenavService.open();
-    this.getMissingAcksInfo();
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
+  }
+
+
+  /**
+  * Method to manage the information of the component
+  */
+  check_request_and_reload(): void {
+    const alarmDataAvailable = this.alarmService.isAlarmIndexAvailable(
+      this.alarm_id
+    );
+    if (alarmDataAvailable === true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !== this.alarm_id) {
+          this.reload();
+        }
+      } else {
+        this.reload();
+      }
+    }
   }
 
   /**
@@ -123,6 +164,7 @@ export class AckComponent implements OnInit, OnDestroy {
     this.alarm = this.alarmService.get(this.alarm_id);
     this.requestStatus = 0;
     this.message.reset();
+    this.getMissingAcksInfo();
   }
 
   /**
@@ -193,7 +235,11 @@ export class AckComponent implements OnInit, OnDestroy {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
     const validForm = this.form.valid;
     const isAllowed = this.authService.getAllowedActions()['can_ack'];
-    return (noAlarmsToAck || !validForm || !isAllowed);
+    let isAck = false;
+    if (this.alarm) {
+      isAck = this.alarm.ack;
+    }
+    return (noAlarmsToAck || !validForm || !isAllowed || isAck);
   }
 
   /**
