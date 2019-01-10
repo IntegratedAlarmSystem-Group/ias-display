@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { Alarm } from '../data/alarm';
+import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { HttpClientService } from '../data/http-client.service';
@@ -40,7 +41,7 @@ export class AntennasService {
   public antennasMapName = AntennasSettings.mapKey;
 
   /** Alarms Ids for the antennas summary **/
-  public antennasSummaryConfig: string;
+  public antennasSummaryConfig: AlarmConfig [] = [];
 
   /** Set of antenna icons */
   public antennaImageSet: AlarmImageSet;
@@ -86,7 +87,7 @@ export class AntennasService {
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {
-          this.antennasSummaryConfig = response as string;
+          this.antennasSummaryConfig = response as AlarmConfig[];
         }
       }
     });
