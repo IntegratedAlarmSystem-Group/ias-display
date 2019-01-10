@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
-import { WeatherStationConfig } from '../weather.service';
+import { AlarmConfig } from '../../data/alarm-config';
 
 /**
 * Component used to display Weather Alarms both in a sidebar (instantiated in a {@link WeatherSidebar}),
@@ -13,7 +13,7 @@ import { WeatherStationConfig } from '../weather.service';
 export class WeatherComponent implements OnInit {
 
   /** Selected placemark name from the inner map or inner components */
-  selectedStation: WeatherStationConfig = null;
+  selectedStation: AlarmConfig = null;
 
   /**
    * Builds an instance of the component
@@ -28,9 +28,9 @@ export class WeatherComponent implements OnInit {
   }
 
   /** Update selected placemark name using events emitted from internal components
-   * @param {WeatherStationConfig}
+   * @param {AlarmConfig}
    */
-  changeSelectedStation(selectedStation: WeatherStationConfig): void {
+  changeSelectedStation(selectedStation: AlarmConfig): void {
     this.selectedStation = selectedStation;
   }
 }

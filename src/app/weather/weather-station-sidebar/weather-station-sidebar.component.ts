@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService, WeatherStationConfig } from '../weather.service';
+import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
