@@ -4,6 +4,7 @@ import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
 /**
@@ -35,12 +36,30 @@ export class WeatherSummaryComponent implements OnInit {
     this.weatherService.initialize();
   }
 
-  /** Returns the instance of the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm}
+  /**
+  * Returns the instance of the {@link Alarm}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm} associated to the given {@link AlarmConfig}
   */
-  getAlarm(keyword: string): Alarm {
-    if (this.weatherService.weatherSummaryConfig) {
-      return this.alarmService.get(this.weatherService.weatherSummaryConfig[keyword]);
+  getAlarm(config: AlarmConfig): Alarm {
+    if (config) {
+      return this.alarmService.get(config.alarm_id);
+    }
+  }
+
+  /**
+  * Returns the custom_name of the {@link Alarm} given a corresponding {@link AlarmConfig}.
+  * If there is no custom_name, it returns the alarm_id
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {string} the name associated to the given {@link AlarmConfig}
+  */
+  getName(config: AlarmConfig): string {
+    if (config) {
+      if (config.custom_name) {
+        return config.custom_name;
+      } else {
+        return config.alarm_id;
+      }
     }
   }
 

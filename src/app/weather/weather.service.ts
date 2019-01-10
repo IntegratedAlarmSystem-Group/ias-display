@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { Alarm } from '../data/alarm';
+import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, WeatherSettings } from '../settings';
@@ -71,7 +72,7 @@ export class WeatherService {
   public markerImageUnreliableSet: AlarmImageSet;
 
   /** Alarms Ids for the weather summary **/
-  public weatherSummaryConfig: WeatherStationConfig;
+  public weatherSummaryConfig: AlarmConfig[];
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
   public weatherStationsConfig: WeatherStationConfig[];
@@ -105,6 +106,36 @@ export class WeatherService {
       this.loadImages();
       this.loadPadsStatus('');
       this._initialized = true;
+    }
+  }
+
+
+  /**
+  * Returns the instance of the {@link Alarm}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the type
+  * @returns {string} the type of the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getIconSet(config: AlarmConfig, reliable: boolean): AlarmImageSet {
+    if (!config) {
+      return null;
+    }
+    const type = config.type;
+    if (reliable) {
+      if (config.type === 'humidity') {
+        return this.humidityImageSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageSet;
+      }
+    } else {
+      if (config.type === 'humidity') {
+        return this.humidityImageUnreliableSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageUnreliableSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageUnreliableSet;
+      }
     }
   }
 
@@ -148,7 +179,7 @@ export class WeatherService {
       this.weatherStationsConfig = response as WeatherStationConfig[];
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
-      this.weatherSummaryConfig = response as WeatherStationConfig;
+      this.weatherSummaryConfig = response as AlarmConfig[];
     });
   }
 
