@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService, AntennaConfig } from '../antennas.service';
+import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 
 /**
  * Display used to show the list of antennas' alarms
@@ -18,7 +19,7 @@ export class AntennasSidebarComponent implements OnInit {
   @Input() selectedAntenna = null;
 
   /** Event emitted to notify when an antenna is selected */
-  @Output() antennaClicked = new EventEmitter<AntennaConfig>();
+  @Output() antennaClicked = new EventEmitter<AlarmConfig>();
 
   /**
   * Builds an instance of the component
@@ -49,27 +50,18 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
-   * Build the antenna name to display. It is built with the Antenna's code and the current associated pad.
-   * @param {MapAntennaConfig} antennaConfig the Antenna configuration
-   * @returns {string} the antenna name to display
-   */
-  getAntennaName(antennaConfig: AntennaConfig ): string {
-    return antennaConfig.antenna;
-  }
-
-  /**
   * Return the list of antennas Alarm configuration
-  * @returns {list} list of {@link AntennaConfig}
+  * @returns {list} list of {@link AlarmConfig}
   */
-  getAntennas(): AntennaConfig [] {
+  getAntennas(): AlarmConfig [] {
     return this.antennasService.antennasConfig;
   }
 
   /**
   * Return the list of Alarm configuration for global devices
-  * @returns {list} list of {@link AntennaConfig}
+  * @returns {list} list of {@link AlarmConfig}
   */
-  getDevices(): AntennaConfig [] {
+  getDevices(): AlarmConfig [] {
     return this.antennasService.devicesConfig;
   }
 
@@ -83,18 +75,18 @@ export class AntennasSidebarComponent implements OnInit {
 
   /**
   * Indicates if the antenna is selected or not
-  * @param {AntennaConfig} alarmConfig configuration of the alarm
+  * @param {AlarmConfig} alarmConfig configuration of the alarm
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
-  isSelected(alarmConfig: AntennaConfig): boolean {
+  isSelected(alarmConfig: AlarmConfig): boolean {
     return this.selectedAntenna && (this.selectedAntenna.placemark === alarmConfig.placemark);
   }
 
   /**
   * Action performed when the antenna is clicked
-  * @param {AntennaConfig} alarmConfig configuration of the clicked antenna
+  * @param {AlarmConfig} alarmConfig configuration of the clicked antenna
   */
-  onClick(alarmConfig: AntennaConfig) {
+  onClick(alarmConfig: AlarmConfig) {
     if ( this.selectedAntenna && (this.selectedAntenna.placemark === alarmConfig.placemark) ) {
       this.selectedAntenna = null;
     } else {
