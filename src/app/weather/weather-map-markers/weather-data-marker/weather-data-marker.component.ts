@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmService } from '../../../data/alarm.service';
 import { Alarm } from '../../../data/alarm';
-import { WeatherService, WeatherStationConfig } from '../../weather.service';
+import { AlarmConfig } from '../../../data/alarm-config';
+import { WeatherService } from '../../weather.service';
 
 
 /**
@@ -16,7 +17,7 @@ import { WeatherService, WeatherStationConfig } from '../../weather.service';
 export class WeatherDataMarkerComponent implements OnInit {
 
   /** Station config related to the component */
-  @Input() stationConfig: WeatherStationConfig;
+  @Input() stationConfig: AlarmConfig;
 
   /** Variable to manage if the marker should be highlighted
   * for example after the selection from a parent component
@@ -41,14 +42,5 @@ export class WeatherDataMarkerComponent implements OnInit {
    * Executed after the component is instantiated.
    */
   ngOnInit() { }
-
-  /**
-  * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm}
-  */
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
-  }
 
 }

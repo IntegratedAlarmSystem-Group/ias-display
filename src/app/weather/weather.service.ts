@@ -179,7 +179,6 @@ export class WeatherService {
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
       this.weatherStationsConfig = response as AlarmConfig[];
-      console.log('this.weatherStationsConfig: ', this.weatherStationsConfig);
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
       this.weatherSummaryConfig = response as AlarmConfig[];
