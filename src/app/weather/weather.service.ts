@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
@@ -75,7 +76,7 @@ export class WeatherService {
   public weatherSummaryConfig: AlarmConfig[];
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  public weatherStationsConfig: WeatherStationConfig[];
+  public weatherStationsConfig: AlarmConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -91,9 +92,11 @@ export class WeatherService {
 
   /**
    * Instantiates the service
+   * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
+    private alarmService: AlarmService,
     private httpClient: HttpClientService
   ) {}
 
@@ -106,6 +109,17 @@ export class WeatherService {
       this.loadImages();
       this.loadPadsStatus('');
       this._initialized = true;
+    }
+  }
+
+  /**
+  * Returns the instance of the {@link Alarm}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getAlarm(config: AlarmConfig): Alarm {
+    if (config) {
+      return this.alarmService.get(config.alarm_id);
     }
   }
 
@@ -191,7 +205,7 @@ export class WeatherService {
   */
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
-      this.weatherStationsConfig = response as WeatherStationConfig[];
+      this.weatherStationsConfig = response as AlarmConfig[];
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
       this.weatherSummaryConfig = response as AlarmConfig[];

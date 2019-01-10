@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
@@ -19,12 +18,10 @@ export class WeatherSummaryComponent implements OnInit {
 
   /**
    * Builds an instance of the component
-   * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {WeatherService} weatherService Service used to retrieve and handle weather configuration data
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(
-    private alarmService: AlarmService,
     public weatherService: WeatherService,
     private routing: RoutingService,
   ) { }
@@ -34,17 +31,6 @@ export class WeatherSummaryComponent implements OnInit {
    */
   ngOnInit() {
     this.weatherService.initialize();
-  }
-
-  /**
-  * Returns the instance of the {@link Alarm}
-  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm} associated to the given {@link AlarmConfig}
-  */
-  getAlarm(config: AlarmConfig): Alarm {
-    if (config) {
-      return this.alarmService.get(config.alarm_id);
-    }
   }
 
   /**
