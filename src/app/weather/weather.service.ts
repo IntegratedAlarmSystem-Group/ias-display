@@ -109,6 +109,21 @@ export class WeatherService {
     }
   }
 
+  /**
+  * Returns the custom_name of the {@link Alarm} given a corresponding {@link AlarmConfig}.
+  * If there is no custom_name, it returns the alarm_id
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {string} the name associated to the given {@link AlarmConfig}
+  */
+  getName(config: AlarmConfig): string {
+    if (config) {
+      if (config.custom_name) {
+        return config.custom_name;
+      } else {
+        return config.alarm_id;
+      }
+    }
+  }
 
   /**
   * Returns the instance of the {@link Alarm}

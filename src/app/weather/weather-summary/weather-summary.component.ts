@@ -48,22 +48,6 @@ export class WeatherSummaryComponent implements OnInit {
   }
 
   /**
-  * Returns the custom_name of the {@link Alarm} given a corresponding {@link AlarmConfig}.
-  * If there is no custom_name, it returns the alarm_id
-  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
-  * @returns {string} the name associated to the given {@link AlarmConfig}
-  */
-  getName(config: AlarmConfig): string {
-    if (config) {
-      if (config.custom_name) {
-        return config.custom_name;
-      } else {
-        return config.alarm_id;
-      }
-    }
-  }
-
-  /**
    * Redirect to table view applying the specified filter
    * @param filter Space-separated String that contains words used to
    * filter the alarms in the table view
