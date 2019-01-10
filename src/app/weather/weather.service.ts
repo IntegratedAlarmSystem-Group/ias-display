@@ -8,40 +8,6 @@ import { Assets } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, WeatherSettings } from '../settings';
 
-
-/**
-* Stores the IDs of the {@link Alarm} objects associated to a WeatherStation
-*/
-export class WeatherStationConfig {
-
-  /** ID to map the {@link Alarm} to the location on the map */
-  public placemark: string;
-
-  /** Group of placemarks who the alarm belongs */
-  public group: string;
-
-  /** ID of the main {@link Alarm} of the Weather Station */
-  public station: string;
-
-  /** ID of the temperature {@link Alarm} of the Weather Station */
-  public temperature: string;
-
-  /** ID of the windspeed {@link Alarm} of the Weather Station */
-  public windspeed: string;
-
-  /** ID of the humidity {@link Alarm} of the Weather Station */
-  public humidity: string;
-
-  /**
-  * Builds a new WeatherStationConfig instance
-  * @param {Object} attributes a dictionary containing the attributes to
-  * create the object
-  */
-  constructor(attributes: Object = {}) {
-    Object.assign(this, attributes);
-  }
-}
-
 /**
 * Service that stores and handles all configuration needed by the components of the {@link WeatherModule}
 */
