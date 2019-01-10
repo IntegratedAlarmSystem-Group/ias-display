@@ -3,6 +3,7 @@ import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService, WeatherStationConfig } from '../weather.service';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
 /**
@@ -16,10 +17,10 @@ import { Assets } from '../../settings';
 export class WeatherStationSidebarComponent implements OnInit {
 
   /** Weather station config object */
-  @Input() stationConfig: WeatherStationConfig;
+  @Input() stationConfig: AlarmConfig;
 
   /** Selected weather station config object, null if it is nothing selected */
-  @Input() selectedAlarm: WeatherStationConfig = null;
+  @Input() selectedAlarm: AlarmConfig = null;
 
   /**
   * Builds an instance of the component
@@ -41,7 +42,7 @@ export class WeatherStationSidebarComponent implements OnInit {
   * @returns {string} the highlighted class
   */
   getClass() {
-    if (this.selectedAlarm && (this.selectedAlarm.station === this.stationConfig.station)) {
+    if (this.selectedAlarm && (this.selectedAlarm.alarm_id === this.stationConfig.alarm_id)) {
       return 'highlighted';
     }
     return '';
