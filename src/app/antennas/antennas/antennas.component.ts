@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AntennaConfig } from '../antennas.service';
+import { AlarmConfig } from '../../data/alarm-config';
 
 /**
 * Component used to display Antennas Alarms both in a sidebar (instantiated in a {@link AntennasSidebar}),
@@ -13,7 +13,7 @@ import { AntennaConfig } from '../antennas.service';
 export class AntennasComponent implements OnInit {
 
   /** Selected placemark name from the inner map or inner components */
-  selectedAntenna: AntennaConfig = null;
+  selectedAntenna: AlarmConfig = null;
 
   /**
    * Builds an instance of the component
@@ -27,9 +27,9 @@ export class AntennasComponent implements OnInit {
   }
 
   /** Update selected placemark name using events emitted from internal components
-   * @param {AntennaConfig}
+   * @param {AlarmConfig}
    */
-  updateSelectedAntenna(selectedAntenna: AntennaConfig): void {
+  updateSelectedAntenna(selectedAntenna: AlarmConfig): void {
     this.selectedAntenna = selectedAntenna;
   }
 

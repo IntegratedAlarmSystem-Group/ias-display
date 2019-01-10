@@ -8,22 +8,6 @@ import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, AntennasSettings } from '../settings';
 
 /**
-* Stores the IDs of the antennas and location related to an {@link Alarm}
-*/
-export class AntennaConfig {
-
-  /** ID of the Antenna associated with the {@link Alarm} */
-  public antenna: string;
-
-  /** ID to map the {@link Alarm} to the location on the map */
-  public placemark: string;
-
-  /** ID of the main {@link Alarm} of the Weather Station */
-  public alarm: string;
-
-}
-
-/**
  * Service that stores and handles all configuration needed by the components of the {@link AntennasModule}
  */
 @Injectable({
@@ -81,8 +65,6 @@ export class AntennasService {
     this.httpClient.get(url).subscribe((response) => {
       this.antennasConfig = response['antennas'] as AlarmConfig[];
       this.devicesConfig = response['devices'] as AlarmConfig[];
-      console.log('this.antennasConfig = ', this.antennasConfig);
-      console.log('this.devicesConfig = ', this.devicesConfig);
     });
 
     const summary_url = BackendUrls.ANTENNAS_SUMMARY;
