@@ -3,10 +3,10 @@
     <div class="no-vertical-margin">
       <div class="sensors-card-wrapper" *ngFor="let config of this.weatherService.weatherSummaryConfig">
           <div class="sensors-card">
-              <div class="title">{{this.weatherService.getName(config)}}</div>
+              <div class="title">{{this.alarmService.getName(config)}}</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.weatherService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)" [size]="'lg'"
+                  [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { WeatherService } from '../weather.service';
+import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
@@ -19,10 +20,12 @@ export class WeatherSummaryComponent implements OnInit {
   /**
    * Builds an instance of the component
    * @param {WeatherService} weatherService Service used to retrieve and handle weather configuration data
+   * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {RoutingService} routing Service used to redirect to weather specialized views
    */
   constructor(
     public weatherService: WeatherService,
+    public alarmService: AlarmService,
     private routing: RoutingService,
   ) { }
 

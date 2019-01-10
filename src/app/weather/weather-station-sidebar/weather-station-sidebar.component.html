@@ -1,8 +1,8 @@
 <div class="weather-station-sidebar" [ngClass]="getClass()">
-  <app-alarm-header fxFlex [alarm]="this.weatherService.getAlarm(stationConfig)"></app-alarm-header>
+  <app-alarm-header fxFlex [alarm]="this.alarmService.getAlarm(stationConfig)"></app-alarm-header>
   <div fxLayout="row" class="weather-icons">
     <div class="icon" *ngFor="let config of stationConfig.children">
-      <app-alarm [alarm]="this.weatherService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
+      <app-alarm [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
     </div>
   </div>
 </div>

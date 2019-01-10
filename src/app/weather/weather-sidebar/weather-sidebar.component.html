@@ -12,35 +12,34 @@
           </mat-expansion-panel-header>
           <table>
             <tr>
-              <!-- <td class="station">Station</td> -->
               <td>
                 <div class="text">
-                  <app-alarm [alarm]="this.weatherService.getAlarm(stationConfig)" [text]="'Station'"></app-alarm>
+                  <app-alarm [alarm]="this.alarmService.getAlarm(stationConfig)" [text]="'Station'"></app-alarm>
                 </div>
               </td>
               <td>
                 <div class="status">
-                  <app-status-view [alarm]="this.weatherService.getAlarm(stationConfig)" [showActionBadges]="false"></app-status-view>
+                  <app-status-view [alarm]="this.alarmService.getAlarm(stationConfig)" [showActionBadges]="false"></app-status-view>
                 </div>
               </td>
               <td class="buttons" align="right">
-                <app-buttons [alarm]="this.weatherService.getAlarm(stationConfig)"></app-buttons>
+                <app-buttons [alarm]="this.alarmService.getAlarm(stationConfig)"></app-buttons>
               </td>
             </tr>
             <ng-container *ngFor="let config of stationConfig.children">
               <tr>
                 <td>
                   <div class="icon">
-                    <app-alarm [alarm]="this.weatherService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
+                    <app-alarm [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
                   </div>
                 </td>
                 <td>
                   <div class="status">
-                    <app-status-view [alarm]="this.weatherService.getAlarm(config)" [showActionBadges]="false" ></app-status-view>
+                    <app-status-view [alarm]="this.alarmService.getAlarm(config)" [showActionBadges]="false" ></app-status-view>
                   </div>
                 </td>
                 <td class="buttons" align="right">
-                  <app-buttons [alarm]="this.weatherService.getAlarm(config)"></app-buttons>
+                  <app-buttons [alarm]="this.alarmService.getAlarm(config)"></app-buttons>
                 </td>
               </tr>
             </ng-container>

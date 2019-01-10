@@ -37,15 +37,6 @@ export class WeatherStationSidebarComponent implements OnInit {
   ngOnInit() { }
 
   /**
-  * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm}
-  */
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
-  }
-
-  /**
   * Returns the corresponding highlighted class when the component is selected
   * @returns {string} the highlighted class
   */
