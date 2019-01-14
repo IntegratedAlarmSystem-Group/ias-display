@@ -1,35 +1,115 @@
 import { Alarm } from '../data/alarm';
 import { AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmConfig } from '../data/alarm-config';
 
 /** Set of mock configurations for WeatherStations */
 export const mockWeatherStationsConfig = [
   {
-    placemark: 'mockAlarm-0',
-    group: 'group1',
-    station: 'mockAlarm-0',
-    temperature: 'mockAlarm-0-temperature',
-    windspeed: 'mockAlarm-0-windspeed',
-    humidity: 'mockAlarm-0-humidity'
+    'alarm_id': 'mockAlarm-0',
+    'custom_name': null,
+    'type': 'station',
+    'view': 'weather',
+    'placemark': 'mockAlarm-0',
+    'group': 'group1',
+    'children': [
+      {
+        'alarm_id': 'mockAlarm-0-windspeed',
+        'custom_name': null,
+        'type': 'windspeed',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group1',
+        'children': []
+      },
+      {
+        'alarm_id': 'mockAlarm-0-humidity',
+        'custom_name': null,
+        'type': 'humidity',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group1',
+        'children': []
+      },
+      {
+        'alarm_id': 'mockAlarm-0-temperature',
+        'custom_name': null,
+        'type': 'temperature',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group1',
+        'children': []
+      }
+    ]
   },
   {
-    placemark: 'mockAlarm-1',
-    group: 'group2',
-    station: 'mockAlarm-1',
-    temperature: 'mockAlarm-1-temperature',
-    windspeed: 'mockAlarm-1-windspeed',
-    humidity: 'mockAlarm-1-humidity'
+    'alarm_id': 'mockAlarm-1',
+    'custom_name': null,
+    'type': 'station',
+    'view': 'weather',
+    'placemark': 'mockAlarm-1',
+    'group': 'group2',
+    'children': [
+      {
+        'alarm_id': 'mockAlarm-0-windspeed',
+        'custom_name': null,
+        'type': 'windspeed',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group2',
+        'children': []
+      },
+      {
+        'alarm_id': 'mockAlarm-0-humidity',
+        'custom_name': null,
+        'type': 'humidity',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group2',
+        'children': []
+      },
+      {
+        'alarm_id': 'mockAlarm-0-temperature',
+        'custom_name': null,
+        'type': 'temperature',
+        'view': 'weather',
+        'placemark': '',
+        'group': 'group2',
+        'children': []
+      }
+    ]
   },
-];
+] as AlarmConfig[];
 
 /** Mock configuration for WeatherSummary */
-export const mockWeatherSummaryConfig = {
-  placemark: '',
-  group: '',
-  station: '',
-  temperature: 'mockGlobal-temperature',
-  windspeed: 'mockGlobal-windspeed',
-  humidity: 'mockGlobal-humidity'
-};
+export const mockWeatherSummaryConfig = [
+  {
+    'alarm_id': 'mockGlobal-windspeed',
+    'custom_name': 'Wind Speed',
+    'type': 'windspeed',
+    'view': 'weather_summary',
+    'placemark': '',
+    'group': '',
+    'children': []
+  },
+  {
+    'alarm_id': 'mockGlobal-humidity',
+    'custom_name': 'Humidity',
+    'type': 'humidity',
+    'view': 'weather_summary',
+    'placemark': '',
+    'group': '',
+    'children': []
+  },
+  {
+    'alarm_id': 'mockGlobal-temperature',
+    'custom_name': 'Temperature',
+    'type': 'temperature',
+    'view': 'weather_summary',
+    'placemark': '',
+    'group': '',
+    'children': []
+  }
+] as AlarmConfig[];
 
 /** Set of mock {@link ImageSet} */
 export const mockImagesSets = {};

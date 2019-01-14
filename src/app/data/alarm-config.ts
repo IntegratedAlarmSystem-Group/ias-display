@@ -24,6 +24,16 @@ export class AlarmConfig {
   /** Group of the alarm, in order to classify it for views that require some sort of classification of {@link Alarm}s */
   public group: string;
 
+  /**
+  * Builds a new AlarmConfig instance
+  *
+  * @param {Object} attributes a dictionary containing the attributes to
+  * create the object
+  */
+  constructor(attributes: Object = {}) {
+    Object.assign(this, attributes);
+  }
+
   public get name(): string {
     if (this.custom_name) {
       return this.custom_name;

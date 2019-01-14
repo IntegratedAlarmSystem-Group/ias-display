@@ -9,8 +9,7 @@ import { AntennasSummaryComponent } from './antennas-summary.component';
 import { AntennasService } from '../antennas.service';
 import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmService } from '../../data/alarm.service';
-
-const AlarmID = 'antenna-dummy-alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 
 const mockImagesSets = new AlarmImageSet({
   clear: 'antennaImageSet',
@@ -33,6 +32,16 @@ const mockImagesUnreliableSets = new AlarmImageSet({
   maintenance: 'antennaUnreliableImageSet',
   shelved: 'antennaUnreliableImageSet',
 });
+
+const config = [new AlarmConfig({
+  alarm_id: 'antenna-dummy-alarm',
+  custom_name: '',
+  type: 'antenna',
+  view: 'antennas',
+  placemark: '',
+  group: 'antennas',
+  children: []
+})];
 
 describe('AntennasSummaryComponent', () => {
   let component: AntennasSummaryComponent;
@@ -69,7 +78,7 @@ describe('AntennasSummaryComponent', () => {
     fixture = TestBed.createComponent(AntennasSummaryComponent);
     antennasService = fixture.debugElement.injector.get(AntennasService);
     spyOn(antennasService, 'initialize').and.callFake(function() {});
-    antennasService.antennasSummaryConfig = AlarmID;
+    antennasService.antennasSummaryConfig = config;
     antennasService.antennaImageSet = mockImagesSets;
     antennasService.antennaImageUnreliableSet = mockImagesUnreliableSets;
     component = fixture.componentInstance;

@@ -56,7 +56,7 @@ describe('HealthSummaryComponent', () => {
   describe('WHEN the component is created', () => {
     it('THEN the alarm id is requested to the webserver', () => {
       expect(httpClientService.get).toHaveBeenCalled();
-      expect(component.alarmId).toEqual('ias-health');
+      expect(component.alarmConfig[0].alarm_id).toEqual('ias-health');
     });
   });
 
