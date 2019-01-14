@@ -55,10 +55,10 @@ export const Assets = {
 
 /** Key for the url to get information for the weather display */
 export const WeatherSettings = {
-  mapKey: 'weather',
+  mapKey: 'weather_map',
 };
 
 /** Key for the url to get information for the antenna display */
 export const AntennasSettings = {
-  mapKey: 'weather',
+  mapKey: 'weather_map',
 };
