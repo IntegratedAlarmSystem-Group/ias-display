@@ -10,38 +10,8 @@ import { AntennasService } from '../antennas.service';
 import { RoutingService} from '../../app-routing/routing.service';
 import { AlarmService } from '../../data/alarm.service';
 import { AlarmConfig } from '../../data/alarm-config';
+import { mockImagesSets, mockImagesUnreliableSets, mockSummaryConfig } from '../tests_fixtures';
 
-const mockImagesSets = new AlarmImageSet({
-  clear: 'antennaImageSet',
-  set_low: 'antennaImageSet',
-  set_medium: 'antennaImageSet',
-  set_high: 'antennaImageSet',
-  set_critical: 'antennaImageSet',
-  unknown: 'antennaImageSet',
-  maintenance: 'antennaImageSet',
-  shelved: 'antennaImageSet',
-});
-
-const mockImagesUnreliableSets = new AlarmImageSet({
-  clear: 'antennaUnreliableImageSet',
-  set_low: 'antennaUnreliableImageSet',
-  set_medium: 'antennaUnreliableImageSet',
-  set_high: 'antennaUnreliableImageSet',
-  set_critical: 'antennaUnreliableImageSet',
-  unknown: 'antennaUnreliableImageSet',
-  maintenance: 'antennaUnreliableImageSet',
-  shelved: 'antennaUnreliableImageSet',
-});
-
-const config = [new AlarmConfig({
-  alarm_id: 'antenna-dummy-alarm',
-  custom_name: '',
-  type: 'antenna',
-  view: 'antennas',
-  placemark: '',
-  group: 'antennas',
-  children: []
-})];
 
 describe('AntennasSummaryComponent', () => {
   let component: AntennasSummaryComponent;
@@ -78,7 +48,7 @@ describe('AntennasSummaryComponent', () => {
     fixture = TestBed.createComponent(AntennasSummaryComponent);
     antennasService = fixture.debugElement.injector.get(AntennasService);
     spyOn(antennasService, 'initialize').and.callFake(function() {});
-    antennasService.antennasSummaryConfig = config;
+    antennasService.antennasSummaryConfig = mockSummaryConfig;
     antennasService.antennaImageSet = mockImagesSets;
     antennasService.antennaImageUnreliableSet = mockImagesUnreliableSets;
     component = fixture.componentInstance;

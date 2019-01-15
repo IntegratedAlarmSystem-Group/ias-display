@@ -8,6 +8,19 @@ import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
 import { AlarmService } from '../../data/alarm.service';
+import { AlarmConfig } from '../../data/alarm-config';
+
+const config = [
+  {
+    'alarm_id': 'ias-health',
+    'custom_name': 'IAS Health',
+    'type': 'health',
+    'view': 'summary',
+    'placemark': '',
+    'group': '',
+    'children': [],
+  },
+] as AlarmConfig[];
 
 describe('HealthSummaryComponent', () => {
   let component: HealthSummaryComponent;
@@ -44,7 +57,7 @@ describe('HealthSummaryComponent', () => {
     alarmService = fixture.debugElement.injector.get(AlarmService);
     httpClientService = fixture.debugElement.injector.get(HttpClientService);
     spyOn(httpClientService, 'get').and.callFake(function() {
-      return of('ias-health');
+      return of(config);
     });
     fixture.detectChanges();
   });
@@ -56,7 +69,7 @@ describe('HealthSummaryComponent', () => {
   describe('WHEN the component is created', () => {
     it('THEN the alarm id is requested to the webserver', () => {
       expect(httpClientService.get).toHaveBeenCalled();
-      expect(component.alarmConfig[0].alarm_id).toEqual('ias-health');
+      expect(component.alarmConfig[0].alarm_id).toEqual(config[0].alarm_id);
     });
   });
 

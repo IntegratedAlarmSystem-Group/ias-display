@@ -16,23 +16,8 @@ import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
 import { Alarm } from '../../data/alarm';
-import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
+import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types, mockAntennas, mockPadsStatus} from '../test_fixtures';
 
-const mockAntennas = {
-  'group1': ['ANT1', 'ANT2'],
-  'group2': ['ANT4']
-};
-
-const mockPadsStatus = {
-  'group1': {
-    'PAD1': 'ANT1',
-    'PAD2': 'ANT2',
-    'PAD3': null
-  },
-  'group2': {
-    'PAD4': 'ANT4'
-  }
-};
 
 describe('WeatherSidebarComponent', () => {
   let sidebarComponent: WeatherSidebarComponent;

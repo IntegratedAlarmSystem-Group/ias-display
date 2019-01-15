@@ -50,7 +50,7 @@ export const mockWeatherStationsConfig = [
     'group': 'group2',
     'children': [
       {
-        'alarm_id': 'mockAlarm-0-windspeed',
+        'alarm_id': 'mockAlarm-1-windspeed',
         'custom_name': null,
         'type': 'windspeed',
         'view': 'weather',
@@ -59,7 +59,7 @@ export const mockWeatherStationsConfig = [
         'children': []
       },
       {
-        'alarm_id': 'mockAlarm-0-humidity',
+        'alarm_id': 'mockAlarm-1-humidity',
         'custom_name': null,
         'type': 'humidity',
         'view': 'weather',
@@ -68,7 +68,7 @@ export const mockWeatherStationsConfig = [
         'children': []
       },
       {
-        'alarm_id': 'mockAlarm-0-temperature',
+        'alarm_id': 'mockAlarm-1-temperature',
         'custom_name': null,
         'type': 'temperature',
         'view': 'weather',
@@ -271,4 +271,20 @@ export const mockAlarms = {
     'shelved': false,
     'dependencies': [],
   }),
+};
+
+export const mockAntennas = {
+  'group1': ['ANT1', 'ANT2'],
+  'group2': ['ANT4']
+};
+
+export const mockPadsStatus = {
+  'group1': {
+    'PAD1': 'ANT1',
+    'PAD2': 'ANT2',
+    'PAD3': null
+  },
+  'group2': {
+    'PAD4': 'ANT4'
+  }
 };
