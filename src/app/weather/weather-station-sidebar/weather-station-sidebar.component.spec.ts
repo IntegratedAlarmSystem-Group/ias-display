@@ -66,10 +66,6 @@ describe('WeatherStationSidebarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a getAlarm function', () => {
-    expect(component.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
-  });
-
   it('should have a Header Alarm Component to display the station alarm', () => {
     const alarmHeaderDebugElement = fixture.debugElement.query(By.directive(AlarmHeaderComponent));
     const alarmHeader = alarmHeaderDebugElement.componentInstance;

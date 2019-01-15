@@ -108,10 +108,6 @@ describe('WeatherSidebarComponent', () => {
     expect(sidebarComponent).toBeTruthy();
   });
 
-  it('should have a getAlarm function', () => {
-    expect(sidebarComponent.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
-  });
-
   describe('Should have a mat accordion', () => {
     it('in the content div', () => {
       expect(content.querySelector('mat-accordion')).toBeTruthy();
