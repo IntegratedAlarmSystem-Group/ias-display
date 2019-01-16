@@ -15,9 +15,9 @@ export const BackendUrls = {
   FILES_JSON: '/panels-api/files/get_json/?key=',
   WEATHER_VIEW: '/panels-api/files/get_json/?key=weather_config',
   ANTENNAS_VIEW: '/panels-api/files/get_json/?key=antennas_config',
-  WEATHER_SUMMARY: '/panels-api/files/get_json/?key=weather_summary',
-  ANTENNAS_SUMMARY: '/panels-api/files/get_json/?key=antennas_summary',
-  HEALTH_SUMMARY: '/panels-api/files/get_json/?key=health_summary',
+  WEATHER_SUMMARY: '/panels-api/files/get_json/?key=weather_summary_config',
+  ANTENNAS_SUMMARY: '/panels-api/files/get_json/?key=antennas_summary_config',
+  HEALTH_SUMMARY: '/panels-api/files/get_json/?key=health_summary_config',
   PADS_STATUS: '/panels-api/placemark/pads_by_group/',
 };
 
