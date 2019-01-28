@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService, WeatherStationConfig } from '../weather.service';
+import { WeatherService } from '../weather.service';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
 /**
@@ -16,10 +17,10 @@ import { Assets } from '../../settings';
 export class WeatherStationSidebarComponent implements OnInit {
 
   /** Weather station config object */
-  @Input() stationConfig: WeatherStationConfig;
+  @Input() stationConfig: AlarmConfig;
 
   /** Selected weather station config object, null if it is nothing selected */
-  @Input() selectedAlarm: WeatherStationConfig = null;
+  @Input() selectedAlarm: AlarmConfig = null;
 
   /**
   * Builds an instance of the component
@@ -37,20 +38,11 @@ export class WeatherStationSidebarComponent implements OnInit {
   ngOnInit() { }
 
   /**
-  * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm}
-  */
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
-  }
-
-  /**
   * Returns the corresponding highlighted class when the component is selected
   * @returns {string} the highlighted class
   */
   getClass() {
-    if (this.selectedAlarm && (this.selectedAlarm.station === this.stationConfig.station)) {
+    if (this.selectedAlarm && (this.selectedAlarm.alarm_id === this.stationConfig.alarm_id)) {
       return 'highlighted';
     }
     return '';

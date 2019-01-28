@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
-import { AntennasService, AntennaConfig } from '../antennas.service';
+import { AntennasService } from '../antennas.service';
 import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
@@ -12,130 +12,9 @@ import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
+import { mockAntennasConfig, mockDevicesConfig, mockAlarms } from '../tests_fixtures';
 
-const mockAntennasConfig =  [
-    {
-      'antenna': 'antenna-0',
-      'placemark': 'mockAlarm-0',
-      'alarm': 'mockAlarm-0',
-      'fire': 'mockAlarm-0-device',
-      'fire_malfunction': 'mockAlarm-0-device',
-      'ups': 'mockAlarm-0-device',
-      'hvac': 'mockAlarm-0-device',
-      'power': 'mockAlarm-0-device'
-    },
-    {
-      'antenna': 'antenna-1',
-      'placemark': 'mockAlarm-1',
-      'alarm': 'mockAlarm-1',
-      'fire': '',
-      'fire_malfunction': '',
-      'ups': '',
-      'hvac': '',
-      'power': ''
-    },
-    {
-      'antenna': 'antenna-2',
-      'placemark': 'mockAlarm-2',
-      'alarm': 'mockAlarm-2',
-      'fire': '',
-      'fire_malfunction': '',
-      'ups': '',
-      'hvac': '',
-      'power': ''
-    }
-  ];
-
-const mockDevicesConfig = [
-    {
-      'antenna': 'device-1',
-      'placemark': 'mockAlarm-3',
-      'alarm': 'mockAlarm-3'
-    }
-  ];
-
-const mockAlarms = {
-  'mockAlarm-0': Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'mockAlarm-0',
-    'running_id': 'mockAlarm-0',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'state_change_timestamp': 1267252440000,
-    'description': 'Short description for mock alarm',
-    'url': 'https://www.alma1.cl',
-    'sound': 'NONE',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': ['mockAlarm-0-device'],
-  }),
-  'mockAlarm-1': Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'mockAlarm-1',
-    'running_id': 'mockAlarm-1',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'state_change_timestamp': 1267252440000,
-    'description': 'Short description for mock alarm',
-    'url': 'https://www.alma2.cl',
-    'sound': 'NONE',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  'mockAlarm-2': Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'mockAlarm-2',
-    'running_id': 'mockAlarm-2',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'state_change_timestamp': 1267252440000,
-    'description': 'Short description for mock alarm',
-    'url': 'https://www.alma2.cl',
-    'sound': 'NONE',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  'mockAlarm-0-device': Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'mockAlarm-0-device',
-    'running_id': 'mockAlarm-0-device',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'state_change_timestamp': 1267252440000,
-    'description': 'Short description for mock alarm device',
-    'url': 'https://www.alma1.cl',
-    'sound': 'NONE',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }),
-  'mockAlarm-3': Alarm.asAlarm({
-    'value': 0,
-    'core_id': 'mockAlarm-3',
-    'running_id': 'mockAlarm-3',
-    'mode': '0',
-    'core_timestamp': 1267252440000,
-    'validity': '1',
-    'state_change_timestamp': 1267252440000,
-    'description': 'Short description for mock alarm',
-    'url': 'https://www.alma2.cl',
-    'sound': 'NONE',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  })
-};
 
 describe('AntennasSidebarComponent', () => {
   let component: AntennasSidebarComponent;
@@ -143,8 +22,6 @@ describe('AntennasSidebarComponent', () => {
   let debug: DebugElement;
   let antennasService: AntennasService;
   let alarmService: AlarmService;
-
-  // const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(async(() => {
@@ -171,8 +48,8 @@ describe('AntennasSidebarComponent', () => {
     fixture = TestBed.createComponent(AntennasSidebarComponent);
     antennasService = fixture.debugElement.injector.get(AntennasService);
     spyOn(antennasService, 'initialize').and.callFake(function() {});
-    antennasService.antennasConfig = mockAntennasConfig;
-    antennasService.devicesConfig = mockDevicesConfig;
+    antennasService.antennasConfig = mockAntennasConfig as AlarmConfig[];
+    antennasService.devicesConfig = mockDevicesConfig as AlarmConfig[];
     component = fixture.componentInstance;
     debug = fixture.debugElement;
     alarmService = fixture.debugElement.injector.get(AlarmService);
@@ -188,11 +65,6 @@ describe('AntennasSidebarComponent', () => {
 
   it('should have a getAlarm method', () => {
     expect(component.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
-  });
-
-  it('should have a getAntennaName method that return the antenna name', () => {
-    const expectedName = 'antenna-0';
-    expect(component.getAntennaName(mockAntennasConfig[0])).toEqual(expectedName);
   });
 
   describe('', () => {
@@ -221,23 +93,23 @@ describe('AntennasSidebarComponent', () => {
         const alarmInfo = fixture.nativeElement.querySelector('.alarm-info');
         const devicesAlarms = fixture.nativeElement.querySelector('.devices-alarms');
         expect(alarmInfo).toBeTruthy('The alarm-info div does not exist');
-        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm, 'The alarmInfo does not contain the alarm');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm_id, 'The alarmInfo does not contain the alarm id');
         expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
-        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].antenna, 'The alarmInfo does not contain the antenna');
+        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].custom_name, 'The alarmInfo does not contain the antenna');
         expect(devicesAlarms).toBeTruthy('The devices-alarms div does not contain the alarm');
       });
     });
 
     describe('and if there is not a selected antenna', () => {
       describe('and an antenna (grid-item with an alarm-header inside) is clicked', () => {
-        it('then the correspoding antenna is selected', () => {
+        it('then the corresponding antenna is selected', () => {
           component.selectedAntenna = null;
           const antennas = fixture.nativeElement.querySelectorAll('.grid-item');
           antennas[0].click();
           expect(component.selectedAntenna).toBeTruthy();
           expect(component.selectedAntenna.placemark).toEqual('mockAlarm-0');
-          expect(component.selectedAntenna.alarm).toEqual('mockAlarm-0');
-          expect(component.selectedAntenna.antenna).toEqual('antenna-0');
+          expect(component.selectedAntenna.alarm_id).toEqual('mockAlarm-0');
+          expect(component.selectedAntenna.custom_name).toEqual('antenna-0');
         });
       });
     });

@@ -12,66 +12,37 @@
           </mat-expansion-panel-header>
           <table>
             <tr>
-              <!-- <td class="station">Station</td> -->
               <td>
                 <div class="text">
-                  <app-alarm [alarm]="this.getAlarm(stationConfig.station)" [text]="'Station'"></app-alarm>
+                  <app-alarm [alarm]="this.alarmService.getAlarm(stationConfig)" [text]="'Station'"></app-alarm>
                 </div>
               </td>
               <td>
                 <div class="status">
-                  <app-status-view [alarm]="this.getAlarm(stationConfig.station)" [showActionBadges]="false"></app-status-view>
+                  <app-status-view [alarm]="this.alarmService.getAlarm(stationConfig)" [showActionBadges]="false"></app-status-view>
                 </div>
               </td>
               <td class="buttons" align="right">
-                <app-buttons [alarm]="this.getAlarm(stationConfig.station)"></app-buttons>
+                <app-buttons [alarm]="this.alarmService.getAlarm(stationConfig)"></app-buttons>
               </td>
             </tr>
-            <tr>
-              <td>
-                <div class="icon">
-                  <app-alarm [alarm]="this.getAlarm(stationConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
-                </div>
-              </td>
-              <td>
-                <div class="status">
-                  <app-status-view [alarm]="this.getAlarm(stationConfig.windspeed)" [showActionBadges]="false" ></app-status-view>
-                </div>
-              </td>
-              <td class="buttons" align="right">
-                <app-buttons [alarm]="this.getAlarm(stationConfig.windspeed)"></app-buttons>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="icon">
-                  <app-alarm [alarm]="this.getAlarm(stationConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
-                </div>
-              </td>
-              <td>
-                <div class="status">
-                  <app-status-view [alarm]="this.getAlarm(stationConfig.humidity)" [showActionBadges]="false" ></app-status-view>
-                </div>
-              </td>
-              <td class="buttons" align="right">
-                <app-buttons [alarm]="this.getAlarm(stationConfig.humidity)"></app-buttons>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="icon">
-                  <app-alarm [alarm]="this.getAlarm(stationConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
-                </div>
-              </td>
-              <td>
-                <div class="status">
-                  <app-status-view [alarm]="this.getAlarm(stationConfig.temperature)" [showActionBadges]="false" ></app-status-view>
-                </div>
-              </td>
-              <td class="buttons" align="right">
-                <app-buttons [alarm]="this.getAlarm(stationConfig.temperature)"></app-buttons>
-              </td>
-            </tr>
+            <ng-container *ngFor="let config of stationConfig.children">
+              <tr>
+                <td>
+                  <div class="icon">
+                    <app-alarm [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
+                  </div>
+                </td>
+                <td>
+                  <div class="status">
+                    <app-status-view [alarm]="this.alarmService.getAlarm(config)" [showActionBadges]="false" ></app-status-view>
+                  </div>
+                </td>
+                <td class="buttons" align="right">
+                  <app-buttons [alarm]="this.alarmService.getAlarm(config)"></app-buttons>
+                </td>
+              </tr>
+            </ng-container>
           </table>
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">

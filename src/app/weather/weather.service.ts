@@ -1,44 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
+import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, WeatherSettings } from '../settings';
-
-
-/**
-* Stores the IDs of the {@link Alarm} objects associated to a WeatherStation
-*/
-export class WeatherStationConfig {
-
-  /** ID to map the {@link Alarm} to the location on the map */
-  public placemark: string;
-
-  /** Group of placemarks who the alarm belongs */
-  public group: string;
-
-  /** ID of the main {@link Alarm} of the Weather Station */
-  public station: string;
-
-  /** ID of the temperature {@link Alarm} of the Weather Station */
-  public temperature: string;
-
-  /** ID of the windspeed {@link Alarm} of the Weather Station */
-  public windspeed: string;
-
-  /** ID of the humidity {@link Alarm} of the Weather Station */
-  public humidity: string;
-
-  /**
-  * Builds a new WeatherStationConfig instance
-  * @param {Object} attributes a dictionary containing the attributes to
-  * create the object
-  */
-  constructor(attributes: Object = {}) {
-    Object.assign(this, attributes);
-  }
-}
 
 /**
 * Service that stores and handles all configuration needed by the components of the {@link WeatherModule}
@@ -71,10 +39,10 @@ export class WeatherService {
   public markerImageUnreliableSet: AlarmImageSet;
 
   /** Alarms Ids for the weather summary **/
-  public weatherSummaryConfig: WeatherStationConfig;
+  public weatherSummaryConfig: AlarmConfig[];
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  public weatherStationsConfig: WeatherStationConfig[];
+  public weatherStationsConfig: AlarmConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -90,9 +58,11 @@ export class WeatherService {
 
   /**
    * Instantiates the service
+   * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
+    private alarmService: AlarmService,
     private httpClient: HttpClientService
   ) {}
 
@@ -105,6 +75,35 @@ export class WeatherService {
       this.loadImages();
       this.loadPadsStatus('');
       this._initialized = true;
+    }
+  }
+
+  /**
+  * Returns the instance of the {@link Alarm}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the type
+  * @returns {string} the type of the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getIconSet(config: AlarmConfig, reliable: boolean): AlarmImageSet {
+    if (!config) {
+      return null;
+    }
+    const type = config.type;
+    if (reliable) {
+      if (config.type === 'humidity') {
+        return this.humidityImageSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageSet;
+      }
+    } else {
+      if (config.type === 'humidity') {
+        return this.humidityImageUnreliableSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageUnreliableSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageUnreliableSet;
+      }
     }
   }
 
@@ -145,10 +144,10 @@ export class WeatherService {
   */
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
-      this.weatherStationsConfig = response as WeatherStationConfig[];
+      this.weatherStationsConfig = response as AlarmConfig[];
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
-      this.weatherSummaryConfig = response as WeatherStationConfig;
+      this.weatherSummaryConfig = response as AlarmConfig[];
     });
   }
 

@@ -120,6 +120,7 @@ export class AuthService {
       username: username,
       password: password
     }).pipe(map((response: any) => {
+      console.log('Login repsonse:', response);
       const token = response['token'];
       if (token) {
         this.storeToken(token);

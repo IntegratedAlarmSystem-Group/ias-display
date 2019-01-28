@@ -41,7 +41,12 @@ export class AntennasSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.antennasService.antennasSummaryConfig);
+    const conf = this.antennasService.antennasSummaryConfig;
+    if (conf && conf[0]) {
+      return this.alarmService.getAlarm(conf[0]);
+    } else {
+      return null;
+    }
   }
 
   /**

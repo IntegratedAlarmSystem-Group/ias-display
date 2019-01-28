@@ -5,6 +5,7 @@ import { RoutingService } from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
 import { BackendUrls } from '../../settings';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
 /**
@@ -23,8 +24,8 @@ export class HealthSummaryComponent implements OnInit {
   /** Set of Unreliable icons */
   public iconUnreliableSet: AlarmImageSet;
 
-  /** ID of the Alarm */
-  public alarmId: string;
+  /** Configuration for displaying the {@link Alarm} */
+  public alarmConfig: AlarmConfig[];
 
   /**
    * Builds an instance of the component
@@ -50,7 +51,11 @@ export class HealthSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.alarmId);
+    if (this.alarmConfig && this.alarmConfig[0]) {
+      return this.alarmService.get(this.alarmConfig[0].alarm_id);
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -62,7 +67,7 @@ export class HealthSummaryComponent implements OnInit {
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {
-          this.alarmId = response as string;
+          this.alarmConfig = response as AlarmConfig[];
         }
       }
     });

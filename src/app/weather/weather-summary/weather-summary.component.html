@@ -1,32 +1,12 @@
 <div class="ias content" (click)="redirect()">
   <div class="ias sensors">
     <div class="no-vertical-margin">
-      <div class="sensors-card-wrapper">
+      <div class="sensors-card-wrapper" *ngFor="let config of this.weatherService.weatherSummaryConfig">
           <div class="sensors-card">
-              <div class="title">WIND SPEED</div>
+              <div class="title">{{this.alarmService.getName(config)}}</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.getAlarm('windspeed')" [images]="this.weatherService.windsImageSet" [imagesUnreliable]="this.weatherService.windsImageUnreliableSet" [size]="'lg'"
-                ></app-alarm>
-              </div>
-          </div>
-      </div>
-      <div class="sensors-card-wrapper">
-          <div class="sensors-card">
-              <div class="title">HUMIDITY</div>
-              <div class="icon">
-                <app-alarm
-                  [alarm]="this.getAlarm('humidity')" [images]="this.weatherService.humidityImageSet" [imagesUnreliable]="this.weatherService.humidityImageUnreliableSet" [size]="'lg'"
-                ></app-alarm>
-              </div>
-          </div>
-      </div>
-      <div class="sensors-card-wrapper">
-          <div class="sensors-card no-border">
-              <div class="title">TEMPERATURE</div>
-              <div class="icon">
-                <app-alarm
-                  [alarm]="this.getAlarm('temperature')" [images]="this.weatherService.tempImageSet" [imagesUnreliable]="this.weatherService.tempImageUnreliableSet" [size]="'lg'"
+                  [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)" [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>
