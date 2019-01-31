@@ -60,7 +60,7 @@
     "karma-coverage-istanbul-reporter": "^2.0.4",
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "mock-socket": "^8.0.5",
+    "mock-socket": "^7.1.0",
     "ng2-mock-component": "^0.1.1",
     "node-sass": "^4.11.0",
     "protractor": "^5.4.2",

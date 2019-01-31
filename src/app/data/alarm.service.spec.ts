@@ -40,6 +40,7 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'dependencies': [],
     }
   }
+
 },
 {
   'stream': 'alarms',
@@ -289,7 +290,7 @@ describe('AlarmService', () => {
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
-        server.send(JSON.stringify(alarm));
+        mockStream.send(JSON.stringify(alarm));
       }
       mockStream.stop();
     });
@@ -353,7 +354,7 @@ describe('AlarmService', () => {
 
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
-        server.send(JSON.stringify(alarm));
+        mockStream.send(JSON.stringify(alarm));
       }
       mockStream.stop();
     });
@@ -446,7 +447,7 @@ describe('AlarmService', () => {
 
     // Act
     mockStream.on('connection', server => {  // send mock alarms list from server
-      server.send(JSON.stringify(fixtureAlarmsList));
+      mockStream.send(JSON.stringify(fixtureAlarmsList));
       mockStream.stop();
     });
 
@@ -527,7 +528,7 @@ describe('AlarmService', () => {
     mockStream.on('connection', server => {  // send mock alarms list from server
       // Act:
       // mock get alarms list from webserver
-      server.send(JSON.stringify(fixtureAlarmsList));
+      mockStream.send(JSON.stringify(fixtureAlarmsList));
 
       // Assert:
       expect(subject.resetTimer).toHaveBeenCalled();
@@ -546,7 +547,7 @@ describe('AlarmService', () => {
     mockStream.on('connection', server => {  // send mock alarm from server
       // Act:
       // mock alarm message from webserver
-      server.send(JSON.stringify(alarmsFromWebServer[0]));
+      mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
       // Assert:
       expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
@@ -593,7 +594,7 @@ describe('AlarmService', () => {
       mockStream = new Server(subject.getConnectionPath());  // mock server
 
       mockStream.on('connection', server => {  // send mock count from server
-        server.send(JSON.stringify(mockCountByView));
+        mockStream.send(JSON.stringify(mockCountByView));
         expect(subject.countByView).toEqual(mockCountByView.payload.data);
         mockStream.stop();
       });
