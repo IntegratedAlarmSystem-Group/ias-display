@@ -7,8 +7,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
-import { combineLatest, Observable } from 'rxjs';
-import { ISubscription } from 'rxjs/Subscription';
+import { combineLatest, Observable, SubscriptionLike as ISubscription } from 'rxjs';
 
 /**
 * Component used to perform acknowledgement of an Alarm

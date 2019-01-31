@@ -7,7 +7,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
-import { ISubscription } from 'rxjs/Subscription';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 
 /**
 * Definition of a timeout option for shelving an alarm

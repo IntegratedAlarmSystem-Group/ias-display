@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable ,  BehaviorSubject } from 'rxjs';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
@@ -560,7 +560,7 @@ export class AlarmService {
       this.connectionStatusStream.next(true);
     }
     const broadcastThreshold = this.cdbService.getBroadcastThreshold();
-    this.connectionStatusTimer = IntervalObservable.create(1000 * broadcastThreshold).subscribe(x => {
+    this.connectionStatusTimer = interval(1000 * broadcastThreshold).subscribe(x => {
       this.connectionStatusStream.next(false);
     });
   }
