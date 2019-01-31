@@ -50,7 +50,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "10.5.2",
-    "codelyzer": "^4.4.2",
+    "codelyzer": "^4.5.0",
     "jasmine": "~3.1.0",
     "jasmine-core": "~3.1.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -60,12 +60,12 @@
     "karma-coverage-istanbul-reporter": "^2.0.1",
     "karma-jasmine": "^1.1.2",
     "karma-jasmine-html-reporter": "^1.2.0",
-    "mock-socket": "^7.1.0",
+    "mock-socket": "^8.0.5",
     "ng2-mock-component": "^0.1.1",
-    "node-sass": "^4.9.2",
-    "protractor": "^5.4.0",
-    "ts-node": "~7.0.0",
-    "tslint": "^5.11.0",
+    "node-sass": "^4.11.0",
+    "protractor": "^5.4.2",
+    "ts-node": "~8.0.2",
+    "tslint": "^5.12.1",
     "typescript": "3.2.4"
   }
 }
