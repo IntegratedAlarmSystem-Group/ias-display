@@ -26,7 +26,7 @@ export class WikiButtonComponent implements OnInit {
   * Handle click on wiki button, it opens the url in another window
   */
   onClick(event) {
-    if (!this.url.startsWith('http://')) {
+    if (!this.url.match(/^https?:\/\//i)) {
       this.url = 'http://' + this.url;
     }
     window.open(this.url, '_blank');
