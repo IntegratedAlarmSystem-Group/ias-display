@@ -178,7 +178,7 @@ export class AppComponent implements OnInit {
    * variable
    * @returns {string} the classname for the nav item mark
    */
-   getNavItemCountClass(navItem, countByView) {
+   getNavItemCountClass(navItem: any, countByView: any): string {
      const navItemCounter = navItem.counter;
      const availableCounters = Object.keys(countByView);
      if (navItemCounter === '') {
@@ -207,7 +207,7 @@ export class AppComponent implements OnInit {
     * variable
     * @returns {string} the text related to the count for the nav item
     */
-    getNavItemCountText(navItem, countByView) {
+    getNavItemCountText(navItem: any, countByView: any): string {
       const navItemCounter = navItem.counter;
       const availableCounters = Object.keys(countByView);
       if (navItemCounter === '') {

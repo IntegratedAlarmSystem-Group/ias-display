@@ -1,6 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { RouterModule, Routes } from '@angular/router';
 import { IasMaterialModule } from './ias-material/ias-material.module';
 import { AuthModule } from './auth/auth.module';
 import { DataModule } from './data/data.module';
@@ -9,11 +8,6 @@ import { TabularModule } from './tabular/tabular.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { AlarmService } from './data/alarm.service';
-
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: 'overview', pathMatch: 'full' }
-];
 
 describe('AppComponent', () => {
 
@@ -43,8 +37,8 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
   });
   it('should create the app', async(() => {
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    component = fixture.debugElement.componentInstance;
+    expect(component).toBeTruthy();
   }));
 });
 
@@ -240,7 +234,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
       }
     ];
 
-    let navItem;
+    let navItem: any;
     let countText = '';
 
     navItem = component.navigationSidenavItems[0];

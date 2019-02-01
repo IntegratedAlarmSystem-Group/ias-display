@@ -223,7 +223,8 @@ describe('AlarmService', () => {
     });
   });
 
-  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
+  beforeEach(
+    inject([AlarmService, CdbService, AuthService], (_alarmService: AlarmService, _cdbService: CdbService, _authService: AuthService) => {
       /**
       * Services
       */
@@ -350,7 +351,7 @@ describe('AlarmService', () => {
     ];
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
-    mockStream.on('connection', server => {  // send mock alarms from server
+    mockStream.on('connection', () => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
         mockStream.send(JSON.stringify(alarm));
       }
@@ -359,7 +360,7 @@ describe('AlarmService', () => {
 
     // Act and assert:
 
-    subject.alarmChangeStream.subscribe(notification => {
+    subject.alarmChangeStream.subscribe( () => {
       subject.canSound = true;
       subject.audio = new Audio();
       const notified_alarms = subject.alarmsArray;
@@ -444,13 +445,13 @@ describe('AlarmService', () => {
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
     // Act
-    mockStream.on('connection', server => {  // send mock alarms list from server
+    mockStream.on('connection', () => {  // send mock alarms list from server
       mockStream.send(JSON.stringify(fixtureAlarmsList));
       mockStream.stop();
     });
 
     // Assert
-    subject.alarmChangeStream.subscribe(notification => {
+    subject.alarmChangeStream.subscribe( () => {
       const notified_alarms = subject.alarmsArray;
       const alarms_indexes = subject.alarmsIndexes;
       if (stage === 0) {
@@ -486,7 +487,7 @@ describe('AlarmService', () => {
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
-    mockStream.on('connection', server => {
+    mockStream.on('connection', () => {
       expect(subject.connectionStatusStream.value).toBe(true);
       mockStream.stop();
     });
@@ -523,7 +524,7 @@ describe('AlarmService', () => {
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
-    mockStream.on('connection', server => {  // send mock alarms list from server
+    mockStream.on('connection', () => {  // send mock alarms list from server
       // Act:
       // mock get alarms list from webserver
       mockStream.send(JSON.stringify(fixtureAlarmsList));
@@ -542,7 +543,7 @@ describe('AlarmService', () => {
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
-    mockStream.on('connection', server => {  // send mock alarm from server
+    mockStream.on('connection', () => {  // send mock alarm from server
       // Act:
       // mock alarm message from webserver
       mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
@@ -591,7 +592,7 @@ describe('AlarmService', () => {
 
       mockStream = new Server(subject.getConnectionPath());  // mock server
 
-      mockStream.on('connection', server => {  // send mock count from server
+      mockStream.on('connection', () => {  // send mock count from server
         mockStream.send(JSON.stringify(mockCountByView));
         expect(subject.countByView).toEqual(mockCountByView.payload.data);
         mockStream.stop();
@@ -607,7 +608,7 @@ describe('AlarmService', () => {
 
 describe('GIVEN the AlarmService contains Alarms', () => {
 
-  let httpSpy;
+  let httpSpy: any;
   const alarmsToAck = [alarms[1].core_id, alarms[2].core_id];
 
   beforeEach(() => {
@@ -619,7 +620,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 
   beforeEach(
     inject([AlarmService, CdbService, HttpClientService],
-      (_alarmService, _cdbService, httpClientService) => {
+      (_alarmService: AlarmService, _cdbService: CdbService, httpClientService: HttpClientService) => {
 
       subject = _alarmService;
       httpSubject = httpClientService;
@@ -647,7 +648,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
   it('WHEN a set of Alarm is Acknowledged, they should be updated', () => {
     const ackMessage = 'This is the message';
     const username = 'username';
-    const ack_response = subject.acknowledgeAlarms(alarmsToAck, ackMessage, username).subscribe(
+    subject.acknowledgeAlarms(alarmsToAck, ackMessage, username).subscribe(
       (response) => {
         expect(response).toEqual(alarmsToAck);
         expect(httpSpy).toHaveBeenCalled();
@@ -671,7 +672,8 @@ describe('AlarmService', () => {
     });
   });
 
-  beforeEach(inject([AlarmService, CdbService, AuthService], (_alarmService, _cdbService, _authService) => {
+  beforeEach(
+    inject([AlarmService, CdbService, AuthService], (_alarmService: AlarmService, _cdbService: CdbService, _authService: AuthService) => {
       /**
       * Services
       */
