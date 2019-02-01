@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { interval, Observable } from 'rxjs';
+import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Alarm, Validity, Value } from '../data/alarm';
