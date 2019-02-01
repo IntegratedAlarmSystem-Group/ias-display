@@ -1,12 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { AlarmConfig } from '../../data/alarm-config';
 import { WeatherService } from '../weather.service';
-import { Alarm } from '../../data/alarm';
-import { Assets } from '../../settings';
 
 /**
 * Component used to display Weather Alarms in an interactive sidebar
@@ -88,7 +85,7 @@ export class WeatherSidebarComponent implements OnInit {
   * @param {AlarmConfig} stationConfig configuration of the weather station
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
-  isSelected(stationConfig: AlarmConfig) {
+  isSelected(stationConfig: AlarmConfig): boolean {
     return this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark);
   }
 
@@ -112,7 +109,7 @@ export class WeatherSidebarComponent implements OnInit {
    */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 20000,
+      duration: 5000,
       panelClass: ['snackbar']
     });
   }
