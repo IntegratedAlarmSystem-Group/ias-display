@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable ,  BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
-import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
+import { Alarm, Validity, Value } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
 import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';

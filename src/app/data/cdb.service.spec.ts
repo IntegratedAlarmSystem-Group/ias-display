@@ -1,13 +1,9 @@
-import { TestRequest } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
 import { BackendUrls } from '../settings';
 import { CdbService } from './cdb.service';
 import { HttpClientService } from '../data/http-client.service';
-import { Iasio } from '../data/iasio';
 
 
 describe('CdbService', () => {

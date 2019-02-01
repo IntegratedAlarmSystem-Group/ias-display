@@ -1,12 +1,10 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
 import { of } from 'rxjs';
-import { Alarm, OperationalMode, Validity } from '../data/alarm';
+import { Alarm, Validity } from '../data/alarm';
 import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
 import { CdbService } from '../data/cdb.service';
-import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';
 import { AuthService } from '../auth/auth.service';
@@ -16,7 +14,7 @@ let cdbService: CdbService;
 let httpSubject: HttpClientService;
 let authService: AuthService;
 let mockStream: Server;
-let spyEmitSound;
+let spyEmitSound: any;
 
 const alarmsFromWebServer = [  // mock alarm messages from webserver
   {  // same alarm, different actions
