@@ -65,7 +65,7 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
    * Defines wether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
-  isDisabled() {
+  isDisabled(): boolean {
     return !this.sidenavService.canClose;
   }
 
@@ -73,7 +73,7 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
   * Handle click on shelve button, it triggers the shelve sidebar
   * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event: MouseEvent) {
+  onClick(event: MouseEvent): void {
     this.sidenavService.goToShelve(this.alarm.core_id);
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, map ,  tap, delay } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { BackendUrls } from '../settings';
 import { environment } from '../../environments/environment';
 
@@ -98,7 +98,8 @@ export class AuthService {
           this.changeLoginStatus(true);
           return true;
         }),
-        catchError(error => {
+        catchError( error => {
+          console.error(error);
           this.logout();
           return of(false);
         }

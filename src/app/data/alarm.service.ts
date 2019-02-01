@@ -290,9 +290,9 @@ export class AlarmService {
 
   /**
    * Acknowledges a list of Alarms with a message
-   * @param alarm_ids list of ids of the alarms to acknowledge
-   * @param message message of the acknowledgement
-   * @param user user that performs the acknowledgement
+   * @param {string[]} alarm_ids list of ids of the alarms to acknowledge
+   * @param {string} message message of the acknowledgement
+   * @param {string} user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
   acknowledgeAlarms(alarms_ids: string[], message: string, user: string): any {
@@ -316,9 +316,9 @@ export class AlarmService {
   /**
    * Get information about old tickets related to a target alarm
    * @param alarm_id id of the target alarm
-   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   * @returns {any[]} response of the HTTP request with a dictionary with information about missing acks
    */
-  getMissingAcks(alarm_id: string): any {
+  getMissingAcks(alarm_id: string) {
     const url = BackendUrls.TICKETS_INFO + '?alarm_id=' + alarm_id;
     return this.httpClientService.get(url).pipe(
     map(
@@ -373,11 +373,11 @@ export class AlarmService {
 
   /**
    * Shelves and {@link Alarm} with a message
-   * @param {string} alarms_ids id of the alarm to shelve
+   * @param {string[]} alarms_ids id of the alarm to shelve
    * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  unshelveAlarms(alarms_ids: string, message: string): any {
+  unshelveAlarms(alarms_ids: string[], message: string): any {
     const data = {
       'alarms_ids': alarms_ids,
     };

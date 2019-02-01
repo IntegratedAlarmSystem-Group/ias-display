@@ -1,6 +1,6 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { DataModule } from '../data/data.module';
 import { AuthService } from './auth.service';
 import { BackendUrls } from '../settings';
@@ -22,7 +22,7 @@ describe('AuthService', () => {
     });
   });
 
-  beforeEach(inject([AuthService, HttpClient], (authService, httpService) => {
+  beforeEach(inject([AuthService, HttpClient], (authService: AuthService, httpService: HttpClient) => {
       service = authService;
       httpClient = httpService;
   }));
@@ -45,7 +45,7 @@ describe('AuthService', () => {
         service.removeToken();
         spyOn(httpClient, 'post').and.returnValue(of({token: token}));
         // Act:
-        service.login(username, password).subscribe((response) => {
+        service.login(username, password).subscribe( () => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
           expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toEqual(JSON.stringify(token));
@@ -61,7 +61,7 @@ describe('AuthService', () => {
         service.removeToken();
         spyOn(httpClient, 'post').and.returnValue(of({}));
         // Act:
-        service.login(username, password).subscribe((response) => {
+        service.login(username, password).subscribe( () => {
           // Assert:
           expect(httpClient.post).toHaveBeenCalledWith(url, data);
           expect(localStorage.getItem(service.TOKEN_STORAGE_NAME)).toBeFalsy();
