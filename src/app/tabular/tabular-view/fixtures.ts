@@ -1,11 +1,4 @@
-import { DatePipe } from '@angular/common';
 import { Alarm } from '../../data/alarm';
-
-/** Object used to format the dates as needed */
-const datepipe = new DatePipe('en');
-
-/** Fixed date to use on the tests */
-const alarms_date = new Date(Date.parse('27 Feb 2010 06:34:00 GMT'));
 
 /** Set of mock IASIOS for the tests */
 export const MockIasios = [

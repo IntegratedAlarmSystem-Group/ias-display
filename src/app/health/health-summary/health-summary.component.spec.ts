@@ -7,7 +7,6 @@ import { HealthSummaryComponent } from './health-summary.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
-import { AlarmService } from '../../data/alarm.service';
 import { AlarmConfig } from '../../data/alarm-config';
 
 const config = [
@@ -25,7 +24,6 @@ const config = [
 describe('HealthSummaryComponent', () => {
   let component: HealthSummaryComponent;
   let fixture: ComponentFixture<HealthSummaryComponent>;
-  let alarmService: AlarmService;
   let httpClientService: HttpClientService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
@@ -54,7 +52,6 @@ describe('HealthSummaryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HealthSummaryComponent);
     component = fixture.componentInstance;
-    alarmService = fixture.debugElement.injector.get(AlarmService);
     httpClientService = fixture.debugElement.injector.get(HttpClientService);
     spyOn(httpClientService, 'get').and.callFake(function() {
       return of(config);
