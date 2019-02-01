@@ -4,12 +4,10 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AntennasSummaryComponent } from './antennas-summary.component';
 import { AntennasService } from '../antennas.service';
 import { RoutingService} from '../../app-routing/routing.service';
-import { AlarmService } from '../../data/alarm.service';
-import { AlarmConfig } from '../../data/alarm-config';
 import { mockImagesSets, mockImagesUnreliableSets, mockSummaryConfig } from '../tests_fixtures';
 
 
@@ -17,7 +15,6 @@ describe('AntennasSummaryComponent', () => {
   let component: AntennasSummaryComponent;
   let fixture: ComponentFixture<AntennasSummaryComponent>;
   let debug: DebugElement;
-  let alarmService: AlarmService;
   let antennasService: AntennasService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter', 'goToAntennas']);
 
@@ -53,7 +50,6 @@ describe('AntennasSummaryComponent', () => {
     antennasService.antennaImageUnreliableSet = mockImagesUnreliableSets;
     component = fixture.componentInstance;
     debug = fixture.debugElement;
-    alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();
   });
 

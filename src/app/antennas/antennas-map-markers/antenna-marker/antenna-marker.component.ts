@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../../data/alarm';
 import { AlarmService } from '../../../data/alarm.service';
 import { AntennasService } from '../../../antennas/antennas.service';

@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService } from '../antennas.service';
 import { MapService } from '../../map/map.service';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 /**
 * Main component for the antennas map

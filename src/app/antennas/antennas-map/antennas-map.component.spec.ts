@@ -7,14 +7,19 @@ import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
 import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
+import { AlarmConfig } from '../../data/alarm-config';
 
 
 const mockAntennasConfig =  [{
-    antenna: 'DV00',
+    alarm_id: 'alarmId',
+    custom_name: 'DV00',
+    type: 'antenna',
+    view: 'antennas',
+    children: [],
     placemark: 'P000',
-    alarm: 'alarmId',
+    group: 'antennas'
   }
-];
+] as AlarmConfig[];
 
 describe('AntennasMapComponent', () => {
   let component: AntennasMapComponent;
@@ -32,7 +37,7 @@ describe('AntennasMapComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject([AntennasService], (service) => {
+  beforeEach(inject([AntennasService], (service: AntennasService) => {
     spyOn(service, 'initialize').and.callFake(function() {});
     service.antennasConfig = mockAntennasConfig;
     spyOn(service, 'getMapData').and.callFake(function() {
