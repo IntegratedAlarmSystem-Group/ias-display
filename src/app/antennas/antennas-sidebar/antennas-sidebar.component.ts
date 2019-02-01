@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';

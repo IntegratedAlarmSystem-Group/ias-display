@@ -11,9 +11,8 @@ import { AuthLoginGuard } from '../auth/auth-login.guard';
 describe('GIVEN the RoutingService', () => {
   let location: Location;
   let router: Router;
-  let subject;
+  let subject: RoutingService;
   let authGuard: AuthLoginGuard;
-  const spyGuard = jasmine.createSpyObj('AuthLoginGuard', {'canActivate': true});
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,7 +22,6 @@ describe('GIVEN the RoutingService', () => {
       ],
       providers: [
         RoutingService,
-        // { provide: AuthLoginGuard, useValue: spyGuard },
         AuthLoginGuard
       ]
     });
@@ -31,7 +29,7 @@ describe('GIVEN the RoutingService', () => {
     location = TestBed.get(Location);
   });
 
-  beforeEach(inject([RoutingService, AuthLoginGuard], (routingService, authLoginGuard) => {
+  beforeEach(inject([RoutingService, AuthLoginGuard], (routingService: RoutingService, authLoginGuard: AuthLoginGuard) => {
       subject = routingService;
       authGuard = authLoginGuard;
   }));

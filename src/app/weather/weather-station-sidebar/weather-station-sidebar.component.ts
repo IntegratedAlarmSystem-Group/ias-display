@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
-import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
-import { Assets } from '../../settings';
 
 /**
  * Component to display an item containing a weather station summary in the interactive Sidebar
@@ -41,7 +38,7 @@ export class WeatherStationSidebarComponent implements OnInit {
   * Returns the corresponding highlighted class when the component is selected
   * @returns {string} the highlighted class
   */
-  getClass() {
+  getClass(): string {
     if (this.selectedAlarm && (this.selectedAlarm.alarm_id === this.stationConfig.alarm_id)) {
       return 'highlighted';
     }

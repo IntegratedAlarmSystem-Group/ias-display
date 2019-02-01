@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SharedModule } from '../../shared/shared.module';
 import { LegendComponent } from './legend.component';
 

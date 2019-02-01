@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AntennasComponent } from './antennas.component';
 import { AntennasMapComponent } from '../antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.component';

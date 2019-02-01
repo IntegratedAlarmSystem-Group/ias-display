@@ -7,8 +7,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
-import { combineLatest, Observable } from 'rxjs';
-import { ISubscription } from 'rxjs/Subscription';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 
 /**
 * Component used to perform acknowledgement of an Alarm
@@ -119,7 +118,7 @@ export class AckComponent implements OnInit, OnDestroy {
       this.check_request_and_reload();
     });
     this.alarmChangeSubscription = this.alarmService.alarmChangeStream
-    .subscribe( value => {
+    .subscribe( () => {
       this.check_request_and_reload();
     });
     this.sidenavService.open();
@@ -183,12 +182,12 @@ export class AckComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
         this.alarmsToAck, this.form.get('message').value, this.user_selected).subscribe(
-          (response) => {
+          (response: any) => {
             this.acknowledgedAlarms = <string[]> response;
             this.requestStatus = 1;
             this.hideSpinner();
           },
-          (error) => {
+          (error: any) => {
             if (error.status === 403) {
               this.requestStatus = -2;
             } else {
@@ -223,7 +222,7 @@ export class AckComponent implements OnInit, OnDestroy {
    * Update the list of alarms to ack from the selection on the child component
    * @param {Event} event event triggered by the inner {@link AckTree}, containing the IDs fo the alarms to acknowledge
    */
-  updateAlarmsToAck(event): void {
+  updateAlarmsToAck(event: string[]): void {
     this.alarmsToAck = event;
   }
 
@@ -231,7 +230,7 @@ export class AckComponent implements OnInit, OnDestroy {
   * Method to invalidate ack action
   * @returns {boolean} True if ack action can be performed and false if not
   */
-  disableAcknowledgment() {
+  disableAcknowledgment(): boolean {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
     const validForm = this.form.valid;
     const isAllowed = this.authService.getAllowedActions()['can_ack'];

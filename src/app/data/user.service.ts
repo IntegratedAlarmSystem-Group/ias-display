@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClientService } from './http-client.service';
 import { BackendUrls } from '../settings';
+import { Subscription } from 'rxjs';
 
 /**
 * Class that models a User
@@ -35,9 +35,9 @@ export class UserService {
 
   /**
   * Get the list of users in the operators group
-  * @return {User[]} the list of users
+  * @return {Subscription} subscription to the list of users
   */
-  requestUsersList() {
+  requestUsersList(): Subscription {
     return this.httpClientService.get(BackendUrls.USERS_LIST)
     .subscribe (
         (response) => {

@@ -1,9 +1,8 @@
-import { Component, Injectable, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable ,  BehaviorSubject ,  SubscriptionLike as ISubscription } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
-import { Alarm, OperationalMode, Validity } from '../../data/alarm';
+import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { Locale } from '../../settings';
 import { DatePipe } from '@angular/common';
@@ -123,7 +122,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.alarmService.alarmsArray;
     this.dataSource.filterPredicate = this.filterPredicate;
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe(notification => {
+    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( () => {
       this.dataSource.data = this.alarmService.alarmsArray;
     });
     let filterValue = this.route.snapshot.paramMap.get('filter');
@@ -150,9 +149,9 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
   * This function is executed after a key is pressed in the keywords input box
   * If the user pressed "Escape", then the filters are cleared by calling {@link clearFilter}, if not, the filters are applied normally
-  * @param {event} event the event that triggered the function
+  * @param {any} event the event that triggered the function
   */
-  onKeyUp(event) {
+  onKeyUp(event: any) {
     if (event.key === 'Escape') {
       this.clearFilter();
     } else {
@@ -225,7 +224,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
   * Toggle the filtering based on selected filter value
   */
-  _toggleFilter(filterStatus, filterValue) {
+  _toggleFilter(filterStatus: boolean, filterValue: string) {
 
     if (this.filterString == null) {
       this.filterString = '';

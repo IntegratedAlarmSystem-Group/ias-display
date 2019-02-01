@@ -49,7 +49,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
    * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
-  canAcknowledge() {
+  canAcknowledge(): boolean {
     if (this.alarm != null && this.alarm.state_change_timestamp > 0) {
       return !this.alarm.ack;
     } else {
@@ -61,15 +61,14 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * Defines wether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
-  isDisabled() {
+  isDisabled(): boolean {
     return !this.sidenavService.canClose || !this.canAcknowledge();
   }
 
   /**
   * Handle click on ack button, it triggers ack sidenav through the {@link Router} service
-  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event: MouseEvent) {
+  onClick() {
     this.sidenavService.goToAcknowledge(this.alarm.core_id);
   }
 

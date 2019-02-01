@@ -7,7 +7,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
-import { ISubscription } from 'rxjs/Subscription';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 
 /**
 * Definition of a timeout option for shelving an alarm
@@ -165,7 +165,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
       }
     );
     this.alarmChangeSubscription = this.alarmService.alarmChangeStream
-    .subscribe( value => {
+    .subscribe( () => {
       this.check_request_and_reload();
     });
     this.sidenavService.open();
@@ -251,7 +251,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
    */
   getResponseMessageTitle(): string {
-    let action;
+    let action: string;
     if (!this.alarm.shelved) {
       action = 'Shelving';
     } else {
@@ -338,12 +338,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   requestShelveInfo(): void {
     this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
-        (response) => {
+        (response: any) => {
           const registry = response[0];
           this.shelvedAtMessage = 'This Alarm was shelved at ' + registry['shelved_at'] +
           ' with a duration of ' + this.timeouts.find(t => t.value === registry['timeout']).viewValue;
         },
-        (error) => {
+        (error: any) => {
           console.log('Error: ', error);
           return error;
         }
@@ -361,12 +361,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
       this.alarmService.shelveAlarm(
         this.alarm.core_id, message, timeout, this.user_selected
       ).subscribe(
-          (response) => {
+          (response: any) => {
             this.requestStatus = 1;
             this.hideSpinner();
             this.errorMessage = '';
           },
-          (error) => {
+          (error: any) => {
             if (error.status === 403) {
               this.requestStatus = -2;
             } else {
@@ -391,12 +391,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
         [this.alarm.core_id], this.form.get('message').value).subscribe(
-          (response) => {
+          (response: any) => {
             this.requestStatus = 1;
             this.hideSpinner();
             this.errorMessage = '';
           },
-          (error) => {
+          (error: any) => {
             console.log('Error: ', error);
             this.requestStatus = -1;
             this.hideSpinner();

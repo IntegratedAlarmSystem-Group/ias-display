@@ -16,7 +16,7 @@ export class MapService {
   * @param {any} pathsGroup group of paths
   * @returns {any} svgPaths
   */
-  getSVGPaths(pathsGroup) {
+  getSVGPaths(pathsGroup: any): any {
     const svgPaths = [];
     for (let i = 0; i < pathsGroup.length; i++) {
       const points = pathsGroup[i];
@@ -41,7 +41,7 @@ export class MapService {
   * @param {any} pathsGroups list of group of paths
   * @return {any} The viewbox: list of 4 numbers used to define the size of the map
   */
-  mapdataProcessing(placemarksGroups, pathsGroups) {
+  mapdataProcessing(placemarksGroups: any, pathsGroups: any): any {
 
     const X_AXIS_SCALING_FACTOR = 1.1;
 

@@ -1,5 +1,4 @@
-import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AntennasService } from '../antennas.service';
@@ -9,9 +8,6 @@ import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { ButtonsComponent } from '../../actions/buttons/buttons.component';
-import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { mockAntennasConfig, mockDevicesConfig, mockAlarms } from '../tests_fixtures';
 
@@ -19,7 +15,6 @@ import { mockAntennasConfig, mockDevicesConfig, mockAlarms } from '../tests_fixt
 describe('AntennasSidebarComponent', () => {
   let component: AntennasSidebarComponent;
   let fixture: ComponentFixture<AntennasSidebarComponent>;
-  let debug: DebugElement;
   let antennasService: AntennasService;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
@@ -51,9 +46,8 @@ describe('AntennasSidebarComponent', () => {
     antennasService.antennasConfig = mockAntennasConfig as AlarmConfig[];
     antennasService.devicesConfig = mockDevicesConfig as AlarmConfig[];
     component = fixture.componentInstance;
-    debug = fixture.debugElement;
     alarmService = fixture.debugElement.injector.get(AlarmService);
-    spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+    spyOn(alarmService, 'get').and.callFake(function(alarm_id: string) {
       return mockAlarms[alarm_id];
     });
     fixture.detectChanges();

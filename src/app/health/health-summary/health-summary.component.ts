@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';

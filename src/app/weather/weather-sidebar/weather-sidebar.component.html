@@ -7,7 +7,7 @@
     <mat-accordion>
       <div multi="false" *ngFor="let stationConfig of this.weatherService.weatherStationsConfig">
         <mat-expansion-panel [expanded]="isSelected(stationConfig)">
-          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig)">
+          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig)" [collapsedHeight]="'60px'" [expandedHeight]="'60px'">
             <app-weather-station-sidebar [stationConfig]="stationConfig" [selectedAlarm]="this.selectedStation"></app-weather-station-sidebar>
           </mat-expansion-panel-header>
           <table>

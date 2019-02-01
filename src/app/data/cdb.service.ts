@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import {forkJoin as observableForkJoin,  BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs';
 import { BackendUrls } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
-import { Iasio } from '../data/iasio';
 
 
 /**

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
-import { Alarm } from '../data/alarm';
+import { Observable } from 'rxjs';
 import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
-import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../shared/alarm/alarm.component';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, AntennasSettings } from '../settings';
 
