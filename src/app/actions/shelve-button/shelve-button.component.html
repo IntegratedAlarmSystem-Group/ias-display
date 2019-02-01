@@ -1,4 +1,4 @@
-<button mat-icon-button color="accent" class="shelve-button" title="{{ getButtonTooltipText() }}" [disabled]="isDisabled()" (click)="onClick($event)">
+<button mat-icon-button color="accent" class="shelve-button" title="{{ getButtonTooltipText() }}" [disabled]="isDisabled()" (click)="onClick()">
     <div *ngIf="alarm?.shelved; then unshelveIcon; else shelveIcon"></div>
     <ng-template #shelveIcon>
       <div class="shelve-button-icon"> <img src="/assets/img/shelve.svg"/> </div>

@@ -71,9 +71,8 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
 
   /**
   * Handle click on shelve button, it triggers the shelve sidebar
-  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event: MouseEvent): void {
+  onClick(): void {
     this.sidenavService.goToShelve(this.alarm.core_id);
   }
 
