@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AckTreeComponent, AlarmItemNode, AlarmItemFlatNode } from './ack-tree.component';
+import { AckTreeComponent, AlarmItemFlatNode } from './ack-tree.component';
 import { AlarmService } from '../../data/alarm.service';
-import { Alarm } from '../../data/alarm';
 import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
@@ -12,7 +11,7 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   let fixture: ComponentFixture<AckTreeComponent>;
   let alarmService: AlarmService;
 
-  function getSelectedAlarms(nodes: AlarmItemFlatNode[]): any[] {
+  function getSelectedAlarms(_: AlarmItemFlatNode[]): any[] {
     const alarms = [];
     component.checklistSelection.selected.forEach( (flatNode) => {
       alarms.push(flatNode.item);
@@ -67,7 +66,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       const node = component.dataSource.data[0]['children'][0]['children'][1]; // Get node corresponding to 'grandChild_2'
       const flatNode = component.nestedNodeMap.get(node); // Transform to FlatNode
       expect(flatNode.item).toEqual('grandChild_12'); // Check that we got the correct node
-      const alarmsToSelect = ['grandChild_12'];
       const expectedSelectedAlarms = ['grandChild_12'];
       const expectedAckList = ['grandChild_12'];
       component.alarmItemSelectionToggle(flatNode); // Select the flatNode
@@ -89,7 +87,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       const flatNode1 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
       const flatNode2 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][2]);
       expect([flatNode1.item, flatNode2.item]).toEqual(['grandChild_12', 'grandChild_13']); // Check that we got the correct node
-      const alarmsToSelect = ['grandChild_12', 'grandChild_13'];
       const expectedAckList = ['grandChild_12', 'grandChild_13'];
       const expectedSelectedAlarms = ['grandChild_12', 'grandChild_13'];
       component.alarmItemSelectionToggle(flatNode1);
@@ -112,7 +109,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       const flatNode0 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][0]);
       const flatNode1 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][1]);
       const flatNode2 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]['children'][2]);
-      const alarmsToSelect = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
       expect([flatNode0.item, flatNode1.item, flatNode2.item]).toEqual(['grandChild_11', 'grandChild_12', 'grandChild_13']);
       const expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
       const expectedSelectedAlarms = ['grandChild_11', 'grandChild_12', 'grandChild_13', 'child_1'];
@@ -137,7 +133,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       expect(component).toBeTruthy();
       const flatNode = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]);
       expect(flatNode.item).toEqual('child_1');
-      const alarmsToSelect = ['child_1'];
       const expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
       const expectedSelectedAlarms = ['child_1', 'grandChild_11', 'grandChild_12', 'grandChild_13'];
       component.alarmItemSelectionToggle(flatNode);
@@ -159,7 +154,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
       const flatNode0 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][0]);
       const flatNode1 = component.nestedNodeMap.get(component.dataSource.data[0]['children'][1]);
       expect([flatNode0.item, flatNode1.item]).toEqual(['child_1', 'child_2']);
-      const alarmsToSelect = ['child_1', 'child_2'];
       const expectedAckList =
         ['grandChild_11', 'grandChild_12', 'grandChild_13', 'grandChild_21', 'grandChild_23'];
       const expectedSelectedAlarms = [
@@ -189,7 +183,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
         expect([grandChildrenNode.item, childrenNode.item]).toEqual(['grandChild_12', 'child_1']); // Check that we got the correct node
 
         // FIRST: Select the grandchildren
-        let alarmsToSelect = ['grandChild_12'];
         let expectedAckList = ['grandChild_12'];
         let expectedSelectedAlarms = ['grandChild_12'];
         component.alarmItemSelectionToggle(grandChildrenNode);
@@ -200,7 +193,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
         expect(component.ackList.sort()).toEqual(expectedAckList.sort());
 
         // SECOND: Select the children
-        alarmsToSelect = ['child_1'];
         expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
         expectedSelectedAlarms = ['grandChild_11', 'grandChild_12', 'grandChild_13', 'child_1'];
         component.alarmItemSelectionToggle(childrenNode);
@@ -226,7 +218,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
         expect([grandChildrenNode.item, childrenNode.item]).toEqual(['grandChild_12', 'child_1']); // Check that we got the correct node
 
         // FIRST: Select the children
-        let alarmsToSelect = ['child_1'];
         let expectedAckList = ['grandChild_11', 'grandChild_12', 'grandChild_13'];
         let expectedSelectedAlarms = ['child_1', 'grandChild_11', 'grandChild_12', 'grandChild_13'];
         component.alarmItemSelectionToggle(childrenNode);
@@ -237,7 +228,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
         expect(component.ackList.sort()).toEqual(expectedAckList.sort());
 
         // SECOND: Deselect the grandchildren
-        alarmsToSelect = ['grandChild_12'];
         expectedAckList = ['grandChild_11', 'grandChild_13'];
         expectedSelectedAlarms = ['grandChild_11', 'grandChild_13'];
         component.alarmItemSelectionToggle(grandChildrenNode);

@@ -165,7 +165,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
       }
     );
     this.alarmChangeSubscription = this.alarmService.alarmChangeStream
-    .subscribe( value => {
+    .subscribe( () => {
       this.check_request_and_reload();
     });
     this.sidenavService.open();
@@ -251,7 +251,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
    */
   getResponseMessageTitle(): string {
-    let action;
+    let action: string;
     if (!this.alarm.shelved) {
       action = 'Shelving';
     } else {
