@@ -38,6 +38,14 @@
           th {
             padding-right: 16px;
             font-weight: normal;
+            vertical-align: top;
+          }
+
+          pre {
+            padding-top: 3px;
+            font-size: 90%;
+            overflow-y: auto;
+            max-height: 130px;
           }
 
         }

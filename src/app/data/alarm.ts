@@ -183,11 +183,29 @@ export class Alarm {
   * @returns {string} a string representation of the Alarm properties
   */
   get formattedProperties(): string {
+    const example = {
+      key1: 'value1',
+      key2: [
+        'value21',
+        'value22',
+        'value23',
+      ],
+      // key2: 'value2',
+      key3: 'value3',
+      key4: 'value4',
+      key5: 'value5',
+    };
+    // return JSON.stringify(example, null, 2);
     if (this.properties === null || Object.keys(this.properties).length === 0) {
       return 'No properties';
-    } else {
-      return JSON.stringify(this.properties);
     }
+    if (Object.keys(this.properties).length === 1) {
+      const property = this.properties[Object.keys(this.properties)[0]];
+      if (!(property instanceof Object)) {
+        return JSON.stringify(this.properties).replace(':', ': ').replace('{', '{ ').replace('}', ' }');
+      }
+    }
+    return JSON.stringify(this.properties, null, 2);
   }
 
   /**
