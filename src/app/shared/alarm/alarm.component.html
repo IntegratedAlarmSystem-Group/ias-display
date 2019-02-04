@@ -1,4 +1,10 @@
-<div [ngClass]="this.getClass()" fxLayout="row" placement="right" [ngbTooltip]="tipContent" tooltipClass="tooltip-class">
+<div
+  [ngClass]="this.getClass()"
+  fxLayout="row"
+  placement="{{tooltipDirection}}"
+  [ngbTooltip]="tipContent"
+  tooltipClass="tooltip-class"
+>
   <ng-template #tipContent>
     <div class="alarm-tooltip">
       <table>

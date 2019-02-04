@@ -108,6 +108,7 @@ export class AlarmComponent implements OnInit {
   * Executed when the component is initiating
   */
   ngOnInit() {
+    console.log('tooltipDirection: ', this.tooltipDirection);
     this.dateFormat = Locale.DATE_FORMAT;
     this.timezone = Locale.TIMEZONE;
     if (this.sizeOptions.indexOf(this.size) < 0) {
