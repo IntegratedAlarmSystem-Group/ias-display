@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Locale } from '../../settings';
 
 /**
 * Class that models the relation of image URLS and Alarm statuses, for displaying purposes
@@ -28,6 +29,13 @@ export class AlarmImageSet {
 
   /** URL of the image to use for the "shelved" Alarm value  */
   public shelved: string;
+
+  /** String to store the formatting of dates, read form the settings */
+  private dateFormat: string;
+
+  /** String to store the timezone to display dates, read from the settings */
+  private timezone: string;
+
 
   /**
   * Builds a new AlarmImageSet instance
@@ -82,6 +90,11 @@ export class AlarmComponent implements OnInit {
   @Input() size = 'md';
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
@@ -95,6 +108,8 @@ export class AlarmComponent implements OnInit {
   * Executed when the component is initiating
   */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
     }

@@ -5,7 +5,32 @@ $md-cem: 1.6*$cem;
 $lg-cem: 3.0*$cem;
 $status-cem: 1*$cem;
 
-.alarm-component{
+::ng-deep .tooltip-class .tooltip-inner {
+  font-size: 11px;
+  min-width: 350px;
+  max-width: 500px;
+  font-family: monospace;
+  vertical-align: top;
+  text-align: left;
+
+  table {
+  }
+
+  th {
+    font-weight: bold;
+    width: 110px;
+    vertical-align: top;
+  }
+
+  pre {
+    color: white;
+    vertical-align: top;
+    font-size: 100%;
+  }
+}
+
+
+.alarm-component {
 
   .icon {
     display: inline-block;

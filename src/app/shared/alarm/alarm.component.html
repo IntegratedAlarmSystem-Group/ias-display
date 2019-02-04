@@ -1,4 +1,27 @@
-<div [ngClass]="this.getClass()" fxLayout="row">
+<div [ngClass]="this.getClass()" fxLayout="row" placement="right" [ngbTooltip]="tipContent" tooltipClass="tooltip-class">
+  <ng-template #tipContent>
+    <div class="alarm-tooltip">
+      <table>
+        <tr>
+          <th>Alarm ID</th>
+          <td>{{alarm?.core_id}}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{{ alarm?.description }}</td>
+        </tr>
+        <tr>
+          <th>Last Change</th>
+          <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
+        </tr>
+        <tr>
+          <th>Last Properties</th>
+          <pre>{{ alarm?.formattedProperties }}</pre>
+        </tr>
+      </table>
+    </div>
+  </ng-template>
+
   <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
 
   <ng-template #textAlarm>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
@@ -24,6 +25,7 @@ import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   declarations: [
     AlarmComponent,
