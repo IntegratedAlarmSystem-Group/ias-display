@@ -84,7 +84,7 @@ export class AlarmHeaderComponent implements OnInit {
   * @returns {boolean} true if the alarm has pending acknowledgement, false if not
   */
   showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack;
+    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
   }
 
   /**
