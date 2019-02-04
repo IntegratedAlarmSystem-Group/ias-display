@@ -99,6 +99,12 @@ export class AlarmComponent implements OnInit {
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
 
+  /** String to store the formatting of dates, read form the settings */
+  private dateFormat: string;
+
+  /** String to store the timezone to display dates, read from the settings */
+  private timezone: string;
+
   /**
   * Instantiates the component
   */
