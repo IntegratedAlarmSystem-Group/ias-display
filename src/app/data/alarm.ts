@@ -71,6 +71,9 @@ export class Alarm {
   /** Short description of the {@link Alarm} */
   description: string;
 
+  /** Dictionary of alarms properties **/
+  properties: {};
+
   /** Documentation url of the {@link Alarm} */
   url: string;
 
@@ -143,8 +146,9 @@ export class Alarm {
     const ack = <boolean>json['ack'];
     const shelved = <boolean>json['shelved'];
     const dependencies = <string[]>json['dependencies'];
+    const properties = json['properties'];
     return new Alarm({ value, core_id, running_id, mode, core_timestamp,
-      state_change_timestamp, validity, description, url, sound, can_shelve, ack, shelved, dependencies });
+      state_change_timestamp, validity, description, url, sound, can_shelve, ack, shelved, dependencies, properties });
   }
 
   /**
@@ -164,8 +168,7 @@ export class Alarm {
     return Value[this.value];
   }
 
-  /**
-  * Returns the core_id of the {@link Alarm}*/
+  /** Returns the core_id of the {@link Alarm}*/
   get name(): string {
     return this.core_id;
   }
@@ -173,6 +176,14 @@ export class Alarm {
   /** Returns the operational mode of the {@link Alarm} as a string*/
   get operationalMode(): string {
     return OperationalMode[this.mode];
+  }
+
+  /**
+  * Returns a string representation of the {@link Alarm.properties} attribute
+  * @returns {string} a string representation of the Alarm properties
+  */
+  get formattedProperties(): string {
+    return JSON.stringify(this.properties);
   }
 
   /**

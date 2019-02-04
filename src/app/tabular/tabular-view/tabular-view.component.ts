@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { SubscriptionLike as ISubscription } from 'rxjs';
 import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { Locale } from '../../settings';
-import { DatePipe } from '@angular/common';
 
 /**
 * Component that dispays all the Alarms in a table
@@ -104,7 +103,6 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private alarmService: AlarmService,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
   ) {}
 
   /**
