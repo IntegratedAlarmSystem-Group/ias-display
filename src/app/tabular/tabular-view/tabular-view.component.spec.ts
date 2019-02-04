@@ -1,11 +1,6 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { DebugElement } from '@angular/core';
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatTableDataSource, MatSort, MatSortable, MatTableModule, MatSortModule } from '@angular/material';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { ActivatedRoute, Params, convertToParamMap, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableModule, MatSortModule } from '@angular/material';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { ActionsModule } from '../../actions/actions.module';
@@ -14,26 +9,18 @@ import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { TabularViewComponent } from './tabular-view.component';
 import { LegendComponent } from '../legend/legend.component';
-import { MockIasios, MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
+import { MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
-import { Iasio } from '../../data/iasio';
 import { DatePipe } from '@angular/common';
-import { Locale } from '../../settings';
 
 
 describe('TabularViewComponent', () => {
-  let datePipe: DatePipe;
   let component: TabularViewComponent;
   let fixture: ComponentFixture<TabularViewComponent>;
-  let debug: DebugElement;
-  let html: HTMLElement;
   let filtersToggle: object;
-  const localOffset = (new Date().getTimezoneOffset()) * 60 * 1000;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const alarms = MockAlarms;
-  const iasios = MockIasios;
-  const expectedRows = ExpectedTableRows;
 
 
   beforeEach(async(() => {
@@ -69,19 +56,10 @@ describe('TabularViewComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject(
-    [ DatePipe ],
-    ( dp: DatePipe ) => {
-      datePipe = dp;
-    })
-  );
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TabularViewComponent);
     component = fixture.componentInstance;
     alarmService = fixture.debugElement.injector.get(AlarmService);
-    debug = fixture.debugElement;
-    html = debug.nativeElement;
     fixture.detectChanges();
   });
 
