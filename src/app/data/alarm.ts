@@ -183,7 +183,11 @@ export class Alarm {
   * @returns {string} a string representation of the Alarm properties
   */
   get formattedProperties(): string {
-    return JSON.stringify(this.properties);
+    if (this.properties === null || Object.keys(this.properties).length === 0) {
+      return 'No properties';
+    } else {
+      return JSON.stringify(this.properties);
+    }
   }
 
   /**
