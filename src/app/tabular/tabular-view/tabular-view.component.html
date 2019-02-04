@@ -88,6 +88,14 @@
         <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
       </ng-container>
 
+      <!-- Properties Column -->
+      <ng-container matColumnDef="properties">
+        <mat-header-cell *matHeaderCellDef>
+          <span mat-sort-header> PROPERTIES </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let alarm"> {{alarm.formattedProperties}} </mat-cell>
+      </ng-container>
+
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>

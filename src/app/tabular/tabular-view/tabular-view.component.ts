@@ -63,7 +63,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
   * Array that defines which coulmns are going to be displayed and in which order
   */
-  public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'actions'];
+  public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'properties', 'actions'];
 
   /** String to store the formatting of dates, read form the settings */
   private dateFormat: string;
