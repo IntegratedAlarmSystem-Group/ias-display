@@ -1,3 +1,27 @@
+::ng-deep .tooltip-class .tooltip-inner {
+  font-size: 11px;
+  min-width: 350px;
+  max-width: 500px;
+  font-family: monospace;
+  vertical-align: top;
+  text-align: left;
+
+  table {
+  }
+
+  th {
+    font-weight: bold;
+    width: 110px;
+    vertical-align: top;
+  }
+
+  pre {
+    color: white;
+    vertical-align: top;
+    font-size: 100%;
+  }
+}
+
 .alarm-header-color {
   height: 100%;
   width: 10px;

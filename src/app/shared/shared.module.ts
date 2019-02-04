@@ -7,7 +7,6 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { DataModule } from '../data/data.module';
 import { AlarmComponent } from './alarm/alarm.component';
 import { StatusViewComponent } from './status-view/status-view.component';
-import { ActionsModule } from '../actions/actions.module';
 import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
 
 /**

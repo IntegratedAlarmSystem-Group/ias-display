@@ -1,7 +1,47 @@
-<div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div>
-<div class="alarm-header-name">
+<ng-template #tipContent>
+  <div class="alarm-tooltip">
+    <table>
+      <tr>
+        <th>Alarm ID</th>
+        <td>{{alarm?.core_id}}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ alarm?.description }}</td>
+      </tr>
+      <tr>
+        <th>Last Change</th>
+        <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
+      </tr>
+      <tr>
+        <th>Last Properties</th>
+        <pre>{{ alarm?.formattedProperties }}</pre>
+      </tr>
+    </table>
+  </div>
+</ng-template>
+
+
+<div
+  fxFlex="10px"
+  class="alarm-header-color"
+  [ngClass]="getClass()"
+  placement="{{tooltipDirection}}"
+  [ngbTooltip]="tipContent"
+  tooltipClass="tooltip-class"
+></div>
+
+
+<div
+  class="alarm-header-name"
+  placement="{{tooltipDirection}}"
+  [ngbTooltip]="tipContent"
+  tooltipClass="tooltip-class"
+>
     {{this.getAlarmName()}}
 </div>
+
+
 <div fxLayout="row" class="alarm-header-badges">
   <div class="badges" *ngIf="showActionBadges">
 

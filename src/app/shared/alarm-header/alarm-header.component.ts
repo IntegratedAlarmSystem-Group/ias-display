@@ -33,6 +33,11 @@ export class AlarmHeaderComponent implements OnInit {
   @Input() optionalAlarmName = null;
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
+
+  /**
    * Builds an instance of the component
    */
   constructor() { }
