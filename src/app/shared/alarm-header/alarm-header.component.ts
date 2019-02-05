@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
-import { Locale } from '../../settings';
 
 /**
  * Component used to display alarms as headers in a table or list
@@ -38,13 +38,6 @@ export class AlarmHeaderComponent implements OnInit {
    */
   @Input() tooltipDirection = 'right';
 
-
-  /** String to store the formatting of dates, read form the settings */
-  private dateFormat: string;
-
-  /** String to store the timezone to display dates, read from the settings */
-  private timezone: string;
-
   /**
    * Builds an instance of the component
    */
@@ -54,8 +47,6 @@ export class AlarmHeaderComponent implements OnInit {
    * Method executed when the component is initiated
    */
   ngOnInit() {
-    this.dateFormat = Locale.DATE_FORMAT;
-    this.timezone = Locale.TIMEZONE;
   }
 
   /**

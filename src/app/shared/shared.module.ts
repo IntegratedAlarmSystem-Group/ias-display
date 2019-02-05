@@ -8,6 +8,7 @@ import { DataModule } from '../data/data.module';
 import { AlarmComponent } from './alarm/alarm.component';
 import { StatusViewComponent } from './status-view/status-view.component';
 import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
+import { AlarmTooltipComponent } from './alarm-tooltip/alarm-tooltip.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -30,6 +31,7 @@ import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
     AlarmComponent,
     StatusViewComponent,
     AlarmHeaderComponent,
+    AlarmTooltipComponent,
   ],
   exports: [
     AlarmComponent,

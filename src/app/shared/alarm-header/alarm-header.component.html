@@ -1,26 +1,3 @@
-<ng-template #tipContent>
-  <div class="alarm-tooltip">
-    <table>
-      <tr>
-        <th>Alarm ID</th>
-        <td>{{alarm?.core_id}}</td>
-      </tr>
-      <tr>
-        <th>Description</th>
-        <td>{{ alarm?.description }}</td>
-      </tr>
-      <tr>
-        <th>Last Change</th>
-        <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
-      </tr>
-      <tr>
-        <th>Last Properties</th>
-        <pre>{{ alarm?.formattedProperties }}</pre>
-      </tr>
-    </table>
-  </div>
-</ng-template>
-
 <div
   class="alarm-header-container"
   placement="{{tooltipDirection}}"
@@ -28,7 +5,10 @@
   tooltipClass="tooltip-class"
   data-container="body"
 >
-  
+  <ng-template #tipContent>
+    <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
+  </ng-template>
+
   <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()" ></div>
 
   <div class="alarm-header-name">
