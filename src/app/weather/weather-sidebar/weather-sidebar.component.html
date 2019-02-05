@@ -23,7 +23,11 @@
               </td>
               <td>
                 <div class="status">
-                  <app-status-view [alarm]="this.alarmService.getAlarm(stationConfig)" [showActionBadges]="false"></app-status-view>
+                  <app-status-view
+                    [alarm]="this.alarmService.getAlarm(stationConfig)"
+                    [showActionBadges]="false"
+                    [tooltipDirection]="'left'"
+                  ></app-status-view>
                 </div>
               </td>
               <td class="buttons" align="right">
@@ -44,7 +48,11 @@
                 </td>
                 <td>
                   <div class="status">
-                    <app-status-view [alarm]="this.alarmService.getAlarm(config)" [showActionBadges]="false" ></app-status-view>
+                    <app-status-view
+                      [alarm]="this.alarmService.getAlarm(config)"
+                      [showActionBadges]="false"
+                      [tooltipDirection]="'left'"
+                    ></app-status-view>
                   </div>
                 </td>
                 <td class="buttons" align="right">

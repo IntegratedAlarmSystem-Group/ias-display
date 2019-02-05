@@ -40,6 +40,11 @@ export class StatusViewComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
+
+  /**
   * Instantiates the component
   */
   constructor() { }

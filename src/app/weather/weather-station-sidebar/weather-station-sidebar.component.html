@@ -2,6 +2,7 @@
   <app-alarm-header
     fxFlex
     [alarm]="this.alarmService.getAlarm(stationConfig)"
+    [tooltipDirection]="'left'"
   ></app-alarm-header>
   <div fxLayout="row" class="weather-icons">
     <div class="icon" *ngFor="let config of stationConfig.children">
