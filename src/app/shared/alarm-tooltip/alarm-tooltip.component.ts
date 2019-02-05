@@ -37,10 +37,10 @@ export class AlarmTooltipComponent implements OnInit {
   @Input() tooltipDirection = 'right';
 
   /** String to store the formatting of dates, read form the settings */
-  private dateFormat: string;
+  dateFormat: string;
 
   /** String to store the timezone to display dates, read from the settings */
-  private timezone: string;
+  timezone: string;
 
   /**
   * Instantiates the component
