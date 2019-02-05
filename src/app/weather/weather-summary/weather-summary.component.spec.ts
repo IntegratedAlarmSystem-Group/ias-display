@@ -1,13 +1,11 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { SharedModule } from '../../shared/shared.module';
 import { WeatherSummaryComponent } from './weather-summary.component';
 import { RoutingService} from '../../app-routing/routing.service';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { mockWeatherSummaryConfig, mockImagesSets} from '../test_fixtures';
@@ -35,11 +33,6 @@ describe('WeatherSummaryComponent', () => {
         { provide: RoutingService, useValue: spyRoutingTable },
         WeatherService
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ AlarmComponent ]
-      }
     })
     .compileComponents();
   }));

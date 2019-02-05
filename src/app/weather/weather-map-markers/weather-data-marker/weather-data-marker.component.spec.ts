@@ -1,9 +1,8 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { WeatherDataMarkerComponent } from './weather-data-marker.component';
 import { WeatherService } from '../../weather.service';
-import { AlarmComponent } from '../../../shared/alarm/alarm.component';
-import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 import { DataModule } from '../../../data/data.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { mockWeatherStationsConfig, mockImagesSets} from '../../test_fixtures';
 
 describe('WeatherDataMarkerComponent', () => {
@@ -15,10 +14,10 @@ describe('WeatherDataMarkerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         WeatherDataMarkerComponent,
-        AlarmComponent
       ],
       imports: [
-        DataModule
+        DataModule,
+        SharedModule
       ],
       providers: [
         WeatherService
@@ -28,7 +27,7 @@ describe('WeatherDataMarkerComponent', () => {
   }));
 
   beforeEach(
-    inject([WeatherService], (service) => {
+    inject([WeatherService], (service: WeatherService) => {
       weatherService = service;
       spyOn(weatherService, 'initialize').and.callFake(function() {});
       weatherService.weatherStationsConfig = mockWeatherStationsConfig;

@@ -6,8 +6,6 @@ import { AlarmService } from '../../data/alarm.service';
 import { WeatherStationSidebarComponent } from './weather-station-sidebar.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmHeaderComponent } from '../../shared/alarm-header/alarm-header.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
-import { Alarm } from '../../data/alarm';
 import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
 
 describe('WeatherStationSidebarComponent', () => {
@@ -32,7 +30,7 @@ describe('WeatherStationSidebarComponent', () => {
   }));
 
   beforeEach(
-    inject([WeatherService], (service) => {
+    inject([WeatherService], (service: WeatherService) => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});
@@ -46,9 +44,9 @@ describe('WeatherStationSidebarComponent', () => {
   );
 
   beforeEach(
-    inject([AlarmService], (service) => {
+    inject([AlarmService], (service: AlarmService) => {
       alarmService = service;
-      spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+      spyOn(alarmService, 'get').and.callFake(function(alarm_id: string) {
         return mockAlarms[alarm_id];
       });
     })
