@@ -21,47 +21,41 @@
   </div>
 </ng-template>
 
-
 <div
-  fxFlex="10px"
-  class="alarm-header-color"
-  [ngClass]="getClass()"
-  placement="{{tooltipDirection}}"
-  [ngbTooltip]="tipContent"
-  tooltipClass="tooltip-class"
-  data-container="body"
-></div>
-
-
-<div
-  class="alarm-header-name"
+  class="alarm-header-container"
   placement="{{tooltipDirection}}"
   [ngbTooltip]="tipContent"
   tooltipClass="tooltip-class"
   data-container="body"
 >
-    {{this.getAlarmName()}}
-</div>
+  
+  <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()" ></div>
 
-
-<div fxLayout="row" class="alarm-header-badges">
-  <div class="badges" *ngIf="showActionBadges">
-
-    <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
-    <ng-template #ackOn>
-      <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
-    </ng-template>
-    <ng-template #ackOff>
-      <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
-    </ng-template>
-
-    <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
-    <ng-template #shelvedOn>
-      <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
-    </ng-template>
-    <ng-template #shelvedOff>
-      <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>
-    </ng-template>
-
+  <div class="alarm-header-name">
+      {{this.getAlarmName()}}
   </div>
+
+
+  <div fxLayout="row" class="alarm-header-badges">
+    <div class="badges" *ngIf="showActionBadges">
+
+      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
+      <ng-template #ackOn>
+        <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
+      </ng-template>
+      <ng-template #ackOff>
+        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
+      </ng-template>
+
+      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
+      <ng-template #shelvedOn>
+        <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
+      </ng-template>
+      <ng-template #shelvedOff>
+        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>
+      </ng-template>
+
+    </div>
+  </div>
+
 </div>
