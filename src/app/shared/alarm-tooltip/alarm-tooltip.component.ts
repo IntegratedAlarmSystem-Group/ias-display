@@ -6,14 +6,13 @@ import { Locale } from '../../settings';
 * Component that defines the content and layout of the tooltip over Alarm Components
 * In order to use it you have to put the {@link AlarmTooltipComponent} inside an ng-template
 * and assign the ng-template to the main container of the parent component with some additional paramenters,
-* such as tooltipClass="tooltip-class" and data-container="body".
+* such as data-container="body".
 *
 * For example:
 *
 * <div
 *   placement="'right'"
 *   [ngbTooltip]="tipContent"
-*   tooltipClass="tooltip-class"
 *   data-container="body"
 * >
 *   <ng-template #tipContent>
