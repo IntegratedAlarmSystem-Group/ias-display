@@ -23,6 +23,15 @@ export class WikiButtonComponent implements OnInit {
   }
 
   /**
+   * Defines whether or not the button is disabled
+   * @returns {boolean} true if the button is disabled, false if not.
+   */
+  isDisabled(): boolean {
+    return !this.url;
+  }
+
+
+  /**
   * Handle click on wiki button, it opens the url in another window
   */
   onClick() {
