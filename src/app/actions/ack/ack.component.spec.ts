@@ -128,6 +128,16 @@ describe('AckComponent', () => {
         expect(componentBody.textContent).toContain(expected);
       });
 
+      it('should display the alarm last state change timestamp', () => {
+        const expected = mockAlarm.formattedTimestamp;
+        expect(componentBody.textContent).toContain(expected);
+      });
+
+      it('should display the alarm last state change properties', () => {
+        const expected = mockAlarm.formattedProperties;
+        expect(componentBody.textContent).toContain(expected);
+      });
+
       // Form
       describe('should have a form', () => {
         it('with an input field and an ack-tree component', () => {

@@ -119,6 +119,16 @@ describe('ShelveComponent', () => {
     expect(componentBody.textContent).toContain(expected);
   });
 
+  it('should display the alarm last state change timestamp', () => {
+    const expected = mockAlarm.formattedTimestamp;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display the alarm last state change properties', () => {
+    const expected = mockAlarm.formattedProperties;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
   // Shelve Panel
   // Form
   describe('should have a form', () => {
