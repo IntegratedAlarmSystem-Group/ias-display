@@ -7,7 +7,6 @@ import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { WeatherSidebarComponent } from './weather-sidebar.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { StatusViewComponent } from '../../shared/status-view/status-view.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
@@ -15,7 +14,6 @@ import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
-import { Alarm } from '../../data/alarm';
 import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types, mockAntennas, mockPadsStatus} from '../test_fixtures';
 
 
@@ -52,7 +50,7 @@ describe('WeatherSidebarComponent', () => {
   }));
 
   beforeEach(
-    inject([WeatherService], (service) => {
+    inject([WeatherService], (service: WeatherService) => {
       weatherService = service;
       spyOn(weatherService, 'initialize').and.callFake(function() {});
       weatherService.padsStatus = mockPadsStatus;
@@ -67,16 +65,16 @@ describe('WeatherSidebarComponent', () => {
   );
 
   beforeEach(
-    inject([AlarmService], (service) => {
+    inject([AlarmService], (service: AlarmService) => {
       alarmService = service;
-      spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+      spyOn(alarmService, 'get').and.callFake(function(alarm_id: string) {
         return mockAlarms[alarm_id];
       });
     })
   );
 
   beforeEach(
-    inject([ClipboardService], (service) => {
+    inject([ClipboardService], (service: ClipboardService) => {
       clipboardService = service;
       spyOn(clipboardService, 'copyFromContent').and.callFake(function() { return true; });
     })
@@ -136,7 +134,7 @@ describe('WeatherSidebarComponent', () => {
                 const columns = tableRows[j].queryAll(By.css('td'));
 
                 const index = alarm_types[Number(j) - 1];
-                let alarmIndex;
+                let alarmIndex: string;
 
                 if ( j === '0' ) {
                   alarmIndex = 'mockAlarm-' + i;

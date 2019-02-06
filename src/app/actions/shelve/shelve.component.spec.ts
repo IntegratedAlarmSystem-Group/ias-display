@@ -1,4 +1,4 @@
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
@@ -17,7 +17,6 @@ describe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
   let componentBody: any;
-  let componentHeader: any;
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
@@ -40,6 +39,7 @@ describe('ShelveComponent', () => {
       'ack': false,
       'shelved': false,
       'dependencies': [],
+      'properties': {},
   });
 
   beforeEach(async(() => {
@@ -95,7 +95,6 @@ describe('ShelveComponent', () => {
     spyOn(component, 'onClose');
     component.ngOnInit();
     fixture.detectChanges();
-    componentHeader = fixture.nativeElement.querySelector('.component-header');
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
   });
@@ -117,6 +116,16 @@ describe('ShelveComponent', () => {
 
   it('should display the alarm short description', () => {
     const expected = mockAlarm.description;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display the alarm last state change timestamp', () => {
+    const expected = mockAlarm.formattedTimestamp;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display the alarm last state change properties', () => {
+    const expected = mockAlarm.formattedProperties;
     expect(componentBody.textContent).toContain(expected);
   });
 

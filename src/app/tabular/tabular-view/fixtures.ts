@@ -203,6 +203,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 3,
@@ -219,6 +220,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 2,
@@ -235,6 +237,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 1,
@@ -251,6 +254,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 0,
@@ -267,6 +271,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
 
   // VALID ACK
@@ -285,6 +290,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 3,
@@ -301,6 +307,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 2,
@@ -317,6 +324,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 1,
@@ -333,6 +341,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 0,
@@ -349,6 +358,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
 
   // INVALID NOT-ACK
@@ -367,6 +377,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 3,
@@ -383,6 +394,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 2,
@@ -399,6 +411,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 1,
@@ -415,6 +428,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 0,
@@ -431,6 +445,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
 
   // INVALID ACK
@@ -449,6 +464,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 3,
@@ -465,6 +481,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 2,
@@ -481,6 +498,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 1,
@@ -497,6 +515,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 0,
@@ -513,6 +532,7 @@ export const MockAlarms = [
     'ack': true,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
 
   // Repetitions weith different modes:
@@ -531,6 +551,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 4,
@@ -547,6 +568,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 4,
@@ -563,6 +585,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
   {
     'value': 4,
@@ -579,6 +602,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   },
 ];
 

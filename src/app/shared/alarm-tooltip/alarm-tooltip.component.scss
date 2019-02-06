@@ -1,0 +1,31 @@
+::ng-deep .tooltip {
+  animation-name: delayedFadeIn;
+  animation-duration: 0.5s; /* Control animation time */
+}
+
+::ng-deep .tooltip-inner {
+  font-size: 11px;
+  min-width: 350px;
+  max-width: 500px;
+  font-family: monospace;
+  vertical-align: top;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.85);
+
+  th {
+    width: 110px;
+    vertical-align: top;
+  }
+
+  pre {
+    color: white;
+    vertical-align: top;
+    font-size: 100%;
+  }
+}
+
+@keyframes delayedFadeIn {
+  0% {opacity: 0;}
+  75% {opacity: 0;} /* Set this to 99% for no fade-in. */
+  100% {opacity: 1;}
+}

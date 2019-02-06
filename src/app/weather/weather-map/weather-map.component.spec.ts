@@ -4,9 +4,8 @@ import { WeatherMapComponent } from './weather-map.component';
 import { WeatherService } from '../weather.service';
 import { MapModule } from '../../map/map.module';
 import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
 import { Map } from '../../map/fixtures';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmConfig } from '../../data/alarm-config';
 
 import {
@@ -40,16 +39,15 @@ describe('WeatherMapComponent', () => {
         WeatherPrimaryWsConnectorComponent,
         WeatherDataMarkerComponent,
         WeatherBackupWsMarkerComponent,
-        AlarmComponent
       ],
-      imports: [ DataModule, MapModule ],
+      imports: [ DataModule, MapModule, SharedModule ],
       providers: [ WeatherService ]
     })
     .compileComponents();
   }));
 
   beforeEach(
-    inject([WeatherService], (service) => {
+    inject([WeatherService], (service: WeatherService) => {
       weatherService = service;
       spyOn(weatherService, 'initialize')
         .and.callFake(function() {});

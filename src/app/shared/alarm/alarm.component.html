@@ -1,4 +1,14 @@
-<div [ngClass]="this.getClass()" fxLayout="row">
+<div
+  [ngClass]="this.getClass()"
+  fxLayout="row"
+  placement="{{tooltipDirection}}"
+  [ngbTooltip]="tipContent"
+  data-container="body"
+>
+  <ng-template #tipContent>
+    <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
+  </ng-template>
+
   <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
 
   <ng-template #textAlarm>

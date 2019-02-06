@@ -18,6 +18,14 @@
             <th>Description</th>
             <td>{{ alarm?.description }}</td>
           </tr>
+          <tr>
+            <th>Last Change</th>
+            <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
+          </tr>
+          <tr>
+            <th>Last Properties</th>
+            <pre>{{ alarm?.formattedProperties }}</pre>
+          </tr>
         </table>
       </div>
 

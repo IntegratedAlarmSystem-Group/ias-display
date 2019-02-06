@@ -14,12 +14,20 @@
             <tr>
               <td>
                 <div class="text">
-                  <app-alarm [alarm]="this.alarmService.getAlarm(stationConfig)" [text]="'Station'"></app-alarm>
+                  <app-alarm
+                    [alarm]="this.alarmService.getAlarm(stationConfig)"
+                    [text]="'Station'"
+                    [tooltipDirection]="'left'"
+                  ></app-alarm>
                 </div>
               </td>
               <td>
                 <div class="status">
-                  <app-status-view [alarm]="this.alarmService.getAlarm(stationConfig)" [showActionBadges]="false"></app-status-view>
+                  <app-status-view
+                    [alarm]="this.alarmService.getAlarm(stationConfig)"
+                    [showActionBadges]="false"
+                    [tooltipDirection]="'left'"
+                  ></app-status-view>
                 </div>
               </td>
               <td class="buttons" align="right">
@@ -30,12 +38,21 @@
               <tr>
                 <td>
                   <div class="icon">
-                    <app-alarm [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)"></app-alarm>
+                    <app-alarm
+                      [alarm]="this.alarmService.getAlarm(config)"
+                      [images]="this.weatherService.getIconSet(config, true)"
+                      [imagesUnreliable]="this.weatherService.getIconSet(config, false)"
+                      [tooltipDirection]="'left'"
+                    ></app-alarm>
                   </div>
                 </td>
                 <td>
                   <div class="status">
-                    <app-status-view [alarm]="this.alarmService.getAlarm(config)" [showActionBadges]="false" ></app-status-view>
+                    <app-status-view
+                      [alarm]="this.alarmService.getAlarm(config)"
+                      [showActionBadges]="false"
+                      [tooltipDirection]="'left'"
+                    ></app-status-view>
                   </div>
                 </td>
                 <td class="buttons" align="right">

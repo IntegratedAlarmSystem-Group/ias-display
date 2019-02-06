@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
-import { SubscriptionLike as ISubscription } from 'rxjs';
+import { Locale } from '../../settings';
 
 /**
 * Definition of a timeout option for shelving an alarm
@@ -116,6 +117,11 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
  sidenavReloadSubscription: ISubscription;
 
+ /** String to store the formatting of dates, read form the settings */
+ private dateFormat: string;
+
+ /** String to store the timezone to display dates, read from the settings */
+ private timezone: string;
 
   /**
    * Instantiates the component
@@ -142,6 +148,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Get the alarmID from the url, create the form and open the sidenav
    */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     this.user = new FormControl('', [Validators.required]);
     this.message = new FormControl('', [Validators.required]);
     this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);

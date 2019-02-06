@@ -25,7 +25,13 @@
   <div class="antennas-container">
     <div class="grid-container">
       <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">
-        <app-alarm-header fxFlex [alarm]="alarmService.getAlarm(antennaConfig)" [alarmNameMaxSize]="4" [optionalAlarmName]="alarmService.getName(antennaConfig)"></app-alarm-header>
+        <app-alarm-header
+          fxFlex
+          [alarm]="alarmService.getAlarm(antennaConfig)"
+          [alarmNameMaxSize]="4"
+          [optionalAlarmName]="alarmService.getName(antennaConfig)"
+          [tooltipDirection]="'left'"
+        ></app-alarm-header>
       </div>
     </div>
   </div>

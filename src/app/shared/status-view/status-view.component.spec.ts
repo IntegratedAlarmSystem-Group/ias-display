@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StatusViewComponent } from './status-view.component';
 import { AlarmComponent } from '../alarm/alarm.component';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm } from '../../data/alarm';
-import { By } from '@angular/platform-browser';
 
 describe('StatusViewComponent', () => {
   let component: StatusViewComponent;
@@ -24,7 +25,8 @@ describe('StatusViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatusViewComponent, AlarmComponent ],
+      declarations: [ StatusViewComponent, AlarmComponent, AlarmTooltipComponent ],
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));

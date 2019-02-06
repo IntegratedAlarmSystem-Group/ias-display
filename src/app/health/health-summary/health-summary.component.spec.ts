@@ -1,10 +1,9 @@
 import { of } from 'rxjs';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
 import { HealthSummaryComponent } from './health-summary.component';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
 import { AlarmConfig } from '../../data/alarm-config';
@@ -31,20 +30,15 @@ describe('HealthSummaryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HealthSummaryComponent,
-        AlarmComponent
       ],
       imports: [
         IasMaterialModule,
         DataModule,
+        SharedModule
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ AlarmComponent ]
-      }
     })
     .compileComponents();
   }));

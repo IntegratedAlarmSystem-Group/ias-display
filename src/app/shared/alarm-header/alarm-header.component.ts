@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -31,6 +32,11 @@ export class AlarmHeaderComponent implements OnInit {
    * Defines an optional alarm name to display. By default it is null and in that case the component use the alarm core_id.
    */
   @Input() optionalAlarmName = null;
+
+  /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
 
   /**
    * Builds an instance of the component
@@ -84,7 +90,7 @@ export class AlarmHeaderComponent implements OnInit {
   * @returns {boolean} true if the alarm has pending acknowledgement, false if not
   */
   showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack;
+    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
   }
 
   /**

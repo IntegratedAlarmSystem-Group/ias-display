@@ -1,10 +1,9 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
+import { SharedModule } from '../../shared/shared.module';
 import { AntennasSummaryComponent } from './antennas-summary.component';
 import { AntennasService } from '../antennas.service';
 import { RoutingService} from '../../app-routing/routing.service';
@@ -22,21 +21,16 @@ describe('AntennasSummaryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AntennasSummaryComponent,
-        AlarmComponent
       ],
       imports: [
         IasMaterialModule,
-        DataModule
+        DataModule,
+        SharedModule
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
         AntennasService
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ AlarmComponent ]
-      }
     })
     .compileComponents();
   }));

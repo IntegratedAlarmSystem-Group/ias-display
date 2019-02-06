@@ -20,6 +20,9 @@
         td {
           color: mat-color($foreground, hint-text);
         }
+        pre {
+          color: mat-color($foreground, hint-text);
+        }
       }
 
       &.action-error {

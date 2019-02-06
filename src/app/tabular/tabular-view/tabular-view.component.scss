@@ -89,6 +89,22 @@
     // flex: 0 0 25% !important;
   }
 
+  .mat-column-properties {
+    // flex: 0 0 25% !important;
+    white-space: pre;
+    font-size: 80%;
+    overflow-y: auto;
+
+    &.mat-cell {
+      max-height: 100px;
+      font-family: monospace;
+      display: inline-grid;
+      vertical-align: middle;
+      padding: 8px 0;
+    }
+
+  }
+
   .mat-column-actions {
     flex: 0 0 10% !important;
     text-align: left !important;

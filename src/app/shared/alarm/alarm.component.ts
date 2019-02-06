@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -28,6 +29,7 @@ export class AlarmImageSet {
 
   /** URL of the image to use for the "shelved" Alarm value  */
   public shelved: string;
+
 
   /**
   * Builds a new AlarmImageSet instance
@@ -80,6 +82,11 @@ export class AlarmComponent implements OnInit {
    * Defines the size of the component, can be either of the options defined by {@link sizeOptions}
    */
   @Input() size = 'md';
+
+  /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
 
   /**
    * Available sizes for the alarm componet
