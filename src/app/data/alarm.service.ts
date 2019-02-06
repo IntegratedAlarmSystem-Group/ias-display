@@ -47,6 +47,7 @@ export class AlarmSounds {
     } else if (sound === 'TYPE4') {
       return Assets.SOUNDS + AlarmSounds.type4;
     }
+    return null;
   }
 }
 
@@ -502,9 +503,13 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    console.log('calling emit with: ', sound);
+    console.log('calling emitSound with: ', sound);
     this.audio = new Audio();
-    this.audio.src = AlarmSounds.getSoundsource(sound);
+    const soundToPlay = AlarmSounds.getSoundsource(sound);
+    if (soundToPlay === null || soundToPlay === '') {
+      return;
+    }
+    this.audio.src = soundToPlay;
     if (repeat) {
       this.audio.addEventListener('ended', function() {
         this.currentTime = 0;
