@@ -32,6 +32,9 @@ module.exports = function (config) {
     },
     browsers: ['ChromeDocker'],
     singleRun: false,
+    captureTimeout: 60000,
+    browserDisconnectTimeout : 10000,
+    browserDisconnectTolerance : 1,
     browserNoActivityTimeout: 120000
   });
 };
