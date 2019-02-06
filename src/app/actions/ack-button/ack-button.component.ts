@@ -58,7 +58,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Defines wether or not the button is disabled
+   * Defines whether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
   isDisabled(): boolean {

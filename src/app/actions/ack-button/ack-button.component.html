@@ -1,9 +1,9 @@
-<button mat-icon-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick()" [disabled]="isDisabled()">
+<button mat-flat-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick()" [disabled]="isDisabled()">
     <div *ngIf="isDisabled(); then ackOff else ackOn"></div>
     <ng-template #ackOn>
-      <div class="ack-button-icon"> <img src="/assets/img/ack-on.svg"/> </div>
+      <div class="ack-button-icon"> <img src="/assets/img/ack-on-btn-icon.svg"/> </div>
     </ng-template>
     <ng-template #ackOff>
-      <div class="ack-button-icon"> <img src="/assets/img/ack-off.svg"/> </div>
+      <div class="ack-button-icon"> <img src="/assets/img/ack-off-btn-icon.svg"/> </div>
     </ng-template>
 </button>
