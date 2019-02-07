@@ -1,16 +1,20 @@
 <div class="ias content" (click)="redirect()">
   <div class="ias sensors">
-    <div class="no-vertical-margin">
       <div class="sensors-card-wrapper" *ngFor="let config of this.weatherService.weatherSummaryConfig">
-          <div class="sensors-card">
+          <div class="sensors-card"
+            [ngClass]="{
+                'no-border': config===this.weatherService.weatherSummaryConfig[
+                  this.weatherService.weatherSummaryConfig.length-1]}">
               <div class="title">{{this.alarmService.getName(config)}}</div>
               <div class="icon">
                 <app-alarm
-                  [alarm]="this.alarmService.getAlarm(config)" [images]="this.weatherService.getIconSet(config, true)" [imagesUnreliable]="this.weatherService.getIconSet(config, false)" [size]="'lg'"
+                  [alarm]="this.alarmService.getAlarm(config)"
+                  [images]="this.weatherService.getIconSet(config, true)"
+                  [imagesUnreliable]="this.weatherService.getIconSet(config, false)"
+                  [size]="'lg'"
                 ></app-alarm>
               </div>
           </div>
       </div>
-    </div>
   </div>
 </div>
