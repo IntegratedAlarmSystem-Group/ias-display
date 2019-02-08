@@ -168,7 +168,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
     .subscribe(
       value => {
         if (value === true) {
-          this.check_request_and_reload();
+          this.reload();
         }
       }
     );
