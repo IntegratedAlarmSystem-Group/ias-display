@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
