@@ -2,14 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
- * Component used to display alarms as headers in a table or list
+ * Component used to display alarms as cards with text support for the
+ * priority of the alarm
  */
 @Component({
-  selector: 'app-alarm-header',
-  templateUrl: './alarm-header.component.html',
-  styleUrls: ['./alarm-header.component.scss']
+  selector: 'app-alarm-card',
+  templateUrl: './alarm-card.component.html',
+  styleUrls: ['./alarm-card.component.scss']
 })
-export class AlarmHeaderComponent implements OnInit {
+export class AlarmCardComponent implements OnInit {
 
   /**
   * Alarm object associated to the component
@@ -55,31 +56,31 @@ export class AlarmHeaderComponent implements OnInit {
   getClass(): string[] {
     const result = [];
     if (!this.alarm) {
-      result.push('blue');
-      result.push('unreliable');
+      result.push('alarm-card-blue');
+      result.push('alarm-card-unreliable');
       return result;
     }
     if (this.alarm.shelved === true) {
-      result.push('green');
+      result.push('alarm-card-green');
     } else if (this.alarm.mode === OperationalMode.unknown) {
-      result.push('blue');
+      result.push('alarm-card-blue');
     } else if (this.alarm.showAsMaintenance()) {
-      result.push('gray');
+      result.push('alarm-card-gray');
     } else if (this.alarm.value === Value.cleared) {
-      result.push('green');
+      result.push('alarm-card-green');
     } else if (this.alarm.value === Value.set_low) {
-      result.push('yellow');
+      result.push('alarm-card-yellow');
     } else if (this.alarm.value === Value.set_medium) {
-      result.push('yellow');
+      result.push('alarm-card-yellow');
     } else if (this.alarm.value === Value.set_high) {
-      result.push('red');
+      result.push('alarm-card-red');
     } else if (this.alarm.value === Value.set_critical) {
-      result.push('red');
+      result.push('alarm-card-red');
     } else {
-      result.push('blue');
+      result.push('alarm-card-blue');
     }
     if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
-      result.push('unreliable');
+      result.push('alarm-card-unreliable');
     }
     return result;
   }
@@ -118,6 +119,18 @@ export class AlarmHeaderComponent implements OnInit {
       alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
     }
     return alarmName;
+  }
+
+  /**
+  * Returns a string related to the name of the alarm priority
+  * @returns {string} alarm prioritity name for the display
+  */
+  getPriorityText(): string {
+    const alarmValue: string = this.alarm.alarmValue;
+    const priorityText: string = alarmValue
+      .replace('cleared', '')
+      .replace('set_', '');
+    return priorityText;
   }
 
 }
