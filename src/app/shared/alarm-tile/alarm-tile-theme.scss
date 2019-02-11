@@ -1,0 +1,14 @@
+@mixin alarm-tile-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .alarm-tile {
+    color: map-get($foreground, secondary-text);
+  }
+
+}

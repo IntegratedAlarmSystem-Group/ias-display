@@ -11,10 +11,17 @@
     .title {
       text-transform: uppercase;
       padding-bottom: 10px;
+      text-align: center;
     }
 
     .alarm {
       display: inline-flex;
+      width: 100%;
+
+      app-alarm {
+        margin: auto;
+      }
+
     }
 
   }

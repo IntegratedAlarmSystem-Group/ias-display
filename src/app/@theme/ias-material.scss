@@ -2,6 +2,7 @@
 @import '../actions/action-theme.scss';
 @import '../shared/alarm/alarm-theme.scss';
 @import '../shared/alarm-card/alarm-card-theme.scss';
+@import '../shared/alarm-tile/alarm-tile-theme.scss';
 @import '../shared/alarm-header/alarm-header-theme.scss';
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
@@ -190,6 +191,7 @@ $ias-typography: mat-typography-config(
   @include alarm-theme($theme);
   @include alarm-header-theme($theme);
   @include alarm-card-theme($theme);
+  @include alarm-tile-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);
