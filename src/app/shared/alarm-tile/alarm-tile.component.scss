@@ -1,0 +1,22 @@
+.alarm-tile-container {
+  display:block;
+}
+
+.alarm-tile {
+
+  .alarm-tile-content {
+
+    padding: 48px;
+
+    .title {
+      text-transform: uppercase;
+      padding-bottom: 10px;
+    }
+
+    .alarm {
+      display: inline-flex;
+    }
+
+  }
+
+}

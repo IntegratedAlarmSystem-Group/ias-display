@@ -1,0 +1,20 @@
+<div
+  [@blinkAnimation]="triggerBlink ? 'highlight' :  'normal'"
+  class="alarm-tile-container"
+>
+  <div class="alarm-tile">
+    <div class="alarm-tile-content">
+      <div class="title">{{getAlarmName()}}</div>
+      <div class="alarm">
+        <app-alarm
+          [alarm]="alarm"
+          [images]="this.images"
+          [imagesUnreliable]="this.imagesUnreliable"
+          [showActionBadges]="this.showActionBadges"
+          [size]="this.size"
+          [tooltipDirection]="this.tooltipDirection"
+        ></app-alarm>
+      </div>
+    </div>
+  </div>
+</div>
