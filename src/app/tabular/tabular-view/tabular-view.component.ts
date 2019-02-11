@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
+import { ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike as ISubscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from '../../data/alarm';
@@ -103,6 +104,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private alarmService: AlarmService,
     private route: ActivatedRoute,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   /**
@@ -118,11 +120,7 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
       start: 'asc'
     });
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.alarmService.alarmsArray;
     this.dataSource.filterPredicate = this.filterPredicate;
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( () => {
-      this.dataSource.data = this.alarmService.alarmsArray;
-    });
     let filterValue = this.route.snapshot.paramMap.get('filter');
     if (filterValue && filterValue !== '') {
       filterValue = filterValue.replace('_', ' ');
@@ -134,6 +132,12 @@ export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.data = this.alarmService.alarmsArray;
+    this.cdRef.detectChanges();
+    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( () => {
+      this.dataSource.data = this.alarmService.alarmsArray;
+      this.cdRef.detectChanges();
+    });
   }
 
   /**
