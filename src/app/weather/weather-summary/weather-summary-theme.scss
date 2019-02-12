@@ -6,8 +6,12 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .ias-weather-summary-item {
-    border-right-color: map-get($foreground, divider);
+  .ias.content {
+    .container {
+      .item {
+        border-right-color: map-get($foreground, divider);
+      }
+    }
   }
 
 }

@@ -1,19 +1,25 @@
 <div class="ias content" (click)="redirect()">
-  <div class="ias-weather-summary" *ngFor="let config of this.weatherService.weatherSummaryConfig">
-    <div class="ias-weather-summary-item"
-      [ngClass]="{
-          'no-border': config===this.weatherService.weatherSummaryConfig[
-            this.weatherService.weatherSummaryConfig.length-1]}">
-        <app-alarm-tile
-          fxFlex
-          [alarm]="this.alarmService.getAlarm(config)"
-          [images]="this.weatherService.getIconSet(config, true)"
-          [imagesUnreliable]="this.weatherService.getIconSet(config, false)"
-          [size]="'lg'"
-          [alarmNameMaxSize]="16"
-          [optionalAlarmName]="this.alarmService.getName(config)"
-          [tooltipDirection]="'left'"
-        ></app-alarm-tile>
+  <div
+    class="container"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+  >
+    <div *ngFor="let config of this.weatherService.weatherSummaryConfig">
+      <div class="item"
+        [ngClass]="{
+            'no-border': config===this.weatherService.weatherSummaryConfig[
+              this.weatherService.weatherSummaryConfig.length-1]}">
+          <app-alarm-tile
+            fxFlex
+            [alarm]="this.alarmService.getAlarm(config)"
+            [images]="this.weatherService.getIconSet(config, true)"
+            [imagesUnreliable]="this.weatherService.getIconSet(config, false)"
+            [size]="'lg'"
+            [alarmNameMaxSize]="16"
+            [optionalAlarmName]="this.alarmService.getName(config)"
+            [tooltipDirection]="'left'"
+          ></app-alarm-tile>
+      </div>
     </div>
   </div>
 </div>
