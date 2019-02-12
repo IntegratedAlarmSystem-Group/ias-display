@@ -1,12 +1,14 @@
-<div class="ias-antennas-summary-item" (click)="redirect()">
-  <app-alarm-tile
-    fxFlex
-    [alarm]="alarm"
-    [images]="this.antennasService.antennaImageSet"
-    [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet"
-    [size]="'lg'"
-    [alarmNameMaxSize]="10"
-    [optionalAlarmName]="'STATUS'"
-    [tooltipDirection]="'left'"
-  ></app-alarm-tile>
+<div class="ias content" (click)="redirect()">
+  <div class="ias-antennas-summary-item">
+    <app-alarm-tile
+      fxFlex
+      [alarm]="alarm"
+      [images]="this.antennasService.antennaImageSet"
+      [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet"
+      [size]="'lg'"
+      [alarmNameMaxSize]="10"
+      [optionalAlarmName]="'STATUS'"
+      [tooltipDirection]="'left'"
+    ></app-alarm-tile>
+  </div>
 </div>
