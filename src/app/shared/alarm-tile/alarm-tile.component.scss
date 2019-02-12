@@ -1,8 +1,22 @@
 .alarm-tile-container {
   display:block;
+  position: relative;
+}
+
+.alarm-tile-background {
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .alarm-tile {
+  position: relative;
+  z-index: 10;
 
   .alarm-tile-content {
 

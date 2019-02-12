@@ -1,13 +1,19 @@
 <div
-  [@blinkAnimation]="triggerBlink ? 'highlight' :  'normal'"
   class="alarm-tile-container"
 >
+  <div
+    class="alarm-tile-background"
+    [ngClass]="getClass()"
+    [@blinkAnimation]="this.targetAnimationState"
+    (@blinkAnimation.start)="captureStartEvent($event)"
+    (@blinkAnimation.done)="captureDoneEvent($event)"
+  ></div>
   <div class="alarm-tile">
     <div class="alarm-tile-content">
       <div class="title">{{getAlarmName()}}</div>
       <div class="alarm">
         <app-alarm
-          [alarm]="alarm"
+          [alarm]="this.alarm"
           [images]="this.images"
           [imagesUnreliable]="this.imagesUnreliable"
           [showActionBadges]="this.showActionBadges"

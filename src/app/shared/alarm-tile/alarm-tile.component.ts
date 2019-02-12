@@ -1,13 +1,14 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
-import { Alarm } from '../../data/alarm';
+import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import {
   trigger,
   state,
   style,
   animate,
-  transition
+  transition,
 } from '@angular/animations';
+import { AnimationEvent } from '@angular/animations';
 
 @Component({
   selector: 'app-alarm-tile',
@@ -15,17 +16,27 @@ import {
   styleUrls: ['./alarm-tile.component.scss'],
   animations: [
     trigger('blinkAnimation', [
-      state('highlight', style({backgroundColor: 'rgba(255, 0, 0, 0.0)'})),
-      state('normal', style({backgroundColor: 'rgba(255, 0, 0, 0.0)'})),
-      transition('highlight => normal', [animate('1s')]),
+      state(
+        'highlighted', style({opacity: '0.45'})
+      ),
+      state(
+        'normal', style({opacity: '0.0'})
+      ),
+      transition('highlighted => normal', [
+          animate('1.0s linear')
+        ]),
       transition(
-        'normal => highlight',
+        'normal => highlighted',
         [
-          animate('2s ease-in', style({backgroundColor: 'rgba(255, 0, 0, 0.0)'})),
-          animate('2s ease-out', style({backgroundColor: 'rgba(255, 0, 0, 1.0)'})),
-          animate('2s ease-in', style({backgroundColor: 'rgba(255, 0, 0, 0.0)'})),
-          animate('2s ease-out', style({backgroundColor: 'rgba(255, 0, 0, 1.0)'})),
-          animate('2s ease-in', style({backgroundColor: 'rgba(255, 0, 0, 0.0)'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
+          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
         ])
     ])
   ]
@@ -74,23 +85,56 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   @Input() tooltipDirection = 'right';
 
   /**
-   * Auxiliary variable to follow the state of the related alarm
+   * Defines the direction of the tooltip
    */
-  oldAlarmValue = null;
+  @Input() disableBlinking = false;
 
   /**
-   * Auxiliary variable to follow the state of the related alarm
+   * Auxiliary variable to follow the status of the animation
    */
-  triggerBlink = false;
+  targetAnimationState: string;
 
-  constructor() { }
+  /**
+  * Size options
+  */
+  sizeOptions = ['xs', 'sm', 'md', 'lg'];
 
-  ngOnInit() { }
+  /**
+  * Show badges options
+  */
+  showBadgesOptions = [true, false];
 
-  ngOnChanges() {
+  /**
+  * Tooltip Direction Options
+  */
+  tooltipDirectionOptions = ['right', 'left'];
+
+  constructor() {
+    this.targetAnimationState = 'normal';
+  }
+
+  ngOnInit() {
+    if (this.sizeOptions.indexOf(this.size) < 0) {
+      this.size = 'md';
+    }
+    if (this.showBadgesOptions.indexOf(this.showActionBadges) < 0) {
+      this.showActionBadges = true;
+    }
+    if (this.tooltipDirectionOptions.indexOf(this.tooltipDirection) < 0) {
+      this.tooltipDirection = 'right';
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     if (this.alarm) {
-      if (this.alarm.value > 0) {
-        this.triggerBlink = true;
+      if (changes.alarm.previousValue) {
+        const previousAlarmValue: number = changes.alarm.previousValue.value;
+        const currentAlarmValue: number = changes.alarm.currentValue.value;
+        if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
+          if (this.disableBlinking === false) {
+            this.startBlinking();
+          }
+        }
       }
     }
   }
@@ -114,5 +158,79 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     }
     return alarmName;
   }
+
+  /**
+  * Method to start the blinking animation
+  */
+  public startBlinking(): void {
+    const prevAnimationState = this.targetAnimationState;
+    if (prevAnimationState === 'normal') {
+      this.targetAnimationState = 'highlighted';
+    }
+    // console.log('Starting animation from:', prevAnimationState, 'to:', this.targetAnimationState);
+  }
+
+
+  /**
+  * Method to follow the start of the animation
+  */
+  public captureStartEvent(event: AnimationEvent): void {
+
+    // console.log('Animation started');
+    // console.log('From:', event.fromState);
+    // console.log('To:', event.toState);
+  }
+
+  /**
+  * Method to follow the end of the animation
+  */
+  public captureDoneEvent(event: AnimationEvent): void {
+
+    // console.log('Animation ended');
+    // console.log('From:', event.fromState);
+    // console.log('To:', event.toState);
+
+    if ( (this.targetAnimationState !== 'normal') && (this.targetAnimationState === event.toState) ) {
+      this.targetAnimationState = 'normal';
+    }
+
+  }
+
+  /**
+  * Defines the CSS classes to use depending on the Alarm status
+  * @returns {string[]} array with names of the classes to use
+  */
+  getClass(): string[] {
+    const result = [];
+    if (!this.alarm) {
+      result.push('alarm-tile-blue');
+      result.push('alarm-tile-unreliable');
+      return result;
+    }
+    if (this.alarm.shelved === true) {
+      result.push('alarm-tile-green');
+    } else if (this.alarm.mode === OperationalMode.unknown) {
+      result.push('alarm-tile-blue');
+    } else if (this.alarm.showAsMaintenance()) {
+      result.push('alarm-tile-gray');
+    } else if (this.alarm.value === Value.cleared) {
+      result.push('alarm-tile-green');
+    } else if (this.alarm.value === Value.set_low) {
+      result.push('alarm-tile-yellow');
+    } else if (this.alarm.value === Value.set_medium) {
+      result.push('alarm-tile-yellow');
+    } else if (this.alarm.value === Value.set_high) {
+      result.push('alarm-tile-red');
+    } else if (this.alarm.value === Value.set_critical) {
+      result.push('alarm-tile-red');
+    } else {
+      result.push('alarm-tile-blue');
+    }
+    if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
+      result.push('alarm-tile-unreliable');
+    }
+    return result;
+  }
+
 
 }
