@@ -2,44 +2,85 @@ import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/cor
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import {
+  animation,
+  useAnimation,
   trigger,
   state,
   style,
   animate,
   transition,
+  keyframes
 } from '@angular/animations';
 import { AnimationEvent } from '@angular/animations';
 
+
+/**
+ * Normal opacity for the background to highlight the tile
+ */
+const normalStateOpacity = 0.0;
+
+/**
+ * Highlighted state opacity for the tile when a set alarm arrives
+ */
+const highlightedStateOpacity = 0.45;
+
+/**
+ * Main transition setup
+ */
+export const normalToHiglightedAnimation = animation([
+    animate(
+      '{{ time }} {{ delay }} {{ ease }}',
+      keyframes([
+        style({opacity: '{{ hide }}'}),
+        style({opacity: '{{ show }}'}),
+        style({opacity: '{{ hide }}'}),
+        style({opacity: '{{ show }}'}),
+        style({opacity: '{{ hide }}'}),
+        style({opacity: '{{ show }}'}),
+        style({opacity: '{{ hide }}'}),
+        style({opacity: '{{ show }}'}),
+        style({opacity: '{{ hide }}'}),
+        style({opacity: '{{ show }}'}),
+        style({opacity: '{{ hide }}'}),
+      ]))
+  ],
+  {
+    params: {
+      time: '10s',
+      delay: '0.25s',
+      show: highlightedStateOpacity,
+      hide: normalStateOpacity,
+      ease: 'linear'
+    }
+  }
+);
+
+/**
+ * Component animations setup
+ */
+export const animations = [
+  trigger(
+    'tileAnimation',
+    [
+      state('highlighted', style({opacity: `${highlightedStateOpacity}`})),
+      state('normal', style({opacity: `${normalStateOpacity}`})),
+      transition('highlighted => normal', []),
+      transition(
+        'normal => highlighted',
+        [useAnimation(normalToHiglightedAnimation)]
+      )
+    ]
+  )
+];
+
+/**
+ * Component used to display alarms as tiles in the overview
+ */
 @Component({
   selector: 'app-alarm-tile',
   templateUrl: './alarm-tile.component.html',
   styleUrls: ['./alarm-tile.component.scss'],
-  animations: [
-    trigger('blinkAnimation', [
-      state(
-        'highlighted', style({opacity: '0.45'})
-      ),
-      state(
-        'normal', style({opacity: '0.0'})
-      ),
-      transition('highlighted => normal', [
-          animate('1.0s linear')
-        ]),
-      transition(
-        'normal => highlighted',
-        [
-          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.0'})),
-          animate('1.0s 0.25s linear', style({opacity: '0.45'})),
-        ])
-    ])
-  ]
+  animations: animations
 })
 export class AlarmTileComponent implements OnChanges, OnInit {
 
@@ -85,9 +126,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   @Input() tooltipDirection = 'right';
 
   /**
-   * Defines the direction of the tooltip
+   * Variable to disable animation
    */
-  @Input() disableBlinking = false;
+  @Input() disableAnimation = false;
 
   /**
    * Auxiliary variable to follow the status of the animation
@@ -131,8 +172,8 @@ export class AlarmTileComponent implements OnChanges, OnInit {
         const previousAlarmValue: number = changes.alarm.previousValue.value;
         const currentAlarmValue: number = changes.alarm.currentValue.value;
         if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-          if (this.disableBlinking === false) {
-            this.startBlinking();
+          if (this.disableAnimation === false) {
+            this.startAnimation();
           }
         }
       }
@@ -162,7 +203,7 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   /**
   * Method to start the blinking animation
   */
-  public startBlinking(): void {
+  public startAnimation(): void {
     const prevAnimationState = this.targetAnimationState;
     if (prevAnimationState === 'normal') {
       this.targetAnimationState = 'highlighted';

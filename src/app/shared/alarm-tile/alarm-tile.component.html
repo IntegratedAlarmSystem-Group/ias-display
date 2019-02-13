@@ -4,9 +4,9 @@
   <div
     class="alarm-tile-background"
     [ngClass]="getClass()"
-    [@blinkAnimation]="this.targetAnimationState"
-    (@blinkAnimation.start)="captureStartEvent($event)"
-    (@blinkAnimation.done)="captureDoneEvent($event)"
+    [@tileAnimation]="this.targetAnimationState"
+    (@tileAnimation.start)="captureStartEvent($event)"
+    (@tileAnimation.done)="captureDoneEvent($event)"
   ></div>
   <div class="alarm-tile">
     <div class="alarm-tile-content">
