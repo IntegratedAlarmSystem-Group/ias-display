@@ -1,47 +1,12 @@
-.ias.content{
+.ias {
+
+  &.content {
     cursor: pointer;
-}
+  }
 
-.ias.sensors{
-    display: flex;
-    width: 100%;
-}
+  .container {
+    margin: 0;
+    padding: 0;
+  }
 
-.sensors-card-wrapper{
-    display: inline-block;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.sensors-card{
-    display: inline-block;
-    text-align: center;
-    padding: 0px 20px;
-    float: left;
-    max-height: 130px;
-    min-width: 100px;
-    border-right-width: 1px;
-    border-right-style: solid;
-    cursor: pointer;
-
-    .global-antennas-status {
-      min-width: 165px;
-      border: 0;
-    }
-
-    .title{
-        text-transform: uppercase;
-        font-size: 16px;
-    }
-
-    .icon{
-        padding: 20px;
-        height: 85px;
-        width: fit-content;
-    }
-
-    &.no-border {
-      border: solid;
-      border-width: 0;
-    }
 }

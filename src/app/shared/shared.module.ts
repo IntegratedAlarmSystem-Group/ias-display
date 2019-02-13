@@ -10,6 +10,7 @@ import { StatusViewComponent } from './status-view/status-view.component';
 import { AlarmHeaderComponent } from './alarm-header/alarm-header.component';
 import { AlarmTooltipComponent } from './alarm-tooltip/alarm-tooltip.component';
 import { AlarmCardComponent } from './alarm-card/alarm-card.component';
+import { AlarmTileComponent } from './alarm-tile/alarm-tile.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -34,12 +35,14 @@ import { AlarmCardComponent } from './alarm-card/alarm-card.component';
     AlarmHeaderComponent,
     AlarmTooltipComponent,
     AlarmCardComponent,
+    AlarmTileComponent,
   ],
   exports: [
     AlarmComponent,
     StatusViewComponent,
     AlarmHeaderComponent,
     AlarmCardComponent,
+    AlarmTileComponent,
   ],
   entryComponents: [
     AlarmComponent,

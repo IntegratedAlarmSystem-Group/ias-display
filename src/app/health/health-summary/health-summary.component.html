@@ -1,14 +1,20 @@
 <div class="ias content" (click)="goToTableFilteredBy('IASMON-');$event.stopPropagation()">
-  <div class="ias sensors">
-      <div class="sensors-card-wrapper">
-          <div class="sensors-card global-health-status no-border">
-              <div class="title">IAS HEALTH</div>
-              <div class="icon">
-                <app-alarm
-                  [alarm]="alarm" [images]="iconSet" [imagesUnreliable]="iconUnreliableSet" [size]="'lg'"
-                ></app-alarm>
-              </div>
-          </div>
-      </div>
+  <div
+    class="container"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+  >
+    <div>
+      <app-alarm-tile
+        fxFlex
+        [alarm]="alarm"
+        [images]="iconSet"
+        [imagesUnreliable]="iconUnreliableSet"
+        [size]="'lg'"
+        [alarmNameMaxSize]="10"
+        [optionalAlarmName]="'IAS HEALTH'"
+        [tooltipDirection]="'right'"
+      ></app-alarm-tile>
+    </div>
   </div>
 </div>
