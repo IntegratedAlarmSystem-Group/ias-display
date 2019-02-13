@@ -366,13 +366,4 @@ describe('AlarmTileComponent: Animation setup', () => {
     expect(transitionAnimations[0]['animation']).toEqual(normalToHiglightedAnimation);
   });
 
-  it('should not have animations for the "highlighted => normal" transition', () => {
-    const steps = animations[0];
-    const transitionDefs = steps.definitions.filter(x => x['expr'] === 'highlighted => normal');
-    expect(transitionDefs.length).toEqual(1);
-    const transition = transitionDefs[0];
-    const transitionAnimations = transition['animation'];
-    expect(transitionAnimations.length).toEqual(0);
-  });
-
 });
