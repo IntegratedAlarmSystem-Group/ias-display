@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
 import { ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike as ISubscription } from 'rxjs';
@@ -19,6 +19,11 @@ import { Locale } from '../../settings';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  /**
+  * Array that defines which coulmns are going to be displayed and in which order
+  */
+  @Input() displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'properties', 'actions'];
 
   /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<Alarm>;
@@ -60,11 +65,6 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** String that stores the test input in the filter textfield */
   public filterString = '';
-
-  /**
-  * Array that defines which coulmns are going to be displayed and in which order
-  */
-  public displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'properties', 'actions'];
 
   /** String to store the formatting of dates, read form the settings */
   private dateFormat: string;
