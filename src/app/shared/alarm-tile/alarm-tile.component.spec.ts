@@ -205,7 +205,6 @@ describe('AlarmTileComponent: Animation methods', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     const mockAlarm = Alarm.asAlarm(MockAlarms[0]);
-    mockAlarm.value = Value.cleared;
     hostComponent = fixture.componentInstance;
     hostComponent.alarm = mockAlarm;
     hostComponent.images = MockImageSet;
