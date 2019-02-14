@@ -7,16 +7,16 @@ import { ActionsModule } from '../../actions/actions.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
-import { TabularViewComponent } from './tabular-view.component';
+import { TableComponent } from './table.component';
 import { LegendComponent } from '../legend/legend.component';
 import { MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
 import { DatePipe } from '@angular/common';
 
 
-describe('TabularViewComponent', () => {
-  let component: TabularViewComponent;
-  let fixture: ComponentFixture<TabularViewComponent>;
+describe('TableComponent', () => {
+  let component: TableComponent;
+  let fixture: ComponentFixture<TableComponent>;
   let filtersToggle: object;
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
@@ -26,7 +26,7 @@ describe('TabularViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        TabularViewComponent,
+        TableComponent,
         LegendComponent,
       ],
       imports: [
@@ -57,7 +57,7 @@ describe('TabularViewComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TabularViewComponent);
+    fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     alarmService = fixture.debugElement.injector.get(AlarmService);
     fixture.detectChanges();

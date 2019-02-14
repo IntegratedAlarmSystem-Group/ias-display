@@ -14,11 +14,11 @@ import { Locale } from '../../settings';
 * by typing in an input field
 */
 @Component({
-  selector: 'app-tabular-view',
-  templateUrl: './tabular-view.component.html',
-  styleUrls: ['./tabular-view.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class TabularViewComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<Alarm>;

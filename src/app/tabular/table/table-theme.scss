@@ -1,4 +1,4 @@
-@mixin tabular-view-theme($theme) {
+@mixin table-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
