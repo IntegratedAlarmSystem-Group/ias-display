@@ -78,7 +78,11 @@
     </table>
   </div>
 
-  <div class="antennas-detail devices-alarms">
+  <app-table
+    [displayedColumns] = "['status', 'name', 'actions']"
+  >
+  </app-table>
+  <!-- <div class="antennas-detail devices-alarms">
     <table>
       <tr>
         <td class="antenna">
@@ -113,5 +117,5 @@
         </tr>
       </ng-container>
     </table>
-  </div>
+  </div> -->
 </ng-template>
