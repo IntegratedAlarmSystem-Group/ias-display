@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { TabularViewComponent } from './tabular-view.component';
 
 describe('TabularViewComponent', () => {
@@ -8,7 +9,13 @@ describe('TabularViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabularViewComponent ]
+      imports: [
+        IasMaterialModule,
+      ],
+      declarations: [
+        TabularViewComponent,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
