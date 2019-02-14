@@ -13,21 +13,8 @@
   border-bottom-style: hidden;
 }
 
-.mat-card {
-
-  .mat-card-header {
-    display: block;
-    padding: 20px;
-    border-top-left-radius: 0.375em;
-    border-top-right-radius: 0.375em;
-  }
-
-  .mat-card-content {
-    padding: 20px;
-    border-bottom-left-radius: 0.375em;
-    border-bottom-right-radius: 0.375em;
-  }
-
+.table-content {
+  padding: 20px;
 }
 
 .filter-mat-form-field {

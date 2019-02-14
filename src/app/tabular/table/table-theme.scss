@@ -26,17 +26,7 @@
     }
   }
 
-  .mat-card {
+  .table-content {
     background: transparent;
-
-    .mat-card-header {
-      padding: 20px;
-      background:  mat-color($background, dialog);
-    }
-
-    .mat-card-content {
-      background: mat-color($primary, 700);
-    }
   }
-
 }

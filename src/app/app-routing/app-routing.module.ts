@@ -9,7 +9,7 @@ import { AntennasComponent } from '../antennas/antennas/antennas.component';
 import { MaterialSandboxComponent } from '../material-sandbox/material-sandbox.component';
 import { OverviewComponent } from '../overview/overview/overview.component';
 import { ShelveComponent } from '../actions/shelve/shelve.component';
-import { TableComponent } from '../tabular/table/table.component';
+import { TabularViewComponent } from '../tabular/tabular-view/tabular-view.component';
 import { WeatherComponent } from '../weather/weather/weather.component';
 import { AuthLoginGuard } from '../auth/auth-login.guard';
 import { LoginComponent } from '../auth/login/login.component';
@@ -21,8 +21,8 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'overview', component: OverviewComponent , canActivate: [AuthLoginGuard]},
-  { path: 'tabular', component: TableComponent , canActivate: [AuthLoginGuard]},
-  { path: 'tabular/:filter', component: TableComponent , canActivate: [AuthLoginGuard]},
+  { path: 'tabular', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
+  { path: 'tabular/:filter', component: TabularViewComponent , canActivate: [AuthLoginGuard]},
   { path: 'acknowledge/:alarmID', component: AckComponent, outlet: 'actions', canActivate: [AuthLoginGuard]},
   { path: 'shelve/:alarmID', component: ShelveComponent, outlet: 'actions', canActivate: [AuthLoginGuard]},
   { path: 'weather', component: WeatherComponent, canActivate: [AuthLoginGuard]},

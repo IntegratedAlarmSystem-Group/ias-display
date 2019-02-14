@@ -5,6 +5,7 @@ import { ActionsModule } from '../actions/actions.module';
 import { SharedModule } from '../shared/shared.module';
 import { LegendComponent } from './legend/legend.component';
 import { TableComponent } from './table/table.component';
+import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
 /**
 * This module contains all the components related to the Table view
@@ -19,6 +20,7 @@ import { TableComponent } from './table/table.component';
   declarations: [
     LegendComponent,
     TableComponent,
+    TabularViewComponent,
   ],
   exports: [
     TableComponent,
