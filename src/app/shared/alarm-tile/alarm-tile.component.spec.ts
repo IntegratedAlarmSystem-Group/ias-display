@@ -8,10 +8,8 @@ import { AlarmTileComponent } from './alarm-tile.component';
 import { Alarm, Value } from '../../data/alarm';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { animations, normalToHiglightedAnimation } from './alarm-tile.component';
 
-const expected_classes = {
+const expected_base_classes = {
   'critical': ['alarm-tile-red'],
   'high': ['alarm-tile-red'],
   'medium': ['alarm-tile-yellow'],
@@ -43,7 +41,7 @@ describe('AlarmTileComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlarmTileComponent, AlarmComponent, AlarmTooltipComponent ],
-      imports: [ NgbModule, BrowserAnimationsModule ]
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));
@@ -105,10 +103,15 @@ describe('AlarmTileComponent', () => {
 
   it('should display the color of the alarms according to each alarm properties', () => {
     for (const alarm of MockAlarms) {
+      const expectedClasses = [];
+      for (const c of expected_base_classes[alarm.core_id]) {
+        expectedClasses.push(c);
+      }
+      expectedClasses.push('normal');
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+      expect(component.getClass()).toEqual(expectedClasses);
     }
   });
 
@@ -126,7 +129,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
         AlarmComponent,
         AlarmTooltipComponent,
       ],
-      imports: [ NgbModule, BrowserAnimationsModule ]
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));
@@ -181,7 +184,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 
 });
 
-describe('AlarmTileComponent: startAnimation', () => {
+describe('AlarmTileComponent: Animation methods', () => {
   let hostComponent: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let component: AlarmTileComponent;
@@ -194,7 +197,7 @@ describe('AlarmTileComponent: startAnimation', () => {
         AlarmTooltipComponent,
         TestHostComponent
       ],
-      imports: [ NgbModule, BrowserAnimationsModule ]
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));
@@ -218,14 +221,66 @@ describe('AlarmTileComponent: startAnimation', () => {
     expect(component.alarm).toEqual(hostComponent.alarm);
   });
 
+  it('should have a startAnimation method to update the animation state and class for the alarm', () => {
+    // Arrange:
+    let expectedClasses: string[];
+    hostComponent.alarm =  Alarm.asAlarm(MockAlarms[0]);
+    fixture.detectChanges();
+    component.targetAnimationState = 'normal';
+    expectedClasses = [];
+    for (const c of expected_base_classes[component.alarm.core_id]) {
+      expectedClasses.push(c);
+    }
+    expectedClasses.push('normal');
+    expect(component.getClass()).toEqual(expectedClasses);
+    // Act:
+    component.startAnimation();
+    // Assert:
+    expect(component.targetAnimationState).toEqual('highlight');
+    expectedClasses = [];
+    for (const c of expected_base_classes[component.alarm.core_id]) {
+      expectedClasses.push(c);
+    }
+    expectedClasses.push('highlight');
+    expect(component.getClass()).toEqual(expectedClasses);
+  });
+
+  it('should have a stopAnimation method to update the animation state', () => {
+    // Arrange:
+    let expectedClasses: string[];
+    hostComponent.alarm =  Alarm.asAlarm(MockAlarms[0]);
+    fixture.detectChanges();
+    component.targetAnimationState = 'highlight';
+    expectedClasses = [];
+    for (const c of expected_base_classes[component.alarm.core_id]) {
+      expectedClasses.push(c);
+    }
+    expectedClasses.push('highlight');
+    expect(component.getClass()).toEqual(expectedClasses);
+    // Act:
+    component.stopAnimation();
+    // Assert:
+    expect(component.targetAnimationState).toEqual('normal');
+    expectedClasses = [];
+    for (const c of expected_base_classes[component.alarm.core_id]) {
+      expectedClasses.push(c);
+    }
+    expectedClasses.push('normal');
+    expect(component.getClass()).toEqual(expectedClasses);
+  });
+
   it('should call startAnimation if "clear-set" transition for its alarm', () => {
     spyOn(component, 'startAnimation');
     expect(component.startAnimation).toHaveBeenCalledTimes(0);
-    const mockAlarm = MockAlarms[0];
+    const mockAlarm = Object.assign({}, MockAlarms[0]);
     const setValues = Object.keys(Value)
         .filter(key => isNaN(Number(key)))
         .filter(x => !(x.indexOf('set') < 0));
     for (const key of setValues) {
+      // clear component alarm to setup transition
+      component.targetAnimationState = 'normal';
+      hostComponent.alarm = null;
+      fixture.detectChanges();
       // cleared
       mockAlarm.value = Value.cleared;
       hostComponent.alarm = Alarm.asAlarm(mockAlarm);
@@ -238,10 +293,34 @@ describe('AlarmTileComponent: startAnimation', () => {
     expect(component.startAnimation).toHaveBeenCalledTimes(4);
   });
 
+  it('should call stopAnimation if "set-clear" transition for its alarm', () => {
+    spyOn(component, 'stopAnimation');
+    expect(component.stopAnimation).toHaveBeenCalledTimes(0);
+    const mockAlarm = Object.assign({}, MockAlarms[0]);
+    const setValues = Object.keys(Value)
+        .filter(key => isNaN(Number(key)))
+        .filter(x => !(x.indexOf('set') < 0));
+    for (const key of setValues) {
+      // clear component alarm to setup transition
+      component.targetAnimationState = 'highlight';
+      hostComponent.alarm = null;
+      fixture.detectChanges();
+      // cleared
+      mockAlarm.value = Value[key];
+      hostComponent.alarm = Alarm.asAlarm(mockAlarm);
+      fixture.detectChanges();
+      // set
+      mockAlarm.value = Value.cleared;
+      hostComponent.alarm = Alarm.asAlarm(mockAlarm);
+      fixture.detectChanges();
+    }
+    expect(component.stopAnimation).toHaveBeenCalledTimes(4);
+  });
+
   it('should not call startAnimation for other transitions for its alarm', () => {
     spyOn(component, 'startAnimation');
     expect(component.startAnimation).toHaveBeenCalledTimes(0);
-    const mockAlarm = MockAlarms[0];
+    const mockAlarm = Object.assign({}, MockAlarms[0]);
     const alarmValues = Object.keys(Value)
         .filter(key => isNaN(Number(key)));
     for (const s of alarmValues) {
@@ -268,7 +347,7 @@ describe('AlarmTileComponent: startAnimation', () => {
     spyOn(component, 'startAnimation');
     expect(component.startAnimation).toHaveBeenCalledTimes(0);
     component.disableAnimation = true;
-    const mockAlarm = MockAlarms[0];
+    const mockAlarm = Object.assign({}, MockAlarms[0]);
     const alarmValues = Object.keys(Value)
         .filter(key => isNaN(Number(key)));
     for (const s of alarmValues) {
@@ -313,57 +392,3 @@ class TestHostComponent {
   images: AlarmImageSet = MockImageSet;
   imagesUnreliable: AlarmImageSet = MockImageUnreliableSet;
 }
-
-
-describe('AlarmTileComponent: Animation setup', () => {
-  let component: AlarmTileComponent;
-  let fixture: ComponentFixture<AlarmTileComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AlarmTileComponent, AlarmComponent, AlarmTooltipComponent ],
-      imports: [ NgbModule, BrowserAnimationsModule ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmTileComponent);
-    component = fixture.componentInstance;
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
-    component.images = MockImageSet;
-    component.imagesUnreliable = MockImageUnreliableSet;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should have the "tileAnimation" trigger name for the component animation', () => {
-    expect(animations.length).toEqual(1);
-    const animation = animations[0];
-    const steps = animation;
-    expect(steps.name).toEqual('tileAnimation');
-  });
-
-  it('should have a setup for the "normal" and "highlighted" states', () => {
-    const steps = animations[0];
-    const normalStateDefs = steps.definitions.filter(x => x['name'] === 'normal');
-    const highlightedStateDefs = steps.definitions.filter(x => x['name'] === 'highlighted');
-    expect(normalStateDefs.length).toEqual(1);
-    expect(highlightedStateDefs.length).toEqual(1);
-  });
-
-  it('should have the animation setup for the "normal => highlighted" transition', () => {
-    const steps = animations[0];
-    const transitionDefs = steps.definitions.filter(x => x['expr'] === 'normal => highlighted');
-    expect(transitionDefs.length).toEqual(1);
-    const transition = transitionDefs[0];
-    const transitionAnimations = transition['animation'];
-    expect(transitionAnimations.length).toEqual(1);
-    expect(transitionAnimations[0]['animation']).toEqual(normalToHiglightedAnimation);
-  });
-
-});

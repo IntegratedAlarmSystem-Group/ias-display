@@ -1,77 +1,7 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
-import {
-  animation,
-  useAnimation,
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  keyframes
-} from '@angular/animations';
-import { AnimationEvent } from '@angular/animations';
 
-
-/**
- * Normal opacity for the background to highlight the tile
- */
-const normalStateOpacity = 0.0;
-
-/**
- * Highlighted state opacity for the tile when a set alarm arrives
- */
-const highlightedStateOpacity = 0.45;
-
-/**
- * Main transition setup
- */
-export const normalToHiglightedAnimation = animation([
-    animate(
-      '{{ time }} {{ delay }} {{ ease }}',
-      keyframes([
-        style({opacity: '{{ hide }}'}),
-        style({opacity: '{{ show }}'}),
-        style({opacity: '{{ hide }}'}),
-        style({opacity: '{{ show }}'}),
-        style({opacity: '{{ hide }}'}),
-        style({opacity: '{{ show }}'}),
-        style({opacity: '{{ hide }}'}),
-        style({opacity: '{{ show }}'}),
-        style({opacity: '{{ hide }}'}),
-        style({opacity: '{{ show }}'}),
-        style({opacity: '{{ hide }}'}),
-      ]))
-  ],
-  {
-    params: {
-      time: '10s',
-      delay: '0.25s',
-      show: highlightedStateOpacity,
-      hide: normalStateOpacity,
-      ease: 'linear'
-    }
-  }
-);
-
-/**
- * Component animations setup
- */
-export const animations = [
-  trigger(
-    'tileAnimation',
-    [
-      state('highlighted', style({opacity: `${highlightedStateOpacity}`})),
-      state('normal', style({opacity: `${normalStateOpacity}`})),
-      transition('highlighted => normal', []),
-      transition(
-        'normal => highlighted',
-        [useAnimation(normalToHiglightedAnimation)]
-      )
-    ]
-  )
-];
 
 /**
  * Component used to display alarms as tiles in the overview
@@ -80,7 +10,6 @@ export const animations = [
   selector: 'app-alarm-tile',
   templateUrl: './alarm-tile.component.html',
   styleUrls: ['./alarm-tile.component.scss'],
-  animations: animations
 })
 export class AlarmTileComponent implements OnChanges, OnInit {
 
@@ -171,9 +100,16 @@ export class AlarmTileComponent implements OnChanges, OnInit {
       if (changes.alarm.previousValue) {
         const previousAlarmValue: number = changes.alarm.previousValue.value;
         const currentAlarmValue: number = changes.alarm.currentValue.value;
+        // clear to set transition
         if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
           if (this.disableAnimation === false) {
             this.startAnimation();
+          }
+        }
+        // set to clear transition
+        if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
+          if (this.disableAnimation === false) {
+            this.stopAnimation();
           }
         }
       }
@@ -204,37 +140,14 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   * Method to start the blinking animation
   */
   public startAnimation(): void {
-    const prevAnimationState = this.targetAnimationState;
-    if (prevAnimationState === 'normal') {
-      this.targetAnimationState = 'highlighted';
-    }
-    // console.log('Starting animation from:', prevAnimationState, 'to:', this.targetAnimationState);
-  }
-
-
-  /**
-  * Method to follow the start of the animation
-  */
-  public captureStartEvent(event: AnimationEvent): void {
-
-    // console.log('Animation started');
-    // console.log('From:', event.fromState);
-    // console.log('To:', event.toState);
+    this.targetAnimationState = 'highlight';
   }
 
   /**
-  * Method to follow the end of the animation
+  * Method to go to the normal state to stop the animation
   */
-  public captureDoneEvent(event: AnimationEvent): void {
-
-    // console.log('Animation ended');
-    // console.log('From:', event.fromState);
-    // console.log('To:', event.toState);
-
-    if ( (this.targetAnimationState !== 'normal') && (this.targetAnimationState === event.toState) ) {
-      this.targetAnimationState = 'normal';
-    }
-
+  public stopAnimation(): void {
+    this.targetAnimationState = 'normal';
   }
 
   /**
@@ -269,6 +182,11 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     }
     if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
       result.push('alarm-tile-unreliable');
+    }
+    if (this.targetAnimationState === 'highlight') {
+      result.push('highlight');
+    } else {
+      result.push('normal');
     }
     return result;
   }
