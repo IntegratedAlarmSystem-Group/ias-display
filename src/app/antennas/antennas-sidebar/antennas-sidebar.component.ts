@@ -15,7 +15,7 @@ import { AlarmConfig } from '../../data/alarm-config';
 export class AntennasSidebarComponent implements OnInit {
 
   /** Selected antenna object, null if it is nothing selected */
-  @Input() selectedAntenna = null;
+  @Input() selectedAntenna: AlarmConfig = null;
 
   /** Event emitted to notify when an antenna is selected */
   @Output() antennaClicked = new EventEmitter<AlarmConfig>();
@@ -54,6 +54,19 @@ export class AntennasSidebarComponent implements OnInit {
   */
   getAntennas(): AlarmConfig [] {
     return this.antennasService.antennasConfig;
+  }
+
+  /**
+  * Return the list of alarm IDs of the children of a given {@link AlarmConfig}
+  * @param {AlarmConfig} config the {@link AlarmConfig}
+  * @returns {string[]} list of alarm IDs
+  */
+  getConfigChildrenAlarmIds(config: AlarmConfig): string[] {
+    const alarm_ids = [];
+    for (const child of config.children) {
+      alarm_ids.push(child.alarm_id);
+    }
+    return alarm_ids;
   }
 
   /**

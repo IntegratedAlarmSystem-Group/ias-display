@@ -80,6 +80,7 @@
 
   <app-table
     [displayedColumns] = "['status', 'name', 'mode', 'timestamp', 'actions']"
+    [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
   >
   </app-table>
 </ng-template>

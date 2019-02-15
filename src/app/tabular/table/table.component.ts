@@ -25,6 +25,12 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   @Input() displayedColumns = ['status', 'name',  'mode', 'timestamp', 'description', 'properties', 'actions'];
 
+  /**
+  * Array that defines which alarms are going to be displayed in the table.
+  * If it is not specified (empty array by default), all the alarms are shown.
+  */
+  @Input() alarmsToDisplay = [];
+
   /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<Alarm>;
 
@@ -78,8 +84,6 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   /** Subscription to changes in the Alarms stored in the {@link AlarmService} */
   private alarmServiceSubscription: ISubscription;
 
-
-
   /**
   * Custom function to apply the filtering to the Table rows. Compares a row of the table with the filter values
   * @returns {boolean} true if the row matches the filter, false if not
@@ -132,10 +136,10 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataSource.data = this.alarmService.alarmsArray;
+    this.dataSource.data = this.getData();
     this.cdRef.detectChanges();
-    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( () => {
-      this.dataSource.data = this.alarmService.alarmsArray;
+    this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( changes => {
+      this.dataSource.data = this.getData(changes);
       this.cdRef.detectChanges();
     });
   }
@@ -146,6 +150,25 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   */
   ngOnDestroy() {
     this.alarmServiceSubscription.unsubscribe();
+  }
+
+  /**
+  * Get Data for Table DataSource, triggered whenever alarms are updated in the {@link AlarmService}
+  * @param {string} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
+  * @returns {Alarm[]} array of {@link Alarm} objects
+  */
+  getData(changes = 'all'): Alarm[] {
+    if (this.alarmsToDisplay.length <= 0) {
+      return this.alarmService.alarmsArray;
+
+    } else if (changes === 'all' || this.alarmsToDisplay.indexOf(changes) >= 0) {
+      const alarms: Alarm[] = [];
+      for (const alarm_id of this.alarmsToDisplay) {
+        const alarm: Alarm = this.alarmService.get(alarm_id);
+        alarms.push(alarm);
+      }
+      return alarms;
+    }
   }
 
   /**
