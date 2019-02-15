@@ -22,25 +22,35 @@
 }
 
 .table-filters {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 
-  .row {
-    .text-container {
-      display: flex;
-    }
-    .toggles-container {
-      height: 100%;
-      .row {
-        height: 100%;
-        mat-slide-toggle {
-          height: 100%;
-        }
-      }
-    }
+  .text-container {
+    display: flex;
   }
 
+  .toggles-container {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    height: 100%;
+
+    mat-slide-toggle {
+      height: 100%;
+      padding: 8px;
+    }
+
+  }
 }
 
 /deep/ {
+
+  mat-slide-toggle {
+    .mat-slide-toggle-label {
+      margin-bottom: 0;
+    }
+  }
 
   // Removes
   .filter-mat-form-field {
