@@ -18,7 +18,7 @@
 }
 
 .filter-mat-form-field {
-  width: 500px;
+  width: 100%;
 }
 
 .table-filters {
@@ -27,7 +27,7 @@
   align-items: center;
 
   .text-container {
-    display: flex;
+    flex: 0.6 1 250px;
   }
 
   .toggles-container {
@@ -35,6 +35,7 @@
     align-items: center;
     flex-flow: row wrap;
     height: 100%;
+    padding-left: 10px;
 
     mat-slide-toggle {
       height: 100%;
