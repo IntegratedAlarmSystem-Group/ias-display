@@ -12,21 +12,15 @@
     </div>
 
     <div class="toggles-container">
-      <!-- <div class="slide-container"> -->
-        <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterSetAlarm()">
-          Show set alarms
-        </mat-slide-toggle>
-      <!-- </div> -->
-      <!-- <div class="slide-container"> -->
-        <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterUnackAlarm()">
-          Show unack alarms
-        </mat-slide-toggle>
-      <!-- </div> -->
-      <!-- <div class="slide-container"> -->
-        <mat-slide-toggle [checked]="_shelvedFilterActivated" (change)="toggleFilterShelvedAlarm()">
-          Show shelved alarms
-        </mat-slide-toggle>
-      <!-- </div> -->
+      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterSetAlarm()">
+        Show set alarms
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterUnackAlarm()">
+        Show unack alarms
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="_shelvedFilterActivated" (change)="toggleFilterShelvedAlarm()">
+        Show shelved alarms
+      </mat-slide-toggle>
     </div>
 
   </div>
