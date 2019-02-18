@@ -1,0 +1,26 @@
+.section {
+  padding: 24px 0px 10px 0px;
+
+  &.alarm-info {
+    table {
+      vertical-align: top;
+      width: 100%;
+    }
+
+    th {
+      padding-right: 16px;
+      font-weight: normal;
+      vertical-align: top;
+      width: 120px;
+    }
+
+    pre {
+      padding-top: 3px;
+      font-size: 90%;
+      overflow-y: auto;
+      max-height: 130px;
+      margin-right: 10px;
+    }
+
+  }
+}
