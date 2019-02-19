@@ -9,6 +9,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
+import { SharedModule } from '../../shared/shared.module';
 import { ShelveComponent } from './shelve.component';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
@@ -51,6 +52,7 @@ describe('ShelveComponent', () => {
         ReactiveFormsModule,
         NgxSpinnerModule,
         IasMaterialModule,
+        SharedModule,
         DataModule,
       ],
       providers: [
