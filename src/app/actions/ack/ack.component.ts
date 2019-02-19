@@ -159,7 +159,7 @@ export class AckComponent implements OnInit, OnDestroy {
         if (this.alarm.core_id !== this.alarm_id) {
           this.reload();
         } else {
-          this.getMissingAcksInfo();
+          this.reload({onlyMissingAcksInfo: true})
         }
       } else {
         this.reload();
@@ -170,10 +170,12 @@ export class AckComponent implements OnInit, OnDestroy {
   /**
   * Cleans the component and reloads the Alarm
   */
-  reload(): void {
-    this.alarm = this.alarmService.get(this.alarm_id);
-    this.requestStatus = 0;
-    this.message.reset();
+  reload({onlyMissingAcksInfo= false}: {onlyMissingAcksInfo?: boolean} = {}): void {
+    if (onlyMissingAcksInfo === false) {
+      this.alarm = this.alarmService.get(this.alarm_id);
+      this.requestStatus = 0;
+      this.message.reset();
+    }
     this.getMissingAcksInfo();
   }
 
