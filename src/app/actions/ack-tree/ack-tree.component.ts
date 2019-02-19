@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, SimpleChange } from '@angular/core';
 import { OnInit, OnChanges } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -81,7 +81,6 @@ export class AckTreeComponent implements OnInit, OnChanges {
 
   /**
    * This function is defined by default and executed on Component startup.
-   * It is currently unused and {@link ngOnChanges} is being used instead
    */
   ngOnInit() {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
@@ -90,14 +89,37 @@ export class AckTreeComponent implements OnInit, OnChanges {
     this.checklistSelection.onChange.subscribe( () => {
       this.updateAckList();
     });
-    this.ngOnChanges();
+    this.updateData();
   }
 
   /**
    * This function is executed on Component startup and everytime its state changes.
-   * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
+   * It currently builds the tree by reading the data from the alarm (whenever the alarm changes)
    */
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.selectedAlarm) {
+      if (changes.selectedAlarm.previousValue) {
+        const alarm: SimpleChange = changes.selectedAlarm;
+        const prevAlarmCoreID = alarm.previousValue.core_id;
+        const currentAlarmCoreID = alarm.currentValue.core_id;
+        const prevDependenciesString = alarm.previousValue.dependencies.sort().join();
+        const currentDependenciesString = alarm.currentValue.dependencies.sort().join();
+        const dependenciesChange = (prevDependenciesString !== currentDependenciesString);
+        const coreIDChange = (prevAlarmCoreID !== currentAlarmCoreID);
+        if ((coreIDChange === true) || (dependenciesChange === true)) {
+          this.updateData();
+        }
+      } else {
+        this.updateData();
+      }
+    }
+  }
+
+
+  /**
+   * Update the data for the dataSource
+   */
+  updateData() {
     if (this.dataSource) {
       const tree_data = this.getTreeData();
       this.dataSource.data = this.buildFileTree(tree_data, 0);

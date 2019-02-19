@@ -1,8 +1,11 @@
+import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { AckTreeComponent, AlarmItemFlatNode } from './ack-tree.component';
 import { AlarmService } from '../../data/alarm.service';
+import { Alarm } from '../../data/alarm';
 import { expectedTreeData, mockAlarmData } from './fixtures';
 
 
@@ -59,7 +62,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   describe('WHEN the user selects 1 grand-children alarm', () => {
     it('THEN only that alarm should be selected and in the ackList', () => {
       component.ngOnInit();
-      component.ngOnChanges();
       component.treeControl.expandAll();
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -80,7 +82,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   describe('WHEN the user selects 2 of its grand-children alarms', () => {
     it('THEN only those alarms should be selected and in the ackList', () => {
       component.ngOnInit();
-      component.ngOnChanges();
       component.treeControl.expandAll();
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -102,7 +103,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   describe('WHEN the user selects all the children of one of its children', () => {
     it('THEN only those alarms should in the ackList, but those alarms and their parent should be selected', () => {
       component.ngOnInit();
-      component.ngOnChanges();
       component.treeControl.expandAll();
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -126,7 +126,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   describe('WHEN the user selects 1 of its children', () => {
     it('THEN that children and its children (grandchildren) should be selected, but the ackList should contain only grandchildren', () => {
       component.ngOnInit();
-      component.ngOnChanges();
       component.treeControl.expandAll();
       component.treeControl.expandAll();
       fixture.detectChanges();
@@ -147,7 +146,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
   describe('WHEN the user selects all of its children', () => {
     it('THEN all the Alarms should be selected and the ackList should contain all the grand-children level Alarms', () => {
       component.ngOnInit();
-      component.ngOnChanges();
       component.treeControl.expandAll();
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -174,7 +172,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
     describe('WHEN the user selects the parent of that grandchildren', () => {
       it('THEN that children and all its children should be selected, but the ackList should contain only grandchildren', () => {
         component.ngOnInit();
-        component.ngOnChanges();
         component.treeControl.expandAll();
         fixture.detectChanges();
         expect(component).toBeTruthy();
@@ -209,7 +206,6 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
     describe('WHEN the user deselects one of the children (grandchildren) of that children', () => {
       it('THEN the children is also selected, but the ackList should contain the still selected grandchildren', () => {
         component.ngOnInit();
-        component.ngOnChanges();
         component.treeControl.expandAll();
         fixture.detectChanges();
         expect(component).toBeTruthy();
@@ -240,3 +236,140 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm with a subtree', () =>
     });
   });
 });
+
+
+describe('GIVEN an AckTreeComponent, with a selectedAlarm that can change', () => {
+  let hostComponent: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let component: AckTreeComponent;
+  let alarmService: AlarmService;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AckTreeComponent,
+        TestHostComponent
+      ],
+      imports: [
+        IasMaterialModule,
+        DataModule,
+      ],
+      providers: [
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
+    alarmService.readAlarmMessagesList(mockAlarmData);
+    hostComponent.alarm = alarmService.get(mockAlarmData[0]['core_id']);
+    component = fixture
+      .debugElement.query(By.directive(AckTreeComponent))
+      .componentInstance;
+    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('GIVEN an update for the same alarm', () => {
+
+    it('The component should update the data for the tree if there are changes on the alarm dependencies', () => {
+      spyOn(component, 'updateData');
+      const newExpectedTreeData = {
+        'parent': {
+          'child_1': {
+            'grandChild_11': null,
+            'grandChild_12': null,
+            'grandChild_13': null,
+          }
+        }
+      };
+      const newMockAlarmData = [];
+      for (const obj of mockAlarmData) {
+        const updatedObj = Object.assign({}, obj);
+        updatedObj['core_timestamp'] += 10;
+        updatedObj['state_change_timestamp'] += 10;
+        if (updatedObj['core_id'] === hostComponent.alarm['core_id']) {
+          updatedObj['dependencies'] = ['child_1'];
+        }
+        newMockAlarmData.push(updatedObj);
+      }
+      alarmService.readAlarmMessagesList(newMockAlarmData);
+      expect(component.getTreeData()).toEqual(expectedTreeData);
+      // Act:
+      hostComponent.alarm = alarmService.get(newMockAlarmData[0]['core_id']);
+      fixture.detectChanges();
+      // Assert:
+      expect(component.updateData).toHaveBeenCalledTimes(1);
+      expect(component.getTreeData()).toEqual(newExpectedTreeData);
+    });
+
+    it('The component should not update the data for the tree if there are no changes on the alarm dependencies', () => {
+      spyOn(component, 'updateData');
+      const newMockAlarmData = [];
+      for (const obj of mockAlarmData) {
+        const updatedObj = Object.assign({}, obj);
+        updatedObj['core_timestamp'] += 10;
+        updatedObj['state_change_timestamp'] += 10;
+        newMockAlarmData.push(updatedObj);
+      }
+      alarmService.readAlarmMessagesList(newMockAlarmData);
+      hostComponent.alarm = alarmService.get(newMockAlarmData[0]['core_id']);
+      fixture.detectChanges();
+      expect(component.updateData).toHaveBeenCalledTimes(0);
+    });
+
+  });
+
+  describe('GIVEN consecutive and different alarms as input', () => {
+
+    it('The component should update the data for the tree even if the dependencies are the same', () => {
+      spyOn(component, 'updateData');
+      const newMockAlarmData = [];
+      for (const obj of mockAlarmData) {
+        const updatedObj = Object.assign({}, obj);
+        updatedObj['core_timestamp'] += 10;
+        updatedObj['state_change_timestamp'] += 10;
+        if (updatedObj['core_id'] === hostComponent.alarm['core_id']) {
+          updatedObj['core_id'] += '2';
+        }
+        newMockAlarmData.push(updatedObj);
+      }
+      alarmService.readAlarmMessagesList(newMockAlarmData);
+      hostComponent.alarm = alarmService.get(newMockAlarmData[0]['core_id']);
+      fixture.detectChanges();
+      expect(component.updateData).toHaveBeenCalledTimes(1);
+    });
+
+  });
+
+});
+
+/**
+ * Mock host component for the alarm tile to check behaviour on change
+ */
+@Component({
+  selector: 'app-host',
+  template: `
+    <app-ack-tree
+      [selectedAlarm]="alarm"
+      (alarmsToAckFromSelection)="updateAlarmsToAck($event)"
+    ></app-ack-tree>
+  `,
+})
+class TestHostComponent {
+  alarm: Alarm;
+  alarmsToAck: string[] = [];
+  updateAlarmsToAck(event: string[]): void {
+    this.alarmsToAck = event;
+  }
+}
