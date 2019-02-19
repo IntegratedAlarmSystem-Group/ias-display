@@ -158,6 +158,8 @@ export class AckComponent implements OnInit, OnDestroy {
       if (this.alarm) {
         if (this.alarm.core_id !== this.alarm_id) {
           this.reload();
+        } else {
+          this.getMissingAcksInfo();
         }
       } else {
         this.reload();
@@ -255,7 +257,7 @@ export class AckComponent implements OnInit, OnDestroy {
   */
   getMissingAcksInfo(): void {
     if (this.alarm) {
-      this.missedAcks = [];
+      const missedAcks = [];
       this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
         (response) => {
           for (const [key, value] of Object.entries(response)) {
@@ -265,9 +267,10 @@ export class AckComponent implements OnInit, OnDestroy {
               if (count > 1) {
                 text += 's';
               }
-              this.missedAcks.push(text);
+              missedAcks.push(text);
             }
           }
+          this.missedAcks = missedAcks;
         }
       );
     }
