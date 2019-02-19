@@ -9,26 +9,7 @@
   <div class="component-action component-body">
     <form class="form-group" [formGroup]="form">
 
-      <div class="section alarm-info">
-        <table>
-          <tr>
-            <th>Alarm ID</th>
-            <td>{{alarm?.core_id}}</td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>{{ alarm?.description }}</td>
-          </tr>
-          <tr>
-            <th>Last Change</th>
-            <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
-          </tr>
-          <tr>
-            <th>Last Properties</th>
-            <pre>{{ alarm?.formattedProperties }}</pre>
-          </tr>
-        </table>
-      </div>
+      <app-alarm-info [alarm]="this.alarmService.get(this.alarm_id)"></app-alarm-info>
 
       <div *ngIf="!this.authService.getAllowedActions()['can_ack']; then notAllowedMessage"> </div>
       <ng-template #notAllowedMessage>
