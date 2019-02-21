@@ -136,11 +136,9 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataSource.data = this.getData();
-    this.cdRef.detectChanges();
+    this.reloadData();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( changes => {
-      this.dataSource.data = this.getData(changes);
-      this.cdRef.detectChanges();
+      this.reloadData(changes);
     });
   }
 
@@ -157,7 +155,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   * @param {string} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
   * @returns {Alarm[]} array of {@link Alarm} objects
   */
-  getData(changes = 'all'): Alarm[] {
+  getData(changes: string = 'all'): Alarm[] {
     if (this.alarmsToDisplay.length <= 0) {
       return this.alarmService.alarmsArray;
 
@@ -168,6 +166,18 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
         alarms.push(alarm);
       }
       return alarms;
+    }
+  }
+
+  /**
+  * Reloads Data of the Table DataSource, triggered whenever alarms are updated in the {@link AlarmService}
+  * @param {string} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
+  */
+  reloadData(changes: string = 'all') {
+    const updatedData = this.getData(changes);
+    if (updatedData) {
+      this.dataSource.data = updatedData;
+      this.cdRef.detectChanges();
     }
   }
 
