@@ -1,0 +1,97 @@
+<div class="table-content">
+
+  <div class="table-filters">
+
+    <div class="text-container">
+      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >
+        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
+        <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="toggles-container">
+      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterSetAlarm()">
+        Show set alarms
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterUnackAlarm()">
+        Show unack alarms
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="_shelvedFilterActivated" (change)="toggleFilterShelvedAlarm()">
+        Show shelved alarms
+      </mat-slide-toggle>
+    </div>
+
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> STATUS </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm">
+        <div class="status-icon">
+          <app-status-view [alarm]="alarm" [value]="alarm.status" ></app-status-view>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Monitoring Point Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> ALARM NAME </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Mode Column -->
+    <ng-container matColumnDef="mode">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> MODE </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm"> {{alarm.operationalMode}} </mat-cell>
+    </ng-container>
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> LAST CHANGE TIME </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> DESCRIPTION </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>
+    </ng-container>
+
+    <!-- Properties Column -->
+    <ng-container matColumnDef="properties">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> PROPERTIES </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm"> {{alarm.formattedProperties}} </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <span mat-sort-header> ACTIONS </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let alarm">
+        <app-buttons [alarm]="alarm"></app-buttons>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+
+</div>

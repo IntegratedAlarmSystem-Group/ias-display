@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { AntennasSidebarComponent } from './antennas-sidebar.component';
 import { AntennasService } from '../antennas.service';
 import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { SharedModule } from '../../shared/shared.module';
+import { TabularModule } from '../../tabular/tabular.module';
+import { TableComponent } from '../../tabular/table/table.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { AlarmConfig } from '../../data/alarm-config';
@@ -28,12 +31,23 @@ describe('AntennasSidebarComponent', () => {
         AntennasService,
         RoutingService,
         { provide: Router, useValue: spyRoutingTable },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: convertToParamMap({
+                filter: ''
+              })
+            }
+          },
+        },
       ],
       imports: [
         ActionsModule,
         DataModule,
         IasMaterialModule,
         SharedModule,
+        TabularModule,
       ]
     })
     .compileComponents();
@@ -74,23 +88,34 @@ describe('AntennasSidebarComponent', () => {
 
     describe('and if there is a selected antenna', () => {
       it('should have a link to return back', () => {
-        component.selectedAntenna = mockAntennasConfig[0];
+        component.selectedAntenna = mockAntennasConfig[0] as AlarmConfig;
         fixture.detectChanges();
         const link = fixture.nativeElement.querySelector('.return-link');
         expect(link).toBeTruthy();
         link.click();
         expect(component.selectedAntenna).toBeFalsy();
       });
-      it('should show antenna details component', () => {
-        component.selectedAntenna = mockAntennasConfig[0];
-        fixture.detectChanges();
-        const alarmInfo = fixture.nativeElement.querySelector('.alarm-info');
-        const devicesAlarms = fixture.nativeElement.querySelector('.devices-alarms');
-        expect(alarmInfo).toBeTruthy('The alarm-info div does not exist');
-        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm_id, 'The alarmInfo does not contain the alarm id');
-        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
-        expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].custom_name, 'The alarmInfo does not contain the antenna');
-        expect(devicesAlarms).toBeTruthy('The devices-alarms div does not contain the alarm');
+      describe('it should show antenna details component', () => {
+        it('with the alarm info', () => {
+          component.selectedAntenna = mockAntennasConfig[0] as AlarmConfig;
+          fixture.detectChanges();
+          const alarmInfo = fixture.nativeElement.querySelector('.alarm-info');
+          expect(alarmInfo).toBeTruthy('The alarm-info div does not exist');
+          expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].alarm_id, 'The alarmInfo does not contain the alarm id');
+          expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
+          expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].custom_name, 'The alarmInfo does not contain the antenna');
+        });
+        it('and a TableComponent with the antennas children alarms', () => {
+          component.selectedAntenna = mockAntennasConfig[0] as AlarmConfig;
+          fixture.detectChanges();
+          const tableComponent = fixture.debugElement.query(By.directive(TableComponent)).componentInstance;
+          expect(tableComponent).toBeTruthy('There is no TableComponent');
+          const expectedAlarmsToDisplay = [
+            'mockAlarm-0-child-0',
+            'mockAlarm-0-child-1',
+          ];
+          expect(tableComponent.alarmsToDisplay).toEqual(expectedAlarmsToDisplay, 'The table did not receive the expected sub alarms');
+        });
       });
     });
 

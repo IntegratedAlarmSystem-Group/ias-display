@@ -78,40 +78,10 @@
     </table>
   </div>
 
-  <div class="antennas-detail devices-alarms">
-    <table>
-      <tr>
-        <td class="antenna">
-          <div class="text">
-            <app-alarm [alarm]="this.alarmService.getAlarm(selectedAntenna)" [text]="'Antenna'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.alarmService.getAlarm(selectedAntenna)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.alarmService.getAlarm(selectedAntenna)"></app-buttons>
-        </td>
-      </tr>
-      <ng-container *ngFor="let config of selectedAntenna.children">
-        <tr>
-          <td class="device">
-            <div class="text">
-              <app-alarm [alarm]="this.alarmService.getAlarm(config)" [text]="this.alarmService.getName(config)"></app-alarm>
-            </div>
-          </td>
-          <td>
-            <div class="status">
-              <app-status-view [alarm]="this.alarmService.getAlarm(config)" [showActionBadges]="false"></app-status-view>
-            </div>
-          </td>
-          <td class="buttons" align="right">
-            <app-buttons [alarm]="this.alarmService.getAlarm(config)"></app-buttons>
-          </td>
-        </tr>
-      </ng-container>
-    </table>
-  </div>
+  <app-table
+    [displayedColumns] = "['status', 'name', 'mode', 'timestamp', 'actions']"
+    [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
+    [pageSizeOptions] = "[12, 25, 50, 100]"
+  >
+  </app-table>
 </ng-template>

@@ -4,6 +4,7 @@ import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { ActionsModule } from '../actions/actions.module';
 import { SharedModule } from '../shared/shared.module';
 import { LegendComponent } from './legend/legend.component';
+import { TableComponent } from './table/table.component';
 import { TabularViewComponent } from './tabular-view/tabular-view.component';
 
 /**
@@ -18,10 +19,11 @@ import { TabularViewComponent } from './tabular-view/tabular-view.component';
   ],
   declarations: [
     LegendComponent,
+    TableComponent,
     TabularViewComponent,
   ],
   exports: [
-    TabularViewComponent,
+    TableComponent,
   ],
 })
 export class TabularModule { }

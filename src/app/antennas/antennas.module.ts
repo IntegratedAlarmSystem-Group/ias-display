@@ -8,6 +8,7 @@ import { ActionsModule } from '../actions/actions.module';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { MapModule } from '../map/map.module';
 import { SharedModule } from '../shared/shared.module';
+import { TabularModule } from '../tabular/tabular.module';
 import { AntennasService } from './antennas.service';
 import { AntennaMarkerComponent } from './antennas-map-markers/antenna-marker/antenna-marker.component';
 import { AntennasSummaryComponent } from './antennas-summary/antennas-summary.component';
@@ -21,6 +22,7 @@ import { AntennasSummaryComponent } from './antennas-summary/antennas-summary.co
     IasMaterialModule,
     MapModule,
     SharedModule,
+    TabularModule,
   ],
   providers: [
     AntennasService
