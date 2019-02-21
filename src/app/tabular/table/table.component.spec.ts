@@ -9,9 +9,18 @@ import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { TableComponent } from './table.component';
 import { LegendComponent } from '../legend/legend.component';
-import { MockAlarms, ExpectedTableRows, ExpectedFilteredTableRows } from './fixtures';
 import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
 import { DatePipe } from '@angular/common';
+import {
+  MockAlarms,
+  MockAlarmsToDisplay,
+  ExpectedTableRows,
+  ExpectedFilteredTableRows,
+  ExpectedReducedTableRows,
+  ChangedAlarm5,
+  ChangedAlarm2,
+  ExpectedReducedTableRowsAfterChange,
+} from './fixtures';
 
 
 describe('TableComponent', () => {
@@ -21,7 +30,6 @@ describe('TableComponent', () => {
   let alarmService: AlarmService;
   const spyRoutingTable = jasmine.createSpyObj('Router', ['navigate']);
   const alarms = MockAlarms;
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -68,13 +76,61 @@ describe('TableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TEST SORTING
+  // TEST LOADING AND SORTING
   describe('WHEN the service processes the alarms', () => {
     it('THEN the DataSource of the Table contains those Alarms sorted by status', () => {
       alarmService.readAlarmMessagesList(alarms);
       fixture.detectChanges();
       const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
       expect(sortedData).toEqual(ExpectedTableRows);
+    });
+  });
+
+  // TEST LOADING WHEN TABLE DISPLAYS SOME ALARMS ONLY
+  describe('WHEN the Table shows only some alarms', () => {
+
+    beforeEach(() => {
+      component.alarmsToDisplay = MockAlarmsToDisplay;
+      fixture.detectChanges();
+    });
+
+    describe('AND the service processes all the alarms', () => {
+      it('THEN the DataSource of the Table contains those Alarms sorted by status', () => {
+        // Act
+        alarmService.readAlarmMessagesList(alarms);
+        fixture.detectChanges();
+        // Assert
+        const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
+        expect(sortedData).toEqual(ExpectedReducedTableRows);
+      });
+    });
+
+    describe('AND the service processes only one of the alarms that must be displayed', () => {
+      it('THEN the DataSource of the Table updates the change of that Alarm', () => {
+        // Arrange
+        alarmService.readAlarmMessagesList(alarms);
+        fixture.detectChanges();
+        // Act
+        alarmService.readAlarmMessage('update', ChangedAlarm5);
+        fixture.detectChanges();
+        // Assert
+        const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
+        expect(sortedData).toEqual(ExpectedReducedTableRowsAfterChange);
+      });
+    });
+
+    describe('AND the service processes only one of the alarms that must NOT be displayed', () => {
+      it('THEN the DataSource of the Table does not update the change of that Alarm', () => {
+        // Arrange
+        alarmService.readAlarmMessagesList(alarms);
+        fixture.detectChanges();
+        // Act
+        alarmService.readAlarmMessage('update', ChangedAlarm2);
+        fixture.detectChanges();
+        // Assert
+        const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
+        expect(sortedData).toEqual(ExpectedReducedTableRows);
+      });
     });
   });
 

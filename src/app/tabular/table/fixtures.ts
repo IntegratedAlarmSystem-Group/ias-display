@@ -653,3 +653,65 @@ export const ExpectedFilteredTableRows = [
   ExpectedTableRows[15],
   ExpectedTableRows[22],
 ];
+
+/** Set of IDs of the alarms are going to be displayed, when only some of them are displayed */
+export const MockAlarmsToDisplay = [
+  MockAlarms[0]['core_id'],
+  MockAlarms[4]['core_id'],
+  MockAlarms[2]['core_id'],
+  MockAlarms[11]['core_id'],
+];
+
+/** Set of the rows the that the test expects on the Table when only some alarms are going to be displayed */
+export const ExpectedReducedTableRows = [
+  Alarm.asAlarm(MockAlarms[0]),
+  Alarm.asAlarm(MockAlarms[2]),
+  Alarm.asAlarm(MockAlarms[11]),
+  Alarm.asAlarm(MockAlarms[4]),
+];
+
+/** Change in MockAlarm[4] (coreid$5) */
+export const ChangedAlarm5 = {
+  'value': 4,
+  'core_id': 'coreid$5',
+  'running_id': 'coreid$5',
+  'mode': 5,
+  'core_timestamp': 1267252440010,
+  'state_change_timestamp': 1267252440010,
+  'validity': 1,
+  'description': 'Alarm 5 description',
+  'url': 'https://www.alma.cl',
+  'sound': 'NONE',
+  'can_shelve': true,
+  'ack': false,
+  'shelved': false,
+  'dependencies': [],
+  'properties': {},
+};
+
+/** Change in MockAlarm[1] (coreid$2) */
+export const ChangedAlarm2 = {
+  'value': 1,
+  'core_id': 'coreid$2',
+  'running_id': 'coreid$2',
+  'mode': 5,
+  'core_timestamp': 1267252440010,
+  'state_change_timestamp': 1267252440010,
+  'validity': 1,
+  'description': 'Alarm 2 description',
+  'url': 'https://www.alma.cl',
+  'sound': 'NONE',
+  'can_shelve': true,
+  'ack': false,
+  'shelved': false,
+  'dependencies': [],
+  'properties': {},
+};
+
+/** Set of the rows the that the test expects on the Table when only some alarms are going to be displayed, after the change is done */
+export const ExpectedReducedTableRowsAfterChange = [
+  Alarm.asAlarm(MockAlarms[0]),
+  Alarm.asAlarm(ChangedAlarm5),
+  Alarm.asAlarm(MockAlarms[2]),
+  Alarm.asAlarm(MockAlarms[11]),
+];
