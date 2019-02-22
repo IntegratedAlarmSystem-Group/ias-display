@@ -18,10 +18,10 @@ export class AlarmInfoComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /** String to store the formatting of dates, read form the settings */
-  private dateFormat: string;
+  public dateFormat: string;
 
   /** String to store the timezone to display dates, read from the settings */
-  private timezone: string;
+  public timezone: string;
 
   /**
    * Builds an instance of the component
