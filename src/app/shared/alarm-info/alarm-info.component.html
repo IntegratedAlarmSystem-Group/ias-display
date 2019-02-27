@@ -12,7 +12,7 @@
       <th>Last Change</th>
       <td>{{alarm?.timestamp | date: dateFormat: timezone}}</td>
     </tr>
-    <tr>
+    <tr *ngIf="alarm?.formattedProperties !== ''">
       <th>Last Properties</th>
       <pre>{{alarm?.formattedProperties}}</pre>
     </tr>
