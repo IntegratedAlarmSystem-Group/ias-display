@@ -197,7 +197,7 @@ export class Alarm {
     };
     // return JSON.stringify(example, null, 2);
     if (this.properties === null || Object.keys(this.properties).length === 0) {
-      return 'No properties';
+      return '';
     }
     if (Object.keys(this.properties).length === 1) {
       const property = this.properties[Object.keys(this.properties)[0]];
