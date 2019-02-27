@@ -22,10 +22,10 @@ describe('Alarm', () => {
     expect(new Alarm()).toBeTruthy();
   });
 
-  it('should display properties as "No properties" if the Alarm has no properties', () => {
+  it('should display properties as an empty string if the Alarm has no properties', () => {
     alarm.properties = null;
     expect(alarm).toBeTruthy();
-    expect(alarm.formattedProperties).toEqual('No properties');
+    expect(alarm.formattedProperties).toEqual('');
   });
 
   it('should display properties in a single line if the Alarm has 1 property which is not an Object or list', () => {
