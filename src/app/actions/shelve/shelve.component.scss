@@ -7,20 +7,19 @@
   .component-action {
 
     &.component-header {
-      padding: 12px 0px;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-
-      .component-title {
-        display: inline;
+      &.component-header-title {
+        padding: 12px 0px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
       }
-
+      padding: 0px 24px;
     }
 
     &.component-body {
       font-size: 14px;
       height: 100%;
       overflow-y: auto;
+      padding: 0px 24px;
 
       .section {
         padding: 24px 0px 10px 0px;
