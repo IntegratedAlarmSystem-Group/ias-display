@@ -4,7 +4,7 @@
   &.alarm-info {
     table {
       vertical-align: top;
-      width: 100%;
+      width: 450px;
     }
 
     th {
@@ -18,8 +18,10 @@
       padding-top: 3px;
       font-size: 90%;
       overflow-y: auto;
-      max-height: 130px;
-      margin-right: 10px;
+      overflow-x: auto;
+      margin: 0px;
+      max-width: 330px;
+      max-height: 400px;
     }
 
   }
