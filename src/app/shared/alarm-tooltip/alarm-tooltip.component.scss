@@ -12,15 +12,21 @@
   text-align: left;
   background: rgba(0, 0, 0, 0.85);
 
+  table {
+    vertical-align: top;
+  }
+
   th {
     width: 110px;
     vertical-align: top;
   }
 
-  pre {
+  .props-container {
     color: white;
     vertical-align: top;
     font-size: 100%;
+    word-wrap: break-all;
+    max-width: 390px;
   }
 }
 
