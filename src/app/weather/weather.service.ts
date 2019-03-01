@@ -157,14 +157,14 @@ export class WeatherService {
   loadImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-valid-clear.svg',
-      set_low: Assets.ICONS + 'hum-valid-low.svg',
-      set_medium: Assets.ICONS + 'hum-valid-low.svg',
-      set_high: Assets.ICONS + 'hum-valid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-valid-critical.svg',
-      unknown: Assets.ICONS + 'hum-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-valid-maint.svg',
-      shelved: Assets.ICONS + 'hum-valid-clear.svg',
+      clear: Assets.ICONS + 'humidity-valid-clear.svg',
+      set_low: Assets.ICONS + 'humidity-valid-low.svg',
+      set_medium: Assets.ICONS + 'humidity-valid-low.svg',
+      set_high: Assets.ICONS + 'humidity-valid-critical.svg',
+      set_critical: Assets.ICONS + 'humidity-valid-critical.svg',
+      unknown: Assets.ICONS + 'humidity-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'humidity-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'humidity-valid-clear.svg',
     });
 
     /** Set of Temperature icons */
@@ -193,14 +193,14 @@ export class WeatherService {
 
     /** Set of Humidity Unreliable icons */
     this.humidityImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-invalid-clear.svg',
-      set_low: Assets.ICONS + 'hum-invalid-low.svg',
-      set_medium: Assets.ICONS + 'hum-invalid-low.svg',
-      set_high: Assets.ICONS + 'hum-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
-      unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-invalid-maint.svg',
-      shelved: Assets.ICONS + 'hum-valid-clear.svg',
+      clear: Assets.ICONS + 'humidity-invalid-clear.svg',
+      set_low: Assets.ICONS + 'humidity-invalid-low.svg',
+      set_medium: Assets.ICONS + 'humidity-invalid-low.svg',
+      set_high: Assets.ICONS + 'humidity-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'humidity-invalid-critical.svg',
+      unknown: Assets.ICONS + 'humidity-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'humidity-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'humidity-valid-clear.svg',
     });
 
     /** Set of Temperature Unreliable icons */
