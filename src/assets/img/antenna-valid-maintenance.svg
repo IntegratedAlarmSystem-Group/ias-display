@@ -1,1 +1,28 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 65.3 62.6"><defs><style>.cls-1{fill-opacity:0;fill:url(#linear-gradient);}.cls-2{fill:url(#linear-gradient-2);}.cls-3,.cls-5,.cls-6,.cls-7{fill:none;}.cls-3,.cls-5,.cls-6{stroke-miterlimit:10;}.cls-3,.cls-4,.cls-5,.cls-6,.cls-7{stroke-width:2px;}.cls-3{stroke:url(#linear-gradient-3);}.cls-4,.cls-7{stroke-linecap:round;stroke-linejoin:round;}.cls-4{fill:url(#linear-gradient-4);stroke:url(#linear-gradient-5);}.cls-5{stroke:url(#linear-gradient-6);}.cls-6{stroke:url(#linear-gradient-7);}.cls-7{stroke:url(#linear-gradient-8);}</style><linearGradient id="linear-gradient" y1="32.7" x2="65.3" y2="32.7" gradientTransform="matrix(1, 0, 0, -1, 0, 64)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f0512e"/><stop offset="0.28" stop-color="#f05230"/><stop offset="0.51" stop-color="#f15736"/><stop offset="0.73" stop-color="#f15f42"/><stop offset="0.94" stop-color="#f26a52"/><stop offset="1" stop-color="#f26d57"/></linearGradient><linearGradient id="linear-gradient-2" x1="37.5" y1="17.99" x2="42.32" y2="17.99" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b5b5b5"/><stop offset="0.65" stop-color="#e8e8e8"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="linear-gradient-3" x1="35.72" y1="19.85" x2="40.18" y2="19.85" xlink:href="#linear-gradient-2"/><linearGradient id="linear-gradient-4" x1="16" y1="31.3" x2="50.2" y2="31.3" xlink:href="#linear-gradient-2"/><linearGradient id="linear-gradient-5" x1="15" y1="31.3" x2="51.2" y2="31.3" xlink:href="#linear-gradient-2"/><linearGradient id="linear-gradient-6" x1="33.29" y1="17.74" x2="47.03" y2="17.74" xlink:href="#linear-gradient-2"/><linearGradient id="linear-gradient-7" x1="30.29" y1="17.1" x2="51.3" y2="17.1" xlink:href="#linear-gradient-2"/><linearGradient id="linear-gradient-8" x1="14" y1="55.9" x2="39" y2="55.9" xlink:href="#linear-gradient-2"/></defs><title>antenna-valid-maintenance</title><g id="Layer_2" data-name="Layer 2"><rect class="cls-1" width="65.3" height="62.6"/></g><path class="cls-2" d="M39.5,18.4l-2-2a2.83,2.83,0,0,1,4,4Z"/><line class="cls-3" x1="39.5" y1="18.4" x2="36.4" y2="21.3"/><path class="cls-4" d="M33.8,55.9,31.09,40.23l.31.07a17.55,17.55,0,0,0,4.6.5,20.06,20.06,0,0,0,14.2-5.9L36,20.9,21.9,6.7A19.89,19.89,0,0,0,16,20.9,19.48,19.48,0,0,0,21.87,35v.1L19.4,55.9"/><path class="cls-5" d="M34,13.9a7.07,7.07,0,0,1,10,10"/><path class="cls-6" d="M31,10.9a11.31,11.31,0,0,1,16,16"/><polyline class="cls-7" points="15 55.9 18.7 55.9 38 55.9"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 65.3 62.6" style="enable-background:new 0 0 65.3 62.6;" xml:space="preserve">
+<style type="text/css">.st0{fill:#8e98a1;}.st1{fill:url(#SVGID_1_);fill-opacity:0;}.st2{fill:none;stroke:#8e98a1;stroke-width:2;stroke-miterlimit:10;}.st3{fill:none;stroke:#8e98a1;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}.st4{fill:#8e98a1;stroke:#8e98a1;}</style>
+<title>antenna</title>
+<path class="st0" d="M33.8,55.9l-2.7-15.7l0.3,0.1c1.5,0.4,3.1,0.5,4.6,0.5c5.3,0,10.4-2.1,14.2-5.9L36,20.9L21.9,6.7
+	c-3.8,3.8-5.9,8.9-5.9,14.2c0,5.3,2.1,10.4,5.9,14.1v0.1l-2.5,20.8"/>
+<g id="Layer_2_1_">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="-383.3" x2="65.3" y2="-383.3" gradientTransform="matrix(1 0 0 -1 0 -352)">
+		<stop  offset="0" style="stop-color:#F0512E"/>
+		<stop  offset="0.28" style="stop-color:#F05230"/>
+		<stop  offset="0.51" style="stop-color:#F15736"/>
+		<stop  offset="0.73" style="stop-color:#F15F42"/>
+		<stop  offset="0.94" style="stop-color:#F26A52"/>
+		<stop  offset="1" style="stop-color:#F26D57"/>
+	</linearGradient>
+	<rect class="st1" width="65.3" height="62.6"/>
+</g>
+<path class="st4" d="M39.5,18.4l-2-2c1.1-1.1,2.9-1,4,0.1c1,1.1,1,2.8,0,3.9L39.5,18.4z"/>
+<path class="st2" d="M34,13.9c2.8-2.8,7.2-2.8,10,0s2.8,7.2,0,10"/>
+<path class="st2" d="M31,10.9c4.4-4.4,11.6-4.4,16,0s4.4,11.6,0,16"/>
+<line class="st2" x1="39.5" y1="18.4" x2="36.4" y2="21.3"/>
+<path class="st3" d="M33.8,55.9l-2.7-15.7l0.3,0.1c1.5,0.4,3.1,0.5,4.6,0.5c5.3,0,10.4-2.1,14.2-5.9L36,20.9L21.9,6.7
+	c-3.8,3.8-5.9,8.9-5.9,14.2c0,5.3,2.1,10.4,5.9,14.1v0.1l-2.5,20.8"/>
+<polyline class="st3" points="15,55.9 18.7,55.9 38,55.9 "/>
+</svg>

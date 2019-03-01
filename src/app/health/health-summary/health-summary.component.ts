@@ -80,26 +80,26 @@ export class HealthSummaryComponent implements OnInit {
 
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'ias_health-valid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-valid-low.svg',
-      set_medium: Assets.ICONS + 'ias_health-valid-low.svg',
-      set_high: Assets.ICONS + 'ias_health-valid-critical.svg',
-      set_critical: Assets.ICONS + 'ias_health-valid-critical.svg',
-      unknown: Assets.ICONS + 'ias_health-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'ias_health-valid-maint.svg',
-      shelved: Assets.ICONS + 'ias_health-valid-clear.svg',
+      clear: Assets.ICONS + 'ias_health-clear-valid.svg',
+      set_low: Assets.ICONS + 'ias_health-others-valid.svg',
+      set_medium: Assets.ICONS + 'ias_health-others-valid.svg',
+      set_high: Assets.ICONS + 'ias_health-critical-valid-critical.svg',
+      set_critical: Assets.ICONS + 'ias_health-critical-valid-critical.svg',
+      unknown: Assets.ICONS + 'ias_health-clear-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'ias_health-clear-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'ias_health-clear-valid.svg',
     });
 
     /** Set of Unreliable icons */
     this.iconUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'ias_health-invalid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-invalid-low.svg',
-      set_medium: Assets.ICONS + 'ias_health-invalid-low.svg',
-      set_high: Assets.ICONS + 'ias_health-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'ias_health-invalid-critical.svg',
-      unknown: Assets.ICONS + 'ias_health-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'ias_health-invalid-maint.svg',
-      shelved: Assets.ICONS + 'ias_health-invalid-clear.svg',
+      clear: Assets.ICONS + 'ias_health-clear-invalid.svg',
+      set_low: Assets.ICONS + 'ias_health-others-invalid.svg',
+      set_medium: Assets.ICONS + 'ias_health-others-invalid.svg',
+      set_high: Assets.ICONS + 'ias_health-critical-invalid.svg',
+      set_critical: Assets.ICONS + 'ias_health-critical-invalid.svg',
+      unknown: Assets.ICONS + 'ias_health-clear-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'ias_health-clear-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'ias_health-clear-valid.svg',
     });
   }
 
