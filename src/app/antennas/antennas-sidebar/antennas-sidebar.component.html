@@ -81,7 +81,7 @@
   <div class="antennas-detail subalarms">
     Antenna devices alarms:
     <app-table
-      [displayedColumns] = "['status', 'name', 'mode', 'timestamp', 'actions']"
+      [displayedColumns] = "['status', 'name', 'mode', 'actions']"
       [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
       [pageSizeOptions] = "[12, 25, 50, 100]"
     >
