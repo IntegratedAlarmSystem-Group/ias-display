@@ -82,6 +82,17 @@
         border-bottom-width: 1px;
         border-bottom-style: solid;
         border-bottom-color: rgba(255, 255, 255, 0.12);
+        display: flex;
+        flex-flow: row;
+
+        .header {
+          font-weight: bold;
+        }
+
+        .alarm-buttons {
+          flex: 1 1 auto;
+          align-self: center;
+        }
 
         table {
           vertical-align: top;
@@ -94,7 +105,12 @@
       }
 
       &.subalarms {
-        padding-top: 12px;
+        // padding-top: 20px;
+
+        .subalarms-header {
+          padding: 20px 0 10px 0px;
+          font-weight: bold;
+        }
       }
 
       &.devices-alarms {

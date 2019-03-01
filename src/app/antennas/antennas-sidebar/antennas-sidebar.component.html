@@ -62,24 +62,27 @@
 <!-- Content when one antenna is selected -->
 <ng-template #antennasDetail>
   <div class="antennas-detail alarm-info">
-    <table>
-      <tr>
-        <th>Alarm ID</th>
-        <td>{{this.selectedAntenna.alarm_id}}</td>
-      </tr>
-      <tr>
-        <th>Antenna</th>
-        <td>{{this.alarmService.getName(selectedAntenna)}}</td>
-      </tr>
-      <tr>
-        <th>Location (PAD)</th>
-        <td>{{this.selectedAntenna.placemark}}</td>
-      </tr>
-    </table>
+    <div class="alarm-data">
+      <table>
+        <tr>
+          <th class="header">Alarm ID</th>
+          <td>{{this.selectedAntenna.alarm_id}}</td>
+        </tr>
+        <tr>
+          <th class="header">Antenna (Pad)</th>
+          <td>{{this.alarmService.getName(selectedAntenna)}} ({{this.selectedAntenna.placemark}})</td>
+        </tr>
+      </table>
+    </div>
+    <div class="alarm-buttons">
+      <app-buttons [alarm]="alarmService.getAlarm(this.selectedAntenna.alarm_id)"></app-buttons>
+    </div>
   </div>
 
   <div class="antennas-detail subalarms">
-    Antenna devices alarms:
+    <div class="subalarms-header">
+      Antenna devices alarms
+    </div>
     <app-table
       [displayedColumns] = "['status', 'name', 'mode', 'actions']"
       [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
