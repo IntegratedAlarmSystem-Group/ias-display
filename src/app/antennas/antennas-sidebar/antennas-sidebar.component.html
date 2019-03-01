@@ -78,10 +78,13 @@
     </table>
   </div>
 
-  <app-table
-    [displayedColumns] = "['status', 'name', 'mode', 'timestamp', 'actions']"
-    [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
-    [pageSizeOptions] = "[12, 25, 50, 100]"
-  >
-  </app-table>
+  <div class="antennas-detail subalarms">
+    Antenna devices alarms:
+    <app-table
+      [displayedColumns] = "['status', 'name', 'mode', 'timestamp', 'actions']"
+      [alarmsToDisplay] = "this.getConfigChildrenAlarmIds(this.selectedAntenna)"
+      [pageSizeOptions] = "[12, 25, 50, 100]"
+    >
+    </app-table>
+  </div>
 </ng-template>

@@ -78,7 +78,7 @@
       margin-right: 28px;
 
       &.alarm-info {
-        padding-bottom: 10px;
+        padding-bottom: 12px;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         border-bottom-color: rgba(255, 255, 255, 0.12);
@@ -91,6 +91,10 @@
           padding-right: 16px;
           font-weight: normal;
         }
+      }
+
+      &.subalarms {
+        padding-top: 12px;
       }
 
       &.devices-alarms {
