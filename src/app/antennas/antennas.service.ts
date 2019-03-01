@@ -92,8 +92,8 @@ export class AntennasService {
     /** Set of icons */
     this.antennaImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-valid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-valid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-valid-s_low.svg',
+      set_low: Assets.ICONS + 'antenna-valid-low.svg',
+      set_medium: Assets.ICONS + 'antenna-valid-low.svg',
       set_high: Assets.ICONS + 'antenna-valid-critical.svg',
       set_critical: Assets.ICONS + 'antenna-valid-critical.svg',
       unknown: Assets.ICONS + 'antenna-valid-unknown.svg',
@@ -104,8 +104,8 @@ export class AntennasService {
     /** Set of Unreliable icons */
     this.antennaImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-invalid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-invalid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-invalid-s_low.svg',
+      set_low: Assets.ICONS + 'antenna-invalid-low.svg',
+      set_medium: Assets.ICONS + 'antenna-invalid-low.svg',
       set_high: Assets.ICONS + 'antenna-invalid-critical.svg',
       set_critical: Assets.ICONS + 'antenna-invalid-critical.svg',
       unknown: Assets.ICONS + 'antenna-invalid-unknown.svg',
