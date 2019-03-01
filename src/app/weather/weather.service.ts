@@ -169,14 +169,14 @@ export class WeatherService {
 
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-valid-clear.svg',
-      set_low: Assets.ICONS + 'temp-valid-low.svg',
-      set_medium: Assets.ICONS + 'temp-valid-low.svg',
-      set_high: Assets.ICONS + 'temp-valid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-valid-critical.svg',
-      unknown: Assets.ICONS + 'temp-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-valid-maint.svg',
-      shelved: Assets.ICONS + 'temp-valid-clear.svg',
+      clear: Assets.ICONS + 'temperature-valid-clear.svg',
+      set_low: Assets.ICONS + 'temperature-valid-low.svg',
+      set_medium: Assets.ICONS + 'temperature-valid-low.svg',
+      set_high: Assets.ICONS + 'temperature-valid-critical.svg',
+      set_critical: Assets.ICONS + 'temperature-valid-critical.svg',
+      unknown: Assets.ICONS + 'temperature-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'temperature-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'temperature-valid-clear.svg',
     });
 
     /** Set of Wind Speed icons */
@@ -205,14 +205,14 @@ export class WeatherService {
 
     /** Set of Temperature Unreliable icons */
     this.tempImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-invalid-clear.svg',
-      set_low: Assets.ICONS + 'temp-invalid-low.svg',
-      set_medium: Assets.ICONS + 'temp-invalid-low.svg',
-      set_high: Assets.ICONS + 'temp-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
-      unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-invalid-maint.svg',
-      shelved: Assets.ICONS + 'temp-valid-clear.svg',
+      clear: Assets.ICONS + 'temperature-invalid-clear.svg',
+      set_low: Assets.ICONS + 'temperature-invalid-low.svg',
+      set_medium: Assets.ICONS + 'temperature-invalid-low.svg',
+      set_high: Assets.ICONS + 'temperature-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'temperature-invalid-critical.svg',
+      unknown: Assets.ICONS + 'temperature-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'temperature-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'temperature-valid-clear.svg',
     });
 
     /** Set of Wind Speed Unreliable icons */
