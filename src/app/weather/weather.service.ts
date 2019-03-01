@@ -181,14 +181,14 @@ export class WeatherService {
 
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-valid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-valid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-valid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-valid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
+      clear: Assets.ICONS + 'wind_speed-clear-valid.svg',
+      set_low: Assets.ICONS + 'wind_speed_others-valid-low.svg',
+      set_medium: Assets.ICONS + 'wind_speed_others-valid-low.svg',
+      set_high: Assets.ICONS + 'wind_speed-critical-valid.svg',
+      set_critical: Assets.ICONS + 'wind_speed-critical-valid.svg',
+      unknown: Assets.ICONS + 'wind_speed-clear-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'wind_speed-clear-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'wind_speed-clear-valid.svg',
     });
 
     /** Set of Humidity Unreliable icons */
@@ -217,14 +217,14 @@ export class WeatherService {
 
     /** Set of Wind Speed Unreliable icons */
     this.windsImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-invalid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
+      clear: Assets.ICONS + 'wind_speed-clear-invalid.svg',
+      set_low: Assets.ICONS + 'wind_speed-others-invalid-low.svg',
+      set_medium: Assets.ICONS + 'wind_speed-others-invalid-low.svg',
+      set_high: Assets.ICONS + 'wind_speed-critical-invalid.svg',
+      set_critical: Assets.ICONS + 'wind_speed-critical-invalid.svg',
+      unknown: Assets.ICONS + 'wind_speed-clear-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'wind_speed-clear-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'wind_speed-clear-valid.svg',
     });
 
     /** Set of Marker icons */
