@@ -182,8 +182,8 @@ export class WeatherService {
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'wind_speed-clear-valid.svg',
-      set_low: Assets.ICONS + 'wind_speed_others-valid-low.svg',
-      set_medium: Assets.ICONS + 'wind_speed_others-valid-low.svg',
+      set_low: Assets.ICONS + 'wind_speed-others-valid-low.svg',
+      set_medium: Assets.ICONS + 'wind_speed-others-valid-low.svg',
       set_high: Assets.ICONS + 'wind_speed-critical-valid.svg',
       set_critical: Assets.ICONS + 'wind_speed-critical-valid.svg',
       unknown: Assets.ICONS + 'wind_speed-clear-valid-unknown.svg',
