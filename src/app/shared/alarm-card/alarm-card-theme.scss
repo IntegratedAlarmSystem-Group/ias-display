@@ -16,8 +16,8 @@
   }
 
   .alarm-card-yellow {
-    border-color: mat-color($alarms, set-low-card);
-    background: mat-color($alarms, set-low-card);
+    border-color: mat-color($alarms, set-low);
+    background: mat-color($alarms, set-low);
     color: mat-color($alarms, set-card-dark-text);
     &.alarm-card-unreliable {
       color: mat-color($foreground, text);
@@ -25,13 +25,13 @@
   }
 
   .alarm-card-red {
-    border-color: mat-color($alarms, set-critical-card);
-    background: mat-color($alarms, set-critical-card);
+    border-color: mat-color($alarms, set-critical);
+    background: mat-color($alarms, set-critical);
   }
 
   .alarm-card-gray {
-    border-color: mat-color($alarms, maintenance-card);
-    background: mat-color($alarms, maintenance-card);
+    border-color: mat-color($alarms, maintenance);
+    background: mat-color($alarms, maintenance);
     color: mat-color($alarms, set-card-dark-text);
     &.alarm-card-unreliable {
       color: mat-color($foreground, text);
@@ -39,8 +39,8 @@
   }
 
   .alarm-card-blue {
-    border-color: mat-color($alarms, unknown-card);
-    background: mat-color($alarms, unknown-card);
+    border-color: mat-color($alarms, unknown);
+    background: mat-color($alarms, unknown);
   }
 
   .alarm-card-unreliable {
