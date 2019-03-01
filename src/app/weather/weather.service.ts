@@ -230,8 +230,8 @@ export class WeatherService {
     /** Set of Marker icons */
     this.markerImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'weather_station-valid-clear.svg',
-      set_low: Assets.ICONS + 'weather_station-valid-medium.svg',
-      set_medium: Assets.ICONS + 'weather_station-valid-medium.svg',
+      set_low: Assets.ICONS + 'weather_station-valid-low.svg',
+      set_medium: Assets.ICONS + 'weather_station-valid-low.svg',
       set_high: Assets.ICONS + 'weather_station-valid-critical.svg',
       set_critical: Assets.ICONS + 'weather_station-valid-critical.svg',
       unknown: Assets.ICONS + 'weather_station-valid-unknown.svg',
@@ -242,8 +242,8 @@ export class WeatherService {
     /** Set of Marker Unreliable icons */
     this.markerImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'weather_station-invalid-clear.svg',
-      set_low: Assets.ICONS + 'weather_station-invalid-medium.svg',
-      set_medium: Assets.ICONS + 'weather_station-invalid-medium.svg',
+      set_low: Assets.ICONS + 'weather_station-invalid-low.svg',
+      set_medium: Assets.ICONS + 'weather_station-invalid-low.svg',
       set_high: Assets.ICONS + 'weather_station-invalid-critical.svg',
       set_critical: Assets.ICONS + 'weather_station-invalid-critical.svg',
       unknown: Assets.ICONS + 'weather_station-invalid-unknown.svg',
