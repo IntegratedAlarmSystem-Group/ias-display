@@ -64,6 +64,9 @@ describe('AntennasSidebarComponent', () => {
     spyOn(alarmService, 'get').and.callFake(function(alarm_id: string) {
       return mockAlarms[alarm_id];
     });
+    spyOn(alarmService, 'getAlarm').and.callFake(function(config: AlarmConfig) {
+      return mockAlarms[config.alarm_id];
+    });
     fixture.detectChanges();
   });
 
@@ -115,6 +118,14 @@ describe('AntennasSidebarComponent', () => {
             'mockAlarm-0-child-1',
           ];
           expect(tableComponent.alarmsToDisplay).toEqual(expectedAlarmsToDisplay, 'The table did not receive the expected sub alarms');
+        });
+        it('or a TableComponent with no alarms if the selectedAntenna does not have children', () => {
+          component.selectedAntenna = mockAntennasConfig[2] as AlarmConfig;
+          fixture.detectChanges();
+          const tableComponent = fixture.debugElement.query(By.directive(TableComponent)).componentInstance;
+          expect(tableComponent).toBeTruthy('There is no TableComponent');
+          const expectedAlarmsToDisplay = [];
+          expect(tableComponent.alarmsToDisplay).toEqual(expectedAlarmsToDisplay, 'The table did not receive an empty list of sub alarms');
         });
       });
     });

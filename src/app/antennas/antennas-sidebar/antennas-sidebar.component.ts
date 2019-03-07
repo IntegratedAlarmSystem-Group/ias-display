@@ -57,16 +57,16 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
-  * Return the list of alarm IDs of the children of a given {@link AlarmConfig}
-  * @param {AlarmConfig} config the {@link AlarmConfig}
+  * Return the list of alarm IDs of the children of the selectedAntenna
   * @returns {string[]} list of alarm IDs
   */
-  getConfigChildrenAlarmIds(config: AlarmConfig): string[] {
-    const alarm_ids = [];
-    for (const child of config.children) {
-      alarm_ids.push(child.alarm_id);
+  getChildrenAlarmIds(): string[] {
+    const alarm = this.alarmService.getAlarm(this.selectedAntenna);
+    console.log('alarm.dependencies: ', alarm.dependencies);
+    if (!alarm) {
+      return [];
     }
-    return alarm_ids;
+    return alarm.dependencies;
   }
 
   /**
