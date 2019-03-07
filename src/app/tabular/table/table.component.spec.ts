@@ -134,6 +134,26 @@ describe('TableComponent', () => {
     });
   });
 
+  // TEST LOADING WHEN TABLE DISPLAYS NO ALARMS
+  describe('WHEN the Table shows no alarms', () => {
+
+    beforeEach(() => {
+      component.alarmsToDisplay = [];
+      fixture.detectChanges();
+    });
+
+    describe('AND the service processes all the alarms', () => {
+      it('THEN the DataSource of the Table contains no Alarms', () => {
+        // Act
+        alarmService.readAlarmMessagesList(alarms);
+        fixture.detectChanges();
+        // Assert
+        const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
+        expect(sortedData).toEqual([]);
+      });
+    });
+  });
+
   // TEST APPLICATION OF FILTER AND TOGGLE
   //
   // SET FILTER

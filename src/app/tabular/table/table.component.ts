@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   * Array that defines which alarms are going to be displayed in the table.
   * If it is not specified (empty array by default), all the alarms are shown.
   */
-  @Input() alarmsToDisplay = [];
+  @Input() alarmsToDisplay = null;
 
   /**
   * Array that defines the options for the number of element to diplay in each page of the table
@@ -161,7 +161,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   * @returns {Alarm[]} array of {@link Alarm} objects
   */
   getData(changes: string = 'all'): Alarm[] {
-    if (this.alarmsToDisplay.length <= 0) {
+    if (this.alarmsToDisplay === null || this.alarmsToDisplay === undefined) {
       return this.alarmService.alarmsArray;
 
     } else if (changes === 'all' || this.alarmsToDisplay.indexOf(changes) >= 0) {
