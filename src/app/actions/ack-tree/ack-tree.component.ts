@@ -191,6 +191,10 @@ export class AckTreeComponent implements OnInit, OnChanges {
       const subSubTree = this._getSubTree(childAlarm);
       subTree[childId] = subSubTree;
     }
+    const subTreeIsEmpty = Object.keys(subTree).length === 0;
+    if ( subTreeIsEmpty ) {
+      return null;
+    }
     return subTree;
   }
 

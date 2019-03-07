@@ -354,6 +354,120 @@ describe('GIVEN an AckTreeComponent, with a selectedAlarm that can change', () =
 
 });
 
+describe('GIVEN an AckTreeComponent with an Alarm with no children', () => {
+  let component: AckTreeComponent;
+  let fixture: ComponentFixture<AckTreeComponent>;
+  let alarmService: AlarmService;
+
+  function getSelectedAlarms(_: AlarmItemFlatNode[]): any[] {
+    const alarms = [];
+    component.checklistSelection.selected.forEach( (flatNode) => {
+      alarms.push(flatNode.item);
+    });
+    return alarms;
+  }
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AckTreeComponent
+      ],
+      imports: [
+        IasMaterialModule,
+        DataModule,
+      ],
+      providers: [
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AckTreeComponent);
+    component = fixture.componentInstance;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
+    const alarm = JSON.parse(JSON.stringify(mockAlarmData[0]));
+    alarm['dependencies'] = [];
+    alarmService.readAlarmMessagesList([alarm]);
+    component.selectedAlarm = alarmService.get(alarm['core_id']);
+    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('The component should retrieve a tree data with only 1 node', () => {
+    const treeData = component.getTreeData();
+    expect(treeData).toEqual( {'parent': null} );
+  });
+});
+
+describe('GIVEN an AckTreeComponent with an Alarm whose children are all acknowledged', () => {
+  let component: AckTreeComponent;
+  let fixture: ComponentFixture<AckTreeComponent>;
+  let alarmService: AlarmService;
+
+  function getSelectedAlarms(_: AlarmItemFlatNode[]): any[] {
+    const alarms = [];
+    component.checklistSelection.selected.forEach( (flatNode) => {
+      alarms.push(flatNode.item);
+    });
+    return alarms;
+  }
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AckTreeComponent
+      ],
+      imports: [
+        IasMaterialModule,
+        DataModule,
+      ],
+      providers: [
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AckTreeComponent);
+    component = fixture.componentInstance;
+    alarmService = fixture.debugElement.injector.get(AlarmService);
+    const myMockAlarms = [];
+    for (const alarm of mockAlarmData) {
+      if (alarm['core_id'] === 'parent') {
+        myMockAlarms.push(JSON.parse(JSON.stringify(alarm)));
+        continue;
+      }
+      const myAlarm = JSON.parse(JSON.stringify(alarm));
+      myAlarm['ack'] = true;
+      myMockAlarms.push(myAlarm);
+    }
+    alarmService.readAlarmMessagesList(myMockAlarms);
+    component.selectedAlarm = alarmService.get(myMockAlarms[0]['core_id']);
+    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('The component should retrieve the tree data just like if the alarm had no dependencies', () => {
+    const treeData = component.getTreeData();
+    expect(treeData).toEqual( {'parent': null} );
+  });
+});
+
 /**
  * Mock host component for the alarm tile to check behaviour on change
  */
