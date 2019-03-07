@@ -69,54 +69,6 @@ describe('AlarmCardComponent', () => {
     expect(content.innerHTML).toEqual('malfunctioning_un...');
   });
 
-  it('should display an empty text for the priority of a cleared alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[4]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    expect(content.innerHTML).toEqual('');
-  });
-
-  it('should display an uppercase text for the priority of a set low alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[3]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('LOW');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set medium alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[2]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('MEDIUM');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set high alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[1]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card > .alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('HIGH');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set critical alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card > .alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('CRITICAL');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
   it('should display the color of the alarms according to each alarm properties', () => {
     for (const alarm of MockAlarms) {
       component.alarm = Alarm.asAlarm(alarm);
