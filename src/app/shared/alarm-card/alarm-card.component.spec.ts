@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmCardComponent } from './alarm-card.component';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -34,7 +35,8 @@ describe('AlarmCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmCardComponent,  AlarmTooltipComponent],
+      declarations: [
+        AlarmCardComponent,  AlarmTooltipComponent, AlarmLabelComponent],
       imports: [ NgbModule ]
     })
     .compileComponents();
