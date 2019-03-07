@@ -62,7 +62,6 @@ export class AntennasSidebarComponent implements OnInit {
   */
   getChildrenAlarmIds(): string[] {
     const alarm = this.alarmService.getAlarm(this.selectedAntenna);
-    console.log('alarm.dependencies: ', alarm.dependencies);
     if (!alarm) {
       return [];
     }
