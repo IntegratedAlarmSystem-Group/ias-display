@@ -11,26 +11,7 @@ export const mockAntennasConfig =  [
       'view': 'antennas',
       'placemark': 'mockAlarm-0',
       'group': 'antennas',
-      'children': [
-        {
-          'alarm_id': 'mockAlarm-0-child-0',
-          'custom_name': 'antenna-0-child-0',
-          'type': 'antenna',
-          'view': 'antennas',
-          'placemark': '',
-          'group': 'antennas',
-          'children': [],
-        },
-        {
-          'alarm_id': 'mockAlarm-0-child-1',
-          'custom_name': 'antenna-0-child-1',
-          'type': 'antenna',
-          'view': 'antennas',
-          'placemark': '',
-          'group': 'antennas',
-          'children': [],
-        },
-      ],
+      'children': []
     },
     {
       'alarm_id': 'mockAlarm-1',
@@ -48,27 +29,7 @@ export const mockAntennasConfig =  [
       'view': 'antennas',
       'placemark': 'mockAlarm-2',
       'group': 'antennas',
-      // 'children': []
-      'children': [
-        {
-          'alarm_id': 'mockAlarm-2-child-0',
-          'custom_name': 'antenna-2-child-0',
-          'type': 'antenna',
-          'view': 'antennas',
-          'placemark': '',
-          'group': 'antennas',
-          'children': [],
-        },
-        {
-          'alarm_id': 'mockAlarm-2-child-1',
-          'custom_name': 'antenna-2-child-1',
-          'type': 'antenna',
-          'view': 'antennas',
-          'placemark': '',
-          'group': 'antennas',
-          'children': [],
-        },
-      ],
+      'children': []
     },
     {
       'alarm_id': 'mockAlarm-3',

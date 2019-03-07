@@ -15,7 +15,7 @@ import { AlarmConfig } from '../../data/alarm-config';
 import { mockAntennasConfig, mockDevicesConfig, mockAlarms } from '../tests_fixtures';
 
 
-fdescribe('AntennasSidebarComponent', () => {
+describe('AntennasSidebarComponent', () => {
   let component: AntennasSidebarComponent;
   let fixture: ComponentFixture<AntennasSidebarComponent>;
   let antennasService: AntennasService;
