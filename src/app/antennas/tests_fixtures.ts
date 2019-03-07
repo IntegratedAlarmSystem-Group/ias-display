@@ -69,7 +69,16 @@ export const mockAntennasConfig =  [
           'children': [],
         },
       ],
-    }
+    },
+    {
+      'alarm_id': 'mockAlarm-3',
+      'custom_name': 'antenna-3',
+      'type': 'antenna',
+      'view': 'antennas',
+      'placemark': 'mockAlarm-3',
+      'group': 'antennas',
+      'children': [],
+    },
   ];
 
 export const mockDevicesConfig = [
@@ -98,7 +107,7 @@ export const mockAlarms = {
     'can_shelve': true,
     'ack': false,
     'shelved': false,
-    'dependencies': ['mockAlarm-0-device'],
+    'dependencies': ['mockAlarm-0-child-0', 'mockAlarm-0-child-1'],
   }),
   'mockAlarm-1': Alarm.asAlarm({
     'value': 0,
@@ -114,7 +123,7 @@ export const mockAlarms = {
     'can_shelve': true,
     'ack': false,
     'shelved': false,
-    'dependencies': [],
+    'dependencies': ['mockAlarm-1-child-0', 'mockAlarm-1-child-1'],
   }),
   'mockAlarm-2': Alarm.asAlarm({
     'value': 0,
