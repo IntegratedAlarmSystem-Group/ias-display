@@ -15,7 +15,7 @@
     border-color: transparent;
     background: transparent;
     &.alarm-tile-unreliable {
-      border-color: #00A090;
+      border-color: mat-color($alarms, clear);
     }
   }
 

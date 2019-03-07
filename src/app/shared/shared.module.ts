@@ -12,6 +12,7 @@ import { AlarmTooltipComponent } from './alarm-tooltip/alarm-tooltip.component';
 import { AlarmCardComponent } from './alarm-card/alarm-card.component';
 import { AlarmTileComponent } from './alarm-tile/alarm-tile.component';
 import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
+import { AlarmLabelComponent } from './alarm-label/alarm-label.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -38,6 +39,7 @@ import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
     AlarmCardComponent,
     AlarmTileComponent,
     AlarmInfoComponent,
+    AlarmLabelComponent,
   ],
   exports: [
     AlarmComponent,
@@ -46,6 +48,7 @@ import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
     AlarmCardComponent,
     AlarmTileComponent,
     AlarmInfoComponent,
+    AlarmLabelComponent,
   ],
   entryComponents: [
     AlarmComponent,

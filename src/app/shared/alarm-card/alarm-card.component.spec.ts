@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmCardComponent } from './alarm-card.component';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -34,7 +35,8 @@ describe('AlarmCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmCardComponent,  AlarmTooltipComponent],
+      declarations: [
+        AlarmCardComponent,  AlarmTooltipComponent, AlarmLabelComponent],
       imports: [ NgbModule ]
     })
     .compileComponents();
@@ -81,7 +83,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('low');
+    expect(content.innerHTML).toEqual('LOW');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -91,7 +93,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('medium');
+    expect(content.innerHTML).toEqual('MEDIUM');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -101,7 +103,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card > .alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('high');
+    expect(content.innerHTML).toEqual('HIGH');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -111,7 +113,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card > .alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('critical');
+    expect(content.innerHTML).toEqual('CRITICAL');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
