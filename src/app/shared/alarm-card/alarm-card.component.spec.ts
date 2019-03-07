@@ -81,7 +81,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('low');
+    expect(content.innerHTML).toEqual('LOW');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -91,7 +91,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('medium');
+    expect(content.innerHTML).toEqual('MEDIUM');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -101,7 +101,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card > .alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('high');
+    expect(content.innerHTML).toEqual('HIGH');
     expect(styles.textTransform).toEqual('uppercase');
   });
 
@@ -111,7 +111,7 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card > .alarm-card-content > .alarm-priority');
     const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('critical');
+    expect(content.innerHTML).toEqual('CRITICAL');
     expect(styles.textTransform).toEqual('uppercase');
   });
 

@@ -130,7 +130,7 @@ export class AlarmCardComponent implements OnInit {
     const priorityText: string = alarmValue
       .replace('cleared', '')
       .replace('set_', '');
-    return priorityText;
+    return priorityText.toUpperCase();
   }
 
 }
