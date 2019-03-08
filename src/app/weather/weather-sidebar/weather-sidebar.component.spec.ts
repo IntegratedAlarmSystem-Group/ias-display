@@ -151,12 +151,7 @@ describe('WeatherSidebarComponent', () => {
                   expect(alarmComponent.imagesUnreliable).toEqual(mockImagesSets[index + '-unreliable']);
                 }
 
-                const statusView = columns[1].query(By.directive(StatusViewComponent)).componentInstance;
-                expect(statusView).toBeTruthy();
-                expect(statusView.alarm).toEqual(expectedAlarm);
-                expect(statusView.showActionBadges).toEqual(false);
-
-                const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
+                const buttons = columns[1].query(By.directive(ButtonsComponent)).componentInstance;
                 expect(buttons).toBeTruthy();
                 expect(buttons.alarm).toEqual(expectedAlarm);
               }
