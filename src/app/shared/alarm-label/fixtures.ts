@@ -26,7 +26,7 @@ export const expectedClassesWhenShowText = {
   'malfunctioning_low_unreliable': ['alarm-label-low', 'unreliable'],
   'malfunctioning_clear_unreliable': ['alarm-label-clear', 'hide-label', 'unreliable'],
   'shelved': ['alarm-label-clear',  'hide-label'],
-  'shelved_unreliable': ['alarm-label-clear', 'hide-label', 'unreliable'],
+  'shelved_unreliable': ['alarm-label-clear', 'hide-label'],
 };
 
 export const expectedClassesWhenHiddenText = {
@@ -50,14 +50,14 @@ export const expectedClassesWhenHiddenText = {
   'clear_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
   'unknown_low_unreliable': ['alarm-label-low', 'unreliable', 'hide-text'],
   'unknown_clear_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
-  'maintenance_low_unreliable': ['alarm-label-low', 'unreliable'],
+  'maintenance_low_unreliable': ['alarm-label-low', 'unreliable', 'hide-text'],
   'maintenance_clear_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
   'shutteddown_low_unreliable': ['alarm-label-low', 'unreliable', 'hide-text'],
   'shutteddown_clear_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
   'malfunctioning_low_unreliable': ['alarm-label-low', 'unreliable', 'hide-text'],
   'malfunctioning_clear_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
   'shelved': ['alarm-label-clear', 'hide-text'],
-  'shelved_unreliable': ['alarm-label-clear', 'unreliable', 'hide-text'],
+  'shelved_unreliable': ['alarm-label-clear', 'hide-text'],
 };
 
 /** Set of mock Alarms for the tests */
