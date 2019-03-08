@@ -382,6 +382,7 @@ export class SandboxAlarmLabelComponent implements OnInit {
               [imagesUnreliable]="alarmIconsUnreliableSet"
               [labelMode]="labelMode"
               [size]="size"
+              [labelLocation]="labelLocation"
             ></app-alarm>
             <span class="sandbox-marker">+</span>
           </div>
@@ -408,6 +409,9 @@ export class SandboxAlarmComponent implements OnInit {
 
   /** Size category */
   @Input() size = 'md';
+
+  /** Label location */
+  @Input() labelLocation = 'right';
 
   getMockAlarm(
     value: number,
@@ -443,6 +447,7 @@ export class SandboxAlarmComponent implements OnInit {
    * Executed after the component is instantiated.
    */
   ngOnInit() {
+    console.log(this.labelLocation);
     this.defineAlarmsAndImages();
     this.generateAlarmsList();
   }

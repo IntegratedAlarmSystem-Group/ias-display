@@ -9,6 +9,10 @@ $status-cem: 1*$cem;
 
   .alarm-label-container {
     padding-left: 6px;
+    &.bottom {
+      margin: auto;
+      padding: 0;
+    }
   }
 
   .icon {

@@ -9,7 +9,16 @@
     <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
   </ng-template>
 
-  <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
+  <div fxLayout="column">
+    <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
+    <div *ngIf="(labelMode !== 'hidden') && (labelLocation === 'bottom')" class="alarm-label-container bottom">
+      <app-alarm-label
+        [alarm]="alarm"
+        [showText]="showPriorityLevelText()"
+        [size]="size"
+      ></app-alarm-label>
+    </div>
+  </div>
 
   <ng-template #textAlarm>
     <div [ngClass]="this.getTextClass()">
@@ -21,6 +30,7 @@
     <div class="icon">
       <img class="alarm-icon" src="{{ getImage() }}"/>
     </div>
+
   </ng-template>
 
   <div class="badges" [ngClass]="{'hidden': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">
@@ -41,7 +51,7 @@
     </ng-template>
   </div>
 
-  <div *ngIf="labelMode !== 'hidden'" class="alarm-label-container">
+  <div *ngIf="(labelMode !== 'hidden') && (labelLocation === 'right')" class="alarm-label-container">
     <app-alarm-label
       [alarm]="alarm"
       [showText]="showPriorityLevelText()"

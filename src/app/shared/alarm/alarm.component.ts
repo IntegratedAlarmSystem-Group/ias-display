@@ -95,9 +95,19 @@ export class AlarmComponent implements OnInit {
   @Input() tooltipDirection = 'right';
 
   /**
+   * Defines the direction of the label
+   */
+  @Input() labelLocation = 'right';
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
+
+  /**
+   * Available locations for the label component
+   */
+  private labelLocationOptions = ['right', 'bottom'];
 
   /**
   * Instantiates the component
@@ -110,6 +120,9 @@ export class AlarmComponent implements OnInit {
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
+    }
+    if (this.labelLocationOptions.indexOf(this.labelLocation) < 0) {
+      this.labelLocation = 'right';
     }
   }
 

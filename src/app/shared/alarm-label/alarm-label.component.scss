@@ -48,7 +48,7 @@ $lg-cem: 1.4*$cem;
   .priority-text {
     font-size: $xs-cem;
     &.hide-text {
-      width: 20px;
+      width: 16px;
     }
   }
 }
@@ -59,7 +59,8 @@ $lg-cem: 1.4*$cem;
     font-size: $sm-cem;
     min-width: 40px;
     &.hide-text {
-      width: 40px;
+      min-width: unset;
+      width: 20px !important;
     }
   }
 }
@@ -71,7 +72,7 @@ $lg-cem: 1.4*$cem;
     min-width: 78px;
     &.hide-text {
       min-width: unset;
-      width: 40px !important;
+      width: 30px !important;
     }
   }
 }
