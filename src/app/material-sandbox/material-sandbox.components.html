@@ -1,0 +1,25 @@
+<div class="sandbox-container" style="padding: 20px;">
+  <div class="sandbox-material-palettes">
+    <app-material-colors [palette]="'Primary'"></app-material-colors>
+    <app-material-colors [palette]="'Accent'"></app-material-colors>
+    <app-material-colors [palette]="'Warn'"></app-material-colors>
+    <app-material-colors [palette]="'Background'"></app-material-colors>
+    <app-material-colors [palette]="'Foreground'"></app-material-colors>
+  <div>
+  <div class="sandbox-material-components" fxLayout="row wrap" fxLayoutGap="40px">
+    <div>
+      <app-material-sample-card></app-material-sample-card>
+    </div>
+    <div>
+      <app-material-buttons-colors></app-material-buttons-colors>
+    </div>
+    <div>
+      <app-material-toggle-colors></app-material-toggle-colors>
+    </div>
+  </div>
+  <div class="sandbox-ias-components">
+    <app-sandbox-alarm-label></app-sandbox-alarm-label>
+    <app-sandbox-alarm></app-sandbox-alarm>
+    <app-sandbox-alarm-tile></app-sandbox-alarm-tile>
+  </div>
+</div>
