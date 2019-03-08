@@ -217,4 +217,19 @@ export class AlarmComponent implements OnInit {
   showAsShelved(): boolean {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
+
+  /**
+   * Check if the alarm should display the priority text in the related label
+   * @return {boolean} True if mode is 'text' else False
+   */
+   showPriorityLevelText(): boolean {
+     if (this.labelMode === 'text') {
+       return true;
+     } else if (this.labelMode === 'line') {
+       return false;
+     } else {
+       return false;
+     }
+   }
+
 }

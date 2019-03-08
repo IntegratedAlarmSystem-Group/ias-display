@@ -18,6 +18,7 @@ $lg-cem: 1.4*$cem;
   font-weight: bold;
   &.hide-text {
     visibility: hidden;
+    line-height: 0.2em !important;
   }
 }
 
@@ -46,6 +47,9 @@ $lg-cem: 1.4*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $xs-cem;
+    &.hide-text {
+      width: 20px;
+    }
   }
 }
 
@@ -54,6 +58,9 @@ $lg-cem: 1.4*$cem;
   .priority-text {
     font-size: $sm-cem;
     min-width: 40px;
+    &.hide-text {
+      width: 40px;
+    }
   }
 }
 
@@ -62,6 +69,10 @@ $lg-cem: 1.4*$cem;
   .priority-text {
     font-size: $md-cem;
     min-width: 78px;
+    &.hide-text {
+      min-width: unset;
+      width: 40px !important;
+    }
   }
 }
 
@@ -69,5 +80,8 @@ $lg-cem: 1.4*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $lg-cem;
+    &.hide-text {
+      width: 40px;
+    }
   }
 }

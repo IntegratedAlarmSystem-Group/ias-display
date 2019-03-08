@@ -44,7 +44,7 @@
   <div *ngIf="labelMode !== 'hidden'" class="alarm-label-container">
     <app-alarm-label
       [alarm]="alarm"
-      [showText]="labelMode === 'text'"
+      [showText]="showPriorityLevelText()"
       [size]="size"
     ></app-alarm-label>
   </div>
