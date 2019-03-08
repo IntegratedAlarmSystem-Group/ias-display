@@ -6,7 +6,7 @@ import { MockAlarms } from './fixtures';
 import { expectedClassesWhenShowText } from './fixtures';
 import { expectedClassesWhenHiddenText } from './fixtures';
 
-fdescribe('AlarmLabelComponent: ', () => {
+describe('AlarmLabelComponent: ', () => {
   let component: AlarmLabelComponent;
   let fixture: ComponentFixture<AlarmLabelComponent>;
 
