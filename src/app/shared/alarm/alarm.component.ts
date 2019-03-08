@@ -79,6 +79,12 @@ export class AlarmComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
+   * Defines wether or not the component will display the text of the label
+   * with the alarm priority
+   */
+  @Input() showLabelText = true;
+
+  /**
    * Defines the size of the component, can be either of the options defined by {@link sizeOptions}
    */
   @Input() size = 'md';

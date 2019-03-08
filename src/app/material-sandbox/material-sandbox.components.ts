@@ -360,7 +360,9 @@ export class SandboxAlarmLabelComponent implements OnInit {
   selector: 'app-sandbox-alarm',
   template: `
     <div style="padding: 20px;">
-      <div class="sandbox-title"> {{componentName}} </div>
+      <div class="sandbox-title">
+        {{componentName}} - showLabelText: {{showLabelText}} - size: {{size}}
+      </div>
       <div style="padding: 20px;" fxLayout="row wrap" fxLayoutGap="40px">
         <div class="sandbox-alarm-container" *ngFor="let alarm of alarms">
           <div class="sandbox-alarm-values">
@@ -378,6 +380,8 @@ export class SandboxAlarmLabelComponent implements OnInit {
               [alarm]="alarm"
               [images]="alarmIconsSet"
               [imagesUnreliable]="alarmIconsUnreliableSet"
+              [showLabelText]="showLabelText"
+              [size]="size"
             ></app-alarm>
             <span class="sandbox-marker">+</span>
           </div>
@@ -399,6 +403,11 @@ export class SandboxAlarmComponent implements OnInit {
   /** Set of alarm unreliable icons */
   public alarmIconsUnreliableSet: AlarmImageSet;
 
+  /** Show or hide label text */
+  @Input() showLabelText = true;
+
+  /** Size category */
+  @Input() size = 'md';
 
   getMockAlarm(
     value: number,
@@ -443,9 +452,9 @@ export class SandboxAlarmComponent implements OnInit {
    */
   generateAlarmsList() {
     for (const shelved of [false]) {
-      for (const value of [0, 1, 2, 3, 4]) {
-        for (const validity of [0, 1]) {
-          for (const mode of [0, 1, 2, 3, 4, 5, 6, 7, 8]) {
+      for (const value of [0, 4]) {
+        for (const validity of [1]) {
+          for (const mode of [5, 7, 8]) {
             const alarm = this.getMockAlarm(
               value, 'test', mode, validity, false, shelved);
             this.alarms.push(alarm);
@@ -578,19 +587,19 @@ export class SandboxAlarmTileComponent implements OnInit {
   /**
    * Alarms generation to check the component
    */
-  generateAlarmsList() {
-    for (const shelved of [false]) {
-      for (const value of [0, 1, 2, 3, 4]) {
-        for (const validity of [0, 1]) {
-          for (const mode of [0, 1, 2, 3, 4, 5, 6, 7, 8]) {
-            const alarm = this.getMockAlarm(
-              value, 'test', mode, validity, false, shelved);
-            this.alarms.push(alarm);
-          }
-        }
-      }
-    }
-  }
+   generateAlarmsList() {
+     for (const shelved of [false]) {
+       for (const value of [0, 1]) {
+         for (const validity of [1]) {
+           for (const mode of [5, 7, 8]) {
+             const alarm = this.getMockAlarm(
+               value, 'test', mode, validity, false, shelved);
+             this.alarms.push(alarm);
+           }
+         }
+       }
+     }
+   }
 
   /**
   * Define the alarms that the component should listen to and their respective icons

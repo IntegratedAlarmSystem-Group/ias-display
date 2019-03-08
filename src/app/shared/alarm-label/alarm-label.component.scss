@@ -1,19 +1,76 @@
-.alarm-label {
-  text-transform: uppercase;
-  padding: 2px 2px;
-  border-radius: 2px;
-  line-height: 1em;
-  display: inline;
-}
+$cem: 12px;
+$xs-cem: 1*$cem;
+$sm-cem: 1.2*$cem;
+$md-cem: 1.6*$cem;
+$lg-cem: 3.0*$cem;
 
 .no-padding {
   padding: 0;
 }
 
 .hide-label {
-  display: none;
+  visibility: hidden;
+  border: 1px solid red;
+}
+
+.priority-text {
+  margin: auto;
+  &.hide-text {
+    visibility: hidden;
+  }
 }
 
 .unreliable {
   padding: 2px 2px;
+}
+
+.alarm-label {
+  text-transform: uppercase;
+  padding: 2px 2px;
+  border-radius: 2px;
+  line-height: 1em;
+  display: inline-flex;
+  min-width: 78px;
+
+  &.hide-text {
+    line-height: 0.2em;
+  }
+
+  .alarm-label-content {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+.alarm-label-xs {
+  @extend .alarm-label;
+  .priority-text {
+    font-size: $xs-cem;
+    color: red;
+  }
+}
+
+.alarm-label-sm {
+  @extend .alarm-label;
+  .priority-text {
+    font-size: $sm-cem;
+    color: blue;
+  }
+}
+
+.alarm-label-md {
+  @extend .alarm-label;
+  .priority-text {
+    font-size: $md-cem;
+    color: green;
+  }
+}
+
+.alarm-label-lg {
+  @extend .alarm-label;
+  .priority-text {
+    font-size: $lg-cem;
+    color: cyan;
+  }
 }

@@ -18,6 +18,11 @@ export class AlarmLabelComponent implements OnInit {
   @Input() alarm: Alarm;
 
   /**
+  * Size options
+  */
+  @Input() size = 'md';
+
+  /**
   * Defines if the priority text should be displayed (if set state for the alarm)
   */
   @Input() showText = true;
@@ -37,6 +42,12 @@ export class AlarmLabelComponent implements OnInit {
   */
   noPaddingOptions = [true, false];
 
+  /**
+  * Size Options
+  */
+  sizeOptions = ['xs', 'sm', 'md', 'lg'];
+
+
   constructor() { }
 
   ngOnInit() {
@@ -45,6 +56,9 @@ export class AlarmLabelComponent implements OnInit {
     }
     if (this.showTextOptions.indexOf(this.showText) < 0) {
       this.noPadding = false;
+    }
+    if (this.sizeOptions.indexOf(this.size) < 0) {
+      this.size = 'md';
     }
   }
 
@@ -55,7 +69,6 @@ export class AlarmLabelComponent implements OnInit {
   getPriorityText(): string {
     const alarmValue: string = this.alarm.alarmValue;
     const priorityText: string = alarmValue
-      .replace('cleared', '')
       .replace('set_', '');
     return priorityText.toUpperCase();
   }
@@ -94,8 +107,38 @@ export class AlarmLabelComponent implements OnInit {
     if (this.noPadding === true) {
       result.push('no-padding');
     }
+    if (this.showText === false) {
+      result.push('hide-text');
+    }
     return result;
   }
+
+  /**
+  * Defines the CSS classes to use depending on the Alarm status
+  * @returns {string[]} array with names of the classes to use
+  */
+  getPriorityTextClass(): string[] {
+    const result = [];
+    if (!this.alarm) {
+      result.push('hide-text');
+      return result;
+    }
+    if (this.showText === false) {
+      result.push('hide-text');
+    }
+    return result;
+  }
+
+  /**
+  * Defines the CSS classes to use depending on the Alarm status
+  * @returns {string[]} array with names of the classes to use
+  */
+  getSizeClass(): string[] {
+    const result = [];
+    result.push('alarm-label-' + this.size);
+    return result;
+  }
+
 
 
 }

@@ -1,4 +1,6 @@
-<div *ngIf="alarm" class="alarm-label-container">
-  <div class="alarm-label" [ngClass]="getClass()"
-  >{{this.getPriorityText()}}</div>
+<div *ngIf="alarm" class="alarm-label" [ngClass]="getSizeClass()">
+  <div class="alarm-label-content" [ngClass]="getClass()">
+    <div class="priority-text"
+      [ngClass]="getPriorityTextClass()">{{this.getPriorityText()}}</div>
+  </div>
 </div>

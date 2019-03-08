@@ -7,6 +7,10 @@ $status-cem: 1*$cem;
 
 .alarm-component {
 
+  .alarm-label-container {
+    padding-left: 14px;
+  }
+
   .icon {
     display: inline-block;
     vertical-align: middle;
