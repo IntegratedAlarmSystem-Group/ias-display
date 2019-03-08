@@ -41,7 +41,7 @@
     </ng-template>
   </div>
 
-  <div class="alarm-label-container">
+  <div *ngIf="labelMode !== 'hidden'" class="alarm-label-container">
     <app-alarm-label
       [alarm]="alarm"
       [showText]="labelMode === 'text'"
