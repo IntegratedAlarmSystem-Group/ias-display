@@ -361,7 +361,7 @@ export class SandboxAlarmLabelComponent implements OnInit {
   template: `
     <div style="padding: 20px;">
       <div class="sandbox-title">
-        {{componentName}} - showLabelText: {{showLabelText}} - size: {{size}}
+        {{componentName}} - labelMode: {{labelMode}} - size: {{size}}
       </div>
       <div style="padding: 20px;" fxLayout="row wrap" fxLayoutGap="40px">
         <div class="sandbox-alarm-container" *ngFor="let alarm of alarms">
@@ -380,7 +380,7 @@ export class SandboxAlarmLabelComponent implements OnInit {
               [alarm]="alarm"
               [images]="alarmIconsSet"
               [imagesUnreliable]="alarmIconsUnreliableSet"
-              [showLabelText]="showLabelText"
+              [labelMode]="labelMode"
               [size]="size"
             ></app-alarm>
             <span class="sandbox-marker">+</span>
@@ -404,7 +404,7 @@ export class SandboxAlarmComponent implements OnInit {
   public alarmIconsUnreliableSet: AlarmImageSet;
 
   /** Show or hide label text */
-  @Input() showLabelText = true;
+  @Input() labelMode = 'text';
 
   /** Size category */
   @Input() size = 'md';
