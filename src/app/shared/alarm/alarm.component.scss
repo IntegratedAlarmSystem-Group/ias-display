@@ -9,6 +9,11 @@ $status-cem: 1*$cem;
 
   .alarm-label-container {
     padding-left: 6px;
+    &.bottom {
+      margin: auto;
+      padding:0;
+      line-height: 0;
+    }
   }
 
   .icon {
@@ -68,6 +73,12 @@ $status-cem: 1*$cem;
     width: 8*$xs-cem;
   }
 
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.2em;
+    }
+  }
+
 }
 
 .alarm-component-sm {
@@ -82,10 +93,7 @@ $status-cem: 1*$cem;
 
   .alarm-label-container {
     &.bottom {
-      margin: auto;
-      padding: 0;
-      line-height: 0.5em;
-      border: 2px solid red;
+      padding-top: 0.2em;
     }
   }
 
@@ -100,6 +108,12 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$md-cem;
   }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.2em;
+    }
+  }
 }
 
 .alarm-component-lg {
@@ -111,6 +125,12 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$lg-cem;
     margin-left: 10px;
+  }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.24em;
+    }
   }
 }
 
