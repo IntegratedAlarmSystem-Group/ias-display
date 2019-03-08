@@ -9,10 +9,6 @@ $status-cem: 1*$cem;
 
   .alarm-label-container {
     padding-left: 6px;
-    &.bottom {
-      margin: auto;
-      padding: 0;
-    }
   }
 
   .icon {
@@ -71,6 +67,7 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$xs-cem;
   }
+
 }
 
 .alarm-component-sm {
@@ -82,6 +79,16 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$sm-cem;
   }
+
+  .alarm-label-container {
+    &.bottom {
+      margin: auto;
+      padding: 0;
+      line-height: 0.5em;
+      border: 2px solid red;
+    }
+  }
+
 }
 
 .alarm-component-md {
