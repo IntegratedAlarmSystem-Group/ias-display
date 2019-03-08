@@ -1,11 +1,11 @@
-$cem: 12px;
-$xs-cem: 1*$cem;
-$sm-cem: 1.2*$cem;
+$cem: 8px;
+$xs-cem: 1.2*$cem;
+$sm-cem: 10px;
 $md-cem: 1.6*$cem;
 $lg-cem: 3.0*$cem;
 
 .no-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .hide-label {
@@ -21,23 +21,21 @@ $lg-cem: 3.0*$cem;
 }
 
 .unreliable {
-  padding: 2px 2px;
+  padding: 2px 2px !important;
 }
 
 .alarm-label {
   text-transform: uppercase;
-  padding: 2px 2px;
-  border-radius: 2px;
   line-height: 1em;
   display: inline-flex;
-  min-width: 78px;
-
+  
   &.hide-text {
     line-height: 0.2em;
   }
 
   .alarm-label-content {
-    width: 100%;
+    border-radius: 2px;
+    padding: 2px 2px;
     text-align: center;
   }
 
@@ -56,6 +54,7 @@ $lg-cem: 3.0*$cem;
   .priority-text {
     font-size: $sm-cem;
     color: blue;
+    min-width: 40px;
   }
 }
 
@@ -64,6 +63,7 @@ $lg-cem: 3.0*$cem;
   .priority-text {
     font-size: $md-cem;
     color: green;
+    min-width: 78px;
   }
 }
 
