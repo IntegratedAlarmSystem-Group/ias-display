@@ -1,8 +1,8 @@
-$cem: 8px;
-$xs-cem: 1.2*$cem;
-$sm-cem: 10px;
-$md-cem: 1.6*$cem;
-$lg-cem: 3.0*$cem;
+$cem: 10px;
+$xs-cem: 0.8*$cem;
+$sm-cem: 1.0*$cem;
+$md-cem: 1.4*$cem;
+$lg-cem: 1.4*$cem;
 
 .no-padding {
   padding: 0 !important;
@@ -15,6 +15,7 @@ $lg-cem: 3.0*$cem;
 
 .priority-text {
   margin: auto;
+  font-weight: bold;
   &.hide-text {
     visibility: hidden;
   }
@@ -28,7 +29,7 @@ $lg-cem: 3.0*$cem;
   text-transform: uppercase;
   line-height: 1em;
   display: inline-flex;
-  
+
   &.hide-text {
     line-height: 0.2em;
   }
@@ -45,7 +46,6 @@ $lg-cem: 3.0*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $xs-cem;
-    color: red;
   }
 }
 
@@ -53,7 +53,6 @@ $lg-cem: 3.0*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $sm-cem;
-    color: blue;
     min-width: 40px;
   }
 }
@@ -62,7 +61,6 @@ $lg-cem: 3.0*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $md-cem;
-    color: green;
     min-width: 78px;
   }
 }
@@ -71,6 +69,5 @@ $lg-cem: 3.0*$cem;
   @extend .alarm-label;
   .priority-text {
     font-size: $lg-cem;
-    color: cyan;
   }
 }
