@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm, Value } from '../../data/alarm';
 
 
 /**
@@ -67,8 +67,7 @@ export class AlarmLabelComponent implements OnInit {
   getClass(): string[] {
     const result = [];
     if (!this.alarm) {
-      result.push('alarm-label-blue');
-      result.push('alarm-label-unreliable');
+      result.push('hide-label');
       return result;
     }
     if (this.alarm.shelved === true) {
@@ -89,12 +88,12 @@ export class AlarmLabelComponent implements OnInit {
         result.push('hide-label');
       }
     }
+    if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
+      result.push('unreliable');
+    }
     if (this.noPadding === true) {
       result.push('no-padding');
     }
-    // if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
-    //   result.push('unreliable');
-    // }
     return result;
   }
 

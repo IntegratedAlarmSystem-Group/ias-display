@@ -3,39 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmLabelComponent } from './alarm-label.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
+import { expectedClassesWhenShowText } from './fixtures';
+import { expectedClassesWhenHiddenText } from './fixtures';
 
-const expected_classes = {
-  'critical': ['alarm-label-critical'],
-  'high': ['alarm-label-high'],
-  'medium': ['alarm-label-medium'],
-  'low': ['alarm-label-low'],
-  'clear': ['alarm-label-clear', 'hide-label'],
-  'unknown_low': ['alarm-label-low'],
-  'unknown_clear': ['alarm-label-clear', 'hide-label'],
-  'maintenance_low': ['alarm-label-low'],
-  'maintenance_clear': ['alarm-label-clear', 'hide-label'],
-  'shutteddown_low': ['alarm-label-low'],
-  'shutteddown_clear': ['alarm-label-clear', 'hide-label'],
-  'malfunctioning_low': ['alarm-label-low'],
-  'malfunctioning_clear': ['alarm-label-clear', 'hide-label'],
-  'critical_unreliable': ['alarm-label-critical'],
-  'high_unreliable': ['alarm-label-high'],
-  'medium_unreliable': ['alarm-label-medium'],
-  'low_unreliable': ['alarm-label-low'],
-  'clear_unreliable': ['alarm-label-clear', 'hide-label'],
-  'unknown_low_unreliable': ['alarm-label-low'],
-  'unknown_clear_unreliable': ['alarm-label-clear', 'hide-label'],
-  'maintenance_low_unreliable': ['alarm-label-low'],
-  'maintenance_clear_unreliable': ['alarm-label-clear', 'hide-label'],
-  'shutteddown_low_unreliable': ['alarm-label-low'],
-  'shutteddown_clear_unreliable': ['alarm-label-clear', 'hide-label'],
-  'malfunctioning_low_unreliable': ['alarm-label-low'],
-  'malfunctioning_clear_unreliable': ['alarm-label-clear', 'hide-label'],
-  'shelved': ['alarm-label-clear',  'hide-label'],
-  'shelved_unreliable': ['alarm-label-clear', 'hide-label'],
-};
-
-describe('AlarmLabelComponent', () => {
+describe('AlarmLabelComponent: ', () => {
   let component: AlarmLabelComponent;
   let fixture: ComponentFixture<AlarmLabelComponent>;
 
@@ -49,12 +20,18 @@ describe('AlarmLabelComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlarmLabelComponent);
     component = fixture.componentInstance;
-    component.showText = true;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display an empty text for the priority of a cleared alarm', () => {
+    component.alarm = Alarm.asAlarm(MockAlarms[4]);
+    fixture.detectChanges();
+    const content = fixture.nativeElement.querySelector('.alarm-label');
+    expect(content.innerHTML).toEqual('');
   });
 
   it('should display an uppercase text for the priority of a set low alarm', () => {
@@ -93,12 +70,49 @@ describe('AlarmLabelComponent', () => {
     expect(styles.textTransform).toEqual('uppercase');
   });
 
-  it('should display the color of the labels according to each alarm properties', () => {
+  it('should hide labels for a clear value or shelved status if showText', () => {
+    component.showText = true;
+    component.noPadding = false;
     for (const alarm of MockAlarms) {
+      const expected_classes = Object.assign({}, expectedClassesWhenShowText);
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+    }
+  });
+
+  it('should not hide labels for a clear value or shelved status if showText is false', () => {
+    component.showText = false;
+    component.noPadding = false;
+    for (const alarm of MockAlarms) {
+      const expected_classes = Object.assign({}, expectedClassesWhenHiddenText);
+      component.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+    }
+  });
+
+  it('should add a no padding class if noPadding is true, if required showText', () => {
+    component.showText = true;
+    component.noPadding = true;
+    for (const alarm of MockAlarms) {
+      component.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getClass().indexOf('no-padding')).toBeTruthy();
+    }
+  });
+
+  it('should add a no padding class if noPadding is true, if showText is false', () => {
+    component.showText = false;
+    component.noPadding = true;
+    for (const alarm of MockAlarms) {
+      component.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getClass().indexOf('no-padding')).toBeTruthy();
     }
   });
 
