@@ -64,6 +64,13 @@
     <code>src/app/tabular/tabular-view/tabular-view.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component that dispays all the Alarms in a table using the <a href="../components/TableComponent.html">TableComponent</a></p>
+
+    </p>
 
 
     <p class="comment">
@@ -156,10 +163,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/tabular/tabular-view/tabular-view.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/tabular/tabular-view/tabular-view.component.ts:11</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Instantiates the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -195,13 +208,16 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/tabular/tabular-view/tabular-view.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/tabular/tabular-view/tabular-view.component.ts:22</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Method executed when the Component is initializated
+Does not do anything at the moment</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -220,6 +236,9 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
+/**
+* Component that dispays all the Alarms in a table using the {@link TableComponent}
+*/
 @Component({
   selector: &#x27;app-tabular-view&#x27;,
   templateUrl: &#x27;./tabular-view.component.html&#x27;,
@@ -227,8 +246,15 @@
 })
 export class TabularViewComponent implements OnInit {
 
+  /**
+   * Instantiates the component
+   */
   constructor() { }
 
+  /**
+   * Method executed when the Component is initializated
+   * Does not do anything at the moment
+   */
   ngOnInit() {
   }
 

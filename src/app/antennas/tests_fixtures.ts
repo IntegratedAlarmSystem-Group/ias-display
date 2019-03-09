@@ -2,7 +2,7 @@ import { AlarmImageSet } from '../shared/alarm/alarm.component';
 import { Alarm } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
 
-
+/** Mock configuration for the displaying of antennas alarms */
 export const mockAntennasConfig =  [
     {
       'alarm_id': 'mockAlarm-0',
@@ -42,6 +42,7 @@ export const mockAntennasConfig =  [
     },
   ];
 
+/** Mock configuration for the displaying of general devices alarms */
 export const mockDevicesConfig = [
     {
       'alarm_id': 'mockAlarm-3',
@@ -53,6 +54,7 @@ export const mockDevicesConfig = [
     }
   ];
 
+/** Mock alarms for the test */
 export const mockAlarms = {
   'mockAlarm-0': Alarm.asAlarm({
     'value': 0,
@@ -184,6 +186,7 @@ export const mockAlarms = {
   })
 };
 
+/** Mock sets of images for the icons of antennas alarms */
 export const mockImagesSets = new AlarmImageSet({
   clear: 'antennaImageSet',
   set_low: 'antennaImageSet',
@@ -195,6 +198,7 @@ export const mockImagesSets = new AlarmImageSet({
   shelved: 'antennaImageSet',
 });
 
+/** Mock sets of images for the icons of antennas unreliable alarms */
 export const mockImagesUnreliableSets = new AlarmImageSet({
   clear: 'antennaUnreliableImageSet',
   set_low: 'antennaUnreliableImageSet',
@@ -206,6 +210,7 @@ export const mockImagesUnreliableSets = new AlarmImageSet({
   shelved: 'antennaUnreliableImageSet',
 });
 
+/** Mock configuration for the Antennas Summary (to be displayed in Overview) */
 export const mockSummaryConfig = [new AlarmConfig({
   alarm_id: 'antenna-dummy-alarm',
   custom_name: '',

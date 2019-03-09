@@ -294,10 +294,22 @@ export class MaterialCardSampleComponent {
 })
 export class SandboxAlarmLabelComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName = 'AlarmLabel';
 
+  /** Array of Alarms to display */
   alarms: Alarm[] = [];
 
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
@@ -394,8 +406,10 @@ export class SandboxAlarmLabelComponent implements OnInit {
 })
 export class SandboxAlarmComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName = 'Alarm';
 
+  /** Array of Alarms to display */
   alarms: Alarm[] = [];
 
   /** Set of alarm icons */
@@ -413,6 +427,16 @@ export class SandboxAlarmComponent implements OnInit {
   /** Label location */
   @Input() labelLocation = 'right';
 
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
@@ -540,8 +564,10 @@ export class SandboxAlarmComponent implements OnInit {
 })
 export class SandboxAlarmTileComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName = 'Alarm Tile';
 
+  /** Array of Alarms to display */
   alarms: Alarm[] = [];
 
   /** Set of alarm icons */
@@ -550,7 +576,16 @@ export class SandboxAlarmTileComponent implements OnInit {
   /** Set of alarm unreliable icons */
   public alarmIconsUnreliableSet: AlarmImageSet;
 
-
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
