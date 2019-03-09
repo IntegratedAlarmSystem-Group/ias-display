@@ -79,10 +79,16 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   tooltipDirectionOptions = ['right', 'left'];
 
+  /**
+  * Builds a new instance
+  */
   constructor() {
     this.targetAnimationState = 'normal';
   }
 
+  /**
+  * Executed when the component is initiating
+  */
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
@@ -95,6 +101,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     }
   }
 
+  /**
+  * Method to handle the changes on the alarm values
+  */
   ngOnChanges(changes: SimpleChanges) {
     if (this.alarm) {
       if (changes.alarm.previousValue) {

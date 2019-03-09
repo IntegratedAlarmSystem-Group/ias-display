@@ -273,11 +273,13 @@ export const mockAlarms = {
   }),
 };
 
+/** Set of mock antennas */
 export const mockAntennas = {
   'group1': ['ANT1', 'ANT2'],
   'group2': ['ANT4']
 };
 
+/** Set of mock pad status */
 export const mockPadsStatus = {
   'group1': {
     'PAD1': 'ANT1',
