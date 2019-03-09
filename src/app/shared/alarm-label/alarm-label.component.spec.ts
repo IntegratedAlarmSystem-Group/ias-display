@@ -70,11 +70,11 @@ describe('AlarmLabelComponent: ', () => {
     expect(styles.textTransform).toEqual('uppercase');
   });
 
-  xit('should hide labels for a clear value or shelved status if showText', () => {
+  it('should hide labels for a clear value or shelved status even if showText is true', () => {
     component.showText = true;
     component.noPadding = false;
+    const expected_classes = Object.assign({}, expectedClassesWhenShowText);
     for (const alarm of MockAlarms) {
-      const expected_classes = Object.assign({}, expectedClassesWhenShowText);
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -82,14 +82,11 @@ describe('AlarmLabelComponent: ', () => {
     }
   });
 
-  xit('should not hide labels for a clear value or shelved status if showText is false', () => {
+  it('should not hide labels for a clear value or shelved status if showText is false', () => {
     component.showText = false;
     component.noPadding = false;
+    const expected_classes = Object.assign({}, expectedClassesWhenHiddenText);
     for (const alarm of MockAlarms) {
-      const expected_classes = Object.assign({}, expectedClassesWhenHiddenText);
-      console.log(expected_classes[alarm.core_id]);
-      console.log(component.getClass());
-      console.log('----');
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
