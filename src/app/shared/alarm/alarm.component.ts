@@ -79,6 +79,12 @@ export class AlarmComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
+   * Defines wether or not the component will display the text of the label
+   * with the alarm priority
+   */
+  @Input() labelMode = 'text';
+
+  /**
    * Defines the size of the component, can be either of the options defined by {@link sizeOptions}
    */
   @Input() size = 'md';
@@ -89,9 +95,19 @@ export class AlarmComponent implements OnInit {
   @Input() tooltipDirection = 'right';
 
   /**
+   * Defines the direction of the label
+   */
+  @Input() labelLocation = 'right';
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
+
+  /**
+   * Available locations for the label component
+   */
+  private labelLocationOptions = ['right', 'bottom'];
 
   /**
   * Instantiates the component
@@ -104,6 +120,9 @@ export class AlarmComponent implements OnInit {
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
+    }
+    if (this.labelLocationOptions.indexOf(this.labelLocation) < 0) {
+      this.labelLocation = 'right';
     }
   }
 
@@ -211,4 +230,19 @@ export class AlarmComponent implements OnInit {
   showAsShelved(): boolean {
     return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
+
+  /**
+   * Check if the alarm should display the priority text in the related label
+   * @return {boolean} True if mode is 'text' else False
+   */
+   showPriorityLevelText(): boolean {
+     if (this.labelMode === 'text') {
+       return true;
+     } else if (this.labelMode === 'line') {
+       return false;
+     } else {
+       return false;
+     }
+   }
+
 }

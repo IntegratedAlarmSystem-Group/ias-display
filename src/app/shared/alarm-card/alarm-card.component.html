@@ -12,7 +12,13 @@
   <div class="alarm-card" [ngClass]="getClass()">
     <div fxFlex="auto" class="alarm-card-content">
       <div class="alarm-name">{{this.getAlarmName()}}</div>
-      <div class="alarm-priority">{{this.getPriorityText()}}</div>
+      <div class="alarm-priority">
+        <app-alarm-label
+          [alarm]="alarm"
+          [size]="'sm'"
+          [noPadding]="true"
+        ></app-alarm-label>
+      </div>
     </div>
     <div fxFlex="20px" class="alarm-card-badges">
 

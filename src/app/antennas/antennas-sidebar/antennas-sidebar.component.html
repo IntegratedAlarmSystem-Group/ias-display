@@ -17,7 +17,10 @@
 
 <!-- Title when one antenna is selected -->
 <ng-template #returnLink>
-    <div class="return-link" (click)="unselectAntenna()"> <i class="material-icons">chevron_left</i> <span> {{alarmService.getName(this.selectedAntenna)}} </span> </div>
+    <div class="return-link" (click)="unselectAntenna()">
+      <i class="material-icons">chevron_left</i>
+      <span> {{alarmService.getName(this.selectedAntenna)}} </span>
+    </div>
 </ng-template>
 
 <!-- Content when there is not a selected antenna -->
@@ -42,12 +45,17 @@
         <tr>
           <td class="antenna">
             <div class="text">
-              <app-alarm [alarm]="alarmService.getAlarm(device)" [text]="alarmService.getName(device)"></app-alarm>
+              <app-alarm
+                [alarm]="alarmService.getAlarm(device)"
+                [text]="alarmService.getName(device)"
+                [labelMode]="'hidden'"
+                [showActionBadges]="false"
+              ></app-alarm>
             </div>
           </td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="alarmService.getAlarm(device)" [showActionBadges]="false"></app-status-view>
+              <app-status-view [alarm]="alarmService.getAlarm(device)" [showActionBadges]="true"></app-status-view>
             </div>
           </td>
           <td class="buttons" align="right">

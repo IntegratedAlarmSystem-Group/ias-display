@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoutingService } from './routing.service';
 import { IasMaterialModule } from '../ias-material/ias-material.module';
 import { AckComponent } from '../actions/ack/ack.component';
-import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { AntennasComponent } from '../antennas/antennas/antennas.component';
-import { MaterialSandboxComponent } from '../material-sandbox/material-sandbox.component';
+import { MaterialSandboxComponent } from '../material-sandbox/material-sandbox.components';
+import { MaterialSandboxModule } from '../material-sandbox/material-sandbox.module';
 import { OverviewComponent } from '../overview/overview/overview.component';
 import { ShelveComponent } from '../actions/shelve/shelve.component';
 import { TabularViewComponent } from '../tabular/tabular-view/tabular-view.component';
@@ -34,6 +34,7 @@ export const appRoutes: Routes = [
   imports: [
     CommonModule,
     IasMaterialModule,
+    MaterialSandboxModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- true for debugging purposes only

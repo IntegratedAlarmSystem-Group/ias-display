@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmCardComponent } from './alarm-card.component';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -34,7 +35,8 @@ describe('AlarmCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmCardComponent,  AlarmTooltipComponent],
+      declarations: [
+        AlarmCardComponent,  AlarmTooltipComponent, AlarmLabelComponent],
       imports: [ NgbModule ]
     })
     .compileComponents();
@@ -65,54 +67,6 @@ describe('AlarmCardComponent', () => {
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-name');
     expect(content.innerHTML).toEqual('malfunctioning_un...');
-  });
-
-  it('should display an empty text for the priority of a cleared alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[4]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    expect(content.innerHTML).toEqual('');
-  });
-
-  it('should display an uppercase text for the priority of a set low alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[3]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('low');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set medium alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[2]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('medium');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set high alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[1]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card > .alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('high');
-    expect(styles.textTransform).toEqual('uppercase');
-  });
-
-  it('should display an uppercase text for the priority of a set critical alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
-    fixture.detectChanges();
-    const content = fixture.nativeElement.querySelector(
-      '.alarm-card > .alarm-card-content > .alarm-priority');
-    const styles = window.getComputedStyle(content);
-    expect(content.innerHTML).toEqual('critical');
-    expect(styles.textTransform).toEqual('uppercase');
   });
 
   it('should display the color of the alarms according to each alarm properties', () => {

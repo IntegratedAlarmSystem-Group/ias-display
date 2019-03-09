@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmComponent } from '../alarm/alarm.component';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { AlarmTileComponent } from './alarm-tile.component';
 import { Alarm, Value } from '../../data/alarm';
@@ -40,7 +41,11 @@ describe('AlarmTileComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AlarmTileComponent, AlarmComponent, AlarmTooltipComponent ],
+        AlarmTileComponent,
+        AlarmLabelComponent,
+        AlarmComponent,
+        AlarmTooltipComponent
+      ],
       imports: [ NgbModule ]
     })
     .compileComponents();
@@ -126,6 +131,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlarmTileComponent,
+        AlarmLabelComponent,
         AlarmComponent,
         AlarmTooltipComponent,
       ],
@@ -194,6 +200,7 @@ describe('AlarmTileComponent: Animation methods', () => {
       declarations: [
         AlarmTileComponent,
         AlarmComponent,
+        AlarmLabelComponent,
         AlarmTooltipComponent,
         TestHostComponent
       ],

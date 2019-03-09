@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 @import '../actions/action-theme.scss';
 @import '../shared/alarm/alarm-theme.scss';
+@import '../shared/alarm-label/alarm-label-theme.scss';
 @import '../shared/alarm-card/alarm-card-theme.scss';
 @import '../shared/alarm-tile/alarm-tile-theme.scss';
 @import '../shared/alarm-header/alarm-header-theme.scss';
@@ -140,6 +141,7 @@ $ias-alarms-colors: (
   border-maintenance: #8e98a1,
   border-shelved: #05e086,
   set-card-dark-text: #212D3A,
+  clear-line-label: hsla(211, 27%, 18%, 0.25),
 );
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
@@ -187,6 +189,7 @@ $ias-typography: mat-typography-config(
   @include alarm-header-theme($theme);
   @include alarm-card-theme($theme);
   @include alarm-tile-theme($theme);
+  @include alarm-label-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);

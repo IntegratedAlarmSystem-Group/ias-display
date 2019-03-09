@@ -8,10 +8,15 @@
     <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
   </ng-template>
 
-  <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()" ></div>
+  <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div>
 
-  <div class="alarm-header-name">
-      {{this.getAlarmName()}}
+  <div fxLayout="column">
+    <div class="alarm-header-name">
+        {{this.getAlarmName()}}
+    </div>
+    <div>
+      <app-alarm-label [alarm]="alarm" [showText]="false" [size]="'md'"></app-alarm-label>
+    </div>
   </div>
 
 

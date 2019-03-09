@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialSandboxComponent } from './material-sandbox.component';
+import { MaterialSandboxComponent } from './material-sandbox.components';
 
 xdescribe('MaterialSandboxComponent', () => {
   let component: MaterialSandboxComponent;

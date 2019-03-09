@@ -7,6 +7,15 @@ $status-cem: 1*$cem;
 
 .alarm-component {
 
+  .alarm-label-container {
+    padding-left: 6px;
+    &.bottom {
+      margin: auto;
+      padding:0;
+      line-height: 0;
+    }
+  }
+
   .icon {
     display: inline-block;
     vertical-align: middle;
@@ -19,11 +28,9 @@ $status-cem: 1*$cem;
   }
 
   .text {
-    display: inline-block;
     vertical-align: middle;
     height: 100%;
     padding-right: 6%;
-    width: 100%;
   }
 
   .badges{
@@ -63,6 +70,13 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$xs-cem;
   }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.2em;
+    }
+  }
+
 }
 
 .alarm-component-sm {
@@ -74,6 +88,13 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$sm-cem;
   }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.2em;
+    }
+  }
+
 }
 
 .alarm-component-md {
@@ -84,6 +105,12 @@ $status-cem: 1*$cem;
   .badges{
     @extend .badges;
     width: 8*$md-cem;
+  }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.2em;
+    }
   }
 }
 
@@ -96,6 +123,12 @@ $status-cem: 1*$cem;
     @extend .badges;
     width: 8*$lg-cem;
     margin-left: 10px;
+  }
+
+  .alarm-label-container {
+    &.bottom {
+      padding-top: 0.24em;
+    }
   }
 }
 
