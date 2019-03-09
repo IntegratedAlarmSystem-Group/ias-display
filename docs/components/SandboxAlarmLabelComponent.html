@@ -226,7 +226,7 @@ according to the values related to an alarm</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="332" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:332</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:344</a></div>
                             </td>
                         </tr>
 
@@ -266,13 +266,15 @@ according to the values related to an alarm</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="301" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:301</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="313" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:313</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Return a mock alarm with a given set of input parameters</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -367,7 +369,8 @@ according to the values related to an alarm</p>
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>a mock {</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -395,7 +398,7 @@ according to the values related to an alarm</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="349" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:349</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="361" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:361</a></div>
                             </td>
                         </tr>
 
@@ -427,16 +430,9 @@ according to the values related to an alarm</p>
                         <a name="alarms"></a>
                         <span class="name">
                             <b>
-                            alarms
-                            </b>
+                            alarms</b>
                             <a href="#alarms"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>alarms:     <code><a href="../classes/Alarm.html" target="_self" >Alarm[]</a></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -452,10 +448,16 @@ according to the values related to an alarm</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:299</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="301" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:301</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array of Alarms to display </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -466,16 +468,9 @@ according to the values related to an alarm</p>
                         <a name="componentName"></a>
                         <span class="name">
                             <b>
-                            componentName
-                            </b>
+                            componentName</b>
                             <a href="#componentName"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>componentName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -491,10 +486,16 @@ according to the values related to an alarm</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="297" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:297</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="298" class="link-to-prism">src/app/material-sandbox/material-sandbox.components.ts:298</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name of the Shared component to be displayed in the <a href="../components/SandboxAlarmComponent.html">SandboxAlarmComponent</a> </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -800,10 +801,22 @@ export class MaterialCardSampleComponent {
 })
 export class SandboxAlarmLabelComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName &#x3D; &#x27;AlarmLabel&#x27;;
 
+  /** Array of Alarms to display */
   alarms: Alarm[] &#x3D; [];
 
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
@@ -900,8 +913,10 @@ export class SandboxAlarmLabelComponent implements OnInit {
 })
 export class SandboxAlarmComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName &#x3D; &#x27;Alarm&#x27;;
 
+  /** Array of Alarms to display */
   alarms: Alarm[] &#x3D; [];
 
   /** Set of alarm icons */
@@ -919,6 +934,16 @@ export class SandboxAlarmComponent implements OnInit {
   /** Label location */
   @Input() labelLocation &#x3D; &#x27;right&#x27;;
 
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
@@ -1046,8 +1071,10 @@ export class SandboxAlarmComponent implements OnInit {
 })
 export class SandboxAlarmTileComponent implements OnInit {
 
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
   componentName &#x3D; &#x27;Alarm Tile&#x27;;
 
+  /** Array of Alarms to display */
   alarms: Alarm[] &#x3D; [];
 
   /** Set of alarm icons */
@@ -1056,7 +1083,16 @@ export class SandboxAlarmTileComponent implements OnInit {
   /** Set of alarm unreliable icons */
   public alarmIconsUnreliableSet: AlarmImageSet;
 
-
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
   getMockAlarm(
     value: number,
     core_id: string,
