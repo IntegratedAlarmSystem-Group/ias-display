@@ -1,3 +1,4 @@
+/** Set of mock classes to display the alarm label if showText is true */
 export const expectedClassesWhenShowText = {
   'critical': ['alarm-label-critical'],
   'high': ['alarm-label-high'],
@@ -29,6 +30,7 @@ export const expectedClassesWhenShowText = {
   'shelved_unreliable': ['alarm-label-clear', 'hide-label'],
 };
 
+/** Set of mock classes to display the alarm label if showText is false */
 export const expectedClassesWhenHiddenText = {
   'critical': ['alarm-label-critical', 'hide-text'],
   'high': ['alarm-label-high', 'hide-text'],

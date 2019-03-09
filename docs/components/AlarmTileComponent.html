@@ -246,6 +246,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Builds a new instance</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -521,7 +527,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:126</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:135</a></div>
                             </td>
                         </tr>
 
@@ -570,7 +576,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:157</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:166</a></div>
                             </td>
                         </tr>
 
@@ -616,13 +622,15 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:98</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:107</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Method to handle the changes on the alarm values</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -685,13 +693,15 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:92</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Executed when the component is initiating</p>
+</div>
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -725,7 +735,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:142</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:151</a></div>
                             </td>
                         </tr>
 
@@ -767,7 +777,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:149</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:158</a></div>
                             </td>
                         </tr>
 
@@ -1026,10 +1036,16 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   tooltipDirectionOptions &#x3D; [&#x27;right&#x27;, &#x27;left&#x27;];
 
+  /**
+  * Builds a new instance
+  */
   constructor() {
     this.targetAnimationState &#x3D; &#x27;normal&#x27;;
   }
 
+  /**
+  * Executed when the component is initiating
+  */
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) &lt; 0) {
       this.size &#x3D; &#x27;md&#x27;;
@@ -1042,6 +1058,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     }
   }
 
+  /**
+  * Method to handle the changes on the alarm values
+  */
   ngOnChanges(changes: SimpleChanges) {
     if (this.alarm) {
       if (changes.alarm.previousValue) {
