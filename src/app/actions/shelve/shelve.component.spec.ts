@@ -1,4 +1,4 @@
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
@@ -9,6 +9,7 @@ import { DataModule } from '../../data/data.module';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
+import { SharedModule } from '../../shared/shared.module';
 import { ShelveComponent } from './shelve.component';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
@@ -17,7 +18,6 @@ describe('ShelveComponent', () => {
   let component: ShelveComponent;
   let fixture: ComponentFixture<ShelveComponent>;
   let componentBody: any;
-  let componentHeader: any;
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
@@ -40,6 +40,7 @@ describe('ShelveComponent', () => {
       'ack': false,
       'shelved': false,
       'dependencies': [],
+      'properties': {},
   });
 
   beforeEach(async(() => {
@@ -51,6 +52,7 @@ describe('ShelveComponent', () => {
         ReactiveFormsModule,
         NgxSpinnerModule,
         IasMaterialModule,
+        SharedModule,
         DataModule,
       ],
       providers: [
@@ -65,7 +67,7 @@ describe('ShelveComponent', () => {
             paramMap: {
               subscribe: (fn: (value: Params) => void) => fn(
                 convertToParamMap({
-                  alarmID: ''
+                  alarmID: mockAlarm.core_id
                 })
               )
             }
@@ -82,6 +84,7 @@ describe('ShelveComponent', () => {
     sidenavService = fixture.debugElement.injector.get(SidenavService);
     authService = fixture.debugElement.injector.get(AuthService);
     spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
+    spyOn(alarmService, 'isAlarmIndexAvailable').and.callFake(function() { return true; });
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(sidenavService, 'open');
@@ -92,13 +95,10 @@ describe('ShelveComponent', () => {
     );
     component = fixture.componentInstance;
     spyOn(component, 'onClose');
-    component.alarm_id = mockAlarm['core_id'];
     component.ngOnInit();
-    component.reload();
-    componentHeader = fixture.nativeElement.querySelector('.component-header');
+    fixture.detectChanges();
     componentBody = fixture.nativeElement.querySelector('.component-body');
     componentFooter = fixture.nativeElement.querySelector('.component-footer');
-    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -111,12 +111,23 @@ describe('ShelveComponent', () => {
 
   // Information
   it('should display the Alarm ID', () => {
+    expect(component.alarm_id).toEqual(mockAlarm.core_id);
     expect(componentBody).toBeTruthy();
     expect(componentBody.textContent).toContain(component.alarm_id);
   });
 
   it('should display the alarm short description', () => {
     const expected = mockAlarm.description;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display the alarm last state change timestamp', () => {
+    const expected = mockAlarm.formattedTimestamp;
+    expect(componentBody.textContent).toContain(expected);
+  });
+
+  it('should display the alarm last state change properties', () => {
+    const expected = mockAlarm.formattedProperties;
     expect(componentBody.textContent).toContain(expected);
   });
 

@@ -6,7 +6,6 @@ import { AckButtonComponent } from './ack-button/ack-button.component';
 import { ShelveButtonComponent } from './shelve-button/shelve-button.component';
 import { WikiButtonComponent } from './wiki-button/wiki-button.component';
 import { AckTreeComponent } from './ack-tree/ack-tree.component';
-import { AlarmComponent } from '../shared/alarm/alarm.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { IasMaterialModule } from '../ias-material/ias-material.module';

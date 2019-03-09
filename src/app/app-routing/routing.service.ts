@@ -14,8 +14,8 @@ export class RoutingService {
   constructor(private router: Router) { }
 
   /**
-  * Go to the TabularViewComponent and pass a filter value by the URL
-  * @param {string} filter filter values to pass to the TabularViewComponent through the URL
+  * Go to the TableComponent and pass a filter value by the URL
+  * @param {string} filter filter values to pass to the TableComponent through the URL
   */
   tableWithFilter(filter: string) {
     filter.replace(' ', '_'); // TODO: This is wrong, fix it

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 65.3 62.6" style="enable-background:new 0 0 65.3 62.6;" xml:space="preserve">
+<style type="text/css">.st0{fill:#E4D506;}.st1{fill:url(#SVGID_1_);fill-opacity:0;}.st2{fill:none;stroke:#E4D506;stroke-width:2;stroke-miterlimit:10;}.st3{fill:none;stroke:#E4D506;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}.st4{fill:#E4D506;stroke:#E4D506;}</style>
+<title>antenna</title>
+<path class="st0" d="M33.8,55.9l-2.7-15.7l0.3,0.1c1.5,0.4,3.1,0.5,4.6,0.5c5.3,0,10.4-2.1,14.2-5.9L36,20.9L21.9,6.7
+	c-3.8,3.8-5.9,8.9-5.9,14.2c0,5.3,2.1,10.4,5.9,14.1v0.1l-2.5,20.8"/>
+<g id="Layer_2_1_">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="-383.3" x2="65.3" y2="-383.3" gradientTransform="matrix(1 0 0 -1 0 -352)">
+		<stop  offset="0" style="stop-color:#F0512E"/>
+		<stop  offset="0.28" style="stop-color:#F05230"/>
+		<stop  offset="0.51" style="stop-color:#F15736"/>
+		<stop  offset="0.73" style="stop-color:#F15F42"/>
+		<stop  offset="0.94" style="stop-color:#F26A52"/>
+		<stop  offset="1" style="stop-color:#F26D57"/>
+	</linearGradient>
+	<rect class="st1" width="65.3" height="62.6"/>
+</g>
+<path class="st4" d="M39.5,18.4l-2-2c1.1-1.1,2.9-1,4,0.1c1,1.1,1,2.8,0,3.9L39.5,18.4z"/>
+<path class="st2" d="M34,13.9c2.8-2.8,7.2-2.8,10,0s2.8,7.2,0,10"/>
+<path class="st2" d="M31,10.9c4.4-4.4,11.6-4.4,16,0s4.4,11.6,0,16"/>
+<line class="st2" x1="39.5" y1="18.4" x2="36.4" y2="21.3"/>
+<path class="st3" d="M33.8,55.9l-2.7-15.7l0.3,0.1c1.5,0.4,3.1,0.5,4.6,0.5c5.3,0,10.4-2.1,14.2-5.9L36,20.9L21.9,6.7
+	c-3.8,3.8-5.9,8.9-5.9,14.2c0,5.3,2.1,10.4,5.9,14.1v0.1l-2.5,20.8"/>
+<polyline class="st3" points="15,55.9 18.7,55.9 38,55.9 "/>
+</svg>

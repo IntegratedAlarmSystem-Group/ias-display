@@ -6,36 +6,16 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .mat-table {
-    background: transparent;
-  }
-
-  .mat-row {
-    background: mat-color($background, dialog);
-
-    &:nth-child(odd){
-      background-color: mat-color($background, dialog);
-    }
-
-    &:nth-child(even){
-      background-color: transparent;
-    }
-
-    &:hover {
-      background: mat-color($background, hover);
-    }
-  }
-
   .mat-card {
     background: transparent;
 
     .mat-card-header {
-      padding: 20px;
       background:  mat-color($background, dialog);
     }
 
     .mat-card-content {
       background: mat-color($primary, 700);
+      padding: 20px;
     }
   }
 

@@ -1,4 +1,4 @@
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, convertToParamMap } from '@angular/router';
@@ -19,7 +19,6 @@ describe('AckComponent', () => {
   let component: AckComponent;
   let fixture: ComponentFixture<AckComponent>;
   let componentBody: any;
-  let componentHeader: any;
   let componentFooter: any;
   let alarmService: AlarmService;
   let sidenavService: SidenavService;
@@ -40,6 +39,7 @@ describe('AckComponent', () => {
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'properties': {},
   });
 
   beforeEach(async(() => {
@@ -69,7 +69,7 @@ describe('AckComponent', () => {
             paramMap: {
               subscribe: (fn: (value: Params) => void) => fn(
                 convertToParamMap({
-                  alarmID: ''
+                  alarmID: mockAlarm.core_id
                 })
               )
             }
@@ -87,6 +87,7 @@ describe('AckComponent', () => {
       sidenavService = fixture.debugElement.injector.get(SidenavService);
       authService = fixture.debugElement.injector.get(AuthService);
       spyOn(alarmService, 'get').and.callFake(function() { return mockAlarm; });
+      spyOn(alarmService, 'isAlarmIndexAvailable').and.callFake(function() { return true; });
       spyOn(alarmService, 'acknowledgeAlarms').and.returnValue( of([mockAlarm.core_id]) );
       spyOn(alarmService, 'getMissingAcks').and.returnValue( of({'coreid$1': [1, 5, 6]}) );
       spyOn(sidenavService, 'open');
@@ -94,13 +95,11 @@ describe('AckComponent', () => {
       spyOn(sidenavService, 'toggle');
       spyOn(authService, 'getAllowedActions').and.returnValue({'can_ack': true});
       component = fixture.componentInstance;
-      component.alarm_id = mockAlarm['core_id'];
-      component.ngOnInit();
       spyOn(component, 'updateAlarmsToAck');
-      componentHeader = fixture.nativeElement.querySelector('.component-header');
+      component.ngOnInit();
+      fixture.detectChanges();
       componentBody = fixture.nativeElement.querySelector('.component-body');
       componentFooter = fixture.nativeElement.querySelector('.component-footer');
-      fixture.detectChanges();
     });
 
     afterEach(() => {
@@ -119,12 +118,23 @@ describe('AckComponent', () => {
 
       // Information
       it('should display the Alarm ID', () => {
+        expect(component.alarm_id).toEqual(mockAlarm.core_id);
         expect(componentBody).toBeTruthy();
         expect(componentBody.textContent).toContain(component.alarm_id);
       });
 
       it('should display the alarm short description', () => {
         const expected = mockAlarm.description;
+        expect(componentBody.textContent).toContain(expected);
+      });
+
+      it('should display the alarm last state change timestamp', () => {
+        const expected = mockAlarm.formattedTimestamp;
+        expect(componentBody.textContent).toContain(expected);
+      });
+
+      it('should display the alarm last state change properties', () => {
+        const expected = mockAlarm.formattedProperties;
         expect(componentBody.textContent).toContain(expected);
       });
 

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable ,  BehaviorSubject } from 'rxjs';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { BehaviorSubject } from 'rxjs';
+import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
 import { environment } from '../../environments/environment';
-import { Alarm, OperationalMode, Validity, Value } from '../data/alarm';
+import { Alarm, Validity, Value } from '../data/alarm';
+import { AlarmConfig } from '../data/alarm-config';
 import { BackendUrls, Streams, Assets } from '../settings';
 import { CdbService } from '../data/cdb.service';
 import { HttpClientService } from './http-client.service';
@@ -46,6 +47,7 @@ export class AlarmSounds {
     } else if (sound === 'TYPE4') {
       return Assets.SOUNDS + AlarmSounds.type4;
     }
+    return null;
   }
 }
 
@@ -118,7 +120,7 @@ export class AlarmService {
   /**
   * Connection status timer
   */
-  public connectionStatusTimer;
+  public connectionStatusTimer: any;
 
   /**
    * Builds an instance of the service
@@ -155,7 +157,7 @@ export class AlarmService {
   * @param {Any} any the core_id of the updated alarm,
   * or 'all' if all were updated
   */
-  changeAlarms(any) {
+  changeAlarms(any: any) {
     this.alarmChangeStream.next(any);
   }
 
@@ -184,21 +186,21 @@ export class AlarmService {
         this.resetCountByView();
       }
     );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) => {
+    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
       // console.log('notify ', payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
       }
     });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) => {
+    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
       // console.log('request', payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessagesList(payload.data);
       }
     });
-    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) => {
+    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
       // console.log('counter ', payload);
       if (this.authService.loginStatus) {
         this.readCountByViewMessage(payload.data);
@@ -252,13 +254,49 @@ export class AlarmService {
   }
 
   /**
+   * Returns a boolean to check if there is information available about an alarm
+   * @param core_id core_id of the Alarm
+   * @returns {boolean} true if there is information about the alarm
+   */
+  isAlarmIndexAvailable(core_id: string): boolean {
+    return (core_id in this.alarmsIndexes);
+  }
+
+  /**
+  * Returns the instance of the {@link Alarm} associated to a given {@link AlarmConfig}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getAlarm(config: AlarmConfig): Alarm {
+    if (config) {
+      return this.get(config.alarm_id);
+    }
+  }
+
+  /**
+  * Returns the custom_name of the {@link Alarm} given a corresponding {@link AlarmConfig}.
+  * If there is no custom_name, it returns the alarm_id
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {string} the name associated to the given {@link AlarmConfig}
+  */
+  getName(config: AlarmConfig): string {
+    if (config) {
+      if (config.custom_name) {
+        return config.custom_name;
+      } else {
+        return config.alarm_id;
+      }
+    }
+  }
+
+  /**
    * Acknowledges a list of Alarms with a message
-   * @param alarms list of ids of the alarms to acknowledge
-   * @param message message of the acknowledgement
-   * @param user user that performs the acknowledgement
+   * @param {string[]} alarm_ids list of ids of the alarms to acknowledge
+   * @param {string} message message of the acknowledgement
+   * @param {string} user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message, user) {
+  acknowledgeAlarms(alarms_ids: string[], message: string, user: string): any {
     const data = {
       'alarms_ids': alarms_ids,
       'message': message,
@@ -279,9 +317,9 @@ export class AlarmService {
   /**
    * Get information about old tickets related to a target alarm
    * @param alarm_id id of the target alarm
-   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   * @returns {any[]} response of the HTTP request with a dictionary with information about missing acks
    */
-  getMissingAcks(alarm_id) {
+  getMissingAcks(alarm_id: string) {
     const url = BackendUrls.TICKETS_INFO + '?alarm_id=' + alarm_id;
     return this.httpClientService.get(url).pipe(
     map(
@@ -294,10 +332,10 @@ export class AlarmService {
   /**
    * Gets the open {@link ShelveRegistry} for an {@link Alarm}
    * @param {string} alarm_id id of the target alarm
-   * @param {int} status id of the target alarm
+   * @param {number} status id of the target alarm
    * @returns {json} response of the HTTP request with a dictionary with information about missing acks
    */
-  getShelveRegistries(alarm_id, status) {
+  getShelveRegistries(alarm_id: string, status: number): any {
     const url = BackendUrls.SHELVE_REGS_FILTER + '?alarm_id=' + alarm_id + '&status=' + status;
     return this.httpClientService.get(url).pipe(
     map(
@@ -312,9 +350,10 @@ export class AlarmService {
    * @param {string} alarm_id id of the alarm to shelve
    * @param {string} message message of the shelving
    * @param {string} timeout the timeout for the shelving
+   * @param {string} user the user who performed the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout, user) {
+  shelveAlarm(alarm_id: string, message: string, timeout: string, user: string): any {
     const data = {
       'alarm_id': alarm_id,
       'message': message,
@@ -335,11 +374,11 @@ export class AlarmService {
 
   /**
    * Shelves and {@link Alarm} with a message
-   * @param {string} alarms_ids id of the alarm to shelve
+   * @param {string[]} alarms_ids id of the alarm to shelve
    * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  unshelveAlarms(alarms_ids, message) {
+  unshelveAlarms(alarms_ids: string[], message: string): any {
     const data = {
       'alarms_ids': alarms_ids,
     };
@@ -375,7 +414,7 @@ export class AlarmService {
    * @param {string} action create, update or delete
    * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
-  readAlarmMessage(action, obj) {
+  readAlarmMessage(action: string, obj: Object) {
     if ( action === 'create' || action === 'update' ) {
       const alarm = Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
@@ -388,7 +427,7 @@ export class AlarmService {
    * service alarms list
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
    */
-  readAlarmMessagesList(alarmsList) {
+  readAlarmMessagesList(alarmsList: Object[]) {
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
@@ -401,7 +440,7 @@ export class AlarmService {
    * Reads the count by view object received from the webserver
    * @param {Object} countByView
    */
-  readCountByViewMessage(countByView) {
+  readCountByViewMessage(countByView: Object) {
     this.countByView = countByView;
   }
 
@@ -416,7 +455,7 @@ export class AlarmService {
    * Adds or updates an {@link Alarm} to the AlarmService
    * @param {Alarm} alarm the {@link Alarm} to add or update
    */
-  add_or_update_alarm(alarm) {
+  add_or_update_alarm(alarm: Alarm) {
     let old_alarm_value = Value.cleared;
     let old_alarm_ack = true;
     if (alarm.core_id in this.alarmsIndexes) {
@@ -464,9 +503,13 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    console.log('calling emit with: ', sound);
+    console.log('calling emitSound with: ', sound);
     this.audio = new Audio();
-    this.audio.src = AlarmSounds.getSoundsource(sound);
+    const soundToPlay = AlarmSounds.getSoundsource(sound);
+    if (soundToPlay === null || soundToPlay === '') {
+      return;
+    }
+    this.audio.src = soundToPlay;
     if (repeat) {
       this.audio.addEventListener('ended', function() {
         this.currentTime = 0;
@@ -523,7 +566,7 @@ export class AlarmService {
       this.connectionStatusStream.next(true);
     }
     const broadcastThreshold = this.cdbService.getBroadcastThreshold();
-    this.connectionStatusTimer = IntervalObservable.create(1000 * broadcastThreshold).subscribe(x => {
+    this.connectionStatusTimer = interval(1000 * broadcastThreshold).subscribe( () => {
       this.connectionStatusStream.next(false);
     });
   }

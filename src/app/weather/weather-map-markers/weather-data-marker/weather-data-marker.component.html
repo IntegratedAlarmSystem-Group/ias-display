@@ -2,14 +2,14 @@
   [ngClass]="{'selected': this.selected, 'onhover': this.onHover}">
 
   <div fxLayout="row" class="weather-icons">
-    <div class="icon">
-      <app-alarm [alarm]="this.getAlarm(this.stationConfig.windspeed)" [images]="weatherService.windsImageSet" [imagesUnreliable]="weatherService.windsImageUnreliableSet"></app-alarm>
-    </div>
-    <div class="icon">
-      <app-alarm [alarm]="this.getAlarm(this.stationConfig.humidity)" [images]="weatherService.humidityImageSet" [imagesUnreliable]="weatherService.humidityImageUnreliableSet"></app-alarm>
-    </div>
-    <div class="icon">
-      <app-alarm [alarm]="this.getAlarm(this.stationConfig.temperature)" [images]="weatherService.tempImageSet" [imagesUnreliable]="weatherService.tempImageUnreliableSet"></app-alarm>
+    <div class="icon" *ngFor="let config of stationConfig.children">
+      <app-alarm
+        [alarm]="this.alarmService.getAlarm(config)"
+        [images]="weatherService.getIconSet(config, true)"
+        [imagesUnreliable]="weatherService.getIconSet(config, false)"
+        [labelLocation]="'bottom'"
+        [labelMode]="'line'"
+      ></app-alarm>
     </div>
   </div>
 

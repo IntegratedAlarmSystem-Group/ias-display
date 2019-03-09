@@ -1,0 +1,43 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-card__header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.title {
+  font-size: 20pt;
+  padding-top: 20px;
+}
+
+.panels {
+  span {
+    padding: 30px;
+  }
+}
+
+.sandbox-component {
+  display: inline-flex;
+}
+
+.sandbox-marker {
+  color: gray;
+}
+
+.sandbox-title {
+  font-weight: bold;
+}
+
+.sandbox-alarm-container {
+  border: 1px solid #273d54;
+  margin: 10px;
+  padding: 10px;
+  background: #314963;
+}
+
+.sandbox-alarm-values {
+  font-size: 10px;
+  margin: 10px;
+}

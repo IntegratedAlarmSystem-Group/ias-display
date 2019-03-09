@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AntennasComponent } from './antennas.component';
 import { AntennasMapComponent } from '../antennas-map/antennas-map.component';
 import { AntennasSidebarComponent } from '../antennas-sidebar/antennas-sidebar.component';
@@ -13,23 +14,28 @@ import { MapService } from '../../map/map.service';
 import { Map } from '../../map/fixtures';
 import { of } from 'rxjs';
 import { AntennaMarkerComponent } from '../antennas-map-markers/antenna-marker/antenna-marker.component';
+import { AlarmConfig } from '../../data/alarm-config';
 
 
-const mockAntennasConfig =  [
-  {
-    antenna: 'DV00',
-    placemark: 'P000',
-    alarm: 'alarmId',
-  }
-];
+const mockAntennasConfig =  [ new AlarmConfig({
+  alarm_id: 'alarmId',
+  custom_name: 'DV00',
+  placemark: 'P000',
+  type: 'device',
+  view: 'antennas',
+  group: 'antennas',
+  children: []
+})];
 
-const mockDevicesConfig =  [
-  {
-    antenna: 'Correlator',
-    placemark: 'Correlator',
-    alarm: 'alarm-Correlator',
-  }
-];
+const mockDevicesConfig = [ new AlarmConfig({
+  alarm_id: 'alarm-Correlator',
+  custom_name: 'Correlator',
+  placemark: 'Correlator',
+  type: 'device',
+  view: 'antennas',
+  group: 'global_devices',
+  children: []
+})];
 
 describe('AntennasComponent', () => {
   let component: AntennasComponent;
@@ -56,7 +62,8 @@ describe('AntennasComponent', () => {
         AntennasService,
         MapService,
         { provide: RoutingService, useValue: spyRoutingTable },
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

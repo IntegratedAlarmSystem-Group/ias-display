@@ -173,7 +173,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/alarm.service.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/data/alarm.service.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -219,7 +219,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/data/alarm.service.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/alarm.service.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -265,7 +265,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/data/alarm.service.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/data/alarm.service.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -311,7 +311,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/data/alarm.service.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/alarm.service.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -357,7 +357,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/alarm.service.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/alarm.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -401,7 +401,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/data/alarm.service.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/data/alarm.service.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -469,11 +469,12 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
-import { Observable ,  BehaviorSubject } from &#x27;rxjs&#x27;;
-import { IntervalObservable } from &#x27;rxjs/observable/IntervalObservable&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
+import { interval } from &#x27;rxjs&#x27;;
 import { WebSocketBridge } from &#x27;django-channels&#x27;;
 import { environment } from &#x27;../../environments/environment&#x27;;
-import { Alarm, OperationalMode, Validity, Value } from &#x27;../data/alarm&#x27;;
+import { Alarm, Validity, Value } from &#x27;../data/alarm&#x27;;
+import { AlarmConfig } from &#x27;../data/alarm-config&#x27;;
 import { BackendUrls, Streams, Assets } from &#x27;../settings&#x27;;
 import { CdbService } from &#x27;../data/cdb.service&#x27;;
 import { HttpClientService } from &#x27;./http-client.service&#x27;;
@@ -515,6 +516,7 @@ export class AlarmSounds {
     } else if (sound &#x3D;&#x3D;&#x3D; &#x27;TYPE4&#x27;) {
       return Assets.SOUNDS + AlarmSounds.type4;
     }
+    return null;
   }
 }
 
@@ -587,7 +589,7 @@ export class AlarmService {
   /**
   * Connection status timer
   */
-  public connectionStatusTimer;
+  public connectionStatusTimer: any;
 
   /**
    * Builds an instance of the service
@@ -624,7 +626,7 @@ export class AlarmService {
   * @param {Any} any the core_id of the updated alarm,
   * or &#x27;all&#x27; if all were updated
   */
-  changeAlarms(any) {
+  changeAlarms(any: any) {
     this.alarmChangeStream.next(any);
   }
 
@@ -653,21 +655,21 @@ export class AlarmService {
         this.resetCountByView();
       }
     );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload, streamName) &#x3D;&gt; {
+    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) &#x3D;&gt; {
       // console.log(&#x27;notify &#x27;, payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
       }
     });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload, streamName) &#x3D;&gt; {
+    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) &#x3D;&gt; {
       // console.log(&#x27;request&#x27;, payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessagesList(payload.data);
       }
     });
-    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload, streamName) &#x3D;&gt; {
+    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) &#x3D;&gt; {
       // console.log(&#x27;counter &#x27;, payload);
       if (this.authService.loginStatus) {
         this.readCountByViewMessage(payload.data);
@@ -721,13 +723,49 @@ export class AlarmService {
   }
 
   /**
+   * Returns a boolean to check if there is information available about an alarm
+   * @param core_id core_id of the Alarm
+   * @returns {boolean} true if there is information about the alarm
+   */
+  isAlarmIndexAvailable(core_id: string): boolean {
+    return (core_id in this.alarmsIndexes);
+  }
+
+  /**
+  * Returns the instance of the {@link Alarm} associated to a given {@link AlarmConfig}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {Alarm} the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getAlarm(config: AlarmConfig): Alarm {
+    if (config) {
+      return this.get(config.alarm_id);
+    }
+  }
+
+  /**
+  * Returns the custom_name of the {@link Alarm} given a corresponding {@link AlarmConfig}.
+  * If there is no custom_name, it returns the alarm_id
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the {@link Alarm}
+  * @returns {string} the name associated to the given {@link AlarmConfig}
+  */
+  getName(config: AlarmConfig): string {
+    if (config) {
+      if (config.custom_name) {
+        return config.custom_name;
+      } else {
+        return config.alarm_id;
+      }
+    }
+  }
+
+  /**
    * Acknowledges a list of Alarms with a message
-   * @param alarms list of ids of the alarms to acknowledge
-   * @param message message of the acknowledgement
-   * @param user user that performs the acknowledgement
+   * @param {string[]} alarm_ids list of ids of the alarms to acknowledge
+   * @param {string} message message of the acknowledgement
+   * @param {string} user user that performs the acknowledgement
    * @returns {json} response of the HTTP request of the acknowledge
    */
-  acknowledgeAlarms(alarms_ids, message, user) {
+  acknowledgeAlarms(alarms_ids: string[], message: string, user: string): any {
     const data &#x3D; {
       &#x27;alarms_ids&#x27;: alarms_ids,
       &#x27;message&#x27;: message,
@@ -748,9 +786,9 @@ export class AlarmService {
   /**
    * Get information about old tickets related to a target alarm
    * @param alarm_id id of the target alarm
-   * @returns {json} response of the HTTP request with a dictionary with information about missing acks
+   * @returns {any[]} response of the HTTP request with a dictionary with information about missing acks
    */
-  getMissingAcks(alarm_id) {
+  getMissingAcks(alarm_id: string) {
     const url &#x3D; BackendUrls.TICKETS_INFO + &#x27;?alarm_id&#x3D;&#x27; + alarm_id;
     return this.httpClientService.get(url).pipe(
     map(
@@ -763,10 +801,10 @@ export class AlarmService {
   /**
    * Gets the open {@link ShelveRegistry} for an {@link Alarm}
    * @param {string} alarm_id id of the target alarm
-   * @param {int} status id of the target alarm
+   * @param {number} status id of the target alarm
    * @returns {json} response of the HTTP request with a dictionary with information about missing acks
    */
-  getShelveRegistries(alarm_id, status) {
+  getShelveRegistries(alarm_id: string, status: number): any {
     const url &#x3D; BackendUrls.SHELVE_REGS_FILTER + &#x27;?alarm_id&#x3D;&#x27; + alarm_id + &#x27;&amp;status&#x3D;&#x27; + status;
     return this.httpClientService.get(url).pipe(
     map(
@@ -781,9 +819,10 @@ export class AlarmService {
    * @param {string} alarm_id id of the alarm to shelve
    * @param {string} message message of the shelving
    * @param {string} timeout the timeout for the shelving
+   * @param {string} user the user who performed the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  shelveAlarm(alarm_id, message, timeout, user) {
+  shelveAlarm(alarm_id: string, message: string, timeout: string, user: string): any {
     const data &#x3D; {
       &#x27;alarm_id&#x27;: alarm_id,
       &#x27;message&#x27;: message,
@@ -804,11 +843,11 @@ export class AlarmService {
 
   /**
    * Shelves and {@link Alarm} with a message
-   * @param {string} alarms_ids id of the alarm to shelve
+   * @param {string[]} alarms_ids id of the alarm to shelve
    * @param {string} message message of the shelving
    * @returns {json} response of the HTTP request of the shelve
    */
-  unshelveAlarms(alarms_ids, message) {
+  unshelveAlarms(alarms_ids: string[], message: string): any {
     const data &#x3D; {
       &#x27;alarms_ids&#x27;: alarms_ids,
     };
@@ -844,7 +883,7 @@ export class AlarmService {
    * @param {string} action create, update or delete
    * @param {Object} obj dictionary with values for alarm fields (as generic object)
    */
-  readAlarmMessage(action, obj) {
+  readAlarmMessage(action: string, obj: Object) {
     if ( action &#x3D;&#x3D;&#x3D; &#x27;create&#x27; || action &#x3D;&#x3D;&#x3D; &#x27;update&#x27; ) {
       const alarm &#x3D; Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
@@ -857,7 +896,7 @@ export class AlarmService {
    * service alarms list
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
    */
-  readAlarmMessagesList(alarmsList) {
+  readAlarmMessagesList(alarmsList: Object[]) {
     for (const obj of alarmsList) {
       const alarm &#x3D; Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
@@ -870,7 +909,7 @@ export class AlarmService {
    * Reads the count by view object received from the webserver
    * @param {Object} countByView
    */
-  readCountByViewMessage(countByView) {
+  readCountByViewMessage(countByView: Object) {
     this.countByView &#x3D; countByView;
   }
 
@@ -885,7 +924,7 @@ export class AlarmService {
    * Adds or updates an {@link Alarm} to the AlarmService
    * @param {Alarm} alarm the {@link Alarm} to add or update
    */
-  add_or_update_alarm(alarm) {
+  add_or_update_alarm(alarm: Alarm) {
     let old_alarm_value &#x3D; Value.cleared;
     let old_alarm_ack &#x3D; true;
     if (alarm.core_id in this.alarmsIndexes) {
@@ -933,9 +972,13 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    console.log(&#x27;calling emit with: &#x27;, sound);
+    console.log(&#x27;calling emitSound with: &#x27;, sound);
     this.audio &#x3D; new Audio();
-    this.audio.src &#x3D; AlarmSounds.getSoundsource(sound);
+    const soundToPlay &#x3D; AlarmSounds.getSoundsource(sound);
+    if (soundToPlay &#x3D;&#x3D;&#x3D; null || soundToPlay &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return;
+    }
+    this.audio.src &#x3D; soundToPlay;
     if (repeat) {
       this.audio.addEventListener(&#x27;ended&#x27;, function() {
         this.currentTime &#x3D; 0;
@@ -992,7 +1035,7 @@ export class AlarmService {
       this.connectionStatusStream.next(true);
     }
     const broadcastThreshold &#x3D; this.cdbService.getBroadcastThreshold();
-    this.connectionStatusTimer &#x3D; IntervalObservable.create(1000 * broadcastThreshold).subscribe(x &#x3D;&gt; {
+    this.connectionStatusTimer &#x3D; interval(1000 * broadcastThreshold).subscribe( () &#x3D;&gt; {
       this.connectionStatusStream.next(false);
     });
   }

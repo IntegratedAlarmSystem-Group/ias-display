@@ -1,7 +1,8 @@
 import { APP_BASE_HREF, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DataModule } from './data/data.module';
@@ -31,17 +32,18 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AuthModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    IasMaterialModule,
     NgxSpinnerModule,
+    IasMaterialModule,
     DataModule,
     HealthModule,
     OverviewModule,
     SharedModule,
     TabularModule,
     WeatherModule,
-    HttpModule,
     MapModule,
   ],
   providers: [

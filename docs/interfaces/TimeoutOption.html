@@ -181,11 +181,13 @@
 import { FormGroup, FormControl, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { SubscriptionLike as ISubscription } from &#x27;rxjs&#x27;;
 import { SidenavService } from &#x27;../sidenav.service&#x27;;
 import { AlarmService } from &#x27;../../data/alarm.service&#x27;;
 import { UserService } from &#x27;../../data/user.service&#x27;;
 import { AuthService } from &#x27;../../auth/auth.service&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
+import { Locale } from &#x27;../../settings&#x27;;
 
 /**
 * Definition of a timeout option for shelving an alarm
@@ -280,6 +282,27 @@ export class ShelveComponent implements OnInit, OnDestroy {
   shelvedAtMessage &#x3D; &#x27;&#x27;;
 
   /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
+
+  /**
+   * Sidenav service subscription
+   */
+ sidenavReloadSubscription: ISubscription;
+
+ /** String to store the formatting of dates, read form the settings */
+ private dateFormat: string;
+
+ /** String to store the timezone to display dates, read from the settings */
+ private timezone: string;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -304,6 +327,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Get the alarmID from the url, create the form and open the sidenav
    */
   ngOnInit() {
+    this.dateFormat &#x3D; Locale.DATE_FORMAT;
+    this.timezone &#x3D; Locale.TIMEZONE;
     this.user &#x3D; new FormControl(&#x27;&#x27;, [Validators.required]);
     this.message &#x3D; new FormControl(&#x27;&#x27;, [Validators.required]);
     this.timeout &#x3D; new FormControl(this.defaultTimeout, [Validators.required]);
@@ -313,24 +338,57 @@ export class ShelveComponent implements OnInit, OnDestroy {
       message: this.message,
       timeout: this.timeout
     });
-    this.route.paramMap.subscribe( paramMap &#x3D;&gt; {
+    this.paramMapSubscription &#x3D; this.route.paramMap
+    .subscribe( paramMap &#x3D;&gt; {
       this.alarm_id &#x3D; paramMap.get(&#x27;alarmID&#x27;);
-      this.reload();
+      this.check_request_and_reload();
     });
-    this.sidenavService.shouldReload.subscribe(
+    this.sidenavReloadSubscription &#x3D; this.sidenavService.shouldReload
+    .subscribe(
       value &#x3D;&gt; {
         if (value &#x3D;&#x3D;&#x3D; true) {
           this.reload();
         }
       }
     );
+    this.alarmChangeSubscription &#x3D; this.alarmService.alarmChangeStream
+    .subscribe( () &#x3D;&gt; {
+      this.check_request_and_reload();
+    });
     this.sidenavService.open();
+  }
+
+  /**
+  * Method to manage the information of the component
+  */
+  check_request_and_reload(): void {
+    const alarmDataAvailable &#x3D; this.alarmService.isAlarmIndexAvailable(
+      this.alarm_id
+    );
+    if (alarmDataAvailable &#x3D;&#x3D;&#x3D; true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !&#x3D;&#x3D; this.alarm_id) {
+          this.reload();
+        }
+      } else {
+        this.reload();
+      }
+    }
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.sidenavReloadSubscription) {
+      this.sidenavReloadSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
   }
 
@@ -380,7 +438,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {string} the text to display in the title, either &quot;Shelving results&quot; or &quot;Unshelving results&quot;
    */
   getResponseMessageTitle(): string {
-    let action;
+    let action: string;
     if (!this.alarm.shelved) {
       action &#x3D; &#x27;Shelving&#x27;;
     } else {
@@ -467,12 +525,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   requestShelveInfo(): void {
     this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
-        (response) &#x3D;&gt; {
+        (response: any) &#x3D;&gt; {
           const registry &#x3D; response[0];
           this.shelvedAtMessage &#x3D; &#x27;This Alarm was shelved at &#x27; + registry[&#x27;shelved_at&#x27;] +
           &#x27; with a duration of &#x27; + this.timeouts.find(t &#x3D;&gt; t.value &#x3D;&#x3D;&#x3D; registry[&#x27;timeout&#x27;]).viewValue;
         },
-        (error) &#x3D;&gt; {
+        (error: any) &#x3D;&gt; {
           console.log(&#x27;Error: &#x27;, error);
           return error;
         }
@@ -490,12 +548,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
       this.alarmService.shelveAlarm(
         this.alarm.core_id, message, timeout, this.user_selected
       ).subscribe(
-          (response) &#x3D;&gt; {
+          (response: any) &#x3D;&gt; {
             this.requestStatus &#x3D; 1;
             this.hideSpinner();
             this.errorMessage &#x3D; &#x27;&#x27;;
           },
-          (error) &#x3D;&gt; {
+          (error: any) &#x3D;&gt; {
             if (error.status &#x3D;&#x3D;&#x3D; 403) {
               this.requestStatus &#x3D; -2;
             } else {
@@ -520,12 +578,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
         [this.alarm.core_id], this.form.get(&#x27;message&#x27;).value).subscribe(
-          (response) &#x3D;&gt; {
+          (response: any) &#x3D;&gt; {
             this.requestStatus &#x3D; 1;
             this.hideSpinner();
             this.errorMessage &#x3D; &#x27;&#x27;;
           },
-          (error) &#x3D;&gt; {
+          (error: any) &#x3D;&gt; {
             console.log(&#x27;Error: &#x27;, error);
             this.requestStatus &#x3D; -1;
             this.hideSpinner();

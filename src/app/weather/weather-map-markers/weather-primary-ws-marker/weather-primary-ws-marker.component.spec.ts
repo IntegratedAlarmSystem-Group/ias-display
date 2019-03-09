@@ -1,10 +1,9 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { WeatherPrimaryWsMarkerComponent } from './weather-primary-ws-marker.component';
 import { WeatherService } from '../../weather.service';
-import { AlarmComponent } from '../../../shared/alarm/alarm.component';
-import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 import { DataModule } from '../../../data/data.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { mockWeatherStationsConfig, mockImagesSets} from '../../test_fixtures';
 
 describe('WeatherPrimaryWsMarkerComponent', () => {
@@ -16,11 +15,11 @@ describe('WeatherPrimaryWsMarkerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         WeatherPrimaryWsMarkerComponent,
-        AlarmComponent
       ],
       imports: [
         HttpClientModule,
-        DataModule
+        DataModule,
+        SharedModule
       ],
       providers: [
         HttpClient,

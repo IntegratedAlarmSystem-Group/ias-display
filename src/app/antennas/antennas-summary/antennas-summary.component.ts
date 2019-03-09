@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
-import { Assets } from '../../settings';
 
 /**
  * Summarized state of the Antennas Arrays
@@ -41,7 +39,12 @@ export class AntennasSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.antennasService.antennasSummaryConfig);
+    const conf = this.antennasService.antennasSummaryConfig;
+    if (conf && conf[0]) {
+      return this.alarmService.getAlarm(conf[0]);
+    } else {
+      return null;
+    }
   }
 
   /**

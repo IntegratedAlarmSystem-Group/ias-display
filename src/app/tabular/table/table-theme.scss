@@ -1,0 +1,32 @@
+@mixin table-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-table {
+    background: transparent;
+  }
+
+  .mat-row {
+    background: mat-color($background, dialog);
+
+    &:nth-child(odd){
+      background-color: mat-color($background, dialog);
+    }
+
+    &:nth-child(even){
+      background-color: transparent;
+    }
+
+    &:hover {
+      background: mat-color($background, hover);
+    }
+  }
+
+  .table-content {
+    background: transparent;
+  }
+}

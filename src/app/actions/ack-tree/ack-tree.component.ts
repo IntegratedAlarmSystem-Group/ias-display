@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { OnInit, OnChanges, Injectable } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, SimpleChange } from '@angular/core';
+import { OnInit, OnChanges } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
-import { of as ofObservable, Observable, BehaviorSubject } from 'rxjs';
+import { of as ofObservable, Observable } from 'rxjs';
 import { AlarmService } from '../../data/alarm.service';
 import { Alarm } from '../../data/alarm';
 
@@ -81,23 +81,45 @@ export class AckTreeComponent implements OnInit, OnChanges {
 
   /**
    * This function is defined by default and executed on Component startup.
-   * It is currently unused and {@link ngOnChanges} is being used instead
    */
   ngOnInit() {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<AlarmItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.checklistSelection.onChange.subscribe(data => {
+    this.checklistSelection.onChange.subscribe( () => {
       this.updateAckList();
     });
-    this.ngOnChanges();
+    this.updateData();
   }
 
   /**
    * This function is executed on Component startup and everytime its state changes.
-   * It currently builds the tree by reading the data from the alarm (whevenver the alarm changes)
+   * It currently builds the tree by reading the data from the alarm (whenever the alarm changes)
    */
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.selectedAlarm) {
+      if (changes.selectedAlarm.previousValue) {
+        const alarm: SimpleChange = changes.selectedAlarm;
+        const prevAlarmCoreID = alarm.previousValue.core_id;
+        const currentAlarmCoreID = alarm.currentValue.core_id;
+        const prevDependenciesString = alarm.previousValue.dependencies.sort().join();
+        const currentDependenciesString = alarm.currentValue.dependencies.sort().join();
+        const dependenciesChange = (prevDependenciesString !== currentDependenciesString);
+        const coreIDChange = (prevAlarmCoreID !== currentAlarmCoreID);
+        if ((coreIDChange === true) || (dependenciesChange === true)) {
+          this.updateData();
+        }
+      } else {
+        this.updateData();
+      }
+    }
+  }
+
+
+  /**
+   * Update the data for the dataSource
+   */
+  updateData() {
     if (this.dataSource) {
       const tree_data = this.getTreeData();
       this.dataSource.data = this.buildFileTree(tree_data, 0);
@@ -143,9 +165,9 @@ export class AckTreeComponent implements OnInit, OnChanges {
 
   /**
    * Get tree data from selected alarm
-   * @returns {dictionary}  the tree data in a JSON format
+   * @returns {any}  the tree data in a JSON format
    */
-  getTreeData() {
+  getTreeData(): any {
     const tree_data = {};
     tree_data[this.selectedAlarm.core_id] = this._getSubTree(this.selectedAlarm);
     return tree_data;
@@ -154,9 +176,9 @@ export class AckTreeComponent implements OnInit, OnChanges {
   /**
    * Auxiliary function used to get the tree data from a given alarm
    * @param {Alarm} alarm the {@link Alarm}
-   * @returns {dictionary}  the tree data in a JSON format
+   * @returns {any}  the tree data in a JSON format
    */
-  private _getSubTree(alarm: Alarm) {
+  private _getSubTree(alarm: Alarm): any {
     if (alarm.dependencies.length === 0) {
       return null;
     }
@@ -169,6 +191,10 @@ export class AckTreeComponent implements OnInit, OnChanges {
       const subSubTree = this._getSubTree(childAlarm);
       subTree[childId] = subSubTree;
     }
+    const subTreeIsEmpty = Object.keys(subTree).length === 0;
+    if ( subTreeIsEmpty ) {
+      return null;
+    }
     return subTree;
   }
 
@@ -176,9 +202,9 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * @param {any} value the node as a Json object, or a sub-tree of a Json object.
    * @param {number} level the level of the node
-   * @returns {list} the list of `AlarmItemNode`.
+   * @returns {AlarmItemNode[]} the list of `AlarmItemNode`.
    */
-  buildFileTree(value: any, level: number) {
+  buildFileTree(value: any, level: number): AlarmItemNode[] {
     const data: any[] = [];
     for (const k in value) {
       if (k in value) {
@@ -202,10 +228,10 @@ export class AckTreeComponent implements OnInit, OnChanges {
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    * @param {AlarmItemNode} node the node
    * @param {number} level the level node
-   * @returns {flatNode} the node converted to a FlatNode
+   * @returns {AlarmItemFlatNode} the node converted to a FlatNode
    */
   transformer = (node: AlarmItemNode, level: number) => {
-    let flatNode;
+    let flatNode: any;
     if (this.nestedNodeMap.has(node) && this.nestedNodeMap.get(node) !== null && this.nestedNodeMap.get(node).item === node.item) {
       flatNode = this.nestedNodeMap.get(node);
     } else {

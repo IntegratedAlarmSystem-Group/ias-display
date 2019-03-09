@@ -1,16 +1,20 @@
 <div class="ias content" (click)="redirect()">
-  <div class="ias sensors">
-    <div class="row no-vertical-margin">
-      <div class="sensors-card-wrapper">
-          <div class="sensors-card global-antennas-status no-border">
-              <div class="title">STATUS</div>
-              <div class="icon">
-                <app-alarm
-                  [alarm]="alarm" [images]="this.antennasService.antennaImageSet" [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet" [size]="'lg'"
-                ></app-alarm>
-              </div>
-          </div>
-      </div>
+  <div
+    class="container"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+  >
+    <div>
+      <app-alarm-tile
+        fxFlex
+        [alarm]="alarm"
+        [images]="this.antennasService.antennaImageSet"
+        [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet"
+        [size]="'lg'"
+        [alarmNameMaxSize]="10"
+        [optionalAlarmName]="'STATUS'"
+        [tooltipDirection]="'left'"
+      ></app-alarm-tile>
     </div>
   </div>
 </div>

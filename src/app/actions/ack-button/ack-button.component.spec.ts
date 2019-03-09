@@ -1,23 +1,16 @@
-import { DebugElement } from '@angular/core';
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { Router } from '@angular/router';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { AckButtonComponent } from './ack-button.component';
 import { Alarm } from '../../data/alarm';
-import { Iasio } from '../../data/iasio';
 
 
 describe('GIVEN an AckButtonComponent', () => {
   let component: AckButtonComponent;
   let fixture: ComponentFixture<AckButtonComponent>;
-  let debug: DebugElement;
-  let html: HTMLElement;
+  let button: any;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
   const mockAlarm = Alarm.asAlarm({
     'value': 4,
@@ -55,10 +48,9 @@ describe('GIVEN an AckButtonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AckButtonComponent);
+    button = fixture.nativeElement.querySelector('.ack-button');
     component = fixture.componentInstance;
     component.alarm = mockAlarm;
-    debug = fixture.debugElement;
-    html = debug.nativeElement;
     fixture.detectChanges();
   });
 
@@ -67,14 +59,39 @@ describe('GIVEN an AckButtonComponent', () => {
     expect(component.alarm.core_id).toBe('coreid$1');
   });
 
+  describe('AND IF the alarm is not-acknowledged', () => {
+    it('THEN button should be enabled', () => {
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 1267252440000;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeFalsy();
+    });
+  });
+
+  describe('AND IF the alarm is acknowledged', () => {
+    it('THEN button should be disabled', () => {
+      component.alarm.ack = true;
+      component.alarm.state_change_timestamp = 1267252440000;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeTruthy();
+    });
+  });
+
+  describe('AND IF the alarm is not-acknowledged, but the state_change_timestamp is 0', () => {
+    it('THEN button should be disabled', () => {
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 0;
+      fixture.detectChanges();
+      button = fixture.nativeElement.querySelector('.ack-button');
+      expect(button.disabled).toBeTruthy();
+    });
+  });
+
   describe('AND WHEN the user clicks on it', () => {
     it('THEN the sidenav is opened with the AcknowledgeComponent as content', () => {
-      const mockEvent = {
-        data: {
-          alarm: Alarm.asAlarm(mockAlarm)
-        }
-      };
-      component.onClick(null);
+      component.onClick();
       const expectedargs = component.alarm.core_id;
       expect(spyRoutingTable.goToAcknowledge.calls.count()).toBe(1, 'spy method was called once');
       expect(spyRoutingTable.goToAcknowledge.calls.mostRecent().args[0]).

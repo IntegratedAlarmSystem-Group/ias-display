@@ -1,3 +1,10 @@
-<button mat-icon-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick($event)" [disabled]="!url">
-  <i class="ion-md-open wiki-button-icon"></i>
+<button mat-flat-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick()" [disabled]="!url">
+  <!-- <i class="ion-md-open wiki-button-icon"></i> -->
+  <div *ngIf="isDisabled(); then goToOff else goToOn"></div>
+  <ng-template #goToOn>
+    <div class="wiki-button-icon"> <img src="/assets/img/go-to-on-btn-icon.svg"/> </div>
+  </ng-template>
+  <ng-template #goToOff>
+    <div class="wiki-button-icon"> <img src="/assets/img/go-to-off-btn-icon.svg"/> </div>
+  </ng-template>
 </button>

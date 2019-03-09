@@ -1,44 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
+import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, WeatherSettings } from '../settings';
-
-
-/**
-* Stores the IDs of the {@link Alarm} objects associated to a WeatherStation
-*/
-export class WeatherStationConfig {
-
-  /** ID to map the {@link Alarm} to the location on the map */
-  public placemark: string;
-
-  /** Group of placemarks who the alarm belongs */
-  public group: string;
-
-  /** ID of the main {@link Alarm} of the Weather Station */
-  public station: string;
-
-  /** ID of the temperature {@link Alarm} of the Weather Station */
-  public temperature: string;
-
-  /** ID of the windspeed {@link Alarm} of the Weather Station */
-  public windspeed: string;
-
-  /** ID of the humidity {@link Alarm} of the Weather Station */
-  public humidity: string;
-
-  /**
-  * Builds a new WeatherStationConfig instance
-  * @param {Object} attributes a dictionary containing the attributes to
-  * create the object
-  */
-  constructor(attributes: Object = {}) {
-    Object.assign(this, attributes);
-  }
-}
 
 /**
 * Service that stores and handles all configuration needed by the components of the {@link WeatherModule}
@@ -71,10 +39,10 @@ export class WeatherService {
   public markerImageUnreliableSet: AlarmImageSet;
 
   /** Alarms Ids for the weather summary **/
-  public weatherSummaryConfig: WeatherStationConfig;
+  public weatherSummaryConfig: AlarmConfig[];
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
-  public weatherStationsConfig: WeatherStationConfig[];
+  public weatherStationsConfig: AlarmConfig[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -90,9 +58,11 @@ export class WeatherService {
 
   /**
    * Instantiates the service
+   * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {HttpClientService} httpClient Service used to perform HTTP requests
    */
   constructor(
+    private alarmService: AlarmService,
     private httpClient: HttpClientService
   ) {}
 
@@ -105,6 +75,35 @@ export class WeatherService {
       this.loadImages();
       this.loadPadsStatus('');
       this._initialized = true;
+    }
+  }
+
+  /**
+  * Returns the instance of the {@link Alarm}
+  * @param {AlarmConfig} config the corresponding AlarmConfig from where to get the type
+  * @returns {string} the type of the {@link Alarm} associated to the given {@link AlarmConfig}
+  */
+  getIconSet(config: AlarmConfig, reliable: boolean): AlarmImageSet {
+    if (!config) {
+      return null;
+    }
+    const type = config.type;
+    if (reliable) {
+      if (config.type === 'humidity') {
+        return this.humidityImageSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageSet;
+      }
+    } else {
+      if (config.type === 'humidity') {
+        return this.humidityImageUnreliableSet;
+      } else if (config.type === 'temperature') {
+        return this.tempImageUnreliableSet;
+      } else if (config.type === 'windspeed') {
+        return this.windsImageUnreliableSet;
+      }
     }
   }
 
@@ -145,10 +144,10 @@ export class WeatherService {
   */
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
-      this.weatherStationsConfig = response as WeatherStationConfig[];
+      this.weatherStationsConfig = response as AlarmConfig[];
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
-      this.weatherSummaryConfig = response as WeatherStationConfig;
+      this.weatherSummaryConfig = response as AlarmConfig[];
     });
   }
 
@@ -158,98 +157,98 @@ export class WeatherService {
   loadImages() {
     /** Set of Humidity icons */
     this.humidityImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-valid-clear.svg',
-      set_low: Assets.ICONS + 'hum-valid-low.svg',
-      set_medium: Assets.ICONS + 'hum-valid-low.svg',
-      set_high: Assets.ICONS + 'hum-valid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-valid-critical.svg',
-      unknown: Assets.ICONS + 'hum-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-valid-maint.svg',
-      shelved: Assets.ICONS + 'hum-valid-clear.svg',
+      clear: Assets.ICONS + 'humidity-valid-clear.svg',
+      set_low: Assets.ICONS + 'humidity-valid-low.svg',
+      set_medium: Assets.ICONS + 'humidity-valid-low.svg',
+      set_high: Assets.ICONS + 'humidity-valid-critical.svg',
+      set_critical: Assets.ICONS + 'humidity-valid-critical.svg',
+      unknown: Assets.ICONS + 'humidity-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'humidity-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'humidity-valid-clear.svg',
     });
 
     /** Set of Temperature icons */
     this.tempImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-valid-clear.svg',
-      set_low: Assets.ICONS + 'temp-valid-low.svg',
-      set_medium: Assets.ICONS + 'temp-valid-low.svg',
-      set_high: Assets.ICONS + 'temp-valid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-valid-critical.svg',
-      unknown: Assets.ICONS + 'temp-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-valid-maint.svg',
-      shelved: Assets.ICONS + 'temp-valid-clear.svg',
+      clear: Assets.ICONS + 'temperature-valid-clear.svg',
+      set_low: Assets.ICONS + 'temperature-valid-low.svg',
+      set_medium: Assets.ICONS + 'temperature-valid-low.svg',
+      set_high: Assets.ICONS + 'temperature-valid-critical.svg',
+      set_critical: Assets.ICONS + 'temperature-valid-critical.svg',
+      unknown: Assets.ICONS + 'temperature-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'temperature-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'temperature-valid-clear.svg',
     });
 
     /** Set of Wind Speed icons */
     this.windsImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-valid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-valid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-valid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-valid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-valid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
+      clear: Assets.ICONS + 'wind_speed-clear-valid.svg',
+      set_low: Assets.ICONS + 'wind_speed-others-valid-low.svg',
+      set_medium: Assets.ICONS + 'wind_speed-others-valid-low.svg',
+      set_high: Assets.ICONS + 'wind_speed-critical-valid.svg',
+      set_critical: Assets.ICONS + 'wind_speed-critical-valid.svg',
+      unknown: Assets.ICONS + 'wind_speed-clear-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'wind_speed-clear-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'wind_speed-clear-valid.svg',
     });
 
     /** Set of Humidity Unreliable icons */
     this.humidityImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'hum-invalid-clear.svg',
-      set_low: Assets.ICONS + 'hum-invalid-low.svg',
-      set_medium: Assets.ICONS + 'hum-invalid-low.svg',
-      set_high: Assets.ICONS + 'hum-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'hum-invalid-critical.svg',
-      unknown: Assets.ICONS + 'hum-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'hum-invalid-maint.svg',
-      shelved: Assets.ICONS + 'hum-valid-clear.svg',
+      clear: Assets.ICONS + 'humidity-invalid-clear.svg',
+      set_low: Assets.ICONS + 'humidity-invalid-low.svg',
+      set_medium: Assets.ICONS + 'humidity-invalid-low.svg',
+      set_high: Assets.ICONS + 'humidity-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'humidity-invalid-critical.svg',
+      unknown: Assets.ICONS + 'humidity-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'humidity-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'humidity-valid-clear.svg',
     });
 
     /** Set of Temperature Unreliable icons */
     this.tempImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'temp-invalid-clear.svg',
-      set_low: Assets.ICONS + 'temp-invalid-low.svg',
-      set_medium: Assets.ICONS + 'temp-invalid-low.svg',
-      set_high: Assets.ICONS + 'temp-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'temp-invalid-critical.svg',
-      unknown: Assets.ICONS + 'temp-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'temp-invalid-maint.svg',
-      shelved: Assets.ICONS + 'temp-valid-clear.svg',
+      clear: Assets.ICONS + 'temperature-invalid-clear.svg',
+      set_low: Assets.ICONS + 'temperature-invalid-low.svg',
+      set_medium: Assets.ICONS + 'temperature-invalid-low.svg',
+      set_high: Assets.ICONS + 'temperature-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'temperature-invalid-critical.svg',
+      unknown: Assets.ICONS + 'temperature-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'temperature-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'temperature-valid-clear.svg',
     });
 
     /** Set of Wind Speed Unreliable icons */
     this.windsImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'wind_s-invalid-clear.svg',
-      set_low: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_medium: Assets.ICONS + 'wind_s-invalid-low.svg',
-      set_high: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'wind_s-invalid-critical.svg',
-      unknown: Assets.ICONS + 'wind_s-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'wind_s-invalid-maint.svg',
-      shelved: Assets.ICONS + 'wind_s-valid-clear.svg',
+      clear: Assets.ICONS + 'wind_speed-clear-invalid.svg',
+      set_low: Assets.ICONS + 'wind_speed-others-invalid-low.svg',
+      set_medium: Assets.ICONS + 'wind_speed-others-invalid-low.svg',
+      set_high: Assets.ICONS + 'wind_speed-critical-invalid.svg',
+      set_critical: Assets.ICONS + 'wind_speed-critical-invalid.svg',
+      unknown: Assets.ICONS + 'wind_speed-clear-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'wind_speed-clear-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'wind_speed-clear-valid.svg',
     });
 
     /** Set of Marker icons */
     this.markerImageSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'weather_s-valid-clear.svg',
-      set_low: Assets.ICONS + 'weather_s-valid-medium.svg',
-      set_medium: Assets.ICONS + 'weather_s-valid-medium.svg',
-      set_high: Assets.ICONS + 'weather_s-valid-critical.svg',
-      set_critical: Assets.ICONS + 'weather_s-valid-critical.svg',
-      unknown: Assets.ICONS + 'weather_s-valid-unknown.svg',
-      maintenance: Assets.ICONS + 'weather_s-valid-maintenance.svg',
-      shelved: Assets.ICONS + 'weather_s-valid-clear.svg',
+      clear: Assets.ICONS + 'weather_station-valid-clear.svg',
+      set_low: Assets.ICONS + 'weather_station-valid-low.svg',
+      set_medium: Assets.ICONS + 'weather_station-valid-low.svg',
+      set_high: Assets.ICONS + 'weather_station-valid-critical.svg',
+      set_critical: Assets.ICONS + 'weather_station-valid-critical.svg',
+      unknown: Assets.ICONS + 'weather_station-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'weather_station-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'weather_station-valid-clear.svg',
     });
 
     /** Set of Marker Unreliable icons */
     this.markerImageUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'weather_s-invalid-clear.svg',
-      set_low: Assets.ICONS + 'weather_s-invalid-medium.svg',
-      set_medium: Assets.ICONS + 'weather_s-invalid-medium.svg',
-      set_high: Assets.ICONS + 'weather_s-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'weather_s-invalid-critical.svg',
-      unknown: Assets.ICONS + 'weather_s-invalid-unknown.svg',
-      maintenance: Assets.ICONS + 'weather_s-invalid-maintenance.svg',
-      shelved: Assets.ICONS + 'weather_s-valid-clear.svg',
+      clear: Assets.ICONS + 'weather_station-invalid-clear.svg',
+      set_low: Assets.ICONS + 'weather_station-invalid-low.svg',
+      set_medium: Assets.ICONS + 'weather_station-invalid-low.svg',
+      set_high: Assets.ICONS + 'weather_station-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'weather_station-invalid-critical.svg',
+      unknown: Assets.ICONS + 'weather_station-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'weather_station-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'weather_station-valid-clear.svg',
     });
   }
 }

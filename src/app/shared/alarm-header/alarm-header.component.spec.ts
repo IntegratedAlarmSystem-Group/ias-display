@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmHeaderComponent } from './alarm-header.component';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
 
 const expected_classes = {
@@ -33,7 +35,12 @@ describe('AlarmHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmHeaderComponent ]
+      declarations: [
+        AlarmHeaderComponent,
+        AlarmLabelComponent,
+        AlarmTooltipComponent
+      ],
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));

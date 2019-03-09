@@ -17,7 +17,10 @@
 
 <!-- Title when one antenna is selected -->
 <ng-template #returnLink>
-    <div class="return-link" (click)="unselectAntenna()"> <i class="material-icons">chevron_left</i> <span> {{getAntennaName(this.selectedAntenna)}} </span> </div>
+    <div class="return-link" (click)="unselectAntenna()">
+      <i class="material-icons">chevron_left</i>
+      <span> {{alarmService.getName(this.selectedAntenna)}} </span>
+    </div>
 </ng-template>
 
 <!-- Content when there is not a selected antenna -->
@@ -25,7 +28,13 @@
   <div class="antennas-container">
     <div class="grid-container">
       <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">
-        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>
+        <app-alarm-card
+          fxFlex
+          [alarm]="alarmService.getAlarm(antennaConfig)"
+          [alarmNameMaxSize]="4"
+          [optionalAlarmName]="alarmService.getName(antennaConfig)"
+          [tooltipDirection]="'left'"
+        ></app-alarm-card>
       </div>
     </div>
   </div>
@@ -36,16 +45,21 @@
         <tr>
           <td class="antenna">
             <div class="text">
-              <app-alarm [alarm]="this.getAlarm(device.alarm)" [text]="device.antenna"></app-alarm>
+              <app-alarm
+                [alarm]="alarmService.getAlarm(device)"
+                [text]="alarmService.getName(device)"
+                [labelMode]="'hidden'"
+                [showActionBadges]="false"
+              ></app-alarm>
             </div>
           </td>
           <td>
             <div class="status">
-              <app-status-view [alarm]="this.getAlarm(device.alarm)" [showActionBadges]="false"></app-status-view>
+              <app-status-view [alarm]="alarmService.getAlarm(device)" [showActionBadges]="true"></app-status-view>
             </div>
           </td>
           <td class="buttons" align="right">
-            <app-buttons [alarm]="this.getAlarm(device.alarm)"></app-buttons>
+            <app-buttons [alarm]="alarmService.getAlarm(device)"></app-buttons>
           </td>
         </tr>
       </ng-container>
@@ -56,204 +70,32 @@
 <!-- Content when one antenna is selected -->
 <ng-template #antennasDetail>
   <div class="antennas-detail alarm-info">
-    <table>
-      <tr>
-        <th>Alarm ID</th>
-        <td>{{this.selectedAntenna.alarm}}</td>
-      </tr>
-      <tr>
-        <th>Antenna</th>
-        <td>{{this.selectedAntenna.antenna}}</td>
-      </tr>
-      <tr>
-        <th>Location (PAD)</th>
-        <td>{{this.selectedAntenna.placemark}}</td>
-      </tr>
-    </table>
+    <div class="alarm-data">
+      <table>
+        <tr>
+          <th class="header">Alarm ID</th>
+          <td>{{this.selectedAntenna.alarm_id}}</td>
+        </tr>
+        <tr>
+          <th class="header">Antenna (Pad)</th>
+          <td>{{this.alarmService.getName(selectedAntenna)}} ({{this.selectedAntenna.placemark}})</td>
+        </tr>
+      </table>
+    </div>
+    <div class="alarm-buttons">
+      <app-buttons [alarm]="alarmService.getAlarm(this.selectedAntenna)"></app-buttons>
+    </div>
   </div>
 
-  <div class="antennas-detail devices-alarms">
-    <table>
-      <tr>
-        <td class="antenna">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [text]="'Antenna'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.alarm)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire)" [text]="'Fire'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [text]="'Fire Malfunction'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.ups)" [text]="'UPS Failure'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.ups)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.ups)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [text]="'HVAC Failure'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.hvac)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.power)" [text]="'Power Cut'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.power)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.power)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [text]="'Cryo temperature sensor 0'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [text]="'Cryo temperature sensor 5'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [text]="'Cryo temperature sensor 9'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [text]="'Cryo pressure sensor 0'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [text]="'Cryo pressure sensor 1'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)"></app-buttons>
-        </td>
-      </tr>
-      <tr>
-        <td class="device">
-          <div class="text">
-            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [text]="'Compressor Drive OFF'"></app-alarm>
-          </div>
-        </td>
-        <td>
-          <div class="status">
-            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [showActionBadges]="false"></app-status-view>
-          </div>
-        </td>
-        <td class="buttons" align="right">
-          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)"></app-buttons>
-        </td>
-      </tr>
-    </table>
+  <div class="antennas-detail subalarms">
+    <div class="subalarms-header">
+      Antenna devices alarms
+    </div>
+    <app-table
+      [displayedColumns] = "['status', 'name', 'mode', 'actions']"
+      [alarmsToDisplay] = "this.getChildrenAlarmIds()"
+      [pageSizeOptions] = "[12, 25, 50, 100]"
+    >
+    </app-table>
   </div>
 </ng-template>

@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
   * @param {any} item an item of the navigation sidenav
   * @returns {Object} The links in a dictionary
   */
-  getActionsLink(item: any) {
+  getActionsLink(item: any): Object {
     if (this.actionsSidenavService.canClose) {
       return {outlets: { primary: item.link, actions: null }};
     } else {
@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
    " Uses the getUser method defined on the {@link AuthService}
    * @returns {string} the username
    */
-  getUser() {
+  getUser(): string {
     return this.authService.getUser();
   }
 
@@ -178,7 +178,7 @@ export class AppComponent implements OnInit {
    * variable
    * @returns {string} the classname for the nav item mark
    */
-   getNavItemCountClass(navItem, countByView) {
+   getNavItemCountClass(navItem: any, countByView: any): string {
      const navItemCounter = navItem.counter;
      const availableCounters = Object.keys(countByView);
      if (navItemCounter === '') {
@@ -207,7 +207,7 @@ export class AppComponent implements OnInit {
     * variable
     * @returns {string} the text related to the count for the nav item
     */
-    getNavItemCountText(navItem, countByView) {
+    getNavItemCountText(navItem: any, countByView: any): string {
       const navItemCounter = navItem.counter;
       const availableCounters = Object.keys(countByView);
       if (navItemCounter === '') {

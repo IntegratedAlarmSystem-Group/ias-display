@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidenavService } from '../sidenav.service';
@@ -7,6 +8,7 @@ import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
+import { Locale } from '../../settings';
 
 /**
 * Component used to perform acknowledgement of an Alarm
@@ -72,6 +74,22 @@ export class AckComponent implements OnInit, OnDestroy {
   requestStatus = 0;
 
   /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
+
+  /** String to store the formatting of dates, read form the settings */
+  private dateFormat: string;
+
+  /** String to store the timezone to display dates, read from the settings */
+  private timezone: string;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -88,41 +106,77 @@ export class AckComponent implements OnInit, OnDestroy {
     public sidenavService: SidenavService,
     private spinnerService: NgxSpinnerService,
     private userService: UserService,
-    public authService: AuthService
+    public authService: AuthService,
   ) { }
 
   /**
   * Initiates the component, by getting the alarm_id from the url.
   */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     this.user = new FormControl('', [Validators.required]);
     this.message = new FormControl('', [Validators.required]);
     this.form = this.formBuilder.group({
       user: this.user,
       message: this.message,
     });
-    this.route.paramMap.subscribe( paramMap => {
+    this.paramMapSubscription = this.route.paramMap
+    .subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
+      this.check_request_and_reload();
+    });
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream
+    .subscribe( () => {
+      this.check_request_and_reload();
     });
     this.sidenavService.open();
-    this.getMissingAcksInfo();
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
+  }
+
+
+  /**
+  * Method to manage the information of the component
+  */
+  check_request_and_reload(): void {
+    const alarmDataAvailable = this.alarmService.isAlarmIndexAvailable(
+      this.alarm_id
+    );
+    if (alarmDataAvailable === true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !== this.alarm_id) {
+          this.reload();
+        } else {
+          this.reload({onlyMissingAcksInfo: true})
+        }
+      } else {
+        this.reload();
+      }
+    }
   }
 
   /**
   * Cleans the component and reloads the Alarm
   */
-  reload(): void {
-    this.alarm = this.alarmService.get(this.alarm_id);
-    this.requestStatus = 0;
-    this.message.reset();
+  reload({onlyMissingAcksInfo= false}: {onlyMissingAcksInfo?: boolean} = {}): void {
+    if (onlyMissingAcksInfo === false) {
+      this.alarm = this.alarmService.get(this.alarm_id);
+      this.requestStatus = 0;
+      this.message.reset();
+    }
+    this.getMissingAcksInfo();
   }
 
   /**
@@ -141,12 +195,12 @@ export class AckComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.alarmService.acknowledgeAlarms(
         this.alarmsToAck, this.form.get('message').value, this.user_selected).subscribe(
-          (response) => {
+          (response: any) => {
             this.acknowledgedAlarms = <string[]> response;
             this.requestStatus = 1;
             this.hideSpinner();
           },
-          (error) => {
+          (error: any) => {
             if (error.status === 403) {
               this.requestStatus = -2;
             } else {
@@ -181,7 +235,7 @@ export class AckComponent implements OnInit, OnDestroy {
    * Update the list of alarms to ack from the selection on the child component
    * @param {Event} event event triggered by the inner {@link AckTree}, containing the IDs fo the alarms to acknowledge
    */
-  updateAlarmsToAck(event): void {
+  updateAlarmsToAck(event: string[]): void {
     this.alarmsToAck = event;
   }
 
@@ -189,11 +243,15 @@ export class AckComponent implements OnInit, OnDestroy {
   * Method to invalidate ack action
   * @returns {boolean} True if ack action can be performed and false if not
   */
-  disableAcknowledgment() {
+  disableAcknowledgment(): boolean {
     const noAlarmsToAck = (this.alarmsToAck.length === 0);
     const validForm = this.form.valid;
     const isAllowed = this.authService.getAllowedActions()['can_ack'];
-    return (noAlarmsToAck || !validForm || !isAllowed);
+    let isAck = false;
+    if (this.alarm) {
+      isAck = this.alarm.ack;
+    }
+    return (noAlarmsToAck || !validForm || !isAllowed || isAck);
   }
 
   /**
@@ -201,7 +259,7 @@ export class AckComponent implements OnInit, OnDestroy {
   */
   getMissingAcksInfo(): void {
     if (this.alarm) {
-      this.missedAcks = [];
+      const missedAcks = [];
       this.alarmService.getMissingAcks(this.alarm.core_id).subscribe(
         (response) => {
           for (const [key, value] of Object.entries(response)) {
@@ -211,9 +269,10 @@ export class AckComponent implements OnInit, OnDestroy {
               if (count > 1) {
                 text += 's';
               }
-              this.missedAcks.push(text);
+              missedAcks.push(text);
             }
           }
+          this.missedAcks = missedAcks;
         }
       );
     }

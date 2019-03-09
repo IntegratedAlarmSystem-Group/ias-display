@@ -3,7 +3,8 @@ import { AlarmComponent } from '../../../shared/alarm/alarm.component';
 import { AlarmImageSet } from '../../../shared/alarm/alarm.component';
 import { AlarmService } from '../../../data/alarm.service';
 import { Alarm } from '../../../data/alarm';
-import { WeatherService, WeatherStationConfig } from '../../weather.service';
+import { AlarmConfig } from '../../../data/alarm-config';
+import { WeatherService } from '../../weather.service';
 import { Assets } from '../../../settings';
 
 /**
@@ -20,7 +21,7 @@ export class WeatherBackupWsMarkerComponent implements OnInit {
   public alarmId: string;
 
   /** Station config related to the component */
-  @Input() stationConfig: WeatherStationConfig;
+  @Input() stationConfig: AlarmConfig;
 
   /**
   * Builds an instance of the component
@@ -43,7 +44,7 @@ export class WeatherBackupWsMarkerComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   getAlarm(): Alarm {
-    return this.alarmService.get(this.stationConfig.station);
+    return this.alarmService.getAlarm(this.stationConfig);
   }
 
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AlarmComponent, AlarmImageSet } from '../../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
 import { BackendUrls } from '../../settings';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
 /**
@@ -23,8 +24,8 @@ export class HealthSummaryComponent implements OnInit {
   /** Set of Unreliable icons */
   public iconUnreliableSet: AlarmImageSet;
 
-  /** ID of the Alarm */
-  public alarmId: string;
+  /** Configuration for displaying the {@link Alarm} */
+  public alarmConfig: AlarmConfig[];
 
   /**
    * Builds an instance of the component
@@ -50,7 +51,11 @@ export class HealthSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.alarmId);
+    if (this.alarmConfig && this.alarmConfig[0]) {
+      return this.alarmService.get(this.alarmConfig[0].alarm_id);
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -62,7 +67,7 @@ export class HealthSummaryComponent implements OnInit {
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {
-          this.alarmId = response as string;
+          this.alarmConfig = response as AlarmConfig[];
         }
       }
     });
@@ -75,26 +80,26 @@ export class HealthSummaryComponent implements OnInit {
 
     /** Set of icons */
     this.iconSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'ias_health-valid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-valid-low.svg',
-      set_medium: Assets.ICONS + 'ias_health-valid-low.svg',
-      set_high: Assets.ICONS + 'ias_health-valid-critical.svg',
-      set_critical: Assets.ICONS + 'ias_health-valid-critical.svg',
-      unknown: Assets.ICONS + 'ias_health-valid-unkn.svg',
-      maintenance: Assets.ICONS + 'ias_health-valid-maint.svg',
-      shelved: Assets.ICONS + 'ias_health-valid-clear.svg',
+      clear: Assets.ICONS + 'ias_health-clear-valid.svg',
+      set_low: Assets.ICONS + 'ias_health-others-valid.svg',
+      set_medium: Assets.ICONS + 'ias_health-others-valid.svg',
+      set_high: Assets.ICONS + 'ias_health-critical-valid.svg',
+      set_critical: Assets.ICONS + 'ias_health-critical-valid.svg',
+      unknown: Assets.ICONS + 'ias_health-clear-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'ias_health-clear-valid-maintenance.svg',
+      shelved: Assets.ICONS + 'ias_health-clear-valid.svg',
     });
 
     /** Set of Unreliable icons */
     this.iconUnreliableSet = new AlarmImageSet({
-      clear: Assets.ICONS + 'ias_health-invalid-clear.svg',
-      set_low: Assets.ICONS + 'ias_health-invalid-low.svg',
-      set_medium: Assets.ICONS + 'ias_health-invalid-low.svg',
-      set_high: Assets.ICONS + 'ias_health-invalid-critical.svg',
-      set_critical: Assets.ICONS + 'ias_health-invalid-critical.svg',
-      unknown: Assets.ICONS + 'ias_health-invalid-unkn.svg',
-      maintenance: Assets.ICONS + 'ias_health-invalid-maint.svg',
-      shelved: Assets.ICONS + 'ias_health-invalid-clear.svg',
+      clear: Assets.ICONS + 'ias_health-clear-invalid.svg',
+      set_low: Assets.ICONS + 'ias_health-others-invalid.svg',
+      set_medium: Assets.ICONS + 'ias_health-others-invalid.svg',
+      set_high: Assets.ICONS + 'ias_health-critical-invalid.svg',
+      set_critical: Assets.ICONS + 'ias_health-critical-invalid.svg',
+      unknown: Assets.ICONS + 'ias_health-clear-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'ias_health-clear-invalid-maintenance.svg',
+      shelved: Assets.ICONS + 'ias_health-clear-valid.svg',
     });
   }
 

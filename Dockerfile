@@ -3,14 +3,10 @@ FROM centos:7 as builder
 # install chromium to run karma tests
 COPY google-chrome.repo /etc/yum.repos.d/
 RUN yum update -y && \
-  yum install -y google-chrome-stable && \
+  yum install -y google-chrome-stable wget && \
   yum clean all
 ENV CHROME_BIN=/opt/google/chrome/chrome \
   CHROME_PATH=/opt/google/chrome
-
-# install nodejs
-RUN sh -c "curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -" && \
-  yum install -y nodejs gcc-c++ make
 
 # create project folder
 RUN useradd --user-group --create-home --shell /bin/false node && \
@@ -18,25 +14,28 @@ RUN useradd --user-group --create-home --shell /bin/false node && \
   chown node:node /usr/src/ias-display
 WORKDIR /usr/src/ias-display
 
-# install Angular CLI
+# create user node
 USER node
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global \
-  PATH="/home/node/.npm-global/bin:${PATH}"
-RUN cd /home/node && \
-  npm install -g @angular/cli@6.0.8
+
+# install node
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+RUN . /home/node/.nvm/nvm.sh && nvm install 10.15.1
+
+# install Angular CLI
+RUN . /home/node/.nvm/nvm.sh && npm install -g @angular/cli@6.0.8
 
 # install project requirements
 COPY package.json .
 COPY package-lock.json .
-RUN npm install
+RUN . /home/node/.nvm/nvm.sh && npm install
 
 # copy project files
 COPY . .
 EXPOSE 4200
 
 # test and build project
-RUN ng test --watch=false --browsers=ChromeDocker --karma-config karma.low_resources.conf.js
-RUN npm run-script build-prod
+RUN . /home/node/.nvm/nvm.sh &&  ng test --watch=false --browsers=ChromeDocker --karma-config karma.low_resources.conf.js
+RUN . /home/node/.nvm/nvm.sh &&  npm run-script build-prod
 
 # copy compiled files to smaller image
 FROM centos:7

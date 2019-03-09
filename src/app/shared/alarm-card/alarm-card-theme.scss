@@ -1,0 +1,50 @@
+@mixin alarm-card-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .alarm-card-green {
+    border-color: transparent;
+    background: transparent;
+    &.alarm-card-unreliable {
+      border-color: mat-color($alarms, clear);
+    }
+  }
+
+  .alarm-card-yellow {
+    border-color: mat-color($alarms, set-low);
+    background: mat-color($alarms, set-low);
+    color: mat-color($alarms, set-card-dark-text);
+    &.alarm-card-unreliable {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  .alarm-card-red {
+    border-color: mat-color($alarms, set-critical);
+    background: mat-color($alarms, set-critical);
+  }
+
+  .alarm-card-gray {
+    border-color: mat-color($alarms, maintenance);
+    background: mat-color($alarms, maintenance);
+    color: mat-color($alarms, set-card-dark-text);
+    &.alarm-card-unreliable {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  .alarm-card-blue {
+    border-color: mat-color($alarms, unknown);
+    background: mat-color($alarms, unknown);
+  }
+
+  .alarm-card-unreliable {
+    background: transparent;
+  }
+
+}

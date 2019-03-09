@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService, WeatherStationConfig } from '../weather.service';
+import { WeatherService } from '../weather.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 
@@ -18,13 +19,13 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   /** Variable to manage a placemark selection
    * from the map, or from an external component
    */
-  @Input() selectedStation: WeatherStationConfig = null;
+  @Input() selectedStation: AlarmConfig = null;
 
   /** Variable to manage a placemark selection from the map */
-  @Output() placemarkClicked = new EventEmitter<WeatherStationConfig>();
+  @Output() placemarkClicked = new EventEmitter<AlarmConfig>();
 
   /** Variable to manage a placemark hover */
-  onHoverStation: WeatherStationConfig = null;
+  onHoverStation: AlarmConfig = null;
 
   /** Placemarks list obtained from the webserver */
   public mapPlacemarks = {};
@@ -203,10 +204,10 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Style for the backup weather stations
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    * @return {string} class name of the graphical element
    */
-  getBackupWeatherStationStyle(stationConfig: WeatherStationConfig): string {
+  getBackupWeatherStationStyle(stationConfig: AlarmConfig): string {
     if (this.selectedStation === null || this.selectedStation === undefined) {
       return 'weather-display-hide';
     } else {
@@ -235,10 +236,10 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Style for the main weather station group
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    * @return {string} class name of the graphical element
    */
-  getPrimaryWeatherStationStyle(stationConfig: WeatherStationConfig): string {
+  getPrimaryWeatherStationStyle(stationConfig: AlarmConfig): string {
     if (this.selectedStation === null || this.selectedStation === undefined) {
       return 'opacity-100';
     } else {
@@ -257,10 +258,10 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Check if the placemarker related to a main weather station is hovered
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    * @return {boolean} True if the alarm specified is hover, false if not
    */
-   isOnHover(stationConfig: WeatherStationConfig): boolean {
+   isOnHover(stationConfig: AlarmConfig): boolean {
     if (stationConfig) {
       return stationConfig === this.onHoverStation;
     }
@@ -268,10 +269,10 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Check if the placemarker related to a main weather station is selected
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    * @return {boolean} True if the station alarm is selected, false if it is not
    */
-  isSelected(stationConfig: WeatherStationConfig): boolean {
+  isSelected(stationConfig: AlarmConfig): boolean {
     if (this.selectedStation === null) {
       return false;
     } else {
@@ -281,9 +282,9 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Identify primary weather station group on hover
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    */
-  mouseEnterPrimaryWeatherStationGroup(stationConfig: WeatherStationConfig) {
+  mouseEnterPrimaryWeatherStationGroup(stationConfig: AlarmConfig) {
     if (stationConfig) {
       this.onHoverStation = stationConfig;
     }
@@ -296,9 +297,9 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /**
    * Action after click on a weather station marker
-   * @param {WeatherStationConfig} stationConfig configuration of the alarm
+   * @param {AlarmConfig} stationConfig configuration of the alarm
    */
-  onClick(stationConfig: WeatherStationConfig) {
+  onClick(stationConfig: AlarmConfig) {
     if (this.isSelected(stationConfig)) {
       this.selectedStation = null;
     } else {

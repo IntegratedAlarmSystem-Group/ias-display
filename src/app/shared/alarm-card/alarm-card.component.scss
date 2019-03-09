@@ -1,0 +1,69 @@
+.alarm-card {
+
+  display:block;
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 4px;
+  font-weight: normal;
+
+  width:100%;
+  min-height: 60px;
+  width: 84.5px;
+  height:60px;
+  margin-bottom:15px;
+  line-height: normal;
+
+  .alarm-card-content {
+    height:100%;
+    padding:10px 4px;
+    .alarm-name {}
+    .alarm-priority {
+      font-size:10px;
+      text-transform: uppercase;
+      padding: 2px 0px;
+    }
+  }
+
+  .alarm-card-badges {
+    height:100%;
+    max-width:20px;
+    margin-right:4%;
+    position: relative;
+
+    .badges {
+      .badge-icon {
+        position: absolute;
+        &.ack-icon { top: 16%; }
+        &.shelve-icon { bottom: 12%; }
+      }
+      .badge-off {
+        opacity: 0.08;
+      }
+    }
+
+  }
+
+}
+
+.alarm-card-green {
+}
+
+.alarm-card-yellow {
+  font-weight: bold;
+}
+
+.alarm-card-red {
+  font-weight: bold;
+}
+
+.alarm-card-gray {
+  font-weight: bold;
+}
+
+.alarm-card-blue {
+  font-weight: bold;
+}
+
+.alarm-card-unreliable {
+  font-weight: normal;
+}

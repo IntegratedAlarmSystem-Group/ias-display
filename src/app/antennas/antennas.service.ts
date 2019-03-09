@@ -1,26 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
-import { Alarm } from '../data/alarm';
+import { Observable } from 'rxjs';
+import { AlarmConfig } from '../data/alarm-config';
 import { Assets } from '../settings';
-import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../shared/alarm/alarm.component';
 import { HttpClientService } from '../data/http-client.service';
 import { BackendUrls, AntennasSettings } from '../settings';
-
-/**
-* Stores the IDs of the antennas and location related to an {@link Alarm}
-*/
-export class AntennaConfig {
-
-  /** ID of the Antenna associated with the {@link Alarm} */
-  public antenna: string;
-
-  /** ID to map the {@link Alarm} to the location on the map */
-  public placemark: string;
-
-  /** ID of the main {@link Alarm} of the Weather Station */
-  public alarm: string;
-
-}
 
 /**
  * Service that stores and handles all configuration needed by the components of the {@link AntennasModule}
@@ -31,16 +15,16 @@ export class AntennaConfig {
 export class AntennasService {
 
   /** List of Alarm configuration for each antenna **/
-  public antennasConfig: AntennaConfig [] = [];
+  public antennasConfig: AlarmConfig [] = [];
 
   /** List of Alarm configuration for other devices related with the array **/
-  public devicesConfig: AntennaConfig [] = [];
+  public devicesConfig: AlarmConfig [] = [];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public antennasMapName = AntennasSettings.mapKey;
 
   /** Alarms Ids for the antennas summary **/
-  public antennasSummaryConfig: string;
+  public antennasSummaryConfig: AlarmConfig [] = [];
 
   /** Set of antenna icons */
   public antennaImageSet: AlarmImageSet;
@@ -78,15 +62,15 @@ export class AntennasService {
 
     const url = BackendUrls.ANTENNAS_VIEW;
     this.httpClient.get(url).subscribe((response) => {
-      this.antennasConfig = response['antennas'] as AntennaConfig[];
-      this.devicesConfig = response['devices'] as AntennaConfig[];
+      this.antennasConfig = response['antennas'] as AlarmConfig[];
+      this.devicesConfig = response['devices'] as AlarmConfig[];
     });
 
     const summary_url = BackendUrls.ANTENNAS_SUMMARY;
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {
-          this.antennasSummaryConfig = response as string;
+          this.antennasSummaryConfig = response as AlarmConfig[];
         }
       }
     });
@@ -108,8 +92,8 @@ export class AntennasService {
     /** Set of icons */
     this.antennaImageSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-valid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-valid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-valid-s_low.svg',
+      set_low: Assets.ICONS + 'antenna-valid-low.svg',
+      set_medium: Assets.ICONS + 'antenna-valid-low.svg',
       set_high: Assets.ICONS + 'antenna-valid-critical.svg',
       set_critical: Assets.ICONS + 'antenna-valid-critical.svg',
       unknown: Assets.ICONS + 'antenna-valid-unknown.svg',
@@ -120,8 +104,8 @@ export class AntennasService {
     /** Set of Unreliable icons */
     this.antennaImageUnreliableSet = new AlarmImageSet({
       clear: Assets.ICONS + 'antenna-invalid-clear.svg',
-      set_low: Assets.ICONS + 'antenna-invalid-s_low.svg',
-      set_medium: Assets.ICONS + 'antenna-invalid-s_low.svg',
+      set_low: Assets.ICONS + 'antenna-invalid-low.svg',
+      set_medium: Assets.ICONS + 'antenna-invalid-low.svg',
       set_high: Assets.ICONS + 'antenna-invalid-critical.svg',
       set_critical: Assets.ICONS + 'antenna-invalid-critical.svg',
       unknown: Assets.ICONS + 'antenna-invalid-unknown.svg',

@@ -516,7 +516,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Go to the TabularViewComponent and pass a filter value by the URL</p>
+                            <div class="io-description"><p>Go to the TableComponent and pass a filter value by the URL</p>
 </div>
 
                             <div class="io-description">
@@ -543,7 +543,7 @@
                                                     
 
                                                         <td>
-                                                                <code><p>filter values to pass to the TabularViewComponent through the URL</p>
+                                                                <code><p>filter values to pass to the TableComponent through the URL</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -586,8 +586,8 @@ export class RoutingService {
   constructor(private router: Router) { }
 
   /**
-  * Go to the TabularViewComponent and pass a filter value by the URL
-  * @param {string} filter filter values to pass to the TabularViewComponent through the URL
+  * Go to the TableComponent and pass a filter value by the URL
+  * @param {string} filter filter values to pass to the TableComponent through the URL
   */
   tableWithFilter(filter: string) {
     filter.replace(&#x27; &#x27;, &#x27;_&#x27;); // TODO: This is wrong, fix it

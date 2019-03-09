@@ -189,6 +189,9 @@
                                 <a href="#showActionBadges">showActionBadges</a>
                             </li>
                             <li>
+                                <a href="#tooltipDirection">tooltipDirection</a>
+                            </li>
+                            <li>
                                 <a href="#value">value</a>
                             </li>
                         </ul>
@@ -213,7 +216,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -279,6 +282,28 @@ This value is &quot;true&quot; by default</p>
             <tbody>
                 <tr>
                     <td class="col-md-2">
+                        <a name="tooltipDirection"></a>
+                        <code>tooltipDirection</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Defines the direction of the tooltip</p>
+</div>
+                        <p>
+                            <em>Default value : </em><code>&#x27;right&#x27;</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
                         <a name="value"></a>
                         <code>value</code>
                     </td>
@@ -328,7 +353,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -368,7 +393,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/shared/status-view/status-view.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -610,6 +635,11 @@ export class StatusViewComponent implements OnInit {
   @Input() showActionBadges &#x3D; true;
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection &#x3D; &#x27;right&#x27;;
+
+  /**
   * Instantiates the component
   */
   constructor() { }
@@ -631,10 +661,10 @@ export class StatusViewComponent implements OnInit {
       clear: Assets.ICONS + &#x27;clear-valid.svg&#x27;,
       set_low: Assets.ICONS + &#x27;set-valid-low.svg&#x27;,
       set_medium: Assets.ICONS + &#x27;set-valid-low.svg&#x27;,
-      set_high: Assets.ICONS + &#x27;set-valid.svg&#x27;,
-      set_critical: Assets.ICONS + &#x27;set-valid.svg&#x27;,
-      unknown: Assets.ICONS + &#x27;unknown-valid.svg&#x27;,
-      maintenance: Assets.ICONS + &#x27;maintenance-valid.svg&#x27;,
+      set_high: Assets.ICONS + &#x27;set-valid-critical.svg&#x27;,
+      set_critical: Assets.ICONS + &#x27;set-valid-critical.svg&#x27;,
+      unknown: Assets.ICONS + &#x27;clear-valid-unknown.svg&#x27;,
+      maintenance: Assets.ICONS + &#x27;clear-valid-maintenance.svg&#x27;,
       shelved: Assets.ICONS + &#x27;clear-valid.svg&#x27;,
     });
 
@@ -643,10 +673,10 @@ export class StatusViewComponent implements OnInit {
       clear: Assets.ICONS + &#x27;clear-invalid.svg&#x27;,
       set_low: Assets.ICONS + &#x27;set-invalid-low.svg&#x27;,
       set_medium: Assets.ICONS + &#x27;set-invalid-low.svg&#x27;,
-      set_high: Assets.ICONS + &#x27;set-invalid.svg&#x27;,
-      set_critical: Assets.ICONS + &#x27;set-invalid.svg&#x27;,
-      unknown: Assets.ICONS + &#x27;unknown-invalid.svg&#x27;,
-      maintenance: Assets.ICONS + &#x27;maintenance-invalid.svg&#x27;,
+      set_high: Assets.ICONS + &#x27;set-invalid-critical.svg&#x27;,
+      set_critical: Assets.ICONS + &#x27;set-invalid-critical.svg&#x27;,
+      unknown: Assets.ICONS + &#x27;clear-invalid-unknown.svg&#x27;,
+      maintenance: Assets.ICONS + &#x27;clear-invalid-maintenance.svg&#x27;,
       shelved: Assets.ICONS + &#x27;clear-valid.svg&#x27;,
     });
 
@@ -671,12 +701,11 @@ export class StatusViewComponent implements OnInit {
         <pre class="line-numbers"><code class="language-html">&lt;div fxLayout&#x3D;&quot;row&quot;&gt;
   &lt;div class&#x3D;&quot;alarm-icon&quot;&gt;
     &lt;app-alarm
-      [alarm]&#x3D;&quot;alarm&quot; [images]&#x3D;&quot;alarmIconsSet&quot; [imagesUnreliable]&#x3D;&quot;alarmIconsUnreliableSet&quot; [showActionBadges]&#x3D;&quot;false&quot; [size]&#x3D;&quot;&#x27;status&#x27;&quot;
-    &gt;&lt;/app-alarm&gt;
-  &lt;/div&gt;
-  &lt;div class&#x3D;&quot;priority-icon&quot;&gt;
-    &lt;app-alarm
-      [alarm]&#x3D;&quot;alarm&quot; [images]&#x3D;&quot;alarmIconsPrioritySet&quot; [imagesUnreliable]&#x3D;&quot;alarmIconsPrioritySet&quot; [showActionBadges]&#x3D;&quot;showActionBadges&quot; [size]&#x3D;&quot;&#x27;status&#x27;&quot;
+      [alarm]&#x3D;&quot;alarm&quot;
+      [images]&#x3D;&quot;alarmIconsSet&quot;
+      [imagesUnreliable]&#x3D;&quot;alarmIconsUnreliableSet&quot;
+      [size]&#x3D;&quot;&#x27;sm&#x27;&quot;
+      [tooltipDirection]&#x3D;&quot;tooltipDirection&quot;
     &gt;&lt;/app-alarm&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -687,44 +716,10 @@ export class StatusViewComponent implements OnInit {
                 <p class="comment">
                     <code>./status-view.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.status-view {
+                <pre class="line-numbers"><code class="language-scss">.alarm-icon {
   height: 100%;
   width: 100%;
 }
-
-.alarm-icon {
-  height: 100%;
-  width: 33%;
-}
-
-.priority-icon {
-  height: 100%;
-  width: 55%;
-}
-
-/* .blink {
-  -webkit-animation: BLINK 1s infinite;
-  -moz-animation:    BLINK 1s infinite;
-  -o-animation:      BLINK 1s infinite;
-  animation:         BLINK 1s infinite;
-}
-
-@-webkit-keyframes BLINK {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-@-moz-keyframes BLINK {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-@-o-keyframes BLINK {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-@keyframes BLINK {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-} */
 </code></pre>
     </div>
 
@@ -753,8 +748,8 @@ export class StatusViewComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div fxLayout="row">  <div class="alarm-icon">    <app-alarm      [alarm]="alarm" [images]="alarmIconsSet" [imagesUnreliable]="alarmIconsUnreliableSet" [showActionBadges]="false" [size]="\'status\'"    ></app-alarm>  </div>  <div class="priority-icon">    <app-alarm      [alarm]="alarm" [images]="alarmIconsPrioritySet" [imagesUnreliable]="alarmIconsPrioritySet" [showActionBadges]="showActionBadges" [size]="\'status\'"    ></app-alarm>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div fxLayout="row">  <div class="alarm-icon">    <app-alarm      [alarm]="alarm"      [images]="alarmIconsSet"      [imagesUnreliable]="alarmIconsUnreliableSet"      [size]="\'sm\'"      [tooltipDirection]="tooltipDirection"    ></app-alarm>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'StatusViewComponent'};
 </script>

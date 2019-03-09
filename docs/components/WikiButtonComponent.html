@@ -138,6 +138,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#isDisabled">isDisabled</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
@@ -232,6 +235,52 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="isDisabled"></a>
+                        <span class="name">
+                            <b>
+                            isDisabled
+                            </b>
+                            <a href="#isDisabled"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>isDisabled()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/actions/wiki-button/wiki-button.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Defines whether or not the button is disabled</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>true if the button is disabled, false if not.</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="ngOnInit"></a>
                         <span class="name">
                             <b>
@@ -283,14 +332,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(event)</code>
+<code>onClick()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/actions/wiki-button/wiki-button.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/actions/wiki-button/wiki-button.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -301,36 +350,9 @@
 </div>
 
                             <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>event</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -367,10 +389,19 @@ export class WikiButtonComponent implements OnInit {
   }
 
   /**
+   * Defines whether or not the button is disabled
+   * @returns {boolean} true if the button is disabled, false if not.
+   */
+  isDisabled(): boolean {
+    return !this.url;
+  }
+
+
+  /**
   * Handle click on wiki button, it opens the url in another window
   */
-  onClick(event) {
-    if (!this.url.startsWith(&#x27;http://&#x27;)) {
+  onClick() {
+    if (!this.url.match(/^https?:\/\//i)) {
       this.url &#x3D; &#x27;http://&#x27; + this.url;
     }
     window.open(this.url, &#x27;_blank&#x27;);
@@ -380,8 +411,15 @@ export class WikiButtonComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button mat-icon-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;wiki-button&quot; title&#x3D;&quot;Go to documentation&quot; (click)&#x3D;&quot;onClick($event)&quot; [disabled]&#x3D;&quot;!url&quot;&gt;
-  &lt;i class&#x3D;&quot;ion-md-open wiki-button-icon&quot;&gt;&lt;/i&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;button mat-flat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;wiki-button&quot; title&#x3D;&quot;Go to documentation&quot; (click)&#x3D;&quot;onClick()&quot; [disabled]&#x3D;&quot;!url&quot;&gt;
+  &lt;!-- &lt;i class&#x3D;&quot;ion-md-open wiki-button-icon&quot;&gt;&lt;/i&gt; --&gt;
+  &lt;div *ngIf&#x3D;&quot;isDisabled(); then goToOff else goToOn&quot;&gt;&lt;/div&gt;
+  &lt;ng-template #goToOn&gt;
+    &lt;div class&#x3D;&quot;wiki-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/go-to-on-btn-icon.svg&quot;/&gt; &lt;/div&gt;
+  &lt;/ng-template&gt;
+  &lt;ng-template #goToOff&gt;
+    &lt;div class&#x3D;&quot;wiki-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/go-to-off-btn-icon.svg&quot;/&gt; &lt;/div&gt;
+  &lt;/ng-template&gt;
 &lt;/button&gt;
 </code></pre>
     </div>
@@ -391,13 +429,23 @@ export class WikiButtonComponent implements OnInit {
                     <code>./wiki-button.component.css</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.wiki-button {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 1px;
+  margin: 0px 4px;
+  border-radius: 24px;
+  min-width: 1px;
+  width: 32px;
+  height: 32px;
 }
 
 .wiki-button-icon {
-  font-size: 16pt;
-  font-weight: bold;
+  width: 18px;
+  margin: auto;
+}
+
+.mat-flat-button {
+  line-height: 28px;
 }
 </code></pre>
     </div>
@@ -427,8 +475,8 @@ export class WikiButtonComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button mat-icon-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick($event)" [disabled]="!url">  <i class="ion-md-open wiki-button-icon"></i></button></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><button mat-flat-button color="accent" class="wiki-button" title="Go to documentation" (click)="onClick()" [disabled]="!url">  <!-- <i class="ion-md-open wiki-button-icon"></i> -->  <div *ngIf="isDisabled(); then goToOff else goToOn"></div>  <ng-template #goToOn>    <div class="wiki-button-icon"> <img src="/assets/img/go-to-on-btn-icon.svg"/> </div>  </ng-template>  <ng-template #goToOff>    <div class="wiki-button-icon"> <img src="/assets/img/go-to-off-btn-icon.svg"/> </div>  </ng-template></button></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'WikiButtonComponent'};
 </script>

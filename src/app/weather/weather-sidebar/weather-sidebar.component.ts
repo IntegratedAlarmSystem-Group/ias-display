@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { AlarmService } from '../../data/alarm.service';
-import { WeatherService, WeatherStationConfig } from '../weather.service';
-import { Alarm } from '../../data/alarm';
-import { Assets } from '../../settings';
+import { AlarmConfig } from '../../data/alarm-config';
+import { WeatherService } from '../weather.service';
 
 /**
 * Component used to display Weather Alarms in an interactive sidebar
@@ -18,10 +16,10 @@ import { Assets } from '../../settings';
 export class WeatherSidebarComponent implements OnInit {
 
   /** Selected weather station config object, null if it is nothing selected */
-  @Input() selectedStation: WeatherStationConfig = null;
+  @Input() selectedStation: AlarmConfig = null;
 
   /** Event emitted to notify when an weather station is selected */
-  @Output() panelClicked = new EventEmitter<WeatherStationConfig>();
+  @Output() panelClicked = new EventEmitter<AlarmConfig>();
 
   /**
   * Builds an instance of the component
@@ -50,7 +48,7 @@ export class WeatherSidebarComponent implements OnInit {
   * @param {string} station the ID of the weather station
   * @returns {boolean} true if the data was copied to the clipboard, false if not
   */
-  copyAntennas(stationConfig: WeatherStationConfig): boolean {
+  copyAntennas(stationConfig: AlarmConfig): boolean {
     const antennas = this.getAntennas(stationConfig);
     const result = antennas.join(',');
     const status = this.clipboardService.copyFromContent(result);
@@ -69,7 +67,7 @@ export class WeatherSidebarComponent implements OnInit {
   * @param {string} station the ID of the weather station
   * @returns {string[]} a list with the name of nearby antennas
   */
-  getAntennas(stationConfig: WeatherStationConfig): string[] {
+  getAntennas(stationConfig: AlarmConfig): string[] {
     const response = [];
     if ( this.weatherService.padsStatus && stationConfig.group !== '' ) {
         const pads = this.weatherService.padsStatus[stationConfig.group];
@@ -83,28 +81,19 @@ export class WeatherSidebarComponent implements OnInit {
   }
 
   /**
-  * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
-  * @param {string} alarm_id the ID of the {@link Alarm}
-  * @returns {Alarm} the {@link Alarm}
-  */
-  getAlarm(alarm_id: string): Alarm {
-    return this.alarmService.get(alarm_id);
-  }
-
-  /**
   * Indicates if the weather station is selected or not
-  * @param {WeatherStationConfig} stationConfig configuration of the weather station
+  * @param {AlarmConfig} stationConfig configuration of the weather station
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
-  isSelected(stationConfig: WeatherStationConfig) {
+  isSelected(stationConfig: AlarmConfig): boolean {
     return this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark);
   }
 
   /**
   * Action performed when the weather station is clicked
-  * @param {WeatherStationConfig} stationConfig configuration of the clicked weather station
+  * @param {AlarmConfig} stationConfig configuration of the clicked weather station
   */
-  onClick(stationConfig: WeatherStationConfig) {
+  onClick(stationConfig: AlarmConfig) {
     if ( this.selectedStation && (this.selectedStation.placemark === stationConfig.placemark) ) {
       this.selectedStation = null;
     } else {
@@ -120,7 +109,7 @@ export class WeatherSidebarComponent implements OnInit {
    */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 20000,
+      duration: 5000,
       panelClass: ['snackbar']
     });
   }

@@ -1,0 +1,20 @@
+<div>
+  <table>
+    <tr>
+      <th>Alarm ID</th>
+      <td>{{alarm?.core_id}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ alarm?.description }}</td>
+    </tr>
+    <tr>
+      <th>Last Change</th>
+      <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
+    </tr>
+    <tr *ngIf="alarm?.formattedProperties !== ''">
+      <th>Last Properties</th>
+      <td class="props-container">{{ alarm?.formattedProperties }}</td>
+    </tr>
+  </table>
+</div>

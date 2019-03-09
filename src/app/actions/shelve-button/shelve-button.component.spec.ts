@@ -1,23 +1,17 @@
 import { DebugElement } from '@angular/core';
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
-import { AppModule } from '../../app.module';
-import { appRoutes } from '../../app-routing/app-routing.module';
 import { RoutingService } from '../../app-routing/routing.service';
 import { SidenavService } from '../sidenav.service';
 import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
-import { Iasio } from '../../data/iasio';
 
 describe('GIVEN a ShelveButtonComponent', () => {
   let component: ShelveButtonComponent;
   let fixture: ComponentFixture<ShelveButtonComponent>;
   let debug: DebugElement;
-  let html: HTMLElement;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
   const mockAlarm = Alarm.asAlarm({
     'value': 4,
@@ -58,12 +52,10 @@ describe('GIVEN a ShelveButtonComponent', () => {
     component = fixture.componentInstance;
     component.alarm = mockAlarm;
     debug = fixture.debugElement;
-    html = debug.nativeElement;
     fixture.detectChanges();
   });
 
   it('THEN it should be created with the given Alarm', () => {
-    const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
     expect(component).toBeTruthy();
     expect(component.alarm.core_id).toBe('coreid$1');
   });
@@ -92,12 +84,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
 
   describe('AND WHEN the user clicks on it', () => {
     it('THEN the sidenav is opened with ShelveComponent as content', () => {
-      const mockEvent = {
-        data: {
-          alarm: Alarm.asAlarm(mockAlarm)
-        }
-      };
-      component.onClick(null);
+      component.onClick();
       const expectedargs = component.alarm.core_id;
       expect(spyRoutingTable.goToShelve.calls.count()).toBe(1, 'spy method was called once');
       expect(spyRoutingTable.goToShelve.calls.mostRecent().args[0]).

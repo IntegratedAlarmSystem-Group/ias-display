@@ -1,5 +1,3 @@
-import { Alarm } from '../../data/alarm';
-
 /** Data expected to be contained by the tree in tests */
 export const expectedTreeData = {
   'parent': {

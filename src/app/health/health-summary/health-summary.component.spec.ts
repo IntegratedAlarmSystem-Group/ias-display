@@ -1,18 +1,28 @@
 import { of } from 'rxjs';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
+import { SharedModule } from '../../shared/shared.module';
 import { HealthSummaryComponent } from './health-summary.component';
-import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { RoutingService} from '../../app-routing/routing.service';
 import { HttpClientService } from '../../data/http-client.service';
-import { AlarmService } from '../../data/alarm.service';
+import { AlarmConfig } from '../../data/alarm-config';
+
+const config = [
+  {
+    'alarm_id': 'ias-health',
+    'custom_name': 'IAS Health',
+    'type': 'health',
+    'view': 'summary',
+    'placemark': '',
+    'group': '',
+    'children': [],
+  },
+] as AlarmConfig[];
 
 describe('HealthSummaryComponent', () => {
   let component: HealthSummaryComponent;
   let fixture: ComponentFixture<HealthSummaryComponent>;
-  let alarmService: AlarmService;
   let httpClientService: HttpClientService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['tableWithFilter']);
 
@@ -20,20 +30,15 @@ describe('HealthSummaryComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HealthSummaryComponent,
-        AlarmComponent
       ],
       imports: [
         IasMaterialModule,
         DataModule,
+        SharedModule
       ],
       providers: [
         { provide: RoutingService, useValue: spyRoutingTable },
       ],
-    })
-    .overrideModule( BrowserDynamicTestingModule , {
-      set: {
-        entryComponents: [ AlarmComponent ]
-      }
     })
     .compileComponents();
   }));
@@ -41,10 +46,9 @@ describe('HealthSummaryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HealthSummaryComponent);
     component = fixture.componentInstance;
-    alarmService = fixture.debugElement.injector.get(AlarmService);
     httpClientService = fixture.debugElement.injector.get(HttpClientService);
     spyOn(httpClientService, 'get').and.callFake(function() {
-      return of('ias-health');
+      return of(config);
     });
     fixture.detectChanges();
   });
@@ -56,7 +60,7 @@ describe('HealthSummaryComponent', () => {
   describe('WHEN the component is created', () => {
     it('THEN the alarm id is requested to the webserver', () => {
       expect(httpClientService.get).toHaveBeenCalled();
-      expect(component.alarmId).toEqual('ias-health');
+      expect(component.alarmConfig[0].alarm_id).toEqual(config[0].alarm_id);
     });
   });
 

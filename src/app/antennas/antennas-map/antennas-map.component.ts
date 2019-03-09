@@ -1,9 +1,10 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm } from '../../data/alarm';
+import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
-import { AntennasService, AntennaConfig } from '../antennas.service';
+import { AntennasService } from '../antennas.service';
 import { MapService } from '../../map/map.service';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 /**
 * Main component for the antennas map
@@ -17,10 +18,10 @@ export class AntennasMapComponent implements OnInit {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component */
-  @Input() selectedAntenna: AntennaConfig = null;
+  @Input() selectedAntenna: AlarmConfig = null;
 
   /** Variable to manage a placemark selection from the map */
-  @Output() clickedAntennaMarker = new EventEmitter<AntennaConfig>();
+  @Output() clickedAntennaMarker = new EventEmitter<AlarmConfig>();
 
   /** Placemarks list obtained from the webserver */
   public mapPlacemarks = {};
@@ -128,10 +129,10 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * Opacity class name for each antenna marker
-   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @param {AlarmConfig} antennaConfig configuration of the alarm
    * @return class name that defines the opacity of the graphical element
    */
-  getOpacityClass(antennaConfig: AntennaConfig): string {
+  getOpacityClass(antennaConfig: AlarmConfig): string {
     if (this.selectedAntenna === null) {
       return 'opacity-100';
     } else {
@@ -156,10 +157,10 @@ export class AntennasMapComponent implements OnInit {
   /**
    * Check if an specific antenna marker was selected through its related
    * alarm configuration
-   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @param {AlarmConfig} antennaConfig configuration of the alarm
    * @return {boolean} True if the antenna alarm is selected, false if it is not
    */
-  isSelected(antennaConfig: AntennaConfig): boolean {
+  isSelected(antennaConfig: AlarmConfig): boolean {
     if (this.selectedAntenna === null) {
       return false;
     } else {
@@ -170,9 +171,9 @@ export class AntennasMapComponent implements OnInit {
 
   /**
    * On click action for the antenna markers
-   * @param {AntennaConfig} antennaConfig configuration of the alarm
+   * @param {AlarmConfig} antennaConfig configuration of the alarm
    */
-  onClick(antennaConfig: AntennaConfig) {
+  onClick(antennaConfig: AlarmConfig) {
     if (this.isSelected(antennaConfig)) {
       this.selectedAntenna = null;
     } else {

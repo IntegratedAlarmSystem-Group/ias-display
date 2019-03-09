@@ -176,6 +176,9 @@
                             <li>
                                 <a href="#showActionBadges">showActionBadges</a>
                             </li>
+                            <li>
+                                <a href="#tooltipDirection">tooltipDirection</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -198,7 +201,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -304,6 +307,28 @@ This value is &quot;true&quot; by default</p>
                         </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="tooltipDirection"></a>
+                        <code>tooltipDirection</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Defines the direction of the tooltip</p>
+</div>
+                        <p>
+                            <em>Default value : </em><code>&#x27;right&#x27;</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
 </section>
 
 
@@ -335,7 +360,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:105</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:110</a></div>
                             </td>
                         </tr>
 
@@ -384,7 +409,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -430,7 +455,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -470,7 +495,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:91</a></div>
                             </td>
                         </tr>
 
@@ -516,7 +541,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/shared/alarm-header/alarm-header.component.ts:99</a></div>
                             </td>
                         </tr>
 
@@ -582,6 +607,11 @@ export class AlarmHeaderComponent implements OnInit {
   @Input() optionalAlarmName &#x3D; null;
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection &#x3D; &#x27;right&#x27;;
+
+  /**
    * Builds an instance of the component
    */
   constructor() { }
@@ -633,7 +663,7 @@ export class AlarmHeaderComponent implements OnInit {
   * @returns {boolean} true if the alarm has pending acknowledgement, false if not
   */
   showAsPendingAck(): boolean {
-    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack;
+    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
   }
 
   /**
@@ -669,30 +699,50 @@ export class AlarmHeaderComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div fxFlex&#x3D;&quot;10px&quot; class&#x3D;&quot;alarm-header-color&quot; [ngClass]&#x3D;&quot;getClass()&quot;&gt;&lt;/div&gt;
-&lt;div class&#x3D;&quot;alarm-header-name&quot;&gt;
-    {{this.getAlarmName()}}
-&lt;/div&gt;
-&lt;div fxLayout&#x3D;&quot;row&quot; class&#x3D;&quot;alarm-header-badges&quot;&gt;
-  &lt;div class&#x3D;&quot;badges&quot; *ngIf&#x3D;&quot;showActionBadges&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;alarm-header-container&quot;
+  placement&#x3D;&quot;{{tooltipDirection}}&quot;
+  [ngbTooltip]&#x3D;&quot;tipContent&quot;
+  data-container&#x3D;&quot;body&quot;
+&gt;
+  &lt;ng-template #tipContent&gt;
+    &lt;app-alarm-tooltip [alarm]&#x3D;&quot;alarm&quot; [tooltipDirection]&#x3D;&quot;tooltipDirection&quot;&gt;&lt;/app-alarm-tooltip&gt;
+  &lt;/ng-template&gt;
 
-    &lt;div *ngIf&#x3D;&quot;showAsPendingAck(); then ackOn else ackOff&quot;&gt;&lt;/div&gt;
-    &lt;ng-template #ackOn&gt;
-      &lt;img class&#x3D;&quot;badge-icon ack-icon&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template #ackOff&gt;
-      &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
-    &lt;/ng-template&gt;
+  &lt;div fxFlex&#x3D;&quot;10px&quot; class&#x3D;&quot;alarm-header-color&quot; [ngClass]&#x3D;&quot;getClass()&quot;&gt;&lt;/div&gt;
 
-    &lt;div *ngIf&#x3D;&quot;showAsShelved(); then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
-    &lt;ng-template #shelvedOn&gt;
-      &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot; src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template #shelvedOff&gt;
-      &lt;img class&#x3D;&quot;badge-icon shelve-icon badge-off&quot; src&#x3D;&quot;/assets/img/shelve.svg&quot;/&gt;
-    &lt;/ng-template&gt;
-
+  &lt;div fxLayout&#x3D;&quot;column&quot;&gt;
+    &lt;div class&#x3D;&quot;alarm-header-name&quot;&gt;
+        {{this.getAlarmName()}}
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;app-alarm-label [alarm]&#x3D;&quot;alarm&quot; [showText]&#x3D;&quot;false&quot; [size]&#x3D;&quot;&#x27;md&#x27;&quot;&gt;&lt;/app-alarm-label&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
+
+
+  &lt;div fxLayout&#x3D;&quot;row&quot; class&#x3D;&quot;alarm-header-badges&quot;&gt;
+    &lt;div class&#x3D;&quot;badges&quot; *ngIf&#x3D;&quot;showActionBadges&quot;&gt;
+
+      &lt;div *ngIf&#x3D;&quot;showAsPendingAck(); then ackOn else ackOff&quot;&gt;&lt;/div&gt;
+      &lt;ng-template #ackOn&gt;
+        &lt;img class&#x3D;&quot;badge-icon ack-icon&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template #ackOff&gt;
+        &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
+      &lt;/ng-template&gt;
+
+      &lt;div *ngIf&#x3D;&quot;showAsShelved(); then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
+      &lt;ng-template #shelvedOn&gt;
+        &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot; src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template #shelvedOff&gt;
+        &lt;img class&#x3D;&quot;badge-icon shelve-icon badge-off&quot; src&#x3D;&quot;/assets/img/shelve.svg&quot;/&gt;
+      &lt;/ng-template&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -701,7 +751,11 @@ export class AlarmHeaderComponent implements OnInit {
                 <p class="comment">
                     <code>./alarm-header.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.alarm-header-color {
+                <pre class="line-numbers"><code class="language-scss">.alarm-header-container {
+  height: 100%;
+}
+
+.alarm-header-color {
   height: 100%;
   width: 10px;
   border-radius: 4px 0px 0px 4px;
@@ -710,6 +764,7 @@ export class AlarmHeaderComponent implements OnInit {
 }
 
 .alarm-header-name {
+  padding-top: 20px;
   padding-right: 4px;
 }
 
@@ -795,8 +850,8 @@ export class AlarmHeaderComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div><div class="alarm-header-name">    {{this.getAlarmName()}}</div><div fxLayout="row" class="alarm-header-badges">  <div class="badges" *ngIf="showActionBadges">    <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>    <ng-template #ackOn>      <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>    </ng-template>    <ng-template #ackOff>      <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>    </ng-template>    <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>    <ng-template #shelvedOn>      <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>    </ng-template>    <ng-template #shelvedOff>      <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>    </ng-template>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div  class="alarm-header-container"  placement="{{tooltipDirection}}"  [ngbTooltip]="tipContent"  data-container="body">  <ng-template #tipContent>    <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>  </ng-template>  <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div>  <div fxLayout="column">    <div class="alarm-header-name">        {{this.getAlarmName()}}    </div>    <div>      <app-alarm-label [alarm]="alarm" [showText]="false" [size]="\'md\'"></app-alarm-label>    </div>  </div>  <div fxLayout="row" class="alarm-header-badges">    <div class="badges" *ngIf="showActionBadges">      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>      <ng-template #ackOn>        <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>      </ng-template>      <ng-template #ackOff>        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>      </ng-template>      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>      <ng-template #shelvedOn>        <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>      </ng-template>      <ng-template #shelvedOff>        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>      </ng-template>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AlarmHeaderComponent'};
 </script>

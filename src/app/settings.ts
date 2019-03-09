@@ -13,11 +13,11 @@ export const BackendUrls = {
   UNSHELVE_API: '/tickets-api/shelve-registries/unshelve/',
   SHELVE_REGS_FILTER: '/tickets-api/shelve-registries/filters/',
   FILES_JSON: '/panels-api/files/get_json/?key=',
-  WEATHER_VIEW: '/panels-api/alarms-config/weather_config/',
-  ANTENNAS_VIEW: '/panels-api/alarms-config/antennas_config/',
-  WEATHER_SUMMARY: '/panels-api/alarms-config/weather_summary_config/',
-  ANTENNAS_SUMMARY: '/panels-api/alarms-config/antennas_summary_config/',
-  HEALTH_SUMMARY: '/panels-api/alarms-config/ias_health_summary_config/',
+  WEATHER_VIEW: '/panels-api/alarms-config/get_json/?key=weather_config',
+  ANTENNAS_VIEW: '/panels-api/alarms-config/get_json/?key=antennas_config',
+  WEATHER_SUMMARY: '/panels-api/alarms-config/get_json/?key=weather_summary_config',
+  ANTENNAS_SUMMARY: '/panels-api/alarms-config/get_json/?key=antennas_summary_config',
+  HEALTH_SUMMARY: '/panels-api/alarms-config/get_json/?key=health_summary_config',
   PADS_STATUS: '/panels-api/placemark/pads_by_group/',
 };
 
@@ -55,10 +55,10 @@ export const Assets = {
 
 /** Key for the url to get information for the weather display */
 export const WeatherSettings = {
-  mapKey: 'weather',
+  mapKey: 'weather_map',
 };
 
 /** Key for the url to get information for the antenna display */
 export const AntennasSettings = {
-  mapKey: 'weather',
+  mapKey: 'weather_map',
 };

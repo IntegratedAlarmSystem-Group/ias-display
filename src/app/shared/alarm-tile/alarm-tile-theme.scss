@@ -1,0 +1,55 @@
+@mixin alarm-tile-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .alarm-tile {
+    color: map-get($foreground, secondary-text);
+  }
+
+  .alarm-tile-green {
+    border-color: transparent;
+    background: transparent;
+    &.alarm-tile-unreliable {
+      border-color: mat-color($alarms, clear);
+    }
+  }
+
+  .alarm-tile-yellow {
+    border-color: mat-color($alarms, set-low);
+    background: mat-color($alarms, set-low);
+    color: mat-color($alarms, set-card-dark-text);
+    &.alarm-tile-unreliable {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  .alarm-tile-red {
+    border-color: mat-color($alarms, set-critical);
+    background: mat-color($alarms, set-critical);
+  }
+
+  .alarm-tile-gray {
+    border-color: mat-color($alarms, maintenance);
+    background: mat-color($alarms, maintenance);
+    color: mat-color($alarms, set-card-dark-text);
+    &.alarm-tile-unreliable {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  .alarm-tile-blue {
+    border-color: mat-color($alarms, unknown);
+    background: mat-color($alarms, unknown);
+  }
+
+  .alarm-tile-unreliable {
+    background: transparent;
+  }
+
+
+}

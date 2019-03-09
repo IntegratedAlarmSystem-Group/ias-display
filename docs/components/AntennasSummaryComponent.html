@@ -198,7 +198,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -306,7 +306,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -383,7 +383,7 @@ filter the alarms in the table view</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -424,7 +424,7 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -477,7 +477,7 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -511,7 +511,7 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/antennas/antennas-summary/antennas-summary.component.ts:41</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -536,12 +536,10 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { AlarmComponent, AlarmImageSet } from &#x27;../../shared/alarm/alarm.component&#x27;;
 import { AlarmService } from &#x27;../../data/alarm.service&#x27;;
 import { RoutingService } from &#x27;../../app-routing/routing.service&#x27;;
 import { AntennasService } from &#x27;../antennas.service&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
-import { Assets } from &#x27;../../settings&#x27;;
 
 /**
  * Summarized state of the Antennas Arrays
@@ -578,7 +576,12 @@ export class AntennasSummaryComponent implements OnInit {
   * @returns {Alarm} the {@link Alarm}
   */
   get alarm(): Alarm {
-    return this.alarmService.get(this.antennasService.antennasSummaryConfig);
+    const conf &#x3D; this.antennasService.antennasSummaryConfig;
+    if (conf &amp;&amp; conf[0]) {
+      return this.alarmService.getAlarm(conf[0]);
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -602,18 +605,22 @@ export class AntennasSummaryComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ias content&quot; (click)&#x3D;&quot;redirect()&quot;&gt;
-  &lt;div class&#x3D;&quot;ias sensors&quot;&gt;
-    &lt;div class&#x3D;&quot;row no-vertical-margin&quot;&gt;
-      &lt;div class&#x3D;&quot;sensors-card-wrapper&quot;&gt;
-          &lt;div class&#x3D;&quot;sensors-card global-antennas-status no-border&quot;&gt;
-              &lt;div class&#x3D;&quot;title&quot;&gt;STATUS&lt;/div&gt;
-              &lt;div class&#x3D;&quot;icon&quot;&gt;
-                &lt;app-alarm
-                  [alarm]&#x3D;&quot;alarm&quot; [images]&#x3D;&quot;this.antennasService.antennaImageSet&quot; [imagesUnreliable]&#x3D;&quot;this.antennasService.antennaImageUnreliableSet&quot; [size]&#x3D;&quot;&#x27;lg&#x27;&quot;
-                &gt;&lt;/app-alarm&gt;
-              &lt;/div&gt;
-          &lt;/div&gt;
-      &lt;/div&gt;
+  &lt;div
+    class&#x3D;&quot;container&quot;
+    fxLayout&#x3D;&quot;row wrap&quot;
+    fxLayoutAlign&#x3D;&quot;flex-start&quot;
+  &gt;
+    &lt;div&gt;
+      &lt;app-alarm-tile
+        fxFlex
+        [alarm]&#x3D;&quot;alarm&quot;
+        [images]&#x3D;&quot;this.antennasService.antennaImageSet&quot;
+        [imagesUnreliable]&#x3D;&quot;this.antennasService.antennaImageUnreliableSet&quot;
+        [size]&#x3D;&quot;&#x27;lg&#x27;&quot;
+        [alarmNameMaxSize]&#x3D;&quot;10&quot;
+        [optionalAlarmName]&#x3D;&quot;&#x27;STATUS&#x27;&quot;
+        [tooltipDirection]&#x3D;&quot;&#x27;left&#x27;&quot;
+      &gt;&lt;/app-alarm-tile&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -624,52 +631,17 @@ export class AntennasSummaryComponent implements OnInit {
                 <p class="comment">
                     <code>./antennas-summary.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.ias.content{
+                <pre class="line-numbers"><code class="language-scss">.ias {
+
+  &amp;.content {
     cursor: pointer;
-}
+  }
 
-.ias.sensors{
-    display: inline-block;
-    width: 100%;
-}
+  .container {
+    margin: 0;
+    padding: 0;
+  }
 
-.sensors-card-wrapper{
-    display: inline-block;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.sensors-card{
-    display: inline-block;
-    text-align: center;
-    padding: 0px 20px;
-    float: left;
-    max-height: 130px;
-    min-width: 100px;
-    border-right-width: 1px;
-    border-right-style: solid;
-    cursor: pointer;
-
-    .global-antennas-status {
-      min-width: 165px;
-      border: 0;
-    }
-
-    .title{
-        text-transform: uppercase;
-        font-size: 16px;
-    }
-
-    .icon{
-        padding: 20px;
-        height: 85px;
-        width: fit-content;
-    }
-
-    &amp;.no-border {
-      border: solid;
-      border-width: 0;
-    }
 }
 </code></pre>
     </div>
@@ -699,8 +671,8 @@ export class AntennasSummaryComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="ias content" (click)="redirect()">  <div class="ias sensors">    <div class="row no-vertical-margin">      <div class="sensors-card-wrapper">          <div class="sensors-card global-antennas-status no-border">              <div class="title">STATUS</div>              <div class="icon">                <app-alarm                  [alarm]="alarm" [images]="this.antennasService.antennaImageSet" [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet" [size]="\'lg\'"                ></app-alarm>              </div>          </div>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div class="ias content" (click)="redirect()">  <div    class="container"    fxLayout="row wrap"    fxLayoutAlign="flex-start"  >    <div>      <app-alarm-tile        fxFlex        [alarm]="alarm"        [images]="this.antennasService.antennaImageSet"        [imagesUnreliable]="this.antennasService.antennaImageUnreliableSet"        [size]="\'lg\'"        [alarmNameMaxSize]="10"        [optionalAlarmName]="\'STATUS\'"        [tooltipDirection]="\'left\'"      ></app-alarm-tile>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AntennasSummaryComponent'};
 </script>

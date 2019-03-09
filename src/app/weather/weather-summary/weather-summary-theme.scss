@@ -6,12 +6,12 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .ias.sensors{
-    background: map-get($background, dialog);;
+  .ias.content {
+    .container {
+      .item {
+        border-right-color: map-get($foreground, divider);
+      }
+    }
   }
 
-  .sensors-card{
-    border-right-color: map-get($foreground, divider);
-    color: map-get($foreground, secondary-text);
-  }
 }

@@ -2,11 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { SidenavService } from '../sidenav.service';
 import { AlarmService } from '../../data/alarm.service';
 import { UserService } from '../../data/user.service';
 import { AuthService } from '../../auth/auth.service';
 import { Alarm } from '../../data/alarm';
+import { Locale } from '../../settings';
 
 /**
 * Definition of a timeout option for shelving an alarm
@@ -101,6 +103,27 @@ export class ShelveComponent implements OnInit, OnDestroy {
   shelvedAtMessage = '';
 
   /**
+   * Route param map subscription
+   */
+  paramMapSubscription: ISubscription;
+
+   /**
+    * Alarm change subscription
+    */
+  alarmChangeSubscription: ISubscription;
+
+  /**
+   * Sidenav service subscription
+   */
+ sidenavReloadSubscription: ISubscription;
+
+ /** String to store the formatting of dates, read form the settings */
+ private dateFormat: string;
+
+ /** String to store the timezone to display dates, read from the settings */
+ private timezone: string;
+
+  /**
    * Instantiates the component
    * @param {FormBuilder} formBuilder Service to manage the form and validators
    * @param {AlarmService} alarmService Service used to send the request to acknowledge the alarm
@@ -125,6 +148,8 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * Get the alarmID from the url, create the form and open the sidenav
    */
   ngOnInit() {
+    this.dateFormat = Locale.DATE_FORMAT;
+    this.timezone = Locale.TIMEZONE;
     this.user = new FormControl('', [Validators.required]);
     this.message = new FormControl('', [Validators.required]);
     this.timeout = new FormControl(this.defaultTimeout, [Validators.required]);
@@ -134,24 +159,57 @@ export class ShelveComponent implements OnInit, OnDestroy {
       message: this.message,
       timeout: this.timeout
     });
-    this.route.paramMap.subscribe( paramMap => {
+    this.paramMapSubscription = this.route.paramMap
+    .subscribe( paramMap => {
       this.alarm_id = paramMap.get('alarmID');
-      this.reload();
+      this.check_request_and_reload();
     });
-    this.sidenavService.shouldReload.subscribe(
+    this.sidenavReloadSubscription = this.sidenavService.shouldReload
+    .subscribe(
       value => {
         if (value === true) {
           this.reload();
         }
       }
     );
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream
+    .subscribe( () => {
+      this.check_request_and_reload();
+    });
     this.sidenavService.open();
+  }
+
+  /**
+  * Method to manage the information of the component
+  */
+  check_request_and_reload(): void {
+    const alarmDataAvailable = this.alarmService.isAlarmIndexAvailable(
+      this.alarm_id
+    );
+    if (alarmDataAvailable === true) {
+      if (this.alarm) {
+        if (this.alarm.core_id !== this.alarm_id) {
+          this.reload();
+        }
+      } else {
+        this.reload();
+      }
+    }
   }
 
   /**
   * Closes the sidenav when the component is destroyed
   */
   ngOnDestroy() {
+    if (this.paramMapSubscription) {
+      this.paramMapSubscription.unsubscribe();
+    }
+    if (this.sidenavReloadSubscription) {
+      this.sidenavReloadSubscription.unsubscribe();
+    }
+    if (this.alarmChangeSubscription) {
+      this.alarmChangeSubscription.unsubscribe();
+    }
     this.sidenavService.closeAndClean();
   }
 
@@ -201,7 +259,7 @@ export class ShelveComponent implements OnInit, OnDestroy {
    * @returns {string} the text to display in the title, either "Shelving results" or "Unshelving results"
    */
   getResponseMessageTitle(): string {
-    let action;
+    let action: string;
     if (!this.alarm.shelved) {
       action = 'Shelving';
     } else {
@@ -288,12 +346,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
    */
   requestShelveInfo(): void {
     this.alarmService.getShelveRegistries(this.alarm_id, 1).subscribe(
-        (response) => {
+        (response: any) => {
           const registry = response[0];
           this.shelvedAtMessage = 'This Alarm was shelved at ' + registry['shelved_at'] +
           ' with a duration of ' + this.timeouts.find(t => t.value === registry['timeout']).viewValue;
         },
-        (error) => {
+        (error: any) => {
           console.log('Error: ', error);
           return error;
         }
@@ -311,12 +369,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
       this.alarmService.shelveAlarm(
         this.alarm.core_id, message, timeout, this.user_selected
       ).subscribe(
-          (response) => {
+          (response: any) => {
             this.requestStatus = 1;
             this.hideSpinner();
             this.errorMessage = '';
           },
-          (error) => {
+          (error: any) => {
             if (error.status === 403) {
               this.requestStatus = -2;
             } else {
@@ -341,12 +399,12 @@ export class ShelveComponent implements OnInit, OnDestroy {
     if (this.canSend()) {
       this.alarmService.unshelveAlarms(
         [this.alarm.core_id], this.form.get('message').value).subscribe(
-          (response) => {
+          (response: any) => {
             this.requestStatus = 1;
             this.hideSpinner();
             this.errorMessage = '';
           },
-          (error) => {
+          (error: any) => {
             console.log('Error: ', error);
             this.requestStatus = -1;
             this.hideSpinner();

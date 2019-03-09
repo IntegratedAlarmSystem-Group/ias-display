@@ -40,6 +40,11 @@ export class StatusViewComponent implements OnInit {
   @Input() showActionBadges = true;
 
   /**
+   * Defines the direction of the tooltip
+   */
+  @Input() tooltipDirection = 'right';
+
+  /**
   * Instantiates the component
   */
   constructor() { }
@@ -61,10 +66,10 @@ export class StatusViewComponent implements OnInit {
       clear: Assets.ICONS + 'clear-valid.svg',
       set_low: Assets.ICONS + 'set-valid-low.svg',
       set_medium: Assets.ICONS + 'set-valid-low.svg',
-      set_high: Assets.ICONS + 'set-valid.svg',
-      set_critical: Assets.ICONS + 'set-valid.svg',
-      unknown: Assets.ICONS + 'unknown-valid.svg',
-      maintenance: Assets.ICONS + 'maintenance-valid.svg',
+      set_high: Assets.ICONS + 'set-valid-critical.svg',
+      set_critical: Assets.ICONS + 'set-valid-critical.svg',
+      unknown: Assets.ICONS + 'clear-valid-unknown.svg',
+      maintenance: Assets.ICONS + 'clear-valid-maintenance.svg',
       shelved: Assets.ICONS + 'clear-valid.svg',
     });
 
@@ -73,10 +78,10 @@ export class StatusViewComponent implements OnInit {
       clear: Assets.ICONS + 'clear-invalid.svg',
       set_low: Assets.ICONS + 'set-invalid-low.svg',
       set_medium: Assets.ICONS + 'set-invalid-low.svg',
-      set_high: Assets.ICONS + 'set-invalid.svg',
-      set_critical: Assets.ICONS + 'set-invalid.svg',
-      unknown: Assets.ICONS + 'unknown-invalid.svg',
-      maintenance: Assets.ICONS + 'maintenance-invalid.svg',
+      set_high: Assets.ICONS + 'set-invalid-critical.svg',
+      set_critical: Assets.ICONS + 'set-invalid-critical.svg',
+      unknown: Assets.ICONS + 'clear-invalid-unknown.svg',
+      maintenance: Assets.ICONS + 'clear-invalid-maintenance.svg',
       shelved: Assets.ICONS + 'clear-valid.svg',
     });
 

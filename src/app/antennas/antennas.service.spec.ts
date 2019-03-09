@@ -8,8 +8,6 @@ import { Map } from '../map/fixtures';
 
 describe('AntennasService', () => {
 
-  let subject: AntennasService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AntennasService],
@@ -17,8 +15,7 @@ describe('AntennasService', () => {
     });
   });
 
-  beforeEach(inject([AntennasService, HttpClientService], (service, httpClientService) => {
-    subject = service;
+  beforeEach(inject([AntennasService, HttpClientService], (service: AntennasService, httpClientService: HttpClientService) => {
     spyOn(httpClientService, 'get').and.callFake(function() {
       return of(Map);
     });

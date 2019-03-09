@@ -7,7 +7,6 @@ import { ActionsModule } from '../../actions/actions.module';
 import { DataModule } from '../../data/data.module';
 import { WeatherSidebarComponent } from './weather-sidebar.component';
 import { WeatherStationSidebarComponent } from '../weather-station-sidebar/weather-station-sidebar.component';
-import { AlarmImageSet } from '../../shared/alarm/alarm.component';
 import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { StatusViewComponent } from '../../shared/status-view/status-view.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
@@ -15,24 +14,8 @@ import { WeatherService } from '../weather.service';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
-import { Alarm } from '../../data/alarm';
-import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types} from '../test_fixtures';
+import { mockWeatherStationsConfig, mockImagesSets, mockAlarms, alarm_types, mockAntennas, mockPadsStatus} from '../test_fixtures';
 
-const mockAntennas = {
-  'group1': ['ANT1', 'ANT2'],
-  'group2': ['ANT4']
-};
-
-const mockPadsStatus = {
-  'group1': {
-    'PAD1': 'ANT1',
-    'PAD2': 'ANT2',
-    'PAD3': null
-  },
-  'group2': {
-    'PAD4': 'ANT4'
-  }
-};
 
 describe('WeatherSidebarComponent', () => {
   let sidebarComponent: WeatherSidebarComponent;
@@ -67,7 +50,7 @@ describe('WeatherSidebarComponent', () => {
   }));
 
   beforeEach(
-    inject([WeatherService], (service) => {
+    inject([WeatherService], (service: WeatherService) => {
       weatherService = service;
       spyOn(weatherService, 'initialize').and.callFake(function() {});
       weatherService.padsStatus = mockPadsStatus;
@@ -82,16 +65,16 @@ describe('WeatherSidebarComponent', () => {
   );
 
   beforeEach(
-    inject([AlarmService], (service) => {
+    inject([AlarmService], (service: AlarmService) => {
       alarmService = service;
-      spyOn(alarmService, 'get').and.callFake(function(alarm_id) {
+      spyOn(alarmService, 'get').and.callFake(function(alarm_id: string) {
         return mockAlarms[alarm_id];
       });
     })
   );
 
   beforeEach(
-    inject([ClipboardService], (service) => {
+    inject([ClipboardService], (service: ClipboardService) => {
       clipboardService = service;
       spyOn(clipboardService, 'copyFromContent').and.callFake(function() { return true; });
     })
@@ -106,10 +89,6 @@ describe('WeatherSidebarComponent', () => {
 
   it('should create', () => {
     expect(sidebarComponent).toBeTruthy();
-  });
-
-  it('should have a getAlarm function', () => {
-    expect(sidebarComponent.getAlarm('mockAlarm-0')).toEqual(mockAlarms['mockAlarm-0']);
   });
 
   describe('Should have a mat accordion', () => {
@@ -155,7 +134,7 @@ describe('WeatherSidebarComponent', () => {
                 const columns = tableRows[j].queryAll(By.css('td'));
 
                 const index = alarm_types[Number(j) - 1];
-                let alarmIndex;
+                let alarmIndex: string;
 
                 if ( j === '0' ) {
                   alarmIndex = 'mockAlarm-' + i;
@@ -172,12 +151,7 @@ describe('WeatherSidebarComponent', () => {
                   expect(alarmComponent.imagesUnreliable).toEqual(mockImagesSets[index + '-unreliable']);
                 }
 
-                const statusView = columns[1].query(By.directive(StatusViewComponent)).componentInstance;
-                expect(statusView).toBeTruthy();
-                expect(statusView.alarm).toEqual(expectedAlarm);
-                expect(statusView.showActionBadges).toEqual(false);
-
-                const buttons = columns[2].query(By.directive(ButtonsComponent)).componentInstance;
+                const buttons = columns[1].query(By.directive(ButtonsComponent)).componentInstance;
                 expect(buttons).toBeTruthy();
                 expect(buttons.alarm).toEqual(expectedAlarm);
               }

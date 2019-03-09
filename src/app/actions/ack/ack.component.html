@@ -1,26 +1,17 @@
-<div class="component-action-card">
+<div *ngIf="alarm" class="component-action-card">
   <div class="component-action component-header">
-    <div class="component-title"> ALARM ACKNOWLEDGEMENT </div>
-    <button type="button" class="close" aria-label="Close" (click)="onClose()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <div class="component-action component-header component-header-title">
+      ALARM ACKNOWLEDGEMENT
+      <button type="button" class="close" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </div>
 
   <div class="component-action component-body">
     <form class="form-group" [formGroup]="form">
 
-      <div class="section alarm-info">
-        <table>
-          <tr>
-            <th>Alarm ID</th>
-            <td>{{alarm?.core_id}}</td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>{{ alarm?.description }}</td>
-          </tr>
-        </table>
-      </div>
+      <app-alarm-info [alarm]="this.alarmService.get(this.alarm_id)"></app-alarm-info>
 
       <div *ngIf="!this.authService.getAllowedActions()['can_ack']; then notAllowedMessage"> </div>
       <ng-template #notAllowedMessage>
@@ -30,6 +21,17 @@
         }">
         <div class="section-title"> Action Not Allowed </div>
         <div> The logged in user is not allowed to perform this action. The action button will remain disabled. </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="this.alarm.ack; then acknowledgedAlarmMessage"> </div>
+      <ng-template #acknowledgedAlarmMessage>
+        <div [ngClass]="{
+          'section ack-action': true,
+          'action-warning': true
+        }">
+        <div class="section-title"> Acknowledged Alarm </div>
+        <div> The alarm was previously acknowledged. The action button will remain disabled. </div>
         </div>
       </ng-template>
 

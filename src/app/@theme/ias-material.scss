@@ -1,9 +1,13 @@
 @import '~@angular/material/theming';
 @import '../actions/action-theme.scss';
 @import '../shared/alarm/alarm-theme.scss';
+@import '../shared/alarm-label/alarm-label-theme.scss';
+@import '../shared/alarm-card/alarm-card-theme.scss';
+@import '../shared/alarm-tile/alarm-tile-theme.scss';
 @import '../shared/alarm-header/alarm-header-theme.scss';
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
+@import '../tabular/table/table-theme.scss';
 @import '../tabular/tabular-view/tabular-view-theme.scss';
 @import '../weather/weather-summary/weather-summary-theme.scss';
 @import '../weather/weather-sidebar/weather-sidebar-theme.scss';
@@ -120,23 +124,24 @@ $ias-dark-theme-foreground: (
 );
 
 $ias-alarms-colors: (
-  clear: #54c073,
-  set-low: #dcb33d,
-  set-medium: #dcb33d,
-  set-high: #b63f36,
-  set-critical: #b63f36,
-  unknown: #4ac8ff,
-  maintenance: #abb4b4,
-  shelved: #54c073,
+  clear: #05e086,
+  set-low: #E4D506,
+  set-medium: #E4D506,
+  set-high: #FF2C27,
+  set-critical: #FF2C27,
+  unknown: #0081b9,
+  maintenance: #8e98a1,
+  shelved: #05e086,
   border-clear: #95fe96,
-  border-set-low: #fbd575,
-  border-set-medium: #fbd575,
-  border-set-high: #fe6b65,
-  border-set-critical: #fe6b65,
-  border-unknown: #6be0fb,
-  border-maintenance: #e0e2e2,
-  border-shelved: #95fe96
-
+  border-set-low: #E4D506,
+  border-set-medium: #E4D506,
+  border-set-high: #FF2C27,
+  border-set-critical: #FF2C27,
+  border-unknown: #0081b9,
+  border-maintenance: #8e98a1,
+  border-shelved: #05e086,
+  set-card-dark-text: #212D3A,
+  clear-line-label: hsla(211, 27%, 18%, 0.25),
 );
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
@@ -168,6 +173,7 @@ $ias-typography: mat-typography-config(
   @include app-theme($theme);
   @include health-summary-theme($theme);
   @include overview-card-theme($theme);
+  @include table-theme($theme);
   @include tabular-view-theme($theme);
   @include weather-summary-theme($theme);
   @include weather-sidebar-theme($theme);
@@ -181,6 +187,9 @@ $ias-typography: mat-typography-config(
   @include antenna-marker-theme($theme);
   @include alarm-theme($theme);
   @include alarm-header-theme($theme);
+  @include alarm-card-theme($theme);
+  @include alarm-tile-theme($theme);
+  @include alarm-label-theme($theme);
 }
 
 @include angular-material-theme($ias-theme);

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlarmComponent, AlarmImageSet } from './alarm.component';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlarmComponent } from './alarm.component';
+import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
+import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { Alarm } from '../../data/alarm';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
 describe('AlarmComponent', () => {
@@ -9,7 +12,12 @@ describe('AlarmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmComponent ]
+      declarations: [
+        AlarmComponent,
+        AlarmLabelComponent,
+        AlarmTooltipComponent
+    ],
+      imports: [ NgbModule ]
     })
     .compileComponents();
   }));
@@ -77,7 +85,7 @@ describe('AlarmComponent', () => {
     }
   });
 
-  it('should display all shleved alarms accordingly ', () => {
+  it('should display all shelved alarms accordingly ', () => {
     for (const alarm of MockAlarms) {
       component.alarm = Alarm.asAlarm(alarm);
       component.alarm.shelve();
@@ -104,6 +112,18 @@ describe('AlarmComponent', () => {
       component.alarm.ack = true;
       expect(component.showAsPendingAck()).toEqual(false);
       component.alarm.ack = false;
+      expect(component.showAsPendingAck()).toEqual(true);
+    });
+
+    it('that return false when the alarms state_change_timestamp is 0', () => {
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.images = MockImageSet;
+      component.imagesUnreliable = MockImageUnreliableSet;
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 0;
+      expect(component.showAsPendingAck()).toEqual(false);
+      component.alarm.ack = false;
+      component.alarm.state_change_timestamp = 1231231;
       expect(component.showAsPendingAck()).toEqual(true);
     });
 
