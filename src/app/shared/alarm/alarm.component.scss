@@ -20,6 +20,7 @@ $status-cem: 1*$cem;
     display: inline-block;
     vertical-align: middle;
     height: 100%;
+    padding-right: 6%;
 
     .alarm-icon{
       height: 100%;
@@ -28,6 +29,7 @@ $status-cem: 1*$cem;
   }
 
   .text {
+    width: 100%;
     vertical-align: middle;
     height: 100%;
     padding-right: 6%;
@@ -37,6 +39,7 @@ $status-cem: 1*$cem;
     display: inline-block;
     vertical-align: middle;
     height: 100%;
+    min-width: 12px;
 
     .badge-icon{
       width: 100%;
