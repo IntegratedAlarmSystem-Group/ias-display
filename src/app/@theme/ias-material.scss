@@ -141,6 +141,7 @@ $ias-alarms-colors: (
   border-maintenance: #8e98a1,
   border-shelved: #05e086,
   set-card-dark-text: #212D3A,
+  clear-line-label: hsla(211, 27%, 18%, 0.25),
 );
 
 // instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.

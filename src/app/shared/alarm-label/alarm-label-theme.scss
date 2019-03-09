@@ -8,7 +8,7 @@
   $alarms: map-get($theme, alarms);
 
   .alarm-label-clear {
-    background: mat-color($alarms, set-card-dark-text);
+    background: mat-color($alarms, clear-line-label);
   }
 
   .alarm-label-low {
