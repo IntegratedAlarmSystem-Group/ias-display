@@ -144,7 +144,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getSVGPaths(pathsGroup)</code>
+<code>getSVGPaths(pathsGroup: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                     </td>
                 </tr>
 
@@ -167,6 +167,7 @@
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                                     <td>Description</td>
                                             </tr>
@@ -174,6 +175,9 @@
                                         <tbody>
                                                 <tr>
                                                         <td>pathsGroup</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -191,7 +195,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code>{}</code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -217,7 +221,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>mapdataProcessing(placemarksGroups, pathsGroups)</code>
+<code>mapdataProcessing(placemarksGroups: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, pathsGroups: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                     </td>
                 </tr>
 
@@ -240,6 +244,7 @@
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                                     <td>Description</td>
                                             </tr>
@@ -247,6 +252,9 @@
                                         <tbody>
                                                 <tr>
                                                         <td>placemarksGroups</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -260,6 +268,9 @@
                                                 </tr>
                                                 <tr>
                                                         <td>pathsGroups</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -277,7 +288,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code>{}</code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -313,7 +324,7 @@ export class MapService {
   * @param {any} pathsGroup group of paths
   * @returns {any} svgPaths
   */
-  getSVGPaths(pathsGroup) {
+  getSVGPaths(pathsGroup: any): any {
     const svgPaths &#x3D; [];
     for (let i &#x3D; 0; i &lt; pathsGroup.length; i++) {
       const points &#x3D; pathsGroup[i];
@@ -338,7 +349,7 @@ export class MapService {
   * @param {any} pathsGroups list of group of paths
   * @return {any} The viewbox: list of 4 numbers used to define the size of the map
   */
-  mapdataProcessing(placemarksGroups, pathsGroups) {
+  mapdataProcessing(placemarksGroups: any, pathsGroups: any): any {
 
     const X_AXIS_SCALING_FACTOR &#x3D; 1.1;
 

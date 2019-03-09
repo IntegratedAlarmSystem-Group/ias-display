@@ -440,7 +440,7 @@ considering of the actionsSidenav can be closed or not</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code>{ outlets: { primary: any; actions: any; }; } | { outlets: { primary: any; actions?: undefined; }...</code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -466,7 +466,7 @@ considering of the actionsSidenav can be closed or not</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getNavItemCountClass(navItem, countByView)</code>
+<code>getNavItemCountClass(navItem: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, countByView: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                     </td>
                 </tr>
 
@@ -494,12 +494,16 @@ variable</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>navItem</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -509,6 +513,9 @@ variable</p>
                                                 </tr>
                                                 <tr>
                                                         <td>countByView</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -522,7 +529,7 @@ variable</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code>&quot;hide-count&quot; | &quot;nonzero-count&quot; | &quot;zero-count&quot; | &quot;unknown-count&quot;</code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -548,7 +555,7 @@ variable</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getNavItemCountText(navItem, countByView)</code>
+<code>getNavItemCountText(navItem: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, countByView: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                     </td>
                 </tr>
 
@@ -576,12 +583,16 @@ variable</p>
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>navItem</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -591,6 +602,9 @@ variable</p>
                                                 </tr>
                                                 <tr>
                                                         <td>countByView</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -604,7 +618,7 @@ variable</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -651,7 +665,7 @@ variable</p>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -1348,7 +1362,7 @@ export class AppComponent implements OnInit {
   * @param {any} item an item of the navigation sidenav
   * @returns {Object} The links in a dictionary
   */
-  getActionsLink(item: any) {
+  getActionsLink(item: any): Object {
     if (this.actionsSidenavService.canClose) {
       return {outlets: { primary: item.link, actions: null }};
     } else {
@@ -1370,7 +1384,7 @@ export class AppComponent implements OnInit {
    &quot; Uses the getUser method defined on the {@link AuthService}
    * @returns {string} the username
    */
-  getUser() {
+  getUser(): string {
     return this.authService.getUser();
   }
 
@@ -1391,7 +1405,7 @@ export class AppComponent implements OnInit {
    * variable
    * @returns {string} the classname for the nav item mark
    */
-   getNavItemCountClass(navItem, countByView) {
+   getNavItemCountClass(navItem: any, countByView: any): string {
      const navItemCounter &#x3D; navItem.counter;
      const availableCounters &#x3D; Object.keys(countByView);
      if (navItemCounter &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
@@ -1420,7 +1434,7 @@ export class AppComponent implements OnInit {
     * variable
     * @returns {string} the text related to the count for the nav item
     */
-    getNavItemCountText(navItem, countByView) {
+    getNavItemCountText(navItem: any, countByView: any): string {
       const navItemCounter &#x3D; navItem.counter;
       const availableCounters &#x3D; Object.keys(countByView);
       if (navItemCounter &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
@@ -1546,7 +1560,6 @@ export class AppComponent implements OnInit {
 
 #actions-sidenav  {
   width: 500px;
-  padding: 0 24px;
   min-height: 100%;
 }
 
@@ -1685,7 +1698,7 @@ export class AppComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="main-layout">  <mat-toolbar id="app-toolbar">    <div class="btn-wrapper">      <button mat-icon-button (click)="toggleSidenav()">        <mat-icon mat-list-icon>menu</mat-icon>      </button>    </div>    <div class="content-wrapper">      <img class="ias-logo" src="/assets/img/logo-ias_white.svg">      <span class=\'app-title\'> Integrated Alarm System </span>    </div>    <div *ngIf="authService.loginStatus" class="user-wrapper">      <button mat-button [matMenuTriggerFor]="usermenu">        <mat-icon>account_circle</mat-icon> {{ this.getUser() }}      </button>      <mat-menu xPosition="before" #usermenu="matMenu" [overlapTrigger]="false">        <button (click)="logout()" mat-menu-item>          <mat-icon>exit_to_app</mat-icon>Log out        </button>      </mat-menu>    </div>  </mat-toolbar>  <mat-sidenav-container autosize>    <mat-sidenav id="navigation-sidenav" *ngIf="authService.loginStatus" [class.compacted]="isNavigationCompacted" mode="side" opened="true" [disableClose]="true">      <mat-nav-list>        <div *ngFor="let item of navigationSidenavItems">          <a mat-list-item [routerLink]=\'[getActionsLink(item)]\' routerLinkActive="active-link">            <span class="ias-nav-button-container">              <span [ngClass]="[\'ias-count-label\', getNavItemCountClass(item, alarmService.countByView)]">                {{ getNavItemCountText(item, alarmService.countByView) }}              </span>              <span class="ias-icon">                <ng-container *ngIf="item.svgIcon">                  <mat-icon svgIcon="{{ item.icon }}">{{ item.icon }}</mat-icon>                </ng-container>                <ng-container *ngIf="!item.svgIcon">                  <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>                </ng-container>              </span>            </span>            <p matLine *ngIf="!isNavigationCompacted">{{ item.title }} </p>          </a>        </div>      </mat-nav-list>    </mat-sidenav>    <mat-sidenav-content id="main-content" autosize>      <router-outlet></router-outlet>    </mat-sidenav-content>    <mat-sidenav #actionsSidenav id="actions-sidenav" position="end" mode="side" opened="false" [disableClose]="true">        <router-outlet name="actions"></router-outlet>    </mat-sidenav>  </mat-sidenav-container></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

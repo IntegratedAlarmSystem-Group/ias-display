@@ -391,7 +391,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Defines wether or not the button is disabled</p>
+                            <div class="io-description"><p>Defines whether or not the button is disabled</p>
 </div>
 
                             <div>
@@ -504,14 +504,14 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(event: MouseEvent)</code>
+<code>onClick()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:71</a></div>
                             </td>
                         </tr>
 
@@ -522,45 +522,9 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
 </div>
 
                             <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>event</td>
-                                                        <td>
-                                                                    <code>MouseEvent</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>Object that represent the click DOM event</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -669,8 +633,8 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
    * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
-  canAcknowledge() {
-    if (this.alarm !&#x3D; null) {
+  canAcknowledge(): boolean {
+    if (this.alarm !&#x3D; null &amp;&amp; this.alarm.state_change_timestamp &gt; 0) {
       return !this.alarm.ack;
     } else {
       return false;
@@ -678,18 +642,17 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Defines wether or not the button is disabled
+   * Defines whether or not the button is disabled
    * @returns {boolean} true if the button is disabled, false if not.
    */
-  isDisabled() {
+  isDisabled(): boolean {
     return !this.sidenavService.canClose || !this.canAcknowledge();
   }
 
   /**
   * Handle click on ack button, it triggers ack sidenav through the {@link Router} service
-  * @param {MouseEvent} event Object that represent the click DOM event
   */
-  onClick(event: MouseEvent) {
+  onClick() {
     this.sidenavService.goToAcknowledge(this.alarm.core_id);
   }
 
@@ -698,13 +661,13 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button mat-icon-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; (click)&#x3D;&quot;onClick($event)&quot; [disabled]&#x3D;&quot;isDisabled()&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;button mat-flat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; (click)&#x3D;&quot;onClick()&quot; [disabled]&#x3D;&quot;isDisabled()&quot;&gt;
     &lt;div *ngIf&#x3D;&quot;isDisabled(); then ackOff else ackOn&quot;&gt;&lt;/div&gt;
     &lt;ng-template #ackOn&gt;
-      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt; &lt;/div&gt;
+      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-on-btn-icon.svg&quot;/&gt; &lt;/div&gt;
     &lt;/ng-template&gt;
     &lt;ng-template #ackOff&gt;
-      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-off.svg&quot;/&gt; &lt;/div&gt;
+      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-off-btn-icon.svg&quot;/&gt; &lt;/div&gt;
     &lt;/ng-template&gt;
 &lt;/button&gt;
 </code></pre>
@@ -715,12 +678,24 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
                     <code>./ack-button.component.css</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.ack-button {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-radius: 24px;
+  min-width: 1px;
+  width: 32px;
+  height: 32px;
 }
 
 .ack-button-icon {
-  width: 20px;
+  width: 21px;
+  margin: auto;
+}
+
+.mat-flat-button {
+  line-height: 28px;
 }
 </code></pre>
     </div>
@@ -750,8 +725,8 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button mat-icon-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick($event)" [disabled]="isDisabled()">    <div *ngIf="isDisabled(); then ackOff else ackOn"></div>    <ng-template #ackOn>      <div class="ack-button-icon"> <img src="/assets/img/ack-on.svg"/> </div>    </ng-template>    <ng-template #ackOff>      <div class="ack-button-icon"> <img src="/assets/img/ack-off.svg"/> </div>    </ng-template></button></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><button mat-flat-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick()" [disabled]="isDisabled()">    <div *ngIf="isDisabled(); then ackOff else ackOn"></div>    <ng-template #ackOn>      <div class="ack-button-icon"> <img src="/assets/img/ack-on-btn-icon.svg"/> </div>    </ng-template>    <ng-template #ackOff>      <div class="ack-button-icon"> <img src="/assets/img/ack-off-btn-icon.svg"/> </div>    </ng-template></button></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
 </script>

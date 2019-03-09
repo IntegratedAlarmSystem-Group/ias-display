@@ -47,9 +47,14 @@ export class AlarmLabelComponent implements OnInit {
   */
   sizeOptions = ['xs', 'sm', 'md', 'lg'];
 
-
+  /**
+  * Builds a new instance
+  */
   constructor() { }
 
+  /**
+  * Executed when the component is initiating
+  */
   ngOnInit() {
     if (this.showTextOptions.indexOf(this.showText) < 0) {
       this.showText = true;

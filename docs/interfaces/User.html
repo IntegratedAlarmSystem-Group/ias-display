@@ -178,9 +178,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { environment } from &#x27;../../environments/environment&#x27;;
 import { HttpClientService } from &#x27;./http-client.service&#x27;;
 import { BackendUrls } from &#x27;../settings&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 
 /**
 * Class that models a User
@@ -214,9 +214,9 @@ export class UserService {
 
   /**
   * Get the list of users in the operators group
-  * @return {User[]} the list of users
+  * @return {Subscription} subscription to the list of users
   */
-  requestUsersList() {
+  requestUsersList(): Subscription {
     return this.httpClientService.get(BackendUrls.USERS_LIST)
     .subscribe (
         (response) &#x3D;&gt; {

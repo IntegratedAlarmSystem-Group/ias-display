@@ -160,10 +160,10 @@
                                 <a href="#getAlarm">getAlarm</a>
                             </li>
                             <li>
-                                <a href="#getAntennaName">getAntennaName</a>
+                                <a href="#getAntennas">getAntennas</a>
                             </li>
                             <li>
-                                <a href="#getAntennas">getAntennas</a>
+                                <a href="#getChildrenAlarmIds">getChildrenAlarmIds</a>
                             </li>
                             <li>
                                 <a href="#getDevices">getDevices</a>
@@ -304,6 +304,10 @@
                     <td class="col-md-10">
                         <div><p>Selected antenna object, null if it is nothing selected </p>
 </div>
+                            <p>
+                            <em>Type :</em>    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
+
+                            </p>
                         <p>
                             <em>Default value : </em><code>null</code>
                         </p>
@@ -429,83 +433,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getAntennaName"></a>
-                        <span class="name">
-                            <b>
-                            getAntennaName
-                            </b>
-                            <a href="#getAntennaName"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>getAntennaName(antennaConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:56</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Build the antenna name to display. It is built with the Antenna&#39;s code and the current associated pad.</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>antennaConfig</td>
-                                                        <td>
-                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <code><p>the Antenna configuration</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>the antenna name to display</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="getAntennas"></a>
                         <span class="name">
                             <b>
@@ -524,7 +451,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -537,11 +464,57 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig[]</a></code>
+                                <b>Returns : </b>    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig[]</a></code>
 
                             </div>
                                 <div class="io-description">
                                     <p>list of {</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getChildrenAlarmIds"></a>
+                        <span class="name">
+                            <b>
+                            getChildrenAlarmIds
+                            </b>
+                            <a href="#getChildrenAlarmIds"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getChildrenAlarmIds()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Return the list of alarm IDs of the children of the selectedAntenna</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string[]</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>list of alarm IDs</p>
 
                                 </div>
                     </td>
@@ -570,7 +543,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:75</a></div>
                             </td>
                         </tr>
 
@@ -583,7 +556,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig[]</a></code>
+                                <b>Returns : </b>    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig[]</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -609,14 +582,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>isSelected(alarmConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
+<code>isSelected(alarmConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:89</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:92</a></div>
                             </td>
                         </tr>
 
@@ -641,7 +614,7 @@
                                                 <tr>
                                                         <td>alarmConfig</td>
                                                         <td>
-                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -727,14 +700,14 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick(alarmConfig: <a href="../classes/AntennaConfig.html">AntennaConfig</a>)</code>
+<code>onClick(alarmConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:97</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:100</a></div>
                             </td>
                         </tr>
 
@@ -759,7 +732,7 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
                                                 <tr>
                                                         <td>alarmConfig</td>
                                                         <td>
-                                                                    <code><a href="../classes/AntennaConfig.html" target="_self" >AntennaConfig</a></code>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -810,7 +783,7 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/antennas/antennas-sidebar/antennas-sidebar.component.ts:82</a></div>
                             </td>
                         </tr>
 
@@ -922,10 +895,10 @@ Initializes the <a href="../injectables/AntennasService.html">AntennasService</a
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, OnInit, Input, Output } from &#x27;@angular/core&#x27;;
-import { AlarmComponent } from &#x27;../../shared/alarm/alarm.component&#x27;;
 import { AlarmService } from &#x27;../../data/alarm.service&#x27;;
-import { AntennasService, AntennaConfig } from &#x27;../antennas.service&#x27;;
+import { AntennasService } from &#x27;../antennas.service&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
+import { AlarmConfig } from &#x27;../../data/alarm-config&#x27;;
 
 /**
  * Display used to show the list of antennas&#x27; alarms
@@ -938,10 +911,10 @@ import { Alarm } from &#x27;../../data/alarm&#x27;;
 export class AntennasSidebarComponent implements OnInit {
 
   /** Selected antenna object, null if it is nothing selected */
-  @Input() selectedAntenna &#x3D; null;
+  @Input() selectedAntenna: AlarmConfig &#x3D; null;
 
   /** Event emitted to notify when an antenna is selected */
-  @Output() antennaClicked &#x3D; new EventEmitter&lt;AntennaConfig&gt;();
+  @Output() antennaClicked &#x3D; new EventEmitter&lt;AlarmConfig&gt;();
 
   /**
   * Builds an instance of the component
@@ -972,27 +945,30 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
-   * Build the antenna name to display. It is built with the Antenna&#x27;s code and the current associated pad.
-   * @param {MapAntennaConfig} antennaConfig the Antenna configuration
-   * @returns {string} the antenna name to display
-   */
-  getAntennaName(antennaConfig: AntennaConfig ): string {
-    return antennaConfig.antenna;
-  }
-
-  /**
   * Return the list of antennas Alarm configuration
-  * @returns {list} list of {@link AntennaConfig}
+  * @returns {list} list of {@link AlarmConfig}
   */
-  getAntennas(): AntennaConfig [] {
+  getAntennas(): AlarmConfig [] {
     return this.antennasService.antennasConfig;
   }
 
   /**
-  * Return the list of Alarm configuration for global devices
-  * @returns {list} list of {@link AntennaConfig}
+  * Return the list of alarm IDs of the children of the selectedAntenna
+  * @returns {string[]} list of alarm IDs
   */
-  getDevices(): AntennaConfig [] {
+  getChildrenAlarmIds(): string[] {
+    const alarm &#x3D; this.alarmService.getAlarm(this.selectedAntenna);
+    if (!alarm) {
+      return [];
+    }
+    return alarm.dependencies;
+  }
+
+  /**
+  * Return the list of Alarm configuration for global devices
+  * @returns {list} list of {@link AlarmConfig}
+  */
+  getDevices(): AlarmConfig [] {
     return this.antennasService.devicesConfig;
   }
 
@@ -1006,18 +982,18 @@ export class AntennasSidebarComponent implements OnInit {
 
   /**
   * Indicates if the antenna is selected or not
-  * @param {AntennaConfig} alarmConfig configuration of the alarm
+  * @param {AlarmConfig} alarmConfig configuration of the alarm
   * @return  {boolean} true if the alarm is selected or false if it is not
   */
-  isSelected(alarmConfig: AntennaConfig): boolean {
+  isSelected(alarmConfig: AlarmConfig): boolean {
     return this.selectedAntenna &amp;&amp; (this.selectedAntenna.placemark &#x3D;&#x3D;&#x3D; alarmConfig.placemark);
   }
 
   /**
   * Action performed when the antenna is clicked
-  * @param {AntennaConfig} alarmConfig configuration of the clicked antenna
+  * @param {AlarmConfig} alarmConfig configuration of the clicked antenna
   */
-  onClick(alarmConfig: AntennaConfig) {
+  onClick(alarmConfig: AlarmConfig) {
     if ( this.selectedAntenna &amp;&amp; (this.selectedAntenna.placemark &#x3D;&#x3D;&#x3D; alarmConfig.placemark) ) {
       this.selectedAntenna &#x3D; null;
     } else {
@@ -1050,7 +1026,10 @@ export class AntennasSidebarComponent implements OnInit {
 
 &lt;!-- Title when one antenna is selected --&gt;
 &lt;ng-template #returnLink&gt;
-    &lt;div class&#x3D;&quot;return-link&quot; (click)&#x3D;&quot;unselectAntenna()&quot;&gt; &lt;i class&#x3D;&quot;material-icons&quot;&gt;chevron_left&lt;/i&gt; &lt;span&gt; {{getAntennaName(this.selectedAntenna)}} &lt;/span&gt; &lt;/div&gt;
+    &lt;div class&#x3D;&quot;return-link&quot; (click)&#x3D;&quot;unselectAntenna()&quot;&gt;
+      &lt;i class&#x3D;&quot;material-icons&quot;&gt;chevron_left&lt;/i&gt;
+      &lt;span&gt; {{alarmService.getName(this.selectedAntenna)}} &lt;/span&gt;
+    &lt;/div&gt;
 &lt;/ng-template&gt;
 
 &lt;!-- Content when there is not a selected antenna --&gt;
@@ -1058,7 +1037,13 @@ export class AntennasSidebarComponent implements OnInit {
   &lt;div class&#x3D;&quot;antennas-container&quot;&gt;
     &lt;div class&#x3D;&quot;grid-container&quot;&gt;
       &lt;div class&#x3D;&quot;grid-item&quot; *ngFor&#x3D;&quot;let antennaConfig of getAntennas()&quot; (click)&#x3D;&quot;onClick(antennaConfig)&quot;&gt;
-        &lt;app-alarm-header fxFlex [alarm]&#x3D;&quot;this.getAlarm(antennaConfig.alarm)&quot; [alarmNameMaxSize]&#x3D;&quot;4&quot; [optionalAlarmName]&#x3D;&quot;getAntennaName(antennaConfig)&quot;&gt;&lt;/app-alarm-header&gt;
+        &lt;app-alarm-card
+          fxFlex
+          [alarm]&#x3D;&quot;alarmService.getAlarm(antennaConfig)&quot;
+          [alarmNameMaxSize]&#x3D;&quot;4&quot;
+          [optionalAlarmName]&#x3D;&quot;alarmService.getName(antennaConfig)&quot;
+          [tooltipDirection]&#x3D;&quot;&#x27;left&#x27;&quot;
+        &gt;&lt;/app-alarm-card&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -1069,16 +1054,21 @@ export class AntennasSidebarComponent implements OnInit {
         &lt;tr&gt;
           &lt;td class&#x3D;&quot;antenna&quot;&gt;
             &lt;div class&#x3D;&quot;text&quot;&gt;
-              &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(device.alarm)&quot; [text]&#x3D;&quot;device.antenna&quot;&gt;&lt;/app-alarm&gt;
+              &lt;app-alarm
+                [alarm]&#x3D;&quot;alarmService.getAlarm(device)&quot;
+                [text]&#x3D;&quot;alarmService.getName(device)&quot;
+                [labelMode]&#x3D;&quot;&#x27;hidden&#x27;&quot;
+                [showActionBadges]&#x3D;&quot;false&quot;
+              &gt;&lt;/app-alarm&gt;
             &lt;/div&gt;
           &lt;/td&gt;
           &lt;td&gt;
             &lt;div class&#x3D;&quot;status&quot;&gt;
-              &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(device.alarm)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
+              &lt;app-status-view [alarm]&#x3D;&quot;alarmService.getAlarm(device)&quot; [showActionBadges]&#x3D;&quot;true&quot;&gt;&lt;/app-status-view&gt;
             &lt;/div&gt;
           &lt;/td&gt;
           &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-            &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(device.alarm)&quot;&gt;&lt;/app-buttons&gt;
+            &lt;app-buttons [alarm]&#x3D;&quot;alarmService.getAlarm(device)&quot;&gt;&lt;/app-buttons&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/ng-container&gt;
@@ -1089,205 +1079,33 @@ export class AntennasSidebarComponent implements OnInit {
 &lt;!-- Content when one antenna is selected --&gt;
 &lt;ng-template #antennasDetail&gt;
   &lt;div class&#x3D;&quot;antennas-detail alarm-info&quot;&gt;
-    &lt;table&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Alarm ID&lt;/th&gt;
-        &lt;td&gt;{{this.selectedAntenna.alarm}}&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Antenna&lt;/th&gt;
-        &lt;td&gt;{{this.selectedAntenna.antenna}}&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Location (PAD)&lt;/th&gt;
-        &lt;td&gt;{{this.selectedAntenna.placemark}}&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+    &lt;div class&#x3D;&quot;alarm-data&quot;&gt;
+      &lt;table&gt;
+        &lt;tr&gt;
+          &lt;th class&#x3D;&quot;header&quot;&gt;Alarm ID&lt;/th&gt;
+          &lt;td&gt;{{this.selectedAntenna.alarm_id}}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th class&#x3D;&quot;header&quot;&gt;Antenna (Pad)&lt;/th&gt;
+          &lt;td&gt;{{this.alarmService.getName(selectedAntenna)}} ({{this.selectedAntenna.placemark}})&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;alarm-buttons&quot;&gt;
+      &lt;app-buttons [alarm]&#x3D;&quot;alarmService.getAlarm(this.selectedAntenna)&quot;&gt;&lt;/app-buttons&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;div class&#x3D;&quot;antennas-detail devices-alarms&quot;&gt;
-    &lt;table&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;antenna&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.alarm)&quot; [text]&#x3D;&quot;&#x27;Antenna&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.alarm)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.alarm)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire)&quot; [text]&#x3D;&quot;&#x27;Fire&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire_malfunction)&quot; [text]&#x3D;&quot;&#x27;Fire Malfunction&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire_malfunction)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.fire_malfunction)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.ups)&quot; [text]&#x3D;&quot;&#x27;UPS Failure&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.ups)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.ups)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.hvac)&quot; [text]&#x3D;&quot;&#x27;HVAC Failure&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.hvac)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.hvac)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.power)&quot; [text]&#x3D;&quot;&#x27;Power Cut&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.power)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.power)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp0)&quot; [text]&#x3D;&quot;&#x27;Cryo temperature sensor 0&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp0)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp0)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp5)&quot; [text]&#x3D;&quot;&#x27;Cryo temperature sensor 5&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp5)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp5)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp9)&quot; [text]&#x3D;&quot;&#x27;Cryo temperature sensor 9&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp9)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_temp9)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres0)&quot; [text]&#x3D;&quot;&#x27;Cryo pressure sensor 0&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres0)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres0)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres1)&quot; [text]&#x3D;&quot;&#x27;Cryo pressure sensor 1&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres1)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.crio_pres1)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td class&#x3D;&quot;device&quot;&gt;
-          &lt;div class&#x3D;&quot;text&quot;&gt;
-            &lt;app-alarm [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.cmpr_drive)&quot; [text]&#x3D;&quot;&#x27;Compressor Drive OFF&#x27;&quot;&gt;&lt;/app-alarm&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;status&quot;&gt;
-            &lt;app-status-view [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.cmpr_drive)&quot; [showActionBadges]&#x3D;&quot;false&quot;&gt;&lt;/app-status-view&gt;
-          &lt;/div&gt;
-        &lt;/td&gt;
-        &lt;td class&#x3D;&quot;buttons&quot; align&#x3D;&quot;right&quot;&gt;
-          &lt;app-buttons [alarm]&#x3D;&quot;this.getAlarm(this.selectedAntenna.cmpr_drive)&quot;&gt;&lt;/app-buttons&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
+  &lt;div class&#x3D;&quot;antennas-detail subalarms&quot;&gt;
+    &lt;div class&#x3D;&quot;subalarms-header&quot;&gt;
+      Antenna devices alarms
+    &lt;/div&gt;
+    &lt;app-table
+      [displayedColumns] &#x3D; &quot;[&#x27;status&#x27;, &#x27;name&#x27;, &#x27;mode&#x27;, &#x27;actions&#x27;]&quot;
+      [alarmsToDisplay] &#x3D; &quot;this.getChildrenAlarmIds()&quot;
+      [pageSizeOptions] &#x3D; &quot;[12, 25, 50, 100]&quot;
+    &gt;
+    &lt;/app-table&gt;
   &lt;/div&gt;
 &lt;/ng-template&gt;
 </code></pre>
@@ -1377,10 +1195,21 @@ export class AntennasSidebarComponent implements OnInit {
       margin-right: 28px;
 
       &amp;.alarm-info {
-        padding-bottom: 10px;
+        padding-bottom: 12px;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         border-bottom-color: rgba(255, 255, 255, 0.12);
+        display: flex;
+        flex-flow: row;
+
+        .header {
+          font-weight: bold;
+        }
+
+        .alarm-buttons {
+          flex: 1 1 auto;
+          align-self: center;
+        }
 
         table {
           vertical-align: top;
@@ -1389,6 +1218,15 @@ export class AntennasSidebarComponent implements OnInit {
         th {
           padding-right: 16px;
           font-weight: normal;
+        }
+      }
+
+      &amp;.subalarms {
+        // padding-top: 20px;
+
+        .subalarms-header {
+          padding: 20px 0 10px 0px;
+          font-weight: bold;
         }
       }
 
@@ -1481,8 +1319,8 @@ export class AntennasSidebarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="antennas-sidebar-card">  <!-- TITLE -->  <div class="antennas-sidebar-title">    <div *ngIf="this.selectedAntenna == null; then antennasTitle else returnLink"></div>  </div>  <!-- CONTENT -->  <div class="antennas-sidebar-content">    <div *ngIf="this.selectedAntenna == null; then antennasList else antennasDetail"> </div>  </div></div><!-- Title when there is not a selected antenna --><ng-template #antennasTitle>  <span> ANTENNAS </span></ng-template><!-- Title when one antenna is selected --><ng-template #returnLink>    <div class="return-link" (click)="unselectAntenna()"> <i class="material-icons">chevron_left</i> <span> {{getAntennaName(this.selectedAntenna)}} </span> </div></ng-template><!-- Content when there is not a selected antenna --><ng-template #antennasList>  <div class="antennas-container">    <div class="grid-container">      <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">        <app-alarm-header fxFlex [alarm]="this.getAlarm(antennaConfig.alarm)" [alarmNameMaxSize]="4" [optionalAlarmName]="getAntennaName(antennaConfig)"></app-alarm-header>      </div>    </div>  </div>  <mat-divider></mat-divider>  <div class="antennas-detail devices-alarms">    <table>      <ng-container *ngFor="let device of getDevices()">        <tr>          <td class="antenna">            <div class="text">              <app-alarm [alarm]="this.getAlarm(device.alarm)" [text]="device.antenna"></app-alarm>            </div>          </td>          <td>            <div class="status">              <app-status-view [alarm]="this.getAlarm(device.alarm)" [showActionBadges]="false"></app-status-view>            </div>          </td>          <td class="buttons" align="right">            <app-buttons [alarm]="this.getAlarm(device.alarm)"></app-buttons>          </td>        </tr>      </ng-container>    </table>  </div></ng-template><!-- Content when one antenna is selected --><ng-template #antennasDetail>  <div class="antennas-detail alarm-info">    <table>      <tr>        <th>Alarm ID</th>        <td>{{this.selectedAntenna.alarm}}</td>      </tr>      <tr>        <th>Antenna</th>        <td>{{this.selectedAntenna.antenna}}</td>      </tr>      <tr>        <th>Location (PAD)</th>        <td>{{this.selectedAntenna.placemark}}</td>      </tr>    </table>  </div>  <div class="antennas-detail devices-alarms">    <table>      <tr>        <td class="antenna">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [text]="\'Antenna\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.alarm)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.alarm)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire)" [text]="\'Fire\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [text]="\'Fire Malfunction\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.fire_malfunction)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.ups)" [text]="\'UPS Failure\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.ups)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.ups)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [text]="\'HVAC Failure\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.hvac)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.hvac)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.power)" [text]="\'Power Cut\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.power)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.power)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [text]="\'Cryo temperature sensor 0\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp0)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [text]="\'Cryo temperature sensor 5\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp5)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [text]="\'Cryo temperature sensor 9\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_temp9)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [text]="\'Cryo pressure sensor 0\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres0)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [text]="\'Cryo pressure sensor 1\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.crio_pres1)"></app-buttons>        </td>      </tr>      <tr>        <td class="device">          <div class="text">            <app-alarm [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [text]="\'Compressor Drive OFF\'"></app-alarm>          </div>        </td>        <td>          <div class="status">            <app-status-view [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)" [showActionBadges]="false"></app-status-view>          </div>        </td>        <td class="buttons" align="right">          <app-buttons [alarm]="this.getAlarm(this.selectedAntenna.cmpr_drive)"></app-buttons>        </td>      </tr>    </table>  </div></ng-template></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div class="antennas-sidebar-card">  <!-- TITLE -->  <div class="antennas-sidebar-title">    <div *ngIf="this.selectedAntenna == null; then antennasTitle else returnLink"></div>  </div>  <!-- CONTENT -->  <div class="antennas-sidebar-content">    <div *ngIf="this.selectedAntenna == null; then antennasList else antennasDetail"> </div>  </div></div><!-- Title when there is not a selected antenna --><ng-template #antennasTitle>  <span> ANTENNAS </span></ng-template><!-- Title when one antenna is selected --><ng-template #returnLink>    <div class="return-link" (click)="unselectAntenna()">      <i class="material-icons">chevron_left</i>      <span> {{alarmService.getName(this.selectedAntenna)}} </span>    </div></ng-template><!-- Content when there is not a selected antenna --><ng-template #antennasList>  <div class="antennas-container">    <div class="grid-container">      <div class="grid-item" *ngFor="let antennaConfig of getAntennas()" (click)="onClick(antennaConfig)">        <app-alarm-card          fxFlex          [alarm]="alarmService.getAlarm(antennaConfig)"          [alarmNameMaxSize]="4"          [optionalAlarmName]="alarmService.getName(antennaConfig)"          [tooltipDirection]="\'left\'"        ></app-alarm-card>      </div>    </div>  </div>  <mat-divider></mat-divider>  <div class="antennas-detail devices-alarms">    <table>      <ng-container *ngFor="let device of getDevices()">        <tr>          <td class="antenna">            <div class="text">              <app-alarm                [alarm]="alarmService.getAlarm(device)"                [text]="alarmService.getName(device)"                [labelMode]="\'hidden\'"                [showActionBadges]="false"              ></app-alarm>            </div>          </td>          <td>            <div class="status">              <app-status-view [alarm]="alarmService.getAlarm(device)" [showActionBadges]="true"></app-status-view>            </div>          </td>          <td class="buttons" align="right">            <app-buttons [alarm]="alarmService.getAlarm(device)"></app-buttons>          </td>        </tr>      </ng-container>    </table>  </div></ng-template><!-- Content when one antenna is selected --><ng-template #antennasDetail>  <div class="antennas-detail alarm-info">    <div class="alarm-data">      <table>        <tr>          <th class="header">Alarm ID</th>          <td>{{this.selectedAntenna.alarm_id}}</td>        </tr>        <tr>          <th class="header">Antenna (Pad)</th>          <td>{{this.alarmService.getName(selectedAntenna)}} ({{this.selectedAntenna.placemark}})</td>        </tr>      </table>    </div>    <div class="alarm-buttons">      <app-buttons [alarm]="alarmService.getAlarm(this.selectedAntenna)"></app-buttons>    </div>  </div>  <div class="antennas-detail subalarms">    <div class="subalarms-header">      Antenna devices alarms    </div>    <app-table      [displayedColumns] = "[\'status\', \'name\', \'mode\', \'actions\']"      [alarmsToDisplay] = "this.getChildrenAlarmIds()"      [pageSizeOptions] = "[12, 25, 50, 100]"    >    </app-table>  </div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AntennasSidebarComponent'};
 </script>

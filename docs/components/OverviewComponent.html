@@ -257,8 +257,21 @@ export class OverviewComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ias overview&quot;&gt;
-  &lt;div class&#x3D;&quot;ias overview row&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ias-overview &quot;&gt;
+  &lt;div
+    class&#x3D;&quot;content no-margin&quot;
+    fxLayout&#x3D;&quot;row&quot;
+    fxLayoutAlign&#x3D;&quot;center center&quot;
+    fxLayout.lt-lg&#x3D;&quot;column&quot;
+    fxLayoutAlign.lt-lg&#x3D;&quot;flex-start&quot;
+    fxLayout.lg&#x3D;&quot;row&quot;
+    fxLayoutAlign.lg&#x3D;&quot;flex-start&quot;
+  &gt;
+    &lt;div
+      fxFlex&#x3D;&quot;25%&quot;
+      fxFlex.lt-lg&#x3D;&quot;100%&quot;
+      fxFlex.lg&#x3D;&quot;26%&quot;
+    &gt;
       &lt;app-overview-card&gt;
         &lt;div data&#x3D;&quot;label&quot;&gt; IAS HEALTH &lt;/div&gt;
         &lt;div id&#x3D;&quot;ias-card-health-marker&quot; data&#x3D;&quot;marker-img&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/logo.svg&quot;/&gt; &lt;/div&gt;
@@ -266,6 +279,12 @@ export class OverviewComponent implements OnInit {
           &lt;app-health-summary&gt;&lt;/app-health-summary&gt;
         &lt;/div&gt;
       &lt;/app-overview-card&gt;
+    &lt;/div&gt;
+    &lt;div
+      fxFlex&#x3D;&quot;35%&quot;
+      fxFlex.lt-lg&#x3D;&quot;100%&quot;
+      fxFlex.lg&#x3D;&quot;26%&quot;
+    &gt;
       &lt;app-overview-card&gt;
         &lt;div data&#x3D;&quot;label&quot;&gt; ANTENNAS &lt;/div&gt;
         &lt;div data&#x3D;&quot;marker-img&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/container-antenna.svg&quot;/&gt; &lt;/div&gt;
@@ -273,6 +292,12 @@ export class OverviewComponent implements OnInit {
           &lt;app-antennas-summary&gt;&lt;/app-antennas-summary&gt;
         &lt;/div&gt;
       &lt;/app-overview-card&gt;
+    &lt;/div&gt;
+    &lt;div
+      fxFlex&#x3D;&quot;40%&quot;
+      fxFlex.lt-lg&#x3D;&quot;100%&quot;
+      fxFlex.lg&#x3D;&quot;48%&quot;
+    &gt;
       &lt;app-overview-card&gt;
         &lt;div data&#x3D;&quot;label&quot;&gt; WEATHER &lt;/div&gt;
         &lt;div data&#x3D;&quot;marker-img&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/container-weather.svg&quot;/&gt; &lt;/div&gt;
@@ -280,6 +305,7 @@ export class OverviewComponent implements OnInit {
           &lt;app-weather-summary&gt;&lt;/app-weather-summary&gt;
         &lt;/div&gt;
       &lt;/app-overview-card&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
@@ -296,16 +322,17 @@ export class OverviewComponent implements OnInit {
   padding-right: 12px;
 }
 
-.ias.overview {
-  padding: 1.5rem 1.0rem 0.5rem;
+.ias-overview {
+  display: flex;
+
+  .content {
+    padding-top: 45px;
+    width: 100%;
+  }
 }
 
-.ias.overview.column {
-  padding-left: 55px;
-}
-
-.ias.overview.row {
-  padding-bottom: 50px;
+.no-margin {
+  margin: 0;
 }
 </code></pre>
     </div>
@@ -335,8 +362,8 @@ export class OverviewComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="ias overview">  <div class="ias overview row">      <app-overview-card>        <div data="label"> IAS HEALTH </div>        <div id="ias-card-health-marker" data="marker-img"> <img src="/assets/img/logo.svg"/> </div>        <div data="content">          <app-health-summary></app-health-summary>        </div>      </app-overview-card>      <app-overview-card>        <div data="label"> ANTENNAS </div>        <div data="marker-img"> <img src="/assets/img/container-antenna.svg"/> </div>        <div data="content">          <app-antennas-summary></app-antennas-summary>        </div>      </app-overview-card>      <app-overview-card>        <div data="label"> WEATHER </div>        <div data="marker-img"> <img src="/assets/img/container-weather.svg"/> </div>        <div data="content">          <app-weather-summary></app-weather-summary>        </div>      </app-overview-card>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div class="ias-overview ">  <div    class="content no-margin"    fxLayout="row"    fxLayoutAlign="center center"    fxLayout.lt-lg="column"    fxLayoutAlign.lt-lg="flex-start"    fxLayout.lg="row"    fxLayoutAlign.lg="flex-start"  >    <div      fxFlex="25%"      fxFlex.lt-lg="100%"      fxFlex.lg="26%"    >      <app-overview-card>        <div data="label"> IAS HEALTH </div>        <div id="ias-card-health-marker" data="marker-img"> <img src="/assets/img/logo.svg"/> </div>        <div data="content">          <app-health-summary></app-health-summary>        </div>      </app-overview-card>    </div>    <div      fxFlex="35%"      fxFlex.lt-lg="100%"      fxFlex.lg="26%"    >      <app-overview-card>        <div data="label"> ANTENNAS </div>        <div data="marker-img"> <img src="/assets/img/container-antenna.svg"/> </div>        <div data="content">          <app-antennas-summary></app-antennas-summary>        </div>      </app-overview-card>    </div>    <div      fxFlex="40%"      fxFlex.lt-lg="100%"      fxFlex.lg="48%"    >      <app-overview-card>        <div data="label"> WEATHER </div>        <div data="marker-img"> <img src="/assets/img/container-weather.svg"/> </div>        <div data="content">          <app-weather-summary></app-weather-summary>        </div>      </app-overview-card>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'OverviewComponent'};
 </script>
