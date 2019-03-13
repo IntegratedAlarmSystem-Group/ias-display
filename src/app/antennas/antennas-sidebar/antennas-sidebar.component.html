@@ -93,7 +93,7 @@
     </div>
     <app-table
       [displayedColumns] = "['status', 'name', 'mode', 'actions']"
-      [alarmsToDisplay] = "this.getChildrenAlarmIds()"
+      [alarmsToDisplay] = "this.tableIds"
       [pageSizeOptions] = "[12, 25, 50, 100]"
     >
     </app-table>

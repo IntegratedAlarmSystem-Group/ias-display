@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnChanges, Input, Output } from '@angular/core';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
@@ -12,13 +12,19 @@ import { AlarmConfig } from '../../data/alarm-config';
   templateUrl: './antennas-sidebar.component.html',
   styleUrls: ['./antennas-sidebar.component.scss']
 })
-export class AntennasSidebarComponent implements OnInit {
+export class AntennasSidebarComponent implements OnInit, OnChanges {
 
   /** Selected antenna object, null if it is nothing selected */
   @Input() selectedAntenna: AlarmConfig = null;
 
   /** Event emitted to notify when an antenna is selected */
   @Output() antennaClicked = new EventEmitter<AlarmConfig>();
+
+  /** List that contains the core_ids of the alarms associated to the children of the {@link selectedAntenna} */
+  childrenIds = [];
+
+  /** List that contains the core_ids of the alarms to be passed ot the Table */
+  tableIds = [];
 
   /**
   * Builds an instance of the component
@@ -40,6 +46,34 @@ export class AntennasSidebarComponent implements OnInit {
   }
 
   /**
+   * Executed after the component, or its inputs are changed
+   * Currently updates the {@link childrenIds} and the {@link tableIds} whenever the {@link selectedAntenna} changes
+   */
+  ngOnChanges() {
+    this.updateChildrenIds();
+    this.updateTableIds();
+  }
+
+  updateChildrenIds() {
+    this.childrenIds = [];
+    if (this.selectedAntenna && this.selectedAntenna.children) {
+      for (const child of this.selectedAntenna.children) {
+        this.childrenIds.push(child.alarm_id);
+      }
+    }
+  }
+
+  updateTableIds() {
+    const alarm = this.alarmService.getAlarm(this.selectedAntenna);
+    if (!alarm) {
+      this.tableIds = this.childrenIds;
+    } else {
+      this.tableIds = Array.from(new Set(this.childrenIds.concat(alarm.dependencies)));
+    }
+    console.log('this.tableIds: ', this.tableIds);
+  }
+
+  /**
   * Finds and returns an {@link Alarm} by ID in the {@link AlarmService}
   * @param {string} alarm_id the ID of the {@link Alarm}
   * @returns {Alarm} the {@link Alarm}
@@ -54,18 +88,6 @@ export class AntennasSidebarComponent implements OnInit {
   */
   getAntennas(): AlarmConfig [] {
     return this.antennasService.antennasConfig;
-  }
-
-  /**
-  * Return the list of alarm IDs of the children of the selectedAntenna
-  * @returns {string[]} list of alarm IDs
-  */
-  getChildrenAlarmIds(): string[] {
-    const alarm = this.alarmService.getAlarm(this.selectedAntenna);
-    if (!alarm) {
-      return [];
-    }
-    return alarm.dependencies;
   }
 
   /**
