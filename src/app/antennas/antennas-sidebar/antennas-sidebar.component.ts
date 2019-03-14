@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, OnChanges, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnChanges, OnDestroy, Input, Output } from '@angular/core';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 import { AlarmService } from '../../data/alarm.service';
 import { AntennasService } from '../antennas.service';
 import { Alarm } from '../../data/alarm';
@@ -12,7 +13,7 @@ import { AlarmConfig } from '../../data/alarm-config';
   templateUrl: './antennas-sidebar.component.html',
   styleUrls: ['./antennas-sidebar.component.scss']
 })
-export class AntennasSidebarComponent implements OnInit, OnChanges {
+export class AntennasSidebarComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Selected antenna object, null if it is nothing selected */
   @Input() selectedAntenna: AlarmConfig = null;
@@ -20,8 +21,16 @@ export class AntennasSidebarComponent implements OnInit, OnChanges {
   /** Event emitted to notify when an antenna is selected */
   @Output() antennaClicked = new EventEmitter<AlarmConfig>();
 
+  /**
+   * Subscription to changes in Alarms
+   */
+  alarmChangeSubscription: ISubscription;
+
   /** List that contains the core_ids of the alarms associated to the children of the {@link selectedAntenna} */
   childrenIds = [];
+
+  /** List that contains the core_ids of the dependencies of the {@link Alarm} of the {@link selectedAntenna} */
+  dependenciesIds = [];
 
   /** List that contains the core_ids of the alarms to be passed ot the Table */
   tableIds = [];
@@ -43,6 +52,11 @@ export class AntennasSidebarComponent implements OnInit, OnChanges {
    */
   ngOnInit() {
     this.antennasService.initialize();
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream.subscribe( (change) => {
+      if ( this.selectedAntenna && (change === 'all' || change === this.selectedAntenna) ) {
+        this.updateTableIds();
+      }
+    });
   }
 
   /**
@@ -52,6 +66,17 @@ export class AntennasSidebarComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.updateChildrenIds();
     this.updateTableIds();
+  }
+
+  /**
+  * Executed when the component is destryed
+  * Currently, unsubscribes from changes in {@link Alarm}s form {@link AlarmService}
+  */
+  ngOnDestroy() {
+    if (this.alarmChangeSubscription) {
+      console.log('Unsubscribing');
+      this.alarmChangeSubscription.unsubscribe();
+    }
   }
 
   updateChildrenIds() {
@@ -67,10 +92,10 @@ export class AntennasSidebarComponent implements OnInit, OnChanges {
     const alarm = this.alarmService.getAlarm(this.selectedAntenna);
     if (!alarm) {
       this.tableIds = this.childrenIds;
-    } else {
-      this.tableIds = Array.from(new Set(this.childrenIds.concat(alarm.dependencies)));
+    } else if (this.dependenciesIds !== alarm.dependencies) {
+      this.dependenciesIds = alarm.dependencies.slice();
+      this.tableIds = Array.from(new Set(this.childrenIds.concat(this.dependenciesIds)));
     }
-    console.log('this.tableIds: ', this.tableIds);
   }
 
   /**

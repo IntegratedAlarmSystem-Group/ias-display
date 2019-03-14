@@ -79,7 +79,7 @@ export class AckComponent implements OnInit, OnDestroy {
   paramMapSubscription: ISubscription;
 
    /**
-    * Alarm change subscription
+    * Subscription to changes in Alarms
     */
   alarmChangeSubscription: ISubscription;
 
