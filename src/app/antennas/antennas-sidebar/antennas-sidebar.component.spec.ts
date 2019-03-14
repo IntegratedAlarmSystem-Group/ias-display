@@ -110,6 +110,7 @@ describe('AntennasSidebarComponent', () => {
         });
         it('and a TableComponent with the antennas children alarms', () => {
           component.selectedAntenna = mockAntennasConfig[0] as AlarmConfig;
+          component.ngOnChanges();
           fixture.detectChanges();
           const tableComponent = fixture.debugElement.query(By.directive(TableComponent)).componentInstance;
           expect(tableComponent).toBeTruthy('There is no TableComponent');
