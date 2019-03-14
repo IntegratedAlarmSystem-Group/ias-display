@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -50,7 +50,7 @@ export class AlarmImageSet {
   templateUrl: './alarm.component.html',
   styleUrls: ['./alarm.component.scss']
 })
-export class AlarmComponent implements OnInit {
+export class AlarmComponent implements OnInit, OnChanges {
 
   /**
    * Alarm object associated to the component
@@ -109,6 +109,8 @@ export class AlarmComponent implements OnInit {
    */
   private labelLocationOptions = ['right', 'bottom'];
 
+  corrected_text: string;
+
   /**
   * Instantiates the component
   */
@@ -124,6 +126,10 @@ export class AlarmComponent implements OnInit {
     if (this.labelLocationOptions.indexOf(this.labelLocation) < 0) {
       this.labelLocation = 'right';
     }
+  }
+
+  ngOnChanges() {
+    this.corrected_text = this.getCorrectedText();
   }
 
   /**
@@ -166,6 +172,10 @@ export class AlarmComponent implements OnInit {
     } else {
       return this.imagesUnreliable.unknown;
     }
+  }
+
+  getCorrectedText(): string {
+    return this.text.replace(' ', '&nbsp;');
   }
 
   /**

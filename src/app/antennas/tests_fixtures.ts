@@ -11,7 +11,17 @@ export const mockAntennasConfig =  [
       'view': 'antennas',
       'placemark': 'mockAlarm-0',
       'group': 'antennas',
-      'children': []
+      'children': [
+        {
+          'alarm_id': 'mockAlarm-0-child-2',
+          'custom_name': '',
+          'type': '',
+          'view': '',
+          'placemark': '',
+          'group': 'antennas',
+          'children': []
+        },
+      ]
     },
     {
       'alarm_id': 'mockAlarm-1',
@@ -124,6 +134,22 @@ export const mockAlarms = {
     'value': 0,
     'core_id': 'mockAlarm-0-child-1',
     'running_id': 'mockAlarm-0-child-1',
+    'mode': '0',
+    'core_timestamp': 1267252440000,
+    'validity': '1',
+    'state_change_timestamp': 1267252440000,
+    'description': 'Short description for mock alarm device',
+    'url': 'https://www.alma1.cl',
+    'sound': 'NONE',
+    'can_shelve': true,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  }),
+  'mockAlarm-0-child-2': Alarm.asAlarm({
+    'value': 0,
+    'core_id': 'mockAlarm-0-child-2',
+    'running_id': 'mockAlarm-0-child-2',
     'mode': '0',
     'core_timestamp': 1267252440000,
     'validity': '1',
