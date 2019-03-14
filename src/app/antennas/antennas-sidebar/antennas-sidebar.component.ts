@@ -74,7 +74,6 @@ export class AntennasSidebarComponent implements OnInit, OnChanges, OnDestroy {
   */
   ngOnDestroy() {
     if (this.alarmChangeSubscription) {
-      console.log('Unsubscribing');
       this.alarmChangeSubscription.unsubscribe();
     }
   }
