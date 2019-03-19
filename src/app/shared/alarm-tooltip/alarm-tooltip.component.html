@@ -18,7 +18,9 @@
     </tr> -->
   </table>
   <div class=props-container *ngIf="this.alarm?.hasProperties()">
-    Last Properties:
+    <div class=props-container-title>
+      Last Properties
+    </div>
     <app-props-table [alarm]="this.alarm"></app-props-table>
   </div>
 </div>
