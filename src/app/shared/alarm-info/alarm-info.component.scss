@@ -1,47 +1,14 @@
-.section {
-  padding: 24px 0px 10px 0px;
-
-  &.alarm-info {
-    table {
-      vertical-align: top;
-      width: 450px;
-    }
-
-    th {
-      padding-right: 16px;
-      font-weight: normal;
-      vertical-align: top;
-      width: 120px;
-    }
-
-    .props-container {
-      font-size: 90%;
-      overflow-y: auto;
-      overflow-x: auto;
-      max-width: 330px;
-      max-height: 400px;
-
-      ul {
-        padding: 0;
-        margin: 0 0 0 1.1em;
-      }
-    }
-
-
-    pre {
-      padding-top: 3px;
-      font-size: 90%;
-      overflow-y: auto;
-      overflow-x: auto;
-      margin: 0px;
-      max-width: 330px;
-      max-height: 400px;
-    }
-
+.alarm-info {
+  table {
+    vertical-align: top;
+    width: 450px;
   }
 
-  .props-table {
-
+  th {
+    padding-right: 16px;
+    font-weight: normal;
+    vertical-align: top;
+    width: 120px;
   }
 
   .props-container {
@@ -53,7 +20,19 @@
 
     ul {
       padding: 0;
-      margin: 0 0 0 1em;
+      margin: 0 0 0 1.1em;
     }
   }
+
+
+  pre {
+    padding-top: 3px;
+    font-size: 90%;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin: 0px;
+    max-width: 330px;
+    max-height: 400px;
+  }
+
 }

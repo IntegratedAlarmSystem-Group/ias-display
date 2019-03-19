@@ -7,7 +7,7 @@ import { Alarm} from '../../data/alarm';
 @Component({
   selector: 'app-props-table',
   templateUrl: './props-table.component.html',
-  styleUrls: ['./props-table.component.css']
+  styleUrls: ['./props-table.component.scss']
 })
 export class PropsTableComponent implements OnInit {
 
