@@ -1,8 +1,4 @@
 .props-table-container {
-  overflow-y: auto;
-  overflow-x: auto;
-  max-width: 450px;
-  max-height: 400px;
 
   table, th, td {
     border-width: 0px;
@@ -12,7 +8,6 @@
   table {
     vertical-align: top;
     width: 100%;
-    max-width: 450px;
   }
 
   th, td {
@@ -22,6 +17,7 @@
 
   th {
     width: fit-content;
+    word-wrap: break-word;
   }
 
   td {

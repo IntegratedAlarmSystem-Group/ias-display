@@ -18,10 +18,12 @@
       padding-bottom: 4px;
     }
 
-    .props-table-container {
+    .props-container-body {
       font-size: 90%;
       overflow-y: auto;
       overflow-x: auto;
+      max-width: 450px;
+      max-height: 200px;
     }
   }
 
