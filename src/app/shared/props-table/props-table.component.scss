@@ -1,7 +1,14 @@
-.props-table {
+.props-container {
+  font-size: 90%;
+  overflow-y: auto;
+  overflow-x: auto;
+  max-width: 450px;
+  max-height: 400px;
+
   table {
     vertical-align: top;
     width: 450px;
+    // border: 1px solid white;
   }
 
   th {
