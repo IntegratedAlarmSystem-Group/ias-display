@@ -13,13 +13,19 @@
       color: mat-color($foreground, hint-text);
     }
 
-    .props-container {
+    .props-table-container {
+      table, th, td {
+        border-color: mat-color($foreground, hint-text);
+      }
+
       th {
         color: mat-color($foreground, hint-text);
       }
+
       td {
         color: mat-color($foreground, hint-text);
       }
+
       pre {
         color: mat-color($foreground, hint-text);
       }

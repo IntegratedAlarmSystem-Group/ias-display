@@ -14,8 +14,8 @@
     </tr>
   </table>
 
-  <div *ngIf="alarm?.properties">
-    Last Properties
+  <div class=props-container *ngIf="this.alarm?.hasProperties()">
+    Last Properties:
     <app-props-table [alarm]="this.alarm"></app-props-table>
   </div>
 </div>

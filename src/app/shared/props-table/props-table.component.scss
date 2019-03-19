@@ -1,20 +1,23 @@
-.props-container {
+.props-table-container {
   font-size: 90%;
   overflow-y: auto;
   overflow-x: auto;
   max-width: 450px;
   max-height: 400px;
 
+  table, th, td {
+    border-width: 1px;
+    border-style: solid;
+  }
+
   table {
     vertical-align: top;
     width: 450px;
-    // border: 1px solid white;
   }
 
-  th {
-    padding-right: 16px;
+  th, td {
+    padding: 4px 10px 4px 4px ;
     font-weight: normal;
     vertical-align: top;
-    width: 120px;
   }
 }

@@ -25,8 +25,14 @@
         color: map_get($primary, 600);
       }
 
-    }
+      &.ack-action {
+        border-top-color: mat-color($foreground, divider);
+      }
 
+      &.shelve-action {
+        border-top-color: mat-color($foreground, divider);
+      }
+    }
   }
 
   .mat-icon-button.mat-accent[disabled] {

@@ -30,6 +30,8 @@
         }
 
         &.shelve-action {
+          border-top-style: solid;
+          border-top-width: 1px;
 
           textarea {
             min-height: 150px;

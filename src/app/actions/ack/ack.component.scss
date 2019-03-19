@@ -22,7 +22,7 @@
       padding: 0px 24px;
 
       .section {
-        padding: 24px 0px 10px 0px;
+        padding: 20px 0px 20px 0px;
 
         .section-title {
           font-weight: bold;
@@ -30,6 +30,8 @@
         }
 
         &.ack-action {
+          border-top-style: solid;
+          border-top-width: 1px;
 
           textarea {
             min-height: 150px;
