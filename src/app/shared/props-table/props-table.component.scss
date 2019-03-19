@@ -12,12 +12,12 @@
 
   th, td {
     vertical-align: top;
-    padding: 0px 4px 0px 4px ;
+    padding: 0px 4px;
   }
 
   th {
     width: fit-content;
-    word-wrap: break-word;
+    // min-width: 17ex;
   }
 
   td {
