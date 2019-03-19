@@ -14,6 +14,20 @@
       width: 120px;
     }
 
+    .props-container {
+      font-size: 90%;
+      overflow-y: auto;
+      overflow-x: auto;
+      max-width: 330px;
+      max-height: 400px;
+
+      ul {
+        padding: 0;
+        margin: 0 0 0 1.1em;
+      }
+    }
+
+
     pre {
       padding-top: 3px;
       font-size: 90%;
@@ -24,5 +38,22 @@
       max-height: 400px;
     }
 
+  }
+
+  .props-table {
+
+  }
+
+  .props-container {
+    font-size: 90%;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-width: 330px;
+    max-height: 400px;
+
+    ul {
+      padding: 0;
+      margin: 0 0 0 1em;
+    }
   }
 }

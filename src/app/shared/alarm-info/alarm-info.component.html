@@ -14,7 +14,21 @@
     </tr>
     <tr *ngIf="alarm?.formattedProperties !== ''">
       <th>Last Properties</th>
-      <pre>{{alarm?.formattedProperties}}</pre>
+      <td>
+        <!-- <table *ngFor="let prop of alarm.properties | keyvalue">
+          <th> {{ prop.key }} </th>
+          <td> {{ prop.value }} </td>
+        </table> -->
+        <!-- <div class=props-container>
+          <ul *ngFor="let prop of alarm.properties | keyvalue">
+            <li> {{ prop.key }}: {{ prop.value }} </li>
+          </ul>
+        </div> -->
+      </td>
     </tr>
+  </table>
+  <table class=props-table *ngFor="let prop of alarm.properties | keyvalue">
+    <th> {{ prop.key }} </th>
+    <td> {{ prop.value }} </td>
   </table>
 </div>
