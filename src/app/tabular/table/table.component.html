@@ -76,7 +76,10 @@
       <mat-header-cell *matHeaderCellDef>
         <span mat-sort-header> PROPERTIES </span>
       </mat-header-cell>
-      <mat-cell *matCellDef="let alarm"> {{alarm.formattedProperties}} </mat-cell>
+      <mat-cell *matCellDef="let alarm">
+        <!-- {{alarm.formattedProperties}} -->
+        <app-props-table [alarm]="alarm"></app-props-table>
+      </mat-cell>
     </ng-container>
 
     <!-- Actions Column -->

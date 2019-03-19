@@ -51,6 +51,7 @@ import { PropsTableComponent } from './props-table/props-table.component';
     AlarmTileComponent,
     AlarmInfoComponent,
     AlarmLabelComponent,
+    PropsTableComponent,
   ],
   entryComponents: [
     AlarmComponent,
