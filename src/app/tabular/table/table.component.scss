@@ -73,7 +73,7 @@
   }
 
   .mat-column-name {
-    flex: 1 1 120px !important;
+    flex: 0.4 1 120px !important;
   }
 
   .mat-column-mode {
@@ -85,7 +85,7 @@
   }
 
   .mat-column-description {
-    flex: 1 1 200px !important;
+    flex: 0.5 1 200px !important;
   }
 
   .mat-cell {
@@ -94,13 +94,11 @@
 
   .mat-column-properties {
     flex: 1 1 200px !important;
-    // white-space: pre-wrap;
-    // word-break: break-all;
     font-size: 80%;
     overflow-y: auto;
 
     &.mat-cell {
-      max-height: 100px;
+      max-height: 10em;
       font-family: monospace;
       display: inline-grid;
       vertical-align: middle;
