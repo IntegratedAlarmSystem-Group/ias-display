@@ -12,23 +12,10 @@
       <th>Last Change</th>
       <td>{{alarm?.timestamp | date: dateFormat: timezone}}</td>
     </tr>
-    <tr *ngIf="alarm?.formattedProperties !== ''">
-      <th>Last Properties</th>
-      <td>
-        <!-- <table *ngFor="let prop of alarm.properties | keyvalue">
-          <th> {{ prop.key }} </th>
-          <td> {{ prop.value }} </td>
-        </table> -->
-        <!-- <div class=props-container>
-          <ul *ngFor="let prop of alarm.properties | keyvalue">
-            <li> {{ prop.key }}: {{ prop.value }} </li>
-          </ul>
-        </div> -->
-      </td>
-    </tr>
   </table>
-  <table class=props-table *ngFor="let prop of alarm.properties | keyvalue">
-    <th> {{ prop.key }} </th>
-    <td> {{ prop.value }} </td>
-  </table>
+
+  <div *ngIf="alarm?.properties">
+    Last Properties
+    <app-props-table [alarm]="this.alarm"></app-props-table>
+  </div>
 </div>

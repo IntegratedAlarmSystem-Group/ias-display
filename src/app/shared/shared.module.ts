@@ -13,6 +13,7 @@ import { AlarmCardComponent } from './alarm-card/alarm-card.component';
 import { AlarmTileComponent } from './alarm-tile/alarm-tile.component';
 import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
 import { AlarmLabelComponent } from './alarm-label/alarm-label.component';
+import { PropsTableComponent } from './props-table/props-table.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -40,6 +41,7 @@ import { AlarmLabelComponent } from './alarm-label/alarm-label.component';
     AlarmTileComponent,
     AlarmInfoComponent,
     AlarmLabelComponent,
+    PropsTableComponent,
   ],
   exports: [
     AlarmComponent,
