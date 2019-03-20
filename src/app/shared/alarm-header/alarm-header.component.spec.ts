@@ -3,6 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmHeaderComponent } from './alarm-header.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
 
@@ -38,7 +39,8 @@ describe('AlarmHeaderComponent', () => {
       declarations: [
         AlarmHeaderComponent,
         AlarmLabelComponent,
-        AlarmTooltipComponent
+        AlarmTooltipComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })

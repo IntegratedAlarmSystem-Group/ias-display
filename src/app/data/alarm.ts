@@ -242,7 +242,7 @@ export class Alarm {
   * @returns {boolean} True, if it has properties, False if not
   */
   hasProperties(): boolean {
-    return Object.keys(this.properties).length !== 0;
+    return this.properties && Object.keys(this.properties).length !== 0;
   }
 
 

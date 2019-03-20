@@ -4,6 +4,7 @@ import { StatusViewComponent } from './status-view.component';
 import { AlarmComponent } from '../alarm/alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('StatusViewComponent', () => {
@@ -30,7 +31,8 @@ describe('StatusViewComponent', () => {
         StatusViewComponent,
         AlarmComponent,
         AlarmLabelComponent,
-        AlarmTooltipComponent
+        AlarmTooltipComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })

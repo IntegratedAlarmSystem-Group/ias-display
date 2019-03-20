@@ -3,6 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmCardComponent } from './alarm-card.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
 
@@ -36,7 +37,7 @@ describe('AlarmCardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AlarmCardComponent,  AlarmTooltipComponent, AlarmLabelComponent],
+        AlarmCardComponent,  AlarmTooltipComponent, AlarmLabelComponent, PropsTableComponent],
       imports: [ NgbModule ]
     })
     .compileComponents();

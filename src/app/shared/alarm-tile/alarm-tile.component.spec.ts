@@ -6,6 +6,7 @@ import { AlarmComponent } from '../alarm/alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { AlarmTileComponent } from './alarm-tile.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm, Value } from '../../data/alarm';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
@@ -44,7 +45,8 @@ describe('AlarmTileComponent', () => {
         AlarmTileComponent,
         AlarmLabelComponent,
         AlarmComponent,
-        AlarmTooltipComponent
+        AlarmTooltipComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })
@@ -134,6 +136,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
         AlarmLabelComponent,
         AlarmComponent,
         AlarmTooltipComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })
@@ -202,7 +205,8 @@ describe('AlarmTileComponent: Animation methods', () => {
         AlarmComponent,
         AlarmLabelComponent,
         AlarmTooltipComponent,
-        TestHostComponent
+        TestHostComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })
