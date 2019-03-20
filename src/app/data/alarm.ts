@@ -237,6 +237,14 @@ export class Alarm {
     return moment(ts).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
   }
 
+  /**
+  * Defines wether or not the {@link Alarm} has properties
+  * @returns {boolean} True, if it has properties, False if not
+  */
+  hasProperties(): boolean {
+    return this.properties && Object.keys(this.properties).length !== 0;
+  }
+
 
   /**
   * Returns wether or not an {@link Alarm} should be displayed as in "maintenance" or "grayed out mode"

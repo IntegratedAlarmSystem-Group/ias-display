@@ -1,0 +1,8 @@
+<div class=props-table-container>
+  <table>
+    <tr *ngFor="let prop of alarm.properties | keyvalue">
+      <th> {{ prop.key }}: </th>
+      <td> {{ prop.value }} </td>
+    </tr>
+  </table>
+</div>

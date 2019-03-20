@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlarmInfoComponent } from './alarm-info.component';
-import { PropsTableComponent } from '../props-table/props-table.component';
+import { PropsTableComponent } from './props-table.component';
 import { Alarm } from '../../data/alarm';
 
-describe('AlarmInfoComponent', () => {
-  let component: AlarmInfoComponent;
-  let fixture: ComponentFixture<AlarmInfoComponent>;
+describe('PropsTableComponent', () => {
+  let component: PropsTableComponent;
+  let fixture: ComponentFixture<PropsTableComponent>;
   let tableBody: any;
   const mockAlarm: Alarm = Alarm.asAlarm({
     'value': 4,
@@ -22,28 +21,26 @@ describe('AlarmInfoComponent', () => {
     'ack': false,
     'shelved': false,
     'dependencies': [],
-    'properties': null,
+    'properties': {
+      'key1': 'value1',
+      'key2': ['value21', 'value22', 'value23'],
+      'key3': 'value3',
+    }
   });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AlarmInfoComponent,
-        PropsTableComponent,
-      ]
+      declarations: [ PropsTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmInfoComponent);
+    fixture = TestBed.createComponent(PropsTableComponent);
     component = fixture.componentInstance;
+    component.alarm = mockAlarm;
     fixture.detectChanges();
     tableBody = fixture.nativeElement.querySelector('table');
-  });
-
-  afterEach(() => {
-    fixture.destroy();
   });
 
   it('should create', () => {
@@ -59,24 +56,12 @@ describe('AlarmInfoComponent', () => {
       fixture.detectChanges();
     });
 
-    it('IT SHOULD display the Alarm ID', () => {
+    it('IT SHOULD display Alarm properties in a Table', () => {
       expect(tableBody).toBeTruthy();
-      expect(tableBody.textContent).toContain(mockAlarm.core_id);
-    });
-
-    it('IT SHOULD display the Alarm short description', () => {
-      expect(tableBody).toBeTruthy();
-      expect(tableBody.textContent).toContain(mockAlarm.description);
-    });
-
-    it('should display the Alarm last state change timestamp', () => {
-      expect(tableBody).toBeTruthy();
-      expect(tableBody.textContent).toContain(mockAlarm.formattedTimestamp);
-    });
-
-    it('should display the Alarm last state change properties', () => {
-      expect(tableBody).toBeTruthy();
-      expect(tableBody.textContent).toContain(mockAlarm.formattedProperties);
+      expect(tableBody.textContent.replace(/\s/g, '')).toContain('key1:value1');
+      expect(tableBody.textContent.replace(/\s/g, '')).toContain('key2:value21,value22,value23');
+      expect(tableBody.textContent.replace(/\s/g, '')).toContain('key2:value21,value22,value23');
+      expect(tableBody.textContent.replace(/\s/g, '')).toContain('key3:value3');
     });
   });
 });

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmTooltipComponent } from './alarm-tooltip.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('AlarmTooltipComponent', () => {
@@ -26,7 +27,10 @@ describe('AlarmTooltipComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmTooltipComponent ]
+      declarations: [
+        AlarmTooltipComponent,
+        PropsTableComponent
+      ]
     })
     .compileComponents();
   }));

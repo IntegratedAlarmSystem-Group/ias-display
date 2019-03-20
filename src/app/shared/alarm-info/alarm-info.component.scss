@@ -1,28 +1,30 @@
-.section {
-  padding: 24px 0px 10px 0px;
+.alarm-info {
+  table {
+    vertical-align: top;
+    width: 450px;
+  }
 
-  &.alarm-info {
-    table {
-      vertical-align: top;
-      width: 450px;
+  th {
+    padding-right: 16px;
+    font-weight: normal;
+    vertical-align: top;
+    width: 120px;
+  }
+
+  .props-container {
+    padding: 10px 0 0 0;
+
+    .props-container-title {
+      padding-bottom: 4px;
     }
 
-    th {
-      padding-right: 16px;
-      font-weight: normal;
-      vertical-align: top;
-      width: 120px;
-    }
-
-    pre {
-      padding-top: 3px;
+    .props-container-body {
       font-size: 90%;
       overflow-y: auto;
       overflow-x: auto;
-      margin: 0px;
-      max-width: 330px;
-      max-height: 400px;
+      max-width: 450px;
+      max-height: 200px;
     }
-
   }
+
 }

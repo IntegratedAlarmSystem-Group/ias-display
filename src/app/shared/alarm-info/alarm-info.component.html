@@ -1,4 +1,4 @@
-<div class="section alarm-info">
+<div class="alarm-info">
   <table>
     <tr>
       <th>Alarm ID</th>
@@ -12,9 +12,14 @@
       <th>Last Change</th>
       <td>{{alarm?.timestamp | date: dateFormat: timezone}}</td>
     </tr>
-    <tr *ngIf="alarm?.formattedProperties !== ''">
-      <th>Last Properties</th>
-      <pre>{{alarm?.formattedProperties}}</pre>
-    </tr>
   </table>
+
+  <div class=props-container *ngIf="this.alarm?.hasProperties()">
+    <div class=props-container-title>
+      Last Properties
+    </div>
+    <div class=props-container-body>
+      <app-props-table [alarm]="this.alarm"></app-props-table>
+    </div>
+  </div>
 </div>

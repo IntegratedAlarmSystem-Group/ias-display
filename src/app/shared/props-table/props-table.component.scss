@@ -1,0 +1,28 @@
+.props-table-container {
+
+  table, th, td {
+    border-width: 0px;
+    border-style: solid;
+  }
+
+  table {
+    vertical-align: top;
+    width: 100%;
+  }
+
+  th, td {
+    vertical-align: top;
+    padding: 0px 4px;
+  }
+
+  th {
+    width: fit-content;
+  }
+
+  td {
+    max-width: 320px;
+    width: 100%;
+    word-wrap: break-word;
+  }
+
+}

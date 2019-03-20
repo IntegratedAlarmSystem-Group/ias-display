@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AlarmLabelComponent } from './alarm-label.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';

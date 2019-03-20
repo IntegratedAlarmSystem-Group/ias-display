@@ -1,4 +1,4 @@
-<div>
+<div class=alarm-tooltip>
   <table>
     <tr>
       <th>Alarm ID</th>
@@ -12,9 +12,11 @@
       <th>Last Change</th>
       <td>{{ alarm?.timestamp | date: dateFormat: timezone }}</td>
     </tr>
-    <tr *ngIf="alarm?.formattedProperties !== ''">
-      <th>Last Properties</th>
-      <td class="props-container">{{ alarm?.formattedProperties }}</td>
-    </tr>
   </table>
+  <div class=props-container *ngIf="this.alarm?.hasProperties()">
+    <div class=props-container-title>
+      Last Properties
+    </div>
+    <app-props-table [alarm]="this.alarm"></app-props-table>
+  </div>
 </div>
