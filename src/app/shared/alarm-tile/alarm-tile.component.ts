@@ -114,13 +114,29 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   ngOnChanges(changes: SimpleChanges) {
     if (this.alarm) {
+      if (this.alarm.core_id === 'Alarmdummy') {
+        console.log('this.alarm: ', this.alarm);
+        console.log('changes: ', changes);
+        const currentTime = (new Date).getTime();
+        const lastChange = this.alarm.value_change_timestamp;
+        // console.log('currentTime: ', currentTime);
+        // console.log('lastChange: ', lastChange);
+      }
+
+      let previousAlarmValue: number = 0;
+      let currentAlarmValue: number = this.alarm.value;
+
       if (changes.alarm.previousValue) {
-        const previousAlarmValue: number = changes.alarm.previousValue.value;
-        const currentAlarmValue: number = changes.alarm.currentValue.value;
+        previousAlarmValue = changes.alarm.previousValue.value;
+        currentAlarmValue = changes.alarm.currentValue.value;
+      }
+      const canBlink = true;
+
+      if (canBlink) {
         // clear to set transition
         if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
           if (this.disableAnimation === false) {
-            this.startAnimation();
+            this.startAnimation(this.blinkingInterval);
           }
         }
         // set to clear transition
@@ -156,9 +172,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   /**
   * Method to start the blinking animation
   */
-  public startAnimation(): void {
+  public startAnimation(blinkTime: number): void {
     this.targetAnimationState = 'highlight';
-    this.blinkingTimer = interval(this.blinkingInterval).subscribe( () => {
+    this.blinkingTimer = interval(blinkTime).subscribe( () => {
       this.stopAnimation();
     });
   }
