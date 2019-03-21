@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { interval } from 'rxjs';
+import * as moment from 'moment';
+import { Locale } from '../../settings';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -70,7 +72,7 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   public blinkingTimer: any;
 
-  blinkingInterval = 10000;
+  maxBlinkInterval = 10000;
 
   /**
   * Size options
@@ -114,13 +116,29 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   ngOnChanges(changes: SimpleChanges) {
     if (this.alarm) {
+      const currentTime = (new Date).getTime();
+      const lastChange = this.alarm.value_change_timestamp;
+      const timeDiff = currentTime - lastChange;
+      let blinkInterval = this.maxBlinkInterval;
+      const canBlink = true;
+
+      if ( timeDiff >= 0) {
+        blinkInterval = this.maxBlinkInterval - timeDiff;
+        if (blinkInterval <= 0) {
+          return;
+        }
+      }
+
       if (this.alarm.core_id === 'Alarmdummy') {
+        console.log('*******************************************');
         console.log('this.alarm: ', this.alarm);
         console.log('changes: ', changes);
-        const currentTime = (new Date).getTime();
-        const lastChange = this.alarm.value_change_timestamp;
-        // console.log('currentTime: ', currentTime);
-        // console.log('lastChange: ', lastChange);
+        const lastChangeStr = moment(lastChange).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
+        const currentTimeStr = moment(currentTime).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
+        console.log('currentTime: ', currentTime);
+        console.log('lastChange: ', lastChange);
+        console.log('currentTimeStr: ', currentTimeStr);
+        console.log('lastChangeStr: ', lastChangeStr);
       }
 
       let previousAlarmValue: number = 0;
@@ -130,13 +148,12 @@ export class AlarmTileComponent implements OnChanges, OnInit {
         previousAlarmValue = changes.alarm.previousValue.value;
         currentAlarmValue = changes.alarm.currentValue.value;
       }
-      const canBlink = true;
 
       if (canBlink) {
         // clear to set transition
         if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
           if (this.disableAnimation === false) {
-            this.startAnimation(this.blinkingInterval);
+            this.startAnimation(blinkInterval);
           }
         }
         // set to clear transition
@@ -173,6 +190,7 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   * Method to start the blinking animation
   */
   public startAnimation(blinkTime: number): void {
+    console.log('Starting animation for: ', blinkTime);
     this.targetAnimationState = 'highlight';
     this.blinkingTimer = interval(blinkTime).subscribe( () => {
       this.stopAnimation();

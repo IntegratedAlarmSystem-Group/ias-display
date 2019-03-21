@@ -228,7 +228,7 @@ export class Alarm {
   /**
   * Returns a string representation according to the selected UTC offset in the app settings
   * for the {@link Alarm.state_change_timestamp} attribute
-  * @returns {string} a date format representation of the Alarm state_change_timestamp
+  * @returns {string} a string format representation of the Alarm state_change_timestamp
   */
   get formattedTimestamp(): string {
     const ts = this.state_change_timestamp;
