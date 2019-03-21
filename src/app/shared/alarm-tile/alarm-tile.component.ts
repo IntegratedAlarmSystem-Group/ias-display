@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { interval } from 'rxjs';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -63,6 +64,13 @@ export class AlarmTileComponent implements OnChanges, OnInit {
    * Auxiliary variable to follow the status of the animation
    */
   targetAnimationState: string;
+
+  /**
+  * Blinking timer
+  */
+  public blinkingTimer: any;
+
+  blinkingInterval = 10000;
 
   /**
   * Size options
@@ -150,6 +158,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   public startAnimation(): void {
     this.targetAnimationState = 'highlight';
+    this.blinkingTimer = interval(this.blinkingInterval).subscribe( () => {
+      this.stopAnimation();
+    });
   }
 
   /**
