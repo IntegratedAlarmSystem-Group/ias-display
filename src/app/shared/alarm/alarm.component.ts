@@ -109,8 +109,6 @@ export class AlarmComponent implements OnInit, OnChanges {
    */
   private labelLocationOptions = ['right', 'bottom'];
 
-  corrected_text: string;
-
   /**
   * Instantiates the component
   */
@@ -118,6 +116,7 @@ export class AlarmComponent implements OnInit, OnChanges {
 
   /**
   * Executed when the component is initiating
+  * Checks and corrects some of the components inputs
   */
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
@@ -128,8 +127,10 @@ export class AlarmComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+  * Executed when one of the component's inputs is changing
+  */
   ngOnChanges() {
-    this.corrected_text = this.getCorrectedText();
   }
 
   /**
