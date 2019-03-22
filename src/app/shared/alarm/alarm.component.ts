@@ -120,8 +120,7 @@ export class AlarmComponent implements OnInit, OnChanges {
   */
   constructor(
     private cdRef: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   /**
   * Executed when the component is initiating

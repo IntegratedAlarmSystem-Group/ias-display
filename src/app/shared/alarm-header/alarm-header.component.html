@@ -42,4 +42,9 @@
     </div>
   </div>
 
+  <app-alarm-blink
+    [alarm]="this.alarm"
+    (blinkingStatus)="changeBlinkingState($event)"
+  ></app-alarm-blink>
+
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -38,14 +38,42 @@ export class AlarmHeaderComponent implements OnInit {
   @Input() tooltipDirection = 'right';
 
   /**
-   * Builds an instance of the component
+   * Variable to disable animation
    */
-  constructor() { }
+  @Input() disableBlink = false;
+
+  /**
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
+  */
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   /**
    * Method executed when the component is initiated
    */
   ngOnInit() {
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      // this.targetAnimationState = 'highlight';
+      console.log('Start blinking');
+    } else {
+      // this.targetAnimationState = 'normal';
+      console.log('Stop blinking');
+    }
+    this.cdRef.detectChanges();
   }
 
   /**
