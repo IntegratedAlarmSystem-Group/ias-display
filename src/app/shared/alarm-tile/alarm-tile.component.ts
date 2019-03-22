@@ -57,7 +57,7 @@ export class AlarmTileComponent implements OnInit {
   /**
    * Variable to disable animation
    */
-  @Input() disableAnimation = false;
+  @Input() disableBlink = false;
 
   /**
    * Auxiliary variable to follow the status of the animation
@@ -131,7 +131,7 @@ export class AlarmTileComponent implements OnInit {
   * @param {boolean} blinking true if it should blink, false if not
   */
   public changeBlinkingState(blinking: boolean) {
-    if (this.disableAnimation) {
+    if (this.disableBlink) {
       return;
     }
     if (blinking) {

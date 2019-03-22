@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -100,6 +100,11 @@ export class AlarmComponent implements OnInit, OnChanges {
   @Input() labelLocation = 'right';
 
   /**
+   * Variable to disable animation
+   */
+  @Input() disableBlink = false;
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
@@ -110,9 +115,13 @@ export class AlarmComponent implements OnInit, OnChanges {
   private labelLocationOptions = ['right', 'bottom'];
 
   /**
-  * Instantiates the component
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
-  constructor() { }
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {
+  }
 
   /**
   * Executed when the component is initiating
@@ -131,6 +140,26 @@ export class AlarmComponent implements OnInit, OnChanges {
   * Executed when one of the component's inputs is changing
   */
   ngOnChanges() {
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      // this.targetAnimationState = 'highlight';
+      console.log('Start blinking');
+    } else {
+      // this.targetAnimationState = 'normal';
+      console.log('Stop blinking');
+    }
+    this.cdRef.detectChanges();
   }
 
   /**
