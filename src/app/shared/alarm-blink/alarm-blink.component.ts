@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { interval } from 'rxjs';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm } from '../../data/alarm';
 
 @Component({
   selector: 'app-alarm-blink',
@@ -35,7 +35,8 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   /**
   * Builds a new instance
   */
-  constructor() { }
+  constructor(
+  ) { }
 
   /**
   * Executed when the component is initiating
@@ -45,6 +46,7 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
 
   /**
   * Method to handle the changes on the alarm values
+  * @param {SimpleChanges} changes Object containing the changes in the Inouts of the component
   */
   ngOnChanges(changes: SimpleChanges) {
     if (this.disableBlink) {
@@ -85,9 +87,9 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
 
   /**
   * Method to start the blinking animation
+  * @param {number} blinkTime the time in milliseconds for which the alarm should blink
   */
   public startAnimation(blinkTime: number): void {
-    console.log('Starting animation for: ', blinkTime);
     this.blinkingStatus.emit(true);
     this.blinkingTimer = interval(blinkTime).subscribe( () => {
       this.stopAnimation();

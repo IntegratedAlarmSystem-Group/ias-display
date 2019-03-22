@@ -1,5 +1,4 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { interval } from 'rxjs';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -12,7 +11,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
   templateUrl: './alarm-tile.component.html',
   styleUrls: ['./alarm-tile.component.scss'],
 })
-export class AlarmTileComponent implements OnChanges, OnInit {
+export class AlarmTileComponent implements OnInit {
 
   /**
   * Alarm object associated to the component
@@ -66,16 +65,6 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   targetAnimationState: string;
 
   /**
-  * Blinking timer
-  */
-  public blinkingTimer: any;
-
-  /**
-  * Maximum blikining time in miliseconds
-  */
-  maxBlinkInterval = 10000;
-
-  /**
   * Size options
   */
   sizeOptions = ['xs', 'sm', 'md', 'lg'];
@@ -92,8 +81,11 @@ export class AlarmTileComponent implements OnChanges, OnInit {
 
   /**
   * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
-  constructor() {
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {
     this.targetAnimationState = 'normal';
   }
 
@@ -110,46 +102,6 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     if (this.tooltipDirectionOptions.indexOf(this.tooltipDirection) < 0) {
       this.tooltipDirection = 'right';
     }
-  }
-
-  /**
-  * Method to handle the changes on the alarm values
-  */
-  ngOnChanges(changes: SimpleChanges) {
-    // if (this.alarm) {
-    //   const currentTime = (new Date).getTime();
-    //   const lastChange = this.alarm.value_change_timestamp;
-    //   const timeDiff = currentTime - lastChange;
-    //   let blinkInterval = this.maxBlinkInterval;
-    //
-    //   if ( timeDiff >= 0) {
-    //     blinkInterval = this.maxBlinkInterval - timeDiff;
-    //     if (blinkInterval <= 0) {
-    //       return;
-    //     }
-    //   }
-    //
-    //   let previousAlarmValue: number = 0;
-    //   let currentAlarmValue: number = this.alarm.value;
-    //
-    //   if (changes.alarm.previousValue) {
-    //     previousAlarmValue = changes.alarm.previousValue.value;
-    //     currentAlarmValue = changes.alarm.currentValue.value;
-    //   }
-    //
-    //   // clear to set transition
-    //   if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-    //     if (this.disableAnimation === false) {
-    //       this.startAnimation(blinkInterval);
-    //     }
-    //   }
-    //   // set to clear transition
-    //   if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
-    //     if (this.disableAnimation === false) {
-    //       this.stopAnimation();
-    //     }
-    //   }
-    // }
   }
 
   /**
@@ -173,29 +125,21 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   }
 
   /**
-  * Method to start the blinking animation
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
   */
-  public startAnimation(blinkTime: number): void {
-    console.log('Starting animation for: ', blinkTime);
-    this.targetAnimationState = 'highlight';
-    this.blinkingTimer = interval(blinkTime).subscribe( () => {
-      this.stopAnimation();
-    });
-  }
-
-  /**
-  * Method to go to the normal state to stop the animation
-  */
-  public stopAnimation(): void {
-    this.targetAnimationState = 'normal';
-  }
-
   public changeBlinkingState(blinking: boolean) {
+    if (this.disableAnimation) {
+      return;
+    }
     if (blinking) {
       this.targetAnimationState = 'highlight';
     } else {
       this.targetAnimationState = 'normal';
     }
+    this.cdRef.detectChanges();
   }
 
   /**
