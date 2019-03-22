@@ -14,6 +14,10 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   */
   @Input() alarm: Alarm;
 
+  /**
+  * Variable to enable animation
+  */
+  @Input() disableBlink = false;
 
   /** Event emitted to notify when the alarm should start or stop blinking */
   @Output() blinkingStatus = new EventEmitter<boolean>();
@@ -27,11 +31,6 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   * Maximum blikining time in miliseconds
   */
   maxBlinkInterval = 10000;
-
-  /**
-   * Variable to enable animation
-   */
-  @Input() disableAnimation = false;
 
   /**
   * Builds a new instance
@@ -48,7 +47,7 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   * Method to handle the changes on the alarm values
   */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.disableAnimation) {
+    if (this.disableBlink) {
       return;
     }
 

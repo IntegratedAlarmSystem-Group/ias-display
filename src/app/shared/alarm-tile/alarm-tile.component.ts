@@ -116,40 +116,40 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   * Method to handle the changes on the alarm values
   */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.alarm) {
-      const currentTime = (new Date).getTime();
-      const lastChange = this.alarm.value_change_timestamp;
-      const timeDiff = currentTime - lastChange;
-      let blinkInterval = this.maxBlinkInterval;
-
-      if ( timeDiff >= 0) {
-        blinkInterval = this.maxBlinkInterval - timeDiff;
-        if (blinkInterval <= 0) {
-          return;
-        }
-      }
-
-      let previousAlarmValue: number = 0;
-      let currentAlarmValue: number = this.alarm.value;
-
-      if (changes.alarm.previousValue) {
-        previousAlarmValue = changes.alarm.previousValue.value;
-        currentAlarmValue = changes.alarm.currentValue.value;
-      }
-
-      // clear to set transition
-      if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-        if (this.disableAnimation === false) {
-          this.startAnimation(blinkInterval);
-        }
-      }
-      // set to clear transition
-      if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
-        if (this.disableAnimation === false) {
-          this.stopAnimation();
-        }
-      }
-    }
+    // if (this.alarm) {
+    //   const currentTime = (new Date).getTime();
+    //   const lastChange = this.alarm.value_change_timestamp;
+    //   const timeDiff = currentTime - lastChange;
+    //   let blinkInterval = this.maxBlinkInterval;
+    //
+    //   if ( timeDiff >= 0) {
+    //     blinkInterval = this.maxBlinkInterval - timeDiff;
+    //     if (blinkInterval <= 0) {
+    //       return;
+    //     }
+    //   }
+    //
+    //   let previousAlarmValue: number = 0;
+    //   let currentAlarmValue: number = this.alarm.value;
+    //
+    //   if (changes.alarm.previousValue) {
+    //     previousAlarmValue = changes.alarm.previousValue.value;
+    //     currentAlarmValue = changes.alarm.currentValue.value;
+    //   }
+    //
+    //   // clear to set transition
+    //   if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
+    //     if (this.disableAnimation === false) {
+    //       this.startAnimation(blinkInterval);
+    //     }
+    //   }
+    //   // set to clear transition
+    //   if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
+    //     if (this.disableAnimation === false) {
+    //       this.stopAnimation();
+    //     }
+    //   }
+    // }
   }
 
   /**
@@ -188,6 +188,14 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   public stopAnimation(): void {
     this.targetAnimationState = 'normal';
+  }
+
+  public changeBlinkingState(blinking: boolean) {
+    if (blinking) {
+      this.targetAnimationState = 'highlight';
+    } else {
+      this.targetAnimationState = 'normal';
+    }
   }
 
   /**
