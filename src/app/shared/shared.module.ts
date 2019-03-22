@@ -14,6 +14,7 @@ import { AlarmTileComponent } from './alarm-tile/alarm-tile.component';
 import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
 import { AlarmLabelComponent } from './alarm-label/alarm-label.component';
 import { PropsTableComponent } from './props-table/props-table.component';
+import { AlarmBlinkComponent } from './alarm-blink/alarm-blink.component';
 
 /**
 * This module contains all the shared components, that are meant to be used bty the other modules.
@@ -42,6 +43,7 @@ import { PropsTableComponent } from './props-table/props-table.component';
     AlarmInfoComponent,
     AlarmLabelComponent,
     PropsTableComponent,
+    AlarmBlinkComponent,
   ],
   exports: [
     AlarmComponent,

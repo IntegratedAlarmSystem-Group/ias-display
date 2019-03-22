@@ -1,7 +1,5 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { interval } from 'rxjs';
-import * as moment from 'moment';
-import { Locale } from '../../settings';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -72,6 +70,9 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   */
   public blinkingTimer: any;
 
+  /**
+  * Maximum blikining time in miliseconds
+  */
   maxBlinkInterval = 10000;
 
   /**
