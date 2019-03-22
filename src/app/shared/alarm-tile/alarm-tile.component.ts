@@ -120,25 +120,12 @@ export class AlarmTileComponent implements OnChanges, OnInit {
       const lastChange = this.alarm.value_change_timestamp;
       const timeDiff = currentTime - lastChange;
       let blinkInterval = this.maxBlinkInterval;
-      const canBlink = true;
 
       if ( timeDiff >= 0) {
         blinkInterval = this.maxBlinkInterval - timeDiff;
         if (blinkInterval <= 0) {
           return;
         }
-      }
-
-      if (this.alarm.core_id === 'Alarmdummy') {
-        console.log('*******************************************');
-        console.log('this.alarm: ', this.alarm);
-        console.log('changes: ', changes);
-        const lastChangeStr = moment(lastChange).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
-        const currentTimeStr = moment(currentTime).utcOffset(Locale.TIMEZONE).format(Locale.MOMENT_DATE_FORMAT);
-        console.log('currentTime: ', currentTime);
-        console.log('lastChange: ', lastChange);
-        console.log('currentTimeStr: ', currentTimeStr);
-        console.log('lastChangeStr: ', lastChangeStr);
       }
 
       let previousAlarmValue: number = 0;
@@ -149,18 +136,16 @@ export class AlarmTileComponent implements OnChanges, OnInit {
         currentAlarmValue = changes.alarm.currentValue.value;
       }
 
-      if (canBlink) {
-        // clear to set transition
-        if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-          if (this.disableAnimation === false) {
-            this.startAnimation(blinkInterval);
-          }
+      // clear to set transition
+      if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
+        if (this.disableAnimation === false) {
+          this.startAnimation(blinkInterval);
         }
-        // set to clear transition
-        if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
-          if (this.disableAnimation === false) {
-            this.stopAnimation();
-          }
+      }
+      // set to clear transition
+      if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
+        if (this.disableAnimation === false) {
+          this.stopAnimation();
         }
       }
     }
