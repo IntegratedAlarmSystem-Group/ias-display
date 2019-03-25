@@ -3,6 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmHeaderComponent } from './alarm-header.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -40,6 +41,7 @@ describe('AlarmHeaderComponent', () => {
         AlarmHeaderComponent,
         AlarmLabelComponent,
         AlarmTooltipComponent,
+        AlarmBlinkComponent,
         PropsTableComponent
       ],
       imports: [ NgbModule ]
@@ -63,7 +65,7 @@ describe('AlarmHeaderComponent', () => {
       component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+      expect(component.getClass()).toContain(expected_classes[alarm.core_id][0]);
     }
   });
 
@@ -74,9 +76,9 @@ describe('AlarmHeaderComponent', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
       if (component.alarm.validity) {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       } else {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       }
     }
   });

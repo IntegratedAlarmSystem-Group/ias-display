@@ -3,6 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmComponent } from './alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
@@ -17,6 +18,7 @@ describe('AlarmComponent', () => {
         AlarmComponent,
         AlarmLabelComponent,
         AlarmTooltipComponent,
+        AlarmBlinkComponent,
         PropsTableComponent
     ],
       imports: [ NgbModule ]

@@ -232,3 +232,41 @@ a:hover {
   background: mat-color($ias-palette, 200);
   color: mat-contrast($ias-palette, 200);
 }
+
+
+.tile-background-normal {
+  opacity: 0.0;
+}
+
+.blinking {
+  -webkit-animation: BLINK 2s;
+  animation: BLINK 2s;
+  -moz-animation: BLINK 2s;
+  -o-animation: BLINK 2s;
+  animation-iteration-count: infinite;
+  opacity: 0.0;
+}
+
+@-webkit-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100% {opacity: 0.0}
+}
+
+@-moz-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100% {opacity: 0.0}
+}
+
+@keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100%{opacity: 0.0}
+}
+
+@-o-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100%{opacity: 0.0}
+}

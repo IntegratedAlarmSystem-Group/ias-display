@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -100,6 +99,20 @@ export class AlarmComponent implements OnInit, OnChanges {
   @Input() labelLocation = 'right';
 
   /**
+   * Variable to disable animation
+   */
+  @Input() disableBlink = false;
+
+
+  /** Event emitted to notify when the alarm should start or stop blinking */
+  @Output() blinkingStatus = new EventEmitter<boolean>();
+
+  /**
+  * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
+  */
+  blinkingClass = '';
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions = ['xs', 'sm', 'md', 'lg', 'status'];
@@ -109,15 +122,17 @@ export class AlarmComponent implements OnInit, OnChanges {
    */
   private labelLocationOptions = ['right', 'bottom'];
 
-  corrected_text: string;
-
   /**
-  * Instantiates the component
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
-  constructor() { }
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   /**
   * Executed when the component is initiating
+  * Checks and corrects some of the components inputs
   */
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
@@ -128,17 +143,38 @@ export class AlarmComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+  * Executed when one of the component's inputs is changing
+  */
   ngOnChanges() {
-    this.corrected_text = this.getCorrectedText();
+  }
+
+  /**
+  * Function executed to change and propagate the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    this.blinkingStatus.emit(blinking);
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      this.blinkingClass = 'blinking';
+    } else {
+      this.blinkingClass = '';
+    }
+    this.cdRef.detectChanges();
   }
 
   /**
    * Returns the style class name based on the optional input size. By default
    * the class is medium size.
-   * @return {string} style class name
+   * @return {string[]} style class name
    */
-  getClass(): string {
-    return 'alarm-component-' + this.size;
+  getClass(): string[] {
+    return ['alarm-component-' + this.size, this.blinkingClass];
   }
 
   /**

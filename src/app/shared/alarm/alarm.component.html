@@ -1,5 +1,10 @@
 <ng-container *ngIf="labelLocation === 'bottom'; then alarmBottonTag; else alarmRightTag"> </ng-container>
 
+<app-alarm-blink
+  [alarm]="this.alarm"
+  (blinkingStatus)="changeBlinkingState($event)"
+></app-alarm-blink>
+
 <ng-template #alarmBottonTag>
 
   <div
@@ -14,7 +19,6 @@
     </ng-template>
 
     <div fxLayout="column">
-
       <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
 
       <ng-template #textAlarm>
@@ -124,6 +128,5 @@
     </div>
 
   </div>
-
 
 </ng-template>

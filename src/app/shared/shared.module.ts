@@ -12,6 +12,7 @@ import { AlarmTooltipComponent } from './alarm-tooltip/alarm-tooltip.component';
 import { AlarmCardComponent } from './alarm-card/alarm-card.component';
 import { AlarmTileComponent } from './alarm-tile/alarm-tile.component';
 import { AlarmInfoComponent } from './alarm-info/alarm-info.component';
+import { AlarmBlinkComponent } from './alarm-blink/alarm-blink.component';
 import { AlarmLabelComponent } from './alarm-label/alarm-label.component';
 import { PropsTableComponent } from './props-table/props-table.component';
 
@@ -42,6 +43,7 @@ import { PropsTableComponent } from './props-table/props-table.component';
     AlarmInfoComponent,
     AlarmLabelComponent,
     PropsTableComponent,
+    AlarmBlinkComponent,
   ],
   exports: [
     AlarmComponent,
@@ -51,12 +53,14 @@ import { PropsTableComponent } from './props-table/props-table.component';
     AlarmTileComponent,
     AlarmInfoComponent,
     AlarmLabelComponent,
+    AlarmBlinkComponent,
     PropsTableComponent,
   ],
   entryComponents: [
     AlarmComponent,
     StatusViewComponent,
     AlarmHeaderComponent,
+    AlarmBlinkComponent,
   ]
 })
 export class SharedModule { }

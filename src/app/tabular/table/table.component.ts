@@ -109,6 +109,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
    * Instantiates the component
    * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {Route} route Reference to the url that triggered the initialization of this component
+   * @param {ChangeDetectorRef} cdRef Used for change detection in html
    */
   constructor(
     private alarmService: AlarmService,

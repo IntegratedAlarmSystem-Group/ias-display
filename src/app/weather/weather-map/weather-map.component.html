@@ -62,6 +62,17 @@
                 (click)="onClick(stationConfig)"
                 (mouseenter)="mouseEnterPrimaryWeatherStationGroup(stationConfig)"
                 (mouseleave)="mouseLeavePrimaryWeatherStationGroup()">
+                <animate
+                  *ngIf="blinkingStatus[stationConfig.alarm_id]"
+                  attributeType="XML"
+                  attributeName="opacity"
+                  from="0.0"
+                  to="0.0"
+                  dur="2s"
+                  repeatCount="indefinite"
+                  values="0; 0.75; 0.0"
+                  keyTimes="0; 0.5; 1"
+                />
                 <!-- primary ws related markers -->
                 <foreignObject
                      [attr.x]="p.opt_cx"
@@ -80,7 +91,8 @@
                      width="100"
                      height="50">
                   <xhtml:app-weather-primary-ws-marker
-                     [stationConfig]="stationConfig">
+                     [stationConfig]="stationConfig"
+                     (blinkingStatus)="changeBlinkingState($event, stationConfig.alarm_id)">
                   </xhtml:app-weather-primary-ws-marker>
                 </foreignObject>
                 <foreignObject

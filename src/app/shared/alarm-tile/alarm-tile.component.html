@@ -17,7 +17,12 @@
           [size]="this.size"
           [tooltipDirection]="this.tooltipDirection"
           [labelLocation]="'bottom'"
+          [disableBlink]="true"
         ></app-alarm>
+        <app-alarm-blink
+          [alarm]="this.alarm"
+          (blinkingStatus)="changeBlinkingState($event)"
+        ></app-alarm-blink>
       </div>
     </div>
   </div>
