@@ -44,6 +44,11 @@ export class AlarmCardComponent implements OnInit {
   @Input() disableBlink = false;
 
   /**
+  * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
+  */
+  blinkingClass = '';
+
+  /**
   * Builds a new instance
   * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
@@ -68,11 +73,9 @@ export class AlarmCardComponent implements OnInit {
       return;
     }
     if (blinking) {
-      // this.targetAnimationState = 'highlight';
-      console.log('Start blinking');
+      this.blinkingClass = 'blinking';
     } else {
-      // this.targetAnimationState = 'normal';
-      console.log('Stop blinking');
+      this.blinkingClass = '';
     }
     this.cdRef.detectChanges();
   }
@@ -109,6 +112,9 @@ export class AlarmCardComponent implements OnInit {
     }
     if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
       result.push('alarm-card-unreliable');
+    }
+    if (this.blinkingClass !== '') {
+      result.push('blinking');
     }
     return result;
   }

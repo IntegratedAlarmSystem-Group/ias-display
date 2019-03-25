@@ -104,6 +104,9 @@ export class AlarmComponent implements OnInit, OnChanges {
    */
   @Input() disableBlink = false;
 
+  /**
+  * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
+  */
   blinkingClass = '';
 
   /**
@@ -155,10 +158,8 @@ export class AlarmComponent implements OnInit, OnChanges {
     }
     if (blinking) {
       this.blinkingClass = 'blinking';
-      console.log('Start blinking');
     } else {
       this.blinkingClass = '';
-      console.log('Stop blinking');
     }
     this.cdRef.detectChanges();
   }
