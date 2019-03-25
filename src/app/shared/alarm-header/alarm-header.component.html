@@ -14,13 +14,13 @@
     <div class="alarm-header-name">
         {{this.getAlarmName()}}
     </div>
-    <div>
+    <div [ngClass]="blinkingClass">
       <app-alarm-label [alarm]="alarm" [showText]="false" [size]="'md'"></app-alarm-label>
     </div>
   </div>
 
 
-  <div fxLayout="row" class="alarm-header-badges">
+  <div fxLayout="row" class="alarm-header-badges" [ngClass]="blinkingClass">
     <div class="badges" *ngIf="showActionBadges">
 
       <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>

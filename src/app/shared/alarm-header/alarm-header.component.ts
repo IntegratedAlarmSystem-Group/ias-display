@@ -72,7 +72,7 @@ export class AlarmHeaderComponent implements OnInit {
       return;
     }
     if (blinking) {
-      this.blinkingClass = 'normal';
+      this.blinkingClass = 'blinking';
     } else {
       this.blinkingClass = '';
     }
@@ -112,9 +112,7 @@ export class AlarmHeaderComponent implements OnInit {
     if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
       result.push('unreliable');
     }
-    if (this.blinkingClass !== '') {
-      result.push('blinking');
-    }
+    result.push(this.blinkingClass);
     return result;
   }
 
