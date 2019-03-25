@@ -86,7 +86,7 @@ export class AlarmTileComponent implements OnInit {
   constructor(
     private cdRef: ChangeDetectorRef
   ) {
-    this.targetAnimationState = 'normal';
+    this.targetAnimationState = 'tile-background-normal';
   }
 
   /**
@@ -135,9 +135,9 @@ export class AlarmTileComponent implements OnInit {
       return;
     }
     if (blinking) {
-      this.targetAnimationState = 'highlight';
+      this.targetAnimationState = 'blinking';
     } else {
-      this.targetAnimationState = 'normal';
+      this.targetAnimationState = 'tile-background-normal';
     }
     this.cdRef.detectChanges();
   }
@@ -175,10 +175,10 @@ export class AlarmTileComponent implements OnInit {
     if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
       result.push('alarm-tile-unreliable');
     }
-    if (this.targetAnimationState === 'highlight') {
-      result.push('highlight');
+    if (this.targetAnimationState === 'blinking') {
+      result.push('blinking');
     } else {
-      result.push('normal');
+      result.push('tile-background-normal');
     }
     return result;
   }

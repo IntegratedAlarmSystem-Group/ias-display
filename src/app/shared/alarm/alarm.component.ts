@@ -104,6 +104,8 @@ export class AlarmComponent implements OnInit, OnChanges {
    */
   @Input() disableBlink = false;
 
+  blinkingClass = '';
+
   /**
    * Available sizes for the alarm componet
    */
@@ -152,10 +154,10 @@ export class AlarmComponent implements OnInit, OnChanges {
       return;
     }
     if (blinking) {
-      // this.targetAnimationState = 'highlight';
+      this.blinkingClass = 'blinking';
       console.log('Start blinking');
     } else {
-      // this.targetAnimationState = 'normal';
+      this.blinkingClass = '';
       console.log('Stop blinking');
     }
     this.cdRef.detectChanges();
@@ -164,10 +166,10 @@ export class AlarmComponent implements OnInit, OnChanges {
   /**
    * Returns the style class name based on the optional input size. By default
    * the class is medium size.
-   * @return {string} style class name
+   * @return {string[]} style class name
    */
-  getClass(): string {
-    return 'alarm-component-' + this.size;
+  getClass(): string[] {
+    return ['alarm-component-' + this.size, this.blinkingClass];
   }
 
   /**

@@ -234,11 +234,11 @@ a:hover {
 }
 
 
-.normal {
+.tile-background-normal {
   opacity: 0.0;
 }
 
-.highlight {
+.blinking {
   -webkit-animation: BLINK 2s;
   animation: BLINK 2s;
   -moz-animation: BLINK 2s;
