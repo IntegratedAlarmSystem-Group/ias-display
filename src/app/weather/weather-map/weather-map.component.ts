@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
@@ -67,17 +67,21 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   /** List to manage the pads in use */
   public padsStatusGroupNames = [];
 
+  public blinkingStatus = {};
+
   /**
    * Builds an instance of the component
    * @param {WeatherService} service Service used to get the configuration needed by the component
    * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {MapService} mapService Service used to build the interactive map
+   * @param {ChangeDetectorRef} cdRef Used for change detection in html
    *
    */
   constructor(
     public service: WeatherService,
     public alarmService: AlarmService,
     public mapService: MapService,
+    private cdRef: ChangeDetectorRef
   ) { }
 
   /**
@@ -142,6 +146,17 @@ export class WeatherMapComponent implements OnInit, OnChanges {
             });
         });
     });
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean, alarmId: string) {
+    this.blinkingStatus[alarmId] = blinking;
+    this.cdRef.detectChanges();
   }
 
   /**

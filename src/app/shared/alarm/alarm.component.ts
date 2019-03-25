@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -104,6 +103,10 @@ export class AlarmComponent implements OnInit, OnChanges {
    */
   @Input() disableBlink = false;
 
+
+  /** Event emitted to notify when the alarm should start or stop blinking */
+  @Output() blinkingStatus = new EventEmitter<boolean>();
+
   /**
   * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
   */
@@ -147,12 +150,13 @@ export class AlarmComponent implements OnInit, OnChanges {
   }
 
   /**
-  * Function executed to change the blinking state according to a boolean parameter
+  * Function executed to change and propagate the blinking state according to a boolean parameter
   * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
   * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
   * @param {boolean} blinking true if it should blink, false if not
   */
   public changeBlinkingState(blinking: boolean) {
+    this.blinkingStatus.emit(blinking);
     if (this.disableBlink) {
       return;
     }

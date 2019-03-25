@@ -6,6 +6,8 @@
     [imagesUnreliable]="weatherService.markerImageUnreliableSet"
     [labelLocation]="'bottom'"
     [labelMode]="'line'"
+    [disableBlink]="true"
+    (blinkingStatus)="propagateBlinkingState($event)"
   >
   </app-alarm>
 
