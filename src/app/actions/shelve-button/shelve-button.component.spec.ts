@@ -13,7 +13,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
   let fixture: ComponentFixture<ShelveButtonComponent>;
   let debug: DebugElement;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
-  const mockAlarm = Alarm.asAlarm({
+  const mockAlarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'coreid$1',
     'running_id': 'coreid$1',

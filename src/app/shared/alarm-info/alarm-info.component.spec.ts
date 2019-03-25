@@ -7,7 +7,7 @@ describe('AlarmInfoComponent', () => {
   let component: AlarmInfoComponent;
   let fixture: ComponentFixture<AlarmInfoComponent>;
   let tableBody: any;
-  const mockAlarm: Alarm = Alarm.asAlarm({
+  const mockAlarm: Alarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'alarm_1',
     'running_id': 'alarm_1',

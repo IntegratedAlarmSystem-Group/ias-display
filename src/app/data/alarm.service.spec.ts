@@ -28,6 +28,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 0,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 0],
       'validity': 0,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -51,6 +53,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 1,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 1],
       'validity': 1,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -73,6 +77,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 1,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
       'validity': 1,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -95,6 +101,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 1,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
       'validity': 1,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -117,6 +125,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 1,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
       'validity': 1,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -139,6 +149,8 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
       'mode': 1,
       'core_timestamp': 10000,
       'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
       'validity': 1,
       'description': 'my description',
       'url': 'https://www.alma.cl',
@@ -160,6 +172,8 @@ const alarms = [
     'mode': 0,
     'core_timestamp': 10000,
     'state_change_timestamp': 10000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 0],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
@@ -176,6 +190,8 @@ const alarms = [
     'mode': 0,
     'core_timestamp': 10000,
     'state_change_timestamp': 10000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 2],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
@@ -192,6 +208,8 @@ const alarms = [
     'mode': 0,
     'core_timestamp': 10000,
     'state_change_timestamp': 10000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 4],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
@@ -501,9 +519,9 @@ describe('AlarmService', () => {
     // Arrange:
     subject.connectionStatusStream.next(true);
     // Initial alarms dictionary
-    subject.alarmsArray[0] = Alarm.asAlarm(alarms[0]);
+    subject.alarmsArray[0] = Alarm.getMockAlarm(alarms[0]);
     subject.alarmsArray[0]['validity'] = Validity.reliable;
-    subject.alarmsArray[1] = Alarm.asAlarm(alarms[1]);
+    subject.alarmsArray[1] = Alarm.getMockAlarm(alarms[1]);
     subject.alarmsArray[1]['validity'] = Validity.reliable;
 
     const expected_validity = Validity.unreliable;
@@ -559,7 +577,7 @@ describe('AlarmService', () => {
   it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
-    subject.alarmsArray = [Alarm.asAlarm(alarms[1]), Alarm.asAlarm(alarms[2])];
+    subject.alarmsArray = [Alarm.getMockAlarm(alarms[1]), Alarm.getMockAlarm(alarms[2])];
     subject.connectionStatusStream.next(true);
     spyOn(subject, 'triggerAlarmsNonValidConnectionState').and.callThrough();
     for (const alarm of subject.alarmsArray) {
@@ -628,7 +646,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
       const alarmsIndexes = {};
       for (const a in alarms) {
         if (alarms.hasOwnProperty(a)) {
-          const index = alarmsArray.push(Alarm.asAlarm(alarms[a]));
+          const index = alarmsArray.push(Alarm.getMockAlarm(alarms[a]));
           alarmsIndexes[alarms[a].core_id] = index - 1;
         }
       }

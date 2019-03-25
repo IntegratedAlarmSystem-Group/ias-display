@@ -6,7 +6,7 @@ describe('PropsTableComponent', () => {
   let component: PropsTableComponent;
   let fixture: ComponentFixture<PropsTableComponent>;
   let tableBody: any;
-  const mockAlarm: Alarm = Alarm.asAlarm({
+  const mockAlarm: Alarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'alarm_1',
     'running_id': 'alarm_1',

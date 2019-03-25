@@ -36,7 +36,7 @@ describe('AntennaMarkerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AntennaMarkerComponent);
     component = fixture.componentInstance;
-    component.alarm = Alarm.asAlarm(mockAlarm);
+    component.alarm = Alarm.getMockAlarm(mockAlarm);
     fixture.detectChanges();
   });
 

@@ -163,6 +163,36 @@ export class Alarm {
   }
 
   /**
+  * Class method that receives an object and returns a copy as an {@link Alarm}.
+  * This method is intended for testing only as it does not validate the JSON, for real code use {@link Alarm#asAlarm}
+  * @param {any} json the object to convert to an Alarm
+  * @param {number} pk the primary key of the Alarm in the database
+  * @returns {Alarm} the object as an {@link Alarm} instance
+  */
+  static getMockAlarm(json: any): Alarm {
+    const value = <number>json['value'];
+    const core_id = <string>json['core_id'];
+    const running_id = <string>json['running_id'];
+    const mode = <number>json['mode'];
+    const core_timestamp = <number>json['core_timestamp'];
+    const state_change_timestamp = <number>json['state_change_timestamp'];
+    const value_change_timestamp = <number>json['value_change_timestamp'];
+    const value_change_transition = <number[]>json['value_change_transition'];
+    const validity = <number>json['validity'];
+    const description = <string>json['description'];
+    const url = <string>json['url'];
+    const sound = <string>json['sound'];
+    const can_shelve = <boolean>json['can_shelve'];
+    const ack = <boolean>json['ack'];
+    const shelved = <boolean>json['shelved'];
+    const dependencies = <string[]>json['dependencies'];
+    const properties = json['properties'];
+    return new Alarm({ value, core_id, running_id, mode, core_timestamp,
+      state_change_timestamp, value_change_timestamp, value_change_transition, validity, description, url, sound, can_shelve, ack, shelved,
+      dependencies, properties });
+  }
+
+  /**
   * Returns a string representation of the validity of the Alarm
   * @returns {string} a string representation of the {@link Alarm.mode} attribute
   */

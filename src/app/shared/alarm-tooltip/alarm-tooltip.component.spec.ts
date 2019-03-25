@@ -7,7 +7,7 @@ describe('AlarmTooltipComponent', () => {
   let component: AlarmTooltipComponent;
   let fixture: ComponentFixture<AlarmTooltipComponent>;
   let tableBody: any;
-  const mockAlarm: Alarm = Alarm.asAlarm({
+  const mockAlarm: Alarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'alarm_1',
     'running_id': 'alarm_1',

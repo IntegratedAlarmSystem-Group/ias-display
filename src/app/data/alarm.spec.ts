@@ -1,7 +1,7 @@
 import {Alarm} from './alarm';
 
 describe('Alarm', () => {
-  const alarm: Alarm = Alarm.asAlarm({
+  const alarm: Alarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'alarm_1',
     'running_id': 'alarm_1',

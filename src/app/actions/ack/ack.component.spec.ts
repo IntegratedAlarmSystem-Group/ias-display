@@ -24,7 +24,7 @@ describe('AckComponent', () => {
   let sidenavService: SidenavService;
   let authService: AuthService;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
-  const mockAlarm = Alarm.asAlarm({
+  const mockAlarm = Alarm.getMockAlarm({
     'value': 0,
     'core_id': 'coreid$1',
     'running_id': 'coreid$1',

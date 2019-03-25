@@ -340,7 +340,7 @@ describe('TableComponent', () => {
     let mockAlarm: Alarm;
     let alarmString = '';
 
-    mockAlarm = Alarm.asAlarm({
+    mockAlarm = Alarm.getMockAlarm({
       'value': 0,
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',

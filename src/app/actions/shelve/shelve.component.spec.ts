@@ -25,7 +25,7 @@ describe('ShelveComponent', () => {
   const spyRoutingTable = jasmine.createSpyObj(
     'RoutingService', ['goToShelve', 'cleanActionOutlet', 'goToAcknowledge']
   );
-  const mockAlarm = Alarm.asAlarm({
+  const mockAlarm = Alarm.getMockAlarm({
       'value': 0,
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',
@@ -83,7 +83,7 @@ describe('ShelveComponent', () => {
     alarmService = fixture.debugElement.injector.get(AlarmService);
     sidenavService = fixture.debugElement.injector.get(SidenavService);
     authService = fixture.debugElement.injector.get(AuthService);
-    spyOn(alarmService, 'get').and.callFake(function() { return Alarm.asAlarm(mockAlarm); });
+    spyOn(alarmService, 'get').and.callFake(function() { return Alarm.getMockAlarm(mockAlarm); });
     spyOn(alarmService, 'isAlarmIndexAvailable').and.callFake(function() { return true; });
     spyOn(alarmService, 'shelveAlarm').and.returnValue( of([mockAlarm.core_id]) );
     spyOn(alarmService, 'unshelveAlarms').and.returnValue( of([mockAlarm.core_id]) );

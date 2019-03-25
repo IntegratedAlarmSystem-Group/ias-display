@@ -12,7 +12,7 @@ describe('ButtonsComponent', () => {
   let component: ButtonsComponent;
   let fixture: ComponentFixture<ButtonsComponent>;
   const spyRoutingService = jasmine.createSpyObj('RoutingService', ['goToAcknowledge', 'goToShelve']);
-  const mockAlarm = Alarm.asAlarm({
+  const mockAlarm = Alarm.getMockAlarm({
     'value': 4,
     'core_id': 'coreid$1',
     'running_id': 'coreid$1',

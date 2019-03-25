@@ -3,6 +3,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmHeaderComponent } from './alarm-header.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
@@ -40,6 +41,7 @@ describe('AlarmHeaderComponent', () => {
         AlarmHeaderComponent,
         AlarmLabelComponent,
         AlarmTooltipComponent,
+        AlarmBlinkComponent,
         PropsTableComponent
       ],
       imports: [ NgbModule ]
@@ -53,37 +55,37 @@ describe('AlarmHeaderComponent', () => {
   });
 
   it('should create', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should display the color of the alarms according to each alarm properties', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.asAlarm(alarm);
+      component.alarm = Alarm.getMockAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+      expect(component.getClass()).toContain(expected_classes[alarm.core_id][0]);
     }
   });
 
   it('should display the shelved alarms accordingly', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.asAlarm(alarm);
+      component.alarm = Alarm.getMockAlarm(alarm);
       component.alarm.shelve();
       fixture.detectChanges();
       expect(component).toBeTruthy();
       if (component.alarm.validity) {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       } else {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       }
     }
   });
 
   describe('should have a method to determine if the alarm must be shown as acknoledged or not', () => {
     it('based on the alarm ack value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
       component.alarm.ack = true;
       expect(component.showAsPendingAck()).toEqual(false);
       component.alarm.ack = false;
@@ -92,7 +94,7 @@ describe('AlarmHeaderComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
       component.alarm.ack = true;
       expect(component.showAsPendingAck()).toEqual(false);
       component.alarm.ack = false;
@@ -102,7 +104,7 @@ describe('AlarmHeaderComponent', () => {
 
   describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
     it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
       component.alarm.shelved = false;
       expect(component.showAsShelved()).toEqual(false);
       component.alarm.shelved = true;
@@ -111,7 +113,7 @@ describe('AlarmHeaderComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
+      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
       component.alarm.shelved = false;
       expect(component.showAsShelved()).toEqual(false);
       component.alarm.shelved = true;
@@ -120,7 +122,7 @@ describe('AlarmHeaderComponent', () => {
   });
 
   it('should show the action badges images when the showActionBadges is true (by default)', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
     const images = badges.querySelectorAll('img');
@@ -129,7 +131,7 @@ describe('AlarmHeaderComponent', () => {
 
   it('should not show the action badges images when the showActionBadges is false', () => {
     component.showActionBadges = false;
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
     const images = badges.querySelectorAll('img');
@@ -137,7 +139,7 @@ describe('AlarmHeaderComponent', () => {
   });
 
   it('should turn on/off the badges according to the ack and shelve values', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
     component.alarm.ack = true;
     component.alarm.shelved = false;
     fixture.detectChanges();

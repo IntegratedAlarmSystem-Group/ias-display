@@ -4,13 +4,14 @@ import { StatusViewComponent } from './status-view.component';
 import { AlarmComponent } from '../alarm/alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('StatusViewComponent', () => {
   let component: StatusViewComponent;
   let fixture: ComponentFixture<StatusViewComponent>;
-  const alarm = Alarm.asAlarm({
+  const alarm = Alarm.getMockAlarm({
     'value': 1,
     'core_id': 'Dummy-cleared-valid',
     'running_id': 'Dummy-cleared-valid',
@@ -32,6 +33,7 @@ describe('StatusViewComponent', () => {
         AlarmComponent,
         AlarmLabelComponent,
         AlarmTooltipComponent,
+        AlarmBlinkComponent,
         PropsTableComponent
       ],
       imports: [ NgbModule ]
