@@ -101,6 +101,7 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   */
   public stopAnimation(): void {
     this.blinkingStatus.emit(false);
+    this.blinkingTimer.unsubscribe();
   }
 
 }
