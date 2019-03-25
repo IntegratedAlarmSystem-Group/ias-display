@@ -340,12 +340,14 @@ describe('TableComponent', () => {
     let mockAlarm: Alarm;
     let alarmString = '';
 
-    mockAlarm = Alarm.getMockAlarm({
+    mockAlarm = Alarm.asAlarm({
       'value': 0,
       'core_id': 'coreid$1',
       'running_id': 'coreid$1',
       'core_timestamp': 1267252440000,
       'state_change_timestamp': 1267252440000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 0],
       'description': 'Description',
       'url': 'https://www.alma.cl',
       'sound': 'NONE',

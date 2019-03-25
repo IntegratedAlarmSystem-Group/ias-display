@@ -11,12 +11,15 @@ import { Alarm } from '../../data/alarm';
 describe('StatusViewComponent', () => {
   let component: StatusViewComponent;
   let fixture: ComponentFixture<StatusViewComponent>;
-  const alarm = Alarm.getMockAlarm({
+  const alarm = Alarm.asAlarm({
     'value': 1,
     'core_id': 'Dummy-cleared-valid',
     'running_id': 'Dummy-cleared-valid',
     'mode': '5',
     'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 1],
     'validity': '1',
     'description': 'bla bla',
     'url': 'http://alma.cl',

@@ -58,7 +58,7 @@ describe('AlarmTileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlarmTileComponent);
     component = fixture.componentInstance;
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
   });
@@ -69,7 +69,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a title with the name of the alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-tile-content > .title');
@@ -79,7 +79,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a shortened title for a long name of the alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[17]);
+    component.alarm = Alarm.asAlarm(MockAlarms[17]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-tile-content > .title');
@@ -89,7 +89,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a title with the optional name if provided', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.optionalAlarmName = 'my alarm';
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
@@ -100,7 +100,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a shortened title for a long optional name', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[17]);
+    component.alarm = Alarm.asAlarm(MockAlarms[17]);
     component.optionalAlarmName = 'this is a large title for the tile';
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
@@ -117,7 +117,7 @@ describe('AlarmTileComponent', () => {
         expectedClasses.push(c);
       }
       expectedClasses.push('tile-background-normal');
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expectedClasses);
@@ -149,7 +149,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlarmTileComponent);
     component = fixture.componentInstance;
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
   });
@@ -172,7 +172,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
     );
     expect(debugElement).not.toBe(null);
     const alarmComponent = debugElement.componentInstance;
-    component.alarm = Alarm.getMockAlarm(MockAlarms[4]);
+    component.alarm = Alarm.asAlarm(MockAlarms[4]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     for (const showBadges of component.showBadgesOptions ) {
@@ -218,7 +218,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //
 //   beforeEach(() => {
 //     fixture = TestBed.createComponent(TestHostComponent);
-//     const mockAlarm = Alarm.getMockAlarm(MockAlarms[0]);
+//     const mockAlarm = Alarm.asAlarm(MockAlarms[0]);
 //     hostComponent = fixture.componentInstance;
 //     hostComponent.alarm = mockAlarm;
 //     hostComponent.images = MockImageSet;
@@ -237,7 +237,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //   it('should have a startAnimation method to update the animation state and class for the alarm', () => {
 //     // Arrange:
 //     let expectedClasses: string[];
-//     hostComponent.alarm =  Alarm.getMockAlarm(MockAlarms[0]);
+//     hostComponent.alarm =  Alarm.asAlarm(MockAlarms[0]);
 //     fixture.detectChanges();
 //     component.targetAnimationState = 'normal';
 //     expectedClasses = [];
@@ -261,7 +261,7 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //   it('should have a stopAnimation method to update the animation state', () => {
 //     // Arrange:
 //     let expectedClasses: string[];
-//     hostComponent.alarm =  Alarm.getMockAlarm(MockAlarms[0]);
+//     hostComponent.alarm =  Alarm.asAlarm(MockAlarms[0]);
 //     fixture.detectChanges();
 //     component.targetAnimationState = 'highlight';
 //     expectedClasses = [];
@@ -296,11 +296,11 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //       fixture.detectChanges();
 //       // cleared
 //       mockAlarm.value = Value.cleared;
-//       hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//       hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //       fixture.detectChanges();
 //       // set
 //       mockAlarm.value = Value[key];
-//       hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//       hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //       fixture.detectChanges();
 //     }
 //     expect(component.startAnimation).toHaveBeenCalledTimes(4);
@@ -320,11 +320,11 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //       fixture.detectChanges();
 //       // cleared
 //       mockAlarm.value = Value[key];
-//       hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//       hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //       fixture.detectChanges();
 //       // set
 //       mockAlarm.value = Value.cleared;
-//       hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//       hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //       fixture.detectChanges();
 //     }
 //     expect(component.stopAnimation).toHaveBeenCalledTimes(4);
@@ -344,11 +344,11 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //           fixture.detectChanges();
 //           // previous value
 //           mockAlarm.value = Value[s];
-//           hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//           hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //           fixture.detectChanges();
 //           // value
 //           mockAlarm.value = Value[t];
-//           hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//           hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //           fixture.detectChanges();
 //         }
 //       }
@@ -370,11 +370,11 @@ describe('AlarmTileComponent: AlarmComponent', () => {
 //         fixture.detectChanges();
 //         // previous value
 //         mockAlarm.value = Value[s];
-//         hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//         hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //         fixture.detectChanges();
 //         // value
 //         mockAlarm.value = Value[t];
-//         hostComponent.alarm = Alarm.getMockAlarm(mockAlarm);
+//         hostComponent.alarm = Alarm.asAlarm(mockAlarm);
 //         fixture.detectChanges();
 //       }
 //     }

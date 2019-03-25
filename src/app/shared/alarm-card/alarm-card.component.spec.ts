@@ -50,13 +50,13 @@ describe('AlarmCardComponent', () => {
   });
 
   it('should create', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should display a text with the name of the alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-name');
@@ -64,7 +64,7 @@ describe('AlarmCardComponent', () => {
   });
 
   it('should display a shortened text for a long name of the alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[17]);
+    component.alarm = Alarm.asAlarm(MockAlarms[17]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-card-content > .alarm-name');
@@ -73,7 +73,7 @@ describe('AlarmCardComponent', () => {
 
   it('should display the color of the alarms according to each alarm properties', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
@@ -82,7 +82,7 @@ describe('AlarmCardComponent', () => {
 
   it('should display the shelved alarms accordingly', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       component.alarm.shelve();
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -96,7 +96,7 @@ describe('AlarmCardComponent', () => {
 
   describe('should have a method to determine if the alarm must be shown as acknoledged or not', () => {
     it('based on the alarm ack value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.alarm.ack = true;
       expect(component.showAsPendingAck()).toEqual(false);
       component.alarm.ack = false;
@@ -105,7 +105,7 @@ describe('AlarmCardComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.alarm.ack = true;
       expect(component.showAsPendingAck()).toEqual(false);
       component.alarm.ack = false;
@@ -115,7 +115,7 @@ describe('AlarmCardComponent', () => {
 
   describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
     it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.alarm.shelved = false;
       expect(component.showAsShelved()).toEqual(false);
       component.alarm.shelved = true;
@@ -124,7 +124,7 @@ describe('AlarmCardComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.alarm.shelved = false;
       expect(component.showAsShelved()).toEqual(false);
       component.alarm.shelved = true;
@@ -133,7 +133,7 @@ describe('AlarmCardComponent', () => {
   });
 
   it('should show the action badges images when the showActionBadges is true (by default)', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-card-badges');
     const images = badges.querySelectorAll('img');
@@ -142,7 +142,7 @@ describe('AlarmCardComponent', () => {
 
   it('should not show the action badges images when the showActionBadges is false', () => {
     component.showActionBadges = false;
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-card-badges');
     const images = badges.querySelectorAll('img');
@@ -150,7 +150,7 @@ describe('AlarmCardComponent', () => {
   });
 
   it('should turn on/off the badges according to the ack and shelve values', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.alarm.ack = true;
     component.alarm.shelved = false;
     fixture.detectChanges();

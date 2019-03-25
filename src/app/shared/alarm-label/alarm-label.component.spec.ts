@@ -27,14 +27,14 @@ describe('AlarmLabelComponent: ', () => {
   });
 
   it('should get an auxiliary text for the priority of a cleared alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[4]);
+    component.alarm = Alarm.asAlarm(MockAlarms[4]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector('.priority-text');
     expect(content.innerHTML).toEqual('CLEARED');
   });
 
   it('should get an uppercase text for the priority of a set low alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[3]);
+    component.alarm = Alarm.asAlarm(MockAlarms[3]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector('.priority-text');
     const styles = window.getComputedStyle(content);
@@ -43,7 +43,7 @@ describe('AlarmLabelComponent: ', () => {
   });
 
   it('should get an uppercase text for the priority of a set medium alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[2]);
+    component.alarm = Alarm.asAlarm(MockAlarms[2]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector('.priority-text');
     const styles = window.getComputedStyle(content);
@@ -52,7 +52,7 @@ describe('AlarmLabelComponent: ', () => {
   });
 
   it('should get an uppercase text for the priority of a set high alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[1]);
+    component.alarm = Alarm.asAlarm(MockAlarms[1]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector('.priority-text');
     const styles = window.getComputedStyle(content);
@@ -61,7 +61,7 @@ describe('AlarmLabelComponent: ', () => {
   });
 
   it('should get an uppercase text for the priority of a set critical alarm', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector('.priority-text');
     const styles = window.getComputedStyle(content);
@@ -74,7 +74,7 @@ describe('AlarmLabelComponent: ', () => {
     component.noPadding = false;
     const expected_classes = Object.assign({}, expectedClassesWhenShowText);
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
@@ -86,7 +86,7 @@ describe('AlarmLabelComponent: ', () => {
     component.noPadding = false;
     const expected_classes = Object.assign({}, expectedClassesWhenHiddenText);
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
@@ -97,7 +97,7 @@ describe('AlarmLabelComponent: ', () => {
     component.showText = true;
     component.noPadding = true;
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass().indexOf('no-padding')).toBeTruthy();
@@ -108,7 +108,7 @@ describe('AlarmLabelComponent: ', () => {
     component.showText = false;
     component.noPadding = true;
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass().indexOf('no-padding')).toBeTruthy();

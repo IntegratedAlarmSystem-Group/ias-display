@@ -12,13 +12,15 @@ describe('ButtonsComponent', () => {
   let component: ButtonsComponent;
   let fixture: ComponentFixture<ButtonsComponent>;
   const spyRoutingService = jasmine.createSpyObj('RoutingService', ['goToAcknowledge', 'goToShelve']);
-  const mockAlarm = Alarm.getMockAlarm({
+  const mockAlarm = Alarm.asAlarm({
     'value': 4,
     'core_id': 'coreid$1',
     'running_id': 'coreid$1',
     'mode': 5,
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 4],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',

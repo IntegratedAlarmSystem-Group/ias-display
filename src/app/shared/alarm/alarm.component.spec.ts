@@ -32,7 +32,7 @@ describe('AlarmComponent', () => {
   });
 
   it('should create', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     fixture.detectChanges();
@@ -41,7 +41,7 @@ describe('AlarmComponent', () => {
 
   it('should display the icon according to the alarm properties ', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       const value_validity = alarm.core_id.split('_');
@@ -67,7 +67,7 @@ describe('AlarmComponent', () => {
 
   it('should display the text according to the alarm properties ', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       const value_validity = alarm.core_id.split('_');
@@ -91,7 +91,7 @@ describe('AlarmComponent', () => {
 
   it('should display all shelved alarms accordingly ', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.getMockAlarm(alarm);
+      component.alarm = Alarm.asAlarm(alarm);
       component.alarm.shelve();
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
@@ -110,7 +110,7 @@ describe('AlarmComponent', () => {
 
   describe('should have a method to determine if the alarm must be shown as acknoledged or not', () => {
     it('based on the alarm ack value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       component.alarm.ack = true;
@@ -120,7 +120,7 @@ describe('AlarmComponent', () => {
     });
 
     it('that return false when the alarms state_change_timestamp is 0', () => {
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       component.alarm.ack = false;
@@ -133,7 +133,7 @@ describe('AlarmComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       component.alarm.ack = true;
@@ -145,7 +145,7 @@ describe('AlarmComponent', () => {
 
   describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
     it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       component.alarm.shelved = false;
@@ -156,7 +156,7 @@ describe('AlarmComponent', () => {
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+      component.alarm = Alarm.asAlarm(MockAlarms[0]);
       component.images = MockImageSet;
       component.imagesUnreliable = MockImageUnreliableSet;
       component.alarm.shelved = false;
@@ -167,7 +167,7 @@ describe('AlarmComponent', () => {
   });
 
   it('should show the action badges images when the showActionBadges is true (by default)', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     fixture.detectChanges();
@@ -179,7 +179,7 @@ describe('AlarmComponent', () => {
 
   it('should hide the action badges images when the showActionBadges is false', () => {
     component.showActionBadges = false;
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     fixture.detectChanges();
@@ -189,7 +189,7 @@ describe('AlarmComponent', () => {
   });
 
   it('should turn on/off the badges according to the ack and shelve values', () => {
-    component.alarm = Alarm.getMockAlarm(MockAlarms[0]);
+    component.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.images = MockImageSet;
     component.imagesUnreliable = MockImageUnreliableSet;
     component.alarm.ack = true;
