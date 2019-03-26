@@ -3,27 +3,28 @@
   placement="{{tooltipDirection}}"
   [ngbTooltip]="tipContent"
   data-container="body"
+  [ngClass]="blinkingClass"
 >
   <ng-template #tipContent>
     <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
   </ng-template>
 
-  <div fxFlex="10px" class="alarm-header-color" [ngClass]="getClass()"></div>
+  <div fxFlex="10px" class="alarm-header-color" [ngClass]="currentClass"></div>
 
   <div fxLayout="column">
     <div class="alarm-header-name">
-        {{this.getAlarmName()}}
+        {{this.alarmName}}
     </div>
-    <div [ngClass]="blinkingClass">
+    <div>
       <app-alarm-label [alarm]="alarm" [showText]="false" [size]="'md'"></app-alarm-label>
     </div>
   </div>
 
 
-  <div fxLayout="row" class="alarm-header-badges" [ngClass]="blinkingClass">
+  <div fxLayout="row" class="alarm-header-badges">
     <div class="badges" *ngIf="showActionBadges">
 
-      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
+      <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>
       <ng-template #ackOn>
         <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
       </ng-template>
@@ -31,7 +32,7 @@
         <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
       </ng-template>
 
-      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
+      <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>
       <ng-template #shelvedOn>
         <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
       </ng-template>

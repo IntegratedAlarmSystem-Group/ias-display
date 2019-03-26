@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -9,7 +9,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
   templateUrl: './alarm-header.component.html',
   styleUrls: ['./alarm-header.component.scss']
 })
-export class AlarmHeaderComponent implements OnInit {
+export class AlarmHeaderComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -48,6 +48,29 @@ export class AlarmHeaderComponent implements OnInit {
   blinkingClass = '';
 
   /**
+  * Contains the current classes for displaying the component.
+  * The first element contains a reference for the size, and the second contains the blinking status
+  */
+  currentClass = [];
+
+  /**
+   * Defines wether or not the alarm must be displayed with the pending ack badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsPendingAck = false;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the shelved badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsShelved = false;
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName = '';
+
+  /**
   * Builds a new instance
   * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
@@ -59,6 +82,23 @@ export class AlarmHeaderComponent implements OnInit {
    * Method executed when the component is initiated
    */
   ngOnInit() {
+  }
+
+  /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.showActionBadges && changes.showActionBadges.previousValue !== changes.showActionBadges.currentValue) {
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.alarmName = this.getAlarmName();
+      this.currentClass = this.getClass();
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
   }
 
   /**
@@ -114,22 +154,6 @@ export class AlarmHeaderComponent implements OnInit {
     }
     result.push(this.blinkingClass);
     return result;
-  }
-
-  /**
-  * Defines wether or not the component should indicate that the alarm has a pending acknowledgement
-  * @returns {boolean} true if the alarm has pending acknowledgement, false if not
-  */
-  showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
-  }
-
-  /**
-  * Defines wether or not the component should indicate that the alarm is shelved
-  * @returns {boolean} true if the alarm is shelved, false if not
-  */
-  showAsShelved(): boolean {
-    return this.showActionBadges && this.alarm != null && this.alarm.shelved;
   }
 
   /**
