@@ -114,9 +114,6 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
     this.blinkingTimer = this._startTimer(blinkTime).subscribe( () => {
       this.stopAnimation();
     });
-    // this.blinkingTimer = interval(blinkTime).subscribe( () => {
-    //   this.stopAnimation();
-    // });
   }
 
 
@@ -126,7 +123,6 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   public stopAnimation(): void {
     this.blinkingStatus.emit(false);
     this._stopTimer();
-    // this.blinkingTimer.unsubscribe();
   }
 
   /**
