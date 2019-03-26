@@ -53,6 +53,9 @@ export class WeatherService {
   /** Variable to check if pads status is available */
   public padsStatusAvailable = new BehaviorSubject<any>(false);
 
+  /** Variable to check if weather stations config is available */
+  public weatherStationsConfigAvailable = new BehaviorSubject<any>(false);
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
@@ -145,6 +148,7 @@ export class WeatherService {
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
       this.weatherStationsConfig = response as AlarmConfig[];
+      this.weatherStationsConfigAvailable.next(true);
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
       this.weatherSummaryConfig = response as AlarmConfig[];
