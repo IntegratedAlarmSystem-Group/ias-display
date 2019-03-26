@@ -484,7 +484,7 @@ export class AlarmService {
    * @param {Alarm} alarm the {@link Alarm}
    */
   playAlarmSound(alarm: Alarm) {
-    if (!this.canSound) {
+    if (!this.canSound || alarm.shelved) {
       return;
     }
     const repeat = alarm.shouldRepeat();
