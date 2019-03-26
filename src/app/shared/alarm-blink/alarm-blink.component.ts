@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { Alarm } from '../../data/alarm';
 
 @Component({
@@ -54,6 +54,9 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
     }
 
     if (this.alarm) {
+      if (this.alarm.shelved) {
+        return;
+      }
       const currentTime = (new Date).getTime();
       const lastChange = this.alarm.value_change_timestamp;
       const timeDiff = currentTime - lastChange;
@@ -68,19 +71,36 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
 
       let previousAlarmValue = 0;
       let currentAlarmValue: number = this.alarm.value;
+      let previousAlarmAck = false;
+      let currentAlarmAck: boolean = this.alarm.ack;
 
       if (changes.alarm.previousValue) {
         previousAlarmValue = changes.alarm.previousValue.value;
         currentAlarmValue = changes.alarm.currentValue.value;
+        previousAlarmAck = changes.alarm.previousValue.ack;
+        currentAlarmAck = changes.alarm.currentValue.ack;
       }
 
-      // clear to set transition
-      if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-        this.startAnimation(blinkInterval);
+      // unack to ack
+      if ( !previousAlarmAck  && currentAlarmAck ) {
+        this.stopAnimation();
+        return;
       }
+
       // set to clear transition
       if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
         this.stopAnimation();
+        return;
+      }
+      // clear to set transition
+      if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
+        this.startAnimation(blinkInterval);
+        return;
+      }
+      // set to different priority transition
+      if ( (previousAlarmValue > 0) && (currentAlarmValue > 0) && (previousAlarmValue !== currentAlarmValue)) {
+        this.startAnimation(blinkInterval);
+        return;
       }
     }
   }
@@ -91,17 +111,36 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   */
   public startAnimation(blinkTime: number): void {
     this.blinkingStatus.emit(true);
-    this.blinkingTimer = interval(blinkTime).subscribe( () => {
+    this.blinkingTimer = this._startTimer(blinkTime).subscribe( () => {
       this.stopAnimation();
     });
+    // this.blinkingTimer = interval(blinkTime).subscribe( () => {
+    //   this.stopAnimation();
+    // });
   }
+
 
   /**
   * Method to go to the normal state to stop the animation
   */
   public stopAnimation(): void {
     this.blinkingStatus.emit(false);
-    this.blinkingTimer.unsubscribe();
+    this._stopTimer();
+    // this.blinkingTimer.unsubscribe();
   }
 
+  /**
+  * Internal method to start the timer for the animation
+  * @param {number} time the time in milliseconds after which the timer should finish
+  */
+  _startTimer(time: number): Observable<any> {
+    return interval(time);
+  }
+
+  /**
+  * Internal method to stop (unsubscribe from) the timer
+  */
+  _stopTimer(): void {
+    this.blinkingTimer.unsubscribe();
+  }
 }
