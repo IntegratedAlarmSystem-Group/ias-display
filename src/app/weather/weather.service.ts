@@ -156,6 +156,28 @@ export class WeatherService {
   }
 
   /**
+  * Method to obtain a flattened configuration list
+  */
+  getFlattennedList(configInput: any) {
+    const flattennedList = [];
+    const configItems = [];
+    // first level configurations
+    for (const config of configInput) {
+      flattennedList.push(config.alarm_id);
+      configItems.push(config);
+    }
+    // other configurations
+    while (configItems.length > 0) {
+      const config = configItems.pop();
+      for (const e of config.children) {
+        flattennedList.push(e.alarm_id);
+        configItems.push(e);
+      }
+    }
+    return flattennedList;
+  }
+
+  /**
   * Define the alarms that the component should listen to and their respective icons
   */
   loadImages() {

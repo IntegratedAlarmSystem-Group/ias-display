@@ -10,7 +10,7 @@ import { mockWeatherStationsConfig, mockWeatherSummaryConfig, mockImagesSets} fr
 import { BackendUrls } from '../settings';
 
 
-describe('WeatherService', () => {
+fdescribe('WeatherService', () => {
   let subject: WeatherService;
   let httpClient: HttpClientService;
 
@@ -108,6 +108,19 @@ describe('WeatherService', () => {
     expect(httpClient.get).toHaveBeenCalled();
     expect(httpClient.get).toHaveBeenCalledWith(padsStatusUrl + group);
     expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
+  });
+
+  it('should be able to get a flattenned list of alarm configurations', () => {
+    const mockConfig = [
+      {
+        'alarm_id': 'WSAlarm', 'children': [
+          {'alarm_id': 'WSAlarmOne', children: []},
+          {'alarm_id': 'WSAlarmTwo', children: []},
+        ]
+      }
+    ];
+    const flattenedList = subject.getFlattennedList(mockConfig);
+    expect(flattenedList).toEqual(['WSAlarm', 'WSAlarmOne', 'WSAlarmTwo']);
   });
 
 });
