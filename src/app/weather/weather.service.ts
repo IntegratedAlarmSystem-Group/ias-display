@@ -103,9 +103,6 @@ export class WeatherService {
               } else {
                 if (alarmChange) {
                   this.updateAntennasRelationMapsAndAlarmPriorities(alarmChange);
-                  console.log(this.alarmIdToAffectedAntennasMap);
-                  console.log(this.affectedAntennasToAlarmIdsMap);
-                  console.log(this.affectedAntennaHighPriorityAlarm);
                 }
               }
             }
@@ -124,16 +121,20 @@ export class WeatherService {
       for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
         this.updateAntennasRelationMaps(alarmId);
       }
-      for (const antenna of Object.keys(this.affectedAntennasToAlarmIdsMap)) {
-        this.updateAntennaHighPriorityAlarm(antenna);
-      }
+      this.updateAllAntennaHighPriorityMap();
     } else {
-      const alarmId = alarmChange;
-      if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(alarmId) > 0) {
-        for (let i = 0; i < this.alarmIdToAffectedAntennasMap[alarmId]; i++) {
-          const antenna = this.alarmIdToAffectedAntennasMap[alarmId];
-          this.updateAntennaHighPriorityAlarm(antenna);
+      for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
+        this.updateAntennasRelationMaps(alarmId);
+      }
+      const selectedAlarmId = alarmChange;
+      if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(selectedAlarmId) > 0) {
+        const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
+        for (let i = 0; i < this.alarmIdToAffectedAntennasMap[selectedAlarmId]; i++) {
+          const antenna = this.alarmIdToAffectedAntennasMap[selectedAlarmId];
+          const highAlarm = this.getAntennaHighPriorityAlarm(antenna);
+          localMap[antenna] = highAlarm;
         }
+        this.affectedAntennaHighPriorityAlarm = localMap;
       }
     }
   }
@@ -248,9 +249,18 @@ export class WeatherService {
     for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
       this.updateAntennasRelationMaps(alarmId);
     }
+    this.updateAllAntennaHighPriorityMap();
+  }
+
+  /**
+  * Update affected antennas high priority alarms
+  */
+  updateAllAntennaHighPriorityMap() {
+    const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
     for (const antenna of Object.keys(this.affectedAntennasToAlarmIdsMap)) {
-      this.updateAntennaHighPriorityAlarm(antenna);
+      localMap[antenna] = this.getAntennaHighPriorityAlarm(antenna);
     }
+    this.affectedAntennaHighPriorityAlarm = localMap;
   }
 
   /**
@@ -285,9 +295,9 @@ export class WeatherService {
   }
 
   /**
-  * Update antenna high priority alarm
+  * Get antenna high priority alarm
   */
-  updateAntennaHighPriorityAlarm(antenna: string) {
+  getAntennaHighPriorityAlarm(antenna: string) {
     if (Object.keys(this.affectedAntennasToAlarmIdsMap).indexOf(antenna) > -1) {
       const alarmIds = this.affectedAntennasToAlarmIdsMap[antenna];
       const alarms = alarmIds.map(
@@ -295,7 +305,9 @@ export class WeatherService {
       );
       alarms.sort((a: Alarm, b: Alarm) => a.value < b.value ? 1 : a.value > b.value ? -1 : 0);
       const highPriorityAlarm = alarms[0];
-      this.affectedAntennaHighPriorityAlarm[antenna] = highPriorityAlarm;
+      return highPriorityAlarm;
+    } else {
+      return null;
     }
   }
 

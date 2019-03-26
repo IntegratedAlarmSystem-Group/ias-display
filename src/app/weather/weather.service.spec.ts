@@ -210,11 +210,9 @@ describe('WeatherService', () => {
     subject.updateAntennasRelationMaps('WSAlarmOne');
     subject.updateAntennasRelationMaps('WSAlarmTwo');
     subject.updateAntennasRelationMaps('WSAlarmThree');
-    subject.updateAntennaHighPriorityAlarm('A02');
-    expect(subject.affectedAntennaHighPriorityAlarm['A02'].core_id).toEqual(
-      mockAlarmTwo.core_id);
-    expect(subject.affectedAntennaHighPriorityAlarm['A02'].value).toEqual(
-      mockAlarmTwo.value);
+    const highAlarm = subject.getAntennaHighPriorityAlarm('A02');
+    expect(highAlarm.core_id).toEqual(mockAlarmTwo.core_id);
+    expect(highAlarm.value).toEqual(mockAlarmTwo.value);
   });
 
 });
