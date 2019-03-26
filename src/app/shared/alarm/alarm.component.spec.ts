@@ -11,7 +11,7 @@ import { Alarm } from '../../data/alarm';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
-fdescribe('AlarmComponent', () => {
+describe('AlarmComponent', () => {
   let hostComponent: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let component: AlarmComponent;
