@@ -188,6 +188,36 @@ describe('WeatherSidebarComponent', () => {
           }
         }
       });
+
+      it('Each panel contains a button to copy the names of affected antennas', () => {
+        sidebarComponent.affectedAntennas = ['ANT1'];
+        sidebarComponent.groupHasAffectedAntennas = {
+          'group1': true,
+          'group2': false,
+        };
+        const mockAffectedAntennas = {
+          'group1': ['ANT1'],
+          'group2': []
+        };
+        fixture.detectChanges();
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const expectedAntennas = mockAffectedAntennas[mockWeatherStationsConfig[i].group];
+            const panel = panels[i];
+            if (expectedAntennas.length > 0) {
+              const button = panel.nativeElement.querySelector('.copy-affected-antennas-button');
+              expect(button).toBeTruthy();
+              button.click();
+              expect(clipboardService.copyFromContent).toHaveBeenCalledWith(expectedAntennas.join(','));
+            } else {
+              const button = panel.nativeElement.querySelector('.copy-affected-antennas-button');
+              expect(button).toBeNull();
+            }
+          }
+        }
+      });
+
     });
 
   });

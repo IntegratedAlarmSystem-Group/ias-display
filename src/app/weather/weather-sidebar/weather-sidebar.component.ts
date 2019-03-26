@@ -4,6 +4,8 @@ import { ClipboardService } from 'ngx-clipboard';
 import { AlarmService } from '../../data/alarm.service';
 import { AlarmConfig } from '../../data/alarm-config';
 import { WeatherService } from '../weather.service';
+import { SubscriptionLike as ISubscription } from 'rxjs';
+
 
 /**
 * Component used to display Weather Alarms in an interactive sidebar
@@ -20,6 +22,17 @@ export class WeatherSidebarComponent implements OnInit {
 
   /** Event emitted to notify when an weather station is selected */
   @Output() panelClicked = new EventEmitter<AlarmConfig>();
+
+  /**
+   * Subscription to changes in alarms related to affected antennas
+   */
+  affectedAntennasSubscription: ISubscription;
+
+  /** List of affected antennas by some alarm */
+  affectedAntennas: string[];
+
+  /** Map to detect the presence of affected antennas */
+  groupHasAffectedAntennas = {};
 
   /**
   * Builds an instance of the component
@@ -41,6 +54,19 @@ export class WeatherSidebarComponent implements OnInit {
   */
   ngOnInit() {
     this.weatherService.initialize();
+    this.affectedAntennasSubscription = this.weatherService.affectedAntennasUpdate
+      .subscribe((update) => {
+        if (update === true) {
+          this.affectedAntennas = Object.keys(
+            this.weatherService.affectedAntennaHighPriorityAlarm);
+            for (const stationConfig of this.weatherService.weatherStationsConfig) {
+              this.groupHasAffectedAntennas[stationConfig.group] = (
+                this.getAffectedAntennas(stationConfig).length > 0
+              );
+            }
+        }
+      }
+    );
   }
 
   /**
@@ -50,6 +76,25 @@ export class WeatherSidebarComponent implements OnInit {
   */
   copyAntennas(stationConfig: AlarmConfig): boolean {
     const antennas = this.getAntennas(stationConfig);
+    const result = antennas.join(',');
+    const status = this.clipboardService.copyFromContent(result);
+    let message = '';
+    if (status) {
+      message = 'Antennas copied to clipboard';
+    } else {
+      message = 'ERROR: Antennas were not copied!';
+    }
+    this.openSnackBar(message, 'Done');
+    return status;
+  }
+
+  /**
+  * Copy list of affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {boolean} true if the data was copied to the clipboard, false if not
+  */
+  copyAffectedAntennas(stationConfig: AlarmConfig): boolean {
+    const antennas = this.getAffectedAntennas(stationConfig);
     const result = antennas.join(',');
     const status = this.clipboardService.copyFromContent(result);
     let message = '';
@@ -77,6 +122,19 @@ export class WeatherSidebarComponent implements OnInit {
             }
         }
     }
+    return response.sort();
+  }
+
+  /**
+  * Return list of affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getAffectedAntennas(stationConfig: AlarmConfig): string[] {
+    const stationAntennas = this.getAntennas(stationConfig);
+    const allAffectedAntennas = this.affectedAntennas;
+    const response = allAffectedAntennas.filter(
+      value => stationAntennas.indexOf(value) > -1);
     return response.sort();
   }
 

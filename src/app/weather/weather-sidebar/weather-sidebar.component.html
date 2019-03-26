@@ -47,7 +47,10 @@
           <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">
             <div class="antennas-title"> Nearby Antennas </div>
             <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">
-              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>
+              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy all </span>
+            </button>
+            <button *ngIf="groupHasAffectedAntennas[stationConfig.group]" mat-button color="accent" class="copy-affected-antennas-button" (click)="copyAffectedAntennas(stationConfig)">
+              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy affected </span>
             </button>
           </div>
           <div class="antennas-list">
