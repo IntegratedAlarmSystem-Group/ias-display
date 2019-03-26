@@ -50,7 +50,6 @@ export class AlarmCardComponent implements OnInit, OnChanges {
 
   /**
   * Contains the current classes for displaying the component.
-  * The first element contains a reference for the size, and the second contains the blinking status
   */
   currentClass = [];
 
