@@ -8,7 +8,7 @@
 <ng-template #alarmBottonTag>
 
   <div
-    [ngClass]="this.getClass()"
+    [ngClass]="this.currentClass"
     fxLayout="row"
     placement="{{tooltipDirection}}"
     [ngbTooltip]="tipContent"
@@ -22,14 +22,14 @@
       <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>
 
       <ng-template #textAlarm>
-        <div [ngClass]="this.getTextClass()">
+        <div [ngClass]="this.currentTextClass">
           {{this.text}}
         </div>
       </ng-template>
 
       <ng-template #iconAlarm>
         <div class="icon">
-          <img class="alarm-icon" src="{{ getImage() }}"/>
+          <img class="alarm-icon" src="{{ this.currentImage }}"/>
         </div>
       </ng-template>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div class="badges" [ngClass]="{'hidden': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">
-      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
+      <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>
       <ng-template #ackOn>
         <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
       </ng-template>
@@ -52,7 +52,7 @@
         <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
       </ng-template>
 
-      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
+      <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>
       <ng-template #shelvedOn>
         <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
       </ng-template>
@@ -70,7 +70,7 @@
 <ng-template #alarmRightTag>
 
   <div
-    [ngClass]="this.getClass()"
+    [ngClass]="this.currentClass"
     fxLayout="row"
     placement="{{tooltipDirection}}"
     [ngbTooltip]="tipContent"
@@ -90,19 +90,19 @@
     </div>
 
     <ng-template #textAlarm>
-      <div [ngClass]="this.getTextClass()">
+      <div [ngClass]="this.currentTextClass">
         {{this.text}}
       </div>
     </ng-template>
 
     <ng-template #iconAlarm>
       <div class="icon">
-        <img class="alarm-icon" src="{{ getImage() }}"/>
+        <img class="alarm-icon" src="{{ this.currentImage }}"/>
       </div>
     </ng-template>
 
     <div class="badges" [ngClass]="{'hidden': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">
-      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
+      <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>
       <ng-template #ackOn>
         <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>
       </ng-template>
@@ -110,7 +110,7 @@
         <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>
       </ng-template>
 
-      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
+      <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>
       <ng-template #shelvedOn>
         <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>
       </ng-template>
