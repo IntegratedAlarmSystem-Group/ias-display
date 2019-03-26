@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
@@ -11,7 +11,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
   templateUrl: './alarm-tile.component.html',
   styleUrls: ['./alarm-tile.component.scss'],
 })
-export class AlarmTileComponent implements OnInit {
+export class AlarmTileComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -80,6 +80,16 @@ export class AlarmTileComponent implements OnInit {
   tooltipDirectionOptions = ['right', 'left'];
 
   /**
+  * Contains the current classes for displaying the component.
+  */
+  currentClass = [];
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName = '';
+
+  /**
   * Builds a new instance
   * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
@@ -105,23 +115,14 @@ export class AlarmTileComponent implements OnInit {
   }
 
   /**
-  * Returns the name of the alarm that should be displayed in the header.
-  * If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
-  * If not, the alarm ID is displayed
-  * In any case, the name is shortened to a maximum length defined by the {@link alarmNameMaxSize}
-  * @returns {string} name to display
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
-  getAlarmName(): string {
-    let alarmName = '';
-    if (this.optionalAlarmName) {
-      alarmName = this.optionalAlarmName;
-    } else if (this.alarm && !this.optionalAlarmName) {
-        alarmName = this.alarm.core_id;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.alarmName = this.getAlarmName();
+      this.currentClass = this.getClass();
     }
-    if (alarmName.length > this.alarmNameMaxSize) {
-      alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
-    }
-    return alarmName;
   }
 
   /**
@@ -139,7 +140,28 @@ export class AlarmTileComponent implements OnInit {
     } else {
       this.targetAnimationState = 'tile-background-normal';
     }
+    this.currentClass = this.getClass();
     this.cdRef.detectChanges();
+  }
+
+  /**
+  * Returns the name of the alarm that should be displayed in the header.
+  * If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
+  * If not, the alarm ID is displayed
+  * In any case, the name is shortened to a maximum length defined by the {@link alarmNameMaxSize}
+  * @returns {string} name to display
+  */
+  getAlarmName(): string {
+    let alarmName = '';
+    if (this.optionalAlarmName) {
+      alarmName = this.optionalAlarmName;
+    } else if (this.alarm && !this.optionalAlarmName) {
+        alarmName = this.alarm.core_id;
+    }
+    if (alarmName.length > this.alarmNameMaxSize) {
+      alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
+    }
+    return alarmName;
   }
 
   /**

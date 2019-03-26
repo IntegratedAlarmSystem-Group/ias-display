@@ -9,9 +9,9 @@
     <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
   </ng-template>
 
-  <div class="alarm-card" [ngClass]="getClass()">
+  <div class="alarm-card" [ngClass]="currentClass">
     <div fxFlex="auto" class="alarm-card-content">
-      <div class="alarm-name">{{this.getAlarmName()}}</div>
+      <div class="alarm-name">{{this.alarmName}}</div>
       <div class="alarm-priority">
         <app-alarm-label
           [alarm]="alarm"
@@ -24,7 +24,7 @@
 
       <div class="badges" *ngIf="showActionBadges">
 
-        <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>
+        <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>
         <ng-template #ackOn>
           <img class="badge-icon ack-icon"  src="/assets/img/ack-on.svg"/>
         </ng-template>
@@ -32,7 +32,7 @@
           <img class="badge-icon ack-icon badge-off"  src="/assets/img/ack-on.svg"/>
         </ng-template>
 
-        <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>
+        <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>
         <ng-template #shelvedOn>
           <img class="badge-icon shelve-icon"  src="/assets/img/unshelve.svg"/>
         </ng-template>

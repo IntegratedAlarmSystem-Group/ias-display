@@ -1,5 +1,6 @@
-import { By } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmComponent } from '../alarm/alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
@@ -8,6 +9,7 @@ import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { AlarmTileComponent } from './alarm-tile.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
+import { AlarmImageSet } from '../alarm/alarm.component';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
 const expected_base_classes = {
@@ -35,8 +37,9 @@ const expected_base_classes = {
 
 
 describe('AlarmTileComponent', () => {
+  let hostComponent: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
   let component: AlarmTileComponent;
-  let fixture: ComponentFixture<AlarmTileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,6 +49,7 @@ describe('AlarmTileComponent', () => {
         AlarmComponent,
         AlarmTooltipComponent,
         AlarmBlinkComponent,
+        TestHostComponent,
         PropsTableComponent
       ],
       imports: [ NgbModule ]
@@ -54,11 +58,17 @@ describe('AlarmTileComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmTileComponent);
-    component = fixture.componentInstance;
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
-    component.images = MockImageSet;
-    component.imagesUnreliable = MockImageUnreliableSet;
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+    const mockAlarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent = fixture.componentInstance;
+    hostComponent.alarm = mockAlarm;
+    hostComponent.images = MockImageSet;
+    hostComponent.imagesUnreliable = MockImageUnreliableSet;
+    component = fixture
+      .debugElement.query(By.directive(AlarmTileComponent))
+      .componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -67,7 +77,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a title with the name of the alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-tile-content > .title');
@@ -77,7 +87,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a shortened title for a long name of the alarm', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[17]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[17]);
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
       '.alarm-tile-content > .title');
@@ -87,7 +97,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a title with the optional name if provided', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
     component.optionalAlarmName = 'my alarm';
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
@@ -98,7 +108,7 @@ describe('AlarmTileComponent', () => {
   });
 
   it('should display a shortened title for a long optional name', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[17]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[17]);
     component.optionalAlarmName = 'this is a large title for the tile';
     fixture.detectChanges();
     const content = fixture.nativeElement.querySelector(
@@ -191,5 +201,23 @@ describe('AlarmTileComponent: AlarmComponent', () => {
       }
     }
   });
-
 });
+
+/**
+ * Mock host component for the alarm tile to check behaviour on change
+ */
+@Component({
+  selector: 'app-host',
+  template: `
+    <app-alarm-tile
+      [alarm]="this.alarm"
+      [images]="this.images"
+      [imagesUnreliable]="this.imagesUnreliable"
+    ></app-alarm-tile>
+  `,
+})
+class TestHostComponent {
+  alarm: Alarm;
+  images: AlarmImageSet = MockImageSet;
+  imagesUnreliable: AlarmImageSet = MockImageUnreliableSet;
+}

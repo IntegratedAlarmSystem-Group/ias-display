@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -108,9 +108,33 @@ export class AlarmComponent implements OnInit, OnChanges {
   @Output() blinkingStatus = new EventEmitter<boolean>();
 
   /**
-  * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
+  * Contains the current classes for displaying the component.
+  * The first element contains a reference for the size, and the second contains the blinking status
   */
-  blinkingClass = '';
+  currentClass = ['alarm-component-md', ''];
+
+  /**
+  * Contains the current classes for displaying the component if it is a text alarm.
+  * The first element contains a reference for the size, and the second contains the blinking status
+  */
+  currentTextClass: string[] = null;
+
+  /**
+  * Contains the current image to display in the component
+  */
+  currentImage: string = null;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the pending ack badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsPendingAck = false;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the shelved badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsShelved = false;
 
   /**
    * Available sizes for the alarm componet
@@ -137,6 +161,7 @@ export class AlarmComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
+      this.currentClass[0] = 'alarm-component-md';
     }
     if (this.labelLocationOptions.indexOf(this.labelLocation) < 0) {
       this.labelLocation = 'right';
@@ -144,9 +169,23 @@ export class AlarmComponent implements OnInit, OnChanges {
   }
 
   /**
-  * Executed when one of the component's inputs is changing
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.size && changes.size.previousValue !== changes.size.currentValue) {
+      this.currentClass[0] = 'alarm-component-' + this.size;
+    }
+    if (changes.showActionBadges && changes.showActionBadges.previousValue !== changes.showActionBadges.currentValue) {
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.currentImage = this.getImage();
+      this.currentTextClass = this.getTextClass();
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
   }
 
   /**
@@ -161,20 +200,11 @@ export class AlarmComponent implements OnInit, OnChanges {
       return;
     }
     if (blinking) {
-      this.blinkingClass = 'blinking';
+      this.currentClass[1] = 'blinking';
     } else {
-      this.blinkingClass = '';
+      this.currentClass[1] = '';
     }
     this.cdRef.detectChanges();
-  }
-
-  /**
-   * Returns the style class name based on the optional input size. By default
-   * the class is medium size.
-   * @return {string[]} style class name
-   */
-  getClass(): string[] {
-    return ['alarm-component-' + this.size, this.blinkingClass];
   }
 
   /**
@@ -182,6 +212,9 @@ export class AlarmComponent implements OnInit, OnChanges {
   * @return {string} url of the image
   */
   getImage(): string {
+    if (this.isTextAlarm()) {
+      return null;
+    }
     if (!this.alarm) {
       return this.imagesUnreliable.unknown;
     }
@@ -208,10 +241,6 @@ export class AlarmComponent implements OnInit, OnChanges {
     } else {
       return this.imagesUnreliable.unknown;
     }
-  }
-
-  getCorrectedText(): string {
-    return this.text.replace(' ', '&nbsp;');
   }
 
   /**
@@ -262,33 +291,11 @@ export class AlarmComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Check if the alarm must be displayed with the pending ack badge activated
-   * @return {boolean} True if the pending ack must be activated, false if it must not
-   */
-  showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
-  }
-
-  /**
-   * Check if the alarm must be displayed with the shelve badge activated
-   * @return {boolean} True if the alarm is shelved, false if it is not
-   */
-  showAsShelved(): boolean {
-    return this.showActionBadges && this.alarm != null && this.alarm.shelved;
-  }
-
-  /**
    * Check if the alarm should display the priority text in the related label
    * @return {boolean} True if mode is 'text' else False
    */
-   showPriorityLevelText(): boolean {
-     if (this.labelMode === 'text') {
-       return true;
-     } else if (this.labelMode === 'line') {
-       return false;
-     } else {
-       return false;
-     }
-   }
+  showPriorityLevelText(): boolean {
+    return this.labelMode === 'text';
+  }
 
 }

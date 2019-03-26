@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Alarm, Value } from '../../data/alarm';
 
 
@@ -10,7 +10,7 @@ import { Alarm, Value } from '../../data/alarm';
   templateUrl: './alarm-label.component.html',
   styleUrls: ['./alarm-label.component.scss']
 })
-export class AlarmLabelComponent implements OnInit {
+export class AlarmLabelComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -48,6 +48,26 @@ export class AlarmLabelComponent implements OnInit {
   sizeOptions = ['xs', 'sm', 'md', 'lg'];
 
   /**
+  * Contains the current classes for displaying the component.
+  */
+  currentClass = [];
+
+  /**
+  * Contains the current class for the for displaying size
+  */
+  currentSizeClass: string = null;
+
+  /**
+  * The text that will display the priority of the alarm
+  */
+  priorityText = '';
+
+  /**
+  * The class used to display the priority of the alarm
+  */
+  priorityTextClass = [];
+
+  /**
   * Builds a new instance
   */
   constructor() { }
@@ -64,18 +84,23 @@ export class AlarmLabelComponent implements OnInit {
     }
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
+      this.currentSizeClass = 'alarm-label-md';
     }
   }
 
   /**
-  * Returns a string related to the name of the alarm priority
-  * @returns {string} alarm prioritity name for the display
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
-  getPriorityText(): string {
-    const alarmValue: string = this.alarm.alarmValue;
-    const priorityText: string = alarmValue
-      .replace('set_', '');
-    return priorityText.toUpperCase();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.size && changes.size.previousValue !== changes.size.currentValue) {
+      this.currentSizeClass = 'alarm-label-' + this.size;
+    }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.currentClass = this.getClass();
+      this.priorityText = this.getPriorityText();
+      this.priorityTextClass = this.getPriorityTextClass();
+    }
   }
 
   /**
@@ -116,6 +141,20 @@ export class AlarmLabelComponent implements OnInit {
       result.push('hide-text');
     }
     return result;
+  }
+
+  /**
+  * Returns a string related to the name of the alarm priority
+  * @returns {string} alarm prioritity name for the display
+  */
+  getPriorityText(): string {
+    if ( !this.alarm ) {
+      return '';
+    }
+    const alarmValue: string = this.alarm.alarmValue;
+    const priorityText: string = alarmValue
+      .replace('set_', '');
+    return priorityText.toUpperCase();
   }
 
   /**

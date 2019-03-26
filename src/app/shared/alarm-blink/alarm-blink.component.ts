@@ -46,7 +46,7 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
 
   /**
   * Method to handle the changes on the alarm values
-  * @param {SimpleChanges} changes Object containing the changes in the Inouts of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
   ngOnChanges(changes: SimpleChanges) {
     if (this.disableBlink) {
