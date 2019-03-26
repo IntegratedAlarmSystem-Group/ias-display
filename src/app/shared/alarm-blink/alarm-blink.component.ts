@@ -141,6 +141,8 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   * Internal method to stop (unsubscribe from) the timer
   */
   _stopTimer(): void {
-    this.blinkingTimer.unsubscribe();
+    if (this.blinkingTimer) {
+      this.blinkingTimer.unsubscribe();
+    }
   }
 }
