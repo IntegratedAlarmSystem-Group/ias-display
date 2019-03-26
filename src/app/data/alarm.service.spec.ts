@@ -164,6 +164,154 @@ const alarmsFromWebServer = [  // mock alarm messages from webserver
 }
 ];
 
+const shelvedAlarmsFromWebServer = [  // mock alarm messages from webserver
+  {  // same alarm, different actions
+  'stream': 'alarms',
+  'payload': {
+    'action': 'create',
+    'data': {
+      'value': 0,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': 0,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 0],
+      'validity': 0,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE1',
+      'can_shelve': true,
+      'ack': false,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 1,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 1],
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE1',
+      'can_shelve': true,
+      'ack': false,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE3',
+      'can_shelve': true,
+      'ack': false,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$2',
+      'running_id': 'coreid$2',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE4',
+      'can_shelve': true,
+      'ack': false,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$2',
+      'running_id': 'coreid$2',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE4',
+      'can_shelve': true,
+      'ack': true,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+},
+{
+  'stream': 'alarms',
+  'payload': {
+    'action': 'update',
+    'data': {
+      'value': 4,
+      'core_id': 'coreid$1',
+      'running_id': 'coreid$1',
+      'mode': 1,
+      'core_timestamp': 10000,
+      'state_change_timestamp': 10000,
+      'value_change_timestamp': 0,
+      'value_change_transition': [0, 4],
+      'validity': 1,
+      'description': 'my description',
+      'url': 'https://www.alma.cl',
+      'sound': 'TYPE3',
+      'can_shelve': true,
+      'ack': true,
+      'shelved': true,
+      'dependencies': [],
+    }
+  }
+}
+];
+
 const alarms = [
   {
     'value': 0,
@@ -344,6 +492,69 @@ describe('AlarmService', () => {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
         expect(spyEmitSound).toHaveBeenCalledWith('TYPE1', false);
+        expect(subject.soundingAlarm).toBeUndefined();
+      }
+
+      stage += 1;
+    });
+
+    subject.initialize();
+
+  }));
+
+  it('should update the alarms dictionary on new alarm messages and not play sounds for shelved alarms', async(() => {
+
+    // To use a 2-steps test for alarms messages
+
+    // It is used just one alarm with the following stages:
+    // creation (stage 1) and update (stage 2) actions
+    // from the web Server
+
+    // Arrange:
+    let stage = 0;  // initial state index with no messages from server
+    const fixtureAlarms = [shelvedAlarmsFromWebServer[0], shelvedAlarmsFromWebServer[1]];
+    mockStream = new Server(subject.getConnectionPath());  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarms from server
+      for (const alarm of fixtureAlarms) {
+        mockStream.send(JSON.stringify(alarm));
+      }
+      mockStream.stop();
+    });
+
+    // Act and assert:
+
+    subject.alarmChangeStream.subscribe(notification => {
+      console.log('stage: ', stage);
+      subject.canSound = true;
+      subject.audio = new Audio();
+      const notified_alarms = subject.alarmsArray;
+      if (stage === 0) {  // no messages
+        expect(notified_alarms).toEqual([]);
+        expect(Object.keys(notified_alarms).length).toEqual(0);
+      }
+
+      if (stage === 1) {  // create
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+      }
+
+      if (stage === 2) {  // update
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(spyEmitSound).not.toHaveBeenCalled();
         expect(subject.soundingAlarm).toBeUndefined();
       }
 
