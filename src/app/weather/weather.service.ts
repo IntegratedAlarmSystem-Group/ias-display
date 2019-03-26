@@ -57,6 +57,9 @@ export class WeatherService {
   /** Variable to check if weather stations config is available */
   public weatherStationsConfigAvailable = new BehaviorSubject<any>(false);
 
+  /** Variable to check affected antennas updates */
+  public affectedAntennasUpdate = new BehaviorSubject<any>(false);
+
   /** Variable to manage subscriptions */
   public subscription: ISubscription;
 
@@ -103,6 +106,7 @@ export class WeatherService {
               } else {
                 if (alarmChange) {
                   this.updateAntennasRelationMapsAndAlarmPriorities(alarmChange);
+                  this.affectedAntennasUpdate.next(true);
                 }
               }
             }

@@ -11,6 +11,31 @@
       fill="none"
     />
 
+    <svg:g class="antennas-pads-background">
+
+      <ng-container *ngFor="let group of padsStatusGroupNames">
+
+        <ng-container *ngFor="let pads_item of padsDisplayStatus[group] | keyvalue">
+
+          <ng-container *ngFor="let p of [getPlacemarkObject(pads_item.key)]">
+
+            <svg:circle
+              class="antennas-pad-status-background"
+              [attr.cx]="p.opt_cx"
+              [attr.cy]="p.opt_cy"
+              stroke="currentColor"
+              stroke-width="2"
+              r="5"
+            />
+
+          </ng-container>
+
+        </ng-container>
+
+      </ng-container>
+
+    </svg:g>
+
     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
         <svg:foreignObject *ngIf="p.name === 'AOS'"
              [attr.x]="p.opt_cx-15"
@@ -80,7 +105,7 @@
                      width="80"
                      height="50">
                    <xhtml:app-weather-primary-ws-connector
-                     [coords]="[[8, 36], [30, 2], [80, 2]]"
+                     [coords]="[[0, 32], [30, 2], [80, 2]]"
                      [onHover]="isOnHover(stationConfig)"
                      [selected]="isSelected(stationConfig)">
                    </xhtml:app-weather-primary-ws-connector>
@@ -99,8 +124,8 @@
                      class="fobject"
                      [attr.x]="(p.opt_cx-50) + 125"
                      [attr.y]="(p.opt_cy-50) - 25"
-                     width="210"
-                     height="100">
+                     width="218"
+                     height="64">
                   <xhtml:app-weather-data-marker
                      [stationConfig]="stationConfig"
                      [onHover]="isOnHover(stationConfig)"
