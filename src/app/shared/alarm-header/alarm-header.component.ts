@@ -115,6 +115,7 @@ export class AlarmHeaderComponent implements OnInit, OnChanges {
     } else {
       this.blinkingClass = '';
     }
+    this.currentClass = this.getClass();
     this.cdRef.detectChanges();
   }
 
