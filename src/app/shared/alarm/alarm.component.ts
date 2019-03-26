@@ -176,6 +176,10 @@ export class AlarmComponent implements OnInit, OnChanges {
     if (changes.size && changes.size.previousValue !== changes.size.currentValue) {
       this.currentClass[0] = 'alarm-component-' + this.size;
     }
+    if (changes.showActionBadges && changes.showActionBadges.previousValue !== changes.showActionBadges.currentValue) {
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
     if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
       this.currentImage = this.getImage();
       this.currentTextClass = this.getTextClass();
