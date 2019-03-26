@@ -1,4 +1,5 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
@@ -14,7 +15,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
   templateUrl: './weather-map.component.html',
   styleUrls: ['./weather-map.component.scss']
 })
-export class WeatherMapComponent implements OnInit, OnChanges {
+export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component
@@ -28,6 +29,16 @@ export class WeatherMapComponent implements OnInit, OnChanges {
    * Subscription to changes in alarms related to affected antennas
    */
   affectedAntennasSubscription: ISubscription;
+
+  /**
+   * Subscription to follow changes in the pad status
+   */
+  padStatusSubscription: ISubscription;
+
+  /**
+   * Subscription to follow changes in the map data
+   */
+  mapDataSubscription: ISubscription;
 
   /** Variable to manage a placemark hover */
   onHoverStation: AlarmConfig = null;
@@ -105,12 +116,27 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Executed on component destroy
+   */
+  ngOnDestroy() {
+    if (this.affectedAntennasSubscription) {
+      this.affectedAntennasSubscription.unsubscribe();
+    }
+    if (this.mapDataSubscription) {
+      this.affectedAntennasSubscription.unsubscribe();
+    }
+    if (this.padStatusSubscription) {
+      this.affectedAntennasSubscription.unsubscribe();
+    }
+  }
+
+  /**
    * Component initialization that involves the initialization of the {@link WeatherService}
    * if not already initialized and the initialization of the related map data source
    */
   initialize() {
     this.service.initialize();
-    this.service.getMapData().subscribe((mapdata) => {
+    this.mapDataSubscription = this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       // for (const placemark of mapdata['placemarks']['pads']) {
       //   this.padsFreeStatus[placemark.name] = true;
@@ -136,7 +162,7 @@ export class WeatherMapComponent implements OnInit, OnChanges {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.service.padsStatusAvailable.subscribe(
+    this.padStatusSubscription = this.service.padsStatusAvailable.subscribe(
       (padsStatusFlag) => {
         this.mapdataAvailable.subscribe( (mapStatusFlag) => {
           this.updatedMap.subscribe(
