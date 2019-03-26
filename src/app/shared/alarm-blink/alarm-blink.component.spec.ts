@@ -3,7 +3,7 @@ import { SimpleChange } from '@angular/core';
 import { AlarmBlinkComponent } from './alarm-blink.component';
 import { MockAlarms } from './fixtures';
 
-fdescribe('AlarmBlinkComponent', () => {
+describe('AlarmBlinkComponent', () => {
   let component: AlarmBlinkComponent;
   let fixture: ComponentFixture<AlarmBlinkComponent>;
   let spyStartAnimation: any;
