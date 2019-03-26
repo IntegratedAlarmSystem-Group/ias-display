@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { Alarm, Value, OperationalMode } from '../../data/alarm';
 
 /**
@@ -10,7 +10,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
   templateUrl: './alarm-card.component.html',
   styleUrls: ['./alarm-card.component.scss']
 })
-export class AlarmCardComponent implements OnInit {
+export class AlarmCardComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -49,6 +49,29 @@ export class AlarmCardComponent implements OnInit {
   blinkingClass = '';
 
   /**
+  * Contains the current classes for displaying the component.
+  * The first element contains a reference for the size, and the second contains the blinking status
+  */
+  currentClass = [];
+
+  /**
+   * Defines wether or not the alarm must be displayed with the pending ack badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsPendingAck = false;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the shelved badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsShelved = false;
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName = '';
+
+  /**
   * Builds a new instance
   * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
@@ -60,6 +83,23 @@ export class AlarmCardComponent implements OnInit {
    * Method executed when the component is initiated
    */
   ngOnInit() {
+  }
+
+  /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.showActionBadges && changes.showActionBadges.previousValue !== changes.showActionBadges.currentValue) {
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.alarmName = this.getAlarmName();
+      this.currentClass = this.getClass();
+      this.showAsPendingAck = this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
+      this.showAsShelved = this.showActionBadges && this.alarm != null && this.alarm.shelved;
+    }
   }
 
   /**
@@ -77,6 +117,7 @@ export class AlarmCardComponent implements OnInit {
     } else {
       this.blinkingClass = '';
     }
+    this.currentClass = this.getClass();
     this.cdRef.detectChanges();
   }
 
@@ -120,22 +161,6 @@ export class AlarmCardComponent implements OnInit {
   }
 
   /**
-  * Defines wether or not the component should indicate that the alarm has a pending acknowledgement
-  * @returns {boolean} true if the alarm has pending acknowledgement, false if not
-  */
-  showAsPendingAck(): boolean {
-    return this.showActionBadges && this.alarm != null && !this.alarm.ack && this.alarm.state_change_timestamp > 0;
-  }
-
-  /**
-  * Defines wether or not the component should indicate that the alarm is shelved
-  * @returns {boolean} true if the alarm is shelved, false if not
-  */
-  showAsShelved(): boolean {
-    return this.showActionBadges && this.alarm != null && this.alarm.shelved;
-  }
-
-  /**
   * Returns the name of the alarm that should be displayed in the header.
   * If the input {@link optionalAlarmName} is defined, this is the name that will be displayed
   * If not, the alarm ID is displayed
@@ -153,18 +178,6 @@ export class AlarmCardComponent implements OnInit {
       alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
     }
     return alarmName;
-  }
-
-  /**
-  * Returns a string related to the name of the alarm priority
-  * @returns {string} alarm prioritity name for the display
-  */
-  getPriorityText(): string {
-    const alarmValue: string = this.alarm.alarmValue;
-    const priorityText: string = alarmValue
-      .replace('cleared', '')
-      .replace('set_', '');
-    return priorityText.toUpperCase();
   }
 
 }

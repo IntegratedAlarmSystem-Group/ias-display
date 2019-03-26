@@ -166,7 +166,7 @@ describe('AlarmComponent', () => {
     });
   });
 
-  describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
+  describe('should have an attribute to determine if the alarm must be shown as shelved or not', () => {
     it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
       let newAlarm = Alarm.asAlarm(Object.assign({}, component.alarm));
       newAlarm.shelved = false;

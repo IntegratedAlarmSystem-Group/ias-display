@@ -1,5 +1,3 @@
-import { Alarm } from '../../data/alarm';
-
 /** Set of mock Alarms for the tests */
 export const MockAlarms = [
   {
