@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, Input, ElementRef, SimpleChanges } from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
@@ -11,12 +11,18 @@ import { Alarm } from '../../data/alarm';
   templateUrl: './ack-button.component.html',
   styleUrls: ['./ack-button.component.css']
 })
-export class AckButtonComponent implements OnInit, AfterViewInit {
+export class AckButtonComponent implements OnInit, OnChanges, AfterViewInit {
 
   /**
    * Alarm object associated to the button
    */
   @Input() alarm: Alarm;
+
+  /**
+  * Defines wether or not the Acknowledge can be performed
+  * It is updated when there are changes in the alarm
+  */
+  canAcknowledge = true;
 
   /**
    * Builds an instance of the component
@@ -37,6 +43,16 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.canAcknowledge = this.getCanAcknowledge();
+    }
+  }
+
+  /**
   * Method executed after the component is initialized.
   * It is used here to stop focus monitoring of the button, in order to fix some visual issues
   */
@@ -49,7 +65,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
    * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
-  canAcknowledge(): boolean {
+  getCanAcknowledge(): boolean {
     if (this.alarm != null && this.alarm.state_change_timestamp > 0) {
       return !this.alarm.ack;
     } else {
@@ -62,7 +78,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * @returns {boolean} true if the button is disabled, false if not.
    */
   isDisabled(): boolean {
-    return !this.sidenavService.canClose || !this.canAcknowledge();
+    return !this.sidenavService.canClose || !this.canAcknowledge;
   }
 
   /**

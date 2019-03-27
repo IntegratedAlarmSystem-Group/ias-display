@@ -1,4 +1,6 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
 import { DataModule } from '../../data/data.module';
 import { RoutingService } from '../../app-routing/routing.service';
@@ -8,8 +10,9 @@ import { Alarm } from '../../data/alarm';
 
 
 describe('GIVEN an AckButtonComponent', () => {
+  let hostComponent: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
   let component: AckButtonComponent;
-  let fixture: ComponentFixture<AckButtonComponent>;
   let button: any;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToAcknowledge']);
   const mockAlarm = Alarm.asAlarm({
@@ -35,6 +38,7 @@ describe('GIVEN an AckButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AckButtonComponent,
+        TestHostComponent
       ],
       imports: [
         IasMaterialModule,
@@ -49,10 +53,13 @@ describe('GIVEN an AckButtonComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AckButtonComponent);
-    button = fixture.nativeElement.querySelector('.ack-button');
-    component = fixture.componentInstance;
-    component.alarm = mockAlarm;
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+    hostComponent = fixture.componentInstance;
+    hostComponent.alarm = mockAlarm;
+    component = fixture
+      .debugElement.query(By.directive(AckButtonComponent))
+      .componentInstance;
     fixture.detectChanges();
   });
 
@@ -63,8 +70,9 @@ describe('GIVEN an AckButtonComponent', () => {
 
   describe('AND IF the alarm is not-acknowledged', () => {
     it('THEN button should be enabled', () => {
-      component.alarm.ack = false;
-      component.alarm.state_change_timestamp = 1267252440000;
+      hostComponent.alarm = Alarm.asAlarm(hostComponent.alarm);
+      hostComponent.alarm.ack = false;
+      hostComponent.alarm.state_change_timestamp = 1267252440000;
       fixture.detectChanges();
       button = fixture.nativeElement.querySelector('.ack-button');
       expect(button.disabled).toBeFalsy();
@@ -73,8 +81,9 @@ describe('GIVEN an AckButtonComponent', () => {
 
   describe('AND IF the alarm is acknowledged', () => {
     it('THEN button should be disabled', () => {
-      component.alarm.ack = true;
-      component.alarm.state_change_timestamp = 1267252440000;
+      hostComponent.alarm = Alarm.asAlarm(hostComponent.alarm);
+      hostComponent.alarm.ack = true;
+      hostComponent.alarm.state_change_timestamp = 1267252440000;
       fixture.detectChanges();
       button = fixture.nativeElement.querySelector('.ack-button');
       expect(button.disabled).toBeTruthy();
@@ -83,8 +92,9 @@ describe('GIVEN an AckButtonComponent', () => {
 
   describe('AND IF the alarm is not-acknowledged, but the state_change_timestamp is 0', () => {
     it('THEN button should be disabled', () => {
-      component.alarm.ack = false;
-      component.alarm.state_change_timestamp = 0;
+      hostComponent.alarm = Alarm.asAlarm(hostComponent.alarm);
+      hostComponent.alarm.ack = false;
+      hostComponent.alarm.state_change_timestamp = 0;
       fixture.detectChanges();
       button = fixture.nativeElement.querySelector('.ack-button');
       expect(button.disabled).toBeTruthy();
@@ -101,3 +111,19 @@ describe('GIVEN an AckButtonComponent', () => {
     });
   });
 });
+
+
+/**
+ * Mock host component for the alarm tile to check behaviour on change
+ */
+@Component({
+  selector: 'app-host',
+  template: `
+    <app-ack-button
+      [alarm]="this.alarm"
+    ></app-ack-button>
+  `,
+})
+class TestHostComponent {
+  alarm: Alarm;
+}

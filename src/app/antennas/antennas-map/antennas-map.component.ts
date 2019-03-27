@@ -135,22 +135,19 @@ export class AntennasMapComponent implements OnInit {
   getOpacityClass(antennaConfig: AlarmConfig): string {
     if (this.selectedAntenna === null) {
       return 'opacity-100';
-    } else {
-      if ( this.isSelected(antennaConfig) === true ) {
-        return 'opacity-100';
-      } else {
-        return 'opacity-35';
-      }
     }
+    if ( this.isSelected(antennaConfig) === true ) {
+      return 'opacity-100';
+    }
+    return 'opacity-35';
   }
 
  /**
   * Get a placemark graphical object from an id
-  * @param {string} placemark Id of a graphical element in the map source
+  * @param {string} placemark_id Id of a graphical element in the map source
   * @return {any} placemark graphical element
   */
-  getPlacemarkObject(placemark: string): any {
-    const placemark_id = placemark;
+  getPlacemarkObject(placemark_id: string): any {
     return this.placemarks[placemark_id];
   }
 

@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
@@ -9,8 +9,9 @@ import { ShelveButtonComponent } from './shelve-button.component';
 import { Alarm } from '../../data/alarm';
 
 describe('GIVEN a ShelveButtonComponent', () => {
+  let hostComponent: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
   let component: ShelveButtonComponent;
-  let fixture: ComponentFixture<ShelveButtonComponent>;
   let debug: DebugElement;
   const spyRoutingTable = jasmine.createSpyObj('RoutingService', ['goToShelve']);
   const mockAlarm = Alarm.asAlarm({
@@ -36,6 +37,7 @@ describe('GIVEN a ShelveButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ShelveButtonComponent,
+        TestHostComponent
       ],
       imports: [
         IasMaterialModule,
@@ -50,10 +52,14 @@ describe('GIVEN a ShelveButtonComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShelveButtonComponent);
-    component = fixture.componentInstance;
-    component.alarm = mockAlarm;
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+    hostComponent = fixture.componentInstance;
+    hostComponent.alarm = mockAlarm;
     debug = fixture.debugElement;
+    component = fixture
+      .debugElement.query(By.directive(ShelveButtonComponent))
+      .componentInstance;
     fixture.detectChanges();
   });
 
@@ -64,7 +70,8 @@ describe('GIVEN a ShelveButtonComponent', () => {
 
   describe('AND WHEN the Alarm is unshelved', () => {
     it('THEN its tooltip should be "Shelve"', () => {
-      component.alarm.shelved = false;
+      hostComponent.alarm = Alarm.asAlarm(hostComponent.alarm);
+      hostComponent.alarm.shelved = false;
       const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -75,7 +82,8 @@ describe('GIVEN a ShelveButtonComponent', () => {
 
   describe('AND WHEN the Alarm is shelved', () => {
     it('THEN its tooltip should be "Unshelve"', () => {
-      component.alarm.shelve();
+      hostComponent.alarm = Alarm.asAlarm(hostComponent.alarm);
+      hostComponent.alarm.shelve();
       const shelveButton = debug.query(By.css('.shelve-button')).nativeElement;
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -94,3 +102,18 @@ describe('GIVEN a ShelveButtonComponent', () => {
     });
   });
 });
+
+/**
+ * Mock host component for the alarm tile to check behaviour on change
+ */
+@Component({
+  selector: 'app-host',
+  template: `
+    <app-shelve-button
+      [alarm]="this.alarm"
+    ></app-shelve-button>
+  `,
+})
+class TestHostComponent {
+  alarm: Alarm;
+}
