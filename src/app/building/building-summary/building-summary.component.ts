@@ -60,7 +60,7 @@ export class BuildingSummaryComponent implements OnInit {
   */
   loadAlarmsConfig(): void {
 
-    const summary_url = BackendUrls.HEALTH_SUMMARY;
+    const summary_url = BackendUrls.BUILDING_SUMMARY;
     this.httpClient.get(summary_url).subscribe((response) => {
       for (const key in response) {
         if (key) {

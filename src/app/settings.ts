@@ -18,6 +18,7 @@ export const BackendUrls = {
   WEATHER_SUMMARY: '/panels-api/alarms-config/get_json/?key=weather_summary_config',
   ANTENNAS_SUMMARY: '/panels-api/alarms-config/get_json/?key=antennas_summary_config',
   HEALTH_SUMMARY: '/panels-api/alarms-config/get_json/?key=health_summary_config',
+  BUILDING_SUMMARY: '/panels-api/alarms-config/get_json/?key=building_summary_config',
   PADS_STATUS: '/panels-api/placemark/pads_by_group/',
 };
 
