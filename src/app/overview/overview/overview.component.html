@@ -1,4 +1,4 @@
-<div class="ias-overview ">
+<div class="ias-overview " fxLayout="column" fxLayoutAlign="start start">
   <div
     class="content no-margin"
     fxLayout="row"
@@ -8,11 +8,7 @@
     fxLayout.lg="row"
     fxLayoutAlign.lg="flex-start"
   >
-    <div
-      fxFlex="25%"
-      fxFlex.lt-lg="100%"
-      fxFlex.lg="26%"
-    >
+    <div fxFlex="27.5%" fxFlex.lt-lg="100%" fxFlex.lg="26%">
       <app-overview-card>
         <div data="label"> IAS HEALTH </div>
         <div id="ias-card-health-marker" data="marker-img"> <img src="/assets/img/logo.svg"/> </div>
@@ -21,11 +17,8 @@
         </div>
       </app-overview-card>
     </div>
-    <div
-      fxFlex="35%"
-      fxFlex.lt-lg="100%"
-      fxFlex.lg="26%"
-    >
+
+    <div fxFlex="27.5%" fxFlex.lt-lg="100%" fxFlex.lg="26%">
       <app-overview-card>
         <div data="label"> ANTENNAS </div>
         <div data="marker-img"> <img src="/assets/img/container-antenna.svg"/> </div>
@@ -34,11 +27,8 @@
         </div>
       </app-overview-card>
     </div>
-    <div
-      fxFlex="40%"
-      fxFlex.lt-lg="100%"
-      fxFlex.lg="48%"
-    >
+
+    <div fxFlex="45%" fxFlex.lt-lg="100%" fxFlex.lg="48%">
       <app-overview-card>
         <div data="label"> WEATHER </div>
         <div data="marker-img"> <img src="/assets/img/container-weather.svg"/> </div>
@@ -48,4 +38,27 @@
       </app-overview-card>
     </div>
   </div>
+
+  <div
+    class="content no-margin"
+    fxLayout="row"
+    fxLayout.lt-lg="column"
+    fxLayoutAlign.lt-lg="flex-start"
+    fxLayout.lg="row"
+    fxLayoutAlign.lg="flex-start"
+  >
+
+    <div fxFlex="27.5%" fxFlex.lt-lg="100%" fxFlex.lg="26%">
+      <app-overview-card>
+        <div data="label"> BUILDING </div>
+        <div data="marker-img"> <img src="/assets/img/container-building.svg"/> </div>
+        <div data="content">
+          <app-building-summary></app-building-summary>
+        </div>
+      </app-overview-card>
+    </div>
+  </div>
+
+  <!-- <div fxFlex="65%" fxFlex.lt-lg="100%" fxFlex.lg="65%">
+  </div> -->
 </div>

@@ -1,15 +1,15 @@
 <div class="ias overview-card">
-    <div class="marker-wrapper">
-        <div class="ias overview-card marker">
-            <ng-content select="[data=marker-img]"></ng-content>
-        </div>
+  <div class="marker-wrapper">
+    <div class="ias overview-card marker">
+      <ng-content select="[data=marker-img]"></ng-content>
     </div>
-    <div class="label">
-      <ng-content select="[data=label]"></ng-content>
+  </div>
+  <div class="label">
+    <ng-content select="[data=label]"></ng-content>
+  </div>
+  <div class="content-wrapper">
+    <div class="content">
+      <ng-content select="[data=content]"></ng-content>
     </div>
-    <div class="content-wrapper">
-        <div class="content">
-          <ng-content select="[data=content]"></ng-content>
-        </div>
-    </div>
+  </div>
 </div>

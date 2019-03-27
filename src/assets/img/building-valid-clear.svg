@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 65.3 62.6" style="enable-background:new 0 0 65.3 62.6;" xml:space="preserve">
+<style type="text/css">.st0{fill:#05e086;fill-opacity:0;}.st1{fill:#6B6B6B;}.st2{fill:none;stroke:#05e086;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}</style>
+<g id="Layer_2_1_">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="863.3" x2="65.3" y2="863.3" gradientTransform="matrix(1 0 0 1 0 -832)">
+		<stop  offset="0" style="stop-color:#F0512E"/>
+		<stop  offset="0.28" style="stop-color:#F05230"/>
+		<stop  offset="0.51" style="stop-color:#F15736"/>
+		<stop  offset="0.73" style="stop-color:#F15F42"/>
+		<stop  offset="0.94" style="stop-color:#F26A52"/>
+		<stop  offset="1" style="stop-color:#F26D57"/>
+	</linearGradient>
+	<rect class="st0" width="65.3" height="62.6"/>
+</g>
+<g>
+	<g>
+		<path class="st1" d="M53.8,50.7H11.2V8.5h42.6V50.7z M37.1,25.2H28V31h9.1V25.2z M24.5,25.2h-9.1V31h9.1V25.2z M31.5,42.1h-4.6
+			v7.7h4.6V42.1z M38.1,42.1h-4.6v7.7h4.6V42.1z M49.6,25.2h-9.1V31h9.1V25.2z M37.1,16H28v5.7h9.1V16z M24.5,16h-9.1v5.7h9.1V16z
+			 M49.6,16h-9.1v5.7h9.1V16z"/>
+		<rect x="8.2" y="50.7" class="st1" width="48.7" height="4.1"/>
+	</g>
+	<rect x="11.2" y="8.5" class="st2" width="42.6" height="42.3"/>
+	<rect x="28" y="25.2" class="st2" width="9.1" height="5.7"/>
+	<rect x="15.4" y="25.2" class="st2" width="9.1" height="5.7"/>
+	<rect x="40.5" y="25.2" class="st2" width="9.1" height="5.7"/>
+	<rect x="28" y="16" class="st2" width="9.1" height="5.7"/>
+	<rect x="15.4" y="16" class="st2" width="9.1" height="5.7"/>
+	<rect x="40.5" y="16" class="st2" width="9.1" height="5.7"/>
+	<polyline class="st2" points="25.9,50.7 25.9,41.1 39.1,41.1 39.1,50.7 	"/>
+	<rect x="8.2" y="50.7" class="st2" width="48.7" height="4.1"/>
+	<line class="st2" x1="32.5" y1="41.1" x2="32.5" y2="50.2"/>
+	<line class="st2" x1="28" y1="37.6" x2="37.1" y2="37.6"/>
+</g>
+<title>antenna</title>
+</svg>
