@@ -5,6 +5,7 @@
   $accent: map-get($theme, accent);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
 
   .weather-sidebar-card {
     background: map_get($primary, 600);
@@ -28,6 +29,28 @@
       }
     }
 
+  }
+
+  .text-affected-green {
+  }
+
+  .text-affected-yellow {
+    color: mat-color($alarms, set-low);
+  }
+
+  .text-affected-red {
+    color: mat-color($alarms, set-critical);
+  }
+
+  .text-affected-gray {
+    color: mat-color($alarms, maintenance);
+  }
+
+  .text-affected-blue {
+    color: mat-color($alarms, unknown);
+  }
+
+  .text-affected-unreliable {
   }
 
 }
