@@ -55,7 +55,9 @@
           </div>
           <div class="antennas-list">
             <ul>
-              <li *ngFor="let antenna of this.getAntennas(stationConfig)"> {{antenna}} </li>
+              <ng-container *ngFor="let item of this.getAntennasDetailedList(stationConfig)">
+              <li [ngClass]="item.classes"> {{item.name}} </li>
+              </ng-container>
             </ul>
           </div>
         </mat-expansion-panel>

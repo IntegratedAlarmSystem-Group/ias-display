@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { ClipboardService } from 'ngx-clipboard';
 import { AlarmService } from '../../data/alarm.service';
 import { AlarmConfig } from '../../data/alarm-config';
+import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { WeatherService } from '../weather.service';
 import { SubscriptionLike as ISubscription } from 'rxjs';
 
@@ -29,7 +30,7 @@ export class WeatherSidebarComponent implements OnInit {
   affectedAntennasSubscription: ISubscription;
 
   /** List of affected antennas by some alarm */
-  affectedAntennas: string[];
+  affectedAntennas: string[] = [];
 
   /** Map to detect the presence of affected antennas */
   groupHasAffectedAntennas = {};
@@ -137,6 +138,89 @@ export class WeatherSidebarComponent implements OnInit {
       value => stationAntennas.indexOf(value) > -1);
     return response.sort();
   }
+
+  /**
+  * Return list of not affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getNotAffectedAntennas(stationConfig: AlarmConfig): string[] {
+    const stationAntennas = this.getAntennas(stationConfig);
+    const allAffectedAntennas = this.affectedAntennas;
+    const response = stationAntennas.filter(
+      value => allAffectedAntennas.indexOf(value) < 0);
+    return response.sort();
+  }
+
+  /**
+  * Return a classified list of objects for antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {object[]} a list of objects with related information
+  */
+  getAntennasDetailedList(stationConfig: AlarmConfig): string[] {
+    const stationAffectedAntennas = this.getAffectedAntennas(stationConfig);
+    const stationNotAffectedAntennas = this.getNotAffectedAntennas(stationConfig);
+    const response = [];
+    for (let i = 0; i < stationAffectedAntennas.length; i++) {
+      const antenna = stationAffectedAntennas[i];
+      const highAlarm = this.weatherService.affectedAntennaHighPriorityAlarm[antenna];
+      response.push({
+        'value': highAlarm.value,
+        'name': antenna,
+        'classes': this.getAffectedAntennaColorClasses(highAlarm.core_id),
+      });
+    }
+    for (let i = 0; i < stationNotAffectedAntennas.length; i++) {
+      const antenna = stationNotAffectedAntennas[i];
+      response.push({
+        'value': Value.cleared,
+        'name': antenna,
+        'classes': []
+      });
+    }
+    return response.sort((a, b) => a.value < b.value ? 1 : a.value > b.value ? -1 : 0);
+  }
+
+  /**
+   * Get the color class for an affected antenna
+   */
+  getAffectedAntennaColorClasses(alarmId: string) {
+    if (this.alarmService.isAlarmIndexAvailable(alarmId)) {
+      const alarm = this.alarmService.get(alarmId);
+      let colorClass = '';
+      if (alarm.shelved === true) {
+        colorClass = 'green';
+      } else if (alarm.mode === OperationalMode.unknown) {
+        colorClass = 'blue';
+      } else if (alarm.showAsMaintenance()) {
+        colorClass = 'grey';
+      } else if (alarm.value === Value.cleared) {
+        colorClass = 'green';
+      } else if (alarm.value === Value.set_low) {
+        colorClass = 'yellow';
+      } else if (alarm.value === Value.set_medium) {
+        colorClass = 'yellow';
+      } else if (alarm.value === Value.set_high) {
+        colorClass = 'red';
+      } else if (alarm.value === Value.set_critical) {
+        colorClass = 'red';
+      } else {
+        colorClass = 'green';
+      }
+
+      if (colorClass !== '') {
+        if (alarm.validity === 0) {
+          return ['text-affected-' + colorClass, 'text-affected-' + 'unreliable'];
+        } else {
+          return ['text-affected-' + colorClass];
+        }
+      }
+
+    } else {
+      return ['none'];
+    }
+  }
+
 
   /**
   * Indicates if the weather station is selected or not
