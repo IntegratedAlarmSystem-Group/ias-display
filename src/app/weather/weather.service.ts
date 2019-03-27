@@ -127,10 +127,8 @@ export class WeatherService {
       }
       this.updateAllAntennaHighPriorityMap();
     } else {
-      for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
-        this.updateAntennasRelationMaps(alarmId);
-      }
       const selectedAlarmId = alarmChange;
+      this.updateAntennasRelationMaps(selectedAlarmId);
       if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(selectedAlarmId) > -1) {
         const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
         for (let i = 0; i < this.alarmIdToAffectedAntennasMap[selectedAlarmId]; i++) {
