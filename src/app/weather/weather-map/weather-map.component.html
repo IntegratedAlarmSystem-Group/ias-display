@@ -81,24 +81,23 @@
           <!-- Elements by pads group -->
           <!-- Note: it should be one primary weather stationConfig related to a pad group -->
           <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(stationConfig)}" >
+            <animate
+              *ngIf="blinkingStatus[stationConfig.alarm_id]"
+              attributeType="XML"
+              attributeName="opacity"
+              from="0.0"
+              to="0.0"
+              dur="2s"
+              repeatCount="indefinite"
+              values="0; 0.75; 0.0"
+              keyTimes="0; 0.5; 1"
+            />
             <ng-container *ngFor="let p of [getPlacemarkObject(stationConfig.placemark)]">
               <svg:g class="weather-map-primary-ws-group"
                 [ngClass]="getPrimaryWeatherStationStyle(stationConfig)"
                 (click)="onClick(stationConfig)"
                 (mouseenter)="mouseEnterPrimaryWeatherStationGroup(stationConfig)"
                 (mouseleave)="mouseLeavePrimaryWeatherStationGroup()">
-                <animate
-                  *ngIf="blinkingStatus[stationConfig.alarm_id]"
-                  attributeType="XML"
-                  attributeName="opacity"
-                  from="0.0"
-                  to="0.0"
-                  dur="2s"
-                  repeatCount="indefinite"
-                  values="0; 0.75; 0.0"
-                  keyTimes="0; 0.5; 1"
-                />
-                <!-- primary ws related markers -->
                 <foreignObject
                      [attr.x]="p.opt_cx"
                      [attr.y]="p.opt_cy-50"

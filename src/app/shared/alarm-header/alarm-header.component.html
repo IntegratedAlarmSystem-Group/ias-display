@@ -3,7 +3,6 @@
   placement="{{tooltipDirection}}"
   [ngbTooltip]="tipContent"
   data-container="body"
-  [ngClass]="blinkingClass"
 >
   <ng-template #tipContent>
     <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>
@@ -15,13 +14,13 @@
     <div class="alarm-header-name">
         {{this.alarmName}}
     </div>
-    <div>
+    <div [ngClass]="blinkingClass">
       <app-alarm-label [alarm]="alarm" [showText]="false" [size]="'md'"></app-alarm-label>
     </div>
   </div>
 
 
-  <div fxLayout="row" class="alarm-header-badges">
+  <div fxLayout="row" class="alarm-header-badges" [ngClass]="blinkingClass">
     <div class="badges" *ngIf="showActionBadges">
 
       <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>
