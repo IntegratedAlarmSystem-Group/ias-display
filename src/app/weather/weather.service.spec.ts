@@ -8,10 +8,35 @@ import { HttpClientService } from '../data/http-client.service';
 import { Map } from '../map/fixtures';
 import { mockWeatherStationsConfig, mockWeatherSummaryConfig, mockImagesSets} from './test_fixtures';
 import { BackendUrls } from '../settings';
+import { Alarm } from '../data/alarm';
+import { AlarmService } from '../data/alarm.service';
 
+
+const mockAlarmBaseOne = {
+  'value': 1,
+  'core_id': 'WSAlarmOne',
+  'running_id': 'WSAlarmOne',
+  'mode': 0,
+  'core_timestamp': 1267252440000,
+  'state_change_timestamp': 1267252440000,
+  'value_change_timestamp': 1267252440000,
+  'value_change_transition': [0, 0],
+  'validity': 1,
+  'description': 'my description',
+  'url': 'https://www.alma.cl',
+  'sound': 'sound1',
+  'can_shelve': true,
+  'ack': false,
+  'shelved': false,
+  'dependencies': [],
+  'properties': {
+    'affectedAntennas': 'A00,A01,A02,A03'
+  }
+};
 
 describe('WeatherService', () => {
   let subject: WeatherService;
+  let alarmService: AlarmService;
   let httpClient: HttpClientService;
 
   const padsStatusUrl = BackendUrls.PADS_STATUS;
@@ -33,6 +58,12 @@ describe('WeatherService', () => {
       imports: [DataModule],
     });
   });
+
+  beforeEach(
+    inject([AlarmService], (service: AlarmService) => {
+      alarmService = service;
+    })
+  );
 
   beforeEach(
     inject(
@@ -76,8 +107,9 @@ describe('WeatherService', () => {
     expect(subject.windsImageUnreliableSet).toBeUndefined();
     expect(subject.markerImageUnreliableSet).toBeUndefined();
     spyOn(httpClient, 'get').and.callFake(function() {
-      return of(null);
+      return of(mockWeatherSummaryConfig);
     });
+    expect(subject.weatherSummaryConfig).toBeUndefined();
     subject.initialize();
     expect(subject).toBeTruthy();
     expect(subject.humidityImageSet).not.toBeUndefined();
@@ -108,6 +140,79 @@ describe('WeatherService', () => {
     expect(httpClient.get).toHaveBeenCalled();
     expect(httpClient.get).toHaveBeenCalledWith(padsStatusUrl + group);
     expect(subject.padsStatus).toEqual(mockPadsStatusResponse);
+  });
+
+  it('should be able to get a flattenned list of alarm configurations', () => {
+    const mockConfig = [
+      {
+        'alarm_id': 'WSAlarm', 'children': [
+          {'alarm_id': 'WSAlarmOne', children: []},
+          {'alarm_id': 'WSAlarmTwo', children: []},
+        ]
+      }
+    ];
+    const flattenedList = subject.getFlattennedList(mockConfig);
+    expect(flattenedList).toEqual(['WSAlarm', 'WSAlarmOne', 'WSAlarmTwo']);
+  });
+
+  it('should be able to update antennas and alarms relation maps from alarm properties', () => {
+    const mockAlarmBaseTwo = Object.assign({}, mockAlarmBaseOne);
+    mockAlarmBaseTwo.core_id = 'WSAlarmTwo';
+    const mockAlarmOne = Alarm.asAlarm(mockAlarmBaseOne);
+    const mockAlarmTwo = Alarm.asAlarm(mockAlarmBaseTwo);
+    spyOn(alarmService, 'isAlarmIndexAvailable').and.returnValue(true);
+    spyOn(alarmService, 'get').and.callFake(
+      function (alarmId) {
+        return (alarmId === 'WSAlarmOne' ? mockAlarmOne : mockAlarmTwo);
+      }
+    );
+    subject.updateAntennasRelationMaps('WSAlarmOne');
+    subject.updateAntennasRelationMaps('WSAlarmTwo');
+    expect(subject.alarmIdToAffectedAntennasMap).toEqual(
+      {
+        'WSAlarmOne' : ['A00', 'A01', 'A02', 'A03'],
+        'WSAlarmTwo' : ['A00', 'A01', 'A02', 'A03'],
+      }
+    );
+    expect(subject.affectedAntennasToAlarmIdsMap).toEqual(
+      {
+        'A00': ['WSAlarmOne', 'WSAlarmTwo'],
+        'A01': ['WSAlarmOne', 'WSAlarmTwo'],
+        'A02': ['WSAlarmOne', 'WSAlarmTwo'],
+        'A03': ['WSAlarmOne', 'WSAlarmTwo'],
+      }
+    );
+  });
+
+  it('should get a color for an affected antenna related to the alarm with higher priority', () => {
+    const mockAlarmBaseTwo = Object.assign({}, mockAlarmBaseOne);
+    mockAlarmBaseTwo.core_id = 'WSAlarmTwo';
+    mockAlarmBaseTwo.value = 3;
+    const mockAlarmBaseThree = Object.assign({}, mockAlarmBaseOne);
+    mockAlarmBaseThree.core_id = 'WSAlarmThree';
+    mockAlarmBaseThree.value = 2;
+    const mockAlarmOne = Alarm.asAlarm(mockAlarmBaseOne);
+    const mockAlarmTwo = Alarm.asAlarm(mockAlarmBaseTwo);
+    const mockAlarmThree = Alarm.asAlarm(mockAlarmBaseThree);
+    spyOn(alarmService, 'isAlarmIndexAvailable').and.returnValue(true);
+    spyOn(alarmService, 'get').and.callFake(
+      function (alarmId: string) {
+        switch (alarmId) {
+          case mockAlarmOne.core_id:
+            return mockAlarmOne;
+          case mockAlarmTwo.core_id:
+            return mockAlarmTwo;
+          default:
+            return mockAlarmThree;
+        }
+      }
+    );
+    subject.updateAntennasRelationMaps('WSAlarmOne');
+    subject.updateAntennasRelationMaps('WSAlarmTwo');
+    subject.updateAntennasRelationMaps('WSAlarmThree');
+    const highAlarm = subject.getAntennaHighPriorityAlarm('A02');
+    expect(highAlarm.core_id).toEqual(mockAlarmTwo.core_id);
+    expect(highAlarm.value).toEqual(mockAlarmTwo.value);
   });
 
 });

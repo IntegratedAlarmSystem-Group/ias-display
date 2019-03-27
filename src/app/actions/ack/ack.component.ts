@@ -159,7 +159,7 @@ export class AckComponent implements OnInit, OnDestroy {
         if (this.alarm.core_id !== this.alarm_id) {
           this.reload();
         } else {
-          this.reload({onlyMissingAcksInfo: true})
+          this.reload({onlyMissingAcksInfo: true});
         }
       } else {
         this.reload();
