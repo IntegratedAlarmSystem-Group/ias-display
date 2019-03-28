@@ -28,7 +28,12 @@ export class AlarmLabelComponent implements OnInit, OnChanges {
   @Input() showText = true;
 
   /**
-   * Defines the direction of the label
+   * Defines the presentation of the label
+   */
+  @Input() fluidText = false;
+
+  /**
+   * Defines the presentation of the label
    */
   @Input() noPadding = false;
 
@@ -36,6 +41,11 @@ export class AlarmLabelComponent implements OnInit, OnChanges {
   * Show text options
   */
   showTextOptions = [true, false];
+
+  /**
+  * Show fluid text options
+  */
+  showFluidTextOptions = [true, false];
 
   /**
   * Padding Options
@@ -79,7 +89,10 @@ export class AlarmLabelComponent implements OnInit, OnChanges {
     if (this.showTextOptions.indexOf(this.showText) < 0) {
       this.showText = true;
     }
-    if (this.showTextOptions.indexOf(this.showText) < 0) {
+    if (this.showFluidTextOptions.indexOf(this.fluidText) < 0) {
+      this.fluidText = false;
+    }
+    if (this.noPaddingOptions.indexOf(this.noPadding) < 0) {
       this.noPadding = false;
     }
     if (this.sizeOptions.indexOf(this.size) < 0) {
@@ -169,6 +182,9 @@ export class AlarmLabelComponent implements OnInit, OnChanges {
     }
     if (this.showText === false) {
       result.push('hide-text');
+    }
+    if (this.fluidText === true) {
+      result.push('fluid-text');
     }
     return result;
   }

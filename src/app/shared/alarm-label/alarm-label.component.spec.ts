@@ -82,7 +82,6 @@ describe('AlarmLabelComponent: ', () => {
 
   it('should hide labels for a clear value or shelved status even if showText is true', () => {
     component.showText = true;
-    component.noPadding = false;
     const expected_classes = Object.assign({}, expectedClassesWhenShowText);
     for (const alarm of MockAlarms) {
       hostComponent.alarm = Alarm.asAlarm(alarm);
@@ -94,7 +93,6 @@ describe('AlarmLabelComponent: ', () => {
 
   it('should not hide labels for a clear value or shelved status if showText is false', () => {
     component.showText = false;
-    component.noPadding = false;
     const expected_classes = Object.assign({}, expectedClassesWhenHiddenText);
     for (const alarm of MockAlarms) {
       hostComponent.alarm = Alarm.asAlarm(alarm);
@@ -104,25 +102,47 @@ describe('AlarmLabelComponent: ', () => {
     }
   });
 
-  it('should add a no padding class if noPadding is true, if required showText', () => {
+  it('should add a fluid-text class if fluidText is true, when showText is true', () => {
+    component.showText = true;
+    component.fluidText = true;
+    for (const alarm of MockAlarms) {
+      hostComponent.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getPriorityTextClass().indexOf('fluid-text') > -1).toBeTruthy();
+    }
+  });
+
+  it('should add a fluid-text class if fluidText is true, even if showText is false', () => {
+    component.showText = false;
+    component.fluidText = true;
+    for (const alarm of MockAlarms) {
+      hostComponent.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getPriorityTextClass().indexOf('fluid-text') > -1).toBeTruthy();
+    }
+  });
+
+  it('should add a no-padding class if noPadding is true, when showText is true', () => {
     component.showText = true;
     component.noPadding = true;
     for (const alarm of MockAlarms) {
       hostComponent.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass().indexOf('no-padding')).toBeTruthy();
+      expect(component.getClass().indexOf('no-padding') > -1).toBeTruthy();
     }
   });
 
-  it('should add a no padding class if noPadding is true, if showText is false', () => {
+  it('should add a no-padding class if noPadding is true, even if showText is false', () => {
     component.showText = false;
     component.noPadding = true;
     for (const alarm of MockAlarms) {
       hostComponent.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass().indexOf('no-padding')).toBeTruthy();
+      expect(component.getClass().indexOf('no-padding')  > -1).toBeTruthy();
     }
   });
 
