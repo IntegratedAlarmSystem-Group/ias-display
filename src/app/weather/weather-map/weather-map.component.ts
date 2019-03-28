@@ -5,7 +5,8 @@ import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { MapService } from '../../map/map.service';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { Observable, BehaviorSubject, SubscriptionLike as ISubscription } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 /**
 * Main component for the weather station map
@@ -123,10 +124,10 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
       this.affectedAntennasSubscription.unsubscribe();
     }
     if (this.mapDataSubscription) {
-      this.affectedAntennasSubscription.unsubscribe();
+      this.mapDataSubscription.unsubscribe();
     }
     if (this.padStatusSubscription) {
-      this.affectedAntennasSubscription.unsubscribe();
+      this.padStatusSubscription.unsubscribe();
     }
   }
 
@@ -162,21 +163,17 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.padStatusSubscription = this.service.padsStatusAvailable.subscribe(
-      (padsStatusFlag) => {
-        this.mapdataAvailable.subscribe( (mapStatusFlag) => {
-          this.updatedMap.subscribe(
-            (mapUpToDate) => {
-              if (padsStatusFlag) {
-                if (mapStatusFlag) {
-                  if (!mapUpToDate) {
-                    this.updateAntennaPadDisplayStatus();
-                  }
-                }
-              }
-            });
-        });
-    });
+    this.padStatusSubscription = combineLatest(
+      this.service.padsStatusAvailable,
+      this.mapdataAvailable,
+      this.updatedMap
+    ).subscribe(
+      ([padsStatusFlag, mapStatusFlag, mapUpToDate]) => {
+        if ( padsStatusFlag && mapStatusFlag && !mapUpToDate ) {
+          this.updateAntennaPadDisplayStatus();
+        }
+      }
+    );
     this.affectedAntennasSubscription = this.service.affectedAntennasUpdate
       .subscribe((updateMap) => { if (updateMap === true) { this.updateMap(); } } );
   }
