@@ -322,14 +322,16 @@ export class SandboxAlarmLabelComponent implements OnInit {
       {
         'value': value,
         'core_id': core_id,
-        'running_id': core_id,
+        'running_id': 'critical',
         'mode': mode,
         'core_timestamp': 1267252440000,
         'state_change_timestamp': 1267252440000,
+        'value_change_timestamp': 0,
+        'value_change_transition': [0, 0],
         'validity': validity,
         'description': 'my description',
         'url': 'https://www.alma.cl',
-        'sound': 'sound1',
+        'sound': 'TYPE1',
         'can_shelve': true,
         'ack': ack,
         'shelved': shelved,
@@ -449,14 +451,16 @@ export class SandboxAlarmComponent implements OnInit {
       {
         'value': value,
         'core_id': core_id,
-        'running_id': core_id,
+        'running_id': 'critical',
         'mode': mode,
         'core_timestamp': 1267252440000,
         'state_change_timestamp': 1267252440000,
+        'value_change_timestamp': 0,
+        'value_change_transition': [0, 0],
         'validity': validity,
         'description': 'my description',
         'url': 'https://www.alma.cl',
-        'sound': 'sound1',
+        'sound': 'TYPE1',
         'can_shelve': true,
         'ack': ack,
         'shelved': shelved,
@@ -471,7 +475,6 @@ export class SandboxAlarmComponent implements OnInit {
    * Executed after the component is instantiated.
    */
   ngOnInit() {
-    console.log(this.labelLocation);
     this.defineAlarmsAndImages();
     this.generateAlarmsList();
   }
@@ -598,14 +601,16 @@ export class SandboxAlarmTileComponent implements OnInit {
       {
         'value': value,
         'core_id': core_id,
-        'running_id': core_id,
+        'running_id': 'critical',
         'mode': mode,
         'core_timestamp': 1267252440000,
         'state_change_timestamp': 1267252440000,
+        'value_change_timestamp': 0,
+        'value_change_transition': [0, 0],
         'validity': validity,
         'description': 'my description',
         'url': 'https://www.alma.cl',
-        'sound': 'sound1',
+        'sound': 'TYPE1',
         'can_shelve': true,
         'ack': ack,
         'shelved': shelved,
@@ -629,7 +634,7 @@ export class SandboxAlarmTileComponent implements OnInit {
    */
    generateAlarmsList() {
      for (const shelved of [false]) {
-       for (const value of [0, 1]) {
+       for (const value of [0, 1, 3]) {
          for (const validity of [1]) {
            for (const mode of [5, 7, 8]) {
              const alarm = this.getMockAlarm(
@@ -671,5 +676,125 @@ export class SandboxAlarmTileComponent implements OnInit {
     });
 
   }
+
+}
+
+
+/**
+* Component to display ias components in different scenarios
+* according to the values related to an alarm
+*/
+@Component({
+  selector: 'app-sandbox-alarm-card',
+  template: `
+    <div style="padding: 20px;">
+      <div class="sandbox-title"> {{componentName}} </div>
+      <div style="padding: 20px;" fxLayout="row wrap" fxLayoutGap="40px">
+        <div class="sandbox-alarm-container" *ngFor="let alarm of alarms">
+          <div class="sandbox-alarm-values">
+            {{alarm.alarmValue}}
+            <br>
+            {{alarm.operationalMode}}
+            <br>
+            {{alarm.alarmValidity}}
+            <br>
+            shelved?({{alarm.shelved}})
+          </div>
+          <div class="sandbox-component">
+            <span class="sandbox-marker">+</span>
+            <app-alarm-card
+              fxFlex
+              [alarm]="alarm"
+              [alarmNameMaxSize]="4"
+              [optionalAlarmName]="'TEST'"
+              [tooltipDirection]="'left'"
+            ></app-alarm-card>
+            <span class="sandbox-marker">+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  styleUrls: ['./material-sandbox.components.scss']
+})
+export class SandboxAlarmCardComponent implements OnInit {
+
+  /** Name of the Shared component to be displayed in the {@link SandboxAlarmComponent} */
+  componentName = 'Alarm Tile';
+
+  /** Array of Alarms to display */
+  alarms: Alarm[] = [];
+
+  /** Set of alarm icons */
+  public alarmIconsSet: AlarmImageSet;
+
+  /** Set of alarm unreliable icons */
+  public alarmIconsUnreliableSet: AlarmImageSet;
+
+  /**
+  * Return a mock alarm with a given set of input parameters
+  * @param {value} number the value of the Alarm
+  * @param {core_id} string the core_id of the Alarm
+  * @param {mode} number the mode of the Alarm
+  * @param {validity} number the validity of the Alarm
+  * @param {ack} boolean the ack of the Alarm
+  * @param {shelved} boolean the shelved of the Alarm
+  * @returns {Alarm} a mock {@link Alarm} object
+  */
+  getMockAlarm(
+    value: number,
+    core_id: string,
+    mode: number,
+    validity: number,
+    ack: boolean,
+    shelved: boolean
+  ): Alarm {
+    const alarm = Alarm.asAlarm(
+      {
+        'value': value,
+        'core_id': core_id,
+        'running_id': 'critical',
+        'mode': mode,
+        'core_timestamp': 1267252440000,
+        'state_change_timestamp': 1267252440000,
+        'value_change_timestamp': 0,
+        'value_change_transition': [0, 0],
+        'validity': validity,
+        'description': 'my description',
+        'url': 'https://www.alma.cl',
+        'sound': 'TYPE1',
+        'can_shelve': true,
+        'ack': ack,
+        'shelved': shelved,
+        'dependencies': [],
+      }
+    );
+    alarm.properties = {};
+    return alarm;
+  }
+
+  /**
+   * Executed after the component is instantiated.
+   */
+  ngOnInit() {
+    this.generateAlarmsList();
+  }
+
+  /**
+   * Alarms generation to check the component
+   */
+   generateAlarmsList() {
+     for (const shelved of [true, false]) {
+       for (const value of [0, 1, 2, 3, 4]) {
+         for (const validity of [0, 1]) {
+           for (const mode of [5, 7, 8]) {
+             const alarm = this.getMockAlarm(
+               value, 'test', mode, validity, false, shelved);
+             this.alarms.push(alarm);
+           }
+         }
+       }
+     }
+   }
 
 }

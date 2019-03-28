@@ -8,6 +8,7 @@ import { MaterialToggleColorsComponent } from './material-sandbox.components';
 import { MaterialButtonsColorsComponent } from './material-sandbox.components';
 import { MaterialCardSampleComponent } from './material-sandbox.components';
 import { SandboxAlarmLabelComponent } from './material-sandbox.components';
+import { SandboxAlarmCardComponent } from './material-sandbox.components';
 import { SandboxAlarmComponent } from './material-sandbox.components';
 import { SandboxAlarmTileComponent } from './material-sandbox.components';
 
@@ -24,6 +25,7 @@ import { SandboxAlarmTileComponent } from './material-sandbox.components';
     MaterialButtonsColorsComponent,
     MaterialCardSampleComponent,
     SandboxAlarmLabelComponent,
+    SandboxAlarmCardComponent,
     SandboxAlarmComponent,
     SandboxAlarmTileComponent
   ],
@@ -33,6 +35,7 @@ import { SandboxAlarmTileComponent } from './material-sandbox.components';
     MaterialButtonsColorsComponent,
     MaterialCardSampleComponent,
     SandboxAlarmLabelComponent,
+    SandboxAlarmCardComponent,
     SandboxAlarmComponent,
     SandboxAlarmTileComponent
   ],
