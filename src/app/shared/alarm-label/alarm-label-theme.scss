@@ -26,11 +26,13 @@
   .alarm-label-high {
     border-color: mat-color($alarms, set-high);
     background: mat-color($alarms, set-high);
+    color: mat-color($foreground, text);
   }
 
   .alarm-label-critical {
     border-color: mat-color($alarms, set-critical);
     background: mat-color($alarms, set-critical);
+    color: mat-color($foreground, text);
   }
 
 }

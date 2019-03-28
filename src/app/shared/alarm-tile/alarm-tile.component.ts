@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
 
 
 /**
@@ -194,7 +194,7 @@ export class AlarmTileComponent implements OnInit, OnChanges {
     } else {
       result.push('alarm-tile-blue');
     }
-    if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
+    if (this.alarm.validity === Validity.unreliable && this.alarm.shelved !== true) {
       result.push('alarm-tile-unreliable');
     }
     if (this.targetAnimationState === 'blinking') {

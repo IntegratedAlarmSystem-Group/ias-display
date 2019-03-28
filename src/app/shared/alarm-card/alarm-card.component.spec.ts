@@ -7,7 +7,7 @@ import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
 import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
-import { Alarm } from '../../data/alarm';
+import { Alarm, Validity } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
 
 const expected_classes = {
@@ -30,7 +30,7 @@ const expected_classes = {
   'shutteddown_unreliable': ['alarm-card-gray', 'alarm-card-unreliable'],
   'malfunctioning_unreliable': ['alarm-card-gray', 'alarm-card-unreliable'],
   'shelved': ['alarm-card-green'],
-  'shelved_unreliable': ['alarm-card-green', 'alarm-card-unreliable'],
+  'shelved_unreliable': ['alarm-card-green'],
 };
 
 describe('AlarmCardComponent', () => {
@@ -102,10 +102,10 @@ describe('AlarmCardComponent', () => {
       hostComponent.alarm.shelve();
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      if (component.alarm.validity) {
+      if (component.alarm.validity === Validity.reliable) {
         expect(component.getClass()).toEqual(expected_classes['shelved']);
       } else {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toEqual(expected_classes['shelved_unreliable']);
       }
     }
   });
