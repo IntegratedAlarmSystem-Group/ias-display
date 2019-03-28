@@ -8,7 +8,7 @@ import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component'
 import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
 import { AlarmTileComponent } from './alarm-tile.component';
 import { PropsTableComponent } from '../props-table/props-table.component';
-import { Alarm } from '../../data/alarm';
+import { Alarm, Validity } from '../../data/alarm';
 import { AlarmImageSet } from '../alarm/alarm.component';
 import { MockAlarms, MockImageSet, MockImageUnreliableSet } from './fixtures';
 
@@ -32,7 +32,7 @@ const expected_base_classes = {
   'shutteddown_unreliable': ['alarm-tile-gray', 'alarm-tile-unreliable'],
   'malfunctioning_unreliable': ['alarm-tile-gray', 'alarm-tile-unreliable'],
   'shelved': ['alarm-tile-green'],
-  'shelved_unreliable': ['alarm-tile-green', 'alarm-tile-unreliable'],
+  'shelved_unreliable': ['alarm-tile-green'],
 };
 
 
@@ -126,6 +126,27 @@ describe('AlarmTileComponent', () => {
       }
       expectedClasses.push('tile-background-normal');
       component.alarm = Alarm.asAlarm(alarm);
+      fixture.detectChanges();
+      expect(component).toBeTruthy();
+      expect(component.getClass()).toEqual(expectedClasses);
+    }
+  });
+
+  it('should display the shelved alarms accordingly', () => {
+    for (const alarm of MockAlarms) {
+      component.alarm = Alarm.asAlarm(alarm);
+      component.alarm.shelve();
+      const expectedClasses = [];
+      if (component.alarm.validity === Validity.reliable) {
+        for (const c of expected_base_classes['shelved']) {
+          expectedClasses.push(c);
+        }
+      } else {
+        for (const c of expected_base_classes['shelved_unreliable']) {
+          expectedClasses.push(c);
+        }
+      }
+      expectedClasses.push('tile-background-normal');
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.getClass()).toEqual(expectedClasses);
