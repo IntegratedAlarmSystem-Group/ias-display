@@ -1,5 +1,5 @@
 <svg width="100%" height="100%" [attr.viewbox]="viewbox" class="antenna-marker">
-  <svg:circle
+  <svg:circle *ngIf="alarm"
     [attr.id]="placemark.name"
     [attr.cx]="this.cx"
     [attr.cy]="this.cy"
