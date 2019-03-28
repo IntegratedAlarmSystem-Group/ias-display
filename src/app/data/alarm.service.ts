@@ -187,7 +187,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
-      // console.log('notify ', payload);
+    // console.log('notify ', payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
@@ -215,7 +215,7 @@ export class AlarmService {
     const connectionPath = this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at: ' + environment.websocketPath);
+    console.log('Connected to webserver at');
   }
 
   /**
@@ -503,7 +503,7 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    console.log('calling emitSound with: ', sound);
+    // console.log('calling emitSound with: ', sound);
     this.audio = new Audio();
     const soundToPlay = AlarmSounds.getSoundsource(sound);
     if (soundToPlay === null || soundToPlay === '') {
@@ -552,6 +552,7 @@ export class AlarmService {
   triggerAlarmsNonValidConnectionState() {
     for (const alarm of this.alarmsArray) {
       alarm.validity = Validity.unreliable;
+      this.add_or_update_alarm(Alarm.asAlarm(Object.assign({}, alarm)));
     }
     this.changeAlarms('all');
   }
