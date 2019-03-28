@@ -8,7 +8,7 @@ import { HttpClientService } from '../data/http-client.service';
 import { Map } from '../map/fixtures';
 import { mockWeatherStationsConfig, mockWeatherSummaryConfig, mockImagesSets} from './test_fixtures';
 import { BackendUrls } from '../settings';
-import { Alarm } from '../data/alarm';
+import { Alarm, OperationalMode } from '../data/alarm';
 import { AlarmService } from '../data/alarm.service';
 
 
@@ -213,6 +213,38 @@ describe('WeatherService', () => {
     const highAlarm = subject.getAntennaHighPriorityAlarm('A02');
     expect(highAlarm.core_id).toEqual(mockAlarmTwo.core_id);
     expect(highAlarm.value).toEqual(mockAlarmTwo.value);
+  });
+
+  fit('should select a non shelved alarm, with higher value, as the higher priority alarm', () => {
+    const mockAlarmBaseTwo = Object.assign({}, mockAlarmBaseOne);
+    mockAlarmBaseTwo.core_id = 'WSAlarmTwo';
+    mockAlarmBaseTwo.value = 3;
+    mockAlarmBaseTwo.shelved = true;
+    const mockAlarmBaseThree = Object.assign({}, mockAlarmBaseOne);
+    mockAlarmBaseThree.core_id = 'WSAlarmThree';
+    mockAlarmBaseThree.value = 2;
+    const mockAlarmOne = Alarm.asAlarm(mockAlarmBaseOne);
+    const mockAlarmTwo = Alarm.asAlarm(mockAlarmBaseTwo);
+    const mockAlarmThree = Alarm.asAlarm(mockAlarmBaseThree);
+    spyOn(alarmService, 'isAlarmIndexAvailable').and.returnValue(true);
+    spyOn(alarmService, 'get').and.callFake(
+      function (alarmId: string) {
+        switch (alarmId) {
+          case mockAlarmOne.core_id:
+            return mockAlarmOne;
+          case mockAlarmTwo.core_id:
+            return mockAlarmTwo;
+          default:
+            return mockAlarmThree;
+        }
+      }
+    );
+    subject.updateAntennasRelationMaps('WSAlarmOne');
+    subject.updateAntennasRelationMaps('WSAlarmTwo');
+    subject.updateAntennasRelationMaps('WSAlarmThree');
+    const highAlarm = subject.getAntennaHighPriorityAlarm('A02');
+    expect(highAlarm.core_id).toEqual(mockAlarmThree.core_id);
+    expect(highAlarm.value).toEqual(mockAlarmThree.value);
   });
 
 });
