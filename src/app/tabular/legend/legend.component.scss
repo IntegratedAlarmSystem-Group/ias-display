@@ -1,8 +1,29 @@
-// /deep/ {
-//
-//   .alarm-status-legend .group .item .status .alarm-status {
-//       height: unset;
-//       width: 40px;
-//   }
-//
-// }
+.legend {
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+  width: 100%;
+}
+
+.legend-icon {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 18px;
+  font-weight: bold;
+}
+
+.legend-priority {
+  display: inline-block;
+  margin-right: 6px;
+  text-align: center;
+  width: 24px;
+  font-weight: bold;
+}
+
+.legend-alarm-label-content {
+  padding: 2px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}

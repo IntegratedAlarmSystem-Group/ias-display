@@ -9,6 +9,7 @@
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
 @import '../tabular/table/table-theme.scss';
+@import '../tabular/legend/legend-theme.scss';
 @import '../tabular/tabular-view/tabular-view-theme.scss';
 @import '../weather/weather-summary/weather-summary-theme.scss';
 @import '../weather/weather-sidebar/weather-sidebar-theme.scss';
@@ -175,6 +176,7 @@ $ias-typography: mat-typography-config(
   @include health-summary-theme($theme);
   @include overview-card-theme($theme);
   @include table-theme($theme);
+  @include legend-theme($theme);
   @include tabular-view-theme($theme);
   @include weather-summary-theme($theme);
   @include weather-sidebar-theme($theme);
