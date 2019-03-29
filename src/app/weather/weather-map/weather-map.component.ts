@@ -218,10 +218,8 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
       let colorClass = '';
       if (alarm.shelved === true) {
         colorClass = 'green';
-      } else if (alarm.mode === OperationalMode.unknown) {
-        colorClass = 'blue';
       } else if (alarm.showAsMaintenance()) {
-        colorClass = 'grey';
+        colorClass = 'green';
       } else if (alarm.value === Value.cleared) {
         colorClass = 'green';
       } else if (alarm.value === Value.set_low) {

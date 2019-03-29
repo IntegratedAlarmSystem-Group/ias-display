@@ -296,21 +296,39 @@ export class WeatherService {
     }
   }
 
+
+  /**
+  * Alarm priorities comparison
+  */
+  compareAlarmPriorities(a: Alarm, b: Alarm) {
+    if (a.value < b.value) {
+      return 1;
+    }
+    if (a.value > b.value) {
+      return -1;
+    }
+    return 0;
+  }
+
   /**
   * Get antenna high priority alarm
   */
   getAntennaHighPriorityAlarm(antenna: string) {
     if (Object.keys(this.affectedAntennasToAlarmIdsMap).indexOf(antenna) > -1) {
       const alarmIds = this.affectedAntennasToAlarmIdsMap[antenna];
-      const alarms = alarmIds.map(
-        (alarmId: string) => this.alarmService.get(alarmId)
-      );
-      alarms.sort((a: Alarm, b: Alarm) => a.value < b.value ? 1 : a.value > b.value ? -1 : 0);
-      const highPriorityAlarm = alarms[0];
-      return highPriorityAlarm;
-    } else {
-      return null;
+      if (alarmIds.length > 0) {
+        const alarms = alarmIds.map((alarmId: string) => this.alarmService.get(alarmId));
+        const mainAlarms = alarms.filter((alarm: Alarm) => !alarm.shelved);
+        if (mainAlarms.length > 0) {
+          mainAlarms.sort(this.compareAlarmPriorities);
+          return mainAlarms[0];
+        } else {
+          alarms.sort(this.compareAlarmPriorities);
+          return alarms[0];
+        }
+      }
     }
+    return null;
   }
 
   /**
