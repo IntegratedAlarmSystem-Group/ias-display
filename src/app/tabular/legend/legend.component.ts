@@ -7,7 +7,7 @@ import { Assets } from '../../settings';
 @Component({
   selector: 'app-legend',
   templateUrl: './legend.component.html',
-  styleUrls: ['./legend.component.css']
+  styleUrls: ['./legend.component.scss']
 })
 export class LegendComponent implements OnInit {
 

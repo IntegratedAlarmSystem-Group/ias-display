@@ -1,0 +1,38 @@
+@mixin legend-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $alarms: map-get($theme, alarms);
+
+  .legend-alarm-label-clear {
+    background: mat-color($alarms, clear-line-label);
+  }
+
+  .legend-alarm-label-low {
+    background: mat-color($alarms, set-low);
+    border-color: mat-color($alarms, set-low);
+    color: mat-color($alarms, set-card-dark-text);
+  }
+
+  .legend-alarm-label-medium {
+    background: mat-color($alarms, set-medium);
+    border-color: mat-color($alarms, set-medium);
+    color: mat-color($alarms, set-card-dark-text);
+  }
+
+  .legend-alarm-label-high {
+    border-color: mat-color($alarms, set-high);
+    background: mat-color($alarms, set-high);
+    color: mat-color($foreground, text);
+  }
+
+  .legend-alarm-label-critical {
+    border-color: mat-color($alarms, set-critical);
+    background: mat-color($alarms, set-critical);
+    color: mat-color($foreground, text);
+  }
+
+}
