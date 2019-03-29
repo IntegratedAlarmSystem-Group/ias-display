@@ -8,6 +8,9 @@ import { Alarm } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { Assets } from '../../settings';
 
+/**
+ * Summarized state of the Building alarms
+ */
 @Component({
   selector: 'app-building-summary',
   templateUrl: './building-summary.component.html',

@@ -78,6 +78,9 @@ export class AntennasSidebarComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  /**
+  * Updates the list of Ids of children alarms ({@link AntennasSidebarComponent#childrenIds})
+  */
   updateChildrenIds() {
     this.childrenIds = [];
     if (this.selectedAntenna && this.selectedAntenna.children) {
@@ -87,6 +90,10 @@ export class AntennasSidebarComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  /**
+  * Updates the list of Ids of all the alarms that are passed to the Table to display the dependent alarms
+  * ({@link AntennasSidebarComponent#childrenIds})
+  */
   updateTableIds() {
     const alarm = this.alarmService.getAlarm(this.selectedAntenna);
     if (!alarm) {
