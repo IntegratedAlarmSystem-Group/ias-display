@@ -34,7 +34,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
   * Array that defines the options for the number of element to diplay in each page of the table
   */
-  @Input() pageSizeOptions = [15, 25, 50, 100];
+  @Input() pageSizeOptions = [12, 25, 50, 100];
 
   /** Reference to the MatTable, the component that defines the table */
   @ViewChild(MatTable) table: MatTable<Alarm>;
