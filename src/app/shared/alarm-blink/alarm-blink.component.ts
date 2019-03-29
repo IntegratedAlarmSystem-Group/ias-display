@@ -2,6 +2,9 @@ import { Component, EventEmitter, OnInit, OnChanges, Input, Output, SimpleChange
 import { interval, Observable } from 'rxjs';
 import { Alarm } from '../../data/alarm';
 
+/**
+ * Component used to manage the blinking animation on different components
+ */
 @Component({
   selector: 'app-alarm-blink',
   templateUrl: './alarm-blink.component.html',
@@ -19,7 +22,9 @@ export class AlarmBlinkComponent implements OnInit, OnChanges {
   */
   @Input() disableBlink = false;
 
-  /** Event emitted to notify when the alarm should start or stop blinking */
+  /**
+  * Event emitted to notify when the alarm should start or stop blinking
+  */
   @Output() blinkingStatus = new EventEmitter<boolean>();
 
   /**

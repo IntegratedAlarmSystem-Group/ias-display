@@ -1804,7 +1804,7 @@ service alarms list</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="563" class="link-to-prism">src/app/data/alarm.service.ts:563</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="564" class="link-to-prism">src/app/data/alarm.service.ts:564</a></div>
                             </td>
                         </tr>
 
@@ -2800,7 +2800,7 @@ export class AlarmService {
       }
     );
     this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) &#x3D;&gt; {
-      // console.log(&#x27;notify &#x27;, payload);
+    // console.log(&#x27;notify &#x27;, payload);
       if (this.authService.loginStatus) {
         this.resetTimer();
         this.readAlarmMessage(payload.action, payload.data);
@@ -2828,7 +2828,7 @@ export class AlarmService {
     const connectionPath &#x3D; this.getConnectionPath();
     this.webSocketBridge.connect(connectionPath);
     this.webSocketBridge.listen(connectionPath);
-    console.log(&#x27;Connected to webserver at: &#x27; + environment.websocketPath);
+    console.log(&#x27;Connected to webserver at&#x27;);
   }
 
   /**
@@ -3097,7 +3097,7 @@ export class AlarmService {
    * @param {Alarm} alarm the {@link Alarm}
    */
   playAlarmSound(alarm: Alarm) {
-    if (!this.canSound) {
+    if (!this.canSound || alarm.shelved) {
       return;
     }
     const repeat &#x3D; alarm.shouldRepeat();
@@ -3116,7 +3116,7 @@ export class AlarmService {
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
   emitSound(sound: string, repeat: boolean) {
-    console.log(&#x27;calling emitSound with: &#x27;, sound);
+    // console.log(&#x27;calling emitSound with: &#x27;, sound);
     this.audio &#x3D; new Audio();
     const soundToPlay &#x3D; AlarmSounds.getSoundsource(sound);
     if (soundToPlay &#x3D;&#x3D;&#x3D; null || soundToPlay &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
@@ -3165,6 +3165,7 @@ export class AlarmService {
   triggerAlarmsNonValidConnectionState() {
     for (const alarm of this.alarmsArray) {
       alarm.validity &#x3D; Validity.unreliable;
+      this.add_or_update_alarm(Alarm.asAlarm(Object.assign({}, alarm)));
     }
     this.changeAlarms(&#x27;all&#x27;);
   }

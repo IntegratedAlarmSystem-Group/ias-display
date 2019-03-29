@@ -84,6 +84,7 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
   /** List to manage the pads in use */
   public padsStatusGroupNames = [];
 
+  /** Blinking status */
   public blinkingStatus = {};
 
   /**

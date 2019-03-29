@@ -79,6 +79,7 @@ priority of the alarm</p>
     </p>
     <p class="comment">
                 <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -129,6 +130,32 @@ priority of the alarm</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#alarmName">alarmName</a>
+                            </li>
+                            <li>
+                                <a href="#blinkingClass">blinkingClass</a>
+                            </li>
+                            <li>
+                                <a href="#currentClass">currentClass</a>
+                            </li>
+                            <li>
+                                <a href="#showAsPendingAck">showAsPendingAck</a>
+                            </li>
+                            <li>
+                                <a href="#showAsShelved">showAsShelved</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -139,22 +166,20 @@ priority of the alarm</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#changeBlinkingState">changeBlinkingState</a>
+                            </li>
+                            <li>
                                 <a href="#getAlarmName">getAlarmName</a>
                             </li>
                             <li>
                                 <a href="#getClass">getClass</a>
                             </li>
                             <li>
-                                <a href="#getPriorityText">getPriorityText</a>
+                                <a href="#ngOnChanges">ngOnChanges</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#showAsPendingAck">showAsPendingAck</a>
-                            </li>
-                            <li>
-                                <a href="#showAsShelved">showAsShelved</a>
                             </li>
                         </ul>
                     </td>
@@ -173,6 +198,9 @@ priority of the alarm</p>
                             </li>
                             <li>
                                 <a href="#alarmNameMaxSize">alarmNameMaxSize</a>
+                            </li>
+                            <li>
+                                <a href="#disableBlink">disableBlink</a>
                             </li>
                             <li>
                                 <a href="#optionalAlarmName">optionalAlarmName</a>
@@ -200,19 +228,50 @@ priority of the alarm</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:71</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Builds an instance of the component</p>
+                            <div class="io-description"><p>Builds a new instance</p>
 </div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Used for change detection in html</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -262,6 +321,28 @@ priority of the alarm</p>
                         <tr>
                             <td class="col-md-2" colspan="2">
                                     <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="disableBlink"></a>
+                        <code>disableBlink</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Variable to disable animation</p>
+</div>
+                        <p>
+                            <em>Default value : </em><code>false</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:44</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -346,6 +427,86 @@ This value is &quot;true&quot; by default</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="changeBlinkingState"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            changeBlinkingState
+                            </b>
+                            <a href="#changeBlinkingState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>changeBlinkingState(blinking: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:110</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Function executed to change the blinking state according to a boolean parameter
+It is executed when the inner <a href="../components/AlarmBlinkComponent.html">AlarmBlinkComponent</a> emits a value on its
+<a href="../components/AlarmBlinkComponent.html#blinkingStatus">AlarmBlinkComponent</a> <a href="EventEmitter">EventEmitter</a></p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>blinking</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>true if it should blink, false if not</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getAlarmName"></a>
                         <span class="name">
                             <b>
@@ -364,7 +525,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:169</a></div>
                             </td>
                         </tr>
 
@@ -413,7 +574,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:127</a></div>
                             </td>
                         </tr>
 
@@ -441,43 +602,73 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getPriorityText"></a>
+                        <a name="ngOnChanges"></a>
                         <span class="name">
                             <b>
-                            getPriorityText
+                            ngOnChanges
                             </b>
-                            <a href="#getPriorityText"><span class="icon ion-ios-link"></span></a>
+                            <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getPriorityText()</code>
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:128</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:91</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Returns a string related to the name of the alarm priority</p>
+                            <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
 </div>
 
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>changes</td>
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>Object containing the changes in the Inputs of the component</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
                                 <div class="io-description">
-                                    <p>alarm prioritity name for the display</p>
-
+                                    
                                 </div>
                     </td>
                 </tr>
@@ -505,7 +696,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:84</a></div>
                             </td>
                         </tr>
 
@@ -523,6 +714,148 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                 </tr>
             </tbody>
         </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="alarmName"></a>
+                        <span class="name">
+                            <b>
+                            alarmName
+                            </b>
+                            <a href="#alarmName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>alarmName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:71</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name of the alarm to display in the box</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blinkingClass"></a>
+                        <span class="name">
+                            <b>
+                            blinkingClass
+                            </b>
+                            <a href="#blinkingClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>blinkingClass:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentClass"></a>
+                        <span class="name">
+                            <b>
+                            currentClass
+                            </b>
+                            <a href="#currentClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentClass:     <code>[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:54</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current classes for displaying the component.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -538,35 +871,29 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>showAsPendingAck()</code>
+                        <code>showAsPendingAck:     <code></code>
+</code>
                     </td>
                 </tr>
-
-
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:92</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:60</a></div>
                             </td>
                         </tr>
 
-
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Defines wether or not the component should indicate that the alarm has a pending acknowledgement</p>
+                        <div class="io-description"><p>Defines wether or not the alarm must be displayed with the pending ack badge activated.
+True if it must be activated, false if not</p>
 </div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>true if the alarm has pending acknowledgement, false if not</p>
-
-                                </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -584,45 +911,38 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>showAsShelved()</code>
+                        <code>showAsShelved:     <code></code>
+</code>
                     </td>
                 </tr>
-
-
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/alarm-card/alarm-card.component.ts:66</a></div>
                             </td>
                         </tr>
 
-
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Defines wether or not the component should indicate that the alarm is shelved</p>
+                        <div class="io-description"><p>Defines wether or not the alarm must be displayed with the shelved badge activated.
+True if it must be activated, false if not</p>
 </div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>true if the alarm is shelved, false if not</p>
-
-                                </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 </section>
-
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
 
 /**
@@ -634,7 +954,7 @@ import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
   templateUrl: &#x27;./alarm-card.component.html&#x27;,
   styleUrls: [&#x27;./alarm-card.component.scss&#x27;]
 })
-export class AlarmCardComponent implements OnInit {
+export class AlarmCardComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -663,14 +983,85 @@ export class AlarmCardComponent implements OnInit {
   @Input() tooltipDirection &#x3D; &#x27;right&#x27;;
 
   /**
-   * Builds an instance of the component
+   * Variable to disable animation
    */
-  constructor() { }
+  @Input() disableBlink &#x3D; false;
+
+  /**
+  * Contains the name of the class to add for blinking, if the alarm should blink, otherwise its empty
+  */
+  blinkingClass &#x3D; &#x27;&#x27;;
+
+  /**
+  * Contains the current classes for displaying the component.
+  */
+  currentClass &#x3D; [];
+
+  /**
+   * Defines wether or not the alarm must be displayed with the pending ack badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsPendingAck &#x3D; false;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the shelved badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsShelved &#x3D; false;
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName &#x3D; &#x27;&#x27;;
+
+  /**
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
+  */
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   /**
    * Method executed when the component is initiated
    */
   ngOnInit() {
+  }
+
+  /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.showActionBadges &amp;&amp; changes.showActionBadges.previousValue !&#x3D;&#x3D; changes.showActionBadges.currentValue) {
+      this.showAsPendingAck &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
+      this.showAsShelved &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
+    }
+    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
+      this.alarmName &#x3D; this.getAlarmName();
+      this.currentClass &#x3D; this.getClass();
+      this.showAsPendingAck &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
+      this.showAsShelved &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
+    }
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      this.blinkingClass &#x3D; &#x27;blinking&#x27;;
+    } else {
+      this.blinkingClass &#x3D; &#x27;&#x27;;
+    }
+    this.currentClass &#x3D; this.getClass();
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -706,23 +1097,10 @@ export class AlarmCardComponent implements OnInit {
     if (this.alarm.validity &#x3D;&#x3D;&#x3D; 0 &amp;&amp; this.alarm.shelved !&#x3D;&#x3D; true) {
       result.push(&#x27;alarm-card-unreliable&#x27;);
     }
+    if (this.blinkingClass !&#x3D;&#x3D; &#x27;&#x27;) {
+      result.push(&#x27;blinking&#x27;);
+    }
     return result;
-  }
-
-  /**
-  * Defines wether or not the component should indicate that the alarm has a pending acknowledgement
-  * @returns {boolean} true if the alarm has pending acknowledgement, false if not
-  */
-  showAsPendingAck(): boolean {
-    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
-  }
-
-  /**
-  * Defines wether or not the component should indicate that the alarm is shelved
-  * @returns {boolean} true if the alarm is shelved, false if not
-  */
-  showAsShelved(): boolean {
-    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
   }
 
   /**
@@ -745,18 +1123,6 @@ export class AlarmCardComponent implements OnInit {
     return alarmName;
   }
 
-  /**
-  * Returns a string related to the name of the alarm priority
-  * @returns {string} alarm prioritity name for the display
-  */
-  getPriorityText(): string {
-    const alarmValue: string &#x3D; this.alarm.alarmValue;
-    const priorityText: string &#x3D; alarmValue
-      .replace(&#x27;cleared&#x27;, &#x27;&#x27;)
-      .replace(&#x27;set_&#x27;, &#x27;&#x27;);
-    return priorityText.toUpperCase();
-  }
-
 }
 </code></pre>
     </div>
@@ -773,22 +1139,22 @@ export class AlarmCardComponent implements OnInit {
     &lt;app-alarm-tooltip [alarm]&#x3D;&quot;alarm&quot; [tooltipDirection]&#x3D;&quot;tooltipDirection&quot;&gt;&lt;/app-alarm-tooltip&gt;
   &lt;/ng-template&gt;
 
-  &lt;div class&#x3D;&quot;alarm-card&quot; [ngClass]&#x3D;&quot;getClass()&quot;&gt;
+  &lt;div class&#x3D;&quot;alarm-card&quot; [ngClass]&#x3D;&quot;currentClass&quot;&gt;
     &lt;div fxFlex&#x3D;&quot;auto&quot; class&#x3D;&quot;alarm-card-content&quot;&gt;
-      &lt;div class&#x3D;&quot;alarm-name&quot;&gt;{{this.getAlarmName()}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;alarm-name&quot;&gt;{{this.alarmName}}&lt;/div&gt;
       &lt;div class&#x3D;&quot;alarm-priority&quot;&gt;
         &lt;app-alarm-label
           [alarm]&#x3D;&quot;alarm&quot;
           [size]&#x3D;&quot;&#x27;sm&#x27;&quot;
-          [noPadding]&#x3D;&quot;true&quot;
+          [fluidText]&#x3D;&quot;true&quot;
         &gt;&lt;/app-alarm-label&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div fxFlex&#x3D;&quot;20px&quot; class&#x3D;&quot;alarm-card-badges&quot;&gt;
+    &lt;div fxFlex&#x3D;&quot;18px&quot; class&#x3D;&quot;alarm-card-badges&quot;&gt;
 
-      &lt;div class&#x3D;&quot;badges&quot; *ngIf&#x3D;&quot;showActionBadges&quot;&gt;
+      &lt;div class&#x3D;&quot;badges&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;space-between&quot; *ngIf&#x3D;&quot;showActionBadges&quot;&gt;
 
-        &lt;div *ngIf&#x3D;&quot;showAsPendingAck(); then ackOn else ackOff&quot;&gt;&lt;/div&gt;
+        &lt;div *ngIf&#x3D;&quot;showAsPendingAck; then ackOn else ackOff&quot;&gt;&lt;/div&gt;
         &lt;ng-template #ackOn&gt;
           &lt;img class&#x3D;&quot;badge-icon ack-icon&quot;  src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
         &lt;/ng-template&gt;
@@ -796,7 +1162,7 @@ export class AlarmCardComponent implements OnInit {
           &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot;  src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
         &lt;/ng-template&gt;
 
-        &lt;div *ngIf&#x3D;&quot;showAsShelved(); then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
+        &lt;div *ngIf&#x3D;&quot;showAsShelved; then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
         &lt;ng-template #shelvedOn&gt;
           &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot;  src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
         &lt;/ng-template&gt;
@@ -809,6 +1175,11 @@ export class AlarmCardComponent implements OnInit {
     &lt;/div&gt;
   &lt;/div&gt;
 
+  &lt;app-alarm-blink
+    [alarm]&#x3D;&quot;this.alarm&quot;
+    (blinkingStatus)&#x3D;&quot;changeBlinkingState($event)&quot;
+  &gt;&lt;/app-alarm-blink&gt;
+
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -818,42 +1189,44 @@ export class AlarmCardComponent implements OnInit {
                     <code>./alarm-card.component.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.alarm-card {
-
-  display:block;
   border-width: 4px;
   border-style: solid;
   border-radius: 4px;
   font-weight: normal;
 
-  width:100%;
   min-height: 60px;
   width: 84.5px;
-  height:60px;
-  margin-bottom:15px;
+  padding: 0 2px;
+  height: 60px;
+  margin-bottom: 15px;
   line-height: normal;
 
   .alarm-card-content {
-    height:100%;
-    padding:10px 4px;
-    .alarm-name {}
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .alarm-name {
+      padding-left: 1px;
+    }
     .alarm-priority {
-      font-size:10px;
+      font-size: 10px;
       text-transform: uppercase;
       padding: 2px 0px;
     }
   }
 
   .alarm-card-badges {
-    height:100%;
-    max-width:20px;
-    margin-right:4%;
-    position: relative;
+    height: 100%;
 
     .badges {
+      vertical-align: middle;
+      height: 100%;
+      min-width: 12px;
+
       .badge-icon {
-        position: absolute;
-        &amp;.ack-icon { top: 16%; }
-        &amp;.shelve-icon { bottom: 12%; }
+        width: 100%;
+        &amp;.ack-icon { margin-top: 18%; }
+        &amp;.shelve-icon { margin-bottom: 14%; }
       }
       .badge-off {
         opacity: 0.08;
@@ -914,8 +1287,8 @@ export class AlarmCardComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="alarm"  class="alarm-card-container"  placement="{{tooltipDirection}}"  [ngbTooltip]="tipContent"  data-container="body">  <ng-template #tipContent>    <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>  </ng-template>  <div class="alarm-card" [ngClass]="getClass()">    <div fxFlex="auto" class="alarm-card-content">      <div class="alarm-name">{{this.getAlarmName()}}</div>      <div class="alarm-priority">        <app-alarm-label          [alarm]="alarm"          [size]="\'sm\'"          [noPadding]="true"        ></app-alarm-label>      </div>    </div>    <div fxFlex="20px" class="alarm-card-badges">      <div class="badges" *ngIf="showActionBadges">        <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>        <ng-template #ackOn>          <img class="badge-icon ack-icon"  src="/assets/img/ack-on.svg"/>        </ng-template>        <ng-template #ackOff>          <img class="badge-icon ack-icon badge-off"  src="/assets/img/ack-on.svg"/>        </ng-template>        <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>        <ng-template #shelvedOn>          <img class="badge-icon shelve-icon"  src="/assets/img/unshelve.svg"/>        </ng-template>        <ng-template #shelvedOff>          <img class="badge-icon shelve-icon badge-off"  src="/assets/img/shelve.svg"/>        </ng-template>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="alarm"  class="alarm-card-container"  placement="{{tooltipDirection}}"  [ngbTooltip]="tipContent"  data-container="body">  <ng-template #tipContent>    <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>  </ng-template>  <div class="alarm-card" [ngClass]="currentClass">    <div fxFlex="auto" class="alarm-card-content">      <div class="alarm-name">{{this.alarmName}}</div>      <div class="alarm-priority">        <app-alarm-label          [alarm]="alarm"          [size]="\'sm\'"          [fluidText]="true"        ></app-alarm-label>      </div>    </div>    <div fxFlex="18px" class="alarm-card-badges">      <div class="badges" fxLayout="column" fxLayoutAlign="space-between" *ngIf="showActionBadges">        <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>        <ng-template #ackOn>          <img class="badge-icon ack-icon"  src="/assets/img/ack-on.svg"/>        </ng-template>        <ng-template #ackOff>          <img class="badge-icon ack-icon badge-off"  src="/assets/img/ack-on.svg"/>        </ng-template>        <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>        <ng-template #shelvedOn>          <img class="badge-icon shelve-icon"  src="/assets/img/unshelve.svg"/>        </ng-template>        <ng-template #shelvedOff>          <img class="badge-icon shelve-icon badge-off"  src="/assets/img/shelve.svg"/>        </ng-template>      </div>    </div>  </div>  <app-alarm-blink    [alarm]="this.alarm"    (blinkingStatus)="changeBlinkingState($event)"  ></app-alarm-blink></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AlarmCardComponent'};
 </script>

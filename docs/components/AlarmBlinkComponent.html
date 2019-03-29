@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AckButtonComponent</li>
+  <li>AlarmBlinkComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,14 +61,14 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/actions/ack-button/ack-button.component.ts</code>
+    <code>src/app/shared/alarm-blink/alarm-blink.component.ts</code>
 </p>
 
     <p class="comment">
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Button used to trigger the event to open the Acknowledge Modal</p>
+        <p>Component used to manage the blinking animation on different components</p>
 
     </p>
 
@@ -79,7 +79,6 @@
     <p class="comment">
                 <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
                 <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
-                <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
     </p>
 
 
@@ -100,19 +99,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-ack-button</code></td>
+                <td class="col-md-9"><code>app-alarm-blink</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./ack-button.component.css</code></td>
+                <td class="col-md-9"><code>./alarm-blink.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./ack-button.component.html</code></td>
+                <td class="col-md-9"><code>./alarm-blink.component.html</code></td>
             </tr>
 
 
@@ -139,11 +138,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#canAcknowledge">canAcknowledge</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#blinkingTimer">blinkingTimer</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#sidenavService">sidenavService</a>
+                                <a href="#maxBlinkInterval">maxBlinkInterval</a>
                             </li>
                         </ul>
                     </td>
@@ -158,13 +157,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getCanAcknowledge">getCanAcknowledge</a>
+                                <a href="#_startTimer">_startTimer</a>
                             </li>
                             <li>
-                                <a href="#isDisabled">isDisabled</a>
-                            </li>
-                            <li>
-                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                                <a href="#_stopTimer">_stopTimer</a>
                             </li>
                             <li>
                                 <a href="#ngOnChanges">ngOnChanges</a>
@@ -173,7 +169,12 @@
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onClick">onClick</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#startAnimation">startAnimation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stopAnimation">stopAnimation</a>
                             </li>
                         </ul>
                     </td>
@@ -190,10 +191,27 @@
                             <li>
                                 <a href="#alarm">alarm</a>
                             </li>
+                            <li>
+                                <a href="#disableBlink">disableBlink</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#blinkingStatus">blinkingStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -207,82 +225,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sidenavService: <a href="../injectables/SidenavService.html">SidenavService</a>, focusMonitor: FocusMonitor, elementRef: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:38</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Builds an instance of the component</p>
+                            <div class="io-description"><p>Builds a new instance</p>
 </div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>sidenavService</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>service to manage the Acknowledge and Shelve sidenav</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>focusMonitor</td>
-                                                  
-                                                        <td>
-                                                                    <code>FocusMonitor</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>system service used to monitor focus of components</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>elementRef</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>reference to this component in the DOM</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -299,7 +254,7 @@
                         <code>alarm</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>Alarm object associated to the button</p>
+                        <div><p>Alarm object associated to the component</p>
 </div>
                             <p>
                             <em>Type :</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
@@ -309,13 +264,58 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="disableBlink"></a>
+                        <code>disableBlink</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Variable to enable animation</p>
+</div>
+                        <p>
+                            <em>Default value : </em><code>false</code>
+                        </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
         </table>
 </section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="blinkingStatus"></a>
+                        <code>blinkingStatus</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Event emitted to notify when the alarm should start or stop blinking</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section>
@@ -327,43 +327,73 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getCanAcknowledge"></a>
+                        <a name="_startTimer"></a>
                         <span class="name">
                             <b>
-                            getCanAcknowledge
+                            _startTimer
                             </b>
-                            <a href="#getCanAcknowledge"><span class="icon ion-ios-link"></span></a>
+                            <a href="#_startTimer"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getCanAcknowledge()</code>
+<code>_startTimer(time: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:137</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
+                            <div class="io-description"><p>Internal method to start the timer for the animation</p>
 </div>
 
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>time</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>the time in milliseconds after which the timer should finish</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
 
                             </div>
                                 <div class="io-description">
-                                    <p>true if the {</p>
-
+                                    
                                 </div>
                     </td>
                 </tr>
@@ -373,79 +403,32 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isDisabled"></a>
+                        <a name="_stopTimer"></a>
                         <span class="name">
                             <b>
-                            isDisabled
+                            _stopTimer
                             </b>
-                            <a href="#isDisabled"><span class="icon ion-ios-link"></span></a>
+                            <a href="#_stopTimer"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>isDisabled()</code>
+<code>_stopTimer()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:144</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Defines whether or not the button is disabled</p>
-</div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>true if the button is disabled, false if not.</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngAfterViewInit"></a>
-                        <span class="name">
-                            <b>
-                            ngAfterViewInit
-                            </b>
-                            <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngAfterViewInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:59</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method executed after the component is initialized.
-It is used here to stop focus monitoring of the button, in order to fix some visual issues</p>
+                            <div class="io-description"><p>Internal method to stop (unsubscribe from) the timer</p>
 </div>
 
                             <div class="io-description">
@@ -478,14 +461,14 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:56</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
+                            <div class="io-description"><p>Method to handle the changes on the alarm values</p>
 </div>
 
                             <div class="io-description">
@@ -554,14 +537,14 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:49</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Initializes the component</p>
+                            <div class="io-description"><p>Executed when the component is initiating</p>
 </div>
 
                             <div class="io-description">
@@ -576,32 +559,112 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="onClick"></a>
+                        <a name="startAnimation"></a>
                         <span class="name">
                             <b>
-                            onClick
+                                <span class="modifier">Public</span>
+                            startAnimation
                             </b>
-                            <a href="#onClick"><span class="icon ion-ios-link"></span></a>
+                            <a href="#startAnimation"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onClick()</code>
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>startAnimation(blinkTime: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:117</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on ack button, it triggers ack sidenav through the <a href="Router">Router</a> service</p>
+                            <div class="io-description"><p>Method to start the blinking animation</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>blinkTime</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>the time in milliseconds for which the alarm should blink</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="stopAnimation"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            stopAnimation
+                            </b>
+                            <a href="#stopAnimation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>stopAnimation()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:128</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Method to go to the normal state to stop the animation</p>
 </div>
 
                             <div class="io-description">
@@ -623,36 +686,37 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="canAcknowledge"></a>
+                        <a name="blinkingTimer"></a>
                         <span class="name">
                             <b>
-                            canAcknowledge
+                                <span class="modifier">Public</span>
+                            blinkingTimer
                             </b>
-                            <a href="#canAcknowledge"><span class="icon ion-ios-link"></span></a>
+                            <a href="#blinkingTimer"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>canAcknowledge:     <code></code>
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>blinkingTimer:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>true</code>
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:33</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Defines wether or not the Acknowledge can be performed
-It is updated when there are changes in the alarm</p>
+                        <div class="io-description"><p>Blinking timer</p>
 </div>
                     </td>
                 </tr>
@@ -663,37 +727,42 @@ It is updated when there are changes in the alarm</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="sidenavService"></a>
+                        <a name="maxBlinkInterval"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            sidenavService
+                            maxBlinkInterval
                             </b>
-                            <a href="#sidenavService"><span class="icon ion-ios-link"></span></a>
+                            <a href="#maxBlinkInterval"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>sidenavService:     <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
+                        <code>maxBlinkInterval:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>10000</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-blink/alarm-blink.component.ts:38</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description">service to manage the Acknowledge and Shelve sidenav</div>
+                        <div class="io-description"><p>Maximum blikining time in miliseconds</p>
+</div>
                     </td>
                 </tr>
 
@@ -705,138 +774,168 @@ It is updated when there are changes in the alarm</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnChanges, AfterViewInit, Input, ElementRef, SimpleChanges } from &#x27;@angular/core&#x27;;
-import { FocusMonitor } from &#x27;@angular/cdk/a11y&#x27;;
-import { SidenavService } from &#x27;../sidenav.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, OnInit, OnChanges, Input, Output, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { interval, Observable } from &#x27;rxjs&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
 
 /**
- * Button used to trigger the event to open the Acknowledge Modal
+ * Component used to manage the blinking animation on different components
  */
 @Component({
-  selector: &#x27;app-ack-button&#x27;,
-  templateUrl: &#x27;./ack-button.component.html&#x27;,
-  styleUrls: [&#x27;./ack-button.component.css&#x27;]
+  selector: &#x27;app-alarm-blink&#x27;,
+  templateUrl: &#x27;./alarm-blink.component.html&#x27;,
+  styleUrls: [&#x27;./alarm-blink.component.css&#x27;]
 })
-export class AckButtonComponent implements OnInit, OnChanges, AfterViewInit {
+export class AlarmBlinkComponent implements OnInit, OnChanges {
 
   /**
-   * Alarm object associated to the button
-   */
+  * Alarm object associated to the component
+  */
   @Input() alarm: Alarm;
 
   /**
-  * Defines wether or not the Acknowledge can be performed
-  * It is updated when there are changes in the alarm
+  * Variable to enable animation
   */
-  canAcknowledge &#x3D; true;
+  @Input() disableBlink &#x3D; false;
 
   /**
-   * Builds an instance of the component
-   * @param {SidenavService} sidenavService service to manage the Acknowledge and Shelve sidenav
-   * @param {FocusMonitor} focusMonitor system service used to monitor focus of components
-   * @param {ElementRef} elementRef reference to this component in the DOM
-   */
+  * Event emitted to notify when the alarm should start or stop blinking
+  */
+  @Output() blinkingStatus &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+  * Blinking timer
+  */
+  public blinkingTimer: any;
+
+  /**
+  * Maximum blikining time in miliseconds
+  */
+  maxBlinkInterval &#x3D; 10000;
+
+  /**
+  * Builds a new instance
+  */
   constructor(
-    public sidenavService: SidenavService,
-    private focusMonitor: FocusMonitor,
-    private elementRef: ElementRef
   ) { }
 
   /**
-   * Initializes the component
-   */
+  * Executed when the component is initiating
+  */
   ngOnInit() {
   }
 
   /**
-  * Method to handle the changes on the inputs of the component
+  * Method to handle the changes on the alarm values
   * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
-      this.canAcknowledge &#x3D; this.getCanAcknowledge();
+    if (this.disableBlink) {
+      return;
+    }
+
+    if (this.alarm) {
+      if (this.alarm.shelved) {
+        return;
+      }
+      const currentTime &#x3D; (new Date).getTime();
+      const lastChange &#x3D; this.alarm.value_change_timestamp;
+      const timeDiff &#x3D; currentTime - lastChange;
+      let blinkInterval &#x3D; this.maxBlinkInterval;
+
+      if ( timeDiff &gt;&#x3D; 0) {
+        blinkInterval &#x3D; this.maxBlinkInterval - timeDiff;
+        if (blinkInterval &lt;&#x3D; 0) {
+          return;
+        }
+      }
+
+      let previousAlarmValue &#x3D; 0;
+      let currentAlarmValue: number &#x3D; this.alarm.value;
+      let previousAlarmAck &#x3D; false;
+      let currentAlarmAck: boolean &#x3D; this.alarm.ack;
+
+      if (changes.alarm.previousValue) {
+        previousAlarmValue &#x3D; changes.alarm.previousValue.value;
+        currentAlarmValue &#x3D; changes.alarm.currentValue.value;
+        previousAlarmAck &#x3D; changes.alarm.previousValue.ack;
+        currentAlarmAck &#x3D; changes.alarm.currentValue.ack;
+      }
+
+      // unack to ack
+      if ( !previousAlarmAck  &amp;&amp; currentAlarmAck ) {
+        this.stopAnimation();
+        return;
+      }
+
+      // set to clear transition
+      if ( (previousAlarmValue &gt; 0) &amp;&amp; (currentAlarmValue &#x3D;&#x3D;&#x3D; 0) ) {
+        this.stopAnimation();
+        return;
+      }
+      // clear to set transition
+      if ( (previousAlarmValue &#x3D;&#x3D;&#x3D; 0) &amp;&amp; (currentAlarmValue &gt; 0) ) {
+        this.startAnimation(blinkInterval);
+        return;
+      }
+      // set to different priority transition
+      if ( (previousAlarmValue &gt; 0) &amp;&amp; (currentAlarmValue &gt; 0) &amp;&amp; (previousAlarmValue !&#x3D;&#x3D; currentAlarmValue)) {
+        this.startAnimation(blinkInterval);
+        return;
+      }
     }
   }
 
   /**
-  * Method executed after the component is initialized.
-  * It is used here to stop focus monitoring of the button, in order to fix some visual issues
+  * Method to start the blinking animation
+  * @param {number} blinkTime the time in milliseconds for which the alarm should blink
   */
-  ngAfterViewInit() {
-    const buttonRef &#x3D; this.elementRef.nativeElement.children[0];
-    this.focusMonitor.stopMonitoring(buttonRef);
+  public startAnimation(blinkTime: number): void {
+    this.blinkingStatus.emit(true);
+    this.blinkingTimer &#x3D; this._startTimer(blinkTime).subscribe( () &#x3D;&gt; {
+      this.stopAnimation();
+    });
+  }
+
+
+  /**
+  * Method to go to the normal state to stop the animation
+  */
+  public stopAnimation(): void {
+    this.blinkingStatus.emit(false);
+    this._stopTimer();
   }
 
   /**
-   * Define if the alarm can be acknowledged based on if it was acknowledged before.
-   * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
-   */
-  getCanAcknowledge(): boolean {
-    if (this.alarm !&#x3D; null &amp;&amp; this.alarm.state_change_timestamp &gt; 0) {
-      return !this.alarm.ack;
-    } else {
-      return false;
+  * Internal method to start the timer for the animation
+  * @param {number} time the time in milliseconds after which the timer should finish
+  */
+  _startTimer(time: number): Observable&lt;any&gt; {
+    return interval(time);
+  }
+
+  /**
+  * Internal method to stop (unsubscribe from) the timer
+  */
+  _stopTimer(): void {
+    if (this.blinkingTimer) {
+      this.blinkingTimer.unsubscribe();
     }
   }
-
-  /**
-   * Defines whether or not the button is disabled
-   * @returns {boolean} true if the button is disabled, false if not.
-   */
-  isDisabled(): boolean {
-    return !this.sidenavService.canClose || !this.canAcknowledge;
-  }
-
-  /**
-  * Handle click on ack button, it triggers ack sidenav through the {@link Router} service
-  */
-  onClick() {
-    this.sidenavService.goToAcknowledge(this.alarm.core_id);
-  }
-
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button mat-flat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;ack-button&quot; title&#x3D;&quot;Acknowledge&quot; (click)&#x3D;&quot;onClick()&quot; [disabled]&#x3D;&quot;isDisabled()&quot;&gt;
-    &lt;div *ngIf&#x3D;&quot;isDisabled(); then ackOff else ackOn&quot;&gt;&lt;/div&gt;
-    &lt;ng-template #ackOn&gt;
-      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-on-btn-icon.svg&quot;/&gt; &lt;/div&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template #ackOff&gt;
-      &lt;div class&#x3D;&quot;ack-button-icon&quot;&gt; &lt;img src&#x3D;&quot;/assets/img/ack-off-btn-icon.svg&quot;/&gt; &lt;/div&gt;
-    &lt;/ng-template&gt;
-&lt;/button&gt;
+        <pre class="line-numbers"><code class="language-html">
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./ack-button.component.css</code>
+                    <code>./alarm-blink.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.ack-button {
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-bottom: 2px;
-  margin-right: 4px;
-  margin-left: 4px;
-  border-radius: 24px;
-  min-width: 1px;
-  width: 32px;
-  height: 32px;
-}
-
-.ack-button-icon {
-  width: 21px;
-  margin: auto;
-}
-
-.mat-flat-button {
-  line-height: 28px;
-}
-</code></pre>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -864,10 +963,10 @@ export class AckButtonComponent implements OnInit, OnChanges, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button mat-flat-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick()" [disabled]="isDisabled()">    <div *ngIf="isDisabled(); then ackOff else ackOn"></div>    <ng-template #ackOn>      <div class="ack-button-icon"> <img src="/assets/img/ack-on-btn-icon.svg"/> </div>    </ng-template>    <ng-template #ackOff>      <div class="ack-button-icon"> <img src="/assets/img/ack-off-btn-icon.svg"/> </div>    </ng-template></button></div>'
+        var COMPONENT_TEMPLATE = '<div></div>'
     var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
+    var ACTUAL_COMPONENT = {'name': 'AlarmBlinkComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -901,7 +1000,7 @@ export class AckButtonComponent implements OnInit, OnChanges, AfterViewInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AckButtonComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AlarmBlinkComponent.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

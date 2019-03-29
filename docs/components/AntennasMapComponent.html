@@ -660,14 +660,14 @@ from the alarm configuration</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>getPlacemarkObject(placemark: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>getPlacemarkObject(placemark_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:152</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:150</a></div>
                             </td>
                         </tr>
 
@@ -690,7 +690,7 @@ from the alarm configuration</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>placemark</td>
+                                                        <td>placemark_id</td>
                                                         <td>
                                                                     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                         </td>
@@ -785,7 +785,7 @@ if not already initialized and the initialization of the related map data source
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:163</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:160</a></div>
                             </td>
                         </tr>
 
@@ -904,7 +904,7 @@ calling the <a href="initialize">initialize</a> method</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:176</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/antennas/antennas-map/antennas-map.component.ts:173</a></div>
                             </td>
                         </tr>
 
@@ -1683,22 +1683,19 @@ export class AntennasMapComponent implements OnInit {
   getOpacityClass(antennaConfig: AlarmConfig): string {
     if (this.selectedAntenna &#x3D;&#x3D;&#x3D; null) {
       return &#x27;opacity-100&#x27;;
-    } else {
-      if ( this.isSelected(antennaConfig) &#x3D;&#x3D;&#x3D; true ) {
-        return &#x27;opacity-100&#x27;;
-      } else {
-        return &#x27;opacity-35&#x27;;
-      }
     }
+    if ( this.isSelected(antennaConfig) &#x3D;&#x3D;&#x3D; true ) {
+      return &#x27;opacity-100&#x27;;
+    }
+    return &#x27;opacity-35&#x27;;
   }
 
  /**
   * Get a placemark graphical object from an id
-  * @param {string} placemark Id of a graphical element in the map source
+  * @param {string} placemark_id Id of a graphical element in the map source
   * @return {any} placemark graphical element
   */
-  getPlacemarkObject(placemark: string): any {
-    const placemark_id &#x3D; placemark;
+  getPlacemarkObject(placemark_id: string): any {
     return this.placemarks[placemark_id];
   }
 
@@ -1865,7 +1862,7 @@ export class AntennasMapComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><app-map  [mapConfig]="this.mapConfig"  [mapdataAvailable]="this.mapdataAvailable.value">   <ng-container data="svg-elements">     <svg:path class="antennas-map-paths" *ngFor="let path of svgPaths"       [attr.d]="path"       stroke="currentColor"       stroke-width="3"       fill="none"     />     <svg:circle class="antennas-map-pads" *ngFor="let p of mapPlacemarks[\'pads\']"       [attr.cx]="p.opt_cx"       [attr.cy]="p.opt_cy"       [attr.data]="p.name"       r="5"       stroke="currentColor"       stroke-width="3"       fill="#212d3a"     />     <ng-container *ngFor="let p of mapPlacemarks[\'buildings\']">         <svg:foreignObject *ngIf="p.name === \'AOS\'"              [attr.x]="p.opt_cx-15"              [attr.y]="p.opt_cy-14"              width="100"              height="100">              <xhtml:div>                 <img class="antennas-map-aos-marker" title="AOS" src="/assets/img/aos.svg"/>              </xhtml:div>         </svg:foreignObject>     </ng-container>    <ng-container *ngFor="let antennaConfig of this.service.antennasConfig">      <ng-container *ngIf="existsPlacemarkData(antennaConfig.placemark)">        <ng-container *ngFor="let p of [getPlacemarkObject(antennaConfig.placemark)]">          <svg:g            (click)="onClick(antennaConfig)"            [ngClass]="getOpacityClass(antennaConfig)"          >            <svg:foreignObject              class="no-line-height"              [attr.x]="p.opt_cx-10"              [attr.y]="p.opt_cy-10"              width="20"              height="20">              <xhtml:app-antenna-marker                [placemark]="p"                [alarm]="getAlarm(antennaConfig.alarm_id)"                [viewbox]="\'0 0 20 20\'"                [cx]=10                [cy]=10                [r]=5              >              </xhtml:app-antenna-marker>            </svg:foreignObject>          </svg:g>        </ng-container>      </ng-container>    </ng-container>   </ng-container></app-map></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AntennasMapComponent'};
 </script>

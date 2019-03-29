@@ -75,13 +75,13 @@
                             <a href="#ChangedAlarm5" title="src/app/tabular/table/fixtures.ts"><b>ChangedAlarm5</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
+                            <a href="#environment" title="src/environments/environment.docker.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.docker.ts)</a>
+                        </li>
+                        <li>
                             <a href="#environment" title="src/environments/environment.prod.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
                         </li>
                         <li>
                             <a href="#environment" title="src/environments/environment.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#environment" title="src/environments/environment.docker.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.docker.ts)</a>
                         </li>
                         <li>
                             <a href="#expectedClassesWhenHiddenText" title="src/app/shared/alarm-label/fixtures.ts"><b>expectedClassesWhenHiddenText</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
@@ -114,13 +114,16 @@
                             <a href="#mockAlarmData" title="src/app/actions/ack-tree/fixtures.ts"><b>mockAlarmData</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#mockAlarms" title="src/app/antennas/tests_fixtures.ts"><b>mockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../tests_fixtures.ts)</a>
-                        </li>
-                        <li>
                             <a href="#mockAlarms" title="src/app/weather/test_fixtures.ts"><b>mockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../test_fixtures.ts)</a>
                         </li>
                         <li>
+                            <a href="#mockAlarms" title="src/app/antennas/tests_fixtures.ts"><b>mockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../tests_fixtures.ts)</a>
+                        </li>
+                        <li>
                             <a href="#MockAlarms" title="src/app/shared/alarm-header/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MockAlarms" title="src/app/shared/alarm-label/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#MockAlarms" title="src/app/shared/alarm/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
@@ -129,13 +132,13 @@
                             <a href="#MockAlarms" title="src/app/shared/alarm-tile/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#MockAlarms" title="src/app/tabular/table/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#MockAlarms" title="src/app/shared/alarm-label/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                            <a href="#MockAlarms" title="src/app/shared/alarm-blink/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#MockAlarms" title="src/app/shared/alarm-card/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MockAlarms" title="src/app/tabular/table/fixtures.ts"><b>MockAlarms</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#MockAlarmsToDisplay" title="src/app/tabular/table/fixtures.ts"><b>MockAlarmsToDisplay</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
@@ -168,10 +171,10 @@
                             <a href="#mockImagesUnreliableSets" title="src/app/antennas/tests_fixtures.ts"><b>mockImagesUnreliableSets</b>&nbsp;&nbsp;&nbsp;(src/.../tests_fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#MockImageUnreliableSet" title="src/app/shared/alarm-tile/fixtures.ts"><b>MockImageUnreliableSet</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                            <a href="#MockImageUnreliableSet" title="src/app/shared/alarm/fixtures.ts"><b>MockImageUnreliableSet</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
-                            <a href="#MockImageUnreliableSet" title="src/app/shared/alarm/fixtures.ts"><b>MockImageUnreliableSet</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
+                            <a href="#MockImageUnreliableSet" title="src/app/shared/alarm-tile/fixtures.ts"><b>MockImageUnreliableSet</b>&nbsp;&nbsp;&nbsp;(src/.../fixtures.ts)</a>
                         </li>
                         <li>
                             <a href="#mockPadsStatus" title="src/app/weather/test_fixtures.ts"><b>mockPadsStatus</b>&nbsp;&nbsp;&nbsp;(src/.../test_fixtures.ts)</a>
@@ -849,6 +852,7 @@
   WEATHER_SUMMARY: &#x27;/panels-api/alarms-config/get_json/?key&#x3D;weather_summary_config&#x27;,
   ANTENNAS_SUMMARY: &#x27;/panels-api/alarms-config/get_json/?key&#x3D;antennas_summary_config&#x27;,
   HEALTH_SUMMARY: &#x27;/panels-api/alarms-config/get_json/?key&#x3D;health_summary_config&#x27;,
+  BUILDING_SUMMARY: &#x27;/panels-api/alarms-config/get_json/?key&#x3D;building_summary_config&#x27;,
   PADS_STATUS: &#x27;/panels-api/placemark/pads_by_group/&#x27;,
 }</code>
                         </td>
@@ -1073,6 +1077,8 @@
   &#x27;mode&#x27;: 5,
   &#x27;core_timestamp&#x27;: 1267252440010,
   &#x27;state_change_timestamp&#x27;: 1267252440010,
+  &#x27;value_change_timestamp&#x27;: 0,
+  &#x27;value_change_transition&#x27;: [0, 1],
   &#x27;validity&#x27;: 1,
   &#x27;description&#x27;: &#x27;Alarm 2 description&#x27;,
   &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1129,6 +1135,8 @@
   &#x27;mode&#x27;: 5,
   &#x27;core_timestamp&#x27;: 1267252440010,
   &#x27;state_change_timestamp&#x27;: 1267252440010,
+  &#x27;value_change_timestamp&#x27;: 0,
+  &#x27;value_change_transition&#x27;: [0, 4],
   &#x27;validity&#x27;: 1,
   &#x27;description&#x27;: &#x27;Alarm 5 description&#x27;,
   &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1398,6 +1406,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 1 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1415,6 +1425,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 2 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1432,6 +1444,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 3 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1449,6 +1463,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 4 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1466,6 +1482,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 5 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1485,6 +1503,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 11 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1502,6 +1522,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 12 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1519,6 +1541,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 13 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1536,6 +1560,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 14 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1553,6 +1579,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 15 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1572,6 +1600,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 21 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1589,6 +1619,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 22 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1606,6 +1638,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 23 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1623,6 +1657,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 24 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1640,6 +1676,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 25 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1659,6 +1697,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 31 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1676,6 +1716,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 32 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1693,6 +1735,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 33 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1710,6 +1754,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 34 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1727,6 +1773,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;Alarm 35 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1746,6 +1794,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 43 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1763,6 +1813,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 44 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1780,6 +1832,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 47 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -1797,6 +1851,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;Alarm 50 description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2088,6 +2144,59 @@
             </tbody>
         </table>
 </section>
+    <h3>src/environments/environment.docker.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="environment"></a>
+                        <span class="name">
+                            <b>
+                            environment
+                            </b>
+                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>environment:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+
+  /** Indicates wether the environment is production or development */
+  production: false,
+
+  /** Path for websocket connection */
+  websocketPath: &#x27;/stream&#x27;,
+
+  /** Base URL for HTTP requests */
+  httpUrl: &#x27;&#x27;,
+}</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Environment variables related to the production environment </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
     <h3>src/environments/environment.prod.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -2180,59 +2289,6 @@
 
   /** Base URL for HTTP requests */
   httpUrl: &#x27;http://127.0.0.1:8000&#x27;,
-}</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Environment variables related to the production environment </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
-    <h3>src/environments/environment.docker.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="environment"></a>
-                        <span class="name">
-                            <b>
-                            environment
-                            </b>
-                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>environment:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>{
-
-  /** Indicates wether the environment is production or development */
-  production: false,
-
-  /** Path for websocket connection */
-  websocketPath: &#x27;/stream&#x27;,
-
-  /** Base URL for HTTP requests */
-  httpUrl: &#x27;&#x27;,
 }</code>
                         </td>
                     </tr>
@@ -2422,6 +2478,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2438,6 +2496,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2454,6 +2514,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2470,6 +2532,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2486,6 +2550,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2502,6 +2568,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2518,6 +2586,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2534,6 +2604,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2550,6 +2622,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2566,6 +2640,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2582,6 +2658,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2598,6 +2676,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2614,6 +2694,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2630,6 +2712,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 4],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2646,6 +2730,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 3],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2662,6 +2748,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 2],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2678,6 +2766,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2694,6 +2784,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2710,6 +2802,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2726,6 +2820,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2742,6 +2838,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2758,6 +2856,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2774,6 +2874,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2790,6 +2892,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2806,6 +2910,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2822,6 +2928,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2838,6 +2946,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2854,6 +2964,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 1],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -2966,6 +3078,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -2985,6 +3099,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3005,6 +3121,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3025,6 +3143,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3041,6 +3161,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3057,6 +3179,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3073,6 +3197,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3089,6 +3215,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3105,6 +3233,8 @@
     &#x27;mode&#x27;: &#x27;&#x27;,
     &#x27;core_timestamp&#x27;: 1,
     &#x27;state_change_timestamp&#x27;: 1,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;www.alma.cl&#x27;,
     &#x27;sound&#x27;: &#x27;TYPE1&#x27;,
@@ -3322,6 +3452,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3338,6 +3470,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma2.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3354,6 +3488,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma2.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3370,6 +3506,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm device&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3386,6 +3524,26 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
+    &#x27;description&#x27;: &#x27;Short description for mock alarm device&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;NONE&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+  &#x27;mockAlarm-0-child-2&#x27;: Alarm.asAlarm({
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;mockAlarm-0-child-2&#x27;,
+    &#x27;running_id&#x27;: &#x27;mockAlarm-0-child-2&#x27;,
+    &#x27;mode&#x27;: &#x27;0&#x27;,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;validity&#x27;: &#x27;1&#x27;,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm device&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3402,6 +3560,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm device&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3418,6 +3578,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm device&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma1.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3434,6 +3596,8 @@
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;validity&#x27;: &#x27;1&#x27;,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;description&#x27;: &#x27;Short description for mock alarm&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma2.cl&#x27;,
     &#x27;sound&#x27;: &#x27;NONE&#x27;,
@@ -3490,7 +3654,17 @@
       &#x27;view&#x27;: &#x27;antennas&#x27;,
       &#x27;placemark&#x27;: &#x27;mockAlarm-0&#x27;,
       &#x27;group&#x27;: &#x27;antennas&#x27;,
-      &#x27;children&#x27;: []
+      &#x27;children&#x27;: [
+        {
+          &#x27;alarm_id&#x27;: &#x27;mockAlarm-0-child-2&#x27;,
+          &#x27;custom_name&#x27;: &#x27;&#x27;,
+          &#x27;type&#x27;: &#x27;&#x27;,
+          &#x27;view&#x27;: &#x27;&#x27;,
+          &#x27;placemark&#x27;: &#x27;&#x27;,
+          &#x27;group&#x27;: &#x27;antennas&#x27;,
+          &#x27;children&#x27;: []
+        },
+      ]
     },
     {
       &#x27;alarm_id&#x27;: &#x27;mockAlarm-1&#x27;,
@@ -3753,6 +3927,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3769,6 +3945,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3785,6 +3963,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3801,6 +3981,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3817,6 +3999,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3833,6 +4017,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3849,6 +4035,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3865,6 +4053,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3881,6 +4071,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3897,6 +4089,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3913,6 +4107,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3929,6 +4125,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3945,6 +4143,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3961,6 +4161,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3977,6 +4179,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -3993,6 +4197,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4009,6 +4215,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4025,6 +4233,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4085,6 +4295,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4101,6 +4313,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4117,6 +4331,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4133,6 +4349,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4149,6 +4367,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4165,6 +4385,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4181,6 +4403,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4197,6 +4421,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4213,6 +4439,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4229,6 +4457,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4245,6 +4475,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4261,6 +4493,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4277,6 +4511,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4293,6 +4529,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4309,6 +4547,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4325,6 +4565,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4341,6 +4583,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4357,6 +4601,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4503,6 +4749,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4519,6 +4767,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4535,6 +4785,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4551,6 +4803,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4567,6 +4821,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4583,6 +4839,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4599,6 +4857,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4615,6 +4875,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4631,6 +4893,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 1,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4647,6 +4911,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4663,6 +4929,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4679,6 +4947,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4695,6 +4965,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4711,6 +4983,8 @@
     &#x27;mode&#x27;: 5,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4727,6 +5001,8 @@
     &#x27;mode&#x27;: 7,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4743,6 +5019,8 @@
     &#x27;mode&#x27;: 4,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4759,6 +5037,8 @@
     &#x27;mode&#x27;: 3,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4775,6 +5055,8 @@
     &#x27;mode&#x27;: 8,
     &#x27;core_timestamp&#x27;: 1267252440000,
     &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 0,
+    &#x27;value_change_transition&#x27;: [0, 0],
     &#x27;validity&#x27;: 0,
     &#x27;description&#x27;: &#x27;my description&#x27;,
     &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
@@ -4884,6 +5166,140 @@
             </tbody>
         </table>
 </section>
+    <h3>src/app/shared/alarm-blink/fixtures.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="MockAlarms"></a>
+                        <span class="name">
+                            <b>
+                            MockAlarms
+                            </b>
+                            <a href="#MockAlarms"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>MockAlarms:     <code>[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+  Alarm.asAlarm({
+    &#x27;value&#x27;: 0,
+    &#x27;core_id&#x27;: &#x27;clear&#x27;,
+    &#x27;running_id&#x27;: &#x27;clear&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+  Alarm.asAlarm({
+    &#x27;value&#x27;: 1,
+    &#x27;core_id&#x27;: &#x27;low&#x27;,
+    &#x27;running_id&#x27;: &#x27;low&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 1],
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+  Alarm.asAlarm({
+    &#x27;value&#x27;: 2,
+    &#x27;core_id&#x27;: &#x27;medium&#x27;,
+    &#x27;running_id&#x27;: &#x27;medium&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 2],
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+  Alarm.asAlarm({
+    &#x27;value&#x27;: 3,
+    &#x27;core_id&#x27;: &#x27;high&#x27;,
+    &#x27;running_id&#x27;: &#x27;high&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 3],
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+  Alarm.asAlarm({
+    &#x27;value&#x27;: 4,
+    &#x27;core_id&#x27;: &#x27;critical&#x27;,
+    &#x27;running_id&#x27;: &#x27;critical&#x27;,
+    &#x27;mode&#x27;: 5,
+    &#x27;core_timestamp&#x27;: 1267252440000,
+    &#x27;state_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 4],
+    &#x27;validity&#x27;: 1,
+    &#x27;description&#x27;: &#x27;my description&#x27;,
+    &#x27;url&#x27;: &#x27;https://www.alma.cl&#x27;,
+    &#x27;sound&#x27;: &#x27;sound1&#x27;,
+    &#x27;can_shelve&#x27;: true,
+    &#x27;ack&#x27;: false,
+    &#x27;shelved&#x27;: false,
+    &#x27;dependencies&#x27;: [],
+  }),
+]</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Set of mock Alarms for the tests </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
     <h3>src/app/shared/alarm-card/fixtures.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -4929,6 +5345,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 4],
   },
   {
     &#x27;value&#x27;: 3,
@@ -4945,6 +5363,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 3],
   },
   {
     &#x27;value&#x27;: 2,
@@ -4961,6 +5381,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 2],
   },
   {
     &#x27;value&#x27;: 1,
@@ -4977,6 +5399,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 1],
   },
   {
     &#x27;value&#x27;: 0,
@@ -4993,6 +5417,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5009,6 +5435,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5025,6 +5453,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5041,6 +5471,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5057,6 +5489,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 4,
@@ -5073,6 +5507,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 4],
   },
   {
     &#x27;value&#x27;: 3,
@@ -5089,6 +5525,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 3],
   },
   {
     &#x27;value&#x27;: 2,
@@ -5105,6 +5543,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 2],
   },
   {
     &#x27;value&#x27;: 1,
@@ -5121,6 +5561,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 1],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5137,6 +5579,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5153,6 +5597,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5169,6 +5615,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5185,6 +5633,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   },
   {
     &#x27;value&#x27;: 0,
@@ -5201,6 +5651,8 @@
     &#x27;ack&#x27;: false,
     &#x27;shelved&#x27;: false,
     &#x27;dependencies&#x27;: [],
+    &#x27;value_change_timestamp&#x27;: 1267252440000,
+    &#x27;value_change_transition&#x27;: [0, 0],
   }
 ]</code>
                         </td>

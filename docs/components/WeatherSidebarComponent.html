@@ -137,8 +137,17 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#affectedAntennas">affectedAntennas</a>
+                            </li>
+                            <li>
+                                <a href="#affectedAntennasSubscription">affectedAntennasSubscription</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#alarmService">alarmService</a>
+                            </li>
+                            <li>
+                                <a href="#groupHasAffectedAntennas">groupHasAffectedAntennas</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -161,10 +170,25 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#copyAffectedAntennas">copyAffectedAntennas</a>
+                            </li>
+                            <li>
                                 <a href="#copyAntennas">copyAntennas</a>
                             </li>
                             <li>
+                                <a href="#getAffectedAntennaColorClasses">getAffectedAntennaColorClasses</a>
+                            </li>
+                            <li>
+                                <a href="#getAffectedAntennas">getAffectedAntennas</a>
+                            </li>
+                            <li>
                                 <a href="#getAntennas">getAntennas</a>
+                            </li>
+                            <li>
+                                <a href="#getAntennasDetailedList">getAntennasDetailedList</a>
+                            </li>
+                            <li>
+                                <a href="#getNotAffectedAntennas">getNotAffectedAntennas</a>
                             </li>
                             <li>
                                 <a href="#isSelected">isSelected</a>
@@ -229,7 +253,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -345,7 +369,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:22</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -369,7 +393,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:25</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -382,6 +406,78 @@
         <h3 id="methods">
             Methods
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="copyAffectedAntennas"></a>
+                        <span class="name">
+                            <b>
+                            copyAffectedAntennas
+                            </b>
+                            <a href="#copyAffectedAntennas"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>copyAffectedAntennas(stationConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:97</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Copy list of affected antennas associated to the given weather station</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>stationConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>true if the data was copied to the clipboard, false if not</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -404,7 +500,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:78</a></div>
                             </td>
                         </tr>
 
@@ -458,6 +554,149 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getAffectedAntennaColorClasses"></a>
+                        <span class="name">
+                            <b>
+                            getAffectedAntennaColorClasses
+                            </b>
+                            <a href="#getAffectedAntennaColorClasses"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAffectedAntennaColorClasses(alarmId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:187</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get the color class for an affected antenna</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>alarmId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>{}</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAffectedAntennas"></a>
+                        <span class="name">
+                            <b>
+                            getAffectedAntennas
+                            </b>
+                            <a href="#getAffectedAntennas"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAffectedAntennas(stationConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:134</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Return list of affected antennas associated to the given weather station</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>stationConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string[]</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>a list with the name of nearby antennas</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getAntennas"></a>
                         <span class="name">
                             <b>
@@ -476,7 +715,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:116</a></div>
                             </td>
                         </tr>
 
@@ -484,6 +723,150 @@
                 <tr>
                     <td class="col-md-4">
                             <div class="io-description"><p>Return list of antennas associated to the given weather station</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>stationConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string[]</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>a list with the name of nearby antennas</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getAntennasDetailedList"></a>
+                        <span class="name">
+                            <b>
+                            getAntennasDetailedList
+                            </b>
+                            <a href="#getAntennasDetailedList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getAntennasDetailedList(stationConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:160</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Return a classified list of objects for antennas associated to the given weather station</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>stationConfig</td>
+                                                        <td>
+                                                                    <code><a href="../classes/AlarmConfig.html" target="_self" >AlarmConfig</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string[]</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>a list of objects with related information</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getNotAffectedAntennas"></a>
+                        <span class="name">
+                            <b>
+                            getNotAffectedAntennas
+                            </b>
+                            <a href="#getNotAffectedAntennas"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getNotAffectedAntennas(stationConfig: <a href="../classes/AlarmConfig.html">AlarmConfig</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:147</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Return list of not affected antennas associated to the given weather station</p>
 </div>
 
                             <div class="io-description">
@@ -548,7 +931,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:230</a></div>
                             </td>
                         </tr>
 
@@ -625,7 +1008,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -666,7 +1049,7 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:96</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:238</a></div>
                             </td>
                         </tr>
 
@@ -742,7 +1125,7 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:110</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="252" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:252</a></div>
                             </td>
                         </tr>
 
@@ -823,6 +1206,91 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="affectedAntennas"></a>
+                        <span class="name">
+                            <b>
+                            affectedAntennas
+                            </b>
+                            <a href="#affectedAntennas"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>affectedAntennas:     <code>string[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>List of affected antennas by some alarm </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="affectedAntennasSubscription"></a>
+                        <span class="name">
+                            <b>
+                            affectedAntennasSubscription
+                            </b>
+                            <a href="#affectedAntennasSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>affectedAntennasSubscription:     <code>ISubscription</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>ISubscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subscription to changes in alarms related to affected antennas</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="alarmService"></a>
                         <span class="name">
                             <b>
@@ -847,13 +1315,58 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:47</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description">Service used to get the Alarms</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="groupHasAffectedAntennas"></a>
+                        <span class="name">
+                            <b>
+                            groupHasAffectedAntennas
+                            </b>
+                            <a href="#groupHasAffectedAntennas"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>groupHasAffectedAntennas:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Map to detect the presence of affected antennas </p>
+</div>
                     </td>
                 </tr>
 
@@ -887,7 +1400,7 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -927,7 +1440,7 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -950,7 +1463,10 @@ import { MatSnackBar } from &#x27;@angular/material&#x27;;
 import { ClipboardService } from &#x27;ngx-clipboard&#x27;;
 import { AlarmService } from &#x27;../../data/alarm.service&#x27;;
 import { AlarmConfig } from &#x27;../../data/alarm-config&#x27;;
+import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
 import { WeatherService } from &#x27;../weather.service&#x27;;
+import { SubscriptionLike as ISubscription } from &#x27;rxjs&#x27;;
+
 
 /**
 * Component used to display Weather Alarms in an interactive sidebar
@@ -967,6 +1483,17 @@ export class WeatherSidebarComponent implements OnInit {
 
   /** Event emitted to notify when an weather station is selected */
   @Output() panelClicked &#x3D; new EventEmitter&lt;AlarmConfig&gt;();
+
+  /**
+   * Subscription to changes in alarms related to affected antennas
+   */
+  affectedAntennasSubscription: ISubscription;
+
+  /** List of affected antennas by some alarm */
+  affectedAntennas: string[] &#x3D; [];
+
+  /** Map to detect the presence of affected antennas */
+  groupHasAffectedAntennas &#x3D; {};
 
   /**
   * Builds an instance of the component
@@ -988,6 +1515,19 @@ export class WeatherSidebarComponent implements OnInit {
   */
   ngOnInit() {
     this.weatherService.initialize();
+    this.affectedAntennasSubscription &#x3D; this.weatherService.affectedAntennasUpdate
+      .subscribe((update) &#x3D;&gt; {
+        if (update &#x3D;&#x3D;&#x3D; true) {
+          this.affectedAntennas &#x3D; Object.keys(
+            this.weatherService.affectedAntennaHighPriorityAlarm);
+            for (const stationConfig of this.weatherService.weatherStationsConfig) {
+              this.groupHasAffectedAntennas[stationConfig.group] &#x3D; (
+                this.getAffectedAntennas(stationConfig).length &gt; 0
+              );
+            }
+        }
+      }
+    );
   }
 
   /**
@@ -997,6 +1537,25 @@ export class WeatherSidebarComponent implements OnInit {
   */
   copyAntennas(stationConfig: AlarmConfig): boolean {
     const antennas &#x3D; this.getAntennas(stationConfig);
+    const result &#x3D; antennas.join(&#x27;,&#x27;);
+    const status &#x3D; this.clipboardService.copyFromContent(result);
+    let message &#x3D; &#x27;&#x27;;
+    if (status) {
+      message &#x3D; &#x27;Antennas copied to clipboard&#x27;;
+    } else {
+      message &#x3D; &#x27;ERROR: Antennas were not copied!&#x27;;
+    }
+    this.openSnackBar(message, &#x27;Done&#x27;);
+    return status;
+  }
+
+  /**
+  * Copy list of affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {boolean} true if the data was copied to the clipboard, false if not
+  */
+  copyAffectedAntennas(stationConfig: AlarmConfig): boolean {
+    const antennas &#x3D; this.getAffectedAntennas(stationConfig);
     const result &#x3D; antennas.join(&#x27;,&#x27;);
     const status &#x3D; this.clipboardService.copyFromContent(result);
     let message &#x3D; &#x27;&#x27;;
@@ -1026,6 +1585,102 @@ export class WeatherSidebarComponent implements OnInit {
     }
     return response.sort();
   }
+
+  /**
+  * Return list of affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getAffectedAntennas(stationConfig: AlarmConfig): string[] {
+    const stationAntennas &#x3D; this.getAntennas(stationConfig);
+    const allAffectedAntennas &#x3D; this.affectedAntennas;
+    const response &#x3D; allAffectedAntennas.filter(
+      value &#x3D;&gt; stationAntennas.indexOf(value) &gt; -1);
+    return response.sort();
+  }
+
+  /**
+  * Return list of not affected antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {string[]} a list with the name of nearby antennas
+  */
+  getNotAffectedAntennas(stationConfig: AlarmConfig): string[] {
+    const stationAntennas &#x3D; this.getAntennas(stationConfig);
+    const allAffectedAntennas &#x3D; this.affectedAntennas;
+    const response &#x3D; stationAntennas.filter(
+      value &#x3D;&gt; allAffectedAntennas.indexOf(value) &lt; 0);
+    return response.sort();
+  }
+
+  /**
+  * Return a classified list of objects for antennas associated to the given weather station
+  * @param {string} station the ID of the weather station
+  * @returns {object[]} a list of objects with related information
+  */
+  getAntennasDetailedList(stationConfig: AlarmConfig): string[] {
+    const stationAffectedAntennas &#x3D; this.getAffectedAntennas(stationConfig);
+    const stationNotAffectedAntennas &#x3D; this.getNotAffectedAntennas(stationConfig);
+    const response &#x3D; [];
+    for (let i &#x3D; 0; i &lt; stationAffectedAntennas.length; i++) {
+      const antenna &#x3D; stationAffectedAntennas[i];
+      const highAlarm &#x3D; this.weatherService.affectedAntennaHighPriorityAlarm[antenna];
+      response.push({
+        &#x27;value&#x27;: highAlarm.value,
+        &#x27;name&#x27;: antenna,
+        &#x27;classes&#x27;: this.getAffectedAntennaColorClasses(highAlarm.core_id),
+      });
+    }
+    for (let i &#x3D; 0; i &lt; stationNotAffectedAntennas.length; i++) {
+      const antenna &#x3D; stationNotAffectedAntennas[i];
+      response.push({
+        &#x27;value&#x27;: Value.cleared,
+        &#x27;name&#x27;: antenna,
+        &#x27;classes&#x27;: []
+      });
+    }
+    return response.sort((a, b) &#x3D;&gt; a.value &lt; b.value ? 1 : a.value &gt; b.value ? -1 : 0);
+  }
+
+  /**
+   * Get the color class for an affected antenna
+   */
+  getAffectedAntennaColorClasses(alarmId: string) {
+    if (this.alarmService.isAlarmIndexAvailable(alarmId)) {
+      const alarm &#x3D; this.alarmService.get(alarmId);
+      let colorClass &#x3D; &#x27;&#x27;;
+      if (alarm.shelved &#x3D;&#x3D;&#x3D; true) {
+        colorClass &#x3D; &#x27;green&#x27;;
+      } else if (alarm.mode &#x3D;&#x3D;&#x3D; OperationalMode.unknown) {
+        colorClass &#x3D; &#x27;blue&#x27;;
+      } else if (alarm.showAsMaintenance()) {
+        colorClass &#x3D; &#x27;grey&#x27;;
+      } else if (alarm.value &#x3D;&#x3D;&#x3D; Value.cleared) {
+        colorClass &#x3D; &#x27;green&#x27;;
+      } else if (alarm.value &#x3D;&#x3D;&#x3D; Value.set_low) {
+        colorClass &#x3D; &#x27;yellow&#x27;;
+      } else if (alarm.value &#x3D;&#x3D;&#x3D; Value.set_medium) {
+        colorClass &#x3D; &#x27;yellow&#x27;;
+      } else if (alarm.value &#x3D;&#x3D;&#x3D; Value.set_high) {
+        colorClass &#x3D; &#x27;red&#x27;;
+      } else if (alarm.value &#x3D;&#x3D;&#x3D; Value.set_critical) {
+        colorClass &#x3D; &#x27;red&#x27;;
+      } else {
+        colorClass &#x3D; &#x27;green&#x27;;
+      }
+
+      if (colorClass !&#x3D;&#x3D; &#x27;&#x27;) {
+        if (alarm.validity &#x3D;&#x3D;&#x3D; 0) {
+          return [&#x27;text-affected-&#x27; + colorClass, &#x27;text-affected-&#x27; + &#x27;unreliable&#x27;];
+        } else {
+          return [&#x27;text-affected-&#x27; + colorClass];
+        }
+      }
+
+    } else {
+      return [&#x27;none&#x27;];
+    }
+  }
+
 
   /**
   * Indicates if the weather station is selected or not
@@ -1114,12 +1769,17 @@ export class WeatherSidebarComponent implements OnInit {
           &lt;div fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;space-between&quot; class&#x3D;&quot;antennas-list-header&quot;&gt;
             &lt;div class&#x3D;&quot;antennas-title&quot;&gt; Nearby Antennas &lt;/div&gt;
             &lt;button mat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;copy-antennas-button&quot; (click)&#x3D;&quot;copyAntennas(stationConfig)&quot;&gt;
-              &lt;i class&#x3D;&quot;ion-ios-copy-outline&quot;&gt;&lt;/i&gt; &amp;nbsp; &lt;span&gt; Copy antennas &lt;/span&gt;
+              &lt;i class&#x3D;&quot;ion-ios-copy-outline&quot;&gt;&lt;/i&gt; &amp;nbsp; &lt;span&gt; Copy all &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button *ngIf&#x3D;&quot;groupHasAffectedAntennas[stationConfig.group]&quot; mat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;copy-affected-antennas-button&quot; (click)&#x3D;&quot;copyAffectedAntennas(stationConfig)&quot;&gt;
+              &lt;i class&#x3D;&quot;ion-ios-copy-outline&quot;&gt;&lt;/i&gt; &amp;nbsp; &lt;span&gt; Copy affected &lt;/span&gt;
             &lt;/button&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;antennas-list&quot;&gt;
             &lt;ul&gt;
-              &lt;li *ngFor&#x3D;&quot;let antenna of this.getAntennas(stationConfig)&quot;&gt; {{antenna}} &lt;/li&gt;
+              &lt;ng-container *ngFor&#x3D;&quot;let item of this.getAntennasDetailedList(stationConfig)&quot;&gt;
+              &lt;li [ngClass]&#x3D;&quot;item.classes&quot;&gt; {{item.name}} &lt;/li&gt;
+              &lt;/ng-container&gt;
             &lt;/ul&gt;
           &lt;/div&gt;
         &lt;/mat-expansion-panel&gt;
@@ -1171,17 +1831,15 @@ export class WeatherSidebarComponent implements OnInit {
           }
         }
         .icon {
-          padding-left: 20px;
+          padding-left: 30px;
           font-weight: bold;
           height: 30px;
           width: fit-content;
-          align: right;
         }
         .text {
           padding-left: 0;
           height: 30px;
           width: fit-content;
-          align: right;
         }
         .status {
           padding-left: 20px;
@@ -1268,8 +1926,8 @@ export class WeatherSidebarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="weather-sidebar-card">  <div class="weather-sidebar-title">    WEATHER STATIONS  </div>  <div class="weather-sidebar-content">    <mat-accordion>      <div multi="false" *ngFor="let stationConfig of this.weatherService.weatherStationsConfig">        <mat-expansion-panel [expanded]="isSelected(stationConfig)">          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig)" [collapsedHeight]="\'60px\'" [expandedHeight]="\'60px\'">            <app-weather-station-sidebar [stationConfig]="stationConfig" [selectedAlarm]="this.selectedStation"></app-weather-station-sidebar>          </mat-expansion-panel-header>          <table>            <tr>              <td>                <div class="text">                  <app-alarm                    [alarm]="this.alarmService.getAlarm(stationConfig)"                    [text]="\'Station\'"                    [tooltipDirection]="\'left\'"                  ></app-alarm>                </div>              </td>              <td class="buttons" align="right">                <app-buttons [alarm]="this.alarmService.getAlarm(stationConfig)"></app-buttons>              </td>            </tr>            <ng-container *ngFor="let config of stationConfig.children">              <tr>                <td>                  <div class="icon">                    <app-alarm                      [alarm]="this.alarmService.getAlarm(config)"                      [images]="this.weatherService.getIconSet(config, true)"                      [imagesUnreliable]="this.weatherService.getIconSet(config, false)"                      [tooltipDirection]="\'left\'"                    ></app-alarm>                  </div>                </td>                <td class="buttons" align="right">                  <app-buttons [alarm]="this.alarmService.getAlarm(config)"></app-buttons>                </td>              </tr>            </ng-container>          </table>          <mat-divider></mat-divider>          <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">            <div class="antennas-title"> Nearby Antennas </div>            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy antennas </span>            </button>          </div>          <div class="antennas-list">            <ul>              <li *ngFor="let antenna of this.getAntennas(stationConfig)"> {{antenna}} </li>            </ul>          </div>        </mat-expansion-panel>      </div>    </mat-accordion>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div class="weather-sidebar-card">  <div class="weather-sidebar-title">    WEATHER STATIONS  </div>  <div class="weather-sidebar-content">    <mat-accordion>      <div multi="false" *ngFor="let stationConfig of this.weatherService.weatherStationsConfig">        <mat-expansion-panel [expanded]="isSelected(stationConfig)">          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig)" [collapsedHeight]="\'60px\'" [expandedHeight]="\'60px\'">            <app-weather-station-sidebar [stationConfig]="stationConfig" [selectedAlarm]="this.selectedStation"></app-weather-station-sidebar>          </mat-expansion-panel-header>          <table>            <tr>              <td>                <div class="text">                  <app-alarm                    [alarm]="this.alarmService.getAlarm(stationConfig)"                    [text]="\'Station\'"                    [tooltipDirection]="\'left\'"                  ></app-alarm>                </div>              </td>              <td class="buttons" align="right">                <app-buttons [alarm]="this.alarmService.getAlarm(stationConfig)"></app-buttons>              </td>            </tr>            <ng-container *ngFor="let config of stationConfig.children">              <tr>                <td>                  <div class="icon">                    <app-alarm                      [alarm]="this.alarmService.getAlarm(config)"                      [images]="this.weatherService.getIconSet(config, true)"                      [imagesUnreliable]="this.weatherService.getIconSet(config, false)"                      [tooltipDirection]="\'left\'"                    ></app-alarm>                  </div>                </td>                <td class="buttons" align="right">                  <app-buttons [alarm]="this.alarmService.getAlarm(config)"></app-buttons>                </td>              </tr>            </ng-container>          </table>          <mat-divider></mat-divider>          <div fxLayout="row" fxLayoutAlign="space-between" class="antennas-list-header">            <div class="antennas-title"> Nearby Antennas </div>            <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy all </span>            </button>            <button *ngIf="groupHasAffectedAntennas[stationConfig.group]" mat-button color="accent" class="copy-affected-antennas-button" (click)="copyAffectedAntennas(stationConfig)">              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy affected </span>            </button>          </div>          <div class="antennas-list">            <ul>              <ng-container *ngFor="let item of this.getAntennasDetailedList(stationConfig)">              <li [ngClass]="item.classes"> {{item.name}} </li>              </ng-container>            </ul>          </div>        </mat-expansion-panel>      </div>    </mat-accordion>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'WeatherSidebarComponent'};
 </script>

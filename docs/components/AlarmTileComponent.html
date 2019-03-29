@@ -77,8 +77,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
                 <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -138,6 +138,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#alarmName">alarmName</a>
+                            </li>
+                            <li>
+                                <a href="#currentClass">currentClass</a>
+                            </li>
+                            <li>
                                 <a href="#showBadgesOptions">showBadgesOptions</a>
                             </li>
                             <li>
@@ -162,6 +168,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#changeBlinkingState">changeBlinkingState</a>
+                            </li>
+                            <li>
                                 <a href="#getAlarmName">getAlarmName</a>
                             </li>
                             <li>
@@ -172,14 +182,6 @@
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#startAnimation">startAnimation</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#stopAnimation">stopAnimation</a>
                             </li>
                         </ul>
                     </td>
@@ -200,7 +202,7 @@
                                 <a href="#alarmNameMaxSize">alarmNameMaxSize</a>
                             </li>
                             <li>
-                                <a href="#disableAnimation">disableAnimation</a>
+                                <a href="#disableBlink">disableBlink</a>
                             </li>
                             <li>
                                 <a href="#images">images</a>
@@ -237,12 +239,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:90</a></div>
                             </td>
                         </tr>
 
@@ -250,6 +252,37 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Builds a new instance</p>
 </div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Used for change detection in html</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -307,8 +340,8 @@
             <tbody>
                 <tr>
                     <td class="col-md-2">
-                        <a name="disableAnimation"></a>
-                        <code>disableAnimation</code>
+                        <a name="disableBlink"></a>
+                        <code>disableBlink</code>
                     </td>
                     <td class="col-md-10">
                         <div><p>Variable to disable animation</p>
@@ -473,6 +506,86 @@ This value is &quot;true&quot; by default</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="changeBlinkingState"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            changeBlinkingState
+                            </b>
+                            <a href="#changeBlinkingState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>changeBlinkingState(blinking: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:134</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Function executed to change the blinking state according to a boolean parameter
+It is executed when the inner <a href="../components/AlarmBlinkComponent.html">AlarmBlinkComponent</a> emits a value on its
+<a href="../components/AlarmBlinkComponent.html#blinkingStatus">AlarmBlinkComponent</a> <a href="EventEmitter">EventEmitter</a></p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>blinking</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>true if it should blink, false if not</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getAlarmName"></a>
                         <span class="name">
                             <b>
@@ -491,7 +604,7 @@ This value is &quot;true&quot; by default</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:154</a></div>
                             </td>
                         </tr>
 
@@ -540,7 +653,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:166</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:171</a></div>
                             </td>
                         </tr>
 
@@ -586,14 +699,14 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:107</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:121</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Method to handle the changes on the alarm values</p>
+                            <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
 </div>
 
                             <div class="io-description">
@@ -604,6 +717,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -618,6 +732,10 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>Object containing the changes in the Inputs of the component</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -657,7 +775,7 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:92</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:105</a></div>
                             </td>
                         </tr>
 
@@ -675,90 +793,6 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
                 </tr>
             </tbody>
         </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="startAnimation"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            startAnimation
-                            </b>
-                            <a href="#startAnimation"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>startAnimation()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:151</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method to start the blinking animation</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="stopAnimation"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            stopAnimation
-                            </b>
-                            <a href="#stopAnimation"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>stopAnimation()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:158</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method to go to the normal state to stop the animation</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 </section>
 
     <section>
@@ -766,6 +800,96 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="alarmName"></a>
+                        <span class="name">
+                            <b>
+                            alarmName
+                            </b>
+                            <a href="#alarmName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>alarmName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:90</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name of the alarm to display in the box</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentClass"></a>
+                        <span class="name">
+                            <b>
+                            currentClass
+                            </b>
+                            <a href="#currentClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentClass:     <code>[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/shared/alarm-tile/alarm-tile.component.ts:85</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current classes for displaying the component.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -947,9 +1071,9 @@ In any case, the name is shortened to a maximum length defined by the <a href="a
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnChanges, Input, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { AlarmImageSet } from &#x27;../alarm/alarm.component&#x27;;
-import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
+import { Alarm, Value, Validity, OperationalMode } from &#x27;../../data/alarm&#x27;;
 
 
 /**
@@ -960,7 +1084,7 @@ import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
   templateUrl: &#x27;./alarm-tile.component.html&#x27;,
   styleUrls: [&#x27;./alarm-tile.component.scss&#x27;],
 })
-export class AlarmTileComponent implements OnChanges, OnInit {
+export class AlarmTileComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -1006,7 +1130,7 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   /**
    * Variable to disable animation
    */
-  @Input() disableAnimation &#x3D; false;
+  @Input() disableBlink &#x3D; false;
 
   /**
    * Auxiliary variable to follow the status of the animation
@@ -1029,10 +1153,23 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   tooltipDirectionOptions &#x3D; [&#x27;right&#x27;, &#x27;left&#x27;];
 
   /**
-  * Builds a new instance
+  * Contains the current classes for displaying the component.
   */
-  constructor() {
-    this.targetAnimationState &#x3D; &#x27;normal&#x27;;
+  currentClass &#x3D; [];
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName &#x3D; &#x27;&#x27;;
+
+  /**
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
+  */
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.targetAnimationState &#x3D; &#x27;tile-background-normal&#x27;;
   }
 
   /**
@@ -1051,27 +1188,33 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   }
 
   /**
-  * Method to handle the changes on the alarm values
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.alarm) {
-      if (changes.alarm.previousValue) {
-        const previousAlarmValue: number &#x3D; changes.alarm.previousValue.value;
-        const currentAlarmValue: number &#x3D; changes.alarm.currentValue.value;
-        // clear to set transition
-        if ( (previousAlarmValue &#x3D;&#x3D;&#x3D; 0) &amp;&amp; (currentAlarmValue &gt; 0) ) {
-          if (this.disableAnimation &#x3D;&#x3D;&#x3D; false) {
-            this.startAnimation();
-          }
-        }
-        // set to clear transition
-        if ( (previousAlarmValue &gt; 0) &amp;&amp; (currentAlarmValue &#x3D;&#x3D;&#x3D; 0) ) {
-          if (this.disableAnimation &#x3D;&#x3D;&#x3D; false) {
-            this.stopAnimation();
-          }
-        }
-      }
+    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
+      this.alarmName &#x3D; this.getAlarmName();
+      this.currentClass &#x3D; this.getClass();
     }
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      this.targetAnimationState &#x3D; &#x27;blinking&#x27;;
+    } else {
+      this.targetAnimationState &#x3D; &#x27;tile-background-normal&#x27;;
+    }
+    this.currentClass &#x3D; this.getClass();
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -1092,20 +1235,6 @@ export class AlarmTileComponent implements OnChanges, OnInit {
       alarmName &#x3D; alarmName.substring(0, this.alarmNameMaxSize - 3) + &#x27;...&#x27;;
     }
     return alarmName;
-  }
-
-  /**
-  * Method to start the blinking animation
-  */
-  public startAnimation(): void {
-    this.targetAnimationState &#x3D; &#x27;highlight&#x27;;
-  }
-
-  /**
-  * Method to go to the normal state to stop the animation
-  */
-  public stopAnimation(): void {
-    this.targetAnimationState &#x3D; &#x27;normal&#x27;;
   }
 
   /**
@@ -1138,13 +1267,13 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     } else {
       result.push(&#x27;alarm-tile-blue&#x27;);
     }
-    if (this.alarm.validity &#x3D;&#x3D;&#x3D; 0 &amp;&amp; this.alarm.shelved !&#x3D;&#x3D; true) {
+    if (this.alarm.validity &#x3D;&#x3D;&#x3D; Validity.unreliable &amp;&amp; this.alarm.shelved !&#x3D;&#x3D; true) {
       result.push(&#x27;alarm-tile-unreliable&#x27;);
     }
-    if (this.targetAnimationState &#x3D;&#x3D;&#x3D; &#x27;highlight&#x27;) {
-      result.push(&#x27;highlight&#x27;);
+    if (this.targetAnimationState &#x3D;&#x3D;&#x3D; &#x27;blinking&#x27;) {
+      result.push(&#x27;blinking&#x27;);
     } else {
-      result.push(&#x27;normal&#x27;);
+      result.push(&#x27;tile-background-normal&#x27;);
     }
     return result;
   }
@@ -1160,11 +1289,11 @@ export class AlarmTileComponent implements OnChanges, OnInit {
 &gt;
   &lt;div
     class&#x3D;&quot;alarm-tile-background&quot;
-    [ngClass]&#x3D;&quot;getClass()&quot;
+    [ngClass]&#x3D;&quot;currentClass&quot;
   &gt;&lt;/div&gt;
   &lt;div class&#x3D;&quot;alarm-tile&quot;&gt;
     &lt;div class&#x3D;&quot;alarm-tile-content&quot;&gt;
-      &lt;div class&#x3D;&quot;title&quot;&gt;{{getAlarmName()}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;title&quot;&gt;{{alarmName}}&lt;/div&gt;
       &lt;div class&#x3D;&quot;alarm&quot;&gt;
         &lt;app-alarm
           [alarm]&#x3D;&quot;this.alarm&quot;
@@ -1174,7 +1303,12 @@ export class AlarmTileComponent implements OnChanges, OnInit {
           [size]&#x3D;&quot;this.size&quot;
           [tooltipDirection]&#x3D;&quot;this.tooltipDirection&quot;
           [labelLocation]&#x3D;&quot;&#x27;bottom&#x27;&quot;
+          [disableBlink]&#x3D;&quot;true&quot;
         &gt;&lt;/app-alarm&gt;
+        &lt;app-alarm-blink
+          [alarm]&#x3D;&quot;this.alarm&quot;
+          (blinkingStatus)&#x3D;&quot;changeBlinkingState($event)&quot;
+        &gt;&lt;/app-alarm-blink&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -1231,43 +1365,6 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   }
 
 }
-
-.normal {
-  opacity: 0.0;
-}
-
-.highlight {
-  -webkit-animation: BLINK 2s;
-  animation: BLINK 2s;
-  -moz-animation: BLINK 2s;
-  -o-animation: BLINK 2s;
-  animation-iteration-count: 5;
-  opacity: 0.0;
-}
-
-@-webkit-keyframes BLINK {
-  0% {opacity: 0.0}
-  50% {opacity: 0.75}
-  100% {opacity: 0.0}
-}
-
-@-moz-keyframes BLINK {
-  0% {opacity: 0.0}
-  50% {opacity: 0.75}
-  100% {opacity: 0.0}
-}
-
-@keyframes BLINK {
-  0% {opacity: 0.0}
-  50% {opacity: 0.75}
-  100%{opacity: 0.0}
-}
-
-@-o-keyframes BLINK {
-  0% {opacity: 0.0}
-  50% {opacity: 0.75}
-  100%{opacity: 0.0}
-}
 </code></pre>
     </div>
 
@@ -1296,8 +1393,8 @@ export class AlarmTileComponent implements OnChanges, OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="alarm-tile-container">  <div    class="alarm-tile-background"    [ngClass]="getClass()"  ></div>  <div class="alarm-tile">    <div class="alarm-tile-content">      <div class="title">{{getAlarmName()}}</div>      <div class="alarm">        <app-alarm          [alarm]="this.alarm"          [images]="this.images"          [imagesUnreliable]="this.imagesUnreliable"          [showActionBadges]="this.showActionBadges"          [size]="this.size"          [tooltipDirection]="this.tooltipDirection"          [labelLocation]="\'bottom\'"        ></app-alarm>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div  class="alarm-tile-container">  <div    class="alarm-tile-background"    [ngClass]="currentClass"  ></div>  <div class="alarm-tile">    <div class="alarm-tile-content">      <div class="title">{{alarmName}}</div>      <div class="alarm">        <app-alarm          [alarm]="this.alarm"          [images]="this.images"          [imagesUnreliable]="this.imagesUnreliable"          [showActionBadges]="this.showActionBadges"          [size]="this.size"          [tooltipDirection]="this.tooltipDirection"          [labelLocation]="\'bottom\'"          [disableBlink]="true"        ></app-alarm>        <app-alarm-blink          [alarm]="this.alarm"          (blinkingStatus)="changeBlinkingState($event)"        ></app-alarm-blink>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AlarmTileComponent'};
 </script>
