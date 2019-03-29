@@ -4,6 +4,8 @@ import { StatusViewComponent } from './status-view.component';
 import { AlarmComponent } from '../alarm/alarm.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('StatusViewComponent', () => {
@@ -15,6 +17,9 @@ describe('StatusViewComponent', () => {
     'running_id': 'Dummy-cleared-valid',
     'mode': '5',
     'core_timestamp': 1267252440000,
+    'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 1],
     'validity': '1',
     'description': 'bla bla',
     'url': 'http://alma.cl',
@@ -30,7 +35,9 @@ describe('StatusViewComponent', () => {
         StatusViewComponent,
         AlarmComponent,
         AlarmLabelComponent,
-        AlarmTooltipComponent
+        AlarmTooltipComponent,
+        AlarmBlinkComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })

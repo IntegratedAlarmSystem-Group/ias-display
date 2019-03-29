@@ -1,5 +1,3 @@
-import { Alarm } from '../../data/alarm';
-
 /** Set of mock Alarms for the tests */
 export const MockAlarms = [
   {
@@ -17,6 +15,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 4],
   },
   {
     'value': 3,
@@ -33,6 +33,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 3],
   },
   {
     'value': 2,
@@ -49,6 +51,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 2],
   },
   {
     'value': 1,
@@ -65,6 +69,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 1],
   },
   {
     'value': 0,
@@ -81,6 +87,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -97,6 +105,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -113,6 +123,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -129,6 +141,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -145,6 +159,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 4,
@@ -161,6 +177,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 4],
   },
   {
     'value': 3,
@@ -177,6 +195,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 3],
   },
   {
     'value': 2,
@@ -193,6 +213,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 2],
   },
   {
     'value': 1,
@@ -209,6 +231,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 1],
   },
   {
     'value': 0,
@@ -225,6 +249,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -241,6 +267,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -257,6 +285,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -273,6 +303,8 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   },
   {
     'value': 0,
@@ -289,5 +321,7 @@ export const MockAlarms = [
     'ack': false,
     'shelved': false,
     'dependencies': [],
+    'value_change_timestamp': 1267252440000,
+    'value_change_transition': [0, 0],
   }
 ];

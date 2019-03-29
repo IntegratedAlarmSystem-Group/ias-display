@@ -3,8 +3,11 @@
     [alarm]="this.getAlarm()"
     [images]="weatherService.markerImageSet"
     [imagesUnreliable]="weatherService.markerImageUnreliableSet"
+    [labelLocation]="'bottom'"
+    [labelMode]="'line'"
     [showActionBadges]="false"
     [size]="'xs'"
+    [disableBlink]="true"
   >
   </app-alarm>
 </div>

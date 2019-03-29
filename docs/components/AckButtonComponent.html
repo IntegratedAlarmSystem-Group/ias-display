@@ -77,8 +77,9 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
     </p>
 
 
@@ -138,6 +139,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#canAcknowledge">canAcknowledge</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#sidenavService">sidenavService</a>
                             </li>
@@ -154,13 +158,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#canAcknowledge">canAcknowledge</a>
+                                <a href="#getCanAcknowledge">getCanAcknowledge</a>
                             </li>
                             <li>
                                 <a href="#isDisabled">isDisabled</a>
                             </li>
                             <li>
                                 <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
@@ -205,7 +212,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -229,7 +236,7 @@
                                                         <td>sidenavService</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
+                                                                        <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -261,7 +268,7 @@
                                                         <td>elementRef</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -287,17 +294,15 @@
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="alarm"></a>
-                        <code>alarm</code>
+                        <b>alarm</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Alarm object associated to the button</p>
-</div>
-                            <p>
-                            <em>Type :</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
 
-                            </p>
                     </td>
                 </tr>
                         <tr>
@@ -305,6 +310,12 @@
                                     <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:19</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Alarm object associated to the button</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -313,224 +324,305 @@
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="canAcknowledge"></a>
-                        <span class="name">
-                            <b>
-                            canAcknowledge
-                            </b>
-                            <a href="#canAcknowledge"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>canAcknowledge()</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCanAcknowledge"></a>
+                    <span class="name">
+                        <b>
+                            getCanAcknowledge
+                        </b>
+                        <a href="#getCanAcknowledge"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCanAcknowledge()</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:52</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:68</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Define if the alarm can be acknowledged based on if it was acknowledged before.</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>true if the {</p>
+                    </div>
+                    <div class="io-description">
+                        <p>true if the {</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="isDisabled"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDisabled"></a>
+                    <span class="name">
+                        <b>
                             isDisabled
-                            </b>
-                            <a href="#isDisabled"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#isDisabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>isDisabled()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:64</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:80</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Defines whether or not the button is disabled</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines whether or not the button is disabled</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>true if the button is disabled, false if not.</p>
+                    </div>
+                    <div class="io-description">
+                        <p>true if the button is disabled, false if not.</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngAfterViewInit"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <b>
                             ngAfterViewInit
-                            </b>
-                            <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngAfterViewInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:43</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:59</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Method executed after the component is initialized.
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method executed after the component is initialized.
 It is used here to stop focus monitoring of the button, in order to fix some visual issues</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Object containing the changes in the Inputs of the component</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
                             ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:36</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:42</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Initializes the component</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Initializes the component</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onClick"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClick"></a>
+                    <span class="name">
+                        <b>
                             onClick
-                            </b>
-                            <a href="#onClick"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#onClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>onClick()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:71</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:87</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Handle click on ack button, it triggers ack sidenav through the <a href="Router">Router</a> service</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Handle click on ack button, it triggers ack sidenav through the <a href="Router">Router</a> service</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     <section>
     
         <h3 id="inputs">
@@ -540,31 +632,57 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="sidenavService"></a>
+                        <a name="canAcknowledge"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            sidenavService
-                            </b>
-                            <a href="#sidenavService"><span class="icon ion-ios-link"></span></a>
+                            canAcknowledge</b>
+                            <a href="#canAcknowledge"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>sidenavService:     <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
-</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines wether or not the Acknowledge can be performed
+It is updated when there are changes in the alarm</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidenavService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            sidenavService</b>
+                            <a href="#sidenavService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/SidenavService.html" target="_self" >SidenavService</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/actions/ack-button/ack-button.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -582,7 +700,7 @@ It is used here to stop focus monitoring of the button, in order to fix some vis
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, AfterViewInit, Input, ElementRef } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnChanges, AfterViewInit, Input, ElementRef, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { FocusMonitor } from &#x27;@angular/cdk/a11y&#x27;;
 import { SidenavService } from &#x27;../sidenav.service&#x27;;
 import { Alarm } from &#x27;../../data/alarm&#x27;;
@@ -595,12 +713,18 @@ import { Alarm } from &#x27;../../data/alarm&#x27;;
   templateUrl: &#x27;./ack-button.component.html&#x27;,
   styleUrls: [&#x27;./ack-button.component.css&#x27;]
 })
-export class AckButtonComponent implements OnInit, AfterViewInit {
+export class AckButtonComponent implements OnInit, OnChanges, AfterViewInit {
 
   /**
    * Alarm object associated to the button
    */
   @Input() alarm: Alarm;
+
+  /**
+  * Defines wether or not the Acknowledge can be performed
+  * It is updated when there are changes in the alarm
+  */
+  canAcknowledge &#x3D; true;
 
   /**
    * Builds an instance of the component
@@ -621,6 +745,16 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
   }
 
   /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
+      this.canAcknowledge &#x3D; this.getCanAcknowledge();
+    }
+  }
+
+  /**
   * Method executed after the component is initialized.
   * It is used here to stop focus monitoring of the button, in order to fix some visual issues
   */
@@ -633,7 +767,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * Define if the alarm can be acknowledged based on if it was acknowledged before.
    * @return {boolean} true if the {@link Alarm} can be acknowledged, false if not.
    */
-  canAcknowledge(): boolean {
+  getCanAcknowledge(): boolean {
     if (this.alarm !&#x3D; null &amp;&amp; this.alarm.state_change_timestamp &gt; 0) {
       return !this.alarm.ack;
     } else {
@@ -646,7 +780,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
    * @returns {boolean} true if the button is disabled, false if not.
    */
   isDisabled(): boolean {
-    return !this.sidenavService.canClose || !this.canAcknowledge();
+    return !this.sidenavService.canClose || !this.canAcknowledge;
   }
 
   /**
@@ -726,7 +860,7 @@ export class AckButtonComponent implements OnInit, AfterViewInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><button mat-flat-button color="accent" class="ack-button" title="Acknowledge" (click)="onClick()" [disabled]="isDisabled()">    <div *ngIf="isDisabled(); then ackOff else ackOn"></div>    <ng-template #ackOn>      <div class="ack-button-icon"> <img src="/assets/img/ack-on-btn-icon.svg"/> </div>    </ng-template>    <ng-template #ackOff>      <div class="ack-button-icon"> <img src="/assets/img/ack-off-btn-icon.svg"/> </div>    </ng-template></button></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AckButtonComponent'};
 </script>

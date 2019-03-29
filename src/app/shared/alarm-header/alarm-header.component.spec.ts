@@ -1,8 +1,12 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmHeaderComponent } from './alarm-header.component';
 import { AlarmLabelComponent } from '../alarm-label/alarm-label.component';
 import { AlarmTooltipComponent } from '../alarm-tooltip/alarm-tooltip.component';
+import { AlarmBlinkComponent } from '../alarm-blink/alarm-blink.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 import { MockAlarms } from './fixtures';
 
@@ -30,15 +34,19 @@ const expected_classes = {
 };
 
 describe('AlarmHeaderComponent', () => {
+  let hostComponent: TestHostComponent;
   let component: AlarmHeaderComponent;
-  let fixture: ComponentFixture<AlarmHeaderComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AlarmHeaderComponent,
         AlarmLabelComponent,
-        AlarmTooltipComponent
+        AlarmTooltipComponent,
+        AlarmBlinkComponent,
+        TestHostComponent,
+        PropsTableComponent
       ],
       imports: [ NgbModule ]
     })
@@ -46,79 +54,111 @@ describe('AlarmHeaderComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmHeaderComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+    const mockAlarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent = fixture.componentInstance;
+    hostComponent.alarm = mockAlarm;
+    component = fixture
+      .debugElement.query(By.directive(AlarmHeaderComponent))
+      .componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should display the color of the alarms according to each alarm properties', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.asAlarm(alarm);
+      hostComponent.alarm = Alarm.asAlarm(alarm);
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      expect(component.getClass()).toEqual(expected_classes[alarm.core_id]);
+      expect(component.getClass()).toContain(expected_classes[alarm.core_id][0]);
     }
   });
 
   it('should display the shelved alarms accordingly', () => {
     for (const alarm of MockAlarms) {
-      component.alarm = Alarm.asAlarm(alarm);
-      component.alarm.shelve();
+      hostComponent.alarm = Alarm.asAlarm(alarm);
+      hostComponent.alarm.shelve();
       fixture.detectChanges();
       expect(component).toBeTruthy();
-      if (component.alarm.validity) {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+      if (hostComponent.alarm.validity) {
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       } else {
-        expect(component.getClass()).toEqual(expected_classes['shelved']);
+        expect(component.getClass()).toContain(expected_classes['shelved'][0]);
       }
     }
   });
 
   describe('should have a method to determine if the alarm must be shown as acknoledged or not', () => {
     it('based on the alarm ack value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
-      component.alarm.ack = true;
-      expect(component.showAsPendingAck()).toEqual(false);
-      component.alarm.ack = false;
-      expect(component.showAsPendingAck()).toEqual(true);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = true;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = false;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(true);
+    });
+
+    it('that return false when the alarms state_change_timestamp is 0', () => {
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = false;
+      hostComponent.alarm.state_change_timestamp = 0;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = false;
+      hostComponent.alarm.state_change_timestamp = 1231231;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(true);
     });
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
-      component.alarm.ack = true;
-      expect(component.showAsPendingAck()).toEqual(false);
-      component.alarm.ack = false;
-      expect(component.showAsPendingAck()).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = true;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.ack = false;
+      fixture.detectChanges();
+      expect(component.showAsPendingAck).toEqual(false);
     });
   });
 
-  describe('should have a method to determine if the alarm must be shown as shelved or not', () => {
+  describe('should have an attribute to determine if the alarm must be shown as shelved or not', () => {
     it('based on the alarm shelved value when the showActionBadges is true (by default)', () => {
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
-      component.alarm.shelved = false;
-      expect(component.showAsShelved()).toEqual(false);
-      component.alarm.shelved = true;
-      expect(component.showAsShelved()).toEqual(true);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.shelved = false;
+      fixture.detectChanges();
+      expect(component.showAsShelved).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.shelved = true;
+      fixture.detectChanges();
+      expect(component.showAsShelved).toEqual(true);
     });
 
     it('that return false when the showActionBadges is set to false', () => {
       component.showActionBadges = false;
-      component.alarm = Alarm.asAlarm(MockAlarms[0]);
-      component.alarm.shelved = false;
-      expect(component.showAsShelved()).toEqual(false);
-      component.alarm.shelved = true;
-      expect(component.showAsShelved()).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.shelved = false;
+      fixture.detectChanges();
+      expect(component.showAsShelved).toEqual(false);
+      hostComponent.alarm = Alarm.asAlarm(Object.assign({}, component.alarm));
+      hostComponent.alarm.shelved = true;
+      fixture.detectChanges();
+      expect(component.showAsShelved).toEqual(false);
     });
   });
 
   it('should show the action badges images when the showActionBadges is true (by default)', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
     const images = badges.querySelectorAll('img');
@@ -127,7 +167,7 @@ describe('AlarmHeaderComponent', () => {
 
   it('should not show the action badges images when the showActionBadges is false', () => {
     component.showActionBadges = false;
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
     fixture.detectChanges();
     const badges = fixture.nativeElement.querySelector('.alarm-header-badges');
     const images = badges.querySelectorAll('img');
@@ -135,38 +175,55 @@ describe('AlarmHeaderComponent', () => {
   });
 
   it('should turn on/off the badges according to the ack and shelve values', () => {
-    component.alarm = Alarm.asAlarm(MockAlarms[0]);
-    component.alarm.ack = true;
-    component.alarm.shelved = false;
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm.ack = true;
+    hostComponent.alarm.shelved = false;
     fixture.detectChanges();
     let badges = fixture.nativeElement.querySelector('.badges');
     let images = badges.querySelectorAll('img');
     expect(images[0].className).toEqual('badge-icon ack-icon badge-off');
     expect(images[1].className).toEqual('badge-icon shelve-icon badge-off');
 
-    component.alarm.ack = false;
-    component.alarm.shelved = false;
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm.ack = false;
+    hostComponent.alarm.shelved = false;
     fixture.detectChanges();
     badges = fixture.nativeElement.querySelector('.badges');
     images = badges.querySelectorAll('img');
     expect(images[0].className).toEqual('badge-icon ack-icon');
     expect(images[1].className).toEqual('badge-icon shelve-icon badge-off');
 
-    component.alarm.ack = false;
-    component.alarm.shelved = true;
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm.ack = false;
+    hostComponent.alarm.shelved = true;
     fixture.detectChanges();
     badges = fixture.nativeElement.querySelector('.badges');
     images = badges.querySelectorAll('img');
     expect(images[0].className).toEqual('badge-icon ack-icon');
     expect(images[1].className).toEqual('badge-icon shelve-icon');
 
-    component.alarm.ack = true;
-    component.alarm.shelved = true;
+    hostComponent.alarm = Alarm.asAlarm(MockAlarms[0]);
+    hostComponent.alarm.ack = true;
+    hostComponent.alarm.shelved = true;
     fixture.detectChanges();
     badges = fixture.nativeElement.querySelector('.badges');
     images = badges.querySelectorAll('img');
     expect(images[0].className).toEqual('badge-icon ack-icon badge-off');
     expect(images[1].className).toEqual('badge-icon shelve-icon');
   });
-
 });
+
+/**
+ * Mock host component for the alarm tile to check behaviour on change
+ */
+@Component({
+  selector: 'app-host',
+  template: `
+    <app-alarm-header
+      [alarm]="this.alarm"
+    ></app-alarm-header>
+  `,
+})
+class TestHostComponent {
+  alarm: Alarm;
+}

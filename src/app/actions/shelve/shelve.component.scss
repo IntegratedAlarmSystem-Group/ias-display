@@ -29,30 +29,9 @@
           padding-bottom: 16px;
         }
 
-        &.alarm-info {
-          table {
-            vertical-align: top;
-            width: 100%;
-          }
-
-          th {
-            padding-right: 16px;
-            font-weight: normal;
-            vertical-align: top;
-            width: 120px;
-          }
-
-          pre {
-            padding-top: 3px;
-            font-size: 90%;
-            overflow-y: auto;
-            max-height: 130px;
-            margin-right: 10px;
-          }
-
-        }
-
         &.shelve-action {
+          border-top-style: solid;
+          border-top-width: 1px;
 
           textarea {
             min-height: 150px;

@@ -8,6 +8,10 @@ $lg-cem: 1.4*$cem;
   padding: 0 !important;
 }
 
+.fluid-text {
+  min-width: unset !important;
+}
+
 .hide-label {
   visibility: hidden;
   border: 1px solid red;

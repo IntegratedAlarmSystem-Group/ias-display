@@ -1,0 +1,20 @@
+<div class="ias content" (click)="goToTableFilteredBy('Building-AOS-');$event.stopPropagation()">
+  <div
+    class="container"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+  >
+    <div>
+      <app-alarm-tile
+        fxFlex
+        [alarm]="alarm"
+        [images]="iconSet"
+        [imagesUnreliable]="iconUnreliableSet"
+        [size]="'lg'"
+        [alarmNameMaxSize]="10"
+        [optionalAlarmName]="'AOS'"
+        [tooltipDirection]="'right'"
+      ></app-alarm-tile>
+    </div>
+  </div>
+</div>

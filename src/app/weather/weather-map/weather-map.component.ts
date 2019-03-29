@@ -1,10 +1,12 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { Alarm } from '../../data/alarm';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { AlarmConfig } from '../../data/alarm-config';
 import { AlarmService } from '../../data/alarm.service';
 import { WeatherService } from '../weather.service';
 import { MapService } from '../../map/map.service';
-import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { Observable, BehaviorSubject, SubscriptionLike as ISubscription } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 /**
 * Main component for the weather station map
@@ -14,7 +16,7 @@ import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 
   templateUrl: './weather-map.component.html',
   styleUrls: ['./weather-map.component.scss']
 })
-export class WeatherMapComponent implements OnInit, OnChanges {
+export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Variable to manage a placemark selection
    * from the map, or from an external component
@@ -23,6 +25,21 @@ export class WeatherMapComponent implements OnInit, OnChanges {
 
   /** Variable to manage a placemark selection from the map */
   @Output() placemarkClicked = new EventEmitter<AlarmConfig>();
+
+  /**
+   * Subscription to changes in alarms related to affected antennas
+   */
+  affectedAntennasSubscription: ISubscription;
+
+  /**
+   * Subscription to follow changes in the pad status
+   */
+  padStatusSubscription: ISubscription;
+
+  /**
+   * Subscription to follow changes in the map data
+   */
+  mapDataSubscription: ISubscription;
 
   /** Variable to manage a placemark hover */
   onHoverStation: AlarmConfig = null;
@@ -67,17 +84,22 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   /** List to manage the pads in use */
   public padsStatusGroupNames = [];
 
+  /** Blinking status */
+  public blinkingStatus = {};
+
   /**
    * Builds an instance of the component
    * @param {WeatherService} service Service used to get the configuration needed by the component
    * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {MapService} mapService Service used to build the interactive map
+   * @param {ChangeDetectorRef} cdRef Used for change detection in html
    *
    */
   constructor(
     public service: WeatherService,
     public alarmService: AlarmService,
     public mapService: MapService,
+    private cdRef: ChangeDetectorRef
   ) { }
 
   /**
@@ -96,12 +118,27 @@ export class WeatherMapComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Executed on component destroy
+   */
+  ngOnDestroy() {
+    if (this.affectedAntennasSubscription) {
+      this.affectedAntennasSubscription.unsubscribe();
+    }
+    if (this.mapDataSubscription) {
+      this.mapDataSubscription.unsubscribe();
+    }
+    if (this.padStatusSubscription) {
+      this.padStatusSubscription.unsubscribe();
+    }
+  }
+
+  /**
    * Component initialization that involves the initialization of the {@link WeatherService}
    * if not already initialized and the initialization of the related map data source
    */
   initialize() {
     this.service.initialize();
-    this.service.getMapData().subscribe((mapdata) => {
+    this.mapDataSubscription = this.service.getMapData().subscribe((mapdata) => {
       this.mapPlacemarks = mapdata['placemarks'];
       // for (const placemark of mapdata['placemarks']['pads']) {
       //   this.padsFreeStatus[placemark.name] = true;
@@ -127,21 +164,30 @@ export class WeatherMapComponent implements OnInit, OnChanges {
       this.datarelations = mapdata['relations']['pad_groups'];
       this.mapdataAvailable.next(true);
     });
-    this.service.padsStatusAvailable.subscribe(
-      (padsStatusFlag) => {
-        this.mapdataAvailable.subscribe( (mapStatusFlag) => {
-          this.updatedMap.subscribe(
-            (mapUpToDate) => {
-              if (padsStatusFlag) {
-                if (mapStatusFlag) {
-                  if (!mapUpToDate) {
-                    this.updateAntennaPadDisplayStatus();
-                  }
-                }
-              }
-            });
-        });
-    });
+    this.padStatusSubscription = combineLatest(
+      this.service.padsStatusAvailable,
+      this.mapdataAvailable,
+      this.updatedMap
+    ).subscribe(
+      ([padsStatusFlag, mapStatusFlag, mapUpToDate]) => {
+        if ( padsStatusFlag && mapStatusFlag && !mapUpToDate ) {
+          this.updateAntennaPadDisplayStatus();
+        }
+      }
+    );
+    this.affectedAntennasSubscription = this.service.affectedAntennasUpdate
+      .subscribe((updateMap) => { if (updateMap === true) { this.updateMap(); } } );
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean, alarmId: string) {
+    this.blinkingStatus[alarmId] = blinking;
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -165,9 +211,48 @@ export class WeatherMapComponent implements OnInit, OnChanges {
     }
 
   /**
+   * Get the color class for an affected antenna
+   */
+  getAffectedAntennaColorClasses(alarmId: string) {
+    if (this.alarmService.isAlarmIndexAvailable(alarmId)) {
+      const alarm = this.alarmService.get(alarmId);
+      let colorClass = '';
+      if (alarm.shelved === true) {
+        colorClass = 'green';
+      } else if (alarm.showAsMaintenance()) {
+        colorClass = 'green';
+      } else if (alarm.value === Value.cleared) {
+        colorClass = 'green';
+      } else if (alarm.value === Value.set_low) {
+        colorClass = 'yellow';
+      } else if (alarm.value === Value.set_medium) {
+        colorClass = 'yellow';
+      } else if (alarm.value === Value.set_high) {
+        colorClass = 'red';
+      } else if (alarm.value === Value.set_critical) {
+        colorClass = 'red';
+      } else {
+        colorClass = 'green';
+      }
+
+      if (colorClass !== '') {
+        if (alarm.validity === 0) {
+          return ['affected-' + colorClass, 'affected-' + 'unreliable'];
+        } else {
+          return ['affected-' + colorClass];
+        }
+      }
+
+    } else {
+      return ['none'];
+    }
+  }
+
+  /**
    * Update the status of the pads from webserver data
    */
   updateAntennaPadDisplayStatus() {
+    const localPadsDisplayStatus = Object.assign({}, this.padsDisplayStatus);
     this.padsStatusGroupNames = Object.keys(this.service.padsStatus);
     const padGroups = Object.keys(this.service.padsStatus);
     for (let i = 0; i < padGroups.length; i++) {
@@ -179,18 +264,29 @@ export class WeatherMapComponent implements OnInit, OnChanges {
         }
       }
       if ( !( group in Object.keys(this.padsDisplayStatus) ) ) {
-        this.padsDisplayStatus[group] = {};
+        localPadsDisplayStatus[group] = {};
       }
       const pads = Object.keys(this.service.padsStatus[group]);
       for (let j = 0; j < pads.length; j++) {
-        const padStatus = this.service.padsStatus[group][pads[j]];
+        const antenna = this.service.padsStatus[group][pads[j]];
         let freeStatus = 'in-use';
-        if (padStatus === null) {
+        if (antenna === null) {
           freeStatus = 'free';
         }
-        this.padsDisplayStatus[group][pads[j]] = [groupStatus, freeStatus];
+        let addClasses = [];
+        if (Object.keys(this.service.affectedAntennaHighPriorityAlarm).indexOf(antenna) > -1) {
+          const highAlarm: Alarm = this.service.affectedAntennaHighPriorityAlarm[antenna];
+          addClasses = this.getAffectedAntennaColorClasses(highAlarm.core_id);
+          if (groupStatus === 'selected') {
+            addClasses = [...addClasses, 'opacity-100'];
+          } else {
+            addClasses = [...addClasses, 'opacity-25'];
+          }
+        }
+        localPadsDisplayStatus[group][pads[j]] = [groupStatus, freeStatus, ...addClasses];
       }
     }
+    this.padsDisplayStatus = localPadsDisplayStatus;
     this.updatedMap.next(true);
   }
 

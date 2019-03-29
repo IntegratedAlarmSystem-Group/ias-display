@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { AlarmImageSet } from '../alarm/alarm.component';
-import { Alarm, Value, OperationalMode } from '../../data/alarm';
+import { Alarm, Value, Validity, OperationalMode } from '../../data/alarm';
 
 
 /**
@@ -11,7 +11,7 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
   templateUrl: './alarm-tile.component.html',
   styleUrls: ['./alarm-tile.component.scss'],
 })
-export class AlarmTileComponent implements OnChanges, OnInit {
+export class AlarmTileComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -57,7 +57,7 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   /**
    * Variable to disable animation
    */
-  @Input() disableAnimation = false;
+  @Input() disableBlink = false;
 
   /**
    * Auxiliary variable to follow the status of the animation
@@ -80,10 +80,23 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   tooltipDirectionOptions = ['right', 'left'];
 
   /**
-  * Builds a new instance
+  * Contains the current classes for displaying the component.
   */
-  constructor() {
-    this.targetAnimationState = 'normal';
+  currentClass = [];
+
+  /**
+  * Name of the alarm to display in the box
+  */
+  alarmName = '';
+
+  /**
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
+  */
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.targetAnimationState = 'tile-background-normal';
   }
 
   /**
@@ -102,27 +115,33 @@ export class AlarmTileComponent implements OnChanges, OnInit {
   }
 
   /**
-  * Method to handle the changes on the alarm values
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.alarm) {
-      if (changes.alarm.previousValue) {
-        const previousAlarmValue: number = changes.alarm.previousValue.value;
-        const currentAlarmValue: number = changes.alarm.currentValue.value;
-        // clear to set transition
-        if ( (previousAlarmValue === 0) && (currentAlarmValue > 0) ) {
-          if (this.disableAnimation === false) {
-            this.startAnimation();
-          }
-        }
-        // set to clear transition
-        if ( (previousAlarmValue > 0) && (currentAlarmValue === 0) ) {
-          if (this.disableAnimation === false) {
-            this.stopAnimation();
-          }
-        }
-      }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.alarmName = this.getAlarmName();
+      this.currentClass = this.getClass();
     }
+  }
+
+  /**
+  * Function executed to change the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      this.targetAnimationState = 'blinking';
+    } else {
+      this.targetAnimationState = 'tile-background-normal';
+    }
+    this.currentClass = this.getClass();
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -143,20 +162,6 @@ export class AlarmTileComponent implements OnChanges, OnInit {
       alarmName = alarmName.substring(0, this.alarmNameMaxSize - 3) + '...';
     }
     return alarmName;
-  }
-
-  /**
-  * Method to start the blinking animation
-  */
-  public startAnimation(): void {
-    this.targetAnimationState = 'highlight';
-  }
-
-  /**
-  * Method to go to the normal state to stop the animation
-  */
-  public stopAnimation(): void {
-    this.targetAnimationState = 'normal';
   }
 
   /**
@@ -189,13 +194,13 @@ export class AlarmTileComponent implements OnChanges, OnInit {
     } else {
       result.push('alarm-tile-blue');
     }
-    if (this.alarm.validity === 0 && this.alarm.shelved !== true) {
+    if (this.alarm.validity === Validity.unreliable && this.alarm.shelved !== true) {
       result.push('alarm-tile-unreliable');
     }
-    if (this.targetAnimationState === 'highlight') {
-      result.push('highlight');
+    if (this.targetAnimationState === 'blinking') {
+      result.push('blinking');
     } else {
-      result.push('normal');
+      result.push('tile-background-normal');
     }
     return result;
   }

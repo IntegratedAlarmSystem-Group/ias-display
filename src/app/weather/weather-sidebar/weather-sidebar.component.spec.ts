@@ -11,6 +11,7 @@ import { AlarmComponent } from '../../shared/alarm/alarm.component';
 import { StatusViewComponent } from '../../shared/status-view/status-view.component';
 import { ButtonsComponent } from '../../actions/buttons/buttons.component';
 import { WeatherService } from '../weather.service';
+import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
 import { RoutingService } from '../../app-routing/routing.service';
 import { Router } from '@angular/router';
@@ -188,6 +189,59 @@ describe('WeatherSidebarComponent', () => {
           }
         }
       });
+
+      it('Each panel contains a button to copy the names of affected antennas', () => {
+        weatherService.affectedAntennaHighPriorityAlarm = {
+          'ANT1': Alarm.asAlarm({
+            'value': 3,
+            'core_id': 'WSAlarmOne',
+            'running_id': 'WSAlarmOne',
+            'mode': 0,
+            'core_timestamp': 1267252440000,
+            'state_change_timestamp': 1267252440000,
+            'value_change_timestamp': 1267252440000,
+            'value_change_transition': [0, 0],
+            'validity': 1,
+            'description': 'my description',
+            'url': 'https://www.alma.cl',
+            'sound': 'sound1',
+            'can_shelve': true,
+            'ack': false,
+            'shelved': false,
+            'dependencies': [],
+            'properties': {
+              'affectedAntennas': 'A00,A01,A02,A03'
+            }
+          })
+        };
+        sidebarComponent.affectedAntennas = ['ANT1'];
+        sidebarComponent.groupHasAffectedAntennas = {
+          'group1': true,
+          'group2': false,
+        };
+        const mockAffectedAntennas = {
+          'group1': ['ANT1'],
+          'group2': []
+        };
+        fixture.detectChanges();
+        const panels = fixture.debugElement.queryAll(By.css('mat-expansion-panel'));
+        for (const i in panels) {
+          if ( panels[i] !== null ) {
+            const expectedAntennas = mockAffectedAntennas[mockWeatherStationsConfig[i].group];
+            const panel = panels[i];
+            if (expectedAntennas.length > 0) {
+              const button = panel.nativeElement.querySelector('.copy-affected-antennas-button');
+              expect(button).toBeTruthy();
+              button.click();
+              expect(clipboardService.copyFromContent).toHaveBeenCalledWith(expectedAntennas.join(','));
+            } else {
+              const button = panel.nativeElement.querySelector('.copy-affected-antennas-button');
+              expect(button).toBeNull();
+            }
+          }
+        }
+      });
+
     });
 
   });

@@ -108,16 +108,20 @@ describe('AntennasSidebarComponent', () => {
           expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].placemark, 'The alarmInfo does not contain the pad');
           expect(alarmInfo.textContent).toContain(mockAntennasConfig[0].custom_name, 'The alarmInfo does not contain the antenna');
         });
-        it('and a TableComponent with the antennas children alarms', () => {
+        it('and a TableComponent with the alarms of the children of the selectedAntenna plus its dependencies', () => {
           component.selectedAntenna = mockAntennasConfig[0] as AlarmConfig;
+          component.ngOnChanges();
           fixture.detectChanges();
           const tableComponent = fixture.debugElement.query(By.directive(TableComponent)).componentInstance;
           expect(tableComponent).toBeTruthy('There is no TableComponent');
           const expectedAlarmsToDisplay = [
             'mockAlarm-0-child-0',
             'mockAlarm-0-child-1',
+            'mockAlarm-0-child-2',
           ];
-          expect(tableComponent.alarmsToDisplay).toEqual(expectedAlarmsToDisplay, 'The table did not receive the expected sub alarms');
+          expect(new Set(tableComponent.alarmsToDisplay)).toEqual(new Set(expectedAlarmsToDisplay),
+            'The table did not receive the expected sub alarms'
+          );
         });
         it('or a TableComponent with no alarms if the selectedAntenna does not have children', () => {
           component.selectedAntenna = mockAntennasConfig[2] as AlarmConfig;

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmInfoComponent } from './alarm-info.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('AlarmInfoComponent', () => {
@@ -13,6 +14,8 @@ describe('AlarmInfoComponent', () => {
     'mode': 5,
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 4],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
@@ -26,7 +29,10 @@ describe('AlarmInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmInfoComponent ]
+      declarations: [
+        AlarmInfoComponent,
+        PropsTableComponent,
+      ]
     })
     .compileComponents();
   }));
@@ -35,11 +41,6 @@ describe('AlarmInfoComponent', () => {
     fixture = TestBed.createComponent(AlarmInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AlarmInfoComponent);
-    component = fixture.componentInstance;
     tableBody = fixture.nativeElement.querySelector('table');
   });
 
@@ -56,6 +57,7 @@ describe('AlarmInfoComponent', () => {
     beforeEach(() => {
       component.alarm = mockAlarm;
       component.ngOnInit();
+      tableBody = fixture.nativeElement.querySelector('table');
       fixture.detectChanges();
     });
 

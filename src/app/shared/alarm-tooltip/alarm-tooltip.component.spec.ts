@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlarmTooltipComponent } from './alarm-tooltip.component';
+import { PropsTableComponent } from '../props-table/props-table.component';
 import { Alarm } from '../../data/alarm';
 
 describe('AlarmTooltipComponent', () => {
@@ -13,6 +14,8 @@ describe('AlarmTooltipComponent', () => {
     'mode': 5,
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 4],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',
@@ -26,7 +29,10 @@ describe('AlarmTooltipComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmTooltipComponent ]
+      declarations: [
+        AlarmTooltipComponent,
+        PropsTableComponent
+      ]
     })
     .compileComponents();
   }));

@@ -26,6 +26,7 @@ describe('OverviewComponent', () => {
         OverviewCardComponent,
         MockComponent({ selector: 'app-weather-summary'}),
         MockComponent({ selector: 'app-antennas-summary'}),
+        MockComponent({ selector: 'app-building-summary'}),
         MockComponent({ selector: 'app-health-summary'})
       ],
       providers: [

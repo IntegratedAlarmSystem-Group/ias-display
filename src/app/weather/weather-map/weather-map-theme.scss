@@ -13,6 +13,8 @@
   $marker_stroke: mat-color($background, dialog);
   $selected_marker_stroke: mat-color($foreground, secondary-text);
 
+  $alarms: map-get($theme, alarms);
+
   svg path.weather-map-paths {
     stroke: $map_stroke;
   }
@@ -36,6 +38,15 @@
     circle {
       stroke: $map_stroke;
       fill: $map_background;
+    }
+
+  }
+
+  svg g.antennas-pads-background {
+
+    circle.antennas-pad-status-background {
+      stroke: $map_stroke;
+      fill: $map_stroke;
     }
 
   }
@@ -65,6 +76,35 @@
       }
     }
 
+  }
+
+  .affected-green {
+    // stroke: mat-color($alarms, border-clear) !important;
+    // fill: mat-color($alarms, clear) !important;
+  }
+
+  .affected-yellow {
+    stroke: mat-color($alarms, border-set-low) !important;
+    fill: mat-color($alarms, set-low) !important;
+  }
+
+  .affected-red {
+    stroke: mat-color($alarms, border-set-critical) !important;
+    fill: mat-color($alarms, set-critical) !important;
+  }
+
+  .affected-gray {
+    stroke: mat-color($alarms, border-maintenance) !important;
+    fill: mat-color($alarms, maintenance) !important;
+  }
+
+  .affected-blue {
+    stroke: mat-color($alarms, border-unknown) !important;
+    fill: mat-color($alarms, unknown) !important;
+  }
+
+  .affected-unreliable {
+    fill: transparent !important;
   }
 
 }

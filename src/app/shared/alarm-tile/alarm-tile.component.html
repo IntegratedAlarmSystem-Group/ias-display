@@ -3,11 +3,11 @@
 >
   <div
     class="alarm-tile-background"
-    [ngClass]="getClass()"
+    [ngClass]="currentClass"
   ></div>
   <div class="alarm-tile">
     <div class="alarm-tile-content">
-      <div class="title">{{getAlarmName()}}</div>
+      <div class="title">{{alarmName}}</div>
       <div class="alarm">
         <app-alarm
           [alarm]="this.alarm"
@@ -17,7 +17,12 @@
           [size]="this.size"
           [tooltipDirection]="this.tooltipDirection"
           [labelLocation]="'bottom'"
+          [disableBlink]="true"
         ></app-alarm>
+        <app-alarm-blink
+          [alarm]="this.alarm"
+          (blinkingStatus)="changeBlinkingState($event)"
+        ></app-alarm-blink>
       </div>
     </div>
   </div>

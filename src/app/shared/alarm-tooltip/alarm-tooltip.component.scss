@@ -22,13 +22,17 @@
   }
 
   .props-container {
-    color: white;
-    vertical-align: top;
-    font-size: 100%;
-    white-space: pre-wrap;
-    word-wrap: break-all;
-    margin: 0px;
-    max-width: 380px;
+    padding: 10px 0 0 0;
+
+    .props-container-title {
+      padding-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .props-table-container {
+      overflow-y: auto;
+      overflow-x: auto;
+    }
   }
 }
 

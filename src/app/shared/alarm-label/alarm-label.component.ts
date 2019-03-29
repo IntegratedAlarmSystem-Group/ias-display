@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Alarm, Value } from '../../data/alarm';
 
 
@@ -10,7 +10,7 @@ import { Alarm, Value } from '../../data/alarm';
   templateUrl: './alarm-label.component.html',
   styleUrls: ['./alarm-label.component.scss']
 })
-export class AlarmLabelComponent implements OnInit {
+export class AlarmLabelComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -28,7 +28,12 @@ export class AlarmLabelComponent implements OnInit {
   @Input() showText = true;
 
   /**
-   * Defines the direction of the label
+   * Defines the presentation of the label
+   */
+  @Input() fluidText = false;
+
+  /**
+   * Defines the presentation of the label
    */
   @Input() noPadding = false;
 
@@ -36,6 +41,11 @@ export class AlarmLabelComponent implements OnInit {
   * Show text options
   */
   showTextOptions = [true, false];
+
+  /**
+  * Show fluid text options
+  */
+  showFluidTextOptions = [true, false];
 
   /**
   * Padding Options
@@ -46,6 +56,26 @@ export class AlarmLabelComponent implements OnInit {
   * Size Options
   */
   sizeOptions = ['xs', 'sm', 'md', 'lg'];
+
+  /**
+  * Contains the current classes for displaying the component.
+  */
+  currentClass = [];
+
+  /**
+  * Contains the current class for the for displaying size
+  */
+  currentSizeClass: string = null;
+
+  /**
+  * The text that will display the priority of the alarm
+  */
+  priorityText = '';
+
+  /**
+  * The class used to display the priority of the alarm
+  */
+  priorityTextClass = [];
 
   /**
   * Builds a new instance
@@ -59,23 +89,31 @@ export class AlarmLabelComponent implements OnInit {
     if (this.showTextOptions.indexOf(this.showText) < 0) {
       this.showText = true;
     }
-    if (this.showTextOptions.indexOf(this.showText) < 0) {
+    if (this.showFluidTextOptions.indexOf(this.fluidText) < 0) {
+      this.fluidText = false;
+    }
+    if (this.noPaddingOptions.indexOf(this.noPadding) < 0) {
       this.noPadding = false;
     }
     if (this.sizeOptions.indexOf(this.size) < 0) {
       this.size = 'md';
+      this.currentSizeClass = 'alarm-label-md';
     }
   }
 
   /**
-  * Returns a string related to the name of the alarm priority
-  * @returns {string} alarm prioritity name for the display
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
-  getPriorityText(): string {
-    const alarmValue: string = this.alarm.alarmValue;
-    const priorityText: string = alarmValue
-      .replace('set_', '');
-    return priorityText.toUpperCase();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.size && changes.size.previousValue !== changes.size.currentValue) {
+      this.currentSizeClass = 'alarm-label-' + this.size;
+    }
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.currentClass = this.getClass();
+      this.priorityText = this.getPriorityText();
+      this.priorityTextClass = this.getPriorityTextClass();
+    }
   }
 
   /**
@@ -119,6 +157,20 @@ export class AlarmLabelComponent implements OnInit {
   }
 
   /**
+  * Returns a string related to the name of the alarm priority
+  * @returns {string} alarm prioritity name for the display
+  */
+  getPriorityText(): string {
+    if ( !this.alarm ) {
+      return '';
+    }
+    const alarmValue: string = this.alarm.alarmValue;
+    const priorityText: string = alarmValue
+      .replace('set_', '');
+    return priorityText.toUpperCase();
+  }
+
+  /**
   * Defines the CSS classes to use depending on the Alarm status
   * @returns {string[]} array with names of the classes to use
   */
@@ -130,6 +182,9 @@ export class AlarmLabelComponent implements OnInit {
     }
     if (this.showText === false) {
       result.push('hide-text');
+    }
+    if (this.fluidText === true) {
+      result.push('fluid-text');
     }
     return result;
   }

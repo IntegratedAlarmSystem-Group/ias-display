@@ -77,7 +77,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -137,8 +138,23 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#currentClass">currentClass</a>
+                            </li>
+                            <li>
+                                <a href="#currentImage">currentImage</a>
+                            </li>
+                            <li>
+                                <a href="#currentTextClass">currentTextClass</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#labelLocationOptions">labelLocationOptions</a>
+                            </li>
+                            <li>
+                                <a href="#showAsPendingAck">showAsPendingAck</a>
+                            </li>
+                            <li>
+                                <a href="#showAsShelved">showAsShelved</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -157,7 +173,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getClass">getClass</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#changeBlinkingState">changeBlinkingState</a>
                             </li>
                             <li>
                                 <a href="#getImage">getImage</a>
@@ -169,13 +186,10 @@
                                 <a href="#isTextAlarm">isTextAlarm</a>
                             </li>
                             <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#showAsPendingAck">showAsPendingAck</a>
-                            </li>
-                            <li>
-                                <a href="#showAsShelved">showAsShelved</a>
                             </li>
                             <li>
                                 <a href="#showPriorityLevelText">showPriorityLevelText</a>
@@ -194,6 +208,9 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#alarm">alarm</a>
+                            </li>
+                            <li>
+                                <a href="#disableBlink">disableBlink</a>
                             </li>
                             <li>
                                 <a href="#images">images</a>
@@ -223,6 +240,20 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#blinkingStatus">blinkingStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -236,19 +267,50 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:147</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Instantiates the component</p>
+                            <div class="io-description"><p>Builds a new instance</p>
 </div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Used for change detection in html</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -260,580 +322,695 @@
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="alarm"></a>
-                        <code>alarm</code>
+                        <b>alarm</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Alarm object associated to the component</p>
-</div>
-                            <p>
-                            <em>Type :</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
 
-                            </p>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:57</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Alarm object associated to the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
+                        <a name="disableBlink"></a>
+                        <b>disableBlink</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:104</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Variable to disable animation</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="images"></a>
-                        <code>images</code>
+                        <b>images</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Set of names for the images to use</p>
-</div>
-                            <p>
-                            <em>Type :</em>    <code><a href="../classes/AlarmImageSet.html" target="_self" >AlarmImageSet</a></code>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/AlarmImageSet.html" target="_self" >AlarmImageSet</a></code>
 
-                            </p>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:67</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Set of names for the images to use</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="imagesUnreliable"></a>
-                        <code>imagesUnreliable</code>
+                        <b>imagesUnreliable</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Set of names for the images to use for unreliable states</p>
-</div>
-                            <p>
-                            <em>Type :</em>    <code><a href="../classes/AlarmImageSet.html" target="_self" >AlarmImageSet</a></code>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/AlarmImageSet.html" target="_self" >AlarmImageSet</a></code>
 
-                            </p>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:72</a></div>
                             </td>
                         </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
                 <tr>
-                    <td class="col-md-2">
-                        <a name="labelLocation"></a>
-                        <code>labelLocation</code>
-                    </td>
-                    <td class="col-md-10">
-                        <div><p>Defines the direction of the label</p>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Set of names for the images to use for unreliable states</p>
 </div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;right&#x27;</code>
-                        </p>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:100</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
-                        <a name="labelMode"></a>
-                        <code>labelMode</code>
+                    <td class="col-md-4">
+                        <a name="labelLocation"></a>
+                        <b>labelLocation</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines wether or not the component will display the text of the label
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;right&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:99</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines the direction of the label</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="labelMode"></a>
+                        <b>labelMode</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;text&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:84</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines wether or not the component will display the text of the label
 with the alarm priority</p>
 </div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;text&#x27;</code>
-                        </p>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:85</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="showActionBadges"></a>
-                        <code>showActionBadges</code>
+                        <b>showActionBadges</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines wether or not the component will display the action badges (&quot;pending acknowledgement&quot; and &quot;alarm in shelf&quot;) besides the icon.
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:78</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines wether or not the component will display the action badges (&quot;pending acknowledgement&quot; and &quot;alarm in shelf&quot;) besides the icon.
 This value is &quot;true&quot; by default</p>
 </div>
-                        <p>
-                            <em>Default value : </em><code>true</code>
-                        </p>
                     </td>
                 </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:79</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="size"></a>
-                        <code>size</code>
+                        <b>size</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines the size of the component, can be either of the options defined by <a href="sizeOptions">sizeOptions</a></p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;md&#x27;</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;md&#x27;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:90</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:89</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines the size of the component, can be either of the options defined by <a href="sizeOptions">sizeOptions</a></p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="text"></a>
-                        <code>text</code>
+                        <b>text</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Alarm object associated to the component</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;&#x27;</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:62</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Alarm object associated to the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="tooltipDirection"></a>
-                        <code>tooltipDirection</code>
+                        <b>tooltipDirection</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines the direction of the tooltip</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;right&#x27;</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;right&#x27;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:95</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:94</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines the direction of the tooltip</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blinkingStatus"></a>
+                        <b>blinkingStatus</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:108</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted to notify when the alarm should start or stop blinking </p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getClass"></a>
-                        <span class="name">
-                            <b>
-                            getClass
-                            </b>
-                            <a href="#getClass"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>getClass()</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeBlinkingState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            changeBlinkingState
+                        </b>
+                        <a href="#changeBlinkingState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeBlinkingState(blinking: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:134</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="197"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:197</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns the style class name based on the optional input size. By default
-the class is medium size.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Function executed to change and propagate the blinking state according to a boolean parameter
+It is executed when the inner <a href="../components/AlarmBlinkComponent.html">AlarmBlinkComponent</a> emits a value on its
+<a href="../components/AlarmBlinkComponent.html#blinkingStatus">AlarmBlinkComponent</a> <a href="EventEmitter">EventEmitter</a></p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>blinking</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>style class name</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getImage"></a>
-                        <span class="name">
-                            <b>
+
+                                    <td>
+                                        <p>true if it should blink, false if not</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImage"></a>
+                    <span class="name">
+                        <b>
                             getImage
-                            </b>
-                            <a href="#getImage"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getImage()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:142</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="214"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:214</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns the URL of the current image to use depending on the Alarm status</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns the URL of the current image to use depending on the Alarm status</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>url of the image</p>
+                    </div>
+                    <div class="io-description">
+                        <p>url of the image</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getTextClass"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTextClass"></a>
+                    <span class="name">
+                        <b>
                             getTextClass
-                            </b>
-                            <a href="#getTextClass"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getTextClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getTextClass()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:175</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="250"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:250</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns the class to be used to display the text</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns the class to be used to display the text</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>string[]</code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string[]</code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>list of css classes</p>
+                    </div>
+                    <div class="io-description">
+                        <p>list of css classes</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="isTextAlarm"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isTextAlarm"></a>
+                    <span class="name">
+                        <b>
                             isTextAlarm
-                            </b>
-                            <a href="#isTextAlarm"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#isTextAlarm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>isTextAlarm()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:214</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="289"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:289</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Check if the alarm must be displayed as a text alarm or as an icon alarm</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the alarm must be displayed as a text alarm or as an icon alarm</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>True if the {</p>
+                    </div>
+                    <div class="io-description">
+                        <p>True if the {</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="175"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:175</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Object containing the changes in the Inputs of the component</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
                             ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:120</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:161</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Executed when the component is initiating</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Executed when the component is initiating
+Checks and corrects some of the components inputs</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showAsPendingAck"></a>
-                        <span class="name">
-                            <b>
-                            showAsPendingAck
-                            </b>
-                            <a href="#showAsPendingAck"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>showAsPendingAck()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="222" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:222</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Check if the alarm must be displayed with the pending ack badge activated</p>
-</div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>True if the pending ack must be activated, false if it must not</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showAsShelved"></a>
-                        <span class="name">
-                            <b>
-                            showAsShelved
-                            </b>
-                            <a href="#showAsShelved"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>showAsShelved()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:230</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Check if the alarm must be displayed with the shelve badge activated</p>
-</div>
-
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    <p>True if the alarm is shelved, false if it is not</p>
-
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showPriorityLevelText"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPriorityLevelText"></a>
+                    <span class="name">
+                        <b>
                             showPriorityLevelText
-                            </b>
-                            <a href="#showPriorityLevelText"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#showPriorityLevelText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>showPriorityLevelText()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:238</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="297"
+                            class="link-to-prism">src/app/shared/alarm/alarm.component.ts:297</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Check if the alarm should display the priority text in the related label</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the alarm should display the priority text in the related label</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>True if mode is &#39;text&#39; else False</p>
+                    </div>
+                    <div class="io-description">
+                        <p>True if mode is &#39;text&#39; else False</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     <section>
     
         <h3 id="inputs">
@@ -843,20 +1020,129 @@ the class is medium size.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="currentClass"></a>
+                        <span class="name">
+                            <b>
+                            currentClass</b>
+                            <a href="#currentClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;alarm-component-md&#x27;, &#x27;&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:114</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current classes for displaying the component.
+The first element contains a reference for the size, and the second contains the blinking status</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentImage"></a>
+                        <span class="name">
+                            <b>
+                            currentImage</b>
+                            <a href="#currentImage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:125</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current image to display in the component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentTextClass"></a>
+                        <span class="name">
+                            <b>
+                            currentTextClass</b>
+                            <a href="#currentTextClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:120</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current classes for displaying the component if it is a text alarm.
+The first element contains a reference for the size, and the second contains the blinking status</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="labelLocationOptions"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            labelLocationOptions
-                            </b>
+                            labelLocationOptions</b>
                             <a href="#labelLocationOptions"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>labelLocationOptions:     <code>[]</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -872,7 +1158,7 @@ the class is medium size.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:110</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:147</a></div>
                             </td>
                         </tr>
 
@@ -889,20 +1175,79 @@ the class is medium size.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="showAsPendingAck"></a>
+                        <span class="name">
+                            <b>
+                            showAsPendingAck</b>
+                            <a href="#showAsPendingAck"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:131</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines wether or not the alarm must be displayed with the pending ack badge activated.
+True if it must be activated, false if not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showAsShelved"></a>
+                        <span class="name">
+                            <b>
+                            showAsShelved</b>
+                            <a href="#showAsShelved"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:137</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines wether or not the alarm must be displayed with the shelved badge activated.
+True if it must be activated, false if not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="sizeOptions"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            sizeOptions
-                            </b>
+                            sizeOptions</b>
                             <a href="#sizeOptions"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>sizeOptions:     <code>[]</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -918,7 +1263,7 @@ the class is medium size.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:105</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/shared/alarm/alarm.component.ts:142</a></div>
                             </td>
                         </tr>
 
@@ -937,8 +1282,7 @@ the class is medium size.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit } from &#x27;@angular/core&#x27;;
-import { AlarmTooltipComponent } from &#x27;../alarm-tooltip/alarm-tooltip.component&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output, OnInit, OnChanges, ChangeDetectorRef, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { Alarm, Value, OperationalMode } from &#x27;../../data/alarm&#x27;;
 
 /**
@@ -989,7 +1333,7 @@ export class AlarmImageSet {
   templateUrl: &#x27;./alarm.component.html&#x27;,
   styleUrls: [&#x27;./alarm.component.scss&#x27;]
 })
-export class AlarmComponent implements OnInit {
+export class AlarmComponent implements OnInit, OnChanges {
 
   /**
    * Alarm object associated to the component
@@ -1039,6 +1383,44 @@ export class AlarmComponent implements OnInit {
   @Input() labelLocation &#x3D; &#x27;right&#x27;;
 
   /**
+   * Variable to disable animation
+   */
+  @Input() disableBlink &#x3D; false;
+
+
+  /** Event emitted to notify when the alarm should start or stop blinking */
+  @Output() blinkingStatus &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+  * Contains the current classes for displaying the component.
+  * The first element contains a reference for the size, and the second contains the blinking status
+  */
+  currentClass &#x3D; [&#x27;alarm-component-md&#x27;, &#x27;&#x27;];
+
+  /**
+  * Contains the current classes for displaying the component if it is a text alarm.
+  * The first element contains a reference for the size, and the second contains the blinking status
+  */
+  currentTextClass: string[] &#x3D; null;
+
+  /**
+  * Contains the current image to display in the component
+  */
+  currentImage: string &#x3D; null;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the pending ack badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsPendingAck &#x3D; false;
+
+  /**
+   * Defines wether or not the alarm must be displayed with the shelved badge activated.
+   * True if it must be activated, false if not
+   */
+  showAsShelved &#x3D; false;
+
+  /**
    * Available sizes for the alarm componet
    */
   private sizeOptions &#x3D; [&#x27;xs&#x27;, &#x27;sm&#x27;, &#x27;md&#x27;, &#x27;lg&#x27;, &#x27;status&#x27;];
@@ -1049,16 +1431,21 @@ export class AlarmComponent implements OnInit {
   private labelLocationOptions &#x3D; [&#x27;right&#x27;, &#x27;bottom&#x27;];
 
   /**
-  * Instantiates the component
+  * Builds a new instance
+  * @param {ChangeDetectorRef} cdRef Used for change detection in html
   */
-  constructor() { }
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   /**
   * Executed when the component is initiating
+  * Checks and corrects some of the components inputs
   */
   ngOnInit() {
     if (this.sizeOptions.indexOf(this.size) &lt; 0) {
       this.size &#x3D; &#x27;md&#x27;;
+      this.currentClass[0] &#x3D; &#x27;alarm-component-md&#x27;;
     }
     if (this.labelLocationOptions.indexOf(this.labelLocation) &lt; 0) {
       this.labelLocation &#x3D; &#x27;right&#x27;;
@@ -1066,12 +1453,42 @@ export class AlarmComponent implements OnInit {
   }
 
   /**
-   * Returns the style class name based on the optional input size. By default
-   * the class is medium size.
-   * @return {string} style class name
-   */
-  getClass(): string {
-    return &#x27;alarm-component-&#x27; + this.size;
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.size &amp;&amp; changes.size.previousValue !&#x3D;&#x3D; changes.size.currentValue) {
+      this.currentClass[0] &#x3D; &#x27;alarm-component-&#x27; + this.size;
+    }
+    if (changes.showActionBadges &amp;&amp; changes.showActionBadges.previousValue !&#x3D;&#x3D; changes.showActionBadges.currentValue) {
+      this.showAsPendingAck &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
+      this.showAsShelved &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
+    }
+    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
+      this.currentImage &#x3D; this.getImage();
+      this.currentTextClass &#x3D; this.getTextClass();
+      this.showAsPendingAck &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
+      this.showAsShelved &#x3D; this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
+    }
+  }
+
+  /**
+  * Function executed to change and propagate the blinking state according to a boolean parameter
+  * It is executed when the inner {@link AlarmBlinkComponent} emits a value on its
+  * {@link AlarmBlinkComponent#blinkingStatus} {@link EventEmitter}
+  * @param {boolean} blinking true if it should blink, false if not
+  */
+  public changeBlinkingState(blinking: boolean) {
+    this.blinkingStatus.emit(blinking);
+    if (this.disableBlink) {
+      return;
+    }
+    if (blinking) {
+      this.currentClass[1] &#x3D; &#x27;blinking&#x27;;
+    } else {
+      this.currentClass[1] &#x3D; &#x27;&#x27;;
+    }
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -1079,6 +1496,9 @@ export class AlarmComponent implements OnInit {
   * @return {string} url of the image
   */
   getImage(): string {
+    if (this.isTextAlarm()) {
+      return null;
+    }
     if (!this.alarm) {
       return this.imagesUnreliable.unknown;
     }
@@ -1155,34 +1575,12 @@ export class AlarmComponent implements OnInit {
   }
 
   /**
-   * Check if the alarm must be displayed with the pending ack badge activated
-   * @return {boolean} True if the pending ack must be activated, false if it must not
-   */
-  showAsPendingAck(): boolean {
-    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; !this.alarm.ack &amp;&amp; this.alarm.state_change_timestamp &gt; 0;
-  }
-
-  /**
-   * Check if the alarm must be displayed with the shelve badge activated
-   * @return {boolean} True if the alarm is shelved, false if it is not
-   */
-  showAsShelved(): boolean {
-    return this.showActionBadges &amp;&amp; this.alarm !&#x3D; null &amp;&amp; this.alarm.shelved;
-  }
-
-  /**
    * Check if the alarm should display the priority text in the related label
    * @return {boolean} True if mode is &#x27;text&#x27; else False
    */
-   showPriorityLevelText(): boolean {
-     if (this.labelMode &#x3D;&#x3D;&#x3D; &#x27;text&#x27;) {
-       return true;
-     } else if (this.labelMode &#x3D;&#x3D;&#x3D; &#x27;line&#x27;) {
-       return false;
-     } else {
-       return false;
-     }
-   }
+  showPriorityLevelText(): boolean {
+    return this.labelMode &#x3D;&#x3D;&#x3D; &#x27;text&#x27;;
+  }
 
 }
 </code></pre>
@@ -1191,10 +1589,15 @@ export class AlarmComponent implements OnInit {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;labelLocation &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;; then alarmBottonTag; else alarmRightTag&quot;&gt; &lt;/ng-container&gt;
 
+&lt;app-alarm-blink
+  [alarm]&#x3D;&quot;this.alarm&quot;
+  (blinkingStatus)&#x3D;&quot;changeBlinkingState($event)&quot;
+&gt;&lt;/app-alarm-blink&gt;
+
 &lt;ng-template #alarmBottonTag&gt;
 
   &lt;div
-    [ngClass]&#x3D;&quot;this.getClass()&quot;
+    [ngClass]&#x3D;&quot;this.currentClass&quot;
     fxLayout&#x3D;&quot;row&quot;
     placement&#x3D;&quot;{{tooltipDirection}}&quot;
     [ngbTooltip]&#x3D;&quot;tipContent&quot;
@@ -1204,52 +1607,57 @@ export class AlarmComponent implements OnInit {
       &lt;app-alarm-tooltip [alarm]&#x3D;&quot;alarm&quot; [tooltipDirection]&#x3D;&quot;tooltipDirection&quot;&gt;&lt;/app-alarm-tooltip&gt;
     &lt;/ng-template&gt;
 
-    &lt;div fxLayout&#x3D;&quot;column&quot;&gt;
+    &lt;div class&#x3D;&quot;alarm-bottom-tag-table&quot;&gt;
+      &lt;div class&#x3D;&quot;alarm-table-cell alarm-row main-column&quot;&gt;
 
-      &lt;ng-container *ngIf&#x3D;&quot;isTextAlarm(); then textAlarm; else iconAlarm&quot;&gt; &lt;/ng-container&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;isTextAlarm(); then textAlarm; else iconAlarm&quot;&gt; &lt;/ng-container&gt;
 
-      &lt;ng-template #textAlarm&gt;
-        &lt;div [ngClass]&#x3D;&quot;this.getTextClass()&quot;&gt;
-          {{this.text}}
-        &lt;/div&gt;
-      &lt;/ng-template&gt;
+        &lt;ng-template #textAlarm&gt;
+          &lt;div [ngClass]&#x3D;&quot;this.currentTextClass&quot;&gt;
+            {{this.text}}
+          &lt;/div&gt;
+        &lt;/ng-template&gt;
 
-      &lt;ng-template #iconAlarm&gt;
-        &lt;div class&#x3D;&quot;icon&quot;&gt;
-          &lt;img class&#x3D;&quot;alarm-icon&quot; src&#x3D;&quot;{{ getImage() }}&quot;/&gt;
-        &lt;/div&gt;
-      &lt;/ng-template&gt;
+        &lt;ng-template #iconAlarm&gt;
+          &lt;div class&#x3D;&quot;icon&quot;&gt;
+            &lt;img class&#x3D;&quot;alarm-icon&quot; src&#x3D;&quot;{{ this.currentImage }}&quot;/&gt;
+          &lt;/div&gt;
+        &lt;/ng-template&gt;
 
-      &lt;div *ngIf&#x3D;&quot;(labelMode !&#x3D;&#x3D; &#x27;hidden&#x27;) &amp;&amp; (labelLocation &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;)&quot; class&#x3D;&quot;alarm-label-container bottom&quot;&gt;
-        &lt;app-alarm-label
-          [alarm]&#x3D;&quot;alarm&quot;
-          [showText]&#x3D;&quot;showPriorityLevelText()&quot;
-          [size]&#x3D;&quot;size&quot;
-        &gt;&lt;/app-alarm-label&gt;
       &lt;/div&gt;
+      &lt;div class&#x3D;&quot;alarm-table-cell alarm-row badges-column&quot;&gt;
+        &lt;div class&#x3D;&quot;badges&quot; [ngClass]&#x3D;&quot;{&#x27;hidden&#x27;: !showActionBadges}&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;space-between&quot;&gt;
+          &lt;div *ngIf&#x3D;&quot;showAsPendingAck; then ackOn else ackOff&quot;&gt;&lt;/div&gt;
+          &lt;ng-template #ackOn&gt;
+            &lt;img class&#x3D;&quot;badge-icon ack-icon&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template #ackOff&gt;
+            &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
+          &lt;/ng-template&gt;
 
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;badges&quot; [ngClass]&#x3D;&quot;{&#x27;hidden&#x27;: !showActionBadges}&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;space-between&quot;&gt;
-      &lt;div *ngIf&#x3D;&quot;showAsPendingAck(); then ackOn else ackOff&quot;&gt;&lt;/div&gt;
-      &lt;ng-template #ackOn&gt;
-        &lt;img class&#x3D;&quot;badge-icon ack-icon&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
-      &lt;/ng-template&gt;
-      &lt;ng-template #ackOff&gt;
-        &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
-      &lt;/ng-template&gt;
-
-      &lt;div *ngIf&#x3D;&quot;showAsShelved(); then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
-      &lt;ng-template #shelvedOn&gt;
-        &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot; src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
-      &lt;/ng-template&gt;
-      &lt;ng-template #shelvedOff&gt;
-        &lt;img class&#x3D;&quot;badge-icon shelve-icon badge-off&quot; src&#x3D;&quot;/assets/img/shelve.svg&quot;/&gt;
-      &lt;/ng-template&gt;
+          &lt;div *ngIf&#x3D;&quot;showAsShelved; then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
+          &lt;ng-template #shelvedOn&gt;
+            &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot; src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template #shelvedOff&gt;
+            &lt;img class&#x3D;&quot;badge-icon shelve-icon badge-off&quot; src&#x3D;&quot;/assets/img/shelve.svg&quot;/&gt;
+          &lt;/ng-template&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;alarm-table-cell label-row main-column&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;(labelMode !&#x3D;&#x3D; &#x27;hidden&#x27;) &amp;&amp; (labelLocation &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;)&quot; class&#x3D;&quot;alarm-label-container bottom&quot;&gt;
+          &lt;app-alarm-label
+            [alarm]&#x3D;&quot;alarm&quot;
+            [showText]&#x3D;&quot;showPriorityLevelText()&quot;
+            [size]&#x3D;&quot;size&quot;
+          &gt;&lt;/app-alarm-label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;alarm-table-cell label-row badges-column&quot;&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
-
 
 &lt;/ng-template&gt;
 
@@ -1257,7 +1665,7 @@ export class AlarmComponent implements OnInit {
 &lt;ng-template #alarmRightTag&gt;
 
   &lt;div
-    [ngClass]&#x3D;&quot;this.getClass()&quot;
+    [ngClass]&#x3D;&quot;this.currentClass&quot;
     fxLayout&#x3D;&quot;row&quot;
     placement&#x3D;&quot;{{tooltipDirection}}&quot;
     [ngbTooltip]&#x3D;&quot;tipContent&quot;
@@ -1268,28 +1676,21 @@ export class AlarmComponent implements OnInit {
     &lt;/ng-template&gt;
 
     &lt;ng-container *ngIf&#x3D;&quot;isTextAlarm(); then textAlarm; else iconAlarm&quot;&gt; &lt;/ng-container&gt;
-    &lt;div *ngIf&#x3D;&quot;(labelMode !&#x3D;&#x3D; &#x27;hidden&#x27;) &amp;&amp; (labelLocation &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;)&quot; class&#x3D;&quot;alarm-label-container bottom&quot;&gt;
-      &lt;app-alarm-label
-        [alarm]&#x3D;&quot;alarm&quot;
-        [showText]&#x3D;&quot;showPriorityLevelText()&quot;
-        [size]&#x3D;&quot;size&quot;
-      &gt;&lt;/app-alarm-label&gt;
-    &lt;/div&gt;
 
     &lt;ng-template #textAlarm&gt;
-      &lt;div [ngClass]&#x3D;&quot;this.getTextClass()&quot;&gt;
+      &lt;div [ngClass]&#x3D;&quot;this.currentTextClass&quot;&gt;
         {{this.text}}
       &lt;/div&gt;
     &lt;/ng-template&gt;
 
     &lt;ng-template #iconAlarm&gt;
       &lt;div class&#x3D;&quot;icon&quot;&gt;
-        &lt;img class&#x3D;&quot;alarm-icon&quot; src&#x3D;&quot;{{ getImage() }}&quot;/&gt;
+        &lt;img class&#x3D;&quot;alarm-icon&quot; src&#x3D;&quot;{{ this.currentImage }}&quot;/&gt;
       &lt;/div&gt;
     &lt;/ng-template&gt;
 
     &lt;div class&#x3D;&quot;badges&quot; [ngClass]&#x3D;&quot;{&#x27;hidden&#x27;: !showActionBadges}&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;space-between&quot;&gt;
-      &lt;div *ngIf&#x3D;&quot;showAsPendingAck(); then ackOn else ackOff&quot;&gt;&lt;/div&gt;
+      &lt;div *ngIf&#x3D;&quot;showAsPendingAck; then ackOn else ackOff&quot;&gt;&lt;/div&gt;
       &lt;ng-template #ackOn&gt;
         &lt;img class&#x3D;&quot;badge-icon ack-icon&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
       &lt;/ng-template&gt;
@@ -1297,7 +1698,7 @@ export class AlarmComponent implements OnInit {
         &lt;img class&#x3D;&quot;badge-icon ack-icon badge-off&quot; src&#x3D;&quot;/assets/img/ack-on.svg&quot;/&gt;
       &lt;/ng-template&gt;
 
-      &lt;div *ngIf&#x3D;&quot;showAsShelved(); then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
+      &lt;div *ngIf&#x3D;&quot;showAsShelved; then shelvedOn else shelvedOff&quot;&gt;&lt;/div&gt;
       &lt;ng-template #shelvedOn&gt;
         &lt;img class&#x3D;&quot;badge-icon shelve-icon&quot; src&#x3D;&quot;/assets/img/unshelve.svg&quot;/&gt;
       &lt;/ng-template&gt;
@@ -1316,7 +1717,6 @@ export class AlarmComponent implements OnInit {
 
   &lt;/div&gt;
 
-
 &lt;/ng-template&gt;
 </code></pre>
     </div>
@@ -1332,6 +1732,57 @@ $md-cem: 1.6*$cem;
 $lg-cem: 3.0*$cem;
 $status-cem: 1*$cem;
 
+.alarm-bottom-tag-table {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 0;
+
+  .alarm-table-cell {
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow: visible;
+    text-align: center;
+  }
+
+  .main-column {
+    width: 60%;
+  }
+
+  .badges-column {
+    width: 40%;
+  }
+
+  .alarm-row {
+    height: 80%;
+  }
+
+  .label-row {
+    height: 20%;
+  }
+
+}
+
+.alarm-icon-right-tag-table {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 0;
+
+  .alarm-table-cell {
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow: visible;
+    text-align: center;
+    border: 1px solid red;
+  }
+
+  .column {
+    width: 30%;
+  }
+
+}
+
 .alarm-component {
 
   .alarm-label-container {
@@ -1345,12 +1796,11 @@ $status-cem: 1*$cem;
 
   .icon {
     display: inline-block;
-    vertical-align: middle;
     height: 100%;
-    padding-right: 6%;
 
     .alarm-icon{
       height: 100%;
+      display: block;
     }
 
   }
@@ -1363,7 +1813,6 @@ $status-cem: 1*$cem;
   }
 
   .badges{
-    display: inline-block;
     vertical-align: middle;
     height: 100%;
     min-width: 12px;
@@ -1417,6 +1866,7 @@ $status-cem: 1*$cem;
   .badges{
     @extend .badges;
     width: 8*$sm-cem;
+    margin-left: 4px;
   }
 
   .alarm-label-container {
@@ -1435,6 +1885,7 @@ $status-cem: 1*$cem;
   .badges{
     @extend .badges;
     width: 8*$md-cem;
+    margin-left: 4px;
   }
 
   .alarm-label-container {
@@ -1457,7 +1908,7 @@ $status-cem: 1*$cem;
 
   .alarm-label-container {
     &amp;.bottom {
-      padding-top: 0.24em;
+      padding-top: 0.2em;
     }
   }
 }
@@ -1514,8 +1965,8 @@ $status-cem: 1*$cem;
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="labelLocation === \'bottom\'; then alarmBottonTag; else alarmRightTag"> </ng-container><ng-template #alarmBottonTag>  <div    [ngClass]="this.getClass()"    fxLayout="row"    placement="{{tooltipDirection}}"    [ngbTooltip]="tipContent"    data-container="body"  >    <ng-template #tipContent>      <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>    </ng-template>    <div fxLayout="column">      <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>      <ng-template #textAlarm>        <div [ngClass]="this.getTextClass()">          {{this.text}}        </div>      </ng-template>      <ng-template #iconAlarm>        <div class="icon">          <img class="alarm-icon" src="{{ getImage() }}"/>        </div>      </ng-template>      <div *ngIf="(labelMode !== \'hidden\') && (labelLocation === \'bottom\')" class="alarm-label-container bottom">        <app-alarm-label          [alarm]="alarm"          [showText]="showPriorityLevelText()"          [size]="size"        ></app-alarm-label>      </div>    </div>    <div class="badges" [ngClass]="{\'hidden\': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>      <ng-template #ackOn>        <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>      </ng-template>      <ng-template #ackOff>        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>      </ng-template>      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>      <ng-template #shelvedOn>        <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>      </ng-template>      <ng-template #shelvedOff>        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>      </ng-template>    </div>  </div></ng-template><ng-template #alarmRightTag>  <div    [ngClass]="this.getClass()"    fxLayout="row"    placement="{{tooltipDirection}}"    [ngbTooltip]="tipContent"    data-container="body"  >    <ng-template #tipContent>      <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>    </ng-template>    <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>    <div *ngIf="(labelMode !== \'hidden\') && (labelLocation === \'bottom\')" class="alarm-label-container bottom">      <app-alarm-label        [alarm]="alarm"        [showText]="showPriorityLevelText()"        [size]="size"      ></app-alarm-label>    </div>    <ng-template #textAlarm>      <div [ngClass]="this.getTextClass()">        {{this.text}}      </div>    </ng-template>    <ng-template #iconAlarm>      <div class="icon">        <img class="alarm-icon" src="{{ getImage() }}"/>      </div>    </ng-template>    <div class="badges" [ngClass]="{\'hidden\': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">      <div *ngIf="showAsPendingAck(); then ackOn else ackOff"></div>      <ng-template #ackOn>        <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>      </ng-template>      <ng-template #ackOff>        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>      </ng-template>      <div *ngIf="showAsShelved(); then shelvedOn else shelvedOff"></div>      <ng-template #shelvedOn>        <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>      </ng-template>      <ng-template #shelvedOff>        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>      </ng-template>    </div>    <div *ngIf="(labelMode !== \'hidden\') && (labelLocation === \'right\')" class="alarm-label-container">      <app-alarm-label        [alarm]="alarm"        [showText]="showPriorityLevelText()"        [size]="size"      ></app-alarm-label>    </div>  </div></ng-template></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="labelLocation === \'bottom\'; then alarmBottonTag; else alarmRightTag"> </ng-container><app-alarm-blink  [alarm]="this.alarm"  (blinkingStatus)="changeBlinkingState($event)"></app-alarm-blink><ng-template #alarmBottonTag>  <div    [ngClass]="this.currentClass"    fxLayout="row"    placement="{{tooltipDirection}}"    [ngbTooltip]="tipContent"    data-container="body"  >    <ng-template #tipContent>      <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>    </ng-template>    <div class="alarm-bottom-tag-table">      <div class="alarm-table-cell alarm-row main-column">        <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>        <ng-template #textAlarm>          <div [ngClass]="this.currentTextClass">            {{this.text}}          </div>        </ng-template>        <ng-template #iconAlarm>          <div class="icon">            <img class="alarm-icon" src="{{ this.currentImage }}"/>          </div>        </ng-template>      </div>      <div class="alarm-table-cell alarm-row badges-column">        <div class="badges" [ngClass]="{\'hidden\': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">          <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>          <ng-template #ackOn>            <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>          </ng-template>          <ng-template #ackOff>            <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>          </ng-template>          <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>          <ng-template #shelvedOn>            <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>          </ng-template>          <ng-template #shelvedOff>            <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>          </ng-template>        </div>      </div>      <div class="alarm-table-cell label-row main-column">        <div *ngIf="(labelMode !== \'hidden\') && (labelLocation === \'bottom\')" class="alarm-label-container bottom">          <app-alarm-label            [alarm]="alarm"            [showText]="showPriorityLevelText()"            [size]="size"          ></app-alarm-label>        </div>      </div>      <div class="alarm-table-cell label-row badges-column">      </div>    </div>  </div></ng-template><ng-template #alarmRightTag>  <div    [ngClass]="this.currentClass"    fxLayout="row"    placement="{{tooltipDirection}}"    [ngbTooltip]="tipContent"    data-container="body"  >    <ng-template #tipContent>      <app-alarm-tooltip [alarm]="alarm" [tooltipDirection]="tooltipDirection"></app-alarm-tooltip>    </ng-template>    <ng-container *ngIf="isTextAlarm(); then textAlarm; else iconAlarm"> </ng-container>    <ng-template #textAlarm>      <div [ngClass]="this.currentTextClass">        {{this.text}}      </div>    </ng-template>    <ng-template #iconAlarm>      <div class="icon">        <img class="alarm-icon" src="{{ this.currentImage }}"/>      </div>    </ng-template>    <div class="badges" [ngClass]="{\'hidden\': !showActionBadges}" fxLayout="column" fxLayoutAlign="space-between">      <div *ngIf="showAsPendingAck; then ackOn else ackOff"></div>      <ng-template #ackOn>        <img class="badge-icon ack-icon" src="/assets/img/ack-on.svg"/>      </ng-template>      <ng-template #ackOff>        <img class="badge-icon ack-icon badge-off" src="/assets/img/ack-on.svg"/>      </ng-template>      <div *ngIf="showAsShelved; then shelvedOn else shelvedOff"></div>      <ng-template #shelvedOn>        <img class="badge-icon shelve-icon" src="/assets/img/unshelve.svg"/>      </ng-template>      <ng-template #shelvedOff>        <img class="badge-icon shelve-icon badge-off" src="/assets/img/shelve.svg"/>      </ng-template>    </div>    <div *ngIf="(labelMode !== \'hidden\') && (labelLocation === \'right\')" class="alarm-label-container">      <app-alarm-label        [alarm]="alarm"        [showText]="showPriorityLevelText()"        [size]="size"      ></app-alarm-label>    </div>  </div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AlarmComponent'};
 </script>

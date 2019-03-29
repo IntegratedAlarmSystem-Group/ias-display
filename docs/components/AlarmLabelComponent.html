@@ -77,7 +77,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -137,7 +138,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#currentClass">currentClass</a>
+                            </li>
+                            <li>
+                                <a href="#currentSizeClass">currentSizeClass</a>
+                            </li>
+                            <li>
                                 <a href="#noPaddingOptions">noPaddingOptions</a>
+                            </li>
+                            <li>
+                                <a href="#priorityText">priorityText</a>
+                            </li>
+                            <li>
+                                <a href="#priorityTextClass">priorityTextClass</a>
+                            </li>
+                            <li>
+                                <a href="#showFluidTextOptions">showFluidTextOptions</a>
                             </li>
                             <li>
                                 <a href="#showTextOptions">showTextOptions</a>
@@ -170,6 +186,9 @@
                                 <a href="#getSizeClass">getSizeClass</a>
                             </li>
                             <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
@@ -186,6 +205,9 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#alarm">alarm</a>
+                            </li>
+                            <li>
+                                <a href="#fluidText">fluidText</a>
                             </li>
                             <li>
                                 <a href="#noPadding">noPadding</a>
@@ -218,7 +240,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:78</a></div>
                             </td>
                         </tr>
 
@@ -237,17 +259,15 @@
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="alarm"></a>
-                        <code>alarm</code>
+                        <b>alarm</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Alarm object associated to the component</p>
-</div>
-                            <p>
-                            <em>Type :</em>    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
 
-                            </p>
                     </td>
                 </tr>
                         <tr>
@@ -255,21 +275,25 @@
                                     <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:18</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Alarm object associated to the component</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
-                        <a name="noPadding"></a>
-                        <code>noPadding</code>
+                    <td class="col-md-4">
+                        <a name="fluidText"></a>
+                        <b>fluidText</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines the direction of the label</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>false</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                         <tr>
@@ -277,21 +301,51 @@
                                     <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:33</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines the presentation of the label</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
-                        <a name="showText"></a>
-                        <code>showText</code>
+                    <td class="col-md-4">
+                        <a name="noPadding"></a>
+                        <b>noPadding</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Defines if the priority text should be displayed (if set state for the alarm)</p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:38</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines the presentation of the label</p>
 </div>
-                        <p>
-                            <em>Default value : </em><code>true</code>
-                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showText"></a>
+                        <b>showText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                         <tr>
@@ -299,21 +353,25 @@
                                     <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:28</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Defines if the priority text should be displayed (if set state for the alarm)</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="size"></a>
-                        <code>size</code>
+                        <b>size</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Size options</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>&#x27;md&#x27;</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;md&#x27;</code>
                     </td>
                 </tr>
                         <tr>
@@ -321,6 +379,12 @@
                                     <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:23</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Size options</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -329,235 +393,316 @@
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getClass"></a>
-                        <span class="name">
-                            <b>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getClass"></a>
+                    <span class="name">
+                        <b>
                             getClass
-                            </b>
-                            <a href="#getClass"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getClass()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:85</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:123</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>string[]</code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string[]</code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>array with names of the classes to use</p>
+                    </div>
+                    <div class="io-description">
+                        <p>array with names of the classes to use</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getPriorityText"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPriorityText"></a>
+                    <span class="name">
+                        <b>
                             getPriorityText
-                            </b>
-                            <a href="#getPriorityText"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getPriorityText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getPriorityText()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:74</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:163</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns a string related to the name of the alarm priority</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns a string related to the name of the alarm priority</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>alarm prioritity name for the display</p>
+                    </div>
+                    <div class="io-description">
+                        <p>alarm prioritity name for the display</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getPriorityTextClass"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPriorityTextClass"></a>
+                    <span class="name">
+                        <b>
                             getPriorityTextClass
-                            </b>
-                            <a href="#getPriorityTextClass"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getPriorityTextClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getPriorityTextClass()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:125</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="177"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:177</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>string[]</code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string[]</code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>array with names of the classes to use</p>
+                    </div>
+                    <div class="io-description">
+                        <p>array with names of the classes to use</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getSizeClass"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSizeClass"></a>
+                    <span class="name">
+                        <b>
                             getSizeClass
-                            </b>
-                            <a href="#getSizeClass"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getSizeClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getSizeClass()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:141</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:196</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Defines the CSS classes to use depending on the Alarm status</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>string[]</code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string[]</code>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>array with names of the classes to use</p>
+                    </div>
+                    <div class="io-description">
+                        <p>array with names of the classes to use</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="108"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:108</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method to handle the changes on the inputs of the component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Object containing the changes in the Inputs of the component</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
                             ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:58</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:88</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Executed when the component is initiating</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Executed when the component is initiating</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     <section>
     
         <h3 id="inputs">
@@ -567,19 +712,240 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="currentClass"></a>
+                        <span class="name">
+                            <b>
+                            currentClass</b>
+                            <a href="#currentClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current classes for displaying the component.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentSizeClass"></a>
+                        <span class="name">
+                            <b>
+                            currentSizeClass</b>
+                            <a href="#currentSizeClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:68</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains the current class for the for displaying size</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="noPaddingOptions"></a>
                         <span class="name">
                             <b>
-                            noPaddingOptions
-                            </b>
+                            noPaddingOptions</b>
                             <a href="#noPaddingOptions"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[true, false]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
                 <tr>
                     <td class="col-md-4">
-                        <code>noPaddingOptions:     <code>[]</code>
-</code>
+                        <div class="io-description"><p>Padding Options</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="priorityText"></a>
+                        <span class="name">
+                            <b>
+                            priorityText</b>
+                            <a href="#priorityText"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:73</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The text that will display the priority of the alarm</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="priorityTextClass"></a>
+                        <span class="name">
+                            <b>
+                            priorityTextClass</b>
+                            <a href="#priorityTextClass"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:78</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The class used to display the priority of the alarm</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showFluidTextOptions"></a>
+                        <span class="name">
+                            <b>
+                            showFluidTextOptions</b>
+                            <a href="#showFluidTextOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[true, false]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show fluid text options</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTextOptions"></a>
+                        <span class="name">
+                            <b>
+                            showTextOptions</b>
+                            <a href="#showTextOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
                     </td>
                 </tr>
                     <tr>
@@ -601,51 +967,6 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Padding Options</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showTextOptions"></a>
-                        <span class="name">
-                            <b>
-                            showTextOptions
-                            </b>
-                            <a href="#showTextOptions"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>showTextOptions:     <code>[]</code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[true, false]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:38</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
                         <div class="io-description"><p>Show text options</p>
 </div>
                     </td>
@@ -660,16 +981,9 @@
                         <a name="sizeOptions"></a>
                         <span class="name">
                             <b>
-                            sizeOptions
-                            </b>
+                            sizeOptions</b>
                             <a href="#sizeOptions"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>sizeOptions:     <code>[]</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -685,7 +999,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/shared/alarm-label/alarm-label.component.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -704,7 +1018,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { Alarm, Value } from &#x27;../../data/alarm&#x27;;
 
 
@@ -716,7 +1030,7 @@ import { Alarm, Value } from &#x27;../../data/alarm&#x27;;
   templateUrl: &#x27;./alarm-label.component.html&#x27;,
   styleUrls: [&#x27;./alarm-label.component.scss&#x27;]
 })
-export class AlarmLabelComponent implements OnInit {
+export class AlarmLabelComponent implements OnInit, OnChanges {
 
   /**
   * Alarm object associated to the component
@@ -734,7 +1048,12 @@ export class AlarmLabelComponent implements OnInit {
   @Input() showText &#x3D; true;
 
   /**
-   * Defines the direction of the label
+   * Defines the presentation of the label
+   */
+  @Input() fluidText &#x3D; false;
+
+  /**
+   * Defines the presentation of the label
    */
   @Input() noPadding &#x3D; false;
 
@@ -742,6 +1061,11 @@ export class AlarmLabelComponent implements OnInit {
   * Show text options
   */
   showTextOptions &#x3D; [true, false];
+
+  /**
+  * Show fluid text options
+  */
+  showFluidTextOptions &#x3D; [true, false];
 
   /**
   * Padding Options
@@ -752,6 +1076,26 @@ export class AlarmLabelComponent implements OnInit {
   * Size Options
   */
   sizeOptions &#x3D; [&#x27;xs&#x27;, &#x27;sm&#x27;, &#x27;md&#x27;, &#x27;lg&#x27;];
+
+  /**
+  * Contains the current classes for displaying the component.
+  */
+  currentClass &#x3D; [];
+
+  /**
+  * Contains the current class for the for displaying size
+  */
+  currentSizeClass: string &#x3D; null;
+
+  /**
+  * The text that will display the priority of the alarm
+  */
+  priorityText &#x3D; &#x27;&#x27;;
+
+  /**
+  * The class used to display the priority of the alarm
+  */
+  priorityTextClass &#x3D; [];
 
   /**
   * Builds a new instance
@@ -765,23 +1109,31 @@ export class AlarmLabelComponent implements OnInit {
     if (this.showTextOptions.indexOf(this.showText) &lt; 0) {
       this.showText &#x3D; true;
     }
-    if (this.showTextOptions.indexOf(this.showText) &lt; 0) {
+    if (this.showFluidTextOptions.indexOf(this.fluidText) &lt; 0) {
+      this.fluidText &#x3D; false;
+    }
+    if (this.noPaddingOptions.indexOf(this.noPadding) &lt; 0) {
       this.noPadding &#x3D; false;
     }
     if (this.sizeOptions.indexOf(this.size) &lt; 0) {
       this.size &#x3D; &#x27;md&#x27;;
+      this.currentSizeClass &#x3D; &#x27;alarm-label-md&#x27;;
     }
   }
 
   /**
-  * Returns a string related to the name of the alarm priority
-  * @returns {string} alarm prioritity name for the display
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
   */
-  getPriorityText(): string {
-    const alarmValue: string &#x3D; this.alarm.alarmValue;
-    const priorityText: string &#x3D; alarmValue
-      .replace(&#x27;set_&#x27;, &#x27;&#x27;);
-    return priorityText.toUpperCase();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.size &amp;&amp; changes.size.previousValue !&#x3D;&#x3D; changes.size.currentValue) {
+      this.currentSizeClass &#x3D; &#x27;alarm-label-&#x27; + this.size;
+    }
+    if (changes.alarm &amp;&amp; changes.alarm.previousValue !&#x3D;&#x3D; changes.alarm.currentValue) {
+      this.currentClass &#x3D; this.getClass();
+      this.priorityText &#x3D; this.getPriorityText();
+      this.priorityTextClass &#x3D; this.getPriorityTextClass();
+    }
   }
 
   /**
@@ -825,6 +1177,20 @@ export class AlarmLabelComponent implements OnInit {
   }
 
   /**
+  * Returns a string related to the name of the alarm priority
+  * @returns {string} alarm prioritity name for the display
+  */
+  getPriorityText(): string {
+    if ( !this.alarm ) {
+      return &#x27;&#x27;;
+    }
+    const alarmValue: string &#x3D; this.alarm.alarmValue;
+    const priorityText: string &#x3D; alarmValue
+      .replace(&#x27;set_&#x27;, &#x27;&#x27;);
+    return priorityText.toUpperCase();
+  }
+
+  /**
   * Defines the CSS classes to use depending on the Alarm status
   * @returns {string[]} array with names of the classes to use
   */
@@ -836,6 +1202,9 @@ export class AlarmLabelComponent implements OnInit {
     }
     if (this.showText &#x3D;&#x3D;&#x3D; false) {
       result.push(&#x27;hide-text&#x27;);
+    }
+    if (this.fluidText &#x3D;&#x3D;&#x3D; true) {
+      result.push(&#x27;fluid-text&#x27;);
     }
     return result;
   }
@@ -857,10 +1226,10 @@ export class AlarmLabelComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;alarm&quot; class&#x3D;&quot;alarm-label&quot; [ngClass]&#x3D;&quot;getSizeClass()&quot;&gt;
-  &lt;div class&#x3D;&quot;alarm-label-content&quot; [ngClass]&#x3D;&quot;getClass()&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;alarm&quot; class&#x3D;&quot;alarm-label&quot; [ngClass]&#x3D;&quot;this.currentSizeClass&quot;&gt;
+  &lt;div class&#x3D;&quot;alarm-label-content&quot; [ngClass]&#x3D;&quot;this.currentClass&quot;&gt;
     &lt;div class&#x3D;&quot;priority-text&quot;
-      [ngClass]&#x3D;&quot;getPriorityTextClass()&quot;&gt;{{this.getPriorityText()}}&lt;/div&gt;
+      [ngClass]&#x3D;&quot;this.priorityTextClass&quot;&gt;{{this.priorityText}}&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
@@ -878,6 +1247,10 @@ $lg-cem: 1.4*$cem;
 
 .no-padding {
   padding: 0 !important;
+}
+
+.fluid-text {
+  min-width: unset !important;
 }
 
 .hide-label {
@@ -986,8 +1359,8 @@ $lg-cem: 1.4*$cem;
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="alarm" class="alarm-label" [ngClass]="getSizeClass()">  <div class="alarm-label-content" [ngClass]="getClass()">    <div class="priority-text"      [ngClass]="getPriorityTextClass()">{{this.getPriorityText()}}</div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="alarm" class="alarm-label" [ngClass]="this.currentSizeClass">  <div class="alarm-label-content" [ngClass]="this.currentClass">    <div class="priority-text"      [ngClass]="this.priorityTextClass">{{this.priorityText}}</div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AlarmLabelComponent'};
 </script>

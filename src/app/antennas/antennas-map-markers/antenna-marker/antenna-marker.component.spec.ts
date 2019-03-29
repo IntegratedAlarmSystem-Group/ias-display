@@ -14,6 +14,8 @@ describe('AntennaMarkerComponent', () => {
     'mode': 5,
     'core_timestamp': 1267252440000,
     'state_change_timestamp': 1267252440000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 0],
     'validity': 1,
     'description': 'my description',
     'url': 'https://www.alma.cl',

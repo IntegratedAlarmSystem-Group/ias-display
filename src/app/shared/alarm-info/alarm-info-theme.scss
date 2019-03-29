@@ -1,0 +1,35 @@
+@mixin alarm-info-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .alarm-info {
+    td {
+      color: mat-color($foreground, hint-text);
+    }
+    pre {
+      color: mat-color($foreground, hint-text);
+    }
+
+    .props-table-container {
+      table, th, td {
+        border-color: mat-color($foreground, hint-text);
+      }
+
+      th {
+        color: mat-color($foreground, hint-text);
+      }
+
+      td {
+        color: mat-color($foreground, hint-text);
+      }
+
+      pre {
+        color: mat-color($foreground, hint-text);
+      }
+    }
+  }
+
+}

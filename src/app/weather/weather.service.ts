@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
 import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
@@ -53,6 +54,24 @@ export class WeatherService {
   /** Variable to check if pads status is available */
   public padsStatusAvailable = new BehaviorSubject<any>(false);
 
+  /** Variable to check if weather stations config is available */
+  public weatherStationsConfigAvailable = new BehaviorSubject<any>(false);
+
+  /** Variable to check affected antennas updates */
+  public affectedAntennasUpdate = new BehaviorSubject<any>(false);
+
+  /** Variable to manage subscriptions */
+  public subscription: ISubscription;
+
+  /** Map from alarms to affected antennas */
+  public alarmIdToAffectedAntennasMap = {};
+
+  /** Map from affected antennas to alarms */
+  public affectedAntennasToAlarmIdsMap = {};
+
+  /** Map for affected antennas colors */
+  public affectedAntennaHighPriorityAlarm = {};
+
   /** Flag that indicates if the configuration was initialized or if it was not */
   private _initialized = false;
 
@@ -74,7 +93,51 @@ export class WeatherService {
       this.loadWeatherStationsConfig();
       this.loadImages();
       this.loadPadsStatus('');
+      const combinedSubscription = combineLatest(
+        this.weatherStationsConfigAvailable,
+        this.alarmService.alarmChangeStream
+      );
+      this.subscription = combinedSubscription.subscribe(
+        ([weatherConfigAvailable, alarmChange]) => {
+          if (weatherConfigAvailable) {
+            if (weatherConfigAvailable === true) {
+              if (Object.keys(this.alarmIdToAffectedAntennasMap).length === 0) {
+                this.initializeAntennasRelationMaps();
+              } else {
+                if (alarmChange) {
+                  this.updateAntennasRelationMapsAndAlarmPriorities(alarmChange);
+                  this.affectedAntennasUpdate.next(true);
+                }
+              }
+            }
+          }
+        }
+      );
       this._initialized = true;
+    }
+  }
+
+  /**
+  * General update for relation maps and antenna alarm priorities
+  */
+  updateAntennasRelationMapsAndAlarmPriorities(alarmChange: string) {
+    if (alarmChange === 'all') {
+      for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
+        this.updateAntennasRelationMaps(alarmId);
+      }
+      this.updateAllAntennaHighPriorityMap();
+    } else {
+      const selectedAlarmId = alarmChange;
+      this.updateAntennasRelationMaps(selectedAlarmId);
+      if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(selectedAlarmId) > -1) {
+        const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
+        for (let i = 0; i < this.alarmIdToAffectedAntennasMap[selectedAlarmId]; i++) {
+          const antenna = this.alarmIdToAffectedAntennasMap[selectedAlarmId];
+          const highAlarm = this.getAntennaHighPriorityAlarm(antenna);
+          localMap[antenna] = highAlarm;
+        }
+        this.affectedAntennaHighPriorityAlarm = localMap;
+      }
     }
   }
 
@@ -145,10 +208,127 @@ export class WeatherService {
   loadWeatherStationsConfig() {
     this.httpClient.get(BackendUrls.WEATHER_VIEW).subscribe((response) => {
       this.weatherStationsConfig = response as AlarmConfig[];
+      this.weatherStationsConfigAvailable.next(true);
     });
     this.httpClient.get(BackendUrls.WEATHER_SUMMARY).subscribe((response) => {
       this.weatherSummaryConfig = response as AlarmConfig[];
     });
+  }
+
+  /**
+  * Method to obtain a flattened configuration list
+  */
+  getFlattennedList(configInput: any) {
+    const flattennedList = [];
+    const configItems = [];
+    // first level configurations
+    for (const config of configInput) {
+      flattennedList.push(config.alarm_id);
+      configItems.push(config);
+    }
+    // other configurations
+    while (configItems.length > 0) {
+      const config = configItems.pop();
+      for (const e of config.children) {
+        flattennedList.push(e.alarm_id);
+        configItems.push(e);
+      }
+    }
+    return flattennedList;
+  }
+
+  /**
+  * Initializes alarm to antennas relation maps
+  */
+  initializeAntennasRelationMaps() {
+    const flattennedConfigAlarmIds = this.getFlattennedList(
+      this.weatherStationsConfig
+    );
+    for (const alarmId of flattennedConfigAlarmIds) {
+      this.alarmIdToAffectedAntennasMap[alarmId] = [];
+    }
+    // update alarmId to Antennas Map
+    for (const alarmId of Object.keys(this.alarmIdToAffectedAntennasMap)) {
+      this.updateAntennasRelationMaps(alarmId);
+    }
+    this.updateAllAntennaHighPriorityMap();
+  }
+
+  /**
+  * Update affected antennas high priority alarms
+  */
+  updateAllAntennaHighPriorityMap() {
+    const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
+    for (const antenna of Object.keys(this.affectedAntennasToAlarmIdsMap)) {
+      localMap[antenna] = this.getAntennaHighPriorityAlarm(antenna);
+    }
+    this.affectedAntennaHighPriorityAlarm = localMap;
+  }
+
+  /**
+  * Update alarm to antennas relation maps
+  */
+  updateAntennasRelationMaps(alarmId: string) {
+    if (this.alarmService.isAlarmIndexAvailable(alarmId)) {
+      const antennasString = this.alarmService.get(alarmId).properties['affectedAntennas'];
+      if (typeof antennasString !== 'undefined') {
+        const antennas = antennasString.split(',')
+         .map((antennaString: string) => antennaString.trim());
+        for (const antenna of antennas) {
+          // alarmId to affectedAntennas
+          if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(alarmId) > -1) {
+            if (this.alarmIdToAffectedAntennasMap[alarmId].indexOf(antenna) < 0) {
+              this.alarmIdToAffectedAntennasMap[alarmId].push(antenna);
+            }
+          } else {
+            this.alarmIdToAffectedAntennasMap[alarmId] = [antenna];
+          }
+          // affectedAntennas to alarmIds
+          if (Object.keys(this.affectedAntennasToAlarmIdsMap).indexOf(antenna) > -1) {
+            if (this.affectedAntennasToAlarmIdsMap[antenna].indexOf(alarmId) < 0) {
+              this.affectedAntennasToAlarmIdsMap[antenna].push(alarmId);
+            }
+          } else {
+            this.affectedAntennasToAlarmIdsMap[antenna] = [alarmId];
+          }
+        }
+      }
+    }
+  }
+
+
+  /**
+  * Alarm priorities comparison
+  */
+  compareAlarmPriorities(a: Alarm, b: Alarm) {
+    if (a.value < b.value) {
+      return 1;
+    }
+    if (a.value > b.value) {
+      return -1;
+    }
+    return 0;
+  }
+
+  /**
+  * Get antenna high priority alarm
+  */
+  getAntennaHighPriorityAlarm(antenna: string) {
+    if (Object.keys(this.affectedAntennasToAlarmIdsMap).indexOf(antenna) > -1) {
+      const alarmIds = this.affectedAntennasToAlarmIdsMap[antenna];
+      if (alarmIds.length > 0) {
+        const alarms = alarmIds.map((alarmId: string) => this.alarmService.get(alarmId));
+        const mainAlarms = alarms.filter((alarm: Alarm) => !alarm.shelved);
+        if (mainAlarms.length > 0) {
+          mainAlarms.sort(this.compareAlarmPriorities);
+          return mainAlarms[0];
+        } else {
+          alarms.sort(this.compareAlarmPriorities);
+          return alarms[0];
+        }
+      }
+    }
+    return null;
   }
 
   /**

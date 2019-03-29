@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, Input, ElementRef, SimpleChanges } from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { SidenavService } from '../sidenav.service';
 import { Alarm } from '../../data/alarm';
@@ -11,12 +11,17 @@ import { Alarm } from '../../data/alarm';
   templateUrl: './shelve-button.component.html',
   styleUrls: ['./shelve-button.component.css']
 })
-export class ShelveButtonComponent implements OnInit, AfterViewInit {
+export class ShelveButtonComponent implements OnInit, OnChanges, AfterViewInit {
 
   /**
    * Alarm object associated to the button
    */
   @Input() alarm: Alarm;
+
+  /**
+  * The text to display in the button tooltip
+  */
+  buttonTooltipText = 'Shelve';
 
 
   /**
@@ -35,6 +40,16 @@ export class ShelveButtonComponent implements OnInit, AfterViewInit {
    * Initialize the component
    */
   ngOnInit() {
+  }
+
+  /**
+  * Method to handle the changes on the inputs of the component
+  * @param {SimpleChanges} changes Object containing the changes in the Inputs of the component
+  */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.alarm && changes.alarm.previousValue !== changes.alarm.currentValue) {
+      this.buttonTooltipText = this.getButtonTooltipText();
+    }
   }
 
   /**

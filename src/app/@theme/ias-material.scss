@@ -5,6 +5,7 @@
 @import '../shared/alarm-card/alarm-card-theme.scss';
 @import '../shared/alarm-tile/alarm-tile-theme.scss';
 @import '../shared/alarm-header/alarm-header-theme.scss';
+@import '../shared/alarm-info/alarm-info-theme.scss';
 @import '../health/health-summary/health-summary-theme.scss';
 @import '../overview/overview-card/overview-card-theme.scss';
 @import '../tabular/table/table-theme.scss';
@@ -187,6 +188,7 @@ $ias-typography: mat-typography-config(
   @include antenna-marker-theme($theme);
   @include alarm-theme($theme);
   @include alarm-header-theme($theme);
+  @include alarm-info-theme($theme);
   @include alarm-card-theme($theme);
   @include alarm-tile-theme($theme);
   @include alarm-label-theme($theme);
@@ -229,4 +231,42 @@ a:hover {
 .snackbar {
   background: mat-color($ias-palette, 200);
   color: mat-contrast($ias-palette, 200);
+}
+
+
+.tile-background-normal {
+  opacity: 0.0;
+}
+
+.blinking {
+  -webkit-animation: BLINK 2s;
+  animation: BLINK 2s;
+  -moz-animation: BLINK 2s;
+  -o-animation: BLINK 2s;
+  animation-iteration-count: infinite;
+  opacity: 0.0;
+}
+
+@-webkit-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100% {opacity: 0.0}
+}
+
+@-moz-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100% {opacity: 0.0}
+}
+
+@keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100%{opacity: 0.0}
+}
+
+@-o-keyframes BLINK {
+  0% {opacity: 0.0}
+  50% {opacity: 0.75}
+  100%{opacity: 0.0}
 }

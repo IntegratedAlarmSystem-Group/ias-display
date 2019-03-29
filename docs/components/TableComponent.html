@@ -79,9 +79,9 @@ by typing in an input field</p>
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
-                <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
     </p>
 
 
@@ -335,7 +335,7 @@ by typing in an input field</p>
                                                         <td>alarmService</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AlarmService.html" target="_self" >AlarmService</a></code>
+                                                                        <code><a href="../injectables/AlarmService.html" target="_self" >AlarmService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -351,7 +351,7 @@ by typing in an input field</p>
                                                         <td>route</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -367,7 +367,7 @@ by typing in an input field</p>
                                                         <td>cdRef</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -375,6 +375,8 @@ by typing in an input field</p>
                                                     </td>
                                                     
                                                         <td>
+                                                                <code><p>Used for change detection in html</p>
+</code>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -391,17 +393,14 @@ by typing in an input field</p>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="alarmsToDisplay"></a>
-                        <code>alarmsToDisplay</code>
+                        <b>alarmsToDisplay</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Array that defines which alarms are going to be displayed in the table.
-If it is not specified (empty array by default), all the alarms are shown.</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>null</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
                     </td>
                 </tr>
                         <tr>
@@ -409,21 +408,26 @@ If it is not specified (empty array by default), all the alarms are shown.</p>
                                     <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/tabular/table/table.component.ts:32</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array that defines which alarms are going to be displayed in the table.
+If it is not specified (empty array by default), all the alarms are shown.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="displayedColumns"></a>
-                        <code>displayedColumns</code>
+                        <b>displayedColumns</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Array that defines which coulmns are going to be displayed and in which order</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>[&#x27;status&#x27;, &#x27;name&#x27;,  &#x27;mode&#x27;, &#x27;timestamp&#x27;, &#x27;description&#x27;, &#x27;properties&#x27;, &#x27;actions&#x27;]</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;status&#x27;, &#x27;name&#x27;,  &#x27;mode&#x27;, &#x27;timestamp&#x27;, &#x27;description&#x27;, &#x27;properties&#x27;, &#x27;actions&#x27;]</code>
                     </td>
                 </tr>
                         <tr>
@@ -431,21 +435,25 @@ If it is not specified (empty array by default), all the alarms are shown.</p>
                                     <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/tabular/table/table.component.ts:26</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array that defines which coulmns are going to be displayed and in which order</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
-                    <td class="col-md-2">
+                    <td class="col-md-4">
                         <a name="pageSizeOptions"></a>
-                        <code>pageSizeOptions</code>
+                        <b>pageSizeOptions</b>
                     </td>
-                    <td class="col-md-10">
-                        <div><p>Array that defines the options for the number of element to diplay in each page of the table</p>
-</div>
-                        <p>
-                            <em>Default value : </em><code>[15, 25, 50, 100]</code>
-                        </p>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[15, 25, 50, 100]</code>
                     </td>
                 </tr>
                         <tr>
@@ -453,6 +461,12 @@ If it is not specified (empty array by default), all the alarms are shown.</p>
                                     <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/tabular/table/table.component.ts:37</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array that defines the options for the number of element to diplay in each page of the table</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -461,798 +475,811 @@ If it is not specified (empty array by default), all the alarms are shown.</p>
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_toggleFilter"></a>
-                        <span class="name">
-                            <b>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_toggleFilter"></a>
+                    <span class="name">
+                        <b>
                             _toggleFilter
-                            </b>
-                            <a href="#_toggleFilter"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#_toggleFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>_toggleFilter(filterStatus: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, filterValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/app/tabular/table/table.component.ts:267</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="268"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:268</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Toggle the filtering based on selected filter value</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle the filtering based on selected filter value</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>filterStatus</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>filterStatus</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>filterValue</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="alarmToStringForFiltering"></a>
-                        <span class="name">
-                            <b>
+                                </tr>
+                                <tr>
+                                    <td>filterValue</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alarmToStringForFiltering"></a>
+                    <span class="name">
+                        <b>
                             alarmToStringForFiltering
-                            </b>
-                            <a href="#alarmToStringForFiltering"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#alarmToStringForFiltering"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>alarmToStringForFiltering(alarm: <a href="../classes/Alarm.html">Alarm</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="341" class="link-to-prism">src/app/tabular/table/table.component.ts:341</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="342"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:342</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Returns a string representation of the <a href="../classes/Alarm.html">Alarm</a> for filtering purposes</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns a string representation of the <a href="../classes/Alarm.html">Alarm</a> for filtering purposes</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>alarm</td>
-                                                        <td>
-                                                                    <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>alarm</td>
+                                    <td>
+                                                <code><a href="../classes/Alarm.html" target="_self" >Alarm</a></code>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>info of the {</p>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="applyFilter"></a>
-                        <span class="name">
-                            <b>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>info of the {</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilter"></a>
+                    <span class="name">
+                        <b>
                             applyFilter
-                            </b>
-                            <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>applyFilter(filter: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/app/tabular/table/table.component.ts:214</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="215"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:215</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Applies the filter ot the Table</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Applies the filter ot the Table</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>filter</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>filter</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="clearFilter"></a>
-                        <span class="name">
-                            <b>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearFilter"></a>
+                    <span class="name">
+                        <b>
                             clearFilter
-                            </b>
-                            <a href="#clearFilter"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#clearFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>clearFilter()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/tabular/table/table.component.ts:205</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="206"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:206</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Clears the filter and applies this empty filtering (i.e. no filtering)</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Clears the filter and applies this empty filtering (i.e. no filtering)</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getData"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getData"></a>
+                    <span class="name">
+                        <b>
                             getData
-                            </b>
-                            <a href="#getData"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getData(changes: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/tabular/table/table.component.ts:163</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:164</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Get Data for Table DataSource, triggered whenever alarms are updated in the <a href="../injectables/AlarmService.html">AlarmService</a></p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get Data for Table DataSource, triggered whenever alarms are updated in the <a href="../injectables/AlarmService.html">AlarmService</a></p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>changes</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>&#x27;all&#x27;</code>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>the {</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/Alarm.html" target="_self" >Alarm[]</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>array of {</p>
+                                    <td>
+                                        <code>&#x27;all&#x27;</code>
+                                    </td>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngAfterViewInit"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <p>the {</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Alarm.html" target="_self" >Alarm[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>array of {</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <b>
                             ngAfterViewInit
-                            </b>
-                            <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngAfterViewInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/tabular/table/table.component.ts:141</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:142</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Applies the table&#39;s default sorting after its initialization </p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Applies the table&#39;s default sorting after its initialization </p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnDestroy"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
                             ngOnDestroy
-                            </b>
-                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnDestroy()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/tabular/table/table.component.ts:154</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="155"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:155</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Unsubscribes from <a href="../injectables/CdbService.html">CdbService</a> and <a href="../injectables/AlarmService.html">AlarmService</a>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unsubscribes from <a href="../injectables/CdbService.html">CdbService</a> and <a href="../injectables/AlarmService.html">AlarmService</a>
 when the component is destroyed</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
                             ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/tabular/table/table.component.ts:124</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:125</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Create the table when the component is initializated
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create the table when the component is initializated
 Subscribes to new alarms from the <a href="../injectables/AlarmService.html">AlarmService</a>
 Retrieves filter values passed by the URL and applies them to the table</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onKeyUp"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onKeyUp"></a>
+                    <span class="name">
+                        <b>
                             onKeyUp
-                            </b>
-                            <a href="#onKeyUp"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#onKeyUp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>onKeyUp(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/tabular/table/table.component.ts:194</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="195"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:195</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>This function is executed after a key is pressed in the keywords input box
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>This function is executed after a key is pressed in the keywords input box
 If the user pressed &quot;Escape&quot;, then the filters are cleared by calling <a href="clearFilter">clearFilter</a>, if not, the filters are applied normally</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>event</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>the event that triggered the function</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="reloadData"></a>
-                        <span class="name">
-                            <b>
+
+                                    <td>
+                                        <p>the event that triggered the function</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadData"></a>
+                    <span class="name">
+                        <b>
                             reloadData
-                            </b>
-                            <a href="#reloadData"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#reloadData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>reloadData(changes: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/tabular/table/table.component.ts:181</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="182"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:182</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Reloads Data of the Table DataSource, triggered whenever alarms are updated in the <a href="../injectables/AlarmService.html">AlarmService</a></p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reloads Data of the Table DataSource, triggered whenever alarms are updated in the <a href="../injectables/AlarmService.html">AlarmService</a></p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>changes</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>&#x27;all&#x27;</code>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>the {</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="toggleFilterOnlySetAlarm"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <code>&#x27;all&#x27;</code>
+                                    </td>
+
+                                    <td>
+                                        <p>the {</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFilterOnlySetAlarm"></a>
+                    <span class="name">
+                        <b>
                             toggleFilterOnlySetAlarm
-                            </b>
-                            <a href="#toggleFilterOnlySetAlarm"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#toggleFilterOnlySetAlarm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>toggleFilterOnlySetAlarm()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/tabular/table/table.component.ts:243</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="244"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:244</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Toggle the filtering for only set <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle the filtering for only set <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="toggleFilterSetAlarm"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFilterSetAlarm"></a>
+                    <span class="name">
+                        <b>
                             toggleFilterSetAlarm
-                            </b>
-                            <a href="#toggleFilterSetAlarm"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#toggleFilterSetAlarm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>toggleFilterSetAlarm()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/tabular/table/table.component.ts:293</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="294"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:294</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Toggle the filtering for only set <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle the filtering for only set <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="toggleFilterShelvedAlarm"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFilterShelvedAlarm"></a>
+                    <span class="name">
+                        <b>
                             toggleFilterShelvedAlarm
-                            </b>
-                            <a href="#toggleFilterShelvedAlarm"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#toggleFilterShelvedAlarm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>toggleFilterShelvedAlarm()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="311" class="link-to-prism">src/app/tabular/table/table.component.ts:311</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="312"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:312</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Toggle the filtering for only shelved <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle the filtering for only shelved <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="toggleFilterUnackAlarm"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFilterUnackAlarm"></a>
+                    <span class="name">
+                        <b>
                             toggleFilterUnackAlarm
-                            </b>
-                            <a href="#toggleFilterUnackAlarm"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#toggleFilterUnackAlarm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>toggleFilterUnackAlarm()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="302" class="link-to-prism">src/app/tabular/table/table.component.ts:302</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="303"
+                            class="link-to-prism">src/app/tabular/table/table.component.ts:303</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Toggle the filtering for only unack <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle the filtering for only unack <a href="../classes/Alarm.html">Alarm</a> objects ON/OFF</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     <section>
     
         <h3 id="inputs">
@@ -1266,16 +1293,9 @@ If the user pressed &quot;Escape&quot;, then the filters are cleared by calling 
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            _setFilterActivated
-                            </b>
+                            _setFilterActivated</b>
                             <a href="#_setFilterActivated"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>_setFilterActivated:     <code></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1311,16 +1331,9 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            _shelvedFilterActivated
-                            </b>
+                            _shelvedFilterActivated</b>
                             <a href="#_shelvedFilterActivated"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>_shelvedFilterActivated:     <code></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1351,16 +1364,9 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            _unackFilterActivated
-                            </b>
+                            _unackFilterActivated</b>
                             <a href="#_unackFilterActivated"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>_unackFilterActivated:     <code></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1391,16 +1397,9 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            alarmServiceSubscription
-                            </b>
+                            alarmServiceSubscription</b>
                             <a href="#alarmServiceSubscription"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>alarmServiceSubscription:     <code>ISubscription</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1432,21 +1431,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            dataSource
-                            </b>
+                            dataSource</b>
                             <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>dataSource:     <code><a href="../classes/Alarm.html" target="_self" >MatTableDataSource&lt;Alarm&gt;</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../classes/Alarm.html" target="_self" >MatTableDataSource&lt;Alarm&gt;</a></code>
+                            <i>Type : </i>        <code><a href="../classes/Alarm.html" target="_self" >MatTableDataSource&lt;Alarm&gt;</a></code>
 
                         </td>
                     </tr>
@@ -1473,21 +1465,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            dateFormat
-                            </b>
+                            dateFormat</b>
                             <a href="#dateFormat"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>dateFormat:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1514,30 +1499,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            filterPredicate
-                            </b>
+                            filterPredicate</b>
                             <a href="#filterPredicate"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterPredicate:     <code></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>(data: Alarm, filterString: string): boolean &#x3D;&gt; {
-    const dataStr &#x3D; this.alarmToStringForFiltering(data).toLowerCase();
-    const filters &#x3D; filterString.toLowerCase().split(&#x27; &#x27;);
-    for (const filter of filters) {
-      if (dataStr.indexOf(filter) &#x3D;&#x3D;&#x3D; -1) {
-        return false;
-      }
-    }
-    return true;
-  }</code>
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
                         </td>
                     </tr>
                         <tr>
@@ -1563,21 +1532,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            filterString
-                            </b>
+                            filterString</b>
                             <a href="#filterString"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterString:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1609,21 +1571,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            filterValueForSetAlarms
-                            </b>
+                            filterValueForSetAlarms</b>
                             <a href="#filterValueForSetAlarms"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterValueForSetAlarms:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1655,21 +1610,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            filterValueForShelvedAlarms
-                            </b>
+                            filterValueForShelvedAlarms</b>
                             <a href="#filterValueForShelvedAlarms"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterValueForShelvedAlarms:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1701,21 +1649,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            filterValueForUnackAlarms
-                            </b>
+                            filterValueForUnackAlarms</b>
                             <a href="#filterValueForUnackAlarms"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterValueForUnackAlarms:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1746,16 +1687,9 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <a name="paginator"></a>
                         <span class="name">
                             <b>
-                            paginator
-                            </b>
+                            paginator</b>
                             <a href="#paginator"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>paginator:     <code>MatPaginator</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1795,16 +1729,9 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <a name="sort"></a>
                         <span class="name">
                             <b>
-                            sort
-                            </b>
+                            sort</b>
                             <a href="#sort"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>sort:     <code>MatSort</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1844,21 +1771,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <a name="table"></a>
                         <span class="name">
                             <b>
-                            table
-                            </b>
+                            table</b>
                             <a href="#table"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>table:     <code><a href="../classes/Alarm.html" target="_self" >MatTable&lt;Alarm&gt;</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../classes/Alarm.html" target="_self" >MatTable&lt;Alarm&gt;</a></code>
+                            <i>Type : </i>        <code><a href="../classes/Alarm.html" target="_self" >MatTable&lt;Alarm&gt;</a></code>
 
                         </td>
                     </tr>
@@ -1894,21 +1814,14 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            timezone
-                            </b>
+                            timezone</b>
                             <a href="#timezone"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>timezone:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1949,7 +1862,7 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="321" class="link-to-prism">src/app/tabular/table/table.component.ts:321</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="322" class="link-to-prism">src/app/tabular/table/table.component.ts:322</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1960,7 +1873,7 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                                 <div>
                                 </div>
                                 <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                 </div>
                         </td>
@@ -1984,7 +1897,7 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="329" class="link-to-prism">src/app/tabular/table/table.component.ts:329</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="330" class="link-to-prism">src/app/tabular/table/table.component.ts:330</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1995,7 +1908,7 @@ with the keys &#39;&quot;unack&quot;&#39; and &#39;&quot;shelved&quot;&#39; inst
                                 <div>
                                 </div>
                                 <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
 
                                 </div>
                         </td>
@@ -2119,6 +2032,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
    * Instantiates the component
    * @param {AlarmService} alarmService Service used to get the Alarms
    * @param {Route} route Reference to the url that triggered the initialization of this component
+   * @param {ChangeDetectorRef} cdRef Used for change detection in html
    */
   constructor(
     private alarmService: AlarmService,
@@ -2452,7 +2366,10 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
       &lt;mat-header-cell *matHeaderCellDef&gt;
         &lt;span mat-sort-header&gt; PROPERTIES &lt;/span&gt;
       &lt;/mat-header-cell&gt;
-      &lt;mat-cell *matCellDef&#x3D;&quot;let alarm&quot;&gt; {{alarm.formattedProperties}} &lt;/mat-cell&gt;
+      &lt;mat-cell *matCellDef&#x3D;&quot;let alarm&quot;&gt;
+        &lt;!-- {{alarm.formattedProperties}} --&gt;
+        &lt;app-props-table [alarm]&#x3D;&quot;alarm&quot;&gt;&lt;/app-props-table&gt;
+      &lt;/mat-cell&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Actions Column --&gt;
@@ -2553,7 +2470,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   .mat-column-name {
-    flex: 1 1 120px !important;
+    flex: 0.4 1 120px !important;
   }
 
   .mat-column-mode {
@@ -2565,7 +2482,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   .mat-column-description {
-    flex: 1 1 200px !important;
+    flex: 0.5 1 200px !important;
   }
 
   .mat-cell {
@@ -2574,13 +2491,11 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   .mat-column-properties {
     flex: 1 1 200px !important;
-    white-space: pre-wrap;
-    word-break: break-all;
     font-size: 80%;
     overflow-y: auto;
 
     &amp;.mat-cell {
-      max-height: 100px;
+      max-height: 10em;
       font-family: monospace;
       display: inline-grid;
       vertical-align: middle;
@@ -2623,8 +2538,8 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="table-content">  <div class="table-filters">    <div class="text-container">      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">        <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">          <mat-icon>close</mat-icon>        </button>      </mat-form-field>    </div>    <div class="toggles-container">      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterSetAlarm()">        Show set alarms      </mat-slide-toggle>      <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterUnackAlarm()">        Show unack alarms      </mat-slide-toggle>      <mat-slide-toggle [checked]="_shelvedFilterActivated" (change)="toggleFilterShelvedAlarm()">        Show shelved alarms      </mat-slide-toggle>    </div>  </div>  <mat-table #table [dataSource]="dataSource" matSort>    <!-- Status Column -->    <ng-container matColumnDef="status">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> STATUS </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm">        <div class="status-icon">          <app-status-view [alarm]="alarm" [value]="alarm.status" ></app-status-view>        </div>      </mat-cell>    </ng-container>    <!-- Monitoring Point Column -->    <ng-container matColumnDef="name">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> ALARM NAME </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>    </ng-container>    <!-- Mode Column -->    <ng-container matColumnDef="mode">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> MODE </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.operationalMode}} </mat-cell>    </ng-container>    <!-- Timestamp Column -->    <ng-container matColumnDef="timestamp">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> LAST CHANGE TIME </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>    </ng-container>    <!-- Description Column -->    <ng-container matColumnDef="description">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> DESCRIPTION </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>    </ng-container>    <!-- Properties Column -->    <ng-container matColumnDef="properties">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> PROPERTIES </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.formattedProperties}} </mat-cell>    </ng-container>    <!-- Actions Column -->    <ng-container matColumnDef="actions">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> ACTIONS </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm">        <app-buttons [alarm]="alarm"></app-buttons>      </mat-cell>    </ng-container>    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>  </mat-table>  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator></div></div>'
-    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
+        var COMPONENT_TEMPLATE = '<div><div class="table-content">  <div class="table-filters">    <div class="text-container">      <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">        <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">          <mat-icon>close</mat-icon>        </button>      </mat-form-field>    </div>    <div class="toggles-container">      <mat-slide-toggle [checked]="_setFilterActivated" (change)="toggleFilterSetAlarm()">        Show set alarms      </mat-slide-toggle>      <mat-slide-toggle [checked]="_unackFilterActivated" (change)="toggleFilterUnackAlarm()">        Show unack alarms      </mat-slide-toggle>      <mat-slide-toggle [checked]="_shelvedFilterActivated" (change)="toggleFilterShelvedAlarm()">        Show shelved alarms      </mat-slide-toggle>    </div>  </div>  <mat-table #table [dataSource]="dataSource" matSort>    <!-- Status Column -->    <ng-container matColumnDef="status">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> STATUS </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm">        <div class="status-icon">          <app-status-view [alarm]="alarm" [value]="alarm.status" ></app-status-view>        </div>      </mat-cell>    </ng-container>    <!-- Monitoring Point Column -->    <ng-container matColumnDef="name">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> ALARM NAME </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.name}} </mat-cell>    </ng-container>    <!-- Mode Column -->    <ng-container matColumnDef="mode">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> MODE </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.operationalMode}} </mat-cell>    </ng-container>    <!-- Timestamp Column -->    <ng-container matColumnDef="timestamp">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> LAST CHANGE TIME </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{ alarm.timestamp | date: dateFormat: timezone }} </mat-cell>    </ng-container>    <!-- Description Column -->    <ng-container matColumnDef="description">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> DESCRIPTION </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm"> {{alarm.description}} </mat-cell>    </ng-container>    <!-- Properties Column -->    <ng-container matColumnDef="properties">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> PROPERTIES </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm">        <!-- {{alarm.formattedProperties}} -->        <app-props-table [alarm]="alarm"></app-props-table>      </mat-cell>    </ng-container>    <!-- Actions Column -->    <ng-container matColumnDef="actions">      <mat-header-cell *matHeaderCellDef>        <span mat-sort-header> ACTIONS </span>      </mat-header-cell>      <mat-cell *matCellDef="let alarm">        <app-buttons [alarm]="alarm"></app-buttons>      </mat-cell>    </ng-container>    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>  </mat-table>  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator></div></div>'
+    var COMPONENTS = [{'name': 'AckButtonComponent', 'selector': 'app-ack-button'},{'name': 'AckComponent', 'selector': 'app-ack'},{'name': 'AckTreeComponent', 'selector': 'app-ack-tree'},{'name': 'AlarmBlinkComponent', 'selector': 'app-alarm-blink'},{'name': 'AlarmCardComponent', 'selector': 'app-alarm-card'},{'name': 'AlarmComponent', 'selector': 'app-alarm'},{'name': 'AlarmHeaderComponent', 'selector': 'app-alarm-header'},{'name': 'AlarmInfoComponent', 'selector': 'app-alarm-info'},{'name': 'AlarmLabelComponent', 'selector': 'app-alarm-label'},{'name': 'AlarmTileComponent', 'selector': 'app-alarm-tile'},{'name': 'AlarmTooltipComponent', 'selector': 'app-alarm-tooltip'},{'name': 'AntennaMarkerComponent', 'selector': 'app-antenna-marker'},{'name': 'AntennasComponent', 'selector': 'app-antennas'},{'name': 'AntennasMapComponent', 'selector': 'app-antennas-map'},{'name': 'AntennasSidebarComponent', 'selector': 'app-antennas-sidebar'},{'name': 'AntennasSummaryComponent', 'selector': 'app-antennas-summary'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BuildingSummaryComponent', 'selector': 'app-building-summary'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'HealthSummaryComponent', 'selector': 'app-health-summary'},{'name': 'LegendComponent', 'selector': 'app-legend'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MaterialButtonsColorsComponent', 'selector': 'app-material-buttons-colors'},{'name': 'MaterialCardSampleComponent', 'selector': 'app-material-sample-card'},{'name': 'MaterialColorsComponent', 'selector': 'app-material-colors'},{'name': 'MaterialSandboxComponent', 'selector': 'app-material-sandbox'},{'name': 'MaterialToggleColorsComponent', 'selector': 'app-material-toggle-colors'},{'name': 'OverviewCardComponent', 'selector': 'app-overview-card'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PropsTableComponent', 'selector': 'app-props-table'},{'name': 'SandboxAlarmCardComponent', 'selector': 'app-sandbox-alarm-card'},{'name': 'SandboxAlarmComponent', 'selector': 'app-sandbox-alarm'},{'name': 'SandboxAlarmLabelComponent', 'selector': 'app-sandbox-alarm-label'},{'name': 'SandboxAlarmTileComponent', 'selector': 'app-sandbox-alarm-tile'},{'name': 'ShelveButtonComponent', 'selector': 'app-shelve-button'},{'name': 'ShelveComponent', 'selector': 'app-shelve'},{'name': 'StatusViewComponent', 'selector': 'app-status-view'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabularViewComponent', 'selector': 'app-tabular-view'},{'name': 'WeatherBackupWsMarkerComponent', 'selector': 'app-weather-backup-ws-marker'},{'name': 'WeatherComponent', 'selector': 'app-weather'},{'name': 'WeatherDataMarkerComponent', 'selector': 'app-weather-data-marker'},{'name': 'WeatherMapComponent', 'selector': 'app-weather-map'},{'name': 'WeatherPrimaryWsConnectorComponent', 'selector': 'app-weather-primary-ws-connector'},{'name': 'WeatherPrimaryWsMarkerComponent', 'selector': 'app-weather-primary-ws-marker'},{'name': 'WeatherSidebarComponent', 'selector': 'app-weather-sidebar'},{'name': 'WeatherStationSidebarComponent', 'selector': 'app-weather-station-sidebar'},{'name': 'WeatherSummaryComponent', 'selector': 'app-weather-summary'},{'name': 'WikiButtonComponent', 'selector': 'app-wiki-button'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TableComponent'};
 </script>

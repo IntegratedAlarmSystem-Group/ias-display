@@ -11,6 +11,31 @@
       fill="none"
     />
 
+    <svg:g class="antennas-pads-background">
+
+      <ng-container *ngFor="let group of padsStatusGroupNames">
+
+        <ng-container *ngFor="let pads_item of padsDisplayStatus[group] | keyvalue">
+
+          <ng-container *ngFor="let p of [getPlacemarkObject(pads_item.key)]">
+
+            <svg:circle
+              class="antennas-pad-status-background"
+              [attr.cx]="p.opt_cx"
+              [attr.cy]="p.opt_cy"
+              stroke="currentColor"
+              stroke-width="2"
+              r="5"
+            />
+
+          </ng-container>
+
+        </ng-container>
+
+      </ng-container>
+
+    </svg:g>
+
     <ng-container *ngFor="let p of mapPlacemarks['buildings']">
         <svg:foreignObject *ngIf="p.name === 'AOS'"
              [attr.x]="p.opt_cx-15"
@@ -56,13 +81,23 @@
           <!-- Elements by pads group -->
           <!-- Note: it should be one primary weather stationConfig related to a pad group -->
           <svg:g class="weather-map-pad-groups" [ngClass]="{'selected': isSelected(stationConfig)}" >
+            <animate
+              *ngIf="blinkingStatus[stationConfig.alarm_id]"
+              attributeType="XML"
+              attributeName="opacity"
+              from="0.0"
+              to="0.0"
+              dur="2s"
+              repeatCount="indefinite"
+              values="0; 0.75; 0.0"
+              keyTimes="0; 0.5; 1"
+            />
             <ng-container *ngFor="let p of [getPlacemarkObject(stationConfig.placemark)]">
               <svg:g class="weather-map-primary-ws-group"
                 [ngClass]="getPrimaryWeatherStationStyle(stationConfig)"
                 (click)="onClick(stationConfig)"
                 (mouseenter)="mouseEnterPrimaryWeatherStationGroup(stationConfig)"
                 (mouseleave)="mouseLeavePrimaryWeatherStationGroup()">
-                <!-- primary ws related markers -->
                 <foreignObject
                      [attr.x]="p.opt_cx"
                      [attr.y]="p.opt_cy-50"
@@ -80,15 +115,16 @@
                      width="100"
                      height="50">
                   <xhtml:app-weather-primary-ws-marker
-                     [stationConfig]="stationConfig">
+                     [stationConfig]="stationConfig"
+                     (blinkingStatus)="changeBlinkingState($event, stationConfig.alarm_id)">
                   </xhtml:app-weather-primary-ws-marker>
                 </foreignObject>
                 <foreignObject
                      class="fobject"
                      [attr.x]="(p.opt_cx-50) + 125"
                      [attr.y]="(p.opt_cy-50) - 25"
-                     width="210"
-                     height="100">
+                     width="218"
+                     height="64">
                   <xhtml:app-weather-data-marker
                      [stationConfig]="stationConfig"
                      [onHover]="isOnHover(stationConfig)"
