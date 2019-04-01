@@ -144,7 +144,9 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.reloadData();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( changes => {
-      this.reloadData(changes);
+      for (const change of changes) {
+        this.reloadData(change);
+      }
     });
   }
 

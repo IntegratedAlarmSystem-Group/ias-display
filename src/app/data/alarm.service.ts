@@ -92,6 +92,18 @@ export class AlarmService {
   public alarmChangeInputStream = new BehaviorSubject<any>(true);
 
   /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBufferStream = new BehaviorSubject<any>(true);
+
+  /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBuffer = new Set();
+
+  /**
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
@@ -157,15 +169,23 @@ export class AlarmService {
         }
       }
     );
-    this.alarmChangeInputStream.pipe(auditTime(200)).subscribe(
-      change => {
+
+    this.alarmChangeInputStream.subscribe(
+      changes => {
         this.ngZone.run(
           () => {
-            this.alarmChangeStream.next(change);
+            this.alarmChangeStream.next(changes);
           }
         );
       }
     );
+
+    this.alarmChangeBufferStream.subscribe(
+      change => {
+        this.bufferStreamTasks(change);
+      }
+    );
+
   }
 
   /**
@@ -175,10 +195,53 @@ export class AlarmService {
   * or 'all' if all were updated
   */
   changeAlarms(any: any) {
-    this.alarmChangeInputStream.next(any);
+    this.alarmChangeBufferStream.next(any);
   }
 
   /******* SERVICE INITIALIZATION *******/
+
+  /**
+  * Setup periodical push from buffer
+  */
+  setPeriodicalPullFromBuffer() {
+    setInterval( () => {
+      const changes = this.getChangesFromBuffer();
+      this.alarmChangeInputStream.next(changes);
+    }, 200);
+  }
+
+  /**
+  * Setup periodical push from buffer
+  */
+  bufferStreamTasks(change) {
+    this.updateAlarmChangeBuffer(change);
+  }
+
+  /**
+  * Method to manage the update of the buffer for a new alarm change
+  */
+  updateAlarmChangeBuffer(change: string) {
+    if (change === 'all') {
+      this.alarmChangeBuffer.clear();
+    } else {
+      this.alarmChangeBuffer.delete('all');  // deletes only 'all' key
+    }
+    this.alarmChangeBuffer.add(change);
+  }
+
+  /**
+  * Get list of alarms with graphical components to update from the buffer
+  */
+  getChangesFromBuffer() {
+    let changes: string[] = [];
+    if (this.alarmChangeBuffer.size > 500 ) {
+      console.log('Changes over buffer size reference');
+      changes = ['all'];
+    } else {
+      changes = Array.from(this.alarmChangeBuffer.values());
+    }
+    return changes;
+  }
 
   /**
   * Start connection to the backend through websockets
@@ -227,6 +290,7 @@ export class AlarmService {
         });
       }
     );
+    this.setPeriodicalPullFromBuffer();
   }
 
   /**

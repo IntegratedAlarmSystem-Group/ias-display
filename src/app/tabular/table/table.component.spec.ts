@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, tick, fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule, MatSortModule } from '@angular/material';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { IasMaterialModule } from '../../ias-material/ias-material.module';
@@ -21,7 +21,6 @@ import {
   ChangedAlarm2,
   ExpectedReducedTableRowsAfterChange,
 } from './fixtures';
-
 
 describe('TableComponent', () => {
   let component: TableComponent;
@@ -68,6 +67,13 @@ describe('TableComponent', () => {
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     alarmService = fixture.debugElement.injector.get(AlarmService);
+    spyOn(alarmService, 'bufferStreamTasks').and.callFake(
+      function(change) {
+        alarmService.updateAlarmChangeBuffer(change);
+        const changes = alarmService.getChangesFromBuffer();
+        alarmService.alarmChangeInputStream.next(changes);
+      }
+    );
     fixture.detectChanges();
   });
 
@@ -143,14 +149,15 @@ describe('TableComponent', () => {
     });
 
     describe('AND the service processes all the alarms', () => {
-      it('THEN the DataSource of the Table contains no Alarms', () => {
+      it('THEN the DataSource of the Table contains no Alarms', fakeAsync(() => {
         // Act
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
         // Assert
+        tick(200);
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
         expect(sortedData).toEqual([]);
-      });
+      }));
     });
   });
 
