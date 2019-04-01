@@ -7,6 +7,7 @@ import { WeatherService } from '../weather.service';
 import { MapService } from '../../map/map.service';
 import { Observable, BehaviorSubject, SubscriptionLike as ISubscription } from 'rxjs';
 import { combineLatest } from 'rxjs';
+import { auditTime } from 'rxjs/operators';
 
 /**
 * Main component for the weather station map
@@ -172,11 +173,12 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
       ([padsStatusFlag, mapStatusFlag, mapUpToDate]) => {
         if ( padsStatusFlag && mapStatusFlag && !mapUpToDate ) {
           this.updateAntennaPadDisplayStatus();
+          this.cdRef.detectChanges();
         }
       }
     );
     this.affectedAntennasSubscription = this.service.affectedAntennasUpdate
-      .subscribe((updateMap) => { if (updateMap === true) { this.updateMap(); } } );
+      .subscribe((updateMap) => { if (updateMap === true) { this.updateMap(); this.cdRef.detectChanges(); } } );
   }
 
   /**
@@ -267,7 +269,7 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
         localPadsDisplayStatus[group] = {};
       }
       const pads = Object.keys(this.service.padsStatus[group]);
-      for (let j = 0; j < pads.length; j++) {
+      for ( let j = 0; j < pads.length; j++) {
         const antenna = this.service.padsStatus[group][pads[j]];
         let freeStatus = 'in-use';
         if (antenna === null) {
@@ -275,12 +277,14 @@ export class WeatherMapComponent implements OnInit, OnChanges, OnDestroy {
         }
         let addClasses = [];
         if (Object.keys(this.service.affectedAntennaHighPriorityAlarm).indexOf(antenna) > -1) {
-          const highAlarm: Alarm = this.service.affectedAntennaHighPriorityAlarm[antenna];
-          addClasses = this.getAffectedAntennaColorClasses(highAlarm.core_id);
-          if (groupStatus === 'selected') {
-            addClasses = [...addClasses, 'opacity-100'];
-          } else {
-            addClasses = [...addClasses, 'opacity-25'];
+          const highAlarm: any = this.service.affectedAntennaHighPriorityAlarm[antenna];
+          if (highAlarm) {
+            addClasses = this.getAffectedAntennaColorClasses(highAlarm.core_id);
+            if (groupStatus === 'selected') {
+              addClasses = [...addClasses, 'opacity-100'];
+            } else {
+              addClasses = [...addClasses, 'opacity-25'];
+            }
           }
         }
         localPadsDisplayStatus[group][pads[j]] = [groupStatus, freeStatus, ...addClasses];
