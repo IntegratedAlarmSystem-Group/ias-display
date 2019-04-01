@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Injectable, NgZone } from '@angular/core';
+import { map, auditTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
@@ -86,6 +86,12 @@ export class AlarmService {
   public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeInputStream = new BehaviorSubject<any>(true);
+
+  /**
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
@@ -127,11 +133,13 @@ export class AlarmService {
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    * @param {AuthService} authService Service used for authentication
+   * @param {NgZone} ngZone Service used for executing work inside or outside of the Angular Zone
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
     private authService: AuthService,
+    private ngZone: NgZone
   ) {
     this.connectionStatusStream.subscribe(
       value => {
@@ -149,6 +157,15 @@ export class AlarmService {
         }
       }
     );
+    this.alarmChangeInputStream.pipe(auditTime(200)).subscribe(
+      change => {
+        this.ngZone.run(
+          () => {
+            this.alarmChangeStream.next(change);
+          }
+        );
+      }
+    );
   }
 
   /**
@@ -158,7 +175,7 @@ export class AlarmService {
   * or 'all' if all were updated
   */
   changeAlarms(any: any) {
-    this.alarmChangeStream.next(any);
+    this.alarmChangeInputStream.next(any);
   }
 
   /******* SERVICE INITIALIZATION *******/
@@ -175,47 +192,54 @@ export class AlarmService {
     this.canSound = false;
     this.audio = new Audio();
     this.connect();
-    this.webSocketBridge.socket.addEventListener(
-      'open', () => {
-        this.connectionStatusStream.next(true);
-        this.getAlarmList();
+    this.ngZone.runOutsideAngular(
+      () => {
+        this.webSocketBridge.socket.addEventListener(
+          'open', () => {
+            this.connectionStatusStream.next(true);
+            this.getAlarmList();
+          }
+        );
+        this.webSocketBridge.socket.addEventListener(
+          'close', () => {
+            this.resetCountByView();
+          }
+        );
+        this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
+        // console.log('notify ', payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessage(payload.action, payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
+          // console.log('request', payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessagesList(payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
+          // console.log('counter ', payload);
+          if (this.authService.loginStatus) {
+           this.readCountByViewMessage(payload.data);
+          }
+        });
       }
     );
-    this.webSocketBridge.socket.addEventListener(
-      'close', () => {
-        this.resetCountByView();
-      }
-    );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
-    // console.log('notify ', payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessage(payload.action, payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
-      // console.log('request', payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessagesList(payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
-      // console.log('counter ', payload);
-      if (this.authService.loginStatus) {
-        this.readCountByViewMessage(payload.data);
-      }
-    });
   }
 
   /**
   *  Start connection to the backend through websockets
   */
   connect() {
-    const connectionPath = this.getConnectionPath();
-    this.webSocketBridge.connect(connectionPath);
-    this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at');
+    this.ngZone.runOutsideAngular(
+      () => {
+        const connectionPath = this.getConnectionPath();
+        this.webSocketBridge.connect(connectionPath);
+        this.webSocketBridge.listen(connectionPath);
+        console.log('Connected to webserver at');
+    });
   }
 
   /**
