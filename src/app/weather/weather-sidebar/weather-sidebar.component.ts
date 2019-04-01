@@ -7,7 +7,6 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { WeatherService } from '../weather.service';
 import { SubscriptionLike as ISubscription } from 'rxjs';
 
-
 /**
 * Component used to display Weather Alarms in an interactive sidebar
 */
@@ -164,11 +163,13 @@ export class WeatherSidebarComponent implements OnInit {
     for (let i = 0; i < stationAffectedAntennas.length; i++) {
       const antenna = stationAffectedAntennas[i];
       const highAlarm = this.weatherService.affectedAntennaHighPriorityAlarm[antenna];
-      response.push({
-        'value': highAlarm.value,
-        'name': antenna,
-        'classes': this.getAffectedAntennaColorClasses(highAlarm.core_id),
-      });
+      if (highAlarm) {
+        response.push({
+          'value': highAlarm.value,
+          'name': antenna,
+          'classes': this.getAffectedAntennaColorClasses(highAlarm.core_id),
+        });
+      }
     }
     for (let i = 0; i < stationNotAffectedAntennas.length; i++) {
       const antenna = stationNotAffectedAntennas[i];
