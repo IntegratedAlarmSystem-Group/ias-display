@@ -88,22 +88,24 @@ export class AuthService {
       this.changeLoginStatus(false);
       return of(false);
     } else {
-      const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
-      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
-        map((response: any) => {
-          const user_data = response['user_data'];
-          const allowed_actions = response['allowed_actions'];
-          this.storeUser(user_data['username']);
-          this.storeAllowedActions(allowed_actions);
-          this.changeLoginStatus(true);
-          return true;
-        }),
-        catchError( error => {
-          console.error(error);
-          this.logout();
-          return of(false);
-        }
-      ));
+      this.changeLoginStatus(true);
+      return of(true);
+      // const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
+      // return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+      //   map((response: any) => {
+      //     const user_data = response['user_data'];
+      //     const allowed_actions = response['allowed_actions'];
+      //     this.storeUser(user_data['username']);
+      //     this.storeAllowedActions(allowed_actions);
+      //     this.changeLoginStatus(true);
+      //     return true;
+      //   }),
+      //   catchError( error => {
+      //     console.error(error);
+      //     this.logout();
+      //     return of(false);
+      //   }
+      // ));
     }
   }
 
@@ -120,7 +122,7 @@ export class AuthService {
       username: username,
       password: password
     }).pipe(map((response: any) => {
-      console.log('Login repsonse:', response);
+      // console.log('Login response:', response);
       const token = response['token'];
       if (token) {
         this.storeToken(token);

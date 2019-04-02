@@ -23,7 +23,7 @@ export class UserService {
   /**
   * List of authorized users
   **/
-  public users: User[];
+  public users: User[] = [];
 
   /**
    * Builds an instance of the service
@@ -37,15 +37,17 @@ export class UserService {
   * Get the list of users in the operators group
   * @return {Subscription} subscription to the list of users
   */
-  requestUsersList(): Subscription {
-    return this.httpClientService.get(BackendUrls.USERS_LIST)
-    .subscribe (
-        (response) => {
-            this.users = <User[]> response;
-        },
-        (error) => {
-            console.error('error: ', error);
-        }
-    );
+  requestUsersList(): void {
+    if (this.users.length === 0) {
+      this.httpClientService.get(BackendUrls.USERS_LIST)
+      .subscribe (
+          (response) => {
+              this.users = <User[]> response;
+          },
+          (error) => {
+              console.error('error: ', error);
+          }
+      );
+    }
   }
 }
