@@ -108,7 +108,9 @@ export class WeatherService {
                 this.initializeAntennasRelationMaps();
               } else {
                 if (alarmChange) {
-                  this.updateAntennasRelationMapsAndAlarmPriorities(alarmChange);
+                  for (const change of alarmChange) {
+                    this.updateAntennasRelationMapsAndAlarmPriorities(change);
+                  }
                 }
               }
             }
