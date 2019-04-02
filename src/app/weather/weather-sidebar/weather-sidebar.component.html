@@ -7,7 +7,7 @@
     <mat-accordion>
       <div multi="false" *ngFor="let stationConfig of this.weatherService.weatherStationsConfig">
         <mat-expansion-panel [expanded]="isSelected(stationConfig)">
-          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig)" [collapsedHeight]="'60px'" [expandedHeight]="'60px'">
+          <mat-expansion-panel-header class="weather-sidebar-header" (click)="onClick(stationConfig);$event.stopPropagation()" [collapsedHeight]="'60px'" [expandedHeight]="'60px'">
             <app-weather-station-sidebar [stationConfig]="stationConfig" [selectedAlarm]="this.selectedStation"></app-weather-station-sidebar>
           </mat-expansion-panel-header>
           <table>
@@ -49,9 +49,11 @@
             <button mat-button color="accent" class="copy-antennas-button" (click)="copyAntennas(stationConfig)">
               <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy all </span>
             </button>
-            <button *ngIf="groupHasAffectedAntennas[stationConfig.group]" mat-button color="accent" class="copy-affected-antennas-button" (click)="copyAffectedAntennas(stationConfig)">
-              <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy affected </span>
-            </button>
+            <ng-container *ngIf="stationConfig.group">
+              <button *ngIf="groupHasAffectedAntennas[stationConfig.group]" mat-button color="accent" class="copy-affected-antennas-button" (click)="copyAffectedAntennas(stationConfig)">
+                <i class="ion-ios-copy-outline"></i> &nbsp; <span> Copy affected </span>
+              </button>
+            </ng-container>
           </div>
           <div class="antennas-list">
             <ul>

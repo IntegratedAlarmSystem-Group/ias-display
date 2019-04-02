@@ -413,6 +413,23 @@ describe('AlarmService', () => {
         .and.callFake(function() {});
 
       /**
+      * Redefinition of periodic pull from buffer
+      */
+      spyOn(subject, 'setPeriodicalPullFromBuffer')
+        .and.callFake(function() {});
+
+      /**
+      * Redefinition of the buffer stream tasks
+      */
+      spyOn(subject, 'bufferStreamTasks').and.callFake(
+        function(change) {
+          subject.updateAlarmChangeBuffer(change);
+          const changes = this.getChangesFromBuffer();
+          subject.alarmChangeInputStream.next(changes);
+        }
+      );
+
+      /**
       * Redefinition of the cdb information for the testing environment
       *
       * This is required to set the alarm service validation delay according to
@@ -803,7 +820,7 @@ describe('AlarmService', () => {
     for (const alarm of subject.alarmsArray) {
       expect(alarm.validity).toEqual(Validity.unreliable);
     }
-    expect(subject.alarmChangeStream.value).toEqual('all');
+    expect(subject.alarmChangeStream.value).toEqual(['all']);
   });
 
   it(`should update a local counter after receiving the count per view

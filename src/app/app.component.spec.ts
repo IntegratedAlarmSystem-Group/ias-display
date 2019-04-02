@@ -76,7 +76,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   if there is, at least, one not acknowledged alarm for the view`,
   () => {
 
-    alarmService.countByView = {'weather': 2, 'antenna': 1};
+    component.countByView = {'weather': 2, 'antenna': 1};
 
     component.navigationSidenavItems = [
       {
@@ -90,8 +90,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
 
     for (let i = 0; i < component.navigationSidenavItems.length; i++) {
       const navItem = component.navigationSidenavItems[i];
-      const className = component.getNavItemCountClass(
-        navItem, alarmService.countByView);
+      const className = component.getNavItemCountClass(navItem);
       expect(className).toEqual('nonzero-count');
     }
 
@@ -101,7 +100,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   if there are zero not acknowledged alarms for the view`,
   () => {
 
-    alarmService.countByView = {'weather': 0, 'antenna': 0};
+    component.countByView = {'weather': 0, 'antenna': 0};
 
     component.navigationSidenavItems = [
       {
@@ -115,8 +114,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
 
     for (let i = 0; i < component.navigationSidenavItems.length; i++) {
       const navItem = component.navigationSidenavItems[i];
-      const className = component.getNavItemCountClass(
-        navItem, alarmService.countByView);
+      const className = component.getNavItemCountClass(navItem);
       expect(className).toEqual('zero-count');
     }
 
@@ -126,7 +124,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   can not be found in the 'counter per view' available in the alarm service`,
   () => {
 
-    alarmService.countByView = {'weather': 2, 'antenna': 0};
+    component.countByView = {'weather': 2, 'antenna': 0};
 
     component.navigationSidenavItems = [
       {
@@ -140,8 +138,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
 
     for (let i = 0; i < component.navigationSidenavItems.length; i++) {
       const navItem = component.navigationSidenavItems[i];
-      const className = component.getNavItemCountClass(
-        navItem, alarmService.countByView);
+      const className = component.getNavItemCountClass(navItem);
       expect(className).toEqual('unknown-count');
     }
 
@@ -150,7 +147,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   it(`should use an 'hide-count' class for the label if the counter key is empty`,
   () => {
 
-    alarmService.countByView = {'weather': 2, 'antenna': 0};
+    component.countByView = {'weather': 2, 'antenna': 0};
 
     component.navigationSidenavItems = [
       {
@@ -171,8 +168,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
 
     for (let i = 0; i < component.navigationSidenavItems.length; i++) {
       const navItem = component.navigationSidenavItems[i];
-      const className = component.getNavItemCountClass(
-        navItem, alarmService.countByView);
+      const className = component.getNavItemCountClass(navItem);
       expect(className).toEqual('hide-count');
     }
 
@@ -215,7 +211,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   if there is, at least, one not acknowledged alarm for a selected view`,
   () => {
 
-    alarmService.countByView = {'weather': 2, 'antenna': 101};
+    component.countByView = {'weather': 2, 'antenna': 101};
 
     component.navigationSidenavItems = [
       {
@@ -238,13 +234,11 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
     let countText = '';
 
     navItem = component.navigationSidenavItems[0];
-    countText = component.getNavItemCountText(
-      navItem, alarmService.countByView);
+    countText = component.getNavItemCountText(navItem);
     expect(countText).toEqual('2');
 
     navItem = component.navigationSidenavItems[1];
-    countText = component.getNavItemCountText(
-      navItem, alarmService.countByView);
+    countText = component.getNavItemCountText(navItem);
     expect(countText).toEqual('>100');
 
   });
@@ -253,7 +247,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   if there are zero not acknowledged alarms for a selected view`,
   () => {
 
-    alarmService.countByView = {'antenna': 0};
+    component.countByView = {'antenna': 0};
 
     component.navigationSidenavItems = [
       {
@@ -266,8 +260,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
     ];
 
     const navItem = component.navigationSidenavItems[0];
-    const countText = component.getNavItemCountText(
-      navItem, alarmService.countByView);
+    const countText = component.getNavItemCountText(navItem);
     expect(countText).toEqual('0');
 
   });
@@ -276,7 +269,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   can not be found in the 'counter per view' available in the alarm service`,
   () => {
 
-    alarmService.countByView = {'weather': 2, 'antenna': 0};
+    component.countByView = {'weather': 2, 'antenna': 0};
 
     component.navigationSidenavItems = [
       {
@@ -289,8 +282,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
     ];
 
     const navItem = component.navigationSidenavItems[0];
-    const className = component.getNavItemCountText(
-      navItem, alarmService.countByView);
+    const className = component.getNavItemCountText(navItem);
     expect(className).toEqual('?');
 
   });
@@ -300,7 +292,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
   must be highlighted as an error)`,
   () => {
 
-    alarmService.countByView = {'antenna': -1};
+    component.countByView = {'antenna': -1};
 
     component.navigationSidenavItems = [
       {
@@ -313,8 +305,7 @@ if there are, or are not, alarms not acknowledged in the related view`, () => {
     ];
 
     const navItem = component.navigationSidenavItems[0];
-    const countText = component.getNavItemCountText(
-      navItem, alarmService.countByView);
+    const countText = component.getNavItemCountText(navItem);
     expect(countText).toEqual('-1');
   });
 

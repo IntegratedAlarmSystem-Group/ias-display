@@ -80,7 +80,17 @@ export class AuthService {
   }
 
   /**
-   * Checks wether or not the user is logged-in, which is true if there is a valid token
+   * Checks wether or not the user has a token, which is true if there is a valid token
+   * @returns { Observable<boolean>} true if there is a valid token, false if not
+   */
+  hasToken(): Observable<boolean> {
+    const hasToken = this.getToken() !== undefined && this.getToken() !== null;
+    this.changeLoginStatus(hasToken);
+    return of(hasToken);
+  }
+
+  /**
+   * Checks wether or not the user is logged-in (has a valid token), which is true if there is a valid token
    * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
   hasValidToken(): Observable<boolean> {
@@ -120,7 +130,7 @@ export class AuthService {
       username: username,
       password: password
     }).pipe(map((response: any) => {
-      console.log('Login repsonse:', response);
+      // console.log('Login response:', response);
       const token = response['token'];
       if (token) {
         this.storeToken(token);

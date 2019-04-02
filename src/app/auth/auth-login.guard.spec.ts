@@ -39,7 +39,7 @@ describe('AuthLoginGuard', () => {
   describe('should have a checkLogin method that checks if the navigation can be activated', () => {
     it('and when it can be activated, it returns true', () => {
       // Arrange:
-      spyOn(authService, 'hasValidToken').and.returnValue(of(true));
+      spyOn(authService, 'hasToken').and.returnValue(of(true));
       // Act:
       guard.checkLogin('attemptedUrl').subscribe(
         (returnValue) => {
@@ -52,7 +52,7 @@ describe('AuthLoginGuard', () => {
 
     it('and when it cannot be activated, it returns false, stores the url and navigates to login', () => {
       // Arrange:
-      spyOn(authService, 'hasValidToken').and.returnValue(of(false));
+      spyOn(authService, 'hasToken').and.returnValue(of(false));
       // Act:
       guard.checkLogin('attemptedUrl').subscribe(
         (returnValue) => {

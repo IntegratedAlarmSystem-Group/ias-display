@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Injectable, NgZone } from '@angular/core';
+import { map, auditTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
@@ -86,6 +86,42 @@ export class AlarmService {
   public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeInputStream = new BehaviorSubject<any>(true);
+
+  /**
+  * Stream of notifications of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeStream = new BehaviorSubject<any>({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeInputStream = new BehaviorSubject<any>({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBufferStream = new BehaviorSubject<any>(true);
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeBufferStream = new BehaviorSubject<any>({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBuffer = new Set();
+
+  /**
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
@@ -127,11 +163,13 @@ export class AlarmService {
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    * @param {AuthService} authService Service used for authentication
+   * @param {NgZone} ngZone Service used for executing work inside or outside of the Angular Zone
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
     private authService: AuthService,
+    private ngZone: NgZone
   ) {
     this.connectionStatusStream.subscribe(
       value => {
@@ -149,6 +187,39 @@ export class AlarmService {
         }
       }
     );
+
+    this.alarmChangeInputStream.subscribe(
+      changes => {
+        this.ngZone.run(
+          () => {
+            this.alarmChangeStream.next(changes);
+          }
+        );
+      }
+    );
+
+    this.counterChangeInputStream.subscribe(
+      countByView => {
+        this.ngZone.run(
+          () => {
+            this.counterChangeStream.next(countByView);
+          }
+        );
+      }
+    );
+
+    this.alarmChangeBufferStream.subscribe(
+      change => {
+        this.bufferStreamTasks(change);
+      }
+    );
+
+    this.counterChangeBufferStream.subscribe(
+      countByView => {
+        this.counterStreamTasks(countByView);
+      }
+    );
+
   }
 
   /**
@@ -158,10 +229,65 @@ export class AlarmService {
   * or 'all' if all were updated
   */
   changeAlarms(any: any) {
-    this.alarmChangeStream.next(any);
+    this.alarmChangeBufferStream.next(any);
+  }
+
+  changeCounter(any: any) {
+    this.counterChangeBufferStream.next(any);
   }
 
   /******* SERVICE INITIALIZATION *******/
+
+  /**
+  * Setup periodical push from buffer
+  */
+  setPeriodicalPullFromBuffer() {
+    setInterval( () => {
+      const changes = this.getChangesFromBuffer();
+      this.alarmChangeInputStream.next(changes);
+      this.counterChangeInputStream.next(this.countByView);
+    }, 250);
+  }
+
+  /**
+  * Setup tasks for data received in the buffer
+  */
+  bufferStreamTasks(change: any) {
+    this.updateAlarmChangeBuffer(change);
+  }
+
+  /**
+  * Setup tasks for counter data
+  */
+  counterStreamTasks(countByView: any) {
+    this.readCountByViewMessage(countByView);
+  }
+
+  /**
+  * Method to manage the update of the buffer for a new alarm change
+  */
+  updateAlarmChangeBuffer(change: string) {
+    if (change === 'all') {
+      this.alarmChangeBuffer.clear();
+    } else {
+      this.alarmChangeBuffer.delete('all');  // deletes only 'all' key
+    }
+    this.alarmChangeBuffer.add(change);
+  }
+
+  /**
+  * Get list of alarms with graphical components to update from the buffer
+  */
+  getChangesFromBuffer() {
+    let changes: string[] = [];
+    if (this.alarmChangeBuffer.size > 10 ) {
+      // console.log('Changes over buffer size reference ', this.alarmChangeBuffer.size);
+      changes = ['all'];
+    } else {
+      changes = Array.from(this.alarmChangeBuffer.values());
+    }
+    return changes;
+  }
 
   /**
   * Start connection to the backend through websockets
@@ -175,47 +301,55 @@ export class AlarmService {
     this.canSound = false;
     this.audio = new Audio();
     this.connect();
-    this.webSocketBridge.socket.addEventListener(
-      'open', () => {
-        this.connectionStatusStream.next(true);
-        this.getAlarmList();
+    this.ngZone.runOutsideAngular(
+      () => {
+        this.webSocketBridge.socket.addEventListener(
+          'open', () => {
+            this.connectionStatusStream.next(true);
+            this.getAlarmList();
+          }
+        );
+        this.webSocketBridge.socket.addEventListener(
+          'close', () => {
+            this.resetCountByView();
+          }
+        );
+        this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
+        // console.log('notify ', payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessage(payload.action, payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
+          // console.log('request', payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessagesList(payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
+          // console.log('counter ', payload);
+          if (this.authService.loginStatus) {
+            this.counterChangeBufferStream.next(payload.data);
+          }
+        });
       }
     );
-    this.webSocketBridge.socket.addEventListener(
-      'close', () => {
-        this.resetCountByView();
-      }
-    );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) => {
-    // console.log('notify ', payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessage(payload.action, payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
-      // console.log('request', payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessagesList(payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
-      // console.log('counter ', payload);
-      if (this.authService.loginStatus) {
-        this.readCountByViewMessage(payload.data);
-      }
-    });
+    this.setPeriodicalPullFromBuffer();
   }
 
   /**
   *  Start connection to the backend through websockets
   */
   connect() {
-    const connectionPath = this.getConnectionPath();
-    this.webSocketBridge.connect(connectionPath);
-    this.webSocketBridge.listen(connectionPath);
-    console.log('Connected to webserver at');
+    this.ngZone.runOutsideAngular(
+      () => {
+        const connectionPath = this.getConnectionPath();
+        this.webSocketBridge.connect(connectionPath);
+        this.webSocketBridge.listen(connectionPath);
+        console.log('Connected to webserver at');
+    });
   }
 
   /**
@@ -511,10 +645,14 @@ export class AlarmService {
     }
     this.audio.src = soundToPlay;
     if (repeat) {
-      this.audio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-      }, false);
+      this.ngZone.runOutsideAngular(
+        () => {
+          this.audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+          }, false);
+        }
+      );
     }
     this.audio.load();
     this.audio.play();

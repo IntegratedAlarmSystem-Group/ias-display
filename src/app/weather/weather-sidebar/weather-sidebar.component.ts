@@ -7,7 +7,6 @@ import { Alarm, Value, OperationalMode } from '../../data/alarm';
 import { WeatherService } from '../weather.service';
 import { SubscriptionLike as ISubscription } from 'rxjs';
 
-
 /**
 * Component used to display Weather Alarms in an interactive sidebar
 */
@@ -58,13 +57,21 @@ export class WeatherSidebarComponent implements OnInit {
     this.affectedAntennasSubscription = this.weatherService.affectedAntennasUpdate
       .subscribe((update) => {
         if (update === true) {
-          this.affectedAntennas = Object.keys(
-            this.weatherService.affectedAntennaHighPriorityAlarm);
-            for (const stationConfig of this.weatherService.weatherStationsConfig) {
-              this.groupHasAffectedAntennas[stationConfig.group] = (
-                this.getAffectedAntennas(stationConfig).length > 0
-              );
+          const localAffectedAntennas = [];
+          for (const antennaName of Object.keys(this.weatherService.affectedAntennaHighPriorityAlarm)) {
+            const antennaAlarm = this.weatherService.affectedAntennaHighPriorityAlarm[antennaName];
+            if (antennaAlarm) {
+              if (antennaAlarm.value > 0) {
+                localAffectedAntennas.push(antennaName);
+              }
             }
+          }
+          this.affectedAntennas = localAffectedAntennas;
+          for (const stationConfig of this.weatherService.weatherStationsConfig) {
+            this.groupHasAffectedAntennas[stationConfig.group] = (
+              this.getAffectedAntennas(stationConfig).length > 0
+            );
+          }
         }
       }
     );
@@ -164,11 +171,19 @@ export class WeatherSidebarComponent implements OnInit {
     for (let i = 0; i < stationAffectedAntennas.length; i++) {
       const antenna = stationAffectedAntennas[i];
       const highAlarm = this.weatherService.affectedAntennaHighPriorityAlarm[antenna];
-      response.push({
-        'value': highAlarm.value,
-        'name': antenna,
-        'classes': this.getAffectedAntennaColorClasses(highAlarm.core_id),
-      });
+      if (highAlarm) {
+        response.push({
+          'value': highAlarm.value,
+          'name': antenna,
+          'classes': this.getAffectedAntennaColorClasses(highAlarm.core_id),
+        });
+      } else {
+        response.push({
+          'value': Value.cleared,
+          'name': antenna,
+          'classes': [],
+        });
+      }
     }
     for (let i = 0; i < stationNotAffectedAntennas.length; i++) {
       const antenna = stationNotAffectedAntennas[i];
