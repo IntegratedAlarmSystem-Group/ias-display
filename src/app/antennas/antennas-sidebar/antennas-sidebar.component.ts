@@ -52,9 +52,11 @@ export class AntennasSidebarComponent implements OnInit, OnChanges, OnDestroy {
    */
   ngOnInit() {
     this.antennasService.initialize();
-    this.alarmChangeSubscription = this.alarmService.alarmChangeStream.subscribe( (change) => {
-      if ( this.selectedAntenna && (change === 'all' || change === this.selectedAntenna) ) {
-        this.updateTableIds();
+    this.alarmChangeSubscription = this.alarmService.alarmChangeStream.subscribe( (changes) => {
+      for (const change of changes) {
+        if ( this.selectedAntenna && (change === 'all' || change === this.selectedAntenna) ) {
+          this.updateTableIds();
+        }
       }
     });
   }
