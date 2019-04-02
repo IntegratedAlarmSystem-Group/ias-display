@@ -83,6 +83,9 @@ export class AckComponent implements OnInit, OnDestroy {
     */
   alarmChangeSubscription: ISubscription;
 
+  /** Timestamp for the last change in the alarm noticed by the component */
+  private lastValueChangeTime = -1;
+
   /** String to store the formatting of dates, read form the settings */
   private dateFormat: string;
 
@@ -176,7 +179,10 @@ export class AckComponent implements OnInit, OnDestroy {
       this.requestStatus = 0;
       this.message.reset();
     }
-    this.getMissingAcksInfo();
+    if (this.alarm.value_change_timestamp !== this.lastValueChangeTime) {
+      this.getMissingAcksInfo();
+      this.lastValueChangeTime = this.alarm.value_change_timestamp;
+    }
   }
 
   /**
