@@ -440,8 +440,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="96"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:96</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:104</a></div>
                 </td>
             </tr>
 
@@ -513,8 +513,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:85</a></div>
                 </td>
             </tr>
 
@@ -586,8 +586,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="188"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:188</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="202"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:202</a></div>
                 </td>
             </tr>
 
@@ -658,8 +658,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="133"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:133</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:141</a></div>
                 </td>
             </tr>
 
@@ -731,8 +731,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="115"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:115</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:123</a></div>
                 </td>
             </tr>
 
@@ -804,8 +804,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="159"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:159</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="167"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:167</a></div>
                 </td>
             </tr>
 
@@ -877,8 +877,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:146</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:154</a></div>
                 </td>
             </tr>
 
@@ -950,8 +950,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="231"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:231</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="245"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:245</a></div>
                 </td>
             </tr>
 
@@ -1070,8 +1070,8 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="239"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:239</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="253"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:253</a></div>
                 </td>
             </tr>
 
@@ -1147,8 +1147,8 @@ Initializes the <a href="../injectables/WeatherService.html">WeatherService</a> 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="253"
-                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:253</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="267"
+                            class="link-to-prism">src/app/weather/weather-sidebar/weather-sidebar.component.ts:267</a></div>
                 </td>
             </tr>
 
@@ -1497,13 +1497,21 @@ export class WeatherSidebarComponent implements OnInit {
     this.affectedAntennasSubscription &#x3D; this.weatherService.affectedAntennasUpdate
       .subscribe((update) &#x3D;&gt; {
         if (update &#x3D;&#x3D;&#x3D; true) {
-          this.affectedAntennas &#x3D; Object.keys(
-            this.weatherService.affectedAntennaHighPriorityAlarm);
-            for (const stationConfig of this.weatherService.weatherStationsConfig) {
-              this.groupHasAffectedAntennas[stationConfig.group] &#x3D; (
-                this.getAffectedAntennas(stationConfig).length &gt; 0
-              );
+          const localAffectedAntennas &#x3D; [];
+          for (const antennaName of Object.keys(this.weatherService.affectedAntennaHighPriorityAlarm)) {
+            const antennaAlarm &#x3D; this.weatherService.affectedAntennaHighPriorityAlarm[antennaName];
+            if (antennaAlarm) {
+              if (antennaAlarm.value &gt; 0) {
+                localAffectedAntennas.push(antennaName);
+              }
             }
+          }
+          this.affectedAntennas &#x3D; localAffectedAntennas;
+          for (const stationConfig of this.weatherService.weatherStationsConfig) {
+            this.groupHasAffectedAntennas[stationConfig.group] &#x3D; (
+              this.getAffectedAntennas(stationConfig).length &gt; 0
+            );
+          }
         }
       }
     );
@@ -1608,6 +1616,12 @@ export class WeatherSidebarComponent implements OnInit {
           &#x27;value&#x27;: highAlarm.value,
           &#x27;name&#x27;: antenna,
           &#x27;classes&#x27;: this.getAffectedAntennaColorClasses(highAlarm.core_id),
+        });
+      } else {
+        response.push({
+          &#x27;value&#x27;: Value.cleared,
+          &#x27;name&#x27;: antenna,
+          &#x27;classes&#x27;: [],
         });
       }
     }

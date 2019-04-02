@@ -202,7 +202,7 @@ export class UserService {
   /**
   * List of authorized users
   **/
-  public users: User[];
+  public users: User[] &#x3D; [];
 
   /**
    * Builds an instance of the service
@@ -216,16 +216,18 @@ export class UserService {
   * Get the list of users in the operators group
   * @return {Subscription} subscription to the list of users
   */
-  requestUsersList(): Subscription {
-    return this.httpClientService.get(BackendUrls.USERS_LIST)
-    .subscribe (
-        (response) &#x3D;&gt; {
-            this.users &#x3D; &lt;User[]&gt; response;
-        },
-        (error) &#x3D;&gt; {
-            console.error(&#x27;error: &#x27;, error);
-        }
-    );
+  requestUsersList(): void {
+    if (this.users.length &#x3D;&#x3D;&#x3D; 0) {
+      this.httpClientService.get(BackendUrls.USERS_LIST)
+      .subscribe (
+          (response) &#x3D;&gt; {
+              this.users &#x3D; &lt;User[]&gt; response;
+          },
+          (error) &#x3D;&gt; {
+              console.error(&#x27;error: &#x27;, error);
+          }
+      );
+    }
   }
 }
 </code></pre>

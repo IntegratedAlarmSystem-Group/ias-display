@@ -398,8 +398,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="148"
-                            class="link-to-prism">src/app/app.component.ts:148</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">src/app/app.component.ts:159</a></div>
                 </td>
             </tr>
 
@@ -477,8 +477,8 @@ considering of the actionsSidenav can be closed or not</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="191"
-                            class="link-to-prism">src/app/app.component.ts:191</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="202"
+                            class="link-to-prism">src/app/app.component.ts:202</a></div>
                 </td>
             </tr>
 
@@ -555,8 +555,8 @@ variable</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="220"
-                            class="link-to-prism">src/app/app.component.ts:220</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">src/app/app.component.ts:231</a></div>
                 </td>
             </tr>
 
@@ -633,8 +633,8 @@ variable</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="170"
-                            class="link-to-prism">src/app/app.component.ts:170</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="181"
+                            class="link-to-prism">src/app/app.component.ts:181</a></div>
                 </td>
             </tr>
 
@@ -681,8 +681,8 @@ variable</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="178"
-                            class="link-to-prism">src/app/app.component.ts:178</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="189"
+                            class="link-to-prism">src/app/app.component.ts:189</a></div>
                 </td>
             </tr>
 
@@ -765,8 +765,8 @@ Initializes the <a href="../injectables/AlarmService.html">AlarmService</a> and 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="160"
-                            class="link-to-prism">src/app/app.component.ts:160</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="171"
+                            class="link-to-prism">src/app/app.component.ts:171</a></div>
                 </td>
             </tr>
 
@@ -1309,6 +1309,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    this.authService.hasValidToken().subscribe(
+      value &#x3D;&gt; {
+        if (value &#x3D;&#x3D;&#x3D; false) {
+          this.logout();
+          this.actionsSidenavService.close();
+          this.router.navigate([{outlets: {primary: &#x27;login&#x27;, actions: null}}]);
+        } else if (value &#x3D;&#x3D;&#x3D; true) {
+          this.userService.requestUsersList();
+        }
+      }
+    );
     this.authService.loginStatusStream.subscribe(
       value &#x3D;&gt; {
         if (value &#x3D;&#x3D;&#x3D; false) {
