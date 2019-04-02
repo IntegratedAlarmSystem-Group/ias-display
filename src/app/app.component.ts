@@ -30,6 +30,11 @@ export class AppComponent implements OnInit {
   title = 'Integrated Alarm System';
 
   /**
+  * Count by view
+  */
+  countByView = {};
+
+  /**
   * State of the main sidenav
   */
   isNavigationCompacted = true;
@@ -127,6 +132,11 @@ export class AppComponent implements OnInit {
         }
       }
     );
+    this.alarmService.counterChangeStream.subscribe(
+      countByView => {
+        this.countByView = countByView;
+      }
+    );
   }
 
   /**
@@ -178,17 +188,17 @@ export class AppComponent implements OnInit {
    * variable
    * @returns {string} the classname for the nav item mark
    */
-   getNavItemCountClass(navItem: any, countByView: any): string {
+   getNavItemCountClass(navItem: any): string {
      const navItemCounter = navItem.counter;
-     const availableCounters = Object.keys(countByView);
+     const availableCounters = Object.keys(this.countByView);
      if (navItemCounter === '') {
        return 'hide-count';
      } else {
        if (availableCounters.indexOf(navItemCounter) > -1) {
-         if (countByView[navItemCounter] > 0) {
+         if (this.countByView[navItemCounter] > 0) {
            return 'nonzero-count';
          }
-         if (countByView[navItemCounter] === 0) {
+         if (this.countByView[navItemCounter] === 0) {
            return 'zero-count';
          }
        } else {
@@ -207,14 +217,14 @@ export class AppComponent implements OnInit {
     * variable
     * @returns {string} the text related to the count for the nav item
     */
-    getNavItemCountText(navItem: any, countByView: any): string {
+    getNavItemCountText(navItem: any): string {
       const navItemCounter = navItem.counter;
-      const availableCounters = Object.keys(countByView);
+      const availableCounters = Object.keys(this.countByView);
       if (navItemCounter === '') {
         return '';
       } else {
         if (availableCounters.indexOf(navItemCounter) > -1) {
-          const count = countByView[navItemCounter];
+          const count = this.countByView[navItemCounter];
           if (count >= 0) {
             if (count <= 100) {
               return String(count);

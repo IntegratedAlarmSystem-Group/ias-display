@@ -92,10 +92,28 @@ export class AlarmService {
   public alarmChangeInputStream = new BehaviorSubject<any>(true);
 
   /**
+  * Stream of notifications of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeStream = new BehaviorSubject<any>({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeInputStream = new BehaviorSubject<any>({});
+
+  /**
   * Stream of notifications to control the delivery of changes in
   * the dictionary of {@link Alarm} objects
   */
   public alarmChangeBufferStream = new BehaviorSubject<any>(true);
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeBufferStream = new BehaviorSubject<any>({});
 
   /**
   * Stream of notifications to control the delivery of changes in
@@ -180,9 +198,25 @@ export class AlarmService {
       }
     );
 
+    this.counterChangeInputStream.subscribe(
+      countByView => {
+        this.ngZone.run(
+          () => {
+            this.counterChangeStream.next(countByView);
+          }
+        );
+      }
+    );
+
     this.alarmChangeBufferStream.subscribe(
       change => {
         this.bufferStreamTasks(change);
+      }
+    );
+
+    this.counterChangeBufferStream.subscribe(
+      countByView => {
+        this.counterStreamTasks(countByView);
       }
     );
 
@@ -198,6 +232,10 @@ export class AlarmService {
     this.alarmChangeBufferStream.next(any);
   }
 
+  changeCounter(any: any) {
+    this.counterChangeBufferStream.next(any);
+  }
+
   /******* SERVICE INITIALIZATION *******/
 
   /**
@@ -207,14 +245,22 @@ export class AlarmService {
     setInterval( () => {
       const changes = this.getChangesFromBuffer();
       this.alarmChangeInputStream.next(changes);
+      this.counterChangeInputStream.next(this.countByView);
     }, 250);
   }
 
   /**
-  * Setup periodical push from buffer
+  * Setup tasks for data received in the buffer
   */
-  bufferStreamTasks(change) {
+  bufferStreamTasks(change: any) {
     this.updateAlarmChangeBuffer(change);
+  }
+
+  /**
+  * Setup tasks for counter data
+  */
+  counterStreamTasks(countByView: any) {
+    this.readCountByViewMessage(countByView);
   }
 
   /**
@@ -285,7 +331,7 @@ export class AlarmService {
         this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
           // console.log('counter ', payload);
           if (this.authService.loginStatus) {
-           this.readCountByViewMessage(payload.data);
+            this.counterChangeBufferStream.next(payload.data);
           }
         });
       }
