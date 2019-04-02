@@ -122,6 +122,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.alarmService.initialize();
     this.actionsSidenavService.setSidenav(this.actionsSidenav);
+    this.authService.hasValidToken().subscribe(
+      value => {
+        if (value === false) {
+          this.logout();
+          this.actionsSidenavService.close();
+          this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+        } else if (value === true) {
+          this.userService.requestUsersList();
+        }
+      }
+    );
     this.authService.loginStatusStream.subscribe(
       value => {
         if (value === false) {

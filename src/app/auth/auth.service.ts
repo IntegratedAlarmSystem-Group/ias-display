@@ -80,7 +80,17 @@ export class AuthService {
   }
 
   /**
-   * Checks wether or not the user is logged-in, which is true if there is a valid token
+   * Checks wether or not the user has a token, which is true if there is a valid token
+   * @returns { Observable<boolean>} true if there is a valid token, false if not
+   */
+  hasToken(): Observable<boolean> {
+    const hasToken = this.getToken() !== undefined && this.getToken() !== null;
+    this.changeLoginStatus(hasToken);
+    return of(hasToken);
+  }
+
+  /**
+   * Checks wether or not the user is logged-in (has a valid token), which is true if there is a valid token
    * @returns { Observable<boolean>} true if there is a valid token, false if not
    */
   hasValidToken(): Observable<boolean> {
@@ -88,24 +98,22 @@ export class AuthService {
       this.changeLoginStatus(false);
       return of(false);
     } else {
-      this.changeLoginStatus(true);
-      return of(true);
-      // const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
-      // return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
-      //   map((response: any) => {
-      //     const user_data = response['user_data'];
-      //     const allowed_actions = response['allowed_actions'];
-      //     this.storeUser(user_data['username']);
-      //     this.storeAllowedActions(allowed_actions);
-      //     this.changeLoginStatus(true);
-      //     return true;
-      //   }),
-      //   catchError( error => {
-      //     console.error(error);
-      //     this.logout();
-      //     return of(false);
-      //   }
-      // ));
+      const url = `${environment.httpUrl}${BackendUrls.VALIDATE_TOKEN}`;
+      return this.http.get(url, {headers: this.getHttpHeaders()} ).pipe(
+        map((response: any) => {
+          const user_data = response['user_data'];
+          const allowed_actions = response['allowed_actions'];
+          this.storeUser(user_data['username']);
+          this.storeAllowedActions(allowed_actions);
+          this.changeLoginStatus(true);
+          return true;
+        }),
+        catchError( error => {
+          console.error(error);
+          this.logout();
+          return of(false);
+        }
+      ));
     }
   }
 
