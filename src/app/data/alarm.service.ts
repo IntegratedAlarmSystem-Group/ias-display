@@ -207,7 +207,7 @@ export class AlarmService {
     setInterval( () => {
       const changes = this.getChangesFromBuffer();
       this.alarmChangeInputStream.next(changes);
-    }, 200);
+    }, 250);
   }
 
   /**
@@ -234,7 +234,7 @@ export class AlarmService {
   */
   getChangesFromBuffer() {
     let changes: string[] = [];
-    if (this.alarmChangeBuffer.size > 500 ) {
+    if (this.alarmChangeBuffer.size > 10 ) {
       console.log('Changes over buffer size reference');
       changes = ['all'];
     } else {
