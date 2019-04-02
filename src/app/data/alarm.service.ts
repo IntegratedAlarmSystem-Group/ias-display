@@ -599,10 +599,14 @@ export class AlarmService {
     }
     this.audio.src = soundToPlay;
     if (repeat) {
-      this.audio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-      }, false);
+      this.ngZone.runOutsideAngular(
+        () => {
+          this.audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+          }, false);
+        }
+      );
     }
     this.audio.load();
     this.audio.play();
