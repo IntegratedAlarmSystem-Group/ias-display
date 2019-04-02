@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject , SubscriptionLike as ISubscription } from 'rxjs';
 import { combineLatest } from 'rxjs';
-import { AlarmComponent, AlarmImageSet } from '../shared/alarm/alarm.component';
+import { AlarmImageSet } from '../shared/alarm/alarm.component';
 import { AlarmService } from '../data/alarm.service';
 import { Alarm } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
@@ -44,6 +44,9 @@ export class WeatherService {
 
   /** Dictionary of Alarm Ids of the Weather Stations, indexed by placemark **/
   public weatherStationsConfig: AlarmConfig[];
+
+  /** Variable to manage the alarm ids related to this display */
+  public flattennedConfigAlarmIds: string[];
 
   /** Key to retrieve the JSON with coordinates to draw the Weather Map */
   public weatherMapName = WeatherSettings.mapKey;
@@ -105,8 +108,9 @@ export class WeatherService {
                 this.initializeAntennasRelationMaps();
               } else {
                 if (alarmChange) {
-                  this.updateAntennasRelationMapsAndAlarmPriorities(alarmChange);
-                  this.affectedAntennasUpdate.next(true);
+                  for (const change of alarmChange) {
+                    this.updateAntennasRelationMapsAndAlarmPriorities(change);
+                  }
                 }
               }
             }
@@ -126,6 +130,7 @@ export class WeatherService {
         this.updateAntennasRelationMaps(alarmId);
       }
       this.updateAllAntennaHighPriorityMap();
+      this.affectedAntennasUpdate.next(true);
     } else {
       const selectedAlarmId = alarmChange;
       this.updateAntennasRelationMaps(selectedAlarmId);
@@ -137,6 +142,7 @@ export class WeatherService {
           localMap[antenna] = highAlarm;
         }
         this.affectedAntennaHighPriorityAlarm = localMap;
+        this.affectedAntennasUpdate.next(true);
       }
     }
   }
@@ -241,10 +247,10 @@ export class WeatherService {
   * Initializes alarm to antennas relation maps
   */
   initializeAntennasRelationMaps() {
-    const flattennedConfigAlarmIds = this.getFlattennedList(
+    this.flattennedConfigAlarmIds = this.getFlattennedList(
       this.weatherStationsConfig
     );
-    for (const alarmId of flattennedConfigAlarmIds) {
+    for (const alarmId of this.flattennedConfigAlarmIds) {
       this.alarmIdToAffectedAntennasMap[alarmId] = [];
     }
     // update alarmId to Antennas Map
@@ -258,7 +264,7 @@ export class WeatherService {
   * Update affected antennas high priority alarms
   */
   updateAllAntennaHighPriorityMap() {
-    const localMap = Object.assign({}, this.affectedAntennaHighPriorityAlarm);
+    const localMap = {};
     for (const antenna of Object.keys(this.affectedAntennasToAlarmIdsMap)) {
       localMap[antenna] = this.getAntennaHighPriorityAlarm(antenna);
     }
@@ -274,18 +280,27 @@ export class WeatherService {
       if (typeof antennasString !== 'undefined') {
         const antennas = antennasString.split(',')
          .map((antennaString: string) => antennaString.trim());
+        // alarmId to list of affected antennas
+        let oldAntennasList = [];
+        if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(alarmId) > -1) {
+          oldAntennasList = this.alarmIdToAffectedAntennasMap[alarmId];
+        }
+        const newAntennasList = [];
         for (const antenna of antennas) {
-          // alarmId to affectedAntennas
-          if (Object.keys(this.alarmIdToAffectedAntennasMap).indexOf(alarmId) > -1) {
-            if (this.alarmIdToAffectedAntennasMap[alarmId].indexOf(antenna) < 0) {
-              this.alarmIdToAffectedAntennasMap[alarmId].push(antenna);
-            }
-          } else {
-            this.alarmIdToAffectedAntennasMap[alarmId] = [antenna];
+          if (newAntennasList.indexOf(antenna) < 0) {
+            newAntennasList.push(antenna);
           }
-          // affectedAntennas to alarmIds
+        }
+        this.alarmIdToAffectedAntennasMap[alarmId] = newAntennasList;
+        // affected antennas to alarmId
+        const clearedAntennas = oldAntennasList
+         .filter((oldAntenna: string) => newAntennasList.indexOf(oldAntenna) < 0);
+        for (const antenna of clearedAntennas) {
+          this.affectedAntennasToAlarmIdsMap[antenna] = [];
+        }
+        for (const antenna of newAntennasList) {
           if (Object.keys(this.affectedAntennasToAlarmIdsMap).indexOf(antenna) > -1) {
-            if (this.affectedAntennasToAlarmIdsMap[antenna].indexOf(alarmId) < 0) {
+            if (this.affectedAntennasToAlarmIdsMap[antenna].indexOf(alarmId) < 0 ) {
               this.affectedAntennasToAlarmIdsMap[antenna].push(alarmId);
             }
           } else {
@@ -326,6 +341,8 @@ export class WeatherService {
           alarms.sort(this.compareAlarmPriorities);
           return alarms[0];
         }
+      } else {
+        return null;
       }
     }
     return null;

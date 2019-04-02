@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
@@ -10,30 +10,43 @@ export class RoutingService {
   /**
   * Instantiates the service
   * @param {Router} router instance of an Angular {@link Router} to handle routing
+  * @param {NgZone} ngZone Service used for executing work inside or outside of the Angular Zone
   */
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ngZone: NgZone) { }
 
   /**
   * Go to the TableComponent and pass a filter value by the URL
   * @param {string} filter filter values to pass to the TableComponent through the URL
   */
   tableWithFilter(filter: string) {
-    filter.replace(' ', '_'); // TODO: This is wrong, fix it
-    this.router.navigate(['/tabular/' + filter]);
+    this.ngZone.run(
+      () => {
+        filter.replace(' ', '_'); // TODO: This is wrong, fix it
+        this.router.navigate(['/tabular/' + filter]);
+      }
+    );
   }
 
   /**
   * Go to the Antennas View
   */
   goToAntennas() {
-    this.router.navigate(['antennas']);
+    this.ngZone.run(
+      () => {
+        this.router.navigate(['antennas']);
+      }
+    );
   }
 
   /**
   * Go to the Weather View
   */
   goToWeather() {
-    this.router.navigate(['weather']);
+    this.ngZone.run(
+      () => {
+        this.router.navigate(['weather']);
+      }
+    );
   }
 
   /**
@@ -41,7 +54,11 @@ export class RoutingService {
   * @param {string} alarm_id Id of the alarm to Acknowledge
   */
   goToAcknowledge(alarm_id: string) {
-    this.router.navigate([{outlets: {actions: ['acknowledge', alarm_id]}}]);
+    this.ngZone.run(
+      () => {
+        this.router.navigate([{outlets: {actions: ['acknowledge', alarm_id]}}]);
+      }
+    );
   }
 
   /**
@@ -49,21 +66,33 @@ export class RoutingService {
   * @param {string} alarm_id Id of the alarm to Shleve/Unshelve
   */
   goToShelve(alarm_id: string) {
-    this.router.navigate([{outlets: {actions: ['shelve', alarm_id]}}]);
+    this.ngZone.run(
+      () => {
+        this.router.navigate([{outlets: {actions: ['shelve', alarm_id]}}]);
+      }
+    );
   }
 
   /**
   * Clean action outlet
   */
   cleanActionOutlet() {
-    this.router.navigate([{outlets: {actions: null}}]);
+    this.ngZone.run(
+      () => {
+        this.router.navigate([{outlets: {actions: null}}]);
+      }
+    );
   }
 
   /**
   * Go to login and clean action outlet
   */
   goToLogin() {
-    this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+    this.ngZone.run(
+      () => {
+        this.router.navigate([{outlets: {primary: 'login', actions: null}}]);
+      }
+    );
   }
 
 }

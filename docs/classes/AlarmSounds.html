@@ -432,8 +432,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, NgZone } from &#x27;@angular/core&#x27;;
+import { map, auditTime } from &#x27;rxjs/operators&#x27;;
 import { BehaviorSubject } from &#x27;rxjs&#x27;;
 import { interval } from &#x27;rxjs&#x27;;
 import { WebSocketBridge } from &#x27;django-channels&#x27;;
@@ -520,6 +520,42 @@ export class AlarmService {
   public alarmChangeStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
 
   /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeInputStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
+
+  /**
+  * Stream of notifications of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeStream &#x3D; new BehaviorSubject&lt;any&gt;({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeInputStream &#x3D; new BehaviorSubject&lt;any&gt;({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBufferStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
+
+  /**
+  * Stream of notifications to control the delivery of changes in the counter related to
+  * the dictionary of {@link Alarm} objects
+  */
+  public counterChangeBufferStream &#x3D; new BehaviorSubject&lt;any&gt;({});
+
+  /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBuffer &#x3D; new Set();
+
+  /**
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
@@ -561,11 +597,13 @@ export class AlarmService {
    * @param {CdbService} cdbService Service used to get complementary alarm information
    * @param {HttpClientService} httpClientService Service used to perform HTTP requests
    * @param {AuthService} authService Service used for authentication
+   * @param {NgZone} ngZone Service used for executing work inside or outside of the Angular Zone
    */
   constructor(
     private cdbService: CdbService,
     private httpClientService: HttpClientService,
     private authService: AuthService,
+    private ngZone: NgZone
   ) {
     this.connectionStatusStream.subscribe(
       value &#x3D;&gt; {
@@ -583,6 +621,39 @@ export class AlarmService {
         }
       }
     );
+
+    this.alarmChangeInputStream.subscribe(
+      changes &#x3D;&gt; {
+        this.ngZone.run(
+          () &#x3D;&gt; {
+            this.alarmChangeStream.next(changes);
+          }
+        );
+      }
+    );
+
+    this.counterChangeInputStream.subscribe(
+      countByView &#x3D;&gt; {
+        this.ngZone.run(
+          () &#x3D;&gt; {
+            this.counterChangeStream.next(countByView);
+          }
+        );
+      }
+    );
+
+    this.alarmChangeBufferStream.subscribe(
+      change &#x3D;&gt; {
+        this.bufferStreamTasks(change);
+      }
+    );
+
+    this.counterChangeBufferStream.subscribe(
+      countByView &#x3D;&gt; {
+        this.counterStreamTasks(countByView);
+      }
+    );
+
   }
 
   /**
@@ -592,10 +663,65 @@ export class AlarmService {
   * or &#x27;all&#x27; if all were updated
   */
   changeAlarms(any: any) {
-    this.alarmChangeStream.next(any);
+    this.alarmChangeBufferStream.next(any);
+  }
+
+  changeCounter(any: any) {
+    this.counterChangeBufferStream.next(any);
   }
 
   /******* SERVICE INITIALIZATION *******/
+
+  /**
+  * Setup periodical push from buffer
+  */
+  setPeriodicalPullFromBuffer() {
+    setInterval( () &#x3D;&gt; {
+      const changes &#x3D; this.getChangesFromBuffer();
+      this.alarmChangeInputStream.next(changes);
+      this.counterChangeInputStream.next(this.countByView);
+    }, 250);
+  }
+
+  /**
+  * Setup tasks for data received in the buffer
+  */
+  bufferStreamTasks(change: any) {
+    this.updateAlarmChangeBuffer(change);
+  }
+
+  /**
+  * Setup tasks for counter data
+  */
+  counterStreamTasks(countByView: any) {
+    this.readCountByViewMessage(countByView);
+  }
+
+  /**
+  * Method to manage the update of the buffer for a new alarm change
+  */
+  updateAlarmChangeBuffer(change: string) {
+    if (change &#x3D;&#x3D;&#x3D; &#x27;all&#x27;) {
+      this.alarmChangeBuffer.clear();
+    } else {
+      this.alarmChangeBuffer.delete(&#x27;all&#x27;);  // deletes only &#x27;all&#x27; key
+    }
+    this.alarmChangeBuffer.add(change);
+  }
+
+  /**
+  * Get list of alarms with graphical components to update from the buffer
+  */
+  getChangesFromBuffer() {
+    let changes: string[] &#x3D; [];
+    if (this.alarmChangeBuffer.size &gt; 10 ) {
+      // console.log(&#x27;Changes over buffer size reference &#x27;, this.alarmChangeBuffer.size);
+      changes &#x3D; [&#x27;all&#x27;];
+    } else {
+      changes &#x3D; Array.from(this.alarmChangeBuffer.values());
+    }
+    return changes;
+  }
 
   /**
   * Start connection to the backend through websockets
@@ -609,47 +735,55 @@ export class AlarmService {
     this.canSound &#x3D; false;
     this.audio &#x3D; new Audio();
     this.connect();
-    this.webSocketBridge.socket.addEventListener(
-      &#x27;open&#x27;, () &#x3D;&gt; {
-        this.connectionStatusStream.next(true);
-        this.getAlarmList();
+    this.ngZone.runOutsideAngular(
+      () &#x3D;&gt; {
+        this.webSocketBridge.socket.addEventListener(
+          &#x27;open&#x27;, () &#x3D;&gt; {
+            this.connectionStatusStream.next(true);
+            this.getAlarmList();
+          }
+        );
+        this.webSocketBridge.socket.addEventListener(
+          &#x27;close&#x27;, () &#x3D;&gt; {
+            this.resetCountByView();
+          }
+        );
+        this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) &#x3D;&gt; {
+        // console.log(&#x27;notify &#x27;, payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessage(payload.action, payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) &#x3D;&gt; {
+          // console.log(&#x27;request&#x27;, payload);
+          if (this.authService.loginStatus) {
+            this.resetTimer();
+            this.readAlarmMessagesList(payload.data);
+          }
+        });
+        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) &#x3D;&gt; {
+          // console.log(&#x27;counter &#x27;, payload);
+          if (this.authService.loginStatus) {
+            this.counterChangeBufferStream.next(payload.data);
+          }
+        });
       }
     );
-    this.webSocketBridge.socket.addEventListener(
-      &#x27;close&#x27;, () &#x3D;&gt; {
-        this.resetCountByView();
-      }
-    );
-    this.webSocketBridge.demultiplex(Streams.ALARMS, (payload: any, streamName: any) &#x3D;&gt; {
-    // console.log(&#x27;notify &#x27;, payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessage(payload.action, payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) &#x3D;&gt; {
-      // console.log(&#x27;request&#x27;, payload);
-      if (this.authService.loginStatus) {
-        this.resetTimer();
-        this.readAlarmMessagesList(payload.data);
-      }
-    });
-    this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) &#x3D;&gt; {
-      // console.log(&#x27;counter &#x27;, payload);
-      if (this.authService.loginStatus) {
-        this.readCountByViewMessage(payload.data);
-      }
-    });
+    this.setPeriodicalPullFromBuffer();
   }
 
   /**
   *  Start connection to the backend through websockets
   */
   connect() {
-    const connectionPath &#x3D; this.getConnectionPath();
-    this.webSocketBridge.connect(connectionPath);
-    this.webSocketBridge.listen(connectionPath);
-    console.log(&#x27;Connected to webserver at&#x27;);
+    this.ngZone.runOutsideAngular(
+      () &#x3D;&gt; {
+        const connectionPath &#x3D; this.getConnectionPath();
+        this.webSocketBridge.connect(connectionPath);
+        this.webSocketBridge.listen(connectionPath);
+        console.log(&#x27;Connected to webserver at&#x27;);
+    });
   }
 
   /**
@@ -945,10 +1079,14 @@ export class AlarmService {
     }
     this.audio.src &#x3D; soundToPlay;
     if (repeat) {
-      this.audio.addEventListener(&#x27;ended&#x27;, function() {
-        this.currentTime &#x3D; 0;
-        this.play();
-      }, false);
+      this.ngZone.runOutsideAngular(
+        () &#x3D;&gt; {
+          this.audio.addEventListener(&#x27;ended&#x27;, function() {
+            this.currentTime &#x3D; 0;
+            this.play();
+          }, false);
+        }
+      );
     }
     this.audio.load();
     this.audio.play();

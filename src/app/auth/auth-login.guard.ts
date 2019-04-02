@@ -40,7 +40,7 @@ export class AuthLoginGuard implements CanActivate {
   * @returns {boolean} true if navigation is permitted, false if not
   */
   checkLogin(url: string): Observable<boolean> {
-    return this.authService.hasValidToken().pipe(map((response: any) => {
+    return this.authService.hasToken().pipe(map((response: any) => {
       if (response === true) {
         return true;
       } else {
