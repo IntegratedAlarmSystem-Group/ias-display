@@ -235,7 +235,7 @@ export class AlarmService {
   getChangesFromBuffer() {
     let changes: string[] = [];
     if (this.alarmChangeBuffer.size > 10 ) {
-      console.log('Changes over buffer size reference');
+      // console.log('Changes over buffer size reference ', this.alarmChangeBuffer.size);
       changes = ['all'];
     } else {
       changes = Array.from(this.alarmChangeBuffer.values());
