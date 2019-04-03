@@ -136,6 +136,8 @@ export class AuthService {
         this.storeToken(token);
         this.storeUser(username);
         this.changeLoginStatus(true);
+        const allowed_actions = response['allowed_actions'];
+        this.storeAllowedActions(allowed_actions);
         return true;
       } else {
         this.changeLoginStatus(false);
