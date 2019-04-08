@@ -117,7 +117,7 @@ describe('TableComponent', () => {
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
         // Act
-        alarmService.readAlarmMessage('update', ChangedAlarm5);
+        alarmService.readAlarmMessagesList([ChangedAlarm5]);
         fixture.detectChanges();
         // Assert
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
@@ -131,7 +131,7 @@ describe('TableComponent', () => {
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
         // Act
-        alarmService.readAlarmMessage('update', ChangedAlarm2);
+        alarmService.readAlarmMessagesList([ChangedAlarm2]);
         fixture.detectChanges();
         // Assert
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);

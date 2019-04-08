@@ -544,7 +544,7 @@ export class AlarmService {
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
    * @param {boolean} allChanged true if the list is a general change in all the alarms, false if not
    */
-  readAlarmMessagesList(alarmsList: Object[], allChanged: boolean) {
+  readAlarmMessagesList(alarmsList: Object[], allChanged: boolean = false) {
     const changed = [];
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
