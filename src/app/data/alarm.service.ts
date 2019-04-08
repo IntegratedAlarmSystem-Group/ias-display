@@ -318,20 +318,16 @@ export class AlarmService {
         // console.log('notify ', payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessage(payload.action, payload.data);
+            this.readAlarmMessagesList(payload.alarms, false);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
         this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
           // console.log('request', payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessagesList(payload.data);
-          }
-        });
-        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
-          // console.log('counter ', payload);
-          if (this.authService.loginStatus) {
-            this.counterChangeBufferStream.next(payload.data);
+            this.readAlarmMessagesList(payload.alarms, true);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
       }
@@ -543,30 +539,23 @@ export class AlarmService {
   }
 
   /**
-   * Reads an alarm message from the Core and modify the service alarms list
-   * depending on the action value.
-   * @param {string} action create, update or delete
-   * @param {Object} obj dictionary with values for alarm fields (as generic object)
-   */
-  readAlarmMessage(action: string, obj: Object) {
-    if ( action === 'create' || action === 'update' ) {
-      const alarm = Alarm.asAlarm(obj);
-      this.add_or_update_alarm(alarm);
-      this.changeAlarms(alarm.core_id);
-    }
-  }
-
-  /**
-   * Reads a list of alarm messages form the Core and add them to the
-   * service alarms list
+   * Reads a list of alarm messages form the Core and add them to the service alarms list.
+   * Sends the corresponding notification in the {@link AlarmService#alarmChangeBufferStream}, by calling {@link AlarmService#changeAlarms}
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   * @param {boolean} allChanged true if the list is a general change in all the alarms, false if not
    */
-  readAlarmMessagesList(alarmsList: Object[]) {
+  readAlarmMessagesList(alarmsList: Object[], allChanged: boolean) {
+    const changed = [];
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
+      changed.push(alarm.core_id);
     }
-    this.changeAlarms('all');
+    if (allChanged) {
+      this.changeAlarms('all');
+    } else {
+      this.changeAlarms(changed);
+    }
     this.canSound = true;
   }
 
