@@ -122,6 +122,12 @@ export class AlarmService {
   public alarmChangeBuffer = new Set();
 
   /**
+  * Stream of notifications to control the delivery of changes in
+  * the dictionary of {@link Alarm} objects
+  */
+  public alarmChangeBufferList = [];
+
+  /**
   * Django Channels WebsocketBridge,
   * used to connect to Django Channels through Websockets
   */
@@ -225,11 +231,10 @@ export class AlarmService {
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Any} any the core_id of the updated alarm,
-  * or 'all' if all were updated
+  * @param {Any} changes the list of core_ids of the updated Alarms, or 'all' if all were updated
   */
-  changeAlarms(any: any) {
-    this.alarmChangeBufferStream.next(any);
+  changeAlarms(changes: any) {
+    this.alarmChangeBufferStream.next(changes);
   }
 
   changeCounter(any: any) {
@@ -244,8 +249,10 @@ export class AlarmService {
   setPeriodicalPullFromBuffer() {
     setInterval( () => {
       const changes = this.getChangesFromBuffer();
-      this.alarmChangeInputStream.next(changes);
-      this.counterChangeInputStream.next(this.countByView);
+      if (changes.length > 0) {
+        this.alarmChangeInputStream.next(changes);
+        this.counterChangeInputStream.next(this.countByView);
+      }
     }, 250);
   }
 
@@ -266,25 +273,30 @@ export class AlarmService {
   /**
   * Method to manage the update of the buffer for a new alarm change
   */
-  updateAlarmChangeBuffer(change: string) {
-    if (change === 'all') {
-      this.alarmChangeBuffer.clear();
+  updateAlarmChangeBuffer(changes: string) {
+    if (changes === 'all') {
+      this.alarmChangeBufferList = ['all']
     } else {
-      this.alarmChangeBuffer.delete('all');  // deletes only 'all' key
+      this.alarmChangeBufferList = this.alarmChangeBufferList.concat(changes);
     }
-    this.alarmChangeBuffer.add(change);
   }
 
   /**
   * Get list of alarms with graphical components to update from the buffer
   */
   getChangesFromBuffer() {
+    if (this.alarmChangeBufferList.indexOf('all') >= 0) {
+      this.alarmChangeBufferList = [];
+      return ['all'];
+    }
     let changes: string[] = [];
-    if (this.alarmChangeBuffer.size > 10 ) {
+    const alarmChangeBuffer = new Set(this.alarmChangeBufferList);
+    this.alarmChangeBufferList = [];
+    if (alarmChangeBuffer.size > 10 ) {
       // console.log('Changes over buffer size reference ', this.alarmChangeBuffer.size);
       changes = ['all'];
     } else {
-      changes = Array.from(this.alarmChangeBuffer.values());
+      changes = Array.from(alarmChangeBuffer);
     }
     return changes;
   }
