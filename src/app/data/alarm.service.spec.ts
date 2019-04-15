@@ -8,7 +8,7 @@ import { CdbService } from '../data/cdb.service';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';
 import { AuthService } from '../auth/auth.service';
-import {alarmSequence, shelvedAlarmSequence, alarms, fixtureAlarmsList} from '../data/alarm.service.fixtures';
+import {alarmSequence, shelvedAlarmSequence, alarms, alarmsUpdates} from '../data/alarm.service.fixtures';
 
 let subject: AlarmService;
 let cdbService: CdbService;
@@ -19,7 +19,7 @@ let spyEmitSound: any;
 
 
 
-fdescribe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
+describe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -94,6 +94,74 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
   it('should be created', inject([AlarmService], (service: AlarmService) => {
     expect(service).toBeTruthy();
+  }));
+
+  it("should update the alarms dictionary on new alarm messages in the 'requests' and 'alarms' stream", async(() => {
+    // It is used just one alarm with the following stages:
+    // creation (stage 1) and update (stage 2) actions
+    // from the web Server
+
+    // Arrange:
+    let stage = 0;  // initial state index with no messages from server
+    mockStream = new Server(subject.getConnectionPath());  // mock server
+    mockStream.on('connection', server => {  // send mock alarms from server
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': alarms,
+              'counters': {}
+            },
+            'stream': 'requests',
+          }
+        ));
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': alarmsUpdates,
+              'counters': {}
+            },
+            'stream': 'alarms',
+          }
+        ));
+      mockStream.stop();
+    });
+
+    // Act and assert:
+    subject.alarmChangeStream.subscribe(notification => {
+      subject.canSound = true;
+      subject.audio = new Audio();
+      const notified_alarms = subject.alarmsArray;
+      if (stage === 0) {  // no messages
+        expect(notified_alarms).toEqual([]);
+        expect(Object.keys(notified_alarms).length).toEqual(0);
+      }
+
+      if (stage === 1) {  // Alarm list from request stream
+        subject.canSound = true;
+        subject.audio = new Audio();
+        expect(notified_alarms.length).toEqual(3);
+        for (const index of [0, 1, 2]) {
+          expect(notified_alarms[index]).toEqual(Alarm.asAlarm(alarms[index]));
+        }
+      }
+
+      if (stage === 2) {  // Alarm list with a subset of updates fro alarms, from alarms stream
+        subject.canSound = true;
+        subject.audio = new Audio();
+        const expectedAlarms = [
+          alarmsUpdates[0],
+          alarms[1],
+          alarmsUpdates[1],
+        ];
+        expect(notified_alarms.length).toEqual(3);
+        for (const index of [0, 1, 2]) {
+          expect(notified_alarms[index]).toEqual(Alarm.asAlarm(expectedAlarms[index]));
+        }
+      }
+
+      stage += 1;
+    });
+    subject.initialize();
   }));
 
   it('should update the alarms dictionary on new alarm messages and play sounds when relevant', async(() => {

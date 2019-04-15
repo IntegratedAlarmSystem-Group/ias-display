@@ -280,14 +280,41 @@ export const alarms = [
   }
 ];
 
-export const fixtureAlarmsList = {
-  'stream': 'requests',
-  'payload': {
-    'alarms': [  // mock list of alarms from webserver
-      alarms[0],
-      alarms[1],
-      alarms[2],
-    ],
-    'counters': {}
+export const alarmsUpdates = [
+  {
+    'value': 3,
+    'core_id': 'coreid$1',
+    'running_id': 'coreid$1',
+    'mode': 0,
+    'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [0, 3],
+    'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
+    'sound': 'TYPE1',
+    'can_shelve': true,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
+  },
+  {
+    'value': 2,
+    'core_id': 'coreid$3',
+    'running_id': 'coreid$3',
+    'mode': 0,
+    'core_timestamp': 10000,
+    'state_change_timestamp': 10000,
+    'value_change_timestamp': 0,
+    'value_change_transition': [4, 2],
+    'validity': 1,
+    'description': 'my description',
+    'url': 'https://www.alma.cl',
+    'sound': 'TYPE3',
+    'can_shelve': true,
+    'ack': false,
+    'shelved': false,
+    'dependencies': [],
   }
-};
+];
