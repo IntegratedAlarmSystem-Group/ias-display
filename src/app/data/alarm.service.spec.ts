@@ -18,7 +18,6 @@ let mockStream: Server;
 let spyEmitSound: any;
 
 
-
 describe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
 
   beforeEach(() => {
@@ -96,7 +95,7 @@ describe('GIVEN the AlarmService establishes a Websocket connection with the Web
     expect(service).toBeTruthy();
   }));
 
-  it("should update the alarms dictionary on new alarm messages in the 'requests' and 'alarms' stream", async(() => {
+  it('should update the alarms dictionary on new alarm messages in the requests and alarms stream', async(() => {
     // It is used just one alarm with the following stages:
     // creation (stage 1) and update (stage 2) actions
     // from the web Server
@@ -143,6 +142,7 @@ describe('GIVEN the AlarmService establishes a Websocket connection with the Web
         for (const index of [0, 1, 2]) {
           expect(notified_alarms[index]).toEqual(Alarm.asAlarm(alarms[index]));
         }
+        expect(subject.alarmChangeInputStream.value).toEqual(['all']);
       }
 
       if (stage === 2) {  // Alarm list with a subset of updates fro alarms, from alarms stream
@@ -157,6 +157,7 @@ describe('GIVEN the AlarmService establishes a Websocket connection with the Web
         for (const index of [0, 1, 2]) {
           expect(notified_alarms[index]).toEqual(Alarm.asAlarm(expectedAlarms[index]));
         }
+        expect(subject.alarmChangeStream.value).toEqual([alarmsUpdates[0].core_id, alarmsUpdates[1].core_id]);
       }
 
       stage += 1;
