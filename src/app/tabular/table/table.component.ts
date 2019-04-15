@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSortable, MatTable, MatPaginator } from '@angular/material';
 import { ChangeDetectorRef } from '@angular/core';
-import { SubscriptionLike as ISubscription } from 'rxjs';
+import { SubscriptionLike as ISubscription, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from '../../data/alarm';
 import { AlarmService } from '../../data/alarm.service';
@@ -73,6 +74,8 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** String to define the keyword to filter SHELVED {@link Alarm} */
   private filterValueForShelvedAlarms = '"shelved"';
+
+  public filterChange = new Subject<any>();
 
   /** String that stores the test input in the filter textfield */
   public filterString = '';
@@ -146,6 +149,15 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( changes => {
       this.reloadData(changes);
     });
+    this.filterChange.pipe(debounceTime(200)).subscribe(
+      event => {
+        if (event.key === 'Escape') {
+          this.clearFilter();
+        } else {
+          this.applyFilter(event.target.value);
+        }
+      }
+    );
   }
 
   /**
@@ -203,12 +215,13 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   * If the user pressed "Escape", then the filters are cleared by calling {@link clearFilter}, if not, the filters are applied normally
   * @param {any} event the event that triggered the function
   */
-  onKeyUp(event: any) {
-    if (event.key === 'Escape') {
-      this.clearFilter();
-    } else {
-      this.applyFilter(event.target.value);
-    }
+  onKeyUp(event: KeyboardEvent) {
+    // if (event.key === 'Escape') {
+    //   this.clearFilter();
+    // } else {
+    //   this.applyFilter(event.target.value);
+    // }
+    this.filterChange.next(event);
   }
 
   /**

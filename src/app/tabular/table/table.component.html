@@ -4,7 +4,7 @@
 
     <div class="text-container">
       <mat-form-field class="filter-mat-form-field" color="accent" appearance="outline" >
-        <input matInput type="search" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
+        <input matInput type="search" ng-model="model.search" ng-model-options="{debounce: 5000}" [value]="filterString" (keyup)="onKeyUp($event)" placeholder="Enter keywords to filter...">
         <button mat-button *ngIf="filterString" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
           <mat-icon>close</mat-icon>
         </button>
