@@ -144,9 +144,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.reloadData();
     this.alarmServiceSubscription = this.alarmService.alarmChangeStream.subscribe( changes => {
-      for (const change of changes) {
-        this.reloadData(change);
-      }
+      this.reloadData(changes);
     });
   }
 
@@ -160,14 +158,25 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /**
   * Get Data for Table DataSource, triggered whenever alarms are updated in the {@link AlarmService}
-  * @param {string} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
+  * @param {any} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
   * @returns {Alarm[]} array of {@link Alarm} objects
   */
-  getData(changes: string = 'all'): Alarm[] {
+  getData(changes: any = ['all']): Alarm[] {
     if (this.alarmsToDisplay === null || this.alarmsToDisplay === undefined) {
       return this.alarmService.alarmsArray;
-
-    } else if (changes === 'all' || this.alarmsToDisplay.indexOf(changes) >= 0) {
+    }
+    let update = false;
+    if (changes.length > 0 && changes[0] === 'all') {
+      update = true;
+    } else {
+      for (const change of changes) {
+        if (this.alarmsToDisplay.indexOf(change) >= 0) {
+          update = true;
+          break;
+        }
+      }
+    }
+    if (update) {
       const alarms: Alarm[] = [];
       for (const alarm_id of this.alarmsToDisplay) {
         const alarm: Alarm = this.alarmService.get(alarm_id);
@@ -179,9 +188,9 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /**
   * Reloads Data of the Table DataSource, triggered whenever alarms are updated in the {@link AlarmService}
-  * @param {string} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
+  * @param {any} changes the {@link Alarm} that changed, it could be 1 {@link Alarm} or the string 'all' (for all the alarms)
   */
-  reloadData(changes: string = 'all') {
+  reloadData(changes: any = ['all']) {
     const updatedData = this.getData(changes);
     if (updatedData) {
       this.dataSource.data = updatedData;

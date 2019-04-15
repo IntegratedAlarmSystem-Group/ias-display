@@ -80,50 +80,42 @@ export class AlarmService {
   public alarmsIndexes: {[core_id: string]: number} = {};
 
   /**
-  * Stream of notifications of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeInputStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeInputStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeBufferStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeBufferStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeBuffer = new Set();
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeBufferList = [];
 
