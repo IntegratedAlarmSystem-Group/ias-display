@@ -130,7 +130,7 @@ export class AlarmService {
   /**
   * Reference to the audio object used to play the sounds
   */
-  public sound = new Howl({src: ['']});
+  public sound: Howl;
 
   /**
   * Id of the currenlty sounding Alarm
@@ -615,7 +615,7 @@ export class AlarmService {
       return;
     }
     const repeat = alarm.shouldRepeat();
-    if (repeat || !this.sound.playing()) {
+    if (repeat || !this.sound || !this.sound.playing()) {
       this.soundingAlarm = alarm.core_id;
       this.emitSound(alarm.sound, repeat);
     }
@@ -631,7 +631,7 @@ export class AlarmService {
     if (soundToPlay === null || soundToPlay === '') {
       return;
     }
-    this.sound.stop();
+    this.stopSound();
     this.sound = new Howl({
       src: [soundToPlay],
       autoplay: true,
@@ -647,7 +647,7 @@ export class AlarmService {
    * @param {Alarm} alarm the {@link Alarm}
    */
   clearSoundsIfAck(alarm: Alarm) {
-    this.sound.stop();
+    this.stopSound();
     if (!alarm.shouldRepeat()) {
       return;
     }
@@ -659,6 +659,12 @@ export class AlarmService {
           return;
         }
       }
+    }
+  }
+
+  stopSound() {
+    if (this.sound) {
+      this.sound.stop();
     }
   }
 

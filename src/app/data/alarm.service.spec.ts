@@ -18,7 +18,7 @@ let authService: AuthService;
 let mockStream: Server;
 let spyEmitSound: any;
 
-fdescribe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
+describe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -85,7 +85,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
       authService.loginStatus = true;
       cdbService.iasConfiguration = mockIasConfiguration;
       subject.canSound = false;
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       spyEmitSound = spyOn(subject, 'emitSound');
   }));
 
@@ -125,7 +125,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
     // Act and assert:
     subject.alarmChangeStream.subscribe(notification => {
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -133,7 +133,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
       }
 
       if (stage === 1) {  // Alarm list from request stream
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(notified_alarms.length).toEqual(3);
         for (const index of [0, 1, 2]) {
           expect(notified_alarms[index]).toEqual(Alarm.asAlarm(alarms[index]));
@@ -142,7 +142,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
       }
 
       if (stage === 2) {  // Alarm list with a subset of updates fro alarms, from alarms stream
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         const expectedAlarms = [
           alarmsUpdates[0],
           alarms[1],
@@ -188,7 +188,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
     subject.alarmChangeStream.subscribe(notification => {
       subject.canSound = true;
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -197,7 +197,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 1) {  // create
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[0];
@@ -208,7 +208,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 2) {  // update
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[1];
@@ -253,7 +253,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
     // Act and assert:
     subject.alarmChangeStream.subscribe(notification => {
       subject.canSound = true;
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -262,7 +262,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 1) {  // create
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[0];
@@ -273,7 +273,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 2) {  // update
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[1];
@@ -319,7 +319,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
     // Act and assert:
     subject.alarmChangeStream.subscribe( () => {
       subject.canSound = true;
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -328,7 +328,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 1) {  // create
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[0];
@@ -339,7 +339,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 2) {  // update with crtical alarm
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[1];
@@ -352,7 +352,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 3) {  // update with another critical alarm
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
         const fixtureAlarmMsg = fixtureAlarms[2];
@@ -365,7 +365,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 4) {  // acknowledge the second critical alarm
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
         const fixtureAlarmMsg = fixtureAlarms[3];
@@ -377,7 +377,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
       if (stage === 5) {  // acknowledge the first critical alarm
         subject.canSound = true;
-        subject.sound = new Howl({src: ['']});
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
         const fixtureAlarmMsg = fixtureAlarms[4];
@@ -437,7 +437,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
   }));
 
-  xit('should have a valid connection status after websocket connection', async(() => {
+  it('should have a valid connection status after websocket connection', async(() => {
     expect(subject.connectionStatusStream.value).toBe(false);
     mockStream = new Server(subject.getConnectionPath());  // mock server
     mockStream.on('connection', () => {
@@ -448,7 +448,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
   }));
 
-  xit('should update the alarms validity to unreliable if connection status is invalid', () => {
+  it('should update the alarms validity to unreliable if connection status is invalid', () => {
     // Arrange:
     subject.connectionStatusStream.next(true);
     // Initial alarms dictionary
@@ -467,7 +467,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
     }
   });
 
-  xit('should call resetTimer after message from "requests" stream', async(() => {
+  it('should call resetTimer after message from "requests" stream', async(() => {
     mockStream = new Server(subject.getConnectionPath());  // mock server
     mockStream.on('connection', () => {  // send mock alarms list from server
       // Act:
@@ -488,7 +488,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
     subject.initialize();
   }));
 
-  xit('should call resetTimer after message from "alarms" stream', async(() => {
+  it('should call resetTimer after message from "alarms" stream', async(() => {
 
 
     mockStream = new Server(subject.getConnectionPath());  // mock server
@@ -514,7 +514,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
 
   }));
 
-  xit('should set invalid state if last received message timestamp has an important delay', function() {
+  it('should set invalid state if last received message timestamp has an important delay', function() {
 
     // Arrange
     subject.alarmsArray = [Alarm.asAlarm(alarms[1]), Alarm.asAlarm(alarms[2])];
@@ -535,7 +535,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
     expect(subject.alarmChangeStream.value).toEqual(['all']);
   });
 
-  xit(`should update a local counter after receiving the count per view from the 'alarms' stream`, async(() => {
+  it(`should update a local counter after receiving the count per view from the 'alarms' stream`, async(() => {
       const mockCountByView = {
         'stream': 'alarms',
         'payload': {
@@ -555,7 +555,7 @@ fdescribe('GIVEN the AlarmService establishes a Websocket connection with the We
       subject.initialize();
   }));
 
-  xit(`should update a local counter after receiving the count per view from the 'requests' stream`, async(() => {
+  it(`should update a local counter after receiving the count per view from the 'requests' stream`, async(() => {
       const mockCountByView = {
         'stream': 'requests',
         'payload': {
@@ -635,7 +635,7 @@ describe('GIVEN the AlarmService contains Alarms', () => {
 });
 
 
-fdescribe('AlarmService, login test', () => {
+describe('AlarmService, login test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -687,7 +687,7 @@ fdescribe('AlarmService, login test', () => {
       spyOn(subject.webSocketBridge, 'listen');
       cdbService.iasConfiguration = mockIasConfiguration;
       subject.canSound = false;
-      subject.sound = new Howl({src: ['']});
+      // subject.sound = new Howl({src: ['']});
       spyEmitSound = spyOn(subject, 'emitSound');
 
   }));
