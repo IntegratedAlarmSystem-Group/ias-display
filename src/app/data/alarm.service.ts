@@ -3,6 +3,7 @@ import { map, auditTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
+import { Howl, Howler} from 'howler';
 import { environment } from '../../environments/environment';
 import { Alarm, Validity, Value } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
@@ -134,7 +135,7 @@ export class AlarmService {
   /**
   * Reference to the audio object used to play the sounds
   */
-  public audio = new Audio();
+  public sound = new Howl({src: ['']});
 
   /**
   * Id of the currenlty sounding Alarm
@@ -303,7 +304,6 @@ export class AlarmService {
     this.cdbService.initialize();
     this.isInitialized = true;
     this.canSound = false;
-    this.audio = new Audio();
     this.connect();
     this.ngZone.runOutsideAngular(
       () => {
@@ -599,6 +599,11 @@ export class AlarmService {
         this.playAlarmSound(alarm);
       }
     }
+    if (old_alarm_value !== Value.cleared && alarm.value === Value.cleared) {
+      if (alarm.sound !== 'NONE') {
+        this.clearSoundsIfAck(alarm);
+      }
+    }
     if (!old_alarm_ack && alarm.ack) {
       if (alarm.sound !== 'NONE') {
         this.clearSoundsIfAck(alarm);
@@ -614,60 +619,52 @@ export class AlarmService {
     if (!this.canSound || alarm.shelved) {
       return;
     }
+    const soundToPlay = AlarmSounds.getSoundsource(alarm.sound);
+    if (soundToPlay === null || soundToPlay === '') {
+      return;
+    }
     const repeat = alarm.shouldRepeat();
     if (repeat) {
       this.soundingAlarm = alarm.core_id;
-      this.audio.pause();
-      this.emitSound(alarm.sound, repeat);
-    } else if (this.audio.paused) {
-      this.emitSound(alarm.sound, repeat);
+      this.emitSound(soundToPlay, repeat);
+    } else if (!this.sound.playing()) {
+      this.soundingAlarm = alarm.core_id;
+      this.emitSound(soundToPlay, repeat);
     }
   }
 
   /**
    * Reproduces a sound
-   * @param {string} sound the type of sound to reproduce
+   * @param {string} soundToPlay the source of the audio file to reproduce
    * @param {boolean} repeat true if the sound should be repeated, false if not
    */
-  emitSound(sound: string, repeat: boolean) {
-    // console.log('calling emitSound with: ', sound);
-    this.audio = new Audio();
-    const soundToPlay = AlarmSounds.getSoundsource(sound);
-    if (soundToPlay === null || soundToPlay === '') {
-      return;
-    }
-    this.audio.src = soundToPlay;
-    if (repeat) {
-      this.ngZone.runOutsideAngular(
-        () => {
-          this.audio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-          }, false);
-        }
-      );
-    }
-    this.audio.load();
-    this.audio.play();
+  emitSound(soundToPlay: string, repeat: boolean) {
+    this.sound.stop();
+    this.sound = new Howl({
+      src: [soundToPlay],
+      autoplay: true,
+      loop: repeat
+    });
   }
 
   /**
    * Stops the sound of a given {@link Alarm}, only if the sound is being repeated
    * It is intended to be used when critical alarms (repeated) are acknowledged.
-   * Once the sound stops, it check there is another non-acknowledged alarm and plays its sound repeatedly,
+   * Once the sound stops, it checks if there is another non-acknowledged alarm and plays its sound repeatedly,
    * by calling {@link AlarmService.html#playAlarmSound}
    * @param {Alarm} alarm the {@link Alarm}
    */
   clearSoundsIfAck(alarm: Alarm) {
+    console.log('Clearign sound of alarm: ', alarm);
+    this.sound.stop();
     if (!alarm.shouldRepeat()) {
       return;
     }
+    console.log('Clearing sound of alarm: ', alarm);
     if (this.soundingAlarm === alarm.core_id) {
-      this.audio.pause();
       this.soundingAlarm = null;
       for (alarm of this.alarmsArray) {
         if (!alarm.ack && alarm.sound !== 'NONE' && alarm.shouldRepeat()) {
-          this.soundingAlarm = alarm.core_id;
           this.playAlarmSound(alarm);
           return;
         }
