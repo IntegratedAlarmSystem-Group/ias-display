@@ -113,11 +113,6 @@ export class AlarmService {
   /**
   * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
-  public alarmChangeBuffer = new Set();
-
-  /**
-  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
-  */
   public alarmChangeBufferList = [];
 
   /**
@@ -268,7 +263,7 @@ export class AlarmService {
   */
   updateAlarmChangeBuffer(changes: string) {
     if (changes === 'all') {
-      this.alarmChangeBufferList = ['all']
+      this.alarmChangeBufferList = ['all'];
     } else {
       this.alarmChangeBufferList = this.alarmChangeBufferList.concat(changes);
     }
@@ -619,26 +614,23 @@ export class AlarmService {
     if (!this.canSound || alarm.shelved) {
       return;
     }
-    const soundToPlay = AlarmSounds.getSoundsource(alarm.sound);
-    if (soundToPlay === null || soundToPlay === '') {
-      return;
-    }
     const repeat = alarm.shouldRepeat();
-    if (repeat) {
+    if (repeat || !this.sound.playing()) {
       this.soundingAlarm = alarm.core_id;
-      this.emitSound(soundToPlay, repeat);
-    } else if (!this.sound.playing()) {
-      this.soundingAlarm = alarm.core_id;
-      this.emitSound(soundToPlay, repeat);
+      this.emitSound(alarm.sound, repeat);
     }
   }
 
   /**
    * Reproduces a sound
-   * @param {string} soundToPlay the source of the audio file to reproduce
-   * @param {boolean} repeat true if the sound should be repeated, false if not
+   * @param {string} sound the sound of the Alarm to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not.
    */
-  emitSound(soundToPlay: string, repeat: boolean) {
+  emitSound(sound: string, repeat: boolean) {
+    const soundToPlay = AlarmSounds.getSoundsource(sound);
+    if (soundToPlay === null || soundToPlay === '') {
+      return;
+    }
     this.sound.stop();
     this.sound = new Howl({
       src: [soundToPlay],
@@ -650,17 +642,15 @@ export class AlarmService {
   /**
    * Stops the sound of a given {@link Alarm}, only if the sound is being repeated
    * It is intended to be used when critical alarms (repeated) are acknowledged.
-   * Once the sound stops, it checks if there is another non-acknowledged alarm and plays its sound repeatedly,
+   * Once the sound stops, it checks if there is another non-acknowledged alarm and plays its sound repeatedly.
    * by calling {@link AlarmService.html#playAlarmSound}
    * @param {Alarm} alarm the {@link Alarm}
    */
   clearSoundsIfAck(alarm: Alarm) {
-    console.log('Clearign sound of alarm: ', alarm);
     this.sound.stop();
     if (!alarm.shouldRepeat()) {
       return;
     }
-    console.log('Clearing sound of alarm: ', alarm);
     if (this.soundingAlarm === alarm.core_id) {
       this.soundingAlarm = null;
       for (alarm of this.alarmsArray) {
