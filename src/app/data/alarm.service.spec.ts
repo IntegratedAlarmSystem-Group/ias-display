@@ -1,6 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
+import { Howl, Howler} from 'howler';
 import { Alarm, Validity } from '../data/alarm';
 import { HttpClientService } from '../data/http-client.service';
 import { AlarmService } from '../data/alarm.service';
@@ -8,6 +9,7 @@ import { CdbService } from '../data/cdb.service';
 import { environment } from '../../environments/environment';
 import { Server } from 'mock-socket';
 import { AuthService } from '../auth/auth.service';
+import {alarmSequence, shelvedAlarmSequence, alarms, alarmsUpdates} from '../data/alarm.service.fixtures';
 
 let subject: AlarmService;
 let cdbService: CdbService;
@@ -16,371 +18,7 @@ let authService: AuthService;
 let mockStream: Server;
 let spyEmitSound: any;
 
-const alarmsFromWebServer = [  // mock alarm messages from webserver
-  {  // same alarm, different actions
-  'stream': 'alarms',
-  'payload': {
-    'action': 'create',
-    'data': {
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 0,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 0],
-      'validity': 0,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE1',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 1,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 1],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE1',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE3',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE4',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE4',
-      'can_shelve': true,
-      'ack': true,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE3',
-      'can_shelve': true,
-      'ack': true,
-      'shelved': false,
-      'dependencies': [],
-    }
-  }
-}
-];
-
-const shelvedAlarmsFromWebServer = [  // mock alarm messages from webserver
-  {  // same alarm, different actions
-  'stream': 'alarms',
-  'payload': {
-    'action': 'create',
-    'data': {
-      'value': 0,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 0,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 0],
-      'validity': 0,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE1',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 1,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 1],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE1',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE3',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE4',
-      'can_shelve': true,
-      'ack': false,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$2',
-      'running_id': 'coreid$2',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE4',
-      'can_shelve': true,
-      'ack': true,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-},
-{
-  'stream': 'alarms',
-  'payload': {
-    'action': 'update',
-    'data': {
-      'value': 4,
-      'core_id': 'coreid$1',
-      'running_id': 'coreid$1',
-      'mode': 1,
-      'core_timestamp': 10000,
-      'state_change_timestamp': 10000,
-      'value_change_timestamp': 0,
-      'value_change_transition': [0, 4],
-      'validity': 1,
-      'description': 'my description',
-      'url': 'https://www.alma.cl',
-      'sound': 'TYPE3',
-      'can_shelve': true,
-      'ack': true,
-      'shelved': true,
-      'dependencies': [],
-    }
-  }
-}
-];
-
-const alarms = [
-  {
-    'value': 0,
-    'core_id': 'coreid$1',
-    'running_id': 'coreid$1',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'state_change_timestamp': 10000,
-    'value_change_timestamp': 0,
-    'value_change_transition': [0, 0],
-    'validity': 1,
-    'description': 'my description',
-    'url': 'https://www.alma.cl',
-    'sound': 'TYPE1',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  },
-  {
-    'value': 2,
-    'core_id': 'coreid$2',
-    'running_id': 'coreid$2',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'state_change_timestamp': 10000,
-    'value_change_timestamp': 0,
-    'value_change_transition': [0, 2],
-    'validity': 1,
-    'description': 'my description',
-    'url': 'https://www.alma.cl',
-    'sound': 'TYPE2',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  },
-  {
-    'value': 4,
-    'core_id': 'coreid$3',
-    'running_id': 'coreid$3',
-    'mode': 0,
-    'core_timestamp': 10000,
-    'state_change_timestamp': 10000,
-    'value_change_timestamp': 0,
-    'value_change_transition': [0, 4],
-    'validity': 1,
-    'description': 'my description',
-    'url': 'https://www.alma.cl',
-    'sound': 'TYPE3',
-    'can_shelve': true,
-    'ack': false,
-    'shelved': false,
-    'dependencies': [],
-  }
-];
-
-const fixtureAlarmsList = {
-  'stream': 'requests',
-  'payload': {
-    'data': [  // mock list of alarms from webserver
-      alarms[0],
-      alarms[1],
-      alarms[2],
-    ]
-  }
-};
-
-describe('AlarmService', () => {
+describe('GIVEN the AlarmService establishes a Websocket connection with the Webserver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -415,8 +53,7 @@ describe('AlarmService', () => {
       /**
       * Redefinition of periodic pull from buffer
       */
-      spyOn(subject, 'setPeriodicalPullFromBuffer')
-        .and.callFake(function() {});
+      spyOn(subject, 'setPeriodicalPullFromBuffer').and.callFake(function() {});
 
       /**
       * Redefinition of the buffer stream tasks
@@ -447,94 +84,102 @@ describe('AlarmService', () => {
       spyOn(cdbService, 'initialize').and.callFake(function() {});
       authService.loginStatus = true;
       cdbService.iasConfiguration = mockIasConfiguration;
-      subject.canSound = true;
-      subject.audio = new Audio();
+      subject.canSound = false;
+      // subject.sound = new Howl({src: ['']});
       spyEmitSound = spyOn(subject, 'emitSound');
-
   }));
 
   it('should be created', inject([AlarmService], (service: AlarmService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should update the alarms dictionary on new alarm messages and play sounds when relevant', async(() => {
-
-    // To use a 2-steps test for alarms messages
-
+  it('should update the alarms dictionary on new alarm messages in the requests and alarms stream', async(() => {
     // It is used just one alarm with the following stages:
     // creation (stage 1) and update (stage 2) actions
     // from the web Server
 
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
-    const fixtureAlarms = [alarmsFromWebServer[0], alarmsFromWebServer[1]];
     mockStream = new Server(subject.getConnectionPath());  // mock server
-
     mockStream.on('connection', server => {  // send mock alarms from server
-      for (const alarm of fixtureAlarms) {
-        mockStream.send(JSON.stringify(alarm));
-      }
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': alarms,
+              'counters': {}
+            },
+            'stream': 'requests',
+          }
+        ));
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': alarmsUpdates,
+              'counters': {}
+            },
+            'stream': 'alarms',
+          }
+        ));
       mockStream.stop();
     });
 
     // Act and assert:
-
     subject.alarmChangeStream.subscribe(notification => {
-      subject.canSound = true;
-      subject.audio = new Audio();
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
         expect(Object.keys(notified_alarms).length).toEqual(0);
       }
 
-      if (stage === 1) {  // create
-        subject.canSound = true;
-        subject.audio = new Audio();
-        expect(Object.keys(notified_alarms).length).toEqual(1);
-        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
-        for (const key of Object.keys(fixtureAlarmMsg)) {
-          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+      if (stage === 1) {  // Alarm list from request stream
+        // subject.sound = new Howl({src: ['']});
+        expect(notified_alarms.length).toEqual(3);
+        for (const index of [0, 1, 2]) {
+          expect(notified_alarms[index]).toEqual(Alarm.asAlarm(alarms[index]));
         }
+        expect(subject.alarmChangeInputStream.value).toEqual(['all']);
       }
 
-      if (stage === 2) {  // update
-        subject.canSound = true;
-        subject.audio = new Audio();
-        expect(Object.keys(notified_alarms).length).toEqual(1);
-        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
-        for (const key of Object.keys(fixtureAlarmMsg)) {
-          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+      if (stage === 2) {  // Alarm list with a subset of updates fro alarms, from alarms stream
+        // subject.sound = new Howl({src: ['']});
+        const expectedAlarms = [
+          alarmsUpdates[0],
+          alarms[1],
+          alarmsUpdates[1],
+        ];
+        expect(notified_alarms.length).toEqual(3);
+        for (const index of [0, 1, 2]) {
+          expect(notified_alarms[index]).toEqual(Alarm.asAlarm(expectedAlarms[index]));
         }
-        expect(spyEmitSound).toHaveBeenCalledWith('TYPE1', false);
-        expect(subject.soundingAlarm).toBeUndefined();
+        expect(subject.alarmChangeStream.value).toEqual([alarmsUpdates[0].core_id, alarmsUpdates[1].core_id]);
       }
 
       stage += 1;
     });
-
     subject.initialize();
-
   }));
 
-  it('should update the alarms dictionary on new alarm messages and not play sounds for shelved alarms', async(() => {
-
-    // To use a 2-steps test for alarms messages
-
+  it('should update the alarms dictionary on new alarm messages and play sounds when relevant', async(() => {
     // It is used just one alarm with the following stages:
     // creation (stage 1) and update (stage 2) actions
     // from the web Server
 
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
-    const fixtureAlarms = [shelvedAlarmsFromWebServer[0], shelvedAlarmsFromWebServer[1]];
+    const fixtureAlarms = [alarmSequence[0], alarmSequence[1]];
     mockStream = new Server(subject.getConnectionPath());  // mock server
-
     mockStream.on('connection', server => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
-        mockStream.send(JSON.stringify(alarm));
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': [alarm],
+              'counters': {}
+            },
+            'stream': 'alarms',
+          }
+        ));
       }
       mockStream.stop();
     });
@@ -542,9 +187,8 @@ describe('AlarmService', () => {
     // Act and assert:
 
     subject.alarmChangeStream.subscribe(notification => {
-      console.log('stage: ', stage);
       subject.canSound = true;
-      subject.audio = new Audio();
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -553,10 +197,10 @@ describe('AlarmService', () => {
 
       if (stage === 1) {  // create
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[0];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -564,10 +208,75 @@ describe('AlarmService', () => {
 
       if (stage === 2) {  // update
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[1];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+        expect(spyEmitSound).toHaveBeenCalledWith('TYPE1', false);
+        expect(subject.soundingAlarm).toEqual('coreid$1');
+      }
+
+      stage += 1;
+    });
+    subject.initialize();
+  }));
+
+  it('should update the alarms dictionary on new alarm messages and not play sounds for shelved alarms', async(() => {
+
+    // It is used just one alarm with the following stages:
+    // creation (stage 1) and update (stage 2) actions
+    // from the web Server
+
+    // Arrange:
+    let stage = 0;  // initial state index with no messages from server
+    const fixtureAlarms = [shelvedAlarmSequence[0], shelvedAlarmSequence[1]];
+    mockStream = new Server(subject.getConnectionPath());  // mock server
+
+    mockStream.on('connection', server => {  // send mock alarms from server
+      for (const alarm of fixtureAlarms) {
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': [alarm],
+              'counters': {}
+            },
+            'stream': 'alarms',
+          }
+        ));
+      }
+      mockStream.stop();
+    });
+
+    // Act and assert:
+    subject.alarmChangeStream.subscribe(notification => {
+      subject.canSound = true;
+      // subject.sound = new Howl({src: ['']});
+      const notified_alarms = subject.alarmsArray;
+      if (stage === 0) {  // no messages
+        expect(notified_alarms).toEqual([]);
+        expect(Object.keys(notified_alarms).length).toEqual(0);
+      }
+
+      if (stage === 1) {  // create
+        subject.canSound = true;
+        // subject.sound = new Howl({src: ['']});
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[0];
+        for (const key of Object.keys(fixtureAlarmMsg)) {
+          expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
+        }
+      }
+
+      if (stage === 2) {  // update
+        subject.canSound = true;
+        // subject.sound = new Howl({src: ['']});
+        expect(Object.keys(notified_alarms).length).toEqual(1);
+        const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
+        const fixtureAlarmMsg = fixtureAlarms[1];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -577,15 +286,10 @@ describe('AlarmService', () => {
 
       stage += 1;
     });
-
     subject.initialize();
-
   }));
 
   it('should update the alarms dictionary on new alarm messages and play sounds repeatedly for critical alarms', async(() => {
-
-    // To use a 2-steps test for alarms messages
-
     // It is used just one alarm with the following stages:
     // creation (stage 1) and update (stage 2) actions
     // from the web Server
@@ -593,22 +297,29 @@ describe('AlarmService', () => {
     // Arrange:
     let stage = 0;  // initial state index with no messages from server
     const fixtureAlarms = [
-      alarmsFromWebServer[0], alarmsFromWebServer[2], alarmsFromWebServer[3], alarmsFromWebServer[4],  alarmsFromWebServer[5]
+      alarmSequence[0], alarmSequence[2], alarmSequence[3], alarmSequence[4],  alarmSequence[5]
     ];
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
     mockStream.on('connection', () => {  // send mock alarms from server
       for (const alarm of fixtureAlarms) {
-        mockStream.send(JSON.stringify(alarm));
+        mockStream.send(JSON.stringify(
+          {
+            'payload': {
+              'alarms': [alarm],
+              'counters': {}
+            },
+            'stream': 'alarms',
+          }
+        ));
       }
       mockStream.stop();
     });
 
     // Act and assert:
-
     subject.alarmChangeStream.subscribe( () => {
       subject.canSound = true;
-      subject.audio = new Audio();
+      // subject.sound = new Howl({src: ['']});
       const notified_alarms = subject.alarmsArray;
       if (stage === 0) {  // no messages
         expect(notified_alarms).toEqual([]);
@@ -617,10 +328,10 @@ describe('AlarmService', () => {
 
       if (stage === 1) {  // create
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[0]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[0];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -628,10 +339,10 @@ describe('AlarmService', () => {
 
       if (stage === 2) {  // update with crtical alarm
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(1);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[1]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[1];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -641,10 +352,10 @@ describe('AlarmService', () => {
 
       if (stage === 3) {  // update with another critical alarm
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
-        const fixtureAlarmMsg = fixtureAlarms[2]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[2];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -654,10 +365,10 @@ describe('AlarmService', () => {
 
       if (stage === 4) {  // acknowledge the second critical alarm
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$2']];
-        const fixtureAlarmMsg = fixtureAlarms[3]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[3];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -666,10 +377,10 @@ describe('AlarmService', () => {
 
       if (stage === 5) {  // acknowledge the first critical alarm
         subject.canSound = true;
-        subject.audio = new Audio();
+        // subject.sound = new Howl({src: ['']});
         expect(Object.keys(notified_alarms).length).toEqual(2);
         const storedAlarm = notified_alarms[subject.alarmsIndexes['coreid$1']];
-        const fixtureAlarmMsg = fixtureAlarms[4]['payload']['data'];
+        const fixtureAlarmMsg = fixtureAlarms[4];
         for (const key of Object.keys(fixtureAlarmMsg)) {
           expect(storedAlarm[key]).toEqual(fixtureAlarmMsg[key]);
         }
@@ -678,21 +389,25 @@ describe('AlarmService', () => {
 
       stage += 1;
     });
-
     subject.initialize();
-
   }));
 
   it('should get the list of alarms from the webserver', async(() => {
-
     // Arrange
     let stage = 0;  // initial state index with no messages from server
-
     mockStream = new Server(subject.getConnectionPath());  // mock server
 
     // Act
     mockStream.on('connection', () => {  // send mock alarms list from server
-      mockStream.send(JSON.stringify(fixtureAlarmsList));
+      mockStream.send(JSON.stringify(
+        {
+          'stream': 'requests',
+          'payload': {
+            'alarms': alarms,
+            'counters': {}
+          }
+        }
+      ));
       mockStream.stop();
     });
 
@@ -704,46 +419,36 @@ describe('AlarmService', () => {
         expect(notified_alarms).toEqual([]);
         expect(notified_alarms.length).toEqual(0);
       }
-
       if (stage === 1) {
         expect(notified_alarms.length).toEqual(3);
         const receivedAlarms = notified_alarms;
-        const fixtureAlarms = fixtureAlarmsList['payload']['data'];
         let index = 0;
         for (const core_id of Object.keys(alarms_indexes)) {
           for (const key of Object.keys(receivedAlarms[alarms_indexes[core_id]])) {
             expect(receivedAlarms[subject.alarmsIndexes[core_id]][key]).toEqual(
-              fixtureAlarms[index][key]);
+              alarms[index][key]);
           }
           index += 1;
         }
       }
-
       stage += 1;
-
     });
-
     subject.initialize();
 
   }));
 
   it('should have a valid connection status after websocket connection', async(() => {
-
     expect(subject.connectionStatusStream.value).toBe(false);
-
     mockStream = new Server(subject.getConnectionPath());  // mock server
-
     mockStream.on('connection', () => {
       expect(subject.connectionStatusStream.value).toBe(true);
       mockStream.stop();
     });
-
     subject.initialize();
 
   }));
 
   it('should update the alarms validity to unreliable if connection status is invalid', () => {
-
     // Arrange:
     subject.connectionStatusStream.next(true);
     // Initial alarms dictionary
@@ -751,37 +456,36 @@ describe('AlarmService', () => {
     subject.alarmsArray[0]['validity'] = Validity.reliable;
     subject.alarmsArray[1] = Alarm.asAlarm(alarms[1]);
     subject.alarmsArray[1]['validity'] = Validity.reliable;
-
     const expected_validity = Validity.unreliable;
-
     // Act:
     // Change connection status to invalid
     subject.connectionStatusStream.next(false);
-
     // Assert:
     // All the alarms should have an unknown mode
     for (const alarm of subject.alarmsArray) {
       expect(alarm.validity).toBe(expected_validity);
     }
-
   });
 
   it('should call resetTimer after message from "requests" stream', async(() => {
-
     mockStream = new Server(subject.getConnectionPath());  // mock server
-
     mockStream.on('connection', () => {  // send mock alarms list from server
       // Act:
       // mock get alarms list from webserver
-      mockStream.send(JSON.stringify(fixtureAlarmsList));
-
+      mockStream.send(JSON.stringify(
+        {
+          'stream': 'requests',
+          'payload': {
+            'alarms': alarms,
+            'counters': {}
+          }
+        }
+      ));
       // Assert:
       expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
     });
-
     subject.initialize();
-
   }));
 
   it('should call resetTimer after message from "alarms" stream', async(() => {
@@ -792,7 +496,15 @@ describe('AlarmService', () => {
     mockStream.on('connection', () => {  // send mock alarm from server
       // Act:
       // mock alarm message from webserver
-      mockStream.send(JSON.stringify(alarmsFromWebServer[0]));
+      mockStream.send(JSON.stringify(
+        {
+          'payload': {
+            'alarms': [alarmSequence[0]],
+            'counters': {}
+          },
+          'stream': 'alarms',
+        }
+      ));
       // Assert:
       expect(subject.resetTimer).toHaveBeenCalled();
       mockStream.stop();
@@ -823,32 +535,45 @@ describe('AlarmService', () => {
     expect(subject.alarmChangeStream.value).toEqual(['all']);
   });
 
-  it(`should update a local counter after receiving the count per view
-  from the 'counter' stream`, async(() => {
-
+  it(`should update a local counter after receiving the count per view from the 'alarms' stream`, async(() => {
       const mockCountByView = {
-        'stream': 'counter',
+        'stream': 'alarms',
         'payload': {
-          'data': {
+          'alarms': alarms,
+          'counters': {
             'weather': 2,
             'antenna': 1,
           }
         }
       };
-
       mockStream = new Server(subject.getConnectionPath());  // mock server
-
       mockStream.on('connection', () => {  // send mock count from server
         mockStream.send(JSON.stringify(mockCountByView));
-        expect(subject.countByView).toEqual(mockCountByView.payload.data);
+        expect(subject.countByView).toEqual(mockCountByView.payload.counters);
         mockStream.stop();
       });
-
       subject.initialize();
-
   }));
 
-
+  it(`should update a local counter after receiving the count per view from the 'requests' stream`, async(() => {
+      const mockCountByView = {
+        'stream': 'requests',
+        'payload': {
+          'alarms': alarms,
+          'counters': {
+            'weather': 2,
+            'antenna': 1,
+          }
+        }
+      };
+      mockStream = new Server(subject.getConnectionPath());  // mock server
+      mockStream.on('connection', () => {  // send mock count from server
+        mockStream.send(JSON.stringify(mockCountByView));
+        expect(subject.countByView).toEqual(mockCountByView.payload.counters);
+        mockStream.stop();
+      });
+      subject.initialize();
+  }));
 });
 
 
@@ -909,7 +634,8 @@ describe('GIVEN the AlarmService contains Alarms', () => {
   });
 });
 
-describe('AlarmService', () => {
+
+describe('AlarmService, login test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -938,8 +664,7 @@ describe('AlarmService', () => {
       * Redefinition of periodic calls in the alarm service for testing
       */
       // TODO: Evaluation to check periodic calls
-      spyOn(subject, 'resetTimer')
-        .and.callFake(function() {});
+      spyOn(subject, 'resetTimer').and.callFake(function() {});
 
       /**
       * Redefinition of the cdb information for the testing environment
@@ -961,8 +686,8 @@ describe('AlarmService', () => {
       spyOn(subject.webSocketBridge, 'connect');
       spyOn(subject.webSocketBridge, 'listen');
       cdbService.iasConfiguration = mockIasConfiguration;
-      subject.canSound = true;
-      subject.audio = new Audio();
+      subject.canSound = false;
+      // subject.sound = new Howl({src: ['']});
       spyEmitSound = spyOn(subject, 'emitSound');
 
   }));

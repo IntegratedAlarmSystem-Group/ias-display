@@ -103,7 +103,7 @@ describe('TableComponent', () => {
     describe('AND the service processes all the alarms', () => {
       it('THEN the DataSource of the Table contains those Alarms sorted by status', () => {
         // Act
-        alarmService.readAlarmMessagesList(alarms);
+        alarmService.readAlarmMessagesList(alarms, true);
         fixture.detectChanges();
         // Assert
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
@@ -117,7 +117,7 @@ describe('TableComponent', () => {
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
         // Act
-        alarmService.readAlarmMessage('update', ChangedAlarm5);
+        alarmService.readAlarmMessagesList([ChangedAlarm5]);
         fixture.detectChanges();
         // Assert
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
@@ -131,7 +131,7 @@ describe('TableComponent', () => {
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
         // Act
-        alarmService.readAlarmMessage('update', ChangedAlarm2);
+        alarmService.readAlarmMessagesList([ChangedAlarm2]);
         fixture.detectChanges();
         // Assert
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
@@ -145,6 +145,7 @@ describe('TableComponent', () => {
 
     beforeEach(() => {
       component.alarmsToDisplay = [];
+      component.ngAfterViewInit();
       fixture.detectChanges();
     });
 
@@ -153,7 +154,7 @@ describe('TableComponent', () => {
         // Act
         alarmService.readAlarmMessagesList(alarms);
         fixture.detectChanges();
-        // Assert
+        // Asserts
         tick(200);
         const sortedData = component.dataSource._orderData(component.dataSource.filteredData);
         expect(sortedData).toEqual([]);
