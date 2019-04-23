@@ -225,6 +225,11 @@ export class AlarmService {
     this.alarmChangeBufferStream.next(changes);
   }
 
+  /**
+  * Sends a counters change event
+  *
+  * @param {Any} changes the dictionary of count value sindexed by view
+  */
   changeCounter(any: any) {
     this.counterChangeBufferStream.next(any);
   }
@@ -662,6 +667,9 @@ export class AlarmService {
     }
   }
 
+  /**
+   * If there is a sound defined, it stops it
+   */
   stopSound() {
     if (this.sound) {
       this.sound.stop();

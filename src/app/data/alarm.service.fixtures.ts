@@ -1,3 +1,4 @@
+/** List of mocks alarms with the same ID, to test sequences of changes in the same Alarm */
 export const alarmSequence = [  // mock alarm messages from webserver
   {  // same alarm, different actions
     'value': 0,
@@ -110,6 +111,7 @@ export const alarmSequence = [  // mock alarm messages from webserver
   }
 ];
 
+/** List of shelved mocks alarms with the same ID, to test sequences of changes in the same Alarm */
 export const shelvedAlarmSequence = [  // mock alarm messages from webserver
   {  // same alarm, different actions
     'value': 0,
@@ -222,7 +224,7 @@ export const shelvedAlarmSequence = [  // mock alarm messages from webserver
   }
 ];
 
-
+/** List of mocks alarms with different IDs, to test changes in multiple Alarms */
 export const alarms = [
   {
     'value': 0,
@@ -280,6 +282,7 @@ export const alarms = [
   }
 ];
 
+/** List of mocks alarms with that represent updates over previous Alarms */
 export const alarmsUpdates = [
   {
     'value': 3,

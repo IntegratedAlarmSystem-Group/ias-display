@@ -166,7 +166,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/data/alarm.service.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/data/alarm.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -205,7 +205,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/alarm.service.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/data/alarm.service.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -244,7 +244,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/data/alarm.service.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/data/alarm.service.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -283,7 +283,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/alarm.service.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/data/alarm.service.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -322,7 +322,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/alarm.service.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/alarm.service.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -366,8 +366,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/app/data/alarm.service.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/app/data/alarm.service.ts:41</a></div>
                 </td>
             </tr>
 
@@ -437,6 +437,7 @@ import { map, auditTime } from &#x27;rxjs/operators&#x27;;
 import { BehaviorSubject } from &#x27;rxjs&#x27;;
 import { interval } from &#x27;rxjs&#x27;;
 import { WebSocketBridge } from &#x27;django-channels&#x27;;
+import { Howl, Howler} from &#x27;howler&#x27;;
 import { environment } from &#x27;../../environments/environment&#x27;;
 import { Alarm, Validity, Value } from &#x27;../data/alarm&#x27;;
 import { AlarmConfig } from &#x27;../data/alarm-config&#x27;;
@@ -514,46 +515,39 @@ export class AlarmService {
   public alarmsIndexes: {[core_id: string]: number} &#x3D; {};
 
   /**
-  * Stream of notifications of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeInputStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
 
   /**
-  * Stream of notifications of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeStream &#x3D; new BehaviorSubject&lt;any&gt;({});
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeInputStream &#x3D; new BehaviorSubject&lt;any&gt;({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeBufferStream &#x3D; new BehaviorSubject&lt;any&gt;(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeBufferStream &#x3D; new BehaviorSubject&lt;any&gt;({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
-  public alarmChangeBuffer &#x3D; new Set();
+  public alarmChangeBufferList &#x3D; [];
 
   /**
   * Django Channels WebsocketBridge,
@@ -570,7 +564,7 @@ export class AlarmService {
   /**
   * Reference to the audio object used to play the sounds
   */
-  public audio &#x3D; new Audio();
+  public sound: Howl;
 
   /**
   * Id of the currenlty sounding Alarm
@@ -659,13 +653,17 @@ export class AlarmService {
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Any} any the core_id of the updated alarm,
-  * or &#x27;all&#x27; if all were updated
+  * @param {Any} changes the list of core_ids of the updated Alarms, or &#x27;all&#x27; if all were updated
   */
-  changeAlarms(any: any) {
-    this.alarmChangeBufferStream.next(any);
+  changeAlarms(changes: any) {
+    this.alarmChangeBufferStream.next(changes);
   }
 
+  /**
+  * Sends a counters change event
+  *
+  * @param {Any} changes the dictionary of count value sindexed by view
+  */
   changeCounter(any: any) {
     this.counterChangeBufferStream.next(any);
   }
@@ -678,8 +676,10 @@ export class AlarmService {
   setPeriodicalPullFromBuffer() {
     setInterval( () &#x3D;&gt; {
       const changes &#x3D; this.getChangesFromBuffer();
-      this.alarmChangeInputStream.next(changes);
-      this.counterChangeInputStream.next(this.countByView);
+      if (changes.length &gt; 0) {
+        this.alarmChangeInputStream.next(changes);
+        this.counterChangeInputStream.next(this.countByView);
+      }
     }, 250);
   }
 
@@ -700,25 +700,30 @@ export class AlarmService {
   /**
   * Method to manage the update of the buffer for a new alarm change
   */
-  updateAlarmChangeBuffer(change: string) {
-    if (change &#x3D;&#x3D;&#x3D; &#x27;all&#x27;) {
-      this.alarmChangeBuffer.clear();
+  updateAlarmChangeBuffer(changes: string) {
+    if (changes &#x3D;&#x3D;&#x3D; &#x27;all&#x27;) {
+      this.alarmChangeBufferList &#x3D; [&#x27;all&#x27;];
     } else {
-      this.alarmChangeBuffer.delete(&#x27;all&#x27;);  // deletes only &#x27;all&#x27; key
+      this.alarmChangeBufferList &#x3D; this.alarmChangeBufferList.concat(changes);
     }
-    this.alarmChangeBuffer.add(change);
   }
 
   /**
   * Get list of alarms with graphical components to update from the buffer
   */
   getChangesFromBuffer() {
+    if (this.alarmChangeBufferList.indexOf(&#x27;all&#x27;) &gt;&#x3D; 0) {
+      this.alarmChangeBufferList &#x3D; [];
+      return [&#x27;all&#x27;];
+    }
     let changes: string[] &#x3D; [];
-    if (this.alarmChangeBuffer.size &gt; 10 ) {
+    const alarmChangeBuffer &#x3D; new Set(this.alarmChangeBufferList);
+    this.alarmChangeBufferList &#x3D; [];
+    if (alarmChangeBuffer.size &gt; 10 ) {
       // console.log(&#x27;Changes over buffer size reference &#x27;, this.alarmChangeBuffer.size);
       changes &#x3D; [&#x27;all&#x27;];
     } else {
-      changes &#x3D; Array.from(this.alarmChangeBuffer.values());
+      changes &#x3D; Array.from(alarmChangeBuffer);
     }
     return changes;
   }
@@ -733,7 +738,6 @@ export class AlarmService {
     this.cdbService.initialize();
     this.isInitialized &#x3D; true;
     this.canSound &#x3D; false;
-    this.audio &#x3D; new Audio();
     this.connect();
     this.ngZone.runOutsideAngular(
       () &#x3D;&gt; {
@@ -752,20 +756,16 @@ export class AlarmService {
         // console.log(&#x27;notify &#x27;, payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessage(payload.action, payload.data);
+            this.readAlarmMessagesList(payload.alarms, false);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
         this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) &#x3D;&gt; {
           // console.log(&#x27;request&#x27;, payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessagesList(payload.data);
-          }
-        });
-        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) &#x3D;&gt; {
-          // console.log(&#x27;counter &#x27;, payload);
-          if (this.authService.loginStatus) {
-            this.counterChangeBufferStream.next(payload.data);
+            this.readAlarmMessagesList(payload.alarms, true);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
       }
@@ -977,30 +977,23 @@ export class AlarmService {
   }
 
   /**
-   * Reads an alarm message from the Core and modify the service alarms list
-   * depending on the action value.
-   * @param {string} action create, update or delete
-   * @param {Object} obj dictionary with values for alarm fields (as generic object)
-   */
-  readAlarmMessage(action: string, obj: Object) {
-    if ( action &#x3D;&#x3D;&#x3D; &#x27;create&#x27; || action &#x3D;&#x3D;&#x3D; &#x27;update&#x27; ) {
-      const alarm &#x3D; Alarm.asAlarm(obj);
-      this.add_or_update_alarm(alarm);
-      this.changeAlarms(alarm.core_id);
-    }
-  }
-
-  /**
-   * Reads a list of alarm messages form the Core and add them to the
-   * service alarms list
+   * Reads a list of alarm messages form the Core and add them to the service alarms list.
+   * Sends the corresponding notification in the {@link AlarmService#alarmChangeBufferStream}, by calling {@link AlarmService#changeAlarms}
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   * @param {boolean} allChanged true if the list is a general change in all the alarms, false if not
    */
-  readAlarmMessagesList(alarmsList: Object[]) {
+  readAlarmMessagesList(alarmsList: Object[], allChanged: boolean &#x3D; false) {
+    const changed &#x3D; [];
     for (const obj of alarmsList) {
       const alarm &#x3D; Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
+      changed.push(alarm.core_id);
     }
-    this.changeAlarms(&#x27;all&#x27;);
+    if (allChanged) {
+      this.changeAlarms(&#x27;all&#x27;);
+    } else {
+      this.changeAlarms(changed);
+    }
     this.canSound &#x3D; true;
   }
 
@@ -1040,6 +1033,11 @@ export class AlarmService {
         this.playAlarmSound(alarm);
       }
     }
+    if (old_alarm_value !&#x3D;&#x3D; Value.cleared &amp;&amp; alarm.value &#x3D;&#x3D;&#x3D; Value.cleared) {
+      if (alarm.sound !&#x3D;&#x3D; &#x27;NONE&#x27;) {
+        this.clearSoundsIfAck(alarm);
+      }
+    }
     if (!old_alarm_ack &amp;&amp; alarm.ack) {
       if (alarm.sound !&#x3D;&#x3D; &#x27;NONE&#x27;) {
         this.clearSoundsIfAck(alarm);
@@ -1056,63 +1054,59 @@ export class AlarmService {
       return;
     }
     const repeat &#x3D; alarm.shouldRepeat();
-    if (repeat) {
+    if (repeat || !this.sound || !this.sound.playing()) {
       this.soundingAlarm &#x3D; alarm.core_id;
-      this.audio.pause();
-      this.emitSound(alarm.sound, repeat);
-    } else if (this.audio.paused) {
       this.emitSound(alarm.sound, repeat);
     }
   }
 
   /**
    * Reproduces a sound
-   * @param {string} sound the type of sound to reproduce
-   * @param {boolean} repeat true if the sound should be repeated, false if not
+   * @param {string} sound the sound of the Alarm to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not.
    */
   emitSound(sound: string, repeat: boolean) {
-    // console.log(&#x27;calling emitSound with: &#x27;, sound);
-    this.audio &#x3D; new Audio();
     const soundToPlay &#x3D; AlarmSounds.getSoundsource(sound);
     if (soundToPlay &#x3D;&#x3D;&#x3D; null || soundToPlay &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
       return;
     }
-    this.audio.src &#x3D; soundToPlay;
-    if (repeat) {
-      this.ngZone.runOutsideAngular(
-        () &#x3D;&gt; {
-          this.audio.addEventListener(&#x27;ended&#x27;, function() {
-            this.currentTime &#x3D; 0;
-            this.play();
-          }, false);
-        }
-      );
-    }
-    this.audio.load();
-    this.audio.play();
+    this.stopSound();
+    this.sound &#x3D; new Howl({
+      src: [soundToPlay],
+      autoplay: true,
+      loop: repeat
+    });
   }
 
   /**
    * Stops the sound of a given {@link Alarm}, only if the sound is being repeated
    * It is intended to be used when critical alarms (repeated) are acknowledged.
-   * Once the sound stops, it check there is another non-acknowledged alarm and plays its sound repeatedly,
+   * Once the sound stops, it checks if there is another non-acknowledged alarm and plays its sound repeatedly.
    * by calling {@link AlarmService.html#playAlarmSound}
    * @param {Alarm} alarm the {@link Alarm}
    */
   clearSoundsIfAck(alarm: Alarm) {
+    this.stopSound();
     if (!alarm.shouldRepeat()) {
       return;
     }
     if (this.soundingAlarm &#x3D;&#x3D;&#x3D; alarm.core_id) {
-      this.audio.pause();
       this.soundingAlarm &#x3D; null;
       for (alarm of this.alarmsArray) {
         if (!alarm.ack &amp;&amp; alarm.sound !&#x3D;&#x3D; &#x27;NONE&#x27; &amp;&amp; alarm.shouldRepeat()) {
-          this.soundingAlarm &#x3D; alarm.core_id;
           this.playAlarmSound(alarm);
           return;
         }
       }
+    }
+  }
+
+  /**
+   * If there is a sound defined, it stops it
+   */
+  stopSound() {
+    if (this.sound) {
+      this.sound.stop();
     }
   }
 

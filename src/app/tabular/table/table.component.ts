@@ -75,6 +75,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   /** String to define the keyword to filter SHELVED {@link Alarm} */
   private filterValueForShelvedAlarms = '"shelved"';
 
+  /** Stream to notify changes in the filter input, in order to update the filter in the table with a debouncet time */
   public filterChange = new Subject<any>();
 
   /** String that stores the test input in the filter textfield */
@@ -216,11 +217,6 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   * @param {any} event the event that triggered the function
   */
   onKeyUp(event: KeyboardEvent) {
-    // if (event.key === 'Escape') {
-    //   this.clearFilter();
-    // } else {
-    //   this.applyFilter(event.target.value);
-    // }
     this.filterChange.next(event);
   }
 
