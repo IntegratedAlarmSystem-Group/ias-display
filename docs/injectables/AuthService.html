@@ -329,8 +329,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="186"
-                            class="link-to-prism">src/app/auth/auth.service.ts:186</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">src/app/auth/auth.service.ts:188</a></div>
                 </td>
             </tr>
 
@@ -423,8 +423,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="160"
-                            class="link-to-prism">src/app/auth/auth.service.ts:160</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/app/auth/auth.service.ts:162</a></div>
                 </td>
             </tr>
 
@@ -470,8 +470,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="173"
-                            class="link-to-prism">src/app/auth/auth.service.ts:173</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="175"
+                            class="link-to-prism">src/app/auth/auth.service.ts:175</a></div>
                 </td>
             </tr>
 
@@ -706,8 +706,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="150"
-                            class="link-to-prism">src/app/auth/auth.service.ts:150</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="152"
+                            class="link-to-prism">src/app/auth/auth.service.ts:152</a></div>
                 </td>
             </tr>
 
@@ -747,8 +747,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="212"
-                            class="link-to-prism">src/app/auth/auth.service.ts:212</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="214"
+                            class="link-to-prism">src/app/auth/auth.service.ts:214</a></div>
                 </td>
             </tr>
 
@@ -788,8 +788,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="198"
-                            class="link-to-prism">src/app/auth/auth.service.ts:198</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="200"
+                            class="link-to-prism">src/app/auth/auth.service.ts:200</a></div>
                 </td>
             </tr>
 
@@ -829,8 +829,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="205"
-                            class="link-to-prism">src/app/auth/auth.service.ts:205</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="207"
+                            class="link-to-prism">src/app/auth/auth.service.ts:207</a></div>
                 </td>
             </tr>
 
@@ -870,8 +870,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="238"
-                            class="link-to-prism">src/app/auth/auth.service.ts:238</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="240"
+                            class="link-to-prism">src/app/auth/auth.service.ts:240</a></div>
                 </td>
             </tr>
 
@@ -942,8 +942,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="220"
-                            class="link-to-prism">src/app/auth/auth.service.ts:220</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="222"
+                            class="link-to-prism">src/app/auth/auth.service.ts:222</a></div>
                 </td>
             </tr>
 
@@ -1019,8 +1019,8 @@ Saves the token in the local storage</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="229"
-                            class="link-to-prism">src/app/auth/auth.service.ts:229</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">src/app/auth/auth.service.ts:231</a></div>
                 </td>
             </tr>
 
@@ -1436,6 +1436,8 @@ export class AuthService {
         this.storeToken(token);
         this.storeUser(username);
         this.changeLoginStatus(true);
+        const allowed_actions &#x3D; response[&#x27;allowed_actions&#x27;];
+        this.storeAllowedActions(allowed_actions);
         return true;
       } else {
         this.changeLoginStatus(false);

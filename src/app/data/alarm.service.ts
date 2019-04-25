@@ -3,6 +3,7 @@ import { map, auditTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { interval } from 'rxjs';
 import { WebSocketBridge } from 'django-channels';
+import { Howl, Howler} from 'howler';
 import { environment } from '../../environments/environment';
 import { Alarm, Validity, Value } from '../data/alarm';
 import { AlarmConfig } from '../data/alarm-config';
@@ -80,46 +81,39 @@ export class AlarmService {
   public alarmsIndexes: {[core_id: string]: number} = {};
 
   /**
-  * Stream of notifications of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeInputStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeInputStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
   public alarmChangeBufferStream = new BehaviorSubject<any>(true);
 
   /**
-  * Stream of notifications to control the delivery of changes in the counter related to
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the counter related to the dictionary of {@link Alarm} objects
   */
   public counterChangeBufferStream = new BehaviorSubject<any>({});
 
   /**
-  * Stream of notifications to control the delivery of changes in
-  * the dictionary of {@link Alarm} objects
+  * Stream of notifications to control the delivery of changes in the dictionary of {@link Alarm} objects
   */
-  public alarmChangeBuffer = new Set();
+  public alarmChangeBufferList = [];
 
   /**
   * Django Channels WebsocketBridge,
@@ -136,7 +130,7 @@ export class AlarmService {
   /**
   * Reference to the audio object used to play the sounds
   */
-  public audio = new Audio();
+  public sound: Howl;
 
   /**
   * Id of the currenlty sounding Alarm
@@ -225,13 +219,17 @@ export class AlarmService {
   /**
   * Sends an {@link Alarm} change event
   *
-  * @param {Any} any the core_id of the updated alarm,
-  * or 'all' if all were updated
+  * @param {Any} changes the list of core_ids of the updated Alarms, or 'all' if all were updated
   */
-  changeAlarms(any: any) {
-    this.alarmChangeBufferStream.next(any);
+  changeAlarms(changes: any) {
+    this.alarmChangeBufferStream.next(changes);
   }
 
+  /**
+  * Sends a counters change event
+  *
+  * @param {Any} changes the dictionary of count value sindexed by view
+  */
   changeCounter(any: any) {
     this.counterChangeBufferStream.next(any);
   }
@@ -244,8 +242,10 @@ export class AlarmService {
   setPeriodicalPullFromBuffer() {
     setInterval( () => {
       const changes = this.getChangesFromBuffer();
-      this.alarmChangeInputStream.next(changes);
-      this.counterChangeInputStream.next(this.countByView);
+      if (changes.length > 0) {
+        this.alarmChangeInputStream.next(changes);
+        this.counterChangeInputStream.next(this.countByView);
+      }
     }, 250);
   }
 
@@ -266,25 +266,30 @@ export class AlarmService {
   /**
   * Method to manage the update of the buffer for a new alarm change
   */
-  updateAlarmChangeBuffer(change: string) {
-    if (change === 'all') {
-      this.alarmChangeBuffer.clear();
+  updateAlarmChangeBuffer(changes: string) {
+    if (changes === 'all') {
+      this.alarmChangeBufferList = ['all'];
     } else {
-      this.alarmChangeBuffer.delete('all');  // deletes only 'all' key
+      this.alarmChangeBufferList = this.alarmChangeBufferList.concat(changes);
     }
-    this.alarmChangeBuffer.add(change);
   }
 
   /**
   * Get list of alarms with graphical components to update from the buffer
   */
   getChangesFromBuffer() {
+    if (this.alarmChangeBufferList.indexOf('all') >= 0) {
+      this.alarmChangeBufferList = [];
+      return ['all'];
+    }
     let changes: string[] = [];
-    if (this.alarmChangeBuffer.size > 10 ) {
+    const alarmChangeBuffer = new Set(this.alarmChangeBufferList);
+    this.alarmChangeBufferList = [];
+    if (alarmChangeBuffer.size > 10 ) {
       // console.log('Changes over buffer size reference ', this.alarmChangeBuffer.size);
       changes = ['all'];
     } else {
-      changes = Array.from(this.alarmChangeBuffer.values());
+      changes = Array.from(alarmChangeBuffer);
     }
     return changes;
   }
@@ -299,7 +304,6 @@ export class AlarmService {
     this.cdbService.initialize();
     this.isInitialized = true;
     this.canSound = false;
-    this.audio = new Audio();
     this.connect();
     this.ngZone.runOutsideAngular(
       () => {
@@ -318,20 +322,16 @@ export class AlarmService {
         // console.log('notify ', payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessage(payload.action, payload.data);
+            this.readAlarmMessagesList(payload.alarms, false);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
         this.webSocketBridge.demultiplex(Streams.UPDATES, (payload: any, streamName: any) => {
           // console.log('request', payload);
           if (this.authService.loginStatus) {
             this.resetTimer();
-            this.readAlarmMessagesList(payload.data);
-          }
-        });
-        this.webSocketBridge.demultiplex(Streams.COUNTER, (payload: any, streamName: any) => {
-          // console.log('counter ', payload);
-          if (this.authService.loginStatus) {
-            this.counterChangeBufferStream.next(payload.data);
+            this.readAlarmMessagesList(payload.alarms, true);
+            this.counterChangeBufferStream.next(payload.counters);
           }
         });
       }
@@ -543,30 +543,23 @@ export class AlarmService {
   }
 
   /**
-   * Reads an alarm message from the Core and modify the service alarms list
-   * depending on the action value.
-   * @param {string} action create, update or delete
-   * @param {Object} obj dictionary with values for alarm fields (as generic object)
-   */
-  readAlarmMessage(action: string, obj: Object) {
-    if ( action === 'create' || action === 'update' ) {
-      const alarm = Alarm.asAlarm(obj);
-      this.add_or_update_alarm(alarm);
-      this.changeAlarms(alarm.core_id);
-    }
-  }
-
-  /**
-   * Reads a list of alarm messages form the Core and add them to the
-   * service alarms list
+   * Reads a list of alarm messages form the Core and add them to the service alarms list.
+   * Sends the corresponding notification in the {@link AlarmService#alarmChangeBufferStream}, by calling {@link AlarmService#changeAlarms}
    * @param {Object[]} alarmsList list of dictionaries with values for alarm fields (as generic objects)
+   * @param {boolean} allChanged true if the list is a general change in all the alarms, false if not
    */
-  readAlarmMessagesList(alarmsList: Object[]) {
+  readAlarmMessagesList(alarmsList: Object[], allChanged: boolean = false) {
+    const changed = [];
     for (const obj of alarmsList) {
       const alarm = Alarm.asAlarm(obj);
       this.add_or_update_alarm(alarm);
+      changed.push(alarm.core_id);
     }
-    this.changeAlarms('all');
+    if (allChanged) {
+      this.changeAlarms('all');
+    } else {
+      this.changeAlarms(changed);
+    }
     this.canSound = true;
   }
 
@@ -606,6 +599,11 @@ export class AlarmService {
         this.playAlarmSound(alarm);
       }
     }
+    if (old_alarm_value !== Value.cleared && alarm.value === Value.cleared) {
+      if (alarm.sound !== 'NONE') {
+        this.clearSoundsIfAck(alarm);
+      }
+    }
     if (!old_alarm_ack && alarm.ack) {
       if (alarm.sound !== 'NONE') {
         this.clearSoundsIfAck(alarm);
@@ -622,63 +620,59 @@ export class AlarmService {
       return;
     }
     const repeat = alarm.shouldRepeat();
-    if (repeat) {
+    if (repeat || !this.sound || !this.sound.playing()) {
       this.soundingAlarm = alarm.core_id;
-      this.audio.pause();
-      this.emitSound(alarm.sound, repeat);
-    } else if (this.audio.paused) {
       this.emitSound(alarm.sound, repeat);
     }
   }
 
   /**
    * Reproduces a sound
-   * @param {string} sound the type of sound to reproduce
-   * @param {boolean} repeat true if the sound should be repeated, false if not
+   * @param {string} sound the sound of the Alarm to reproduce
+   * @param {boolean} repeat true if the sound should be repeated, false if not.
    */
   emitSound(sound: string, repeat: boolean) {
-    // console.log('calling emitSound with: ', sound);
-    this.audio = new Audio();
     const soundToPlay = AlarmSounds.getSoundsource(sound);
     if (soundToPlay === null || soundToPlay === '') {
       return;
     }
-    this.audio.src = soundToPlay;
-    if (repeat) {
-      this.ngZone.runOutsideAngular(
-        () => {
-          this.audio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-          }, false);
-        }
-      );
-    }
-    this.audio.load();
-    this.audio.play();
+    this.stopSound();
+    this.sound = new Howl({
+      src: [soundToPlay],
+      autoplay: true,
+      loop: repeat
+    });
   }
 
   /**
    * Stops the sound of a given {@link Alarm}, only if the sound is being repeated
    * It is intended to be used when critical alarms (repeated) are acknowledged.
-   * Once the sound stops, it check there is another non-acknowledged alarm and plays its sound repeatedly,
+   * Once the sound stops, it checks if there is another non-acknowledged alarm and plays its sound repeatedly.
    * by calling {@link AlarmService.html#playAlarmSound}
    * @param {Alarm} alarm the {@link Alarm}
    */
   clearSoundsIfAck(alarm: Alarm) {
+    this.stopSound();
     if (!alarm.shouldRepeat()) {
       return;
     }
     if (this.soundingAlarm === alarm.core_id) {
-      this.audio.pause();
       this.soundingAlarm = null;
       for (alarm of this.alarmsArray) {
         if (!alarm.ack && alarm.sound !== 'NONE' && alarm.shouldRepeat()) {
-          this.soundingAlarm = alarm.core_id;
           this.playAlarmSound(alarm);
           return;
         }
       }
+    }
+  }
+
+  /**
+   * If there is a sound defined, it stops it
+   */
+  stopSound() {
+    if (this.sound) {
+      this.sound.stop();
     }
   }
 
